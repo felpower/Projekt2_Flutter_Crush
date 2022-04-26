@@ -26,6 +26,7 @@ class XpService {
       prefs.setInt(xp, initialXp);
       currentXp = initialXp;
     }
+    print("Here Are the current XP: "+currentXp.toString());
     return currentXp;
   }
 

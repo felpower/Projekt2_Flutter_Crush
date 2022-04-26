@@ -1,11 +1,14 @@
 import 'dart:math';
 
-import 'package:bachelor_flutter_crush/persistence/daystreak_service.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../model/user.dart';
+
 int xp = 0;
-String lastLogin = "notSet";
+String updateHighScore = "what?";
+String highScore = "notSet";
+List<User> users = List.empty();
 
 class HighScorePage extends StatefulWidget {
   const HighScorePage({Key? key}) : super(key: key);
@@ -15,55 +18,75 @@ class HighScorePage extends StatefulWidget {
 }
 
 class HighScoreState extends State<HighScorePage> {
-  List<Map> users = [
-    {'place': 0, 'name': 'Best Player Ever', 'xp': 0},
-    {'place': 0, 'name': 'Some Random Dude', 'xp': 10},
-    {'place': 0, 'name': 'Huckleberry Finn', 'xp': 9},
-    {'place': 0, 'name': 'Star Wars Fan Guy', 'xp': 7},
-    {'place': 0, 'name': 'League Player', 'xp': 5},
-    {'place': 0, 'name': 'I am not very good at this', 'xp': 4},
-    {'place': 0, 'name': 'I do not even know who i am', 'xp': 3},
-    {'place': 0, 'name': 'The best ever', 'xp': 1},
-  ];
   int _currentSortColumn = 0;
   bool _isSortAsc = true;
 
   @override
   void initState() {
     super.initState();
-    _loadXP();
+    _loadHighScore();
   }
 
-  _loadXP() async {
+  _loadHighScore() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    var now = DateTime.now();
     setState(() {
+      highScore = (prefs.getString('highScore') ?? 'notSet');
       xp = (prefs.getInt('xp') ?? 0);
-      lastLogin = (prefs.getString('last_login') ?? 'notSet');
+      updateHighScore = (prefs.getString('updateHighScore') ?? now.toString());
     });
-    print("XP: " + xp.toString());
-    print("Last Login: " + DateTime.parse(lastLogin).toString());
-    // if (!DayStreakService.alreadyLoggedInToday(DateTime.parse(lastLogin))) {
-    Random random = Random();
-    int randomNumber = random.nextInt(xp) + 1;
-    users[0]['xp'] = randomNumber + xp;
-    for (var i = 1; i < users.length; i++) {
-      randomNumber = random.nextInt(xp) + 1;
-      users[i]['xp'] = xp - randomNumber;
+    bool update = checkIfUpdateNeeded(now, prefs);
+    users = User.decode(highScore);
+    randomizeHighScore(update);
+    updateUserAndHighScore(prefs);
+    sortList();
+  }
+
+  bool checkIfUpdateNeeded(DateTime now, SharedPreferences prefs) {
+    var parse = DateTime.parse(updateHighScore);
+    var passedTime = parse.add(const Duration(minutes: 2));
+    var update = false;
+    if (now.compareTo(passedTime) > 0) {
+      prefs.setString('updateHighScore', now.toString());
+      updateHighScore = now.toString();
+      update = true;
     }
-    // }
-    users.add({'place': 4, 'name': 'Patrick', 'xp': xp});
+    return update;
+  }
+
+  void updateUserAndHighScore(SharedPreferences prefs) {
+    var patrick = User(place: 0, name: 'Patrick', xp: xp);
+    users[users.indexWhere((element) => element.name == patrick.name)] =
+        patrick;
+    prefs.setString("highScore", User.encode(users));
+  }
+
+  void sortList() {
     users.sort((m1, m2) {
-      var r = m2["xp"].compareTo(m1["xp"]);
+      var r = m2.xp.compareTo(m1.xp);
       return r;
     });
     for (var i = 0; i < users.length; i++) {
-      users[i]['place'] = i + 1;
+      users[i].place = i + 1;
+    }
+  }
+
+  void randomizeHighScore(bool update) {
+    if (update && users[0].xp < xp) {
+      Random random = Random();
+      int randomNumber = random.nextInt(xp) + 1;
+      users[0].xp = randomNumber + xp;
+      for (var i = 1; i < users.length; i++) {
+        randomNumber = random.nextInt(xp) + 1;
+        users[i].xp = xp - randomNumber;
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: Scaffold(
             appBar: AppBar(
               title: const Text('High Score'),
@@ -102,9 +125,9 @@ class HighScoreState extends State<HighScorePage> {
           setState(() {
             _currentSortColumn = columnIndex;
             if (_isSortAsc) {
-              users.sort((a, b) => b['xp'].compareTo(a['xp']));
+              users.sort((a, b) => b.xp.compareTo(a.xp));
             } else {
-              users.sort((a, b) => a['xp'].compareTo(b['xp']));
+              users.sort((a, b) => a.xp.compareTo(b.xp));
             }
             _isSortAsc = !_isSortAsc;
           });
@@ -115,13 +138,13 @@ class HighScoreState extends State<HighScorePage> {
 
   List<DataRow> _createRows() {
     return users
-        .map((book) => DataRow(
+        .map((user) => DataRow(
                 color: MaterialStateColor.resolveWith(
                     (states) => Colors.yellowAccent),
                 cells: [
-                  DataCell(Text('#' + book['place'].toString())),
-                  DataCell(Text(book['name'])),
-                  DataCell(Text(book['xp'].toString()))
+                  DataCell(Text('#' + user.place.toString())),
+                  DataCell(Text(user.name)),
+                  DataCell(Text(user.xp.toString()))
                 ]))
         .toList();
   }

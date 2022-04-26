@@ -6,6 +6,8 @@ import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_event.dart'
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/day_streak_bloc/day_streak_bloc.dart';
+import 'package:bachelor_flutter_crush/bloc/user_state_bloc/high_score_bloc/high_score_bloc.dart';
+import 'package:bachelor_flutter_crush/bloc/user_state_bloc/high_score_bloc/high_score_state.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/level_bloc/level_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/level_bloc/level_state.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_bloc.dart';
@@ -123,7 +125,7 @@ class _HomePageState extends State<HomePage>
         ((mediaQueryData.orientation == Orientation.portrait)
             ? screenSize.width
             : screenSize.height);
-    double creditPanelWidth = screenSize.width / 5 * 2;
+    double creditPanelWidth = screenSize.width / 4;
 
     return Scaffold(
       appBar: AppBar(
@@ -157,18 +159,11 @@ class _HomePageState extends State<HomePage>
                             return CreditPanel('XP: ' + state.amount.toString(),
                                 30, creditPanelWidth);
                           }),
-                          // flutter_bloc.BlocBuilder<XpBloc, XpState>(
+                          // flutter_bloc.BlocBuilder<HighScoreBloc, HighScoreState>(
                           //     builder: (context, state) {
-                          //   return ElevatedButton(
-                          //       onPressed: () {
-                          //         Navigator.push(
-                          //             context,
-                          //             MaterialPageRoute(
-                          //                 builder: (context) =>
-                          //                     const HighScorePage()));
-                          //       },
-                          //       child: const Text('High Score!'));
-                          // }),
+                          //       return CreditPanel('HighScore: ' + state.highScore.toString(),
+                          //           30, creditPanelWidth);
+                          //     }),
                           flutter_bloc.BlocBuilder<CoinBloc, CoinState>(
                               builder: (context, state) {
                             return CreditPanel('\$: ' + state.amount.toString(),
