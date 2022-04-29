@@ -6,8 +6,6 @@ import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_event.dart'
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/day_streak_bloc/day_streak_bloc.dart';
-import 'package:bachelor_flutter_crush/bloc/user_state_bloc/high_score_bloc/high_score_bloc.dart';
-import 'package:bachelor_flutter_crush/bloc/user_state_bloc/high_score_bloc/high_score_state.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/level_bloc/level_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/level_bloc/level_state.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_bloc.dart';
@@ -161,8 +159,7 @@ class _HomePageState extends State<HomePage>
                           }),
                           // flutter_bloc.BlocBuilder<HighScoreBloc, HighScoreState>(
                           //     builder: (context, state) {
-                          //       return CreditPanel('HighScore: ' + state.highScore.toString(),
-                          //           30, creditPanelWidth);
+                          //       return HighScorePageNavigationButton();
                           //     }),
                           flutter_bloc.BlocBuilder<CoinBloc, CoinState>(
                               builder: (context, state) {

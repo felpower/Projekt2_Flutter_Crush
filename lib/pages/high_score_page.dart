@@ -44,7 +44,7 @@ class HighScoreState extends State<HighScorePage> {
 
   bool checkIfUpdateNeeded(DateTime now, SharedPreferences prefs) {
     var parse = DateTime.parse(updateHighScore);
-    var passedTime = parse.add(const Duration(minutes: 2));
+    var passedTime = parse.add(const Duration(minutes: 1));
     var update = false;
     if (now.compareTo(passedTime) > 0) {
       prefs.setString('updateHighScore', now.toString());
@@ -74,11 +74,11 @@ class HighScoreState extends State<HighScorePage> {
   void randomizeHighScore(bool update) {
     if (update && users[0].xp < xp) {
       Random random = Random();
-      int randomNumber = random.nextInt(xp) + 1;
+      int randomNumber = random.nextInt(15) + 1;
       users[0].xp = randomNumber + xp;
       for (var i = 1; i < users.length; i++) {
-        randomNumber = random.nextInt(xp) + 1;
-        users[i].xp = xp - randomNumber;
+        users[i].xp = users[i].xp +
+            random.nextInt(xp - users[i].xp); //Make user not loose points
       }
     }
   }
@@ -109,7 +109,7 @@ class HighScoreState extends State<HighScorePage> {
   DataTable _createDataTable() {
     return DataTable(
       columns: _createColumns(),
-      rows: _createRows(),
+      rows: createRow(),
       sortColumnIndex: _currentSortColumn,
       sortAscending: _isSortAsc,
     );
@@ -136,16 +136,43 @@ class HighScoreState extends State<HighScorePage> {
     ];
   }
 
-  List<DataRow> _createRows() {
-    return users
-        .map((user) => DataRow(
-                color: MaterialStateColor.resolveWith(
-                    (states) => Colors.yellowAccent),
-                cells: [
-                  DataCell(Text('#' + user.place.toString())),
-                  DataCell(Text(user.name)),
-                  DataCell(Text(user.xp.toString()))
-                ]))
-        .toList();
+  //
+  // List<DataRow> _createRows() {
+  //   createRow();
+  //   return users
+  //       .map((user) => DataRow(
+  //               color: MaterialStateColor.resolveWith(
+  //                   (states) => Colors.yellowAccent),
+  //               cells: [
+  //                 DataCell(Text('#' + user.place.toString())),
+  //                 DataCell(Text(user.name)),
+  //                 DataCell(Text(user.xp.toString()))
+  //               ]))
+  //       .toList();
+  // }
+
+  List<DataRow> createRow() {
+    List<DataRow> rows = [];
+    for (User user in users) {
+      if (user.name == "Patrick") {
+        rows.add(DataRow(
+            color: MaterialStateColor.resolveWith((states) => Colors.redAccent),
+            cells: [
+              DataCell(Text('#' + user.place.toString())),
+              DataCell(Text(user.name)),
+              DataCell(Text(user.xp.toString()))
+            ]));
+      } else {
+        rows.add(DataRow(
+            color:
+                MaterialStateColor.resolveWith((states) => Colors.yellowAccent),
+            cells: [
+              DataCell(Text('#' + user.place.toString())),
+              DataCell(Text(user.name)),
+              DataCell(Text(user.xp.toString()))
+            ]));
+      }
+    }
+    return rows;
   }
 }
