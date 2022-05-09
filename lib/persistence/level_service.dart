@@ -2,6 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LevelService {
   static const String level = 'level';
+  static const String powerUp = 'nothing';
   static const int numberOfLevels = 16;
 
   static addLevel(int levelnumber) async {

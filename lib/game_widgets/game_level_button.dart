@@ -7,6 +7,7 @@ import 'package:bachelor_flutter_crush/bloc/user_state_bloc/level_bloc/level_blo
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/level_bloc/level_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../bloc/bloc_provider.dart';
 import '../bloc/game_bloc.dart';
@@ -14,6 +15,7 @@ import '../bloc/reporting_bloc/reporting_bloc.dart';
 import '../gamification_widgets/advertisement_video_player.dart';
 import '../model/level.dart';
 import '../pages/game_page.dart';
+import 'package:flutter/material.dart';
 
 class GameLevelButton extends StatelessWidget {
   const GameLevelButton(
@@ -29,6 +31,9 @@ class GameLevelButton extends StatelessWidget {
   final double height;
   final double borderRadius;
   final price = 500;
+  final tntPrice = 100;
+  final minePrice = 200;
+  final rocketPrice = 500;
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +45,17 @@ class GameLevelButton extends StatelessWidget {
         flutter_bloc.BlocProvider.of<ReportingBloc>(context);
     final DarkPatternsBloc darkPatternsBloc =
         flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context);
-    bool disabled = !levelBloc.state.levels.contains(levelNumber) && darkPatternsBloc.state is DarkPatternsActivatedState;
+    bool disabled = !levelBloc.state.levels.contains(levelNumber) &&
+        darkPatternsBloc.state is DarkPatternsActivatedState;
     Color disabledColor = Colors.grey;
 
     return InkWell(
       onTap: () async {
         disabled
             ? showBuyLevelDialog(levelBloc, coinBloc, context)
-            : await openGame(reportingBloc, gameBloc, context);
+            : showBuyPowerUpDialog(
+                reportingBloc, gameBloc, levelBloc, coinBloc, context);
+        // : await openGame(reportingBloc, gameBloc, context);
       },
       child: Center(
         child: Padding(
@@ -119,6 +127,72 @@ class GameLevelButton extends StatelessWidget {
         context,
         MaterialPageRoute(
             builder: (context) => const AdvertisementVideoPlayer()));
+  }
+
+  void showBuyPowerUpDialog(ReportingBloc reportingBloc, GameBloc gameBloc,
+      LevelBloc levelBloc, CoinBloc coinBloc, BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+              title: const Text('Buy power up?'),
+              content: Text(
+                  'Do you want to buy \nTNT for $tntPrice\$ \nMine for $minePrice\$ \nRocket for $rocketPrice\$?'),
+              elevation: 24,
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(16))),
+              actions: <Widget>[
+                IconButton(
+                    icon: Image.asset('assets/images/bombs/tnt.png'),
+                    onPressed: () => buyPowerUp("tnt", tntPrice, coinBloc,
+                        reportingBloc, gameBloc, context)),
+                IconButton(
+                    icon: Image.asset('assets/images/bombs/mine.png'),
+                    onPressed: () => buyPowerUp("mine", minePrice, coinBloc,
+                        reportingBloc, gameBloc, context)),
+                IconButton(
+                    icon: Image.asset('assets/images/bombs/rocket.png'),
+                    onPressed: () => buyPowerUp("rocket", rocketPrice, coinBloc,
+                        reportingBloc, gameBloc, context)),
+                TextButton(
+                  onPressed: () => buyPowerUp(
+                      "nothing", 0, coinBloc, reportingBloc, gameBloc, context),
+                  child: const Text('Start Game'),
+                )
+              ],
+            ));
+  }
+
+  Future<void> buyPowerUp(
+      item,
+      powerUpPrice,
+      CoinBloc coinBloc,
+      ReportingBloc reportingBloc,
+      GameBloc gameBloc,
+      BuildContext context) async {
+    if (coinBloc.state.amount >= powerUpPrice) {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString("powerUp", item);
+      coinBloc.add(RemoveCoinsEvent(powerUpPrice));
+      Navigator.pop(context, 'OK');
+      await openGame(reportingBloc, gameBloc, context);
+    } else {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+                title: const Text('Not enough money to buy power up'),
+                content: const Text(
+                    'You can get coins by playing levels or watching advertisements'),
+                elevation: 24,
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(16))),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => {Navigator.pop(context, 'Ok')},
+                    child: const Text('OK'),
+                  )
+                ],
+              ));
+    }
   }
 
   void showBuyLevelDialog(

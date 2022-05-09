@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../controllers/game_controller.dart';
 import '../model/level.dart';
@@ -110,7 +111,8 @@ class GameBloc implements BlocBase {
     //
     // Fill the Game with Tile and make sure there are possible Swaps
     //
-    _gameController.shuffle();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    _gameController.shuffle(prefs.getString('powerUp') ?? 'nothing');
 
     return _levels[_levelNumber];
   }
