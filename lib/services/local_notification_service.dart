@@ -6,6 +6,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+import 'package:uuid/uuid.dart';
 
 class LocalNotificationService {
   static const String notificaitonsAlreadyScheduled =
@@ -103,6 +104,18 @@ class LocalNotificationService {
         XpService.addMultiplier(multiplier);
       }
     }
+  }
+
+  Future<void> scheduleHighScoreNotification() async {
+        await flutterLocalNotificationsPlugin.zonedSchedule(
+            Random().nextInt(10000),
+            'Flutter Crush',
+            'You just got passed by User Best Player Ever, play now to pass him again!',
+            tz.TZDateTime.now(tz.local).add(const Duration(minutes: 10)),
+            createNotificationDetails(),
+            androidAllowWhileIdle: true,
+            uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime);
   }
 
   Future<bool> _notificationsAlreadyScheduled() async {

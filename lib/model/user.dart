@@ -3,11 +3,13 @@ import 'dart:convert';
 class User {
   int place, xp;
   String name;
+  bool isUser = false;
 
   User({
     required this.place,
     required this.name,
     required this.xp,
+    required this.isUser,
   });
 
   factory User.fromJson(Map<String, dynamic> jsonData) {
@@ -15,6 +17,7 @@ class User {
       place: jsonData['place'],
       name: jsonData['name'],
       xp: jsonData['xp'],
+      isUser: jsonData['isUser'],
     );
   }
 
@@ -22,6 +25,7 @@ class User {
         'place': user.place,
         'name': user.name,
         'xp': user.xp,
+        'isUser': user.isUser,
       };
 
   static String encode(List<User> users) => json.encode(
@@ -32,4 +36,9 @@ class User {
       (json.decode(users) as List<dynamic>)
           .map<User>((item) => User.fromJson(item))
           .toList();
+
+  @override
+  String toString() {
+    return 'User{place: $place, xp: $xp, name: $name, isUser: $isUser}';
+  }
 }

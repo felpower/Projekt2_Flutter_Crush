@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../model/user.dart';
+import '../services/local_notification_service.dart';
 
 int xp = 0;
 String updateHighScore = "what?";
@@ -37,14 +38,14 @@ class HighScoreState extends State<HighScorePage> {
     });
     bool update = checkIfUpdateNeeded(now, prefs);
     users = User.decode(highScore);
-    randomizeHighScore(update);
+    randomizeHighScore(prefs, update);
     updateUserAndHighScore(prefs);
     sortList();
   }
 
   bool checkIfUpdateNeeded(DateTime now, SharedPreferences prefs) {
     var parse = DateTime.parse(updateHighScore);
-    var passedTime = parse.add(const Duration(minutes: 1));
+    var passedTime = parse.add(const Duration(minutes: 15));
     var update = false;
     if (now.compareTo(passedTime) > 0) {
       prefs.setString('updateHighScore', now.toString());
@@ -55,9 +56,8 @@ class HighScoreState extends State<HighScorePage> {
   }
 
   void updateUserAndHighScore(SharedPreferences prefs) {
-    var patrick = User(place: 0, name: 'Patrick', xp: xp);
-    users[users.indexWhere((element) => element.name == patrick.name)] =
-        patrick;
+    var patrick = User(place: 1, name: 'Patrick', xp: xp, isUser: true);
+    users[users.indexWhere((element) => element.isUser == true)] = patrick;
     prefs.setString("highScore", User.encode(users));
   }
 
@@ -71,16 +71,22 @@ class HighScoreState extends State<HighScorePage> {
     }
   }
 
-  void randomizeHighScore(bool update) {
+  void randomizeHighScore(SharedPreferences prefs, bool update) {
     if (update && users[0].xp < xp) {
       Random random = Random();
       int randomNumber = random.nextInt(15) + 1;
       users[0].xp = randomNumber + xp;
-      for (var i = 1; i < users.length; i++) {
+      for (var i = 2; i < users.length; i++) {
         users[i].xp = users[i].xp +
             random.nextInt(xp - users[i].xp); //Make user not loose points
       }
+      prefs.setString("highScore", User.encode(users));
+      scheduleNotification();
     }
+  }
+
+  void scheduleNotification() {
+    LocalNotificationService().scheduleHighScoreNotification();
   }
 
   @override
@@ -136,19 +142,6 @@ class HighScoreState extends State<HighScorePage> {
     ];
   }
 
-  //
-  // List<DataRow> _createRows() {
-  //   createRow();
-  //   return users
-  //       .map((user) => DataRow(
-  //               color: MaterialStateColor.resolveWith(
-  //                   (states) => Colors.yellowAccent),
-  //               cells: [
-  //                 DataCell(Text('#' + user.place.toString())),
-  //                 DataCell(Text(user.name)),
-  //                 DataCell(Text(user.xp.toString()))
-  //               ]))
-  //       .toList();
   // }
 
   List<DataRow> createRow() {

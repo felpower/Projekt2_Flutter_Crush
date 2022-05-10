@@ -6,15 +6,15 @@ class HighScoreService {
   static const String highScore = 'highScore';
   static const String updateHighScore = 'updateHighScore';
   static String initialHighScore = User.encode([
-    User(place: 0, name: 'Best Player Ever', xp: 0),
-    User(place: 0, name: 'Patrick', xp: 0),
-    User(place: 0, name: 'Some Random Dude', xp: 10),
-    User(place: 0, name: 'Huckleberry Finn', xp: 9),
-    User(place: 0, name: 'Star Wars Fan Guy', xp: 7),
-    User(place: 0, name: 'League Player', xp: 5),
-    User(place: 0, name: 'I am not very good at this', xp: 4),
-    User(place: 0, name: 'I do not even know who i am', xp: 3),
-    User(place: 0, name: 'The best ever', xp: 1),
+    User(place: 0, name: 'Best Player Ever', xp: 11, isUser: false),
+    User(place: 0, name: 'Patrick', xp: 0, isUser: true),
+    User(place: 0, name: 'Some Random Dude', xp: 10, isUser: false),
+    User(place: 0, name: 'Huckleberry Finn', xp: 9, isUser: false),
+    User(place: 0, name: 'Star Wars Fan Guy', xp: 7, isUser: false),
+    User(place: 0, name: 'League Player', xp: 5, isUser: false),
+    User(place: 0, name: 'I am not very good at this', xp: 4, isUser: false),
+    User(place: 0, name: 'I do not even know who i am', xp: 3, isUser: false),
+    User(place: 0, name: 'The best ever', xp: 1, isUser: false),
   ]);
 
   HighScoreService._privateConstructor();
