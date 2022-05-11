@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_event.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/coins_bloc/coin_event.dart';
@@ -17,7 +15,6 @@ import '../bloc/reporting_bloc/reporting_bloc.dart';
 import '../gamification_widgets/advertisement_video_player.dart';
 import '../model/level.dart';
 import '../pages/game_page.dart';
-import 'package:flutter/material.dart';
 
 class GameLevelButton extends StatelessWidget {
   const GameLevelButton(
@@ -136,11 +133,39 @@ class GameLevelButton extends StatelessWidget {
         context: context,
         builder: (BuildContext context) => AlertDialog(
               title: const Text('Buy power up?'),
-              content: Text(
-                  'Do you want to buy \nTNT for $tntPrice\$ \nMine for $minePrice\$ \nWrapped for $wrappedPrice\$?'),
+              content: Wrap(
+                children: [
+                  Text('Do you want to buy'),
+                  Row(
+                    children: [
+                      Image.asset(
+                        'assets/images/bombs/tnt.png',
+                        height: 30,
+                      ),
+                      Text(' for $tntPrice\$',
+                          style: const TextStyle(fontSize: 15)),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Image.asset('assets/images/bombs/mine.png', height: 30),
+                      Text(' for $minePrice\$',
+                          style: const TextStyle(fontSize: 15)),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Image.asset('assets/images/bombs/multi_color.png',
+                          height: 30),
+                      Text(' for $wrappedPrice\$',
+                          style: const TextStyle(fontSize: 15)),
+                    ],
+                  ),
+                ],
+              ),
               elevation: 24,
               shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(16))),
+                  borderRadius: BorderRadius.all(Radius.circular(8))),
               actions: <Widget>[
                 IconButton(
                     icon: Image.asset('assets/images/bombs/tnt.png'),
