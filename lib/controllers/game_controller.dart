@@ -127,11 +127,11 @@ class GameController {
           powerUpTile = TileType.bomb;
         } else if (powerUp == "tnt") {
           powerUpTile = TileType.flare;
-        } else if (powerUp == "rocket") {
-          powerUpTile = TileType.fireball;
+        } else if (powerUp == "wrapped") {
+          powerUpTile = TileType.wrapped;
         }
-        powerUpRow = random.nextInt(level.numberOfRows);
-        powerUpCol = random.nextInt(level.numberOfCols);
+        powerUpRow = 1 + random.nextInt(level.numberOfRows - 2);
+        powerUpCol = 1 + random.nextInt(level.numberOfCols - 2);
       }
 
       //

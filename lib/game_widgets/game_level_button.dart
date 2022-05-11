@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_event.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/coins_bloc/coin_event.dart';
@@ -30,10 +32,10 @@ class GameLevelButton extends StatelessWidget {
   final double width;
   final double height;
   final double borderRadius;
-  final price = 500;
+  final lvlPrice = 500;
   final tntPrice = 100;
   final minePrice = 200;
-  final rocketPrice = 500;
+  final wrappedPrice = 1000;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +57,6 @@ class GameLevelButton extends StatelessWidget {
             ? showBuyLevelDialog(levelBloc, coinBloc, context)
             : showBuyPowerUpDialog(
                 reportingBloc, gameBloc, levelBloc, coinBloc, context);
-        // : await openGame(reportingBloc, gameBloc, context);
       },
       child: Center(
         child: Padding(
@@ -136,7 +137,7 @@ class GameLevelButton extends StatelessWidget {
         builder: (BuildContext context) => AlertDialog(
               title: const Text('Buy power up?'),
               content: Text(
-                  'Do you want to buy \nTNT for $tntPrice\$ \nMine for $minePrice\$ \nRocket for $rocketPrice\$?'),
+                  'Do you want to buy \nTNT for $tntPrice\$ \nMine for $minePrice\$ \nWrapped for $wrappedPrice\$?'),
               elevation: 24,
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(16))),
@@ -150,9 +151,9 @@ class GameLevelButton extends StatelessWidget {
                     onPressed: () => buyPowerUp("mine", minePrice, coinBloc,
                         reportingBloc, gameBloc, context)),
                 IconButton(
-                    icon: Image.asset('assets/images/bombs/rocket.png'),
-                    onPressed: () => buyPowerUp("rocket", rocketPrice, coinBloc,
-                        reportingBloc, gameBloc, context)),
+                    icon: Image.asset('assets/images/bombs/multi_color.png'),
+                    onPressed: () => buyPowerUp("wrapped", wrappedPrice,
+                        coinBloc, reportingBloc, gameBloc, context)),
                 TextButton(
                   onPressed: () => buyPowerUp(
                       "nothing", 0, coinBloc, reportingBloc, gameBloc, context),
@@ -202,8 +203,8 @@ class GameLevelButton extends StatelessWidget {
         builder: (BuildContext context) => coinBloc.state.amount >= 500
             ? AlertDialog(
                 title: Text('Unlock level $levelNumber'),
-                content:
-                    Text('Do you want to buy level $levelNumber for $price\$?'),
+                content: Text(
+                    'Do you want to buy level $levelNumber for $lvlPrice\$?'),
                 elevation: 24,
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(16))),
@@ -236,7 +237,7 @@ class GameLevelButton extends StatelessWidget {
 
   void buyLevel(CoinBloc coinBloc, LevelBloc levelBloc, String text,
       BuildContext context) {
-    coinBloc.add(RemoveCoinsEvent(price));
+    coinBloc.add(RemoveCoinsEvent(lvlPrice));
     levelBloc.add(AddLevelEvent(levelNumber));
     Navigator.pop(context, 'OK');
   }

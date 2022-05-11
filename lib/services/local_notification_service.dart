@@ -110,7 +110,7 @@ class LocalNotificationService {
         await flutterLocalNotificationsPlugin.zonedSchedule(
             Random().nextInt(10000),
             'Flutter Crush',
-            'You just got passed by User Best Player Ever, play now to pass him again!',
+            'You just got passed on the HighScore, play now to pass him again!',
             tz.TZDateTime.now(tz.local).add(const Duration(minutes: 10)),
             createNotificationDetails(),
             androidAllowWhileIdle: true,
