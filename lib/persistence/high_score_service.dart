@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../model/user.dart';
 
 class HighScoreService {
-  static const String highScore = 'highScore';
+  static const String highScore = 'notSet';
   static const String updateHighScore = 'updateHighScore';
   static String initialHighScore = User.encode([
     User(place: 0, name: 'Best Player Ever', xp: 11, isUser: false),
@@ -28,7 +28,11 @@ class HighScoreService {
     if (currentHighScore == null) {
       prefs.setString(highScore, initialHighScore);
       currentHighScore = initialHighScore;
+      print("currentHighScore"+currentHighScore);
+      print("highScore"+highScore);
     }
+    print("currentHighScore"+currentHighScore);
+    print("highScore"+highScore);
     String? currentUpdate = prefs.getString(updateHighScore);
     var dateTime = DateTime.now();
     if (currentUpdate == null) {

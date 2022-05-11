@@ -32,7 +32,7 @@ class XpBloc extends Bloc<XpEvent, XpState> {
 
   void _onGameIsOver(bool success) async {
     if (success) {
-      add(AddXpEvent(Random().nextInt(10)));
+      add(AddXpEvent(Random().nextInt(10)+1));
     } else {
       add(LoadXpEvent());
     }

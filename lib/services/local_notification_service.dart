@@ -6,7 +6,6 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
-import 'package:uuid/uuid.dart';
 
 class LocalNotificationService {
   static const String notificaitonsAlreadyScheduled =
@@ -94,7 +93,9 @@ class LocalNotificationService {
         await flutterLocalNotificationsPlugin.zonedSchedule(
             i,
             'Flutter Crush',
-            'Tap here to get ' + multiplier.toString() + 'x XP for the next 15 minutes!',
+            'Tap here to get ' +
+                multiplier.toString() +
+                'x XP for the next 15 minutes!',
             tz.TZDateTime.now(tz.local).add(Duration(days: i, hours: 1)),
             createNotificationDetails(),
             androidAllowWhileIdle: true,
@@ -107,14 +108,14 @@ class LocalNotificationService {
   }
 
   Future<void> scheduleHighScoreNotification() async {
-        await flutterLocalNotificationsPlugin.zonedSchedule(
-            Random().nextInt(10000),
-            'Flutter Crush',
-            'You just got passed on the HighScore, play now to pass him again!',
-            tz.TZDateTime.now(tz.local).add(const Duration(minutes: 10)),
-            createNotificationDetails(),
-            androidAllowWhileIdle: true,
-            uiLocalNotificationDateInterpretation:
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+        Random().nextInt(10000),
+        'Flutter Crush',
+        'You just got passed on the HighScore, play now to pass him again!',
+        tz.TZDateTime.now(tz.local).add(const Duration(minutes: 1)),
+        createNotificationDetails(),
+        androidAllowWhileIdle: true,
+        uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime);
   }
 

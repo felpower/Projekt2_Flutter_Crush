@@ -33,19 +33,25 @@ class HighScoreState extends State<HighScorePage> {
     var now = DateTime.now();
     setState(() {
       highScore = (prefs.getString('highScore') ?? 'notSet');
+      if (highScore == 'notSet') {
+        highScore = setInitialHighScore();
+      }
       xp = (prefs.getInt('xp') ?? 0);
       updateHighScore = (prefs.getString('updateHighScore') ?? now.toString());
+      prefs.setString('updateHighScore', updateHighScore);
     });
     bool update = checkIfUpdateNeeded(now, prefs);
     users = User.decode(highScore);
+    sortList();
     randomizeHighScore(prefs, update);
     updateUserAndHighScore(prefs);
     sortList();
+    scheduleNotification();
   }
 
   bool checkIfUpdateNeeded(DateTime now, SharedPreferences prefs) {
     var parse = DateTime.parse(updateHighScore);
-    var passedTime = parse.add(const Duration(minutes: 15));
+    var passedTime = parse.add(const Duration(minutes: 1));
     var update = false;
     if (now.compareTo(passedTime) > 0) {
       prefs.setString('updateHighScore', now.toString());
@@ -72,21 +78,24 @@ class HighScoreState extends State<HighScorePage> {
   }
 
   void randomizeHighScore(SharedPreferences prefs, bool update) {
-    if (update && users[0].xp < xp) {
+    if (update && users[0].isUser == true) {
       Random random = Random();
       int randomNumber = random.nextInt(15) + 1;
-      users[0].xp = randomNumber + xp;
+      users[1].xp = randomNumber + xp;
       for (var i = 2; i < users.length; i++) {
         users[i].xp = users[i].xp +
             random.nextInt(xp - users[i].xp); //Make user not loose points
       }
       prefs.setString("highScore", User.encode(users));
-      scheduleNotification();
     }
   }
 
   void scheduleNotification() {
-    LocalNotificationService().scheduleHighScoreNotification();
+    if (users[0].isUser) {
+      print("Notification scheduled for: " +
+          DateTime.now().add(const Duration(minutes: 1)).toString());
+      LocalNotificationService().scheduleHighScoreNotification();
+    }
   }
 
   @override
@@ -167,5 +176,19 @@ class HighScoreState extends State<HighScorePage> {
       }
     }
     return rows;
+  }
+
+  String setInitialHighScore() {
+    return User.encode([
+      User(place: 0, name: 'Best Player Ever', xp: 11, isUser: false),
+      User(place: 0, name: 'Patrick', xp: 0, isUser: true),
+      User(place: 0, name: 'Some Random Dude', xp: 10, isUser: false),
+      User(place: 0, name: 'Huckleberry Finn', xp: 9, isUser: false),
+      User(place: 0, name: 'Star Wars Fan Guy', xp: 7, isUser: false),
+      User(place: 0, name: 'League Player', xp: 5, isUser: false),
+      User(place: 0, name: 'I am not very good at this', xp: 4, isUser: false),
+      User(place: 0, name: 'I do not even know who i am', xp: 3, isUser: false),
+      User(place: 0, name: 'The best ever', xp: 1, isUser: false),
+    ]);
   }
 }
