@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:bachelor_flutter_crush/persistence/high_score_service.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -34,7 +35,7 @@ class HighScoreState extends State<HighScorePage> {
     setState(() {
       highScore = (prefs.getString('highScore') ?? 'notSet');
       if (highScore == 'notSet') {
-        highScore = setInitialHighScore();
+        highScore = HighScoreService.initialHighScore;
       }
       xp = (prefs.getInt('xp') ?? 0);
       updateHighScore = (prefs.getString('updateHighScore') ?? now.toString());
@@ -176,19 +177,5 @@ class HighScoreState extends State<HighScorePage> {
       }
     }
     return rows;
-  }
-
-  String setInitialHighScore() {
-    return User.encode([
-      User(place: 0, name: 'Best Player Ever', xp: 11, isUser: false),
-      User(place: 0, name: 'Patrick', xp: 0, isUser: true),
-      User(place: 0, name: 'Some Random Dude', xp: 10, isUser: false),
-      User(place: 0, name: 'Huckleberry Finn', xp: 9, isUser: false),
-      User(place: 0, name: 'Star Wars Fan Guy', xp: 7, isUser: false),
-      User(place: 0, name: 'League Player', xp: 5, isUser: false),
-      User(place: 0, name: 'I am not very good at this', xp: 4, isUser: false),
-      User(place: 0, name: 'I do not even know who i am', xp: 3, isUser: false),
-      User(place: 0, name: 'The best ever', xp: 1, isUser: false),
-    ]);
   }
 }

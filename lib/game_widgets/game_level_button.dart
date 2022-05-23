@@ -109,10 +109,12 @@ class GameLevelButton extends StatelessWidget {
   }
 
   Future<void> openGame(ReportingBloc reportingBloc, GameBloc gameBloc,
-      BuildContext context) async {
+      SharedPreferences prefs, BuildContext context) async {
     reportingBloc.add(ReportStartLevelEvent(levelNumber));
     await _startLevel(gameBloc, context);
-    _showAdvertisement(context);
+    if (prefs.getBool("addsActive") == true) {
+      _showAdvertisement(context);
+    }
   }
 
   Future<void> _startLevel(GameBloc gameBloc, BuildContext context) async {
@@ -200,7 +202,7 @@ class GameLevelButton extends StatelessWidget {
       prefs.setString("powerUp", item);
       coinBloc.add(RemoveCoinsEvent(powerUpPrice));
       Navigator.pop(context, 'OK');
-      await openGame(reportingBloc, gameBloc, context);
+      await openGame(reportingBloc, gameBloc, prefs, context);
     } else {
       showDialog(
           context: context,

@@ -1,4 +1,3 @@
-
 import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -58,17 +57,30 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
             children: [
               VideoPlayer(controller),
               GestureDetector(
-                onTapDown: (tapDownEvent) => _onTapDown(tapDownEvent, reportingBloc),
+                onTapDown: (tapDownEvent) =>
+                    _onTapDown(tapDownEvent, reportingBloc),
               ),
               Container(
-                padding: const EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(5),
                   width: 35,
                   height: 35,
                   margin: const EdgeInsets.only(top: 30),
-                  child: TextButton(
-                      child: const Icon(Icons.close, color: Colors.white,),
-                      onPressed: () {
-                        Navigator.of(context).pop();
+                  child: FutureBuilder(
+                      future:
+                          Future.delayed(const Duration(milliseconds: 5000)),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          return TextButton(
+                              child: const Icon(
+                                Icons.close,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              });
+                        } else {
+                          return const Icon(Icons.update, color: Colors.white);
+                        }
                       }))
             ],
           );
@@ -84,5 +96,4 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
     double y = details.globalPosition.dy;
     reportingBloc.add(ReportAdvertisementTapEvent(x, y));
   }
-
 }

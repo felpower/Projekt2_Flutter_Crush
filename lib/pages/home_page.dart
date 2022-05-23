@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 
 import '../app_bar_widgets/high_score_page_navigation_button.dart';
+import '../app_bar_widgets/remove_adds_button.dart';
 import '../bloc/bloc_provider.dart';
 import '../bloc/game_bloc.dart';
 import '../bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
@@ -129,7 +130,10 @@ class _HomePageState extends State<HomePage>
       appBar: AppBar(
         leading: const DayStreakIcon(1),
         title: const Text('Flutter Crush'),
-        actions: const <Widget>[HighScorePageNavigationButton()],
+        actions: const <Widget>[
+          RemoveAddsButton(),
+          HighScorePageNavigationButton(),
+        ],
       ),
       body: WillPopScope(
         // No way to get back
