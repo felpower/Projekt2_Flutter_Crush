@@ -2,13 +2,16 @@ import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/d
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../controllers/payment_controller.dart';
 
 class RemoveAddsButton extends StatelessWidget {
   const RemoveAddsButton({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    final paymentController = Get.put(PaymentController());
     return BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
         builder: (context, state) {
       if (state is DarkPatternsActivatedState) {
@@ -32,7 +35,7 @@ class RemoveAddsButton extends StatelessWidget {
                                       {Navigator.pop(context, 'Cancel')},
                                   child: const Text('Cancel')),
                               TextButton(
-                                onPressed: () => {buyAddRemover(context)},
+                                onPressed: () => {buyAddRemover(context, paymentController)},
                                 child: const Text('OK'),
                               )
                             ],
@@ -45,16 +48,7 @@ class RemoveAddsButton extends StatelessWidget {
     });
   }
 
-  buyAddRemover(BuildContext context) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? addActive = prefs.getBool("addsActive");
-    if(addActive == true) {
-      prefs.setBool('addsActive', false);
-    } else{
-      prefs.setBool('addsActive', true);
-    }
-    addActive = !addActive!;
-    print("Advertisements are now: " + addActive.toString());
-    Navigator.pop(context, 'Ok');
+  buyAddRemover(BuildContext context, PaymentController paymentController) async {
+    paymentController.makePayment(context);
   }
 }
