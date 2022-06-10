@@ -45,6 +45,7 @@ dependencies:
   http: ^0.13.4
   get: ^4.6.5
   square_in_app_payments: 1.7.0
+  local_auth: ^2.1.0
 
 dev_dependencies:
   flutter_test:

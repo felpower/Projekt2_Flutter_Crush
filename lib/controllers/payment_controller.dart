@@ -30,7 +30,6 @@ class PaymentController extends GetxController {
                     child: const Text('Ok'))
               ],
             ));
-    //Success
   }
 
   void _cardNonceRequestSuccess(CardDetails result) {
