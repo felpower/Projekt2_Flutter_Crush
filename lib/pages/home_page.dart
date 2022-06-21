@@ -15,6 +15,7 @@ import 'package:bachelor_flutter_crush/gamification_widgets/daystreak_milestone_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 
+import '../app_bar_widgets/create_rating_button.dart';
 import '../app_bar_widgets/high_score_page_navigation_button.dart';
 import '../app_bar_widgets/remove_adds_button.dart';
 import '../bloc/bloc_provider.dart';
@@ -133,6 +134,7 @@ class _HomePageState extends State<HomePage>
         actions: const <Widget>[
           RemoveAddsButton(),
           HighScorePageNavigationButton(),
+          CreateRatingButton(),
         ],
       ),
       body: WillPopScope(
