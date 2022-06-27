@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../persistence/reporting_service.dart';
+
 void main() => runApp(const RatingPage());
 
 class RatingPage extends StatefulWidget {
@@ -46,6 +48,7 @@ class _MyAppState extends State<RatingPage> {
                       icon: const Icon(Icons.check),
                       color: Colors.white,
                       onPressed: () {
+                        ReportingService.addRating(_rating);
                         if (_rating > 3) {
                           setRatingState();
                           Navigator.pop(this.context);
@@ -100,6 +103,7 @@ class _MyAppState extends State<RatingPage> {
                     ),
                     IconButton(
                         onPressed: () {
+                          ReportingService.addRating(_rating);
                           if (_rating > 3) {
                             setRatingState();
                             Navigator.pop(this.context);

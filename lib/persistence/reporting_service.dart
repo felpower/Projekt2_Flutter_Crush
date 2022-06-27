@@ -18,6 +18,7 @@ class ReportingService {
   static const String bootAppStartTime = 'bootAppStartTime';
   static const String closeAppTime = 'closeAppTime';
   static const String notificationTap = 'notificationTap';
+  static const String ratingApp = 'rating';
 
   static const _chars =
       'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
@@ -41,6 +42,10 @@ class ReportingService {
 
   static Future<void> addCloseApp(DateTime dateTime) async{
     await _updateDocumentData(closeAppTime, dateTime.toString());
+  }
+
+  static Future<void> addRating(double rating) async{
+    await _updateDocumentData(ratingApp, rating.toString());
   }
 
   static Future<void> addNotificationTap(DateTime dateTime, String? multiplier) async {
@@ -97,7 +102,8 @@ class ReportingService {
       closeAppTime: [],
       addScreenClick: [],
       startOfLevel: [],
-      notificationTap: []
+      notificationTap: [],
+      ratingApp:[]
     };
 
     database.createDocument(

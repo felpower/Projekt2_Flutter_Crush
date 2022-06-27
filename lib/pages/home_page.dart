@@ -135,7 +135,6 @@ class _HomePageState extends State<HomePage>
         actions: const <Widget>[
           RemoveAddsButton(),
           HighScorePageNavigationButton(),
-          CreateRatingButton(),
         ],
       ),
       body: WillPopScope(
