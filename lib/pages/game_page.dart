@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:bachelor_flutter_crush/pages/rating_page.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../animations/animation_chain.dart';
 import '../animations/animation_combo_collapse.dart';
@@ -679,7 +681,8 @@ class _GamePageState extends State<GamePage>
       return;
     }
     _gameOverReceived = true;
-
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? hasRated = prefs.getBool("hasRated");
     // Since some animations could still be ongoing, let's wait a bit
     // before showing the user that the game is won
     await Future.delayed(const Duration(seconds: 1));
@@ -700,11 +703,15 @@ class _GamePageState extends State<GamePage>
 
               // as the game is over, let's leave the game
               Navigator.of(context).pop();
+              print("Has Rated? "+hasRated.toString());
+              if (hasRated == null || !hasRated) {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => const RatingPage()));
+              }
             },
           );
         });
 
     Overlay.of(context)?.insert(_gameSplash);
   }
-
 }
