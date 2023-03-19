@@ -18,19 +18,18 @@ class RemoveAddsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final paymentController = Get.put(PaymentController());
     return BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
         builder: (context, state) {
       if (state is DarkPatternsActivatedState) {
         getSharedPreferences();
-        return buyAddRemover(context, paymentController);
+        return buyAddRemover(context);
       } else {
         return Container();
       }
     });
   }
 
-  buyAddRemover(BuildContext context, PaymentController paymentController) {
+  buyAddRemover(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.only(right: 0),
         child: IconButton(
@@ -53,8 +52,14 @@ class RemoveAddsButton extends StatelessWidget {
                                     {Navigator.pop(context, 'Cancel')},
                                 child: const Text('Cancel')),
                             TextButton(
-                              onPressed: () =>
-                                  {paymentController.makePayment(context)},
+                              onPressed: () => {
+                                Navigator.pop(context, 'Ok'),
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const PaymentController())),
+                              },
                               child: const Text('OK'),
                             )
                           ],
@@ -72,8 +77,7 @@ class RemoveAddsButton extends StatelessWidget {
                                 onPressed: () => {Navigator.pop(context, 'No')},
                                 child: const Text('No')),
                             TextButton(
-                              onPressed: () =>
-                                  {reactivateAdds(context, paymentController)},
+                              onPressed: () => {reactivateAdds(context)},
                               child: const Text('Yes'),
                             )
                           ],
@@ -82,9 +86,8 @@ class RemoveAddsButton extends StatelessWidget {
             icon: const Icon(Icons.money_off)));
   }
 
-  void reactivateAdds(
-      BuildContext context, PaymentController paymentController) {
-    paymentController.updateSharedPreferences();
+  void reactivateAdds(BuildContext context) {
+    updateSharedPreferences();
     Navigator.pop(context, 'Ok');
     print("Reactivate Adds");
     showDialog(
@@ -105,5 +108,15 @@ class RemoveAddsButton extends StatelessWidget {
   void getSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     addsActive = prefs.getBool("addsActive")!;
+  }
+
+  void updateSharedPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? addActive = prefs.getBool("addsActive");
+    if (addActive == true) {
+      prefs.setBool('addsActive', false);
+    } else {
+      prefs.setBool('addsActive', true);
+    }
   }
 }
