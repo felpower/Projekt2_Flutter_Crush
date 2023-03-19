@@ -40,7 +40,7 @@ dependencies:
   shared_preferences: ^2.0.13
   flutter_bloc: ^8.0.1
   video_player: ^2.2.18
-  appwrite: ^3.0.1
+  appwrite: ^8.2.0
   flutter_local_notifications: ^9.4.0
   http: ^0.13.4
   get: ^4.6.5
