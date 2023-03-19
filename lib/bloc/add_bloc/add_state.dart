@@ -1,5 +1,5 @@
 class AddState {
-  bool addsActive;
+  bool addsActive = false;
 
   AddState([this.addsActive = true]);
 }

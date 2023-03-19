@@ -10,6 +10,7 @@ class ReportingBloc extends Bloc<ReportingEvent, ReportingState> {
     on<ReportStartLevelEvent>(_onReportStartLevelEvent);
     on<ReportStartAppEvent>(_onStartAppEvent);
     on<ReportCheckHighScoreEvent>(_onCheckHighscoreEvent);
+    on<ReportPaidForRemovingAddsEvent>(_onPaidForRemovingAddsEvent);
     on<ReportCloseAppEvent>(_onCloseAppEvent);
 
     add(ReportStartAppEvent(DateTime.now()));
@@ -28,6 +29,11 @@ class ReportingBloc extends Bloc<ReportingEvent, ReportingState> {
   void _onCheckHighscoreEvent(
       ReportCheckHighScoreEvent event, Emitter<ReportingState> emit) {
     ReportingService.checkHighScore(event.time);
+  }
+
+  void _onPaidForRemovingAddsEvent(
+      ReportPaidForRemovingAddsEvent event, Emitter<ReportingState> emit) {
+    ReportingService.removeAdds(event.removed);
   }
 
   void _onStartAppEvent(

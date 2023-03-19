@@ -1,8 +1,12 @@
+import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_event.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:square_in_app_payments/in_app_payments.dart';
 import 'package:square_in_app_payments/models.dart';
+
+import '../bloc/reporting_bloc/reporting_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 
 class PaymentController extends GetxController {
   Map<String, dynamic>? paymentIntentData;
@@ -10,6 +14,7 @@ class PaymentController extends GetxController {
 
   void makePayment(BuildContext context) {
     this.context = context;
+
     InAppPayments.setSquareApplicationId(
         'sandbox-sq0idb-tGCIx1hiRafOVCkzw5V6XA');
     InAppPayments.startCardEntryFlow(
@@ -53,12 +58,15 @@ class PaymentController extends GetxController {
                     child: const Text('Ok')),
               ],
             ));
+    final reportingBloc = flutter_bloc.BlocProvider.of<ReportingBloc>(context);
+    reportingBloc.add(ReportPaidForRemovingAddsEvent(true));
     updateSharedPreferences();
   }
 
   void updateSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool? addActive = prefs.getBool("addsActive");
+
     if (addActive == true) {
       prefs.setBool('addsActive', false);
     } else {

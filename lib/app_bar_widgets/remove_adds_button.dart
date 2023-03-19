@@ -5,7 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../bloc/reporting_bloc/reporting_bloc.dart';
+import '../bloc/reporting_bloc/reporting_event.dart';
 import '../controllers/payment_controller.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 
 class RemoveAddsButton extends StatelessWidget {
   const RemoveAddsButton({Key? key}) : super(key: key);
@@ -69,9 +73,7 @@ class RemoveAddsButton extends StatelessWidget {
                                 child: const Text('No')),
                             TextButton(
                               onPressed: () =>
-                                  {
-                                    reactivateAdds(context, paymentController)
-                                  },
+                                  {reactivateAdds(context, paymentController)},
                               child: const Text('Yes'),
                             )
                           ],
@@ -80,22 +82,24 @@ class RemoveAddsButton extends StatelessWidget {
             icon: const Icon(Icons.money_off)));
   }
 
-  void reactivateAdds(BuildContext context, PaymentController paymentController){
+  void reactivateAdds(
+      BuildContext context, PaymentController paymentController) {
     paymentController.updateSharedPreferences();
     Navigator.pop(context, 'Ok');
     print("Reactivate Adds");
     showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-          title: const Text("Subscription cancelled"),
-          content: const Text(
-              "Adds are now active again!"),
-          actions: <Widget>[
-            TextButton(
-                onPressed: () => {Navigator.pop(context, 'Ok')},
-                child: const Text('Ok')),
-          ],
-        ));
+              title: const Text("Subscription cancelled"),
+              content: const Text("Adds are now active again!"),
+              actions: <Widget>[
+                TextButton(
+                    onPressed: () => {Navigator.pop(context, 'Ok')},
+                    child: const Text('Ok')),
+              ],
+            ));
+    final reportingBloc = flutter_bloc.BlocProvider.of<ReportingBloc>(context);
+    reportingBloc.add(ReportPaidForRemovingAddsEvent(false));
   }
 
   void getSharedPreferences() async {

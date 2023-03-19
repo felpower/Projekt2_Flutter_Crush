@@ -15,6 +15,7 @@ class ReportingService {
   static const String uuid = 'uuid';
   static const String darkPatterns = 'darkPatterns';
   static const String addScreenClick = 'addScreenClick';
+  static const String paidForRemovingAdds = 'paidForRemovingAdds';
   static const String startOfLevel = 'startOfLevel';
   static const String checkHighScoreTime = 'checkHighScoreTime';
   static const String bootAppStartTime = 'bootAppStartTime';
@@ -40,7 +41,7 @@ class ReportingService {
         startOfLevel,
         'Level: ' +
             levelNumber.toString() +
-            ', time: ' +
+            ', Time: ' +
             DateTime.now().toString());
   }
 
@@ -58,6 +59,15 @@ class ReportingService {
 
   static Future<void> addRating(double rating) async {
     await _updateDocumentData(ratingApp, rating.toString());
+  }
+
+  static Future<void> removeAdds(bool removed) async {
+    await _updateDocumentData(
+        paidForRemovingAdds,
+        'Removed: ' +
+            removed.toString() +
+            ', Time: ' +
+            DateTime.now().toString());
   }
 
   static Future<void> addNotificationTap(
@@ -127,6 +137,7 @@ class ReportingService {
       notificationTap: [],
       ratingApp: [],
       checkHighScoreTime: [],
+      paidForRemovingAdds: []
     };
 
     database.createDocument(
@@ -149,7 +160,7 @@ class ReportingService {
     if (response != null) {
       return response;
     }
-    final newUuid = ID.unique();
+    final newUuid = _getRandomString(15);
     prefs.setString(uuid, newUuid);
     return newUuid;
   }

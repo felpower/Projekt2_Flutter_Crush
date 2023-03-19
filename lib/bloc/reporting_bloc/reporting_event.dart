@@ -19,6 +19,12 @@ class ReportCheckHighScoreEvent extends ReportingEvent {
   ReportCheckHighScoreEvent(this.time);
 }
 
+class ReportPaidForRemovingAddsEvent extends ReportingEvent {
+  final bool removed;
+
+  ReportPaidForRemovingAddsEvent(this.removed);
+}
+
 class ReportStartAppEvent extends ReportingEvent {
   final DateTime time;
 
