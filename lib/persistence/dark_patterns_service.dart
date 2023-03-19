@@ -10,7 +10,7 @@ class DarkPatternsService {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     bool? shouldDarkPatternsBeVisible = prefs.getBool(darkPatterns);
     if (shouldDarkPatternsBeVisible == null) {
-      shouldDarkPatternsBeVisible = darkPatternsRandomValue;
+      shouldDarkPatternsBeVisible = true; //FixMe: darkPatternsRandomValue;
       prefs.setBool(darkPatterns, shouldDarkPatternsBeVisible);
     }
     return shouldDarkPatternsBeVisible;

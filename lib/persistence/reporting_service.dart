@@ -7,9 +7,9 @@ import 'package:bachelor_flutter_crush/persistence/dark_patterns_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ReportingService {
-  static const String collectionId = '622c77a86c1c479fe0af';
-  static const String endpointUrl = 'https://server.flutter-crush.tk/v1';
-  static const String projectId = '62233cfed4c5a2f3bf3d';
+  static const String collectionId = '6416edda75723d0674ab';
+  static const String endpointUrl = 'http://localhost/v1';
+  static const String projectId = '6416ebbc5895408f82e8';
 
   static const String uuid = 'uuid';
   static const String darkPatterns = 'darkPatterns';
@@ -113,7 +113,7 @@ class ReportingService {
   }
 
   static void _initClient() {
-    client.setEndpoint(endpointUrl).setProject(projectId).setSelfSigned();
+    client.setEndpoint(endpointUrl).setProject(projectId).setSelfSigned(status: true);
   }
 
   static Future<String> _getUuid() async {
