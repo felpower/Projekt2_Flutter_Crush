@@ -3,7 +3,9 @@ import 'dart:math';
 import 'package:bachelor_flutter_crush/persistence/high_score_service.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
+import '../bloc/reporting_bloc/reporting_bloc.dart';
+import '../bloc/reporting_bloc/reporting_event.dart';
 import '../model/user.dart';
 import '../services/local_notification_service.dart';
 
@@ -26,6 +28,7 @@ class HighScoreState extends State<HighScorePage> {
   @override
   void initState() {
     super.initState();
+
     _loadHighScore();
   }
 
@@ -42,6 +45,9 @@ class HighScoreState extends State<HighScorePage> {
       prefs.setString('updateHighScore', updateHighScore);
     });
     bool update = checkIfUpdateNeeded(now, prefs);
+    final ReportingBloc _reportingBloc =
+        flutter_bloc.BlocProvider.of<ReportingBloc>(context);
+    _reportingBloc.add(ReportCheckHighScoreEvent(DateTime.now()));
     users = User.decode(highScore);
     sortList();
     randomizeHighScore(prefs, update);

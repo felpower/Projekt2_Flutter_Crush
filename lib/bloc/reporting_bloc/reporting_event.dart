@@ -13,6 +13,12 @@ class ReportStartLevelEvent extends ReportingEvent {
   ReportStartLevelEvent(this.levelNumber);
 }
 
+class ReportCheckHighScoreEvent extends ReportingEvent {
+  final DateTime time;
+
+  ReportCheckHighScoreEvent(this.time);
+}
+
 class ReportStartAppEvent extends ReportingEvent {
   final DateTime time;
 

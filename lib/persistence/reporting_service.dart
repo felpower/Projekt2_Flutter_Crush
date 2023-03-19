@@ -16,6 +16,7 @@ class ReportingService {
   static const String darkPatterns = 'darkPatterns';
   static const String addScreenClick = 'addScreenClick';
   static const String startOfLevel = 'startOfLevel';
+  static const String checkHighScoreTime = 'checkHighScoreTime';
   static const String bootAppStartTime = 'bootAppStartTime';
   static const String closeAppTime = 'closeAppTime';
   static const String notificationTap = 'notificationTap';
@@ -45,6 +46,10 @@ class ReportingService {
 
   static Future<void> addStartApp(DateTime dateTime) async {
     await _updateDocumentData(bootAppStartTime, dateTime.toString());
+  }
+
+  static Future<void> checkHighScore(DateTime dateTime) async {
+    await _updateDocumentData(checkHighScoreTime, dateTime.toString());
   }
 
   static Future<void> addCloseApp(DateTime dateTime) async {
@@ -107,7 +112,6 @@ class ReportingService {
       dev.log("could not find file");
     }
 
-    print("Printed Document" + document.toString());
     if (document != null) {
       return;
     }
@@ -121,16 +125,15 @@ class ReportingService {
       addScreenClick: [],
       startOfLevel: [],
       notificationTap: [],
-      ratingApp: []
+      ratingApp: [],
+      checkHighScoreTime: [],
     };
 
-    var createDocument = database.createDocument(
+    database.createDocument(
         collectionId: collectionId,
         documentId: await _getUuid(),
         databaseId: databaseId,
         data: planetsByDiameter);
-
-    print("Printed Document" + createDocument.toString() + "planetsByDiameter: " + planetsByDiameter.toString());
   }
 
   static void _initClient() {
@@ -144,12 +147,10 @@ class ReportingService {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String? response = prefs.getString(uuid);
     if (response != null) {
-      print(response.toString());
       return response;
     }
     final newUuid = ID.unique();
     prefs.setString(uuid, newUuid);
-    print(newUuid.toString());
     return newUuid;
   }
 
