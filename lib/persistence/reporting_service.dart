@@ -7,10 +7,10 @@ import 'package:bachelor_flutter_crush/persistence/dark_patterns_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ReportingService {
-  static const String collectionId = '6416edda75723d0674ab';
-  static const String endpointUrl = 'http://192.168.0.80/v1';
-  static const String projectId = '6416ebbc5895408f82e8';
-  static const String databaseId = '6416ed0281be171b2ec1';
+  static const String endpointUrl = 'http://161.35.65.172/v1';
+  static const String projectId = '64178a88883ddd21b350';
+  static const String databaseId = '64178af11a3b242e891a';
+  static const String collectionId = '64178afdbe4dab73b59a';
 
   static const String uuid = 'uuid';
   static const String darkPatterns = 'darkPatterns';
