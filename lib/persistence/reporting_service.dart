@@ -8,9 +8,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ReportingService {
   static const String endpointUrl = 'http://161.35.65.172/v1';
-  static const String projectId = '64178a88883ddd21b350';
-  static const String databaseId = '64178af11a3b242e891a';
-  static const String collectionId = '64178afdbe4dab73b59a';
+  static const String projectId = '64182b7ea21e448ad259';
+  static const String databaseId = '64182c07743312a32653';
+  static const String collectionId = '64182c149865b2351b17';
 
   static const String uuid = 'uuid';
   static const String darkPatterns = 'darkPatterns';

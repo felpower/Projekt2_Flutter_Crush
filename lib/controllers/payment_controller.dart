@@ -15,16 +15,6 @@ class PaymentController extends StatefulWidget {
   State<StatefulWidget> createState() {
     return PaymentState();
   }
-
-  void updateSharedPreferences() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? addActive = prefs.getBool("addsActive");
-    if (addActive == true) {
-      prefs.setBool('addsActive', false);
-    } else {
-      prefs.setBool('addsActive', true);
-    }
-  }
 }
 
 class PaymentState extends State<PaymentController> {
@@ -227,7 +217,7 @@ class PaymentState extends State<PaymentController> {
       final reportingBloc =
           flutter_bloc.BlocProvider.of<ReportingBloc>(context);
       reportingBloc.add(ReportPaidForRemovingAddsEvent(true));
-      updateSharedPreferences();
+      setAddsTo(false);
     } else {
       print('invalid!');
     }
@@ -243,13 +233,8 @@ class PaymentState extends State<PaymentController> {
     });
   }
 
-  void updateSharedPreferences() async {
+  void setAddsTo(bool adds) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? addActive = prefs.getBool("addsActive");
-    if (addActive == true) {
-      prefs.setBool('addsActive', false);
-    } else {
-      prefs.setBool('addsActive', true);
-    }
+    prefs.setBool('addsActive', adds);
   }
 }
