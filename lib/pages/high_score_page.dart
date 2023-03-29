@@ -112,6 +112,11 @@ class HighScoreState extends State<HighScorePage> {
         home: Scaffold(
             appBar: AppBar(
               title: const Text('High Score'),
+              leading: BackButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
             ),
             body: Stack(
               children: <Widget>[

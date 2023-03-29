@@ -97,9 +97,30 @@ class _GamePageState extends State<GamePage>
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.close),
+        child: const Icon(Icons.close),
         onPressed: () {
-          Navigator.of(context).pop();
+          !_gameOverReceived
+              ? showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                        title: const Text('Abort level'),
+                        content: const Text(
+                            'Are you sure you want to abort the level?'),
+                        elevation: 24,
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(16))),
+                        actions: <Widget>[
+                          TextButton(
+                              onPressed: () =>
+                                  {Navigator.pop(context, 'Cancel')},
+                              child: const Text('No')),
+                          TextButton(
+                              onPressed: () => {popUntil()},
+                              child: const Text('Yes')),
+                        ],
+                      ))
+              : null;
         },
       ),
       body: Container(
@@ -127,6 +148,11 @@ class _GamePageState extends State<GamePage>
         ),
       ),
     );
+  }
+
+  void popUntil() {
+    int count = 0;
+    Navigator.of(context).popUntil((_) => count++ >= 2);
   }
 
   //
@@ -703,10 +729,12 @@ class _GamePageState extends State<GamePage>
 
               // as the game is over, let's leave the game
               Navigator.of(context).pop();
-              print("Has Rated? "+hasRated.toString());
+              print("Has Rated? " + hasRated.toString());
               if (hasRated == null || !hasRated) {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => const RatingPage()));
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const RatingPage()));
               }
             },
           );
