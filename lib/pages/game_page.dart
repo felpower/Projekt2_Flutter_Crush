@@ -13,6 +13,7 @@ import '../bloc/game_bloc.dart';
 import '../game_widgets/board.dart';
 import '../game_widgets/game_moves_left_panel.dart';
 import '../game_widgets/game_over_splash.dart';
+import '../game_widgets/game_splash.dart';
 import '../game_widgets/objective_panel.dart';
 import '../helpers/animations_resolver.dart';
 import '../helpers/array_2d.dart';
@@ -61,7 +62,7 @@ class _GamePageState extends State<GamePage>
     super.initState();
     _gameOverReceived = false;
     _allowGesture = true;
-    //WidgetsBinding.instance?.addPostFrameCallback(_showGameStartSplash);
+    WidgetsBinding.instance?.addPostFrameCallback(_showGameStartSplash);
   }
 
   @override
@@ -86,8 +87,8 @@ class _GamePageState extends State<GamePage>
     _overlayEntryAnimateSwapTiles = null;
     _overlayEntryFromTile?.remove();
     _overlayEntryFromTile = null;
-    //_gameSplash.remove();
-    //_controller.dispose();
+    _gameSplash.remove();//Not sure while it was inactive before, comment out if not working correctly
+    // _controller.dispose();//Smae with this shit
     super.dispose();
   }
 
@@ -729,13 +730,38 @@ class _GamePageState extends State<GamePage>
 
               // as the game is over, let's leave the game
               Navigator.of(context).pop();
-              print("Has Rated? " + hasRated.toString());
+              print("Has Rated? " + hasRated.toString());//FixMe: Check if Dark Patterns are activated, otherwise do not call Rating Page
               if (hasRated == null || !hasRated) {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const RatingPage()));
               }
+            },
+          );
+        });
+
+    Overlay.of(context)?.insert(_gameSplash);
+  }
+  //
+  // SplashScreen to be displayed when the game starts
+  // to show the user the objectives
+  //
+  void _showGameStartSplash(_) {
+    // No gesture detection during the splash
+    _allowGesture = false;
+
+    // Show the splash
+    _gameSplash = OverlayEntry(
+        opaque: false,
+        builder: (BuildContext context) {
+          return GameSplash(
+            level: widget.level,
+            onComplete: () {
+              _gameSplash.remove();
+
+              // allow gesture detection
+              _allowGesture = true;
             },
           );
         });
