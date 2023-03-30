@@ -37,7 +37,6 @@ api-key-service-account.json
 /build/
 
 # Web related
-lib/generated_plugin_registrant.dart
 
 # Symbolication related
 app.*.symbols
