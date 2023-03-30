@@ -17,7 +17,7 @@
                 "1,1,1,1,1,1,1,1,1,1"
             ],
             "moves": 10,
-            "objective": ["4;blue", "4;red"]
+            "objective": ["1;blue"]
         },
         {
             "level": 2,

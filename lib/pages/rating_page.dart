@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -49,8 +51,11 @@ class _MyAppState extends State<RatingPage> {
                       color: Colors.white,
                       onPressed: () {
                         ReportingService.addRating(_rating);
+                        print("Rating: "+ _rating.toString());
                         if (_rating > 3) {
                           setRatingState();
+                          var duration = const Duration(milliseconds: 500);
+                          sleep(duration);
                           Navigator.pop(this.context);
                         } else {
                           showDialog(
@@ -92,20 +97,23 @@ class _MyAppState extends State<RatingPage> {
                           height: 200.0,
                         ),
                         _heading('Please Rate the Game'),
-                        _ratingBar(_ratingBarMode),
+                        _ratingBar(),
                         const SizedBox(height: 20.0),
-                        Text(
-                          'Rating: $_rating',
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.amber),
-                        ),
+                        //FixMe: ReAdd when setState works Text(
+                        //   'Rating: $_rating',
+                        //   style: const TextStyle(
+                        //       fontWeight: FontWeight.bold, color: Colors.amber),
+                        // ),
                       ],
                     ),
                     IconButton(
                         onPressed: () {
                           ReportingService.addRating(_rating);
+                          print("Rating: "+ _rating.toString());
                           if (_rating > 3) {
                             setRatingState();
+                            var duration = const Duration(milliseconds: 500);
+                            sleep(duration);
                             Navigator.pop(this.context);
                           } else {
                             showDialog(
@@ -144,7 +152,7 @@ class _MyAppState extends State<RatingPage> {
     ]);
   }
 
-  Widget _ratingBar(int mode) {
+  Widget _ratingBar() {
     return RatingBar.builder(
       initialRating: _initialRating,
       minRating: 1,
@@ -157,9 +165,7 @@ class _MyAppState extends State<RatingPage> {
         color: Colors.amber,
       ),
       onRatingUpdate: (rating) {
-        setState(() {
-          _rating = rating;
-        });
+        _rating = rating;
       },
       updateOnDrag: true,
     );
