@@ -18,7 +18,6 @@ class RatingPage extends StatefulWidget {
 class _MyAppState extends State<RatingPage> {
   late double _rating;
 
-  final int _ratingBarMode = 1;
   final double _initialRating = 3;
 
   IconData? _selectedIcon;

@@ -30,7 +30,8 @@ class _GameStreakMilestoneReachedSplashState
     _controller = AnimationController(
       duration: const Duration(seconds: 10),
       vsync: this,
-    )..addListener(() {
+    )
+      ..addListener(() {
         setState(() {});
       })
       ..addStatusListener((AnimationStatus status) {
@@ -78,34 +79,42 @@ class _GameStreakMilestoneReachedSplashState
           outerColor: darkColor,
           innerColor: lightColor,
           child: Container(
-              color: lightColor,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Center(
-                    child: Text(message,
-                        style: const TextStyle(
-                          fontSize: 22.0,
-                          color: Colors.white,
-                        )),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text('Reached DayStreak: ' + widget.daystreak.toString(),
+            color: lightColor,
+            child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    widget.onComplete();
+                  });
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Center(
+                      child: Text(message,
                           style: const TextStyle(
-                            fontSize: 15.0,
+                            fontSize: 22.0,
                             color: Colors.white,
                           )),
-                      Text('Gained Coins: ' + widget.coins.toString(),
-                          style: const TextStyle(
-                            fontSize: 15.0,
-                            color: Colors.white,
-                          ))
-                    ],
-                  )
-                ],
-              )),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                            'Reached DayStreak: ' + widget.daystreak.toString(),
+                            style: const TextStyle(
+                              fontSize: 15.0,
+                              color: Colors.white,
+                            )),
+                        Text('Gained Coins: ' + widget.coins.toString(),
+                            style: const TextStyle(
+                              fontSize: 15.0,
+                              color: Colors.white,
+                            ))
+                      ],
+                    )
+                  ],
+                )),
+          ),
         ),
       ),
       builder: (BuildContext context, Widget? child) {

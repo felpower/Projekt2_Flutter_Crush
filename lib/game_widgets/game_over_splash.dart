@@ -93,53 +93,62 @@ class _GameOverSplashState extends State<GameOverSplash>
           outerColor: darkColor,
           innerColor: lightColor,
           child: Container(
-              color: lightColor,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Center(
-                    child: Text(message,
-                        style: const TextStyle(
-                          fontSize: 35.0,
-                          color: Colors.white,
-                        )),
-                  ),
-                  BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
-                      builder: (context, state) {
-                    if (state is DarkPatternsActivatedState) {
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          BlocBuilder<XpBloc, XpState>(
-                              builder: (context, state) {
-                            String xpText = state is MultipliedXpState
-                                ? ' x ' + state.multiplier.toString()
-                                : '';
-                            return Text(
-                                    'Gained XP: ' +
-                                    state.addedAmount.toString() + xpText,
-                                style: const TextStyle(
-                                  fontSize: 15.0,
-                                  color: Colors.white,
-                                ));
-                          }),
-                          BlocBuilder<CoinBloc, CoinState>(
-                              builder: (context, state) {
-                            return Text(
-                                'Gained Coins: ' + state.addedAmount.toString(),
-                                style: const TextStyle(
-                                  fontSize: 15.0,
-                                  color: Colors.white,
-                                ));
-                          })
-                        ],
-                      );
-                    } else {
-                      return Container();
-                    }
-                  }),
-                ],
-              )),
+            color: lightColor,
+            child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    widget.onComplete();
+                  });
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Center(
+                      child: Text(message,
+                          style: const TextStyle(
+                            fontSize: 35.0,
+                            color: Colors.white,
+                          )),
+                    ),
+                    BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
+                        builder: (context, state) {
+                      if (state is DarkPatternsActivatedState) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            BlocBuilder<XpBloc, XpState>(
+                                builder: (context, state) {
+                              String xpText = state is MultipliedXpState
+                                  ? ' x ' + state.multiplier.toString()
+                                  : '';
+                              return Text(
+                                  'Gained XP: ' +
+                                      state.addedAmount.toString() +
+                                      xpText,
+                                  style: const TextStyle(
+                                    fontSize: 15.0,
+                                    color: Colors.white,
+                                  ));
+                            }),
+                            BlocBuilder<CoinBloc, CoinState>(
+                                builder: (context, state) {
+                              return Text(
+                                  'Gained Coins: ' +
+                                      state.addedAmount.toString(),
+                                  style: const TextStyle(
+                                    fontSize: 15.0,
+                                    color: Colors.white,
+                                  ));
+                            })
+                          ],
+                        );
+                      } else {
+                        return Container();
+                      }
+                    }),
+                  ],
+                )),
+          ),
         ),
       ),
       builder: (BuildContext context, Widget? child) {

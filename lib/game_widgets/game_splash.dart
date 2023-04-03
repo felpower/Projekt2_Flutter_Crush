@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../helpers/audio.dart';
 import '../model/level.dart';
 import '../model/objective.dart';
@@ -96,21 +97,33 @@ class _GameSplashState extends State<GameSplash>
           innerColor: Colors.blue,
           child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                    child: Text(
-                  'Level:  ${widget.level.index}',
-                  style: TextStyle(fontSize: 24.0, color: Colors.white),
-                )),
-                SizedBox(height: 8.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: objectiveWidgets,
-                ),
-              ],
-            ),
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                      GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        widget.onComplete();
+                      });
+                    },
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                              child: Text(
+                            'Level:  ${widget.level.index}',
+                            style:
+                                TextStyle(fontSize: 24.0, color: Colors.white),
+                          )),
+                          SizedBox(height: 8.0),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: objectiveWidgets,
+                          ),
+                        ]),
+                  )
+                ]),
           ),
         ),
       ),
