@@ -48,7 +48,6 @@ class _GamePageState extends State<GamePage>
   late bool _allowGesture;
   late StreamSubscription _gameOverSubscription;
   late bool _gameOverReceived;
-
   Tile? gestureFromTile;
   late RowCol gestureFromRowCol;
   late Offset gestureOffsetStart;
@@ -56,6 +55,7 @@ class _GamePageState extends State<GamePage>
   static const double _MIN_GESTURE_DELTA = 2.0;
   OverlayEntry? _overlayEntryFromTile;
   OverlayEntry? _overlayEntryAnimateSwapTiles;
+  bool fabVisible = true;
 
   @override
   void initState() {
@@ -87,7 +87,8 @@ class _GamePageState extends State<GamePage>
     _overlayEntryAnimateSwapTiles = null;
     _overlayEntryFromTile?.remove();
     _overlayEntryFromTile = null;
-    _gameSplash.remove();//Not sure while it was inactive before, comment out if not working correctly
+    _gameSplash
+        .remove(); //Not sure while it was inactive before, comment out if not working correctly
     // _controller.dispose();//Smae with this shit
     super.dispose();
   }
@@ -97,32 +98,35 @@ class _GamePageState extends State<GamePage>
     Orientation orientation = MediaQuery.of(context).orientation;
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.close),
-        onPressed: () {
-          !_gameOverReceived
-              ? showDialog(
-                  context: context,
-                  builder: (BuildContext context) => AlertDialog(
-                        title: const Text('Abort level'),
-                        content: const Text(
-                            'Are you sure you want to abort the level?'),
-                        elevation: 24,
-                        shape: const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(16))),
-                        actions: <Widget>[
-                          TextButton(
-                              onPressed: () =>
-                                  {Navigator.pop(context, 'Cancel')},
-                              child: const Text('No')),
-                          TextButton(
-                              onPressed: () => {popUntil()},
-                              child: const Text('Yes')),
-                        ],
-                      ))
-              : null;
-        },
+      floatingActionButton: Visibility(
+        visible: fabVisible,
+        child: FloatingActionButton(
+          child: const Icon(Icons.close),
+          onPressed: () {
+            !_gameOverReceived
+                ? showDialog(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                          title: const Text('Abort level'),
+                          content: const Text(
+                              'Are you sure you want to abort the level?'),
+                          elevation: 24,
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(16))),
+                          actions: <Widget>[
+                            TextButton(
+                                onPressed: () =>
+                                    {Navigator.pop(context, 'Cancel')},
+                                child: const Text('No')),
+                            TextButton(
+                                onPressed: () => {popUntil()},
+                                child: const Text('Yes')),
+                          ],
+                        ))
+                : null;
+          },
+        ),
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -713,10 +717,8 @@ class _GamePageState extends State<GamePage>
     // Since some animations could still be ongoing, let's wait a bit
     // before showing the user that the game is won
     await Future.delayed(const Duration(seconds: 1));
-
     // No gesture detection during the splash
     _allowGesture = false;
-
     // Show the splash
     _gameSplash = OverlayEntry(
         opaque: false,
@@ -730,7 +732,9 @@ class _GamePageState extends State<GamePage>
 
               // as the game is over, let's leave the game
               Navigator.of(context).pop();
-              print("Has Rated? " + hasRated.toString());//FixMe: Check if Dark Patterns are activated, otherwise do not call Rating Page
+              print("Has Rated? " +
+                  hasRated
+                      .toString()); //FixMe: Check if Dark Patterns are activated, otherwise do not call Rating Page
               if (hasRated == null || !hasRated) {
                 Navigator.push(
                     context,
@@ -740,9 +744,12 @@ class _GamePageState extends State<GamePage>
             },
           );
         });
-
+    setState(() {
+      fabVisible = false;
+    });
     Overlay.of(context)?.insert(_gameSplash);
   }
+
   //
   // SplashScreen to be displayed when the game starts
   // to show the user the objectives
