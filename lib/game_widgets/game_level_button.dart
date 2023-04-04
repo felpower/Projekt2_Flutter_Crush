@@ -112,7 +112,10 @@ class GameLevelButton extends StatelessWidget {
       SharedPreferences prefs, BuildContext context) async {
     reportingBloc.add(ReportStartLevelEvent(levelNumber));
     await _startLevel(gameBloc, context);
-    if (prefs.getBool("addsActive") == true) {
+
+    var addState = prefs.getBool("addsActive");
+    print("Adds are: " + addState.toString());
+    if (addState == true) {
       _showAdvertisement(context);
     }
   }

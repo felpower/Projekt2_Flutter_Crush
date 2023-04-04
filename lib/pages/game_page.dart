@@ -714,11 +714,11 @@ class _GamePageState extends State<GamePage>
     _gameOverReceived = true;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool? hasRated = prefs.getBool("hasRated");
+    // No gesture detection during the splash
+    _allowGesture = false;
     // Since some animations could still be ongoing, let's wait a bit
     // before showing the user that the game is won
     await Future.delayed(const Duration(seconds: 1));
-    // No gesture detection during the splash
-    _allowGesture = false;
     // Show the splash
     _gameSplash = OverlayEntry(
         opaque: false,
@@ -735,7 +735,7 @@ class _GamePageState extends State<GamePage>
               print("Has Rated? " +
                   hasRated
                       .toString()); //FixMe: Check if Dark Patterns are activated, otherwise do not call Rating Page
-              if (hasRated == null || !hasRated) {
+              if (hasRated != null || !hasRated!) {
                 Navigator.push(
                     context,
                     MaterialPageRoute(

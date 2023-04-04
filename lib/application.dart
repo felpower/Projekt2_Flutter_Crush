@@ -1,4 +1,6 @@
-import 'package:bachelor_flutter_crush/bloc/rating_bloc/rating_state.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'bloc/rating_bloc/rating_state.dart';
 import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_bloc.dart';
@@ -35,8 +37,7 @@ class Application extends StatelessWidget {
   }
 
   List<flutter_bloc.BlocProvider> _getBlocs(BuildContext context) {
-    AddState();
-    RatingState();
+    setRatingAndAdds();
     return [
       flutter_bloc.BlocProvider<CoinBloc>(
           create: (context) =>
@@ -59,5 +60,11 @@ class Application extends StatelessWidget {
       flutter_bloc.BlocProvider<DarkPatternsBloc>(
           create: (context) => DarkPatternsBloc())
     ];
+  }
+
+  void setRatingAndAdds() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool("addsActive", true);
+    prefs.setBool("hasRated", false);
   }
 }
