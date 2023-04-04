@@ -735,7 +735,7 @@ class _GamePageState extends State<GamePage>
               print("Has Rated? " +
                   hasRated
                       .toString()); //FixMe: Check if Dark Patterns are activated, otherwise do not call Rating Page
-              if (hasRated != null || !hasRated!) {
+              if (hasRated != null && !hasRated) {
                 Navigator.push(
                     context,
                     MaterialPageRoute(

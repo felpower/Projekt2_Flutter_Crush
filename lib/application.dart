@@ -1,6 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'bloc/rating_bloc/rating_state.dart';
 import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_bloc.dart';
@@ -11,7 +10,6 @@ import 'package:bachelor_flutter_crush/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 
-import 'bloc/add_bloc/add_state.dart';
 import 'bloc/bloc_provider.dart' as custom_bloc;
 import 'bloc/game_bloc.dart';
 import 'bloc/user_state_bloc/high_score_bloc/high_score_bloc.dart';
@@ -62,9 +60,15 @@ class Application extends StatelessWidget {
     ];
   }
 
-  void setRatingAndAdds() async{
+  void setRatingAndAdds() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool("addsActive", true);
-    prefs.setBool("hasRated", false);
+    if (prefs.getBool("addsActive") == null) {
+      print("Setting adds again");
+      prefs.setBool("addsActive", true);
+    }
+    if (prefs.getBool("hasRated") == null) {
+      print("Setting Rated again");
+      prefs.setBool("hasRated", false);
+    }
   }
 }
