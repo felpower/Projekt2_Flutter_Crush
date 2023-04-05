@@ -64,7 +64,7 @@ class Application extends StatelessWidget {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getBool("addsActive") == null) {
       print("Setting adds to active");
-      prefs.setBool("addsActive", true);
+      prefs.setBool("addsActive", false);
     }
     if (prefs.getBool("hasRated") == null) {
       print("Setting Rated to false");

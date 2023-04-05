@@ -735,19 +735,19 @@ class _GamePageState extends State<GamePage>
               print("Has Rated? " +
                   hasRated
                       .toString()); //FixMe: Check if Dark Patterns are activated, otherwise do not call Rating Page
-              if (hasRated != null && !hasRated) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const RatingPage()));
-              }
+              // if (hasRated != null && !hasRated) {
+              //   Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //           builder: (context) => const RatingPage()));
+              // }
             },
           );
         });
     setState(() {
       fabVisible = false;
     });
-    Overlay.of(context)?.insert(_gameSplash);
+    Overlay.of(context).insert(_gameSplash);
   }
 
   //

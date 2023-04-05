@@ -100,7 +100,7 @@ class _GameSplashState extends State<GameSplash>
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                      GestureDetector(
+                  GestureDetector(
                     onTap: () {
                       setState(() {
                         widget.onComplete();

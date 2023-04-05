@@ -53,9 +53,7 @@ class _MyAppState extends State<RatingPage> {
                         print("Rating: "+ _rating.toString());
                         if (_rating > 3) {
                           setRatingState();
-                          var duration = const Duration(milliseconds: 500);
-                          sleep(duration);
-                          Navigator.pop(this.context);
+                          Navigator.pop(this.context, 'Ok');
                         } else {
                           showDialog(
                               context: context,
@@ -111,9 +109,7 @@ class _MyAppState extends State<RatingPage> {
                           print("Rating: "+ _rating.toString());
                           if (_rating > 3) {
                             setRatingState();
-                            var duration = const Duration(milliseconds: 500);
-                            sleep(duration);
-                            Navigator.pop(this.context);
+                            Navigator.pop(this.context, 'OK');
                           } else {
                             showDialog(
                                 context: context,
