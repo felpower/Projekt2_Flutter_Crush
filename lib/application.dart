@@ -63,12 +63,12 @@ class Application extends StatelessWidget {
   void setRatingAndAdds() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getBool("addsActive") == null) {
-      print("Setting adds again");
+      print("Setting adds to active");
       prefs.setBool("addsActive", true);
     }
     if (prefs.getBool("hasRated") == null) {
-      print("Setting Rated again");
-      prefs.setBool("hasRated", false);
+      print("Setting Rated to false");
+      prefs.setBool("hasRated", false);//FixMe: adds and rating are still null
     }
   }
 }

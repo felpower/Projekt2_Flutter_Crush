@@ -17,16 +17,22 @@ samples, guidance on mobile development, and a full API reference.
 
 We used flutter version 2.8.0 for implementation.
 
-## How to upload to Internal Testing
+## How to upload to Android Internal Testing
 
-Go to 'C:\Schule\bachelor_flutter_crush\Projekt2_Flutter_Crush\android\app\build.gradle' and change
+Go to 'projekt_flutter_crush\android\app\build.gradle' and change
 flutterVersionCode to next higher version
-Update version in C:\Schule\bachelor_flutter_crush\Projekt2_Flutter_Crush\pubspec.yaml to next version
+Update version in projekt_flutter_crush\pubspec.yaml to next version
 pub get in pubspec.yaml
 Run 'flutter build appbundle'
-Go to https://play.google.com/console/u/0/developers and upload app-release.aab from
-'C:
-\Schule\bachelor_flutter_crush\Projekt2_Flutter_Crush\build\app\outputs\bundle\release\app-release.aab'
+Go to 'https://play.google.com/console/u/0/developers' and upload app-release.aab from
+'projekt_flutter_crush\build\app\outputs\bundle\release\app-release.aab'
 
 https://docs.flutter.dev/deployment/android
 https://developer.android.com/studio/publish/upload-bundle
+
+## How to upload to firebase web app
+
+Go to project_flutter_crush folder
+run 'flutter build web'
+copy 'project_flutter_crush\build\web' folder 'into bachelor_flutter_crush\build\web' folder
+run 'firebase deploy'

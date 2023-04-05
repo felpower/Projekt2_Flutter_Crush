@@ -16,12 +16,6 @@ class InformationPage extends StatelessWidget {
         ),
         body: const SingleChildScrollView(
             child:
-                // Container(
-                //     decoration: const BoxDecoration(
-                //         image: DecorationImage(
-                //   image: AssetImage('assets/images/background/background2.jpg'),
-                //   fit: BoxFit.cover,
-                // ))),
                 Center(
                     child: Column(
           children: <Widget>[
