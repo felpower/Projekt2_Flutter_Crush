@@ -1,6 +1,5 @@
 import 'dart:math' as math;
 
-
 import '../bloc/game_bloc.dart';
 import '../controllers/game_controller.dart';
 import '../model/animation_sequence.dart';
@@ -13,7 +12,6 @@ import '../model/tile.dart';
 import '../model/tile_animation.dart';
 import 'array_2d.dart';
 
-
 class AnimationsResolver {
   final GameBloc gameBloc;
   final Level level;
@@ -24,10 +22,15 @@ class AnimationsResolver {
   AnimationsResolver({
     required this.gameBloc,
     required this.level,
-  }){
+  }) {
     rows = level.numberOfRows;
     cols = level.numberOfCols;
     gameController = gameBloc.gameController;
+    for (int row = 0; row < rows; row++) {
+      for (int col = 0; col < cols; col++) {
+        _fullSet.add(RowCol(row: row, col: col));
+      }
+    }
   }
 
   // _state contains the states of the grid after each move
@@ -35,14 +38,17 @@ class AnimationsResolver {
   // -1: forbidden (no cell or not movable tile)
   // 1:  tile is present
   late Array2d<int?> _state;
+
   Array2d<int?> get resultingGridInTermsOfUse => _state;
 
   // _type contains the types of tiles in the grid after each move
   late Array2d<TileType?> _types;
+
   Array2d<TileType?> get resultingGridInTermsOfTileTypes => _types;
 
   // _tiles contains the definitions of the tiles (type, depth, widget)
   Array2d<Tile?>? _tiles;
+
   Array2d<Tile?>? get resultingGridInTermsOfTiles => _tiles;
 
   // _names contains the tiles identities
@@ -57,154 +63,159 @@ class AnimationsResolver {
   // List of all animations, per identity and per delay
   Map<int, Map<int, TileAnimation>> _animationsPerIdentityAndDelay = {};
   Map<int, List<int>> _animationsIdentitiesPerDelay = {};
-  
+
   // List of all cells, involved in the animations
-  Set<RowCol> _involvedCells = Set<RowCol>();
+  final Set<RowCol> _involvedCells = <RowCol>{};
+
   Set<RowCol> get involvedCells => _involvedCells;
 
-  // Longuest delay for all animations
+  // Longest delay for all animations
   int longestDelay = 0;
 
   // Working array that contains the last moves that took place
   // following a single resolution
   // Used to check for combos
-  Set<RowCol> _lastMoves = Set<RowCol>();
+  final Set<RowCol> _lastMoves = <RowCol>{};
+
+  final Set<RowCol> _fullSet = <RowCol>{};
 
   // Registers an animation
-  void _registerAnimation(int identity, int delay, TileAnimation animation){
-      // First register per identity, then per delay
-      if (_animationsPerIdentityAndDelay[identity] == null){
-        _animationsPerIdentityAndDelay[identity] = Map<int, TileAnimation>();
-      }
+  void _registerAnimation(int identity, int delay, TileAnimation animation) {
+    // First register per identity, then per delay
+    if (_animationsPerIdentityAndDelay[identity] == null) {
+      _animationsPerIdentityAndDelay[identity] = <int, TileAnimation>{};
+    }
 
-      _animationsPerIdentityAndDelay[identity]![delay] = animation;
+    _animationsPerIdentityAndDelay[identity]![delay] = animation;
 
-      // Then the list of identities per delay
-      if (_animationsIdentitiesPerDelay[delay] == null){
-          _animationsIdentitiesPerDelay[delay] = <int>[];
-      }
-      _animationsIdentitiesPerDelay[delay]?.add(identity);
+    // Then the list of identities per delay
+    if (_animationsIdentitiesPerDelay[delay] == null) {
+      _animationsIdentitiesPerDelay[delay] = <int>[];
+    }
+    _animationsIdentitiesPerDelay[delay]?.add(identity);
   }
 
-
   void resolve() {
-//Stopwatch stopwatch = new Stopwatch()..start();    
-      //
-      // Fill both arrays based on the current definition
-      //
-      _state = Array2d<int?>(rows, cols);
-      _types = Array2d<TileType?>(rows, cols);
-      _tiles = Array2d<Tile?>(rows, cols);
-      _identities = Array2d<int?>(rows, cols);
-      _nextIdentity = 0;
+//Stopwatch stopwatch = new Stopwatch()..start();
+    //
+    // Fill both arrays based on the current definition
+    //
+    fillArrays();
 
-      for (int row = 0; row < rows; row++){
-          for (int col = 0; col < cols; col++){
-              if (level.grid[row][col] == "X"){
-                  _state[row][col] = -1;
-                  _types[row][col] = TileType.forbidden;
-              } else {
-                  Tile tile = gameController!.grid[row][col];
-                  if (tile.type == TileType.empty){
-                      _state[row][col] = 0;
-                      _types[row][col] = TileType.empty;
-                  } else if (tile.canMove){
-                      _state[row][col] = 1;
-                      _types[row][col] = tile.type;
-                  } else {
-                      _state[row][col] = -1;
-                      _types[row][col] = tile.type;
-                  }
-                  _tiles![row][col] = tile;
-              }
-              // Give an identity to each cell
-              _identities[row][col] = _nextIdentity++;
-          }
+    //
+    // Initialize the _avalanches
+    //
+    _avalanches = List<List<AvalancheTest>>.generate(
+      cols,
+      (int index) => <AvalancheTest>[],
+    );
+
+    //
+    // Initialize the list of all animations per delay, and per identity
+    //
+    _animationsPerIdentityAndDelay = <int, Map<int, TileAnimation>>{};
+    _animationsIdentitiesPerDelay = <int, List<int>>{};
+
+    //
+    // delay before starting an animation
+    //
+    int delay = 0;
+    longestDelay = 0;
+
+    //
+    // Loop until there is nothing more to be done
+    //
+    bool continueLoop;
+
+    do {
+      //
+      // Check for combos
+      //
+      delay = _resolveCombos(delay);
+
+      //
+      // Once the combos have been resolved,
+      // look for the moves
+      //
+      continueLoop = false;
+
+      //
+      // Process all the columns
+      //
+      _lastMoves.clear();
+
+      for (int column = 0; column < cols; column++) {
+        // Start by processing the avalanches
+        bool somethingHappens = _processAvalanches(column, delay);
+
+        // Then process the moves inside a column
+        int newDelay = _processColumn(column, delay);
+        somethingHappens |= (newDelay != delay);
+
+        // If something happens, we need to continue
+        if (somethingHappens) {
+          // Compute the longest delay
+          longestDelay = math.max(longestDelay, newDelay);
+
+          // As something happened, we need to continue looping
+          continueLoop = true;
+        }
       }
 
-      //
-      // Initialize the _avalanches
-      //
-      _avalanches = List<List<AvalancheTest>>.generate(
-        cols,
-        (int index) => <AvalancheTest>[],
-      );
-
-      //
-      // Initialize the list of all animations per delay, and per identity
-      //
-      _animationsPerIdentityAndDelay = Map<int, Map<int, TileAnimation>>();
-      _animationsIdentitiesPerDelay = Map<int, List<int>>();
-
-      //
-      // delay before starting an animation
-      //
-      int delay = 0;
-      longestDelay = 0;
-
-      //
-      // Loop until there is nothing more to be done
-      //
-      bool continueLoop;
-
-      do {
-        //
-        // Check for combos
-        //
-        delay = _resolveCombos(delay);
-
-        //
-        // Once the combos have been resolved,
-        // look for the moves
-        //
-        continueLoop = false;
-
-        //
-        // Process all the columns
-        //
-        _lastMoves.clear();
-
-        for (int column = 0; column < cols; column++){
-
-            // Start by processing the avalanches
-            bool somethingHappens = _processAvalanches(column, delay);
-
-            // Then process the moves inside a column
-            int newDelay = _processColumn(column, delay);
-            somethingHappens |= (newDelay != delay);
-
-            // If something happens, we need to continue
-            if (somethingHappens){
-              // Compute the longest delay
-              longestDelay = math.max(longestDelay, newDelay);
-
-              // As something happened, we need to continue looping
-              continueLoop = true;
-            }
-        } 
-
-        // Adapt the delay to the longest one
-        delay = longestDelay;      
-
-      } while (continueLoop);
+      // Adapt the delay to the longest one
+      delay = longestDelay;
+    } while (continueLoop);
 
 // print('executed in ${stopwatch.elapsed}');
+  }
+
+  void fillArrays() {
+    _state = Array2d<int?>(rows, cols);
+    _types = Array2d<TileType?>(rows, cols);
+    _tiles = Array2d<Tile?>(rows, cols);
+    _identities = Array2d<int?>(rows, cols);
+    _nextIdentity = 0;
+
+    for (int row = 0; row < rows; row++) {
+      for (int col = 0; col < cols; col++) {
+        if (level.grid[row][col] == "X") {
+          _state[row][col] = -1;
+          _types[row][col] = TileType.forbidden;
+        } else {
+          Tile tile = gameController!.grid[row][col];
+          if (tile.type == TileType.empty) {
+            _state[row][col] = 0;
+            _types[row][col] = TileType.empty;
+          } else if (tile.canMove) {
+            _state[row][col] = 1;
+            _types[row][col] = tile.type;
+          } else {
+            _state[row][col] = -1;
+            _types[row][col] = tile.type;
+          }
+          _tiles![row][col] = tile;
+        }
+        // Give an identity to each cell
+        _identities[row][col] = _nextIdentity++;
+      }
+    }
   }
 
   //
   // Resolves any potential combos
   //
-  int _resolveCombos(int startDelay){
+  int _resolveCombos(int startDelay) {
     int delay = startDelay;
     bool hasCombo = false;
 
-    _lastMoves.forEach((RowCol rowCol){
+    for (var rowCol in _lastMoves) {
       Chain? verticalChain = checkVerticalChain(rowCol.row, rowCol.col);
       Chain? horizontalChain = checkHorizontalChain(rowCol.row, rowCol.col);
 
       // Check if there is a combo
-      Combo combo = Combo(horizontalChain, verticalChain, rowCol.row, rowCol.col);
-      if (combo.type != ComboType.none){
+      Combo combo =
+          Combo(horizontalChain, verticalChain, rowCol.row, rowCol.col);
+      if (combo.type != ComboType.none) {
         // We found a combo.  We therefore need to take appropriate actions
         TileAnimationType animationType;
         RowCol from;
@@ -215,25 +226,25 @@ class AnimationsResolver {
 
         to = RowCol(row: 0, col: 0);
 
-        if (combo.type == ComboType.three){
+        if (combo.type == ComboType.three) {
           animationType = TileAnimationType.chain;
         } else {
           animationType = TileAnimationType.collapse;
 
           // When we are collapsing, the tiles move to the position of the commonTile
 
-          if (combo.commonTile?.row !=null && combo.commonTile?.col != null) {
+          if (combo.commonTile?.row != null && combo.commonTile?.col != null) {
             to = RowCol(row: combo.commonTile!.row, col: combo.commonTile!.col);
           }
-
         }
 
         // We need to register the animations (combo)
-        combo.tiles.forEach((Tile tile){
-          
+        for (var tile in combo.tiles) {
           from = RowCol(row: tile.row, col: tile.col);
 
-          if (_tiles != null && _tiles![tile.row]!=null && _tiles![tile.row][tile.col] != null) {
+          if (_tiles != null &&
+              _tiles![tile.row] != null &&
+              _tiles![tile.row][tile.col] != null) {
             _registerAnimation(
               _identities[tile.row][tile.col],
               delay,
@@ -242,7 +253,8 @@ class AnimationsResolver {
                 delay: delay,
                 from: from,
                 to: to,
-                tile: _tiles![tile.row][tile.col], tileType: TileType.forbidden,
+                tile: _tiles![tile.row][tile.col],
+                tileType: TileType.forbidden,
               ),
             );
           }
@@ -251,10 +263,12 @@ class AnimationsResolver {
           _involvedCells.add(from);
 
           // At the same time, we need to check the objectives
-          if (_tiles!=null && _tiles![tile.row][tile.col] != null && _tiles![tile.row][tile.col].type != null) {
+          if (_tiles != null &&
+              _tiles![tile.row][tile.col] != null &&
+              _tiles![tile.row][tile.col].type != null) {
             gameBloc.pushTileEvent(_tiles![tile.row][tile.col]?.type, 1);
           }
-        });
+        }
 
         // ... the delay for the next move
         delay++;
@@ -265,7 +279,7 @@ class AnimationsResolver {
         // Let's update the _state and _types at destination.
         // Except a potential common tile (combo of more than 3 tiles)
         // would remain
-        combo.tiles.forEach((Tile tile){
+        for (var tile in combo.tiles) {
           if (tile != combo.commonTile) {
             _state[tile.row][tile.col] = 0;
             _types[tile.row][tile.col] = TileType.empty;
@@ -274,14 +288,14 @@ class AnimationsResolver {
             // Transfer the identity
             _identities[tile.row][tile.col] = -1;
           }
-        });
+        }
       }
-    });
+    }
 
     // If there is at least one combo,
     // wait for the combo to play before going any further
     // with the other animations
-    return delay + (hasCombo ? 30 : 0);
+    return delay + (hasCombo ? 50 : 0);
   }
 
   //
@@ -299,14 +313,18 @@ class AnimationsResolver {
 
     // Search Down
     index = row - 1;
-    while (index >= minRow && _tiles![index][col]?.type == type && _tiles![index][col]?.type != TileType.empty) {
+    while (index >= minRow &&
+        _tiles![index][col]?.type == type &&
+        _tiles![index][col]?.type != TileType.empty) {
       chain.addTile(_tiles![index][col]);
       index--;
     }
 
     // Search Up
     index = row + 1;
-    while (index <= maxRow && _tiles![index][col]?.type == type && _tiles![index][col]?.type != TileType.empty) {
+    while (index <= maxRow &&
+        _tiles![index][col]?.type == type &&
+        _tiles![index][col]?.type != TileType.empty) {
       chain.addTile(_tiles![index][col]);
       index++;
     }
@@ -330,14 +348,18 @@ class AnimationsResolver {
 
     // Search Left
     index = col - 1;
-    while (index >= minCol && _tiles![row][index]?.type == type && _tiles![row][index]?.type != TileType.empty) {
+    while (index >= minCol &&
+        _tiles![row][index]?.type == type &&
+        _tiles![row][index]?.type != TileType.empty) {
       chain.addTile(_tiles![row][index]);
       index--;
     }
 
     // Search Right
     index = col + 1;
-    while (index <= maxCol && _tiles![row][index]?.type == type && _tiles![row][index]?.type != TileType.empty) {
+    while (index <= maxCol &&
+        _tiles![row][index]?.type == type &&
+        _tiles![row][index]?.type != TileType.empty) {
       chain.addTile(_tiles![row][index]);
       index++;
     }
@@ -350,10 +372,12 @@ class AnimationsResolver {
   // Counts the number of "holes" (= empty cells) in a column
   // starting at a certain row
   //
-  int _countNumberOfHolesAtColumStartingAtRow(int col, int row){
+  int _countNumberOfHolesAtColumStartingAtRow(int col, int row) {
     int count = 0;
 
-    while (row > 0 && _state[row][col] == 0 && _types[row][col] != TileType.forbidden){
+    while (row > 0 &&
+        _state[row][col] == 0 &&
+        _types[row][col] != TileType.forbidden) {
       row--;
       count++;
     }
@@ -366,8 +390,7 @@ class AnimationsResolver {
   // This happens when a tile reaches its destination but there is
   // a "hole" in an adjacent column.
   //
-  bool _processAvalanches(int col, int delay){
-
+  bool _processAvalanches(int col, int delay) {
     // Counter of moves caused by an avalanche effect
     int movesCounter = 0;
 
@@ -375,28 +398,34 @@ class AnimationsResolver {
     final bool rightCol = (col < cols - 1);
 
     // Let's process all cases
-    _avalanches[col].forEach((AvalancheTest avalancheTest){
+    for (var avalancheTest in _avalanches[col]) {
       final int row = avalancheTest.row;
 
       // Count the number of "holes" on the left-hand side column
-      final leftColHoles = leftCol ? _countNumberOfHolesAtColumStartingAtRow(col - 1, row -1): 0;
+      final leftColHoles = leftCol
+          ? _countNumberOfHolesAtColumStartingAtRow(col - 1, row - 1)
+          : 0;
 
       // Count the number of "holes" on the right-hand side column
-      final rightColHoles = rightCol ? _countNumberOfHolesAtColumStartingAtRow(col + 1, row -1): 0;
+      final rightColHoles = rightCol
+          ? _countNumberOfHolesAtColumStartingAtRow(col + 1, row - 1)
+          : 0;
       int colOffset = 0;
 
       // Check if there is a hole.  If yes, the deeper wins
-      if (leftColHoles + rightColHoles > 0){
+      if (leftColHoles + rightColHoles > 0) {
         colOffset = (leftColHoles > rightColHoles) ? -1 : (rightCol ? 1 : 0);
       }
 
       // If there is a hole, slide the tile to the corresponding column
-      if (colOffset != 0){
+      if (colOffset != 0) {
         RowCol from = RowCol(row: row, col: col);
         RowCol to = RowCol(row: row - 1, col: col + colOffset);
 
         // Register the avalanche animation
-        if (_tiles != null && _tiles![row]!=null &&_tiles![row][col]!=null) {
+        if (_tiles != null &&
+            _tiles![row] != null &&
+            _tiles![row][col] != null) {
           _registerAnimation(
             _identities[row][col],
             delay,
@@ -415,10 +444,10 @@ class AnimationsResolver {
         _involvedCells.addAll([from, to]);
 
         // Adapt _state, _types and _idenditities
-        _state[row-1][col + colOffset] = _state[row][col];
-        _types[row-1][col + colOffset] = _types[row][col];
-        _tiles![row-1][col + colOffset] = _tiles![row][col];
-        _identities[row-1][col + colOffset] = _identities[row][col];
+        _state[row - 1][col + colOffset] = _state[row][col];
+        _types[row - 1][col + colOffset] = _types[row][col];
+        _tiles![row - 1][col + colOffset] = _tiles![row][col];
+        _identities[row - 1][col + colOffset] = _identities[row][col];
 
         _state[row][col] = 0;
         _types[row][col] = TileType.empty;
@@ -428,12 +457,12 @@ class AnimationsResolver {
         _identities[row][col] = -1;
 
         // record the move
-        _lastMoves.add(RowCol(row: row-1, col: col + colOffset));
+        _lastMoves.add(RowCol(row: row - 1, col: col + colOffset));
 
         // Increment the counter of moves
         movesCounter++;
       }
-    });
+    }
 
     // As we processed all avalanches related to this column, we can remove them all
     _avalanches[col].clear();
@@ -447,214 +476,216 @@ class AnimationsResolver {
   //
   //  Returns the longest delay, resulting from moves
   //
-  int _processColumn(int col, int startDelay){
+  int _processColumn(int col, int startDelay) {
+    // Retrieve the entry row for this column
+    int rowTop = _getEntryRowForColumn(col) + 1;
 
-      // Retrieve the entry row for this column
-      int rowTop = _getEntryRowForColumn(col) + 1;
+    // Count the number of moves
+    int countMoves = 0;
 
-      // Count the number of moves
-      int countMoves = 0;
+    // The number of empty cells (resulting from a move)
+    int empty = 0;
 
-      // The number of empty cells (resulting from a move)
-      int empty = 0;
+    // The current delay
+    int delay = startDelay;
 
-      // The current delay
-      int delay = startDelay;
+    // The next destination row for a tile
+    int dest = -1;
 
-      // The next destination row for a tile
-      int dest = -1;
+    // Compute the longest delay related to this column
+    int longestDelay = startDelay;
 
-      // Compute the longest delay related to this column
-      int longestDelay = startDelay;
+    // Start scanning each row.  No need to check the bottom row since the latter will never move
+    for (int row = 0; row < rowTop; row++) {
+      //
+      // Case were the tile is blocked or not existing
+      //
+      if (_state[row][col] == -1) {
+        // This one is blocked => skip
+        delay = startDelay;
 
-      // Start scanning each row.  No need to check the bottom row since the latter will never move
-      for (int row = 0; row < rowTop; row++){
-          //
-          // Case were the tile is blocked or not existing
-          //
-          if (_state[row][col] == -1){
-              // This one is blocked => skip
-              delay = startDelay;
+        // No empty cell will be added (as an assumption)
+        if (row < (rowTop - 1)) {
+          empty = 0;
+        }
 
-              // No empty cell will be added (as an assumption)
-              if (row < (rowTop - 1)){
-                empty = 0;
-              }
+        // We need to reset the destination row
+        dest = -1;
 
-              // We need to reset the destination row
-              dest = -1;
-
-              continue;
-          }
-
-          //
-          // Case where there is no tile
-          //
-          if (_state[row][col] == 0){
-              // There is no tile there, so this will most become the destination if not yet taken
-              if (dest == -1){
-                  dest = row;
-                  delay = startDelay;
-              }
-
-              // In all cases, there will be a move which will lead to an empty cell at the top
-              empty++;
-
-              continue;
-          }
-
-          //
-          // Case where there is a tile
-          //
-          if (_state[row][col] == 1 && dest != -1){
-              RowCol from = RowCol(row: row, col: col);
-              RowCol to = RowCol(row: dest, col: col);
-              
-              // There will be an animation (move down)
-              _registerAnimation(
-                  _identities[row][col],
-                  delay,
-                  TileAnimation(
-                      animationType: TileAnimationType.moveDown,
-                      delay: delay,
-                      from: from,
-                      to: to,
-                      tileType: _types[row][col],
-                      tile: _tiles![row][col],
-                  ),
-              );
-
-              // Record the cells involved in the animation
-              _involvedCells.addAll([from, to]);
-
-              // ... the delay for the next move
-              delay++;
-
-              // Compute the longest delay
-              longestDelay = math.max(longestDelay, delay);
-
-              // Let's update the _state and _types at destination (destination will become this _state)
-              _state[dest][col] = 1;
-              _types[dest][col] = _types[row][col];
-              _tiles![dest][col] = _tiles![row][col];
-
-              // record the move
-              _lastMoves.add(RowCol(row: dest, col: col));
-
-              // Transfer the identity
-              _identities[dest][col] = _identities[row][col];
-
-              // We need to increment the destination
-              dest++;
-
-              // ... as we moved this tile down, its former cell is now empty and has no identity
-              _state[row][col] = 0;
-              _types[row][col] = TileType.empty;
-              _tiles![row][col] = null;
-              _identities[row][col] = -1;
-
-              // It is time to check for the avalanche effects, which will only occur at the end of the first move
-              // (where the tile arrives at destination)
-              if (delay == (startDelay + 1)){
-                  _avalanches[col].add(
-                    AvalancheTest(
-                      delay: delay,
-                      row: dest,
-                    ),
-                  );
-              }
-
-              // Increment the number of moves
-              countMoves++;
-          }
+        continue;
       }
 
       //
-      // We now need to fill the column with new tiles (if necessary)
-      // This routine is very similar to moving the tiles down
-      // Except that we can only do this if the toppest cell of the column
-      // if not preventing from adding new tiles
+      // Case where there is no tile
       //
-      if (empty > 0){
-        int row = _getEntryRowForColumn(col);
+      if (_state[row][col] == 0) {
+        // There is no tile there, so this will most become the destination if not yet taken
+        if (dest == -1) {
+          dest = row;
+          delay = startDelay;
+        }
 
-        //
-        // Only consider the case where there is an entry point
-        //
-        if (row != -1){
-          // Here again, it is time to check for the avalanche effects, which will only occur at the end of the first move
+        // In all cases, there will be a move which will lead to an empty cell at the top
+        empty++;
 
-          // In case the destination is not yet known, determine it
-          if (dest == -1){
-            do {
-              dest++;
-            } while(_types[dest][col] == TileType.forbidden && _state[dest][col] != 0 && dest < rows);
-          }
+        continue;
+      }
 
-          // Consider each empty
-          for (int i = 0; i < empty; i++){
-            TileType newTileType = Tile.random(math.Random());  // Generate a new random tile type
-            _state[dest][col] = 1;
-            _types[dest][col] = newTileType;
-            _tiles![dest][col] = Tile(
-                row: row,
-                col: col,
-                depth: 0,
-                level: level,
-                type: newTileType,
-                visible: true,
-              );   // We will build it later
-            _tiles![dest][col].build();
+      //
+      // Case where there is a tile
+      //
+      if (_state[row][col] == 1 && dest != -1) {
+        RowCol from = RowCol(row: row, col: col);
+        RowCol to = RowCol(row: dest, col: col);
 
-            // Generate a new identity
-            _identities[dest][col] = _nextIdentity++;
+        // There will be an animation (move down)
+        _registerAnimation(
+          _identities[row][col],
+          delay,
+          TileAnimation(
+            animationType: TileAnimationType.moveDown,
+            delay: delay,
+            from: from,
+            to: to,
+            tileType: _types[row][col],
+            tile: _tiles![row][col],
+          ),
+        );
 
-            // Record a new tile injection animation
-            RowCol from = RowCol(row: row, col: col);
-            RowCol to = RowCol(row: dest, col: col);
+        // Record the cells involved in the animation
+        _involvedCells.addAll([from, to]);
 
-            _registerAnimation(
-                  _identities[dest][col],
-                  delay,
-                  TileAnimation(
-                      animationType: TileAnimationType.newTile,
-                      delay: delay,
-                      from: from,
-                      to: to,
-                      tileType: _types[dest][col],
-                      tile: _tiles![dest][col],
-                  ),
-              );
-            // record the move
-            _lastMoves.add(to);
+        // ... the delay for the next move
+        delay++;
 
-            // Record the cells involved in the animation
-            _involvedCells.addAll([from, to]);
+        // Compute the longest delay
+        longestDelay = math.max(longestDelay, delay);
 
-            // ... a new tile could also cause an avalanche
-            if (delay == (startDelay + 1)){
-              _avalanches[col].add(
-                AvalancheTest(
-                  delay: delay,
-                  row: dest,
-                ),
-              );
-            }
+        // Let's update the _state and _types at destination (destination will become this _state)
+        _state[dest][col] = 1;
+        _types[dest][col] = _types[row][col];
+        _tiles![dest][col] = _tiles![row][col];
 
-            // Increment the destination
+        // record the move
+        _lastMoves.add(RowCol(row: dest, col: col));
+
+        // Transfer the identity
+        _identities[dest][col] = _identities[row][col];
+
+        // We need to increment the destination
+        dest++;
+
+        // ... as we moved this tile down, its former cell is now empty and has no identity
+        _state[row][col] = 0;
+        _types[row][col] = TileType.empty;
+        _tiles![row][col] = null;
+        _identities[row][col] = -1;
+
+        // It is time to check for the avalanche effects, which will only occur at the end of the first move
+        // (where the tile arrives at destination)
+        if (delay == (startDelay + 1)) {
+          _avalanches[col].add(
+            AvalancheTest(
+              delay: delay,
+              row: dest,
+            ),
+          );
+        }
+
+        // Increment the number of moves
+        countMoves++;
+      }
+    }
+
+    //
+    // We now need to fill the column with new tiles (if necessary)
+    // This routine is very similar to moving the tiles down
+    // Except that we can only do this if the toppest cell of the column
+    // if not preventing from adding new tiles
+    //
+    if (empty > 0) {
+      int row = _getEntryRowForColumn(col);
+
+      //
+      // Only consider the case where there is an entry point
+      //
+      if (row != -1) {
+        // Here again, it is time to check for the avalanche effects, which will only occur at the end of the first move
+
+        // In case the destination is not yet known, determine it
+        if (dest == -1) {
+          do {
             dest++;
+          } while (_types[dest][col] == TileType.forbidden &&
+              _state[dest][col] != 0 &&
+              dest < rows);
+        }
 
-            // ... and the delay
-            delay++;
+        // Consider each empty
+        for (int i = 0; i < empty; i++) {
+          TileType newTileType =
+              Tile.random(math.Random()); // Generate a new random tile type
+          _state[dest][col] = 1;
+          _types[dest][col] = newTileType;
+          _tiles![dest][col] = Tile(
+            row: row,
+            col: col,
+            depth: 0,
+            level: level,
+            type: newTileType,
+            visible: true,
+          ); // We will build it later
+          _tiles![dest][col].build();
 
-            // Compute the longest delay
-            longestDelay = math.max(longestDelay, delay);
+          // Generate a new identity
+          _identities[dest][col] = _nextIdentity++;
 
-            // Increment the number of moves
-            countMoves++;
+          // Record a new tile injection animation
+          RowCol from = RowCol(row: row, col: col);
+          RowCol to = RowCol(row: dest, col: col);
+
+          _registerAnimation(
+            _identities[dest][col],
+            delay,
+            TileAnimation(
+              animationType: TileAnimationType.newTile,
+              delay: delay,
+              from: from,
+              to: to,
+              tileType: _types[dest][col],
+              tile: _tiles![dest][col],
+            ),
+          );
+          // record the move
+          _lastMoves.add(to);
+
+          // Record the cells involved in the animation
+          _involvedCells.addAll([from, to]);
+
+          // ... a new tile could also cause an avalanche
+          if (delay == (startDelay + 1)) {
+            _avalanches[col].add(
+              AvalancheTest(
+                delay: delay,
+                row: dest,
+              ),
+            );
           }
+
+          // Increment the destination
+          dest++;
+
+          // ... and the delay
+          delay++;
+
+          // Compute the longest delay
+          longestDelay = math.max(longestDelay, delay);
+
+          // Increment the number of moves
+          countMoves++;
         }
       }
+    }
     return longestDelay;
   }
 
@@ -662,13 +693,13 @@ class AnimationsResolver {
   // Returns the row that corresponds to an entry for a new tile injection
   // Returns -1 if there is no entry
   //
-  int _getEntryRowForColumn(int col){
+  int _getEntryRowForColumn(int col) {
     int row = rows - 1;
 
     //
     // First, skip the not existing cells
     //
-    while (_types[row][col] == TileType.forbidden){
+    while (_types[row][col] == TileType.forbidden) {
       row--;
     }
 
@@ -689,17 +720,16 @@ class AnimationsResolver {
   //
   // This routine returns a list of animations sequences, per identity, sorted per delay start
   //
-  List<AnimationSequence> getAnimationsSequences(){
+  List<AnimationSequence> getAnimationsSequences() {
     List<AnimationSequence> sequences = <AnimationSequence>[];
 
-    _animationsPerIdentityAndDelay.keys.forEach((int identity){
+    for (var identity in _animationsPerIdentityAndDelay.keys) {
       // now that we have an identity, let's put all its animations, sorted by delay
       List<TileAnimation> animations = <TileAnimation>[];
-      
+
       // Let's sort the animations related to a single identity
-      List<int>? delays = _animationsPerIdentityAndDelay[identity]
-                        ?.keys
-                        .toList();
+      List<int>? delays =
+          _animationsPerIdentityAndDelay[identity]?.keys.toList();
       delays?.sort();
 
       int startDelay = 0;
@@ -708,24 +738,24 @@ class AnimationsResolver {
       TileAnimation tileAnimation;
       Tile? tile;
 
-      delays?.forEach((item){
+      delays?.forEach((item) {
         // Remember that start and end delays as well as the type of tile
-        if (item == 0){
+        if (item == 0) {
           startDelay = item;
           tileAnimation = _animationsPerIdentityAndDelay[identity]![item]!;
           tileType = tileAnimation.tileType;
 
           // If the tile does not exist, create it
           tile = tileAnimation.tile;
-          if (tile == null){
+          if (tile == null) {
             tile = Tile(
-                row: tileAnimation.from.row,
-                col: tileAnimation.from.col,
-                depth: 0,
-                level: level,
-                type: tileType,
-                visible: true,
-              );
+              row: tileAnimation.from.row,
+              col: tileAnimation.from.col,
+              depth: 0,
+              level: level,
+              type: tileType,
+              visible: true,
+            );
             if (tile != null) {
               tile!.build();
               tileAnimation.tile = tile!;
@@ -735,7 +765,7 @@ class AnimationsResolver {
         endDelay = math.max(endDelay, item);
 
         // add the animation
-        if (_animationsPerIdentityAndDelay[identity]?[item] != null ) {
+        if (_animationsPerIdentityAndDelay[identity]?[item] != null) {
           animations.add(_animationsPerIdentityAndDelay[identity]![item]!);
         }
       });
@@ -747,9 +777,26 @@ class AnimationsResolver {
         endDelay: endDelay,
         animations: animations,
       ));
-    });
+    }
 
     return sequences;
   }
-}
 
+  bool recheck() {
+      for (var rowCol in _fullSet) {
+        Chain? verticalChain = checkVerticalChain(rowCol.row, rowCol.col);
+        Chain? horizontalChain = checkHorizontalChain(rowCol.row, rowCol.col);
+        if(verticalChain!=null){
+          rowCol = RowCol(row: verticalChain.tiles.first.row, col: verticalChain.tiles.first.col);
+          _lastMoves.add(rowCol);
+          print("Recheck Triggered");
+        }
+        if(horizontalChain!=null){
+          rowCol = RowCol(row: horizontalChain.tiles.first.row, col: horizontalChain.tiles.first.col);
+          _lastMoves.add(rowCol);
+          print("Recheck Triggered");
+        }
+    }
+      return _lastMoves.isEmpty ? false : true;
+  }
+}

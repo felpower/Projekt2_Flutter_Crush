@@ -28,7 +28,7 @@ class _AnimationSwapTilesState extends State<AnimationSwapTiles> with SingleTick
     super.initState();
 
     _controller = AnimationController(
-      duration: Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 300),
       vsync: this,
     )..addListener(() {
       setState(() {});

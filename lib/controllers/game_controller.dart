@@ -211,7 +211,7 @@ class GameController {
             level: level,
             depth: (level.grid[powerUpRow][powerUpCol] == '2') ? 1 : 0);
       }
-    } while (_swaps.length == 0);
+    } while (_swaps.isEmpty);
 
     //
     // Once everything is set, build the tile Widgets
@@ -287,7 +287,7 @@ class GameController {
               }
 
               // If we want to swap the same type of tile => skip
-              if (toTile.type == fromTile.type) continue;
+              // if (toTile.type == fromTile.type) continue; ToDo: Reactivate when fixed
 
               if (isDestNormalTile || toTile.type == TileType.empty) {
                 // Exchange the tiles
@@ -454,7 +454,7 @@ class GameController {
   //
   void resolveCombo(Combo combo, GameBloc gameBloc) {
     // We now need to remove all the Tiles from the grid and change the type if necessary
-    combo.tiles.forEach((Tile tile) {
+    for (var tile in combo.tiles) {
       if (tile != combo.commonTile) {
         // Decrement the depth
         if (--grid[tile.row][tile.col].depth < 0) {
@@ -476,7 +476,7 @@ class GameController {
         // We need to notify about the creation of a new tile
         gameBloc.pushTileEvent(combo.resultingTileType!, 1);
       }
-    });
+    }
   }
 
   //
@@ -484,14 +484,14 @@ class GameController {
   //
   void refreshGridAfterAnimations(
       Array2d<TileType?> tileTypes, Set<RowCol> involvedCells) {
-    involvedCells.forEach((RowCol rowCol) {
+    for (var rowCol in involvedCells) {
       _grid[rowCol.row][rowCol.col].row = rowCol.row;
       _grid[rowCol.row][rowCol.col].col = rowCol.col;
       _grid[rowCol.row][rowCol.col].type = tileTypes[rowCol.row][rowCol.col];
       _grid[rowCol.row][rowCol.col].visible = true;
       _grid[rowCol.row][rowCol.col].depth = 0;
       _grid[rowCol.row][rowCol.col].build();
-    });
+    }
   }
 
   //
@@ -499,7 +499,7 @@ class GameController {
   // The spread of the explosion depends on the type of bomb
   //
   void proceedWithExplosion(Tile tileExplosion, GameBloc gameBloc,
-      {bool skipThis: false}) {
+      {bool skipThis = false}) {
     // Retrieve the list of row/col variations
     List<SwapMove> _swaps = _explosions[tileExplosion.type]!;
 
@@ -509,7 +509,7 @@ class GameController {
 
     // All the tiles in that area will disappear
 
-    _swaps.forEach((SwapMove move) {
+    for (var move in _swaps) {
       int row = tileExplosion.row + move.row;
       int col = tileExplosion.col + move.col;
 
@@ -535,11 +535,11 @@ class GameController {
           }
         }
       }
-    });
+    }
 
     // Proceed with chained explosions
-    _subExplosions.forEach((Tile tile) {
+    for (var tile in _subExplosions) {
       proceedWithExplosion(tile, gameBloc, skipThis: true);
-    });
+    }
   }
 }

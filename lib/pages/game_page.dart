@@ -62,7 +62,7 @@ class _GamePageState extends State<GamePage>
     super.initState();
     _gameOverReceived = false;
     _allowGesture = true;
-    WidgetsBinding.instance?.addPostFrameCallback(_showGameStartSplash);
+    WidgetsBinding.instance.addPostFrameCallback(_showGameStartSplash);
   }
 
   @override
@@ -276,12 +276,11 @@ class _GamePageState extends State<GamePage>
     // Check if the [row,col] corresponds to a possible swap
     Tile selectedTile = gameBloc.gameController.grid[rowCol.row][rowCol.col];
     bool canBePlayed = false;
-
+    print("Selected Tile " + selectedTile.toString());
     // Reset
     gestureStarted = false;
 
-    if (selectedTile != null &&
-        selectedTile.type != TileType.wall &&
+    if (selectedTile.type != TileType.wall &&
         selectedTile.type != TileType.forbidden) {
       //TODO: Condition no longer necessary
       canBePlayed = selectedTile.canMove;
@@ -307,7 +306,7 @@ class _GamePageState extends State<GamePage>
             );
           });
       if (_overlayEntryFromTile != null) {
-        Overlay.of(context)?.insert(_overlayEntryFromTile!);
+        Overlay.of(context).insert(_overlayEntryFromTile!);
       }
     }
   }
@@ -370,8 +369,7 @@ class _GamePageState extends State<GamePage>
           Tile destTile = gameBloc.gameController.grid[rowCol.row][rowCol.col];
           bool canBePlayed = false;
 
-          if (destTile != null &&
-              destTile.type != TileType.wall &&
+          if (destTile.type != TileType.wall &&
               destTile.type != TileType.forbidden) {
             //TODO:  Condition no longer necessary
             canBePlayed = destTile.canMove || destTile.type == TileType.empty;
@@ -478,7 +476,7 @@ class _GamePageState extends State<GamePage>
                   );
                 });
             if (_overlayEntryAnimateSwapTiles != null) {
-              Overlay.of(context)?.insert(_overlayEntryAnimateSwapTiles!);
+              Overlay.of(context).insert(_overlayEntryAnimateSwapTiles!);
             }
           }
         }
@@ -503,7 +501,7 @@ class _GamePageState extends State<GamePage>
       gameBloc.gameController.proceedWithExplosion(gestureFromTile!, gameBloc);
 
       // Rebuild the board and proceed with animations
-      WidgetsBinding.instance?.addPostFrameCallback((_) async {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
         // Proceed with the falling tiles
         await _playAllAnimations();
 
@@ -524,7 +522,9 @@ class _GamePageState extends State<GamePage>
   // This is used just before starting an animation
   //
   void _showComboTilesForAnimation(Combo combo, bool visible) {
-    combo.tiles.forEach((Tile tile) => tile.visible = visible);
+    for (var tile in combo.tiles) {
+      tile.visible = visible;
+    }
     setState(() {});
   }
 
@@ -557,7 +557,7 @@ class _GamePageState extends State<GamePage>
         // Play sound
         await Audio.playAsset(AudioType.move_down);
 
-        Overlay.of(context)?.insert(overlayEntry);
+        Overlay.of(context).insert(overlayEntry);
         break;
 
       case ComboType.none:
@@ -602,7 +602,7 @@ class _GamePageState extends State<GamePage>
         // Play sound
         await Audio.playAsset(AudioType.swap);
 
-        Overlay.of(context)?.insert(overlayEntry);
+        Overlay.of(context).insert(overlayEntry);
         break;
     }
     return completer.future;
@@ -621,10 +621,9 @@ class _GamePageState extends State<GamePage>
     AnimationsResolver animationResolver =
         AnimationsResolver(gameBloc: gameBloc, level: widget.level);
     animationResolver.resolve();
-
     // Determine the list of cells that are involved in the animation(s)
     // and make them invisible
-    if (animationResolver.involvedCells.length == 0) {
+    if (animationResolver.involvedCells.isEmpty) {
       // At first glance, there is no animations... so directly return
       completer.complete(null);
     }
@@ -635,19 +634,19 @@ class _GamePageState extends State<GamePage>
     int pendingSequences = sequences.length;
 
     // Make all involved cells invisible
-    animationResolver.involvedCells.forEach((RowCol rowCol) {
+    for (var rowCol in animationResolver.involvedCells) {
       gameBloc.gameController.grid[rowCol.row][rowCol.col].visible = false;
-    });
+    }
 
     // Make a refresh of the board and the end of which we will play the animations
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       //
       // As the board is now refreshed, it is time to start playing
       // all the animations
       //
       List<OverlayEntry> overlayEntries = <OverlayEntry>[];
 
-      sequences.forEach((AnimationSequence animationSequence) {
+      for (var animationSequence in sequences) {
         //
         // Prepare all the animations at once.
         // This is important to avoid having multiple rebuild
@@ -666,21 +665,21 @@ class _GamePageState extends State<GamePage>
 
                   //
                   // When all have finished, we need to "rebuild" the board,
-                  // refresh the screen and yied the hand back
+                  // refresh the screen and yield the hand back
                   //
                   if (pendingSequences == 0) {
                     // Remove all OverlayEntries
-                    overlayEntries.forEach((OverlayEntry entry) {
+                    for (var entry in overlayEntries) {
                       entry.remove();
                       //entry = null;
-                    });
+                    }
 
                     gameBloc.gameController.refreshGridAfterAnimations(
                         animationResolver.resultingGridInTermsOfTileTypes,
                         animationResolver.involvedCells);
 
                     // We now need to proceed with a final rebuild and yield the hand
-                    WidgetsBinding.instance?.addPostFrameCallback((_) {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
                       // Finally, yield the hand
                       completer.complete(null);
                     });
@@ -692,12 +691,11 @@ class _GamePageState extends State<GamePage>
             },
           ),
         );
-      });
-      Overlay.of(context)?.insertAll(overlayEntries);
+      }
+      Overlay.of(context).insertAll(overlayEntries);
     });
-
+    // animationResolver.recheck() ? _playAllAnimations() : null;
     setState(() {});
-
     return completer.future;
   }
 
@@ -773,6 +771,6 @@ class _GamePageState extends State<GamePage>
           );
         });
 
-    Overlay.of(context)?.insert(_gameSplash);
+    Overlay.of(context).insert(_gameSplash);
   }
 }
