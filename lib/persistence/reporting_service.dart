@@ -33,16 +33,13 @@ class ReportingService {
 
   static Future<void> addAdvertisementTap(double x, double y) async {
     await _updateDocumentData(addScreenClick,
-        'x: ' + x.toStringAsFixed(2) + ', y:' + y.toStringAsFixed(2));
+        'x: ${x.toStringAsFixed(2)}, y:${y.toStringAsFixed(2)}');
   }
 
   static Future<void> addStartOfLevel(int levelNumber) async {
     await _updateDocumentData(
         startOfLevel,
-        'Level: ' +
-            levelNumber.toString() +
-            ', Time: ' +
-            DateTime.now().toString());
+        'Level: $levelNumber, Time: ${DateTime.now()}');
   }
 
   static Future<void> addStartApp(DateTime dateTime) async {
@@ -64,17 +61,14 @@ class ReportingService {
   static Future<void> removeAdds(bool removed) async {
     await _updateDocumentData(
         paidForRemovingAdds,
-        'Removed: ' +
-            removed.toString() +
-            ', Time: ' +
-            DateTime.now().toString());
+        'Removed: $removed, Time: ${DateTime.now()}');
   }
 
   static Future<void> addNotificationTap(
       DateTime dateTime, String? multiplier) async {
     multiplier ??= '';
     await _updateDocumentData(notificationTap,
-        'Multiplier: ' + multiplier + ', Time: ' + dateTime.toString());
+        'Multiplier: $multiplier, Time: $dateTime');
   }
 
   static Future<void> _updateDocumentData(

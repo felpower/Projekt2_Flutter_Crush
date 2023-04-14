@@ -28,8 +28,8 @@ class LocalNotificationService {
     const AndroidInitializationSettings androidInitializationSettings =
         AndroidInitializationSettings('tile');
 
-    const IOSInitializationSettings iosInitializationSettings =
-        IOSInitializationSettings(
+    const DarwinInitializationSettings iosInitializationSettings =
+        DarwinInitializationSettings(
             requestSoundPermission: false,
             requestAlertPermission: true,
             requestBadgePermission: true);
@@ -38,14 +38,15 @@ class LocalNotificationService {
         InitializationSettings(
             android: androidInitializationSettings,
             iOS: iosInitializationSettings);
+
     await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: (payload) async {
+        onDidReceiveNotificationResponse: (payload) async {
       return Future(() {
-        ReportingService.addNotificationTap(DateTime.now(), payload);
+        ReportingService.addNotificationTap(DateTime.now(), payload as String?);
         XpService.updateMultiplierXpTime(
             DateTime.now().add(const Duration(minutes: 15)));
         if (payload != null) {
-          XpService.updateCurrentMultiplier(int.parse(payload));
+          XpService.updateCurrentMultiplier(int.parse(payload as String));
         }
       });
     });
@@ -70,9 +71,9 @@ class LocalNotificationService {
     return const AndroidNotificationDetails('testChannelId', 'testChannelName');
   }
 
-  IOSNotificationDetails createIosNotificationDetails() {
-    const IOSNotificationDetails iosNotificationDetails =
-        IOSNotificationDetails(
+  DarwinNotificationDetails createIosNotificationDetails() {
+    const DarwinNotificationDetails iosNotificationDetails =
+        DarwinNotificationDetails(
       presentAlert: true,
       presentBadge: true,
       presentSound: false,
