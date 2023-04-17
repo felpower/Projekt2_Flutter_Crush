@@ -74,7 +74,7 @@ String dumpArray2d(Array2d grid) {
       var cell = grid[row - 1][col];
       values.add(cell == null ? " " : cell.toString());
     }
-    string += (values.join(" ") + "\n");
+    string += ("${values.join(" ")}\n");
   }
   return string;
 }

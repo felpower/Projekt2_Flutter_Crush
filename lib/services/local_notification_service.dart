@@ -94,9 +94,7 @@ class LocalNotificationService {
         await flutterLocalNotificationsPlugin.zonedSchedule(
             i,
             'Flutter Crush',
-            'Tap here to get ' +
-                multiplier.toString() +
-                'x XP for the next 15 minutes!',
+            'Tap here to get ${multiplier}x XP for the next 15 minutes!',
             tz.TZDateTime.now(tz.local).add(Duration(days: i, hours: 1)),
             createNotificationDetails(),
             androidAllowWhileIdle: true,

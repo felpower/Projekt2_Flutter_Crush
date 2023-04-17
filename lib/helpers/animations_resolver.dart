@@ -789,12 +789,10 @@ class AnimationsResolver {
         if(verticalChain!=null){
           rowCol = RowCol(row: verticalChain.tiles.first.row, col: verticalChain.tiles.first.col);
           _lastMoves.add(rowCol);
-          print("Recheck Triggered");
         }
         if(horizontalChain!=null){
           rowCol = RowCol(row: horizontalChain.tiles.first.row, col: horizontalChain.tiles.first.col);
           _lastMoves.add(rowCol);
-          print("Recheck Triggered");
         }
     }
       return _lastMoves.isEmpty ? false : true;

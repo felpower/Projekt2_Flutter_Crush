@@ -287,7 +287,8 @@ class GameController {
               }
 
               // If we want to swap the same type of tile => skip
-              // if (toTile.type == fromTile.type) continue; ToDo: Reactivate when fixed
+              // if (toTile.type == fromTile.type) continue;
+              //ToDo: Reactivate when fixed
 
               if (isDestNormalTile || toTile.type == TileType.empty) {
                 // Exchange the tiles
@@ -501,15 +502,15 @@ class GameController {
   void proceedWithExplosion(Tile tileExplosion, GameBloc gameBloc,
       {bool skipThis = false}) {
     // Retrieve the list of row/col variations
-    List<SwapMove> _swaps = _explosions[tileExplosion.type]!;
+    List<SwapMove> swaps = _explosions[tileExplosion.type]!;
 
     // We will record any explosions that could happen should
     // a bomb make another bomb explode
-    List<Tile> _subExplosions = <Tile>[];
+    List<Tile> subExplosions = <Tile>[];
 
     // All the tiles in that area will disappear
 
-    for (var move in _swaps) {
+    for (var move in swaps) {
       int row = tileExplosion.row + move.row;
       int col = tileExplosion.col + move.col;
 
@@ -524,7 +525,7 @@ class GameController {
 
           if (Tile.isBomb(tile.type) && !skipThis) {
             // Another bomb must explode
-            _subExplosions.add(tile);
+            subExplosions.add(tile);
           } else {
             // Notify that we removed some tiles
             gameBloc.pushTileEvent(tile.type, 1);
@@ -538,7 +539,7 @@ class GameController {
     }
 
     // Proceed with chained explosions
-    for (var tile in _subExplosions) {
+    for (var tile in subExplosions) {
       proceedWithExplosion(tile, gameBloc, skipThis: true);
     }
   }

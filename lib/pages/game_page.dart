@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:bachelor_flutter_crush/pages/rating_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -62,7 +61,7 @@ class _GamePageState extends State<GamePage>
     super.initState();
     _gameOverReceived = false;
     _allowGesture = true;
-    WidgetsBinding.instance.addPostFrameCallback(_showGameStartSplash);
+    WidgetsBinding?.instance.addPostFrameCallback(_showGameStartSplash);
   }
 
   @override
@@ -280,7 +279,8 @@ class _GamePageState extends State<GamePage>
     // Reset
     gestureStarted = false;
 
-    if (selectedTile.type != TileType.wall &&
+    if (selectedTile != null &&
+        selectedTile.type != TileType.wall &&
         selectedTile.type != TileType.forbidden) {
       //TODO: Condition no longer necessary
       canBePlayed = selectedTile.canMove;
@@ -369,7 +369,8 @@ class _GamePageState extends State<GamePage>
           Tile destTile = gameBloc.gameController.grid[rowCol.row][rowCol.col];
           bool canBePlayed = false;
 
-          if (destTile.type != TileType.wall &&
+          if (destTile != null &&
+              destTile.type != TileType.wall &&
               destTile.type != TileType.forbidden) {
             //TODO:  Condition no longer necessary
             canBePlayed = destTile.canMove || destTile.type == TileType.empty;
@@ -694,9 +695,16 @@ class _GamePageState extends State<GamePage>
       }
       Overlay.of(context).insertAll(overlayEntries);
     });
-    // animationResolver.recheck() ? _playAllAnimations() : null;
+    animationResolver.recheck()
+        ? recheckTriggered()
+        : null; //ToDo: Check if need to recheck whole field
     setState(() {});
     return completer.future;
+  }
+
+  Future<void> recheckTriggered() async {
+    // _playAllAnimations();
+    print("Recheck Triggered");
   }
 
   //
@@ -730,9 +738,8 @@ class _GamePageState extends State<GamePage>
 
               // as the game is over, let's leave the game
               Navigator.of(context).pop();
-              print("Has Rated? " +
-                  hasRated
-                      .toString()); //FixMe: Check if Dark Patterns are activated, otherwise do not call Rating Page
+              print(
+                  "Has Rated? $hasRated"); //FixMe: Check if Dark Patterns are activated, otherwise do not call Rating Page
               // if (hasRated != null && !hasRated) {
               //   Navigator.push(
               //       context,
