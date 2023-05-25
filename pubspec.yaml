@@ -47,8 +47,6 @@ dependencies:
   local_auth: ^2.1.6
   flutter_credit_card: ^3.0.6
   flutter_rating_bar: ^4.0.1
-  flutter_slot_machine: ^0.0.1
-  flutter_fortune_wheel: ^1.2.0
 
 dev_dependencies:
   flutter_test:

@@ -1,9 +1,9 @@
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
-import 'package:bachelor_flutter_crush/controllers/slot_controller.dart';
-import 'package:bachelor_flutter_crush/controllers/spinning_wheel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../controllers/flutter_fortune_wheel/spinner_page.dart';
 
 class SlotMachineButton extends StatelessWidget {
   const SlotMachineButton({Key? key}) : super(key: key);
@@ -15,14 +15,14 @@ class SlotMachineButton extends StatelessWidget {
     return BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
         builder: (context, state) {
       if (state is DarkPatternsActivatedState) {
-        return startSlotMachine(context);
+        return startFortuneWheel(context);
       } else {
         return Container();
       }
     });
   }
 
-  startSlotMachine(BuildContext context) {
+  startFortuneWheel(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.only(right: 0),
         child: IconButton(
@@ -30,7 +30,7 @@ class SlotMachineButton extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ExamplePage()));
+                      builder: (context) =>  const FortuneWheel()));
             },
             icon: const Icon(Icons.gamepad_outlined)));
   }
