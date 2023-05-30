@@ -12,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../bloc/bloc_provider.dart';
 import '../bloc/game_bloc.dart';
 import '../bloc/reporting_bloc/reporting_bloc.dart';
+import '../controllers/unity/UnityDemoScreen.dart';
 import '../gamification_widgets/advertisement_video_player.dart';
 import '../model/level.dart';
 import '../pages/game_page.dart';
@@ -111,8 +112,14 @@ class GameLevelButton extends StatelessWidget {
   Future<void> openGame(ReportingBloc reportingBloc, GameBloc gameBloc,
       SharedPreferences prefs, BuildContext context) async {
     reportingBloc.add(ReportStartLevelEvent(levelNumber));
-    await _startLevel(gameBloc, context);
-
+    int lvl = levelNumber%4+1;
+    String levelName = "Level0$lvl";
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => UnityScreen(level: levelName,)));
+    // await _startLevel(gameBloc, context);
+    //ToDo: Put adds before Navigator Push
     var addState = prefs.getBool("addsActive");
     print("Adds are: " + addState.toString());
     if (addState == true) {

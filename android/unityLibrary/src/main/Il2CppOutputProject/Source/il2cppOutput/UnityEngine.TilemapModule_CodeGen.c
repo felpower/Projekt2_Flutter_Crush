@@ -29,7 +29,7 @@ const Il2CppCodeGenModule g_UnityEngine_TilemapModule_CodeGenModule =
 	0,
 	NULL,
 	&g_DebuggerMetadataRegistrationUnityEngine_TilemapModule,
-	NULL, // module initializer,
+	NULL,
 	NULL,
 	NULL,
 	NULL,

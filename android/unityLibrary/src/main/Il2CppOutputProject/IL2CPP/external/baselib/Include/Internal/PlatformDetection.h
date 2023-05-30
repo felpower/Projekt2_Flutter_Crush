@@ -20,7 +20,11 @@
     #define BASELIB_PLATFORM_WASI 1
 #elif defined(__APPLE__)
     #include <TargetConditionals.h>
-    #if TARGET_OS_IOS
+// TODO: replace with actual define from TargetConditionals.h once it's there
+// Also remove the defined(TARGET_OS_BRATWURST) check, it's there to silence warnings on undefined symbols used
+    #if defined(TARGET_OS_BRATWURST) && TARGET_OS_BRATWURST
+        #define BASELIB_PLATFORM_BRATWURST 1
+    #elif TARGET_OS_IOS
         #define BASELIB_PLATFORM_IOS 1
     #elif TARGET_OS_TV
         #define BASELIB_PLATFORM_TVOS 1
@@ -30,9 +34,7 @@
 #elif defined(__NetBSD__)
     #define BASELIB_PLATFORM_NETBSD 1
 #elif defined(linux) || defined(__linux__)
-    #if defined(LUMIN)
-        #define BASELIB_PLATFORM_LUMIN 1
-    #elif defined(GGP)
+    #if defined(GGP)
         #define BASELIB_PLATFORM_STADIA 1
     #elif defined(ANDROID) || defined(__ANDROID__)
         #define BASELIB_PLATFORM_ANDROID 1
@@ -50,4 +52,6 @@
     #else
         #define BASELIB_PLATFORM_WINDOWS 1
     #endif
+#elif defined(__QNX__)
+    #define BASELIB_PLATFORM_QNX 1
 #endif

@@ -91,7 +91,7 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
     );
   }
 
-  _onTapDown(TapDownDetails details, ReportingBloc reportingBloc) {
+  _onTapDown(var details, ReportingBloc reportingBloc) {
     double x = details.globalPosition.dx;
     double y = details.globalPosition.dy;
     reportingBloc.add(ReportAdvertisementTapEvent(x, y));

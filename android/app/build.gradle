@@ -49,7 +49,7 @@ android {
 
     defaultConfig {
         applicationId "com.felpower.fluttercrush"
-        minSdkVersion 21
+        minSdkVersion 29
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

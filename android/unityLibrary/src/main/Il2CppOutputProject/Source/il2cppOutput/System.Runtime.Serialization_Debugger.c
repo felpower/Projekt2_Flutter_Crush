@@ -23,14 +23,16 @@ static const char* g_methodExecutionContextInfoStrings[1] = { NULL };
 static const char* g_methodExecutionContextInfoStrings[1] = { NULL };
 #endif
 #if IL2CPP_MONO_DEBUGGER
-static const Il2CppMethodExecutionContextInfoIndex g_methodExecutionContextInfoIndexes[6] = 
+static const Il2CppMethodExecutionContextInfoIndex g_methodExecutionContextInfoIndexes[8] = 
 {
-	{ 0, 0 } /* 0x06000001 System.Boolean System.Runtime.Serialization.DataContractAttribute::get_IsReference() */,
-	{ 0, 0 } /* 0x06000002 System.String System.Runtime.Serialization.DataMemberAttribute::get_Name() */,
-	{ 0, 0 } /* 0x06000003 System.Int32 System.Runtime.Serialization.DataMemberAttribute::get_Order() */,
-	{ 0, 0 } /* 0x06000004 System.Boolean System.Runtime.Serialization.DataMemberAttribute::get_IsRequired() */,
-	{ 0, 0 } /* 0x06000005 System.Boolean System.Runtime.Serialization.DataMemberAttribute::get_EmitDefaultValue() */,
-	{ 0, 0 } /* 0x06000006 System.String System.Runtime.Serialization.EnumMemberAttribute::get_Value() */,
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
 };
 #else
 static const Il2CppMethodExecutionContextInfoIndex g_methodExecutionContextInfoIndexes[1] = { { 0, 0} };
@@ -63,14 +65,16 @@ static const Il2CppMethodScope g_methodScopes[1] = { { 0, 0 } };
 static const Il2CppMethodScope g_methodScopes[1] = { { 0, 0 } };
 #endif
 #if IL2CPP_MONO_DEBUGGER
-static const Il2CppMethodHeaderInfo g_methodHeaderInfos[6] = 
+static const Il2CppMethodHeaderInfo g_methodHeaderInfos[8] = 
 {
-	{ 0, 0, 0 } /* System.Boolean System.Runtime.Serialization.DataContractAttribute::get_IsReference() */,
-	{ 0, 0, 0 } /* System.String System.Runtime.Serialization.DataMemberAttribute::get_Name() */,
-	{ 0, 0, 0 } /* System.Int32 System.Runtime.Serialization.DataMemberAttribute::get_Order() */,
-	{ 0, 0, 0 } /* System.Boolean System.Runtime.Serialization.DataMemberAttribute::get_IsRequired() */,
-	{ 0, 0, 0 } /* System.Boolean System.Runtime.Serialization.DataMemberAttribute::get_EmitDefaultValue() */,
-	{ 0, 0, 0 } /* System.String System.Runtime.Serialization.EnumMemberAttribute::get_Value() */,
+	{ 0, 0, 0 },
+	{ 0, 0, 0 },
+	{ 0, 0, 0 },
+	{ 0, 0, 0 },
+	{ 0, 0, 0 },
+	{ 0, 0, 0 },
+	{ 0, 0, 0 },
+	{ 0, 0, 0 },
 };
 #else
 static const Il2CppMethodHeaderInfo g_methodHeaderInfos[1] = { { 0, 0, 0 } };
