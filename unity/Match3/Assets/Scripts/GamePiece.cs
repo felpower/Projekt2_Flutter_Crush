@@ -1,19 +1,23 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-namespace Match3 {
-    public class GamePiece : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler {
+namespace Match3
+{
+    public class GamePiece : MonoBehaviour
+    {
         public int score;
 
         private int _x;
         private int _y;
 
-        public int X {
+        public int X
+        {
             get => _x;
             set { if (IsMovable()) { _x = value; } }
         }
 
-        public int Y {
+        public int Y
+        {
             get => _y;
             set { if (IsMovable()) { _y = value; } }
         }
@@ -40,78 +44,64 @@ namespace Match3 {
 
         private Touch theTouch;
 
-        private void Awake() {
+        private void Awake()
+        {
             _movableComponent = GetComponent<MovablePiece>();
             _colorComponent = GetComponent<ColorPiece>();
             _clearableComponent = GetComponent<ClearablePiece>();
         }
 
-        public void Update() {
-            //if (Input.touchCount > 0) {
+        public void Update()
+        {
+            //if (Input.touchCount > 0)
+            //{
             //    theTouch = Input.GetTouch(0);
-            //    if (theTouch.phase == TouchPhase.Began) {
-            //        _gameGrid.PressPiece(this);
-            //    } else if (theTouch.phase == TouchPhase.Moved) {
-            //        //Debug.Log(this.X + " " + this.Y);
-            //        _gameGrid.EnterPiece(this);
-            //    } else if (theTouch.phase == TouchPhase.Ended) {
-            //        _gameGrid.ReleasePiece();
-            //    }
+            //    OnBeginDrag();
             //}
+            //else if (theTouch.phase == TouchPhase.Moved)
+            //{
+            //    OnDrag();
+            //}
+            //else if (theTouch.phase == TouchPhase.Ended)
+            //{
+            //    OnEndDrag();
+
+            //}
+
         }
 
-        public void Init(int x, int y, GameGrid gameGrid, PieceType type) {
+        public void Init(int x, int y, GameGrid gameGrid, PieceType type)
+        {
             _x = x;
             _y = y;
             _gameGrid = gameGrid;
             _type = type;
         }
 
-        private void OnMouseEnter() {
-            if (SystemInfo.deviceType == DeviceType.Desktop) {
-                //Debug.LogWarning("Mouse Entered: " + this.X + " " + this.Y);
-                _gameGrid.EnterPiece(this);
-            }
+        private void OnMouseEnter()
+        {
+            Debug.LogWarning("Mouse Entered: " + this.X + " " + this.Y);
+            _gameGrid.EnterPiece(this);
         }
 
-        private void OnMouseDown() {
-            if (SystemInfo.deviceType == DeviceType.Desktop) {
-                //Debug.LogWarning("Mouse Down");
-                _gameGrid.PressPiece(this);
-            }
+        private void OnMouseDown()
+        {
+            Debug.LogWarning("Mouse Down");
+            _gameGrid.PressPiece(this);
         }
 
-        private void OnMouseUp() {
-            if (SystemInfo.deviceType == DeviceType.Desktop) {
-                //Debug.LogWarning("Mouse Up");
-                _gameGrid.ReleasePiece();
-            }
+        private void OnMouseUp()
+        {
+            Debug.LogWarning("Mouse Up");
+            _gameGrid.ReleasePiece();
         }
+
 
         public bool IsMovable() => _movableComponent != null;
 
         public bool IsColored() => _colorComponent != null;
 
         public bool IsClearable() => _clearableComponent != null;
-
-        public void OnEndDrag(PointerEventData eventData) {
-            if (SystemInfo.deviceType == DeviceType.Handheld) {
-                //Debug.LogWarning("Drag End");
-                _gameGrid.ReleasePiece();
-            }
-        }
-        public void OnDrag(PointerEventData eventData) {
-            if (SystemInfo.deviceType == DeviceType.Handheld) {
-                //Debug.LogWarning("Drag");
-                _gameGrid.EnterPiece(this);
-            }
-        }
-
-        public void OnBeginDrag(PointerEventData eventData) {
-            if (SystemInfo.deviceType == DeviceType.Handheld) {
-                //Debug.LogWarning("Drag Begin");
-                _gameGrid.PressPiece(this);
-            }
-        }
     }
+
 }
