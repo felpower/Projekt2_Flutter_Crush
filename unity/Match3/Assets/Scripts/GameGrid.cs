@@ -119,7 +119,6 @@ namespace Match3 {
                         piece2 = _pieces[x, y - 1];
                         if (EnsureMatch(piece1, piece2)) {
                             Debug.Log("y > 0");
-                            Debug.Log("Possible Match Found Piece 1: X: " + piece1.X + " Y: " + piece1.Y + " Color: " + piece1.ColorComponent.Color);
                             Debug.Log("Possible Match Found Piece 2: X: " + piece2.X + " Y: " + piece2.Y + " Color: " + piece2.ColorComponent.Color);
                             return;
                         }
@@ -260,7 +259,6 @@ namespace Match3 {
             (piece1.Y == piece2.Y && Mathf.Abs(piece1.X - piece2.X) == 1);
 
         private void SwapPieces(GamePiece piece1, GamePiece piece2) {
-            Debug.LogWarning("Entered Swap Pieces");
             if (_gameOver) { return; }
             if (!piece1.IsMovable() || !piece2.IsMovable()) return;
 
@@ -346,7 +344,6 @@ namespace Match3 {
         public void EnterPiece(GamePiece piece) => _enteredPiece = piece;
 
         public void ReleasePiece() {
-            Debug.LogWarning("Pressed Piece: " + _pressedPiece.X + " " + _pressedPiece.Y + " " + _pressedPiece.ColorComponent.Color + ", Entered Piece: " + _enteredPiece.X + " " + _enteredPiece.Y + " " + _pressedPiece.ColorComponent.Color);
             if (IsAdjacent(_pressedPiece, _enteredPiece)) {
                 SwapPieces(_pressedPiece, _enteredPiece);
             }
@@ -647,9 +644,6 @@ namespace Match3 {
             }
 
             if (matchingPieces.Count >= 3) {
-                //foreach (var x in matchingPieces) {
-                //    Debug.Log("X: " + x.X + " Y: " + x.Y + " Color: " + x.ColorComponent.Color.ToString());
-                //}
                 return matchingPieces;
             }
 

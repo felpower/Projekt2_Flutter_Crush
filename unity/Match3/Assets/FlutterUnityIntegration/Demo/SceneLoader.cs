@@ -9,17 +9,13 @@ public class SceneLoader : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         // mMessenger = new UnityMessageManager();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (this.isActiveAndEnabled == false)
-        {
-            this.enabled = true;
-        }
+        
     }
 
     public void LoadScene(int idx)

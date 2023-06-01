@@ -68,6 +68,16 @@ android {
         release {
             signingConfig signingConfigs.release
         }
+        debug {
+            signingConfig signingConfigs.debug
+        }
+        profile{
+            signingConfig signingConfigs.debug
+        }
+        innerTest {
+            //...
+            matchingFallbacks = ['debug', 'release']
+        }
     }
 }
 

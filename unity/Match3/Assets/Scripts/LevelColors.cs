@@ -23,26 +23,7 @@ namespace Match3
             hud.SetScore(currentScore);
             hud.SetTarget(_numObstaclesLeft);
             hud.SetRemaining(numMoves);
-            Debug.Log("Started Level" + type);
         }
-        //    StartCoroutine(RemoveSelectLevel());
-        //}
-
-        //private IEnumerator RemoveSelectLevel()
-        //{
-        //    Debug.Log("Scene Name: " + this.name + "04");
-        //    while( SceneManager.SetActiveScene(SceneManager.GetSceneByName(this.name+"04")) != true )
-        //    {
-        //        yield return null;
-        //    }
-        //    Debug.Log("Activated Scene: " + this.name + "04");
-        //    AsyncOperation asyncOperation = SceneManager.UnloadSceneAsync("LevelSelect");
-        //    while (asyncOperation != null)
-        //    {
-        //        yield return null;
-        //    }
-        //    Debug.Log("Unloaded Level Select");
-
 
         public override void OnMove()
         {

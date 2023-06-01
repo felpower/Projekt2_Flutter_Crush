@@ -80,19 +80,16 @@ namespace Match3
 
         private void OnMouseEnter()
         {
-            Debug.LogWarning("Mouse Entered: " + this.X + " " + this.Y);
             _gameGrid.EnterPiece(this);
         }
 
         private void OnMouseDown()
         {
-            Debug.LogWarning("Mouse Down");
             _gameGrid.PressPiece(this);
         }
 
         private void OnMouseUp()
         {
-            Debug.LogWarning("Mouse Up");
             _gameGrid.ReleasePiece();
         }
 
