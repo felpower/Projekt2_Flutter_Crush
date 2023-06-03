@@ -36,6 +36,7 @@ class _UnityScreenState extends State<UnityScreen> {
     super.dispose();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -67,10 +68,6 @@ class _UnityScreenState extends State<UnityScreen> {
     _unityWidgetController.postMessage('LevelSelect', 'OnButtonPress', level);
     _unityWidgetController.dispose();
     print("Starting level : $level");
-    // _unityWidgetController.pause();
-    // Future.delayed(Duration(seconds: 1),(){
-    //   _unityWidgetController.resume();
-    // });
   }
 
   // Communication from Unity to Flutter

@@ -12,7 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../bloc/bloc_provider.dart';
 import '../bloc/game_bloc.dart';
 import '../bloc/reporting_bloc/reporting_bloc.dart';
-import '../controllers/unity/UnityDemoScreen.dart';
+import '../controllers/unity/UnityScreen.dart';
 import '../gamification_widgets/advertisement_video_player.dart';
 import '../model/level.dart';
 import '../pages/game_page.dart';
