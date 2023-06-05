@@ -1,22 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-namespace Match3 {
-    public class GameGrid : MonoBehaviour {
-        [System.Serializable]
-        public struct PiecePrefab {
-            public PieceType type;
-            public GameObject prefab;
-        };
-
-        [System.Serializable]
-        public struct PiecePosition {
-            public PieceType type;
-            public int x;
-            public int y;
-        };
-        Camera m_MainCamera;
+using Random = UnityEngine.Random;
+namespace Match3
+{
+    public class GameGrid : MonoBehaviour
+    {
         public int xDim;
         public int yDim;
         public float fillTime;
@@ -27,21 +17,23 @@ namespace Match3 {
         public GameObject backgroundPrefab;
 
         public PiecePosition[] initialPieces;
+        private GamePiece _enteredPiece;
+
+        private bool _gameOver;
+
+        private bool _inverse;
 
         private Dictionary<PieceType, GameObject> _piecePrefabDict;
 
         private GamePiece[,] _pieces;
 
-        private bool _inverse;
-
         private GamePiece _pressedPiece;
-        private GamePiece _enteredPiece;
-
-        private bool _gameOver;
+        private Camera m_MainCamera;
 
         public bool IsFilling { get; private set; }
 
-        private void Awake() {
+        private void Awake()
+        {
             // populating dictionary with piece prefabs types
             _piecePrefabDict = new Dictionary<PieceType, GameObject>();
             for (int i = 0; i < piecePrefabs.Length; i++) {
@@ -49,7 +41,7 @@ namespace Match3 {
                     _piecePrefabDict.Add(piecePrefabs[i].type, piecePrefabs[i].prefab);
                 }
             }
-            
+
 
             // instantiate backgrounds
             for (int x = 0; x < xDim; x++) {
@@ -62,7 +54,8 @@ namespace Match3 {
             InstantiatePieces();
         }
 
-        private void InstantiatePieces() {
+        private void InstantiatePieces()
+        {
             _pieces = new GamePiece[xDim, yDim];
 
             for (int i = 0; i < initialPieces.Length; i++) {
@@ -83,7 +76,8 @@ namespace Match3 {
             StartCoroutine(Fill());
         }
 
-        private IEnumerator Fill() {
+        private IEnumerator Fill()
+        {
             bool needsRefill = true;
             IsFilling = true;
 
@@ -102,7 +96,8 @@ namespace Match3 {
             //EnsureMatches();
         }
 
-        private void EnsureMatches() {
+        private void EnsureMatches()
+        {
             for (int x = 0; x < xDim; x++) {
                 for (int y = 0; y < yDim; y++) {
                     GamePiece piece1 = _pieces[x, y];
@@ -147,7 +142,8 @@ namespace Match3 {
             //InstantiatePieces();
         }
 
-        private void ClearAll() {
+        private void ClearAll()
+        {
             for (int x = 0; x < xDim; x++) {
                 for (int y = 0; y < yDim; y++) {
                     if (_pieces[x, y].IsClearable())
@@ -157,10 +153,11 @@ namespace Match3 {
         }
 
         /// <summary>
-        /// One pass through all grid cells, moving them down one grid, if possible.
+        ///     One pass through all grid cells, moving them down one grid, if possible.
         /// </summary>
         /// <returns> returns true if at least one piece is moved down</returns>
-        private bool FillStep() {
+        private bool FillStep()
+        {
             bool movedPiece = false;
             // y = 0 is at the top, we ignore the last row, since it can't be moved down.
             for (int y = yDim - 2; y >= 0; y--) {
@@ -202,7 +199,8 @@ namespace Match3 {
 
                                 if (pieceAbove.IsMovable()) {
                                     break;
-                                } else if (/*!pieceAbove.IsMovable() && */pieceAbove.Type != PieceType.Empty) {
+                                }
+                                if ( /*!pieceAbove.IsMovable() && */pieceAbove.Type != PieceType.Empty) {
                                     hasPieceAbove = false;
                                     break;
                                 }
@@ -228,7 +226,7 @@ namespace Match3 {
                 if (pieceBelow.Type != PieceType.Empty) continue;
 
                 Destroy(pieceBelow.gameObject);
-                GameObject newPiece = Instantiate(_piecePrefabDict[PieceType.Normal], GetWorldPosition(x, -1), Quaternion.identity, this.transform);
+                GameObject newPiece = Instantiate(_piecePrefabDict[PieceType.Normal], GetWorldPosition(x, -1), Quaternion.identity, transform);
 
                 _pieces[x, 0] = newPiece.GetComponent<GamePiece>();
                 _pieces[x, 0].Init(x, -1, this, PieceType.Normal);
@@ -240,14 +238,17 @@ namespace Match3 {
             return movedPiece;
         }
 
-        public Vector2 GetWorldPosition(int x, int y) {
+        public Vector2 GetWorldPosition(int x, int y)
+        {
+            Vector3 transformPosition = transform.position;
             return new Vector2(
-                transform.position.x - xDim / 2.0f + x,
-                transform.position.y + yDim / 2.0f - y);
+                transformPosition.x - xDim / 2.0f + x,
+                transformPosition.y + yDim / 2.0f - y);
         }
 
-        private GamePiece SpawnNewPiece(int x, int y, PieceType type) {
-            GameObject newPiece = Instantiate(_piecePrefabDict[type], GetWorldPosition(x, y), Quaternion.identity, this.transform);
+        private GamePiece SpawnNewPiece(int x, int y, PieceType type)
+        {
+            GameObject newPiece = Instantiate(_piecePrefabDict[type], GetWorldPosition(x, y), Quaternion.identity, transform);
             _pieces[x, y] = newPiece.GetComponent<GamePiece>();
             _pieces[x, y].Init(x, y, this, type);
 
@@ -255,10 +256,11 @@ namespace Match3 {
         }
 
         private static bool IsAdjacent(GamePiece piece1, GamePiece piece2) =>
-            (piece1.X == piece2.X && Mathf.Abs(piece1.Y - piece2.Y) == 1) ||
-            (piece1.Y == piece2.Y && Mathf.Abs(piece1.X - piece2.X) == 1);
+            piece1.X == piece2.X && Mathf.Abs(piece1.Y - piece2.Y) == 1 ||
+            piece1.Y == piece2.Y && Mathf.Abs(piece1.X - piece2.X) == 1;
 
-        private void SwapPieces(GamePiece piece1, GamePiece piece2) {
+        private void SwapPieces(GamePiece piece1, GamePiece piece2)
+        {
             if (_gameOver) { return; }
             if (!piece1.IsMovable() || !piece2.IsMovable()) return;
 
@@ -326,7 +328,8 @@ namespace Match3 {
             }
         }
 
-        private IEnumerator FakeMove(GamePiece piece1, GamePiece piece2) {
+        private IEnumerator FakeMove(GamePiece piece1, GamePiece piece2)
+        {
             int piece1X = piece1.X;
             int piece1Y = piece1.Y;
 
@@ -343,13 +346,15 @@ namespace Match3 {
 
         public void EnterPiece(GamePiece piece) => _enteredPiece = piece;
 
-        public void ReleasePiece() {
+        public void ReleasePiece()
+        {
             if (IsAdjacent(_pressedPiece, _enteredPiece)) {
                 SwapPieces(_pressedPiece, _enteredPiece);
             }
         }
 
-        private bool ClearAllValidMatches() {
+        private bool ClearAllValidMatches()
+        {
             bool needsRefill = false;
 
             for (int y = 0; y < yDim; y++) {
@@ -379,7 +384,7 @@ namespace Match3 {
                         specialPieceType = PieceType.Rainbow;
                     }
 
-                    foreach (var gamePiece in match) {
+                    foreach (GamePiece gamePiece in match) {
                         if (!ClearPiece(gamePiece.X, gamePiece.Y)) continue;
 
                         needsRefill = true;
@@ -408,16 +413,17 @@ namespace Match3 {
             return needsRefill;
         }
 
-        private bool EnsureMatch(GamePiece piece1, GamePiece piece2) {
+        private bool EnsureMatch(GamePiece piece1, GamePiece piece2)
+        {
             if (GetMatchHorizontal(piece1, piece2) || GetMatchVertical(piece1, piece2)) {
                 return true;
-            } else {
-                return false;
             }
+            return false;
         }
 
-        private bool GetMatchHorizontal(GamePiece piece1, GamePiece piece2) {
-            var color = piece1.ColorComponent.Color;
+        private bool GetMatchHorizontal(GamePiece piece1, GamePiece piece2)
+        {
+            ColorType color = piece1.ColorComponent.Color;
             var horizontalPieces = new List<GamePiece>();
             _pieces[piece1.X, piece1.Y] = piece2;
             _pieces[piece2.X, piece2.Y] = piece1;
@@ -448,22 +454,22 @@ namespace Match3 {
             _pieces[piece2.X, piece2.Y] = piece2;
             _pieces[piece1.X, piece1.Y] = piece1;
             Debug.Log("Horizontal Check");
-            foreach (var x in horizontalPieces) {
-                Debug.Log("X: " + x.X + " Y: " + x.Y + " Color: " + x.ColorComponent.Color.ToString());
+            foreach (GamePiece x in horizontalPieces) {
+                Debug.Log("X: " + x.X + " Y: " + x.Y + " Color: " + x.ColorComponent.Color);
             }
             if (horizontalPieces.Count >= 3) {
                 Debug.Log("Horizontal Match");
-                foreach (var x in horizontalPieces) {
-                    Debug.Log("X: " + x.X + " Y: " + x.Y + " Color: " + x.ColorComponent.Color.ToString());
+                foreach (GamePiece x in horizontalPieces) {
+                    Debug.Log("X: " + x.X + " Y: " + x.Y + " Color: " + x.ColorComponent.Color);
                 }
                 return true;
-            } else {
-                return false;
             }
+            return false;
         }
         //ToDo: Fix Get Matches
-        private bool GetMatchVertical(GamePiece piece1, GamePiece piece2) {
-            var color = piece1.ColorComponent.Color;
+        private bool GetMatchVertical(GamePiece piece1, GamePiece piece2)
+        {
+            ColorType color = piece1.ColorComponent.Color;
             var verticalPieces = new List<GamePiece>();
             _pieces[piece1.X, piece1.Y] = piece2;
             _pieces[piece2.X, piece2.Y] = piece1;
@@ -493,18 +499,18 @@ namespace Match3 {
             _pieces[piece1.X, piece1.Y] = piece1;
             if (verticalPieces.Count >= 3) {
                 Debug.Log("Vertical Match");
-                foreach (var x in verticalPieces) {
-                    Debug.Log("X: " + x.X + " Y: " + x.Y + " Color: " + x.ColorComponent.Color.ToString());
+                foreach (GamePiece x in verticalPieces) {
+                    Debug.Log("X: " + x.X + " Y: " + x.Y + " Color: " + x.ColorComponent.Color);
                 }
                 return true;
-            } else {
-                return false;
             }
+            return false;
         }
 
-        private List<GamePiece> GetMatch(GamePiece piece, int newX, int newY) {
+        private List<GamePiece> GetMatch(GamePiece piece, int newX, int newY)
+        {
             if (!piece.IsColored()) return null;
-            var color = piece.ColorComponent.Color;
+            ColorType color = piece.ColorComponent.Color;
             var horizontalPieces = new List<GamePiece>();
             var verticalPieces = new List<GamePiece>();
             var matchingPieces = new List<GamePiece>();
@@ -650,7 +656,8 @@ namespace Match3 {
             return null;
         }
 
-        private bool ClearPiece(int x, int y) {
+        private bool ClearPiece(int x, int y)
+        {
             if (!_pieces[x, y].IsClearable() || _pieces[x, y].ClearableComponent.IsBeingCleared) return false;
 
             _pieces[x, y].ClearableComponent.Clear(true);
@@ -662,7 +669,8 @@ namespace Match3 {
 
         }
 
-        private void ClearObstacles(int x, int y) {
+        private void ClearObstacles(int x, int y)
+        {
             for (int adjacentX = x - 1; adjacentX <= x + 1; adjacentX++) {
                 if (adjacentX == x || adjacentX < 0 || adjacentX >= xDim) continue;
 
@@ -682,23 +690,26 @@ namespace Match3 {
             }
         }
 
-        public void ClearRow(int row) {
+        public void ClearRow(int row)
+        {
             for (int x = 0; x < xDim; x++) {
                 ClearPiece(x, row);
             }
         }
 
-        public void ClearColumn(int column) {
+        public void ClearColumn(int column)
+        {
             for (int y = 0; y < yDim; y++) {
                 ClearPiece(column, y);
             }
         }
 
-        public void ClearColor(ColorType color) {
+        public void ClearColor(ColorType color)
+        {
             for (int x = 0; x < xDim; x++) {
                 for (int y = 0; y < yDim; y++) {
-                    if ((_pieces[x, y].IsColored() && _pieces[x, y].ColorComponent.Color == color)
-                        || (color == ColorType.Any)) {
+                    if (_pieces[x, y].IsColored() && _pieces[x, y].ColorComponent.Color == color
+                        || color == ColorType.Any) {
                         ClearPiece(x, y);
                     }
                 }
@@ -707,7 +718,8 @@ namespace Match3 {
 
         public void GameOver() => _gameOver = true;
 
-        public List<GamePiece> GetPiecesOfType(PieceType type) {
+        public List<GamePiece> GetPiecesOfType(PieceType type)
+        {
             var piecesOfType = new List<GamePiece>();
 
             for (int x = 0; x < xDim; x++) {
@@ -721,7 +733,8 @@ namespace Match3 {
             return piecesOfType;
         }
 
-        public List<GamePiece> GetPiecesOfColor(ColorType colorType) {
+        public List<GamePiece> GetPiecesOfColor(ColorType colorType)
+        {
             var piecesOfColor = new List<GamePiece>();
 
             for (int x = 0; x < xDim; x++) {
@@ -734,6 +747,19 @@ namespace Match3 {
 
             return piecesOfColor;
         }
+        [Serializable]
+        public struct PiecePrefab
+        {
+            public PieceType type;
+            public GameObject prefab;
+        }
 
+        [Serializable]
+        public struct PiecePosition
+        {
+            public PieceType type;
+            public int x;
+            public int y;
+        }
     }
 }

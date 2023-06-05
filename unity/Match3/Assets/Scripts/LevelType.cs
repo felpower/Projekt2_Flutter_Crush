@@ -5,6 +5,6 @@ namespace Match3
         Timer,
         Obstacle,
         Moves,
-        Colors,
+        Colors
     }
 }

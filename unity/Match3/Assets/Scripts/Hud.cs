@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
-namespace Match3 {
-    public class Hud : MonoBehaviour {
+namespace Match3
+{
+    public class Hud : MonoBehaviour
+    {
         public Level level;
         public GameOver gameOver;
 
@@ -14,15 +15,17 @@ namespace Match3 {
         public Text scoreText;
         public Image[] stars;
 
-        private int _starIndex = 0;
+        private int _starIndex;
 
-        private void Start() {
+        private void Start()
+        {
             for (int i = 0; i < stars.Length; i++) {
                 stars[i].enabled = i == _starIndex;
             }
         }
 
-        public void SetScore(int score) {
+        public void SetScore(int score)
+        {
             scoreText.text = score.ToString();
 
             int visibleStar = 0;
@@ -36,7 +39,7 @@ namespace Match3 {
             }
 
             for (int i = 0; i < stars.Length; i++) {
-                stars[i].enabled = (i == visibleStar);
+                stars[i].enabled = i == visibleStar;
             }
 
             _starIndex = visibleStar;
@@ -48,7 +51,8 @@ namespace Match3 {
 
         public void SetRemaining(string remaining) => remainingText.text = remaining;
 
-        public void SetLevelType(LevelType type, ColorType colorType = ColorType.Any) {
+        public void SetLevelType(LevelType type, ColorType colorType = ColorType.Any)
+        {
             switch (type) {
                 case LevelType.Moves:
                     remainingSubText.text = "moves remaining";
@@ -69,7 +73,8 @@ namespace Match3 {
             }
         }
 
-        public void OnGameWin(int score) {
+        public void OnGameWin(int score)
+        {
             gameOver.ShowWin(score, _starIndex);
             if (_starIndex > PlayerPrefs.GetInt(SceneManager.GetActiveScene().name, 0)) {
                 PlayerPrefs.SetInt(SceneManager.GetActiveScene().name, _starIndex);

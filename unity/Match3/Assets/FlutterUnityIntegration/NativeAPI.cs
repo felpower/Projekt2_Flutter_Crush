@@ -1,8 +1,5 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using UnityEngine;
+﻿using System.Runtime.InteropServices;
 using UnityEngine.SceneManagement;
-
 namespace FlutterUnityIntegration
 {
     public class NativeAPI
@@ -55,7 +52,7 @@ namespace FlutterUnityIntegration
             Debug.Log(e.Message);
         }
 #elif UNITY_WEBGL
-        OnUnityMessageWeb(message);
+            OnUnityMessageWeb(message);
 #elif UNITY_IOS && !UNITY_EDITOR
         OnUnityMessage(message);
 #endif

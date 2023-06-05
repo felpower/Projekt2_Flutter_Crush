@@ -53,7 +53,6 @@ class _UnityScreenState extends State<UnityScreen> {
             UnityWidget(
               onUnityCreated: onUnityCreated,
               onUnityMessage: onUnityMessage,
-              useAndroidViewSurface: true,
             ),
           ],
           ),

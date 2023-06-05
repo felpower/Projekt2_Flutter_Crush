@@ -1,16 +1,9 @@
-﻿using UnityEngine;
-using UnityEngine.SceneManagement;
-
+﻿using System;
+using UnityEngine;
 namespace Match3
 {
     public class LevelSelect : MonoBehaviour
     {
-        [System.Serializable]
-        public struct ButtonPlayerPrefs
-        {
-            public GameObject gameObject;
-            public string playerPrefKey;
-        };
 
         public ButtonPlayerPrefs[] buttons;
 
@@ -19,12 +12,10 @@ namespace Match3
 
         private void Start()
         {
-            for (int i = 0; i < buttons.Length; i++)
-            {
+            for (int i = 0; i < buttons.Length; i++) {
                 int score = PlayerPrefs.GetInt(buttons[i].playerPrefKey, 0);
 
-                for (int starIndex = 1; starIndex <= 3; starIndex++)
-                {
+                for (int starIndex = 1; starIndex <= 3; starIndex++) {
                     Transform star = buttons[i].gameObject.transform.Find($"star{starIndex}");
                     star.gameObject.SetActive(starIndex <= score);
                 }
@@ -34,6 +25,12 @@ namespace Match3
         public void OnButtonPress(string levelName)
         {
             GameLoader.instance.LoadScene(levelName);
+        }
+        [Serializable]
+        public struct ButtonPlayerPrefs
+        {
+            public GameObject gameObject;
+            public string playerPrefKey;
         }
     }
 }

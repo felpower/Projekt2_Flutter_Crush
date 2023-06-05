@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using UnityEngine;
-
 namespace Match3
 {
     public class MovablePiece : MonoBehaviour
     {
-        private GamePiece _piece;
         private IEnumerator _moveCoroutine;
+        private GamePiece _piece;
 
         private void Awake()
         {
@@ -15,8 +14,7 @@ namespace Match3
 
         public void Move(int newX, int newY, float time)
         {
-            if (_moveCoroutine != null)
-            {
+            if (_moveCoroutine != null) {
                 StopCoroutine(_moveCoroutine);
             }
 
@@ -33,8 +31,7 @@ namespace Match3
             Vector3 startPos = transform.position;
             Vector3 endPos = _piece.GameGridRef.GetWorldPosition(newX, newY);
 
-            for (float t = 0; t <= 1 * time; t += Time.deltaTime)
-            {
+            for (float t = 0; t <= 1 * time; t += Time.deltaTime) {
                 _piece.transform.position = Vector3.Lerp(startPos, endPos, t / time);
                 yield return null;
             }

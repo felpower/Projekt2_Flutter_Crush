@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 public class GameLoader : MonoBehaviour
 {
     public static GameLoader instance { get; private set; }

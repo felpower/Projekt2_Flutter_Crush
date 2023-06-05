@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Threading;
+﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 namespace Match3
 {
     public class Level : MonoBehaviour
@@ -14,18 +11,18 @@ namespace Match3
         public int score2Star;
         public int score3Star;
 
-        protected LevelType type;
+        private bool _didWin;
 
         protected int currentScore;
 
-        private bool _didWin;
+        protected LevelType type;
+
+        public LevelType Type => type;
 
         private void Start()
         {
             hud.SetScore(currentScore);
         }
-
-        public LevelType Type => type;
 
         protected virtual void GameWin()
         {
@@ -47,8 +44,7 @@ namespace Match3
 
         public virtual void OnPieceCleared(GamePiece piece, bool includePoints)
         {
-            if (includePoints)
-            {
+            if (includePoints) {
                 currentScore += piece.score;
                 hud.SetScore(currentScore);
             }
@@ -56,17 +52,13 @@ namespace Match3
 
         protected virtual IEnumerator WaitForGridFill()
         {
-            while (gameGrid.IsFilling)
-            {
+            while (gameGrid.IsFilling) {
                 yield return null;
             }
 
-            if (_didWin)
-            {
+            if (_didWin) {
                 hud.OnGameWin(currentScore);
-            }
-            else
-            {
+            } else {
                 hud.OnGameLose();
             }
         }

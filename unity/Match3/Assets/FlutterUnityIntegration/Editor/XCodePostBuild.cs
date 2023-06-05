@@ -19,7 +19,6 @@ SOFTWARE.
 */
 
 #if UNITY_IOS
-
 using System;
 
 using System.Collections.Generic;

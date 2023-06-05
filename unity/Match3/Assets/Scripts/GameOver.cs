@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
-
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 namespace Match3
 {
     public class GameOver : MonoBehaviour
@@ -13,12 +12,11 @@ namespace Match3
         public Text scoreText;
         public Image[] stars;
 
-        private void Start ()
+        private void Start()
         {
             screenParent.SetActive(false);
 
-            for (int i = 0; i < stars.Length; i++)
-            {
+            for (int i = 0; i < stars.Length; i++) {
                 stars[i].enabled = false;
             }
         }
@@ -30,8 +28,7 @@ namespace Match3
 
             Animator animator = GetComponent<Animator>();
 
-            if (animator)
-            {
+            if (animator) {
                 animator.Play("GameOverShow");
             }
         }
@@ -46,8 +43,7 @@ namespace Match3
 
             Animator animator = GetComponent<Animator>();
 
-            if (animator)
-            {
+            if (animator) {
                 animator.Play("GameOverShow");
             }
 
@@ -58,14 +54,11 @@ namespace Match3
         {
             yield return new WaitForSeconds(0.5f);
 
-            if (starCount < stars.Length)
-            {
-                for (int i = 0; i <= starCount; i++)
-                {
+            if (starCount < stars.Length) {
+                for (int i = 0; i <= starCount; i++) {
                     stars[i].enabled = true;
 
-                    if (i > 0)
-                    {
+                    if (i > 0) {
                         stars[i - 1].enabled = false;
                     }
 
@@ -85,6 +78,5 @@ namespace Match3
         {
             SceneManager.LoadScene("LevelSelect", LoadSceneMode.Single);
         }
-
     }
 }

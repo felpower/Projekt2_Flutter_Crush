@@ -8,12 +8,9 @@
         {
             base.Clear(includePoints);
 
-            if (isRow)
-            {            
+            if (isRow) {
                 piece.GameGridRef.ClearRow(piece.Y);
-            }
-            else
-            {            
+            } else {
                 piece.GameGridRef.ClearColumn(piece.X);
             }
         }

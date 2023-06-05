@@ -10,5 +10,5 @@ namespace Match3
         Pink,
         Any,
         Count
-    };
+    }
 }

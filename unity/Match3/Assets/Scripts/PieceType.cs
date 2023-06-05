@@ -8,6 +8,6 @@ namespace Match3
         RowClear,
         ColumnClear,
         Rainbow,
-        Count,
+        Count
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-
 namespace FlutterUnityIntegration
 {
     public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
@@ -12,7 +11,7 @@ namespace FlutterUnityIntegration
         private static T CreateSingleton()
         {
             var ownerObject = new GameObject($"{typeof(T).Name} (singleton)");
-            var instance = ownerObject.AddComponent<T>();
+            T instance = ownerObject.AddComponent<T>();
             DontDestroyOnLoad(ownerObject);
             return instance;
         }

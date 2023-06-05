@@ -1,15 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
-
 namespace Match3
 {
     public class ClearablePiece : MonoBehaviour
     {
         public AnimationClip clearAnimation;
 
-        public bool IsBeingCleared { get; private set; }
-
         protected GamePiece piece;
+
+        public bool IsBeingCleared { get; private set; }
 
         private void Awake()
         {
@@ -25,10 +24,9 @@ namespace Match3
 
         private IEnumerator ClearCoroutine()
         {
-            var animator = GetComponent<Animator>();
+            Animator animator = GetComponent<Animator>();
 
-            if (animator)
-            {
+            if (animator) {
                 animator.Play(clearAnimation.name);
 
                 yield return new WaitForSeconds(clearAnimation.length);

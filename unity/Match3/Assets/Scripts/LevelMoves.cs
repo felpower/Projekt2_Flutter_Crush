@@ -6,7 +6,7 @@
         public int numMoves;
         public int targetScore;
 
-        private int _movesUsed = 0;
+        private int _movesUsed;
 
         private void Start()
         {
@@ -25,13 +25,10 @@
             hud.SetRemaining(numMoves - _movesUsed);
 
             if (numMoves - _movesUsed != 0) return;
-        
-            if (currentScore >= targetScore)
-            {
+
+            if (currentScore >= targetScore) {
                 GameWin();
-            }
-            else
-            {
+            } else {
                 GameLose();
             }
         }

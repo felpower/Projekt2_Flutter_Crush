@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-
 namespace Match3
 {
     public class LevelTimer : Level
@@ -24,20 +23,15 @@ namespace Match3
         {
             _timer += Time.deltaTime;
             hud.SetRemaining(
-                $"{(int) Mathf.Max((timeInSeconds - _timer) / 60, 0)}:{(int) Mathf.Max((timeInSeconds - _timer) % 60, 0):00}");
+                $"{(int)Mathf.Max((timeInSeconds - _timer) / 60, 0)}:{(int)Mathf.Max((timeInSeconds - _timer) % 60, 0):00}");
 
-            if (timeInSeconds - _timer <= 0)
-            {
-                if (currentScore >= targetScore)
-                {
+            if (timeInSeconds - _timer <= 0) {
+                if (currentScore >= targetScore) {
                     GameWin();
-                }
-                else
-                {
+                } else {
                     GameLose();
                 }
             }
         }
-	
     }
 }

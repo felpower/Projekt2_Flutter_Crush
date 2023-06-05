@@ -1,13 +1,13 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
-using System;
-
+using Debug = UnityEngine.Debug;
 public static class SweetShellHelper
 {
     public static Task<int> Bash(this string cmd, string fileName)
     {
         var source = new TaskCompletionSource<int>();
-        var escapedArgs = cmd.Replace("\"", "\\\"");
+        string escapedArgs = cmd.Replace("\"", "\\\"");
         var process = new Process
         {
             StartInfo = new ProcessStartInfo
@@ -23,27 +23,22 @@ public static class SweetShellHelper
         };
         process.Exited += (sender, args) =>
         {
-            UnityEngine.Debug.LogWarning(process.StandardError.ReadToEnd());
-            UnityEngine.Debug.Log(process.StandardOutput.ReadToEnd());
-            if (process.ExitCode == 0)
-            {
+            Debug.LogWarning(process.StandardError.ReadToEnd());
+            Debug.Log(process.StandardOutput.ReadToEnd());
+            if (process.ExitCode == 0) {
                 source.SetResult(0);
-            }
-            else
-            {
+            } else {
                 source.SetException(new Exception($"Command `{cmd}` failed with exit code `{process.ExitCode}`"));
             }
 
             process.Dispose();
         };
 
-        try
-        {
+        try {
             process.Start();
         }
-        catch (Exception e)
-        {
-            UnityEngine.Debug.LogError(e);
+        catch (Exception e) {
+            Debug.LogError(e);
             source.SetException(e);
         }
 
