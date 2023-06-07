@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 
+import '../../game_widgets/game_over_splash.dart';
+
 class UnityScreen extends StatefulWidget {
   const UnityScreen({Key? key, required this.level}) : super(key: key);
 
@@ -14,15 +16,17 @@ class UnityScreen extends StatefulWidget {
 class _UnityScreenState extends State<UnityScreen> {
   static final GlobalKey<ScaffoldState> _scaffoldKey =
       GlobalKey<ScaffoldState>();
-  late UnityWidgetController _unityWidgetController;
+  UnityWidgetController? _unityWidgetController;
+  late OverlayEntry _gameSplash;
 
   @override
   void initState() {
     super.initState();
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeRight,
-      DeviceOrientation.landscapeLeft,
-    ]);
+
+    // SystemChrome.setPreferredOrientations([
+    //   DeviceOrientation.landscapeRight,
+    //   DeviceOrientation.landscapeLeft,
+    // ]);
   }
 
   @override
@@ -33,50 +37,99 @@ class _UnityScreenState extends State<UnityScreen> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    _unityWidgetController?.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Game'),
-      ),
       key: _scaffoldKey,
-      body: SafeArea(
-        bottom: false,
-        child: WillPopScope(
-          onWillPop: () {
-            return Future(() => true);
-          },
-          child: Stack(children: <Widget>[
-            UnityWidget(
-              onUnityCreated: onUnityCreated,
-              onUnityMessage: onUnityMessage,
-            ),
-          ],
-          ),
-        ),
+      appBar: AppBar(
+        title: const Text('Simple Screen'),
       ),
+      body: Card(
+          margin: const EdgeInsets.all(0),
+          clipBehavior: Clip.antiAlias,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          child: Stack(
+            children: [
+              UnityWidget(
+                onUnityCreated: _onUnityCreated,
+                onUnityMessage: onUnityMessage,
+                onUnitySceneLoaded: onUnitySceneLoaded,
+                useAndroidViewSurface: false,
+                borderRadius: const BorderRadius.all(Radius.circular(70)),
+              ),
+            ],
+          )),
     );
   }
-  // Callback that connects the created controller to the unity controller
-  void onUnityCreated(controller) {
-    _unityWidgetController = controller;
-    String level = widget.level;
-    _unityWidgetController.postMessage('LevelSelect', 'OnButtonPress', level);
-    _unityWidgetController.dispose();
-    print("Starting level : $level");
-  }
 
-  // Communication from Unity to Flutter
   void onUnityMessage(message) {
     print('Received message from unity: ${message.toString()}');
   }
 
-  void onUnitySceneLoaded(SceneLoaded sceneInfo) {
-    print('Received scene loaded from unity: ${sceneInfo.name}');
-    print('Received scene loaded from unity buildIndex: ${sceneInfo.buildIndex}');
+  void onUnitySceneLoaded(SceneLoaded? scene) {
+    if (scene != null) {
+      print('Received scene loaded from unity: ${scene.name}');
+      print('Received scene loaded from unity buildIndex: ${scene.buildIndex}');
+    } else {
+      print('Received scene loaded from unity: null');
+    }
   }
 
+  // Callback that connects the created controller to the unity controller
+  void _onUnityCreated(controller) {
+    controller.resume();
+    String level = widget.level;
+    _unityWidgetController = controller;
+    print("Starting level : $level");
+  }
+
+  // // Callback that connects the created controller to the unity controller
+  // void onUnityCreated(controller) {
+  //   controller.resume();
+  //   _unityWidgetController = controller;
+  //   String level = widget.level;
+  //   _unityWidgetController?.postMessage('LevelSelect', 'OnButtonPress', level);
+  //   _unityWidgetController?.dispose();
+  //   print("Starting level : $level");
+  // }
+  //
+  // // Communication from Unity to Flutter
+  // void onUnityMessage(message) {
+  //   print('Received message from unity: ${message.toString()}');
+  //   if (message.startsWith("Score: ")) {
+  //   } else if (message.startsWith("GameOver: Won")) {
+  //     showGameOver(true);
+  //   } else if (message.startsWith("GameOver: Lost")) {
+  //     showGameOver(false);
+  //   }
+  // }
+  //
+  // void showGameOver(bool success) {
+  //   _gameSplash = OverlayEntry(
+  //       opaque: false,
+  //       builder: (BuildContext context) {
+  //         return GameOverSplash(
+  //           success: success,
+  //           onComplete: () {
+  //             _gameSplash.remove();
+  //             Navigator.of(context).pop();
+  //           },
+  //         );
+  //       });
+  // }
+  //
+  // void onUnitySceneLoaded(SceneLoaded? scene) {
+  //   if (scene != null) {
+  //     print('Received scene loaded from unity: ${scene.name}');
+  //     print('Received scene loaded from unity buildIndex: ${scene.buildIndex}');
+  //   } else {
+  //     print('Received scene loaded from unity: null');
+  //   }
+  // }
 }

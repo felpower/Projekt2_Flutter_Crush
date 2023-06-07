@@ -1,3 +1,4 @@
+import 'package:bachelor_flutter_crush/controllers/unity/UnityScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_bloc.dart';
@@ -30,6 +31,9 @@ class Application extends StatelessWidget {
               primarySwatch: Colors.blue,
             ),
             home: const HomePage(),
+            routes: {
+              '/simple': (context) => const UnityScreen(level: "Level01"),
+            },
           ),
         ));
   }

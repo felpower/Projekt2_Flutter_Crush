@@ -731,7 +731,7 @@ class _GamePageState extends State<GamePage>
         builder: (BuildContext context) {
           return GameOverSplash(
             success: success,
-            level: widget.level,
+            // level: widget.level,
             onComplete: () {
               _gameSplash.remove();
               //_gameSplash = null;

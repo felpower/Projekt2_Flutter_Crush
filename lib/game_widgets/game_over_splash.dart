@@ -15,11 +15,9 @@ class GameOverSplash extends StatefulWidget {
   const GameOverSplash({
     Key? key,
     required this.success,
-    required this.level,
     required this.onComplete,
   }) : super(key: key);
 
-  final Level level;
   final VoidCallback onComplete;
   final bool success;
 

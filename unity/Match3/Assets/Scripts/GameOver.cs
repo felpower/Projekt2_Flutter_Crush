@@ -2,6 +2,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using FlutterUnityIntegration;
+
 namespace Match3
 {
     public class GameOver : MonoBehaviour
@@ -26,11 +28,13 @@ namespace Match3
             screenParent.SetActive(true);
             scoreParent.SetActive(false);
 
-            Animator animator = GetComponent<Animator>();
+            UnityMessageManager.Instance.SendMessageToFlutter("GameOver: Lost");
+            
+            // Animator animator = GetComponent<Animator>();
 
-            if (animator) {
-                animator.Play("GameOverShow");
-            }
+            // if (animator) {
+            //     animator.Play("GameOverShow");
+            // }
         }
 
         public void ShowWin(int score, int starCount)
@@ -40,9 +44,9 @@ namespace Match3
 
             scoreText.text = score.ToString();
             scoreText.enabled = false;
-
+            UnityMessageManager.Instance.SendMessageToFlutter("GameOver: Won");
             Animator animator = GetComponent<Animator>();
-
+                
             if (animator) {
                 animator.Play("GameOverShow");
             }
@@ -65,7 +69,7 @@ namespace Match3
                     yield return new WaitForSeconds(0.5f);
                 }
             }
-
+            
             scoreText.enabled = true;
         }
 
@@ -76,7 +80,7 @@ namespace Match3
 
         public void OnDoneClicked()
         {
-            SceneManager.LoadScene("LevelSelect", LoadSceneMode.Single);
+            UnityMessageManager.Instance.SendMessageToFlutter("Score: "+scoreText.text);
         }
     }
 }

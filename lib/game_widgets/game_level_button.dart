@@ -114,10 +114,13 @@ class GameLevelButton extends StatelessWidget {
     reportingBloc.add(ReportStartLevelEvent(levelNumber));
     int lvl = levelNumber%4+1;
     String levelName = "Level0$lvl";
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => UnityScreen(level: levelName,)));
+    // Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //         builder: (context) => UnityScreen(level: levelName,)));
+    Navigator.of(context).pushNamed(
+      "/simple",
+    );
     // await _startLevel(gameBloc, context);
     //ToDo: Put adds before Navigator Push
     var addState = prefs.getBool("addsActive");
