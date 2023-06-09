@@ -32,7 +32,7 @@ class Application extends StatelessWidget {
             ),
             home: const HomePage(),
             routes: {
-              '/simple': (context) => const UnityScreen(level: "Level01"),
+              '/simple': (context) => const UnityScreen(),
             },
           ),
         ));

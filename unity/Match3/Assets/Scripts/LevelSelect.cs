@@ -1,4 +1,5 @@
 ﻿using System;
+using FlutterUnityIntegration;
 using UnityEngine;
 namespace Match3
 {
@@ -12,6 +13,7 @@ namespace Match3
 
         private void Start()
         {
+            gameObject.AddComponent<UnityMessageManager>();
             for (int i = 0; i < buttons.Length; i++) {
                 int score = PlayerPrefs.GetInt(buttons[i].playerPrefKey, 0);
 
@@ -22,9 +24,11 @@ namespace Match3
             }
         }
 
-        public void OnButtonPress(string levelName)
+        public void OnButtonPress(string level)
         {
-            GameLoader.instance.LoadScene(levelName);
+            UnityMessageManager.Instance.SendMessageToFlutter("Scene Loaded");
+            GameLoader.instance.LoadScene(level);
+           
         }
         [Serializable]
         public struct ButtonPlayerPrefs

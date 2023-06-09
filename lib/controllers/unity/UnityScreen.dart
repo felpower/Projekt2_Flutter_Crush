@@ -5,9 +5,7 @@ import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import '../../game_widgets/game_over_splash.dart';
 
 class UnityScreen extends StatefulWidget {
-  const UnityScreen({Key? key, required this.level}) : super(key: key);
-
-  final String level;
+  const UnityScreen({Key? key}) : super(key: key);
 
   @override
   _UnityScreenState createState() => _UnityScreenState();
@@ -18,7 +16,8 @@ class _UnityScreenState extends State<UnityScreen> {
       GlobalKey<ScaffoldState>();
   UnityWidgetController? _unityWidgetController;
   late OverlayEntry _gameSplash;
-
+  late String levelName;
+  late String level;
   @override
   void initState() {
     super.initState();
@@ -43,10 +42,15 @@ class _UnityScreenState extends State<UnityScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
+    int lvl = arguments['level'];
+    levelName = "Level $lvl";
+    lvl = lvl%4+1;
+    level = "Level0$lvl";
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: const Text('Simple Screen'),
+        title: Text(levelName),
       ),
       body: Card(
           margin: const EdgeInsets.all(0),
@@ -70,6 +74,14 @@ class _UnityScreenState extends State<UnityScreen> {
 
   void onUnityMessage(message) {
     print('Received message from unity: ${message.toString()}');
+    if (message.startsWith("Score: ")) {
+    } else if (message.startsWith("GameOver: Won")) {
+      showGameOver(true);
+    } else if (message.startsWith("GameOver: Lost")) {
+      showGameOver(false);
+    }else if (message.startsWith("Scene Loaded")) {
+      print("Scene Loaded");
+    }
   }
 
   void onUnitySceneLoaded(SceneLoaded? scene) {
@@ -83,53 +95,25 @@ class _UnityScreenState extends State<UnityScreen> {
 
   // Callback that connects the created controller to the unity controller
   void _onUnityCreated(controller) {
-    controller.resume();
-    String level = widget.level;
     _unityWidgetController = controller;
-    print("Starting level : $level");
+    _unityWidgetController!.postMessage('Level', 'OnButtonPress', level);
+    _unityWidgetController!.dispose();
+     print("Starting level : $level");
   }
 
-  // // Callback that connects the created controller to the unity controller
-  // void onUnityCreated(controller) {
-  //   controller.resume();
-  //   _unityWidgetController = controller;
-  //   String level = widget.level;
-  //   _unityWidgetController?.postMessage('LevelSelect', 'OnButtonPress', level);
-  //   _unityWidgetController?.dispose();
-  //   print("Starting level : $level");
-  // }
-  //
-  // // Communication from Unity to Flutter
-  // void onUnityMessage(message) {
-  //   print('Received message from unity: ${message.toString()}');
-  //   if (message.startsWith("Score: ")) {
-  //   } else if (message.startsWith("GameOver: Won")) {
-  //     showGameOver(true);
-  //   } else if (message.startsWith("GameOver: Lost")) {
-  //     showGameOver(false);
-  //   }
-  // }
-  //
-  // void showGameOver(bool success) {
-  //   _gameSplash = OverlayEntry(
-  //       opaque: false,
-  //       builder: (BuildContext context) {
-  //         return GameOverSplash(
-  //           success: success,
-  //           onComplete: () {
-  //             _gameSplash.remove();
-  //             Navigator.of(context).pop();
-  //           },
-  //         );
-  //       });
-  // }
-  //
-  // void onUnitySceneLoaded(SceneLoaded? scene) {
-  //   if (scene != null) {
-  //     print('Received scene loaded from unity: ${scene.name}');
-  //     print('Received scene loaded from unity buildIndex: ${scene.buildIndex}');
-  //   } else {
-  //     print('Received scene loaded from unity: null');
-  //   }
-  // }
+  void showGameOver(bool success) {
+    print("Show Game Over");
+    _gameSplash = OverlayEntry(
+        opaque: false,
+        builder: (BuildContext context) {
+          return GameOverSplash(
+            success: success,
+            onComplete: () {
+              _gameSplash.remove();
+              Navigator.of(context).pop();
+            },
+          );
+        });
+    Overlay.of(context).insert(_gameSplash);
+  }
 }
