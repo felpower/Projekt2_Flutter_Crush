@@ -41,25 +41,6 @@ namespace Match3
             ClearableComponent = GetComponent<ClearablePiece>();
         }
 
-        public void Update()
-        {
-            //if (Input.touchCount > 0)
-            //{
-            //    theTouch = Input.GetTouch(0);
-            //    OnBeginDrag();
-            //}
-            //else if (theTouch.phase == TouchPhase.Moved)
-            //{
-            //    OnDrag();
-            //}
-            //else if (theTouch.phase == TouchPhase.Ended)
-            //{
-            //    OnEndDrag();
-
-            //}
-
-        }
-
         private void OnMouseDown()
         {
             GameGridRef.PressPiece(this);

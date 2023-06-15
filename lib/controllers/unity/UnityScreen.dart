@@ -14,10 +14,11 @@ class UnityScreen extends StatefulWidget {
 class _UnityScreenState extends State<UnityScreen> {
   static final GlobalKey<ScaffoldState> _scaffoldKey =
       GlobalKey<ScaffoldState>();
-  UnityWidgetController? _unityWidgetController;
+  UnityWidgetController? unityWidgetController;
   late OverlayEntry _gameSplash;
   late String levelName;
   late String level;
+
   @override
   void initState() {
     super.initState();
@@ -36,16 +37,17 @@ class _UnityScreenState extends State<UnityScreen> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    _unityWidgetController?.dispose();
+    unityWidgetController?.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
+    final arguments = (ModalRoute.of(context)?.settings.arguments ??
+        <String, dynamic>{}) as Map;
     int lvl = arguments['level'];
     levelName = "Level $lvl";
-    lvl = lvl%4+1;
+    lvl = lvl % 4 + 1;
     level = "Level0$lvl";
     return Scaffold(
       key: _scaffoldKey,
@@ -61,7 +63,7 @@ class _UnityScreenState extends State<UnityScreen> {
           child: Stack(
             children: [
               UnityWidget(
-                onUnityCreated: _onUnityCreated,
+                onUnityCreated: onUnityCreated,
                 onUnityMessage: onUnityMessage,
                 onUnitySceneLoaded: onUnitySceneLoaded,
                 useAndroidViewSurface: false,
@@ -79,7 +81,7 @@ class _UnityScreenState extends State<UnityScreen> {
       showGameOver(true);
     } else if (message.startsWith("GameOver: Lost")) {
       showGameOver(false);
-    }else if (message.startsWith("Scene Loaded")) {
+    } else if (message.startsWith("Scene Loaded")) {
       print("Scene Loaded");
     }
   }
@@ -94,11 +96,9 @@ class _UnityScreenState extends State<UnityScreen> {
   }
 
   // Callback that connects the created controller to the unity controller
-  void _onUnityCreated(controller) {
-    _unityWidgetController = controller;
-    _unityWidgetController!.postMessage('Level', 'OnButtonPress', level);
-    _unityWidgetController!.dispose();
-     print("Starting level : $level");
+  Future<void> onUnityCreated(controller) async {
+    unityWidgetController = controller;
+    unityWidgetController!.postMessage('Empty', 'OnButtonPress', level);
   }
 
   void showGameOver(bool success) {

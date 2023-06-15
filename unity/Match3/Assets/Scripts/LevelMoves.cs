@@ -1,4 +1,5 @@
-﻿namespace Match3
+﻿using UnityEngine;
+namespace Match3
 {
     public class LevelMoves : Level
     {
@@ -16,6 +17,7 @@
             hud.SetScore(currentScore);
             hud.SetTarget(targetScore);
             hud.SetRemaining(numMoves);
+            transform.localScale = new Vector3(.5f,.5f,.5f);
         }
 
         public override void OnMove()

@@ -28,7 +28,6 @@ namespace Match3
         private GamePiece[,] _pieces;
 
         private GamePiece _pressedPiece;
-        private Camera m_MainCamera;
 
         public bool IsFilling { get; private set; }
 
@@ -37,12 +36,9 @@ namespace Match3
             // populating dictionary with piece prefabs types
             _piecePrefabDict = new Dictionary<PieceType, GameObject>();
             for (int i = 0; i < piecePrefabs.Length; i++) {
-                if (!_piecePrefabDict.ContainsKey(piecePrefabs[i].type)) {
-                    _piecePrefabDict.Add(piecePrefabs[i].type, piecePrefabs[i].prefab);
-                }
+                _piecePrefabDict.TryAdd(piecePrefabs[i].type, piecePrefabs[i].prefab);
             }
-
-
+            
             // instantiate backgrounds
             for (int x = 0; x < xDim; x++) {
                 for (int y = 0; y < yDim; y++) {
