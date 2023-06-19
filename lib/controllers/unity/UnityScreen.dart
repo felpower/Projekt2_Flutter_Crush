@@ -22,7 +22,10 @@ class _UnityScreenState extends State<UnityScreen> {
   @override
   void initState() {
     super.initState();
-
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     // SystemChrome.setPreferredOrientations([
     //   DeviceOrientation.landscapeRight,
     //   DeviceOrientation.landscapeLeft,
@@ -31,12 +34,6 @@ class _UnityScreenState extends State<UnityScreen> {
 
   @override
   dispose() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeRight,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
     unityWidgetController?.dispose();
     super.dispose();
   }
@@ -98,7 +95,7 @@ class _UnityScreenState extends State<UnityScreen> {
   // Callback that connects the created controller to the unity controller
   Future<void> onUnityCreated(controller) async {
     unityWidgetController = controller;
-    unityWidgetController!.postMessage('Empty', 'OnButtonPress', level);
+    unityWidgetController!.postMessage('GameManager', 'OnButtonPress', level);
   }
 
   void showGameOver(bool success) {

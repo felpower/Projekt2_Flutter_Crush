@@ -33,6 +33,9 @@ namespace Match3
 
         private void Awake()
         {
+            float scale = Screen.width / ((float) Screen.height);
+            Debug.Log(scale);
+            transform.localScale = new Vector3(scale,scale,scale);
             // populating dictionary with piece prefabs types
             _piecePrefabDict = new Dictionary<PieceType, GameObject>();
             for (int i = 0; i < piecePrefabs.Length; i++) {
@@ -181,8 +184,8 @@ namespace Match3
         {
             Vector3 transformPosition = transform.position;
             return new Vector2(
-                transformPosition.x - xDim / 2.0f + x,
-                transformPosition.y + yDim / 2.0f - y);
+                (transformPosition.x - xDim / 2.0f + x)*transform.localScale.x,
+                (transformPosition.y + yDim / 2.0f - y)*transform.localScale.y);
         }
 
         private GamePiece SpawnNewPiece(int x, int y, PieceType type)

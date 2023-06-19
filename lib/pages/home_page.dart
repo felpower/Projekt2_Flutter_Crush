@@ -63,10 +63,6 @@ class _HomePageState extends State<HomePage>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 3500),
