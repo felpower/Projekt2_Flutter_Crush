@@ -29,9 +29,7 @@ namespace Match3
             _colorSpriteDict = new Dictionary<ColorType, Sprite>();
 
             for (int i = 0; i < colorSprites.Length; i++) {
-                if (!_colorSpriteDict.ContainsKey(colorSprites[i].color)) {
-                    _colorSpriteDict.Add(colorSprites[i].color, colorSprites[i].sprite);
-                }
+                _colorSpriteDict.TryAdd(colorSprites[i].color, colorSprites[i].sprite);
             }
         }
 
@@ -39,8 +37,8 @@ namespace Match3
         {
             _color = newColor;
 
-            if (_colorSpriteDict.ContainsKey(newColor)) {
-                _sprite.sprite = _colorSpriteDict[newColor];
+            if (_colorSpriteDict.TryGetValue(newColor, out Sprite value)) {
+                _sprite.sprite = value;
             }
         }
         [Serializable]

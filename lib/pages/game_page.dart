@@ -768,7 +768,6 @@ class _GamePageState extends State<GamePage>
         opaque: false,
         builder: (BuildContext context) {
           return GameSplash(
-            level: widget.level,
             onComplete: () {
               _gameSplash.remove();
 

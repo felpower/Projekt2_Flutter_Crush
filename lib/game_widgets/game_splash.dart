@@ -9,11 +9,9 @@ import 'objective_item.dart';
 class GameSplash extends StatefulWidget {
   GameSplash({
     Key? key,
-    required this.level,
     required this.onComplete,
   }) : super(key: key);
 
-  final Level level;
   final VoidCallback onComplete;
 
   @override
@@ -78,13 +76,6 @@ class _GameSplashState extends State<GameSplash>
     //
     // Build the objectives
     //
-    List<Widget> objectiveWidgets =
-        widget.level.objectives.map((Objective obj) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4.0),
-        child: ObjectiveItem(objective: obj, level: widget.level),
-      );
-    }).toList();
 
     return AnimatedBuilder(
       animation: _animationAppear,
@@ -106,23 +97,7 @@ class _GameSplashState extends State<GameSplash>
                         widget.onComplete();
                       });
                     },
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                              child: Text(
-                            'Level:  ${widget.level.index}',
-                            style:
-                                TextStyle(fontSize: 24.0, color: Colors.white),
-                          )),
-                          SizedBox(height: 8.0),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: objectiveWidgets,
-                          ),
-                        ]),
-                  )
+                  ),
                 ]),
           ),
         ),

@@ -2,9 +2,9 @@ namespace Match3
 {
     public enum LevelType
     {
-        Timer,
-        Obstacle,
-        Moves,
-        Colors
+        Moves,//Level01
+        Obstacle,//Level02
+        Timer,//Level03
+        Colors//Level04
     }
 }
