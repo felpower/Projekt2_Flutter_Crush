@@ -17,6 +17,13 @@ namespace Match3
             hud.SetScore(currentScore);
             hud.SetTarget(targetScore);
             hud.SetRemaining($"{timeInSeconds / 60}:{timeInSeconds % 60:00}");
+            var sceneInfo = SceneInfo.CreateFromJson(SceneInfoExtensions.ToJson());
+            if (!string.IsNullOrEmpty(sceneInfo.level)) {
+                Setup(sceneInfo);
+                targetScore = sceneInfo.targetScore;
+                timeInSeconds = sceneInfo.timeInSeconds;
+
+            }
         }
 
         private void Update()

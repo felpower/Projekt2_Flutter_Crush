@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using FlutterUnityIntegration;
 using UnityEngine;
 namespace Match3
 {
@@ -21,7 +22,21 @@ namespace Match3
 
         private void Start()
         {
-            hud.SetScore(currentScore);
+            
+        }
+
+        protected void Setup(SceneInfo sceneInfo)
+        {
+            gameObject.AddComponent<UnityMessageManager>();
+            
+            UnityMessageManager.Instance.SendMessageToFlutter("Static Scene Info Level: " + sceneInfo);
+            if (!string.IsNullOrEmpty(sceneInfo.level)) {
+                score1Star = sceneInfo.score1;
+                score2Star = sceneInfo.score2;
+                score3Star = sceneInfo.score3;
+                gameGrid.xDim = sceneInfo.xDim;
+                gameGrid.yDim = sceneInfo.yDim;
+            }
         }
 
         protected virtual void GameWin()

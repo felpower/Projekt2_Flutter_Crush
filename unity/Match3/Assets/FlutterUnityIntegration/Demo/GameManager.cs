@@ -1,4 +1,5 @@
 ﻿using FlutterUnityIntegration;
+using Match3;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
@@ -14,11 +15,13 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
     }
-    
-    public void LoadScene(string level)
+
+    public void LoadScene(string json)
     {
-        SceneManager.LoadScene(level);
-        UnityMessageManager.Instance.SendMessageToFlutter("Scene Loaded");
+        var sceneInfo = SceneInfo.CreateFromJson(json);
+        SceneInfoExtensions.StaticSave(sceneInfo);
+        UnityMessageManager.Instance.SendMessageToFlutter("Static Scene Info Game Manager: " + SceneInfoExtensions.toString());
+        SceneManager.LoadScene(sceneInfo.level);
     }
 
     private void HandleWebFnCall(string action)

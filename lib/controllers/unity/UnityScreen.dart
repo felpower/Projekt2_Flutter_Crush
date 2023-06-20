@@ -45,6 +45,7 @@ class _UnityScreenState extends State<UnityScreen> {
     int lvl = arguments['level'];
     levelName = "Level $lvl";
     lvl = lvl % 4 + 1;
+    lvl == 2 ? lvl = 1 : lvl = lvl; //FixMe: remove when level 2 is implemented
     level = "Level0$lvl";
     return Scaffold(
       floatingActionButton: PointerInterceptor(
@@ -133,12 +134,27 @@ class _UnityScreenState extends State<UnityScreen> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     print("Width: $width Height: $height");
-    if (width> height) {
+
+    Map<String, dynamic> jsonString =  {
+      'level': level,
+      'xDim': 7,
+      'yDim': 7,
+      'numMoves': 20,
+      'score1': 15000,
+      'score2': 18000,
+      'score3': 21000,
+      'targetScore': 15000,
+      'timeInSeconds': 60,
+      'numOfObstacles': 50
+    };
+    if (width > height) {
       print("Changing level to: $level");
-      unityWidgetController?.postMessage('GameManager', 'LoadScene', level);
+      unityWidgetController?.postJsonMessage('GameManager', 'LoadScene', jsonString);
     } else {
       print("Changing level to: $level Portrait");
-      unityWidgetController?.postMessage('GameManager', 'LoadScene', "${level}Portrait");
+      jsonString['level'] = "${level}Portrait";
+      unityWidgetController?.postJsonMessage(
+          'GameManager', 'LoadScene', jsonString);
     }
   }
 

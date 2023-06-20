@@ -94,7 +94,7 @@ class _GameSplashState extends State<GameSplash>
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        widget.onComplete();
+                        // widget.onComplete(); //ToDo: ReAdd when working
                       });
                     },
                   ),

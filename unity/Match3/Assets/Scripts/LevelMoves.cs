@@ -17,6 +17,13 @@ namespace Match3
             hud.SetScore(currentScore);
             hud.SetTarget(targetScore);
             hud.SetRemaining(numMoves);
+            var sceneInfo = SceneInfo.CreateFromJson(SceneInfoExtensions.ToJson());
+            if (!string.IsNullOrEmpty(sceneInfo.level)) {
+                Setup(sceneInfo);
+                numMoves = sceneInfo.numMoves;
+                targetScore = sceneInfo.targetScore;
+
+            }
         }
 
         public override void OnMove()

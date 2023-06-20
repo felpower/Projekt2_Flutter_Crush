@@ -1,4 +1,5 @@
-﻿namespace Match3
+﻿using UnityEngine;
+namespace Match3
 {
     public class LevelColors : Level
     {
@@ -13,6 +14,13 @@
 
         private void Start()
         {
+            var sceneInfo = SceneInfo.CreateFromJson(SceneInfoExtensions.ToJson());
+            Debug.Log(sceneInfo);
+            if (!string.IsNullOrEmpty(sceneInfo.level)) {
+                Setup(sceneInfo);
+                numMoves = sceneInfo.numMoves;
+                numOfObstacles = sceneInfo.numOfObstacles;
+            }
             type = LevelType.Colors;
             _numObstaclesLeft = numOfObstacles;
             hud.SetLevelType(type, color);
