@@ -12,18 +12,18 @@ namespace Match3
         private void Start()
         {
             type = LevelType.Timer;
-
+            
             hud.SetLevelType(type);
-            hud.SetScore(currentScore);
-            hud.SetTarget(targetScore);
-            hud.SetRemaining($"{timeInSeconds / 60}:{timeInSeconds % 60:00}");
-            var sceneInfo = SceneInfo.CreateFromJson(SceneInfoExtensions.ToJson());
+            
+            var sceneInfo = SceneInfoExtensions.GetAsSceneInfo();
             if (!string.IsNullOrEmpty(sceneInfo.level)) {
                 Setup(sceneInfo);
                 targetScore = sceneInfo.targetScore;
                 timeInSeconds = sceneInfo.timeInSeconds;
-
             }
+            hud.SetScore(currentScore);
+            hud.SetTarget(targetScore);
+            hud.SetRemaining($"{timeInSeconds / 60}:{timeInSeconds % 60:00}");
         }
 
         private void Update()

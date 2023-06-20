@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using FlutterUnityIntegration;
+using Newtonsoft.Json;
 using UnityEngine;
 namespace Match3
 {
@@ -29,7 +30,7 @@ namespace Match3
         {
             gameObject.AddComponent<UnityMessageManager>();
             
-            UnityMessageManager.Instance.SendMessageToFlutter("Static Scene Info Level: " + sceneInfo);
+            UnityMessageManager.Instance.SendMessageToFlutter("Static Scene Info Level: " + JsonConvert.SerializeObject(sceneInfo));
             if (!string.IsNullOrEmpty(sceneInfo.level)) {
                 score1Star = sceneInfo.score1;
                 score2Star = sceneInfo.score2;

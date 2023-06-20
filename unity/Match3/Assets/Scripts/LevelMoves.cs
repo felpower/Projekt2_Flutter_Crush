@@ -12,18 +12,16 @@ namespace Match3
         private void Start()
         {
             type = LevelType.Moves;
-
             hud.SetLevelType(type);
             hud.SetScore(currentScore);
-            hud.SetTarget(targetScore);
-            hud.SetRemaining(numMoves);
-            var sceneInfo = SceneInfo.CreateFromJson(SceneInfoExtensions.ToJson());
+            var sceneInfo = SceneInfoExtensions.GetAsSceneInfo();
             if (!string.IsNullOrEmpty(sceneInfo.level)) {
                 Setup(sceneInfo);
                 numMoves = sceneInfo.numMoves;
                 targetScore = sceneInfo.targetScore;
-
             }
+            hud.SetTarget(targetScore);
+            hud.SetRemaining(numMoves);
         }
 
         public override void OnMove()

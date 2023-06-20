@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Linq;
+using UnityEngine;
 namespace Match3
 {
     public class LevelColors : Level
@@ -8,22 +10,24 @@ namespace Match3
         public int numMoves;
         public ColorType[] obstacleTypes;
         public int numOfObstacles;
-        public ColorType color;
         private int _movesUsed;
         private int _numObstaclesLeft;
 
         private void Start()
         {
-            var sceneInfo = SceneInfo.CreateFromJson(SceneInfoExtensions.ToJson());
+            var sceneInfo = SceneInfoExtensions.GetAsSceneInfo();
             Debug.Log(sceneInfo);
             if (!string.IsNullOrEmpty(sceneInfo.level)) {
                 Setup(sceneInfo);
                 numMoves = sceneInfo.numMoves;
                 numOfObstacles = sceneInfo.numOfObstacles;
+                obstacleTypes = sceneInfo.obstacleTypes.Where(c => Enum.IsDefined(typeof(ColorType), c))
+                    .Select(c => (ColorType)Enum.Parse(typeof(ColorType), c))
+                    .ToArray();;
             }
             type = LevelType.Colors;
             _numObstaclesLeft = numOfObstacles;
-            hud.SetLevelType(type, color);
+            hud.SetLevelType(type, obstacleTypes[1]);
             hud.SetScore(currentScore);
             hud.SetTarget(_numObstaclesLeft);
             hud.SetRemaining(numMoves);

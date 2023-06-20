@@ -1,5 +1,6 @@
 ﻿using FlutterUnityIntegration;
 using Match3;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
@@ -20,7 +21,8 @@ public class GameManager : MonoBehaviour
     {
         var sceneInfo = SceneInfo.CreateFromJson(json);
         SceneInfoExtensions.StaticSave(sceneInfo);
-        UnityMessageManager.Instance.SendMessageToFlutter("Static Scene Info Game Manager: " + SceneInfoExtensions.toString());
+        
+        UnityMessageManager.Instance.SendMessageToFlutter("Static Scene Info Game Manager: " + JsonConvert.SerializeObject(SceneInfoExtensions.GetAsSceneInfo()));
         SceneManager.LoadScene(sceneInfo.level);
     }
 

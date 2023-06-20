@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Newtonsoft.Json;
 namespace Match3
 {
     [System.Serializable]
@@ -14,14 +15,27 @@ namespace Match3
         public int targetScore;
         public int timeInSeconds;
         public int numOfObstacles;
+        public string[] obstacleTypes;
 
         public static SceneInfo CreateFromJson(string jsonString)
         {
             return JsonUtility.FromJson<SceneInfo>(jsonString);
         }
 
-        public override string ToString() => "level: " + level + ", xDim: " + xDim + ", yDim: " + yDim + ", numMoves: " + numMoves + ", score1: " + score1 + ", score2: " + score2 + ", score3: " + score3 + ", targetScore: " +
-                                             targetScore + ", timeInSeconds: " + timeInSeconds + ", numOfObstacles: " + numOfObstacles;
+        public SceneInfo(string level, int xDim, int yDim, int numMoves, int score1, int score2, int score3, int targetScore, int timeInSeconds, int numOfObstacles, string[] obstacleTypes)
+        {
+            this.level = level;
+            this.xDim = xDim;
+            this.yDim = yDim;
+            this.numMoves = numMoves;
+            this.score1 = score1;
+            this.score2 = score2;
+            this.score3 = score3;
+            this.targetScore = targetScore;
+            this.timeInSeconds = timeInSeconds;
+            this.numOfObstacles = numOfObstacles;
+            this.obstacleTypes = obstacleTypes;
+        }
     }
 
     public static class SceneInfoExtensions
@@ -36,11 +50,11 @@ namespace Match3
         private static int targetScore;
         private static int timeInSeconds;
         private static int numOfObstacles;
+        private static string[] obstacleTypes;
 
-        public static string toString()
+        public static SceneInfo GetAsSceneInfo()
         {
-            return "level: " + level + ", xDim: " + xDim + ", yDim: " + yDim + ", numMoves: " + numMoves + ", score1: " + score1 + ", score2: " + score2 + ", score3: " + score3 + ", targetScore: " +
-                   targetScore + ", timeInSeconds: " + timeInSeconds + ", numOfObstacles: " + numOfObstacles;
+            return new SceneInfo(level, xDim, yDim, numMoves, score1, score2, score3, targetScore, timeInSeconds, numOfObstacles, obstacleTypes);
         }
 
         public static void StaticSave(SceneInfo sceneInfo)
@@ -55,12 +69,7 @@ namespace Match3
             targetScore = sceneInfo.targetScore;
             timeInSeconds = sceneInfo.timeInSeconds;
             numOfObstacles = sceneInfo.numOfObstacles;
-        }
-
-        public static string ToJson()
-        {
-            return "{\"level\": \"" + level + "\", \"xDim\": \" " + xDim + "\", \"yDim\": \" " + yDim + "\", \"numMoves\": \" " + numMoves + "\", \"score1\": \" " + score1 + "\", \"score2\": \" " + score2 + "\", \"score3\": \" " + score3 + "\", \"targetScore\": \" " +
-                   targetScore + "\", \"timeInSeconds\": \" " + timeInSeconds + "\", \"numOfObstacles\": \" " + numOfObstacles+"\"}";
+            obstacleTypes = sceneInfo.obstacleTypes;
         }
     }
 }

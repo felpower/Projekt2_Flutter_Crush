@@ -145,7 +145,8 @@ class _UnityScreenState extends State<UnityScreen> {
       'score3': 21000,
       'targetScore': 15000,
       'timeInSeconds': 60,
-      'numOfObstacles': 50
+      'numOfObstacles': 50,
+      'obstacleTypes': ["Yellow", "Red"],
     };
     if (width > height) {
       print("Changing level to: $level");

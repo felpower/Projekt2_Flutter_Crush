@@ -1251,7 +1251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c5a84fd32077c94eb38cbf259d2ac2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameGrid: {fileID: 0}
+  gameGrid: {fileID: 1597584111}
   hud: {fileID: 226560820}
   score1Star: 15000
   score2Star: 18000
