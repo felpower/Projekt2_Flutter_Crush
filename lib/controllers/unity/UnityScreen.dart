@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
@@ -19,8 +21,12 @@ class _UnityScreenState extends State<UnityScreen> {
   late OverlayEntry _gameSplash;
   late String levelName;
   late String level;
+  late int lvl;
   bool gameOver = false;
+
   bool fabVisible = true;
+
+  late List<dynamic> data;
 
   @override
   void initState() {
@@ -30,6 +36,7 @@ class _UnityScreenState extends State<UnityScreen> {
       DeviceOrientation.portraitDown,
     ]);
     WidgetsBinding.instance.addPostFrameCallback(_showGameStartSplash);
+    readJson();
   }
 
   @override
@@ -42,7 +49,7 @@ class _UnityScreenState extends State<UnityScreen> {
   Widget build(BuildContext context) {
     final arguments = (ModalRoute.of(context)?.settings.arguments ??
         <String, dynamic>{}) as Map;
-    int lvl = arguments['level'];
+    lvl = arguments['level'];
     levelName = "Level $lvl";
     lvl = lvl % 4 + 1;
     lvl == 2 ? lvl = 1 : lvl = lvl; //FixMe: remove when level 2 is implemented
@@ -67,7 +74,8 @@ class _UnityScreenState extends State<UnityScreen> {
                             onPressed: () => {Navigator.pop(context, 'Cancel')},
                             child: const Text('No')),
                         TextButton(
-                            onPressed: () => {popUntil()},
+                            onPressed: () =>
+                                {changeScene("StartScreen"), popUntil()},
                             child: const Text('Yes')),
                       ],
                     )));
@@ -75,9 +83,6 @@ class _UnityScreenState extends State<UnityScreen> {
         ),
       ),
       key: _scaffoldKey,
-      appBar: AppBar(
-        title: Text(levelName),
-      ),
       body: Card(
           margin: const EdgeInsets.all(0),
           clipBehavior: Clip.antiAlias,
@@ -118,7 +123,6 @@ class _UnityScreenState extends State<UnityScreen> {
   void onUnitySceneLoaded(SceneLoaded? scene) {
     if (scene != null) {
       print('Received scene loaded from unity: ${scene.name}');
-      print('Received scene loaded from unity buildIndex: ${scene.buildIndex}');
     } else {
       print('Received scene loaded from unity: null');
     }
@@ -131,32 +135,37 @@ class _UnityScreenState extends State<UnityScreen> {
   }
 
   void changeScene(String level) {
+    if (level == "StartScreen") {
+      unityWidgetController?.postMessage(
+          'GameManager', 'LoadStartScene', level);
+      return;
+    }
+    Map<String, dynamic> jsonString = {};
+    for (var x in data) {
+      if (x['level'] == lvl) {
+        jsonString = x;
+        jsonString['levelName'] = levelName;
+        break;
+      }
+    }
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    print("Width: $width Height: $height");
-
-    Map<String, dynamic> jsonString =  {
-      'level': level,
-      'xDim': 7,
-      'yDim': 7,
-      'numMoves': 20,
-      'score1': 15000,
-      'score2': 18000,
-      'score3': 21000,
-      'targetScore': 15000,
-      'timeInSeconds': 60,
-      'numOfObstacles': 50,
-      'obstacleTypes': ["Yellow", "Red"],
-    };
     if (width > height) {
       print("Changing level to: $level");
-      unityWidgetController?.postJsonMessage('GameManager', 'LoadScene', jsonString);
+      jsonString['level'] = level;
+      unityWidgetController?.postJsonMessage(
+          'GameManager', 'LoadScene', jsonString);
     } else {
       print("Changing level to: $level Portrait");
       jsonString['level'] = "${level}Portrait";
       unityWidgetController?.postJsonMessage(
           'GameManager', 'LoadScene', jsonString);
     }
+  }
+
+  Future<void> readJson() async {
+    final String response = await rootBundle.loadString('unityLevels.json');
+    data = await json.decode(response)['levels'];
   }
 
   void showGameOver(bool success) {

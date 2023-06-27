@@ -86,6 +86,7 @@ flutter:
     - assets/images/background/background.jpg
     - assets/images/background/background2.jpg
     - assets/levels.json
+    - assets/unityLevels.json
     - assets/images/borders/border_1.png
     - assets/images/borders/border_2.png
     - assets/images/borders/border_3.png
