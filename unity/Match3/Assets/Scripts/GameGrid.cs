@@ -57,14 +57,10 @@ namespace Match3
         private void InstantiatePieces()
         {
             _pieces = new GamePiece[xDim, yDim];
-
-            for (int i = 0; i < initialPieces.Length; i++) {
-                if (initialPieces[i].x >= 0 && initialPieces[i].y < xDim
-                                            && initialPieces[i].y >= 0 && initialPieces[i].y < yDim) {
-                    SpawnNewPiece(initialPieces[i].x, initialPieces[i].y, initialPieces[i].type);
-                }
+            var sceneInfo = SceneInfoExtensions.GetAsSceneInfo();
+            if (sceneInfo.type == LevelType.Obstacle.ToString()) {
+                SpawnBubbles(sceneInfo.numOfObstacles);
             }
-
             for (int x = 0; x < xDim; x++) {
                 for (int y = 0; y < yDim; y++) {
                     if (_pieces[x, y] == null) {
@@ -74,6 +70,21 @@ namespace Match3
             }
 
             StartCoroutine(Fill());
+        }
+
+        private void SpawnBubbles(int numOfObstacles)
+        {
+            for (int i = 0; i < numOfObstacles; i++) {
+                int x = Random.Range(1, xDim-1);
+                int y = Random.Range(1, yDim-1);
+                SpawnNewPiece(x, y, PieceType.Bubble);
+            }
+            // for (int i = 0; i < initialPieces.Length; i++) {
+            //     if (initialPieces[i].x >= 0 && initialPieces[i].y < xDim
+            //                                 && initialPieces[i].y >= 0 && initialPieces[i].y < yDim) {
+            //         SpawnNewPiece(initialPieces[i].x, initialPieces[i].y, initialPieces[i].type);
+            //     }
+            // }
         }
 
         private IEnumerator Fill()

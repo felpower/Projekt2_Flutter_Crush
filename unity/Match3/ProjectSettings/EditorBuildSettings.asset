@@ -32,6 +32,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ColorsPortrait.unity
     guid: 0f2c2cece8b11954090136bc0d7febbf
+  - enabled: 1
+    path: Assets/Scenes/ObstaclePortrait.unity
+    guid: 09d90c1d31b84d74f9361327e0e18e58
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 889a7763d325aac49952f4475f5c52f6,
       type: 2}
