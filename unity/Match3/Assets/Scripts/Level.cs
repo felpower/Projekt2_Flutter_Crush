@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using FlutterUnityIntegration;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -35,8 +36,11 @@ namespace Match3
                 score1Star = sceneInfo.score1;
                 score2Star = sceneInfo.score2;
                 score3Star = sceneInfo.score3;
+                type = Enum.Parse<LevelType>(sceneInfo.type);
                 gameGrid.xDim = sceneInfo.xDim;
                 gameGrid.yDim = sceneInfo.yDim;
+                
+                
             }
         }
 

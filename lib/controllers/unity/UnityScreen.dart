@@ -19,8 +19,6 @@ class _UnityScreenState extends State<UnityScreen> {
       GlobalKey<ScaffoldState>();
   UnityWidgetController? unityWidgetController;
   late OverlayEntry _gameSplash;
-  late String levelName;
-  late String level;
   late int lvl;
   bool gameOver = false;
 
@@ -50,10 +48,6 @@ class _UnityScreenState extends State<UnityScreen> {
     final arguments = (ModalRoute.of(context)?.settings.arguments ??
         <String, dynamic>{}) as Map;
     lvl = arguments['level'];
-    levelName = "Level $lvl";
-    lvl = lvl % 4 + 1;
-    lvl == 2 ? lvl = 1 : lvl = lvl; //FixMe: remove when level 2 is implemented
-    level = "Level0$lvl";
     return Scaffold(
       floatingActionButton: PointerInterceptor(
         child: FloatingActionButton(
@@ -144,20 +138,21 @@ class _UnityScreenState extends State<UnityScreen> {
     for (var x in data) {
       if (x['level'] == lvl) {
         jsonString = x;
-        jsonString['levelName'] = levelName;
         break;
       }
     }
+
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    String type = jsonString['type'];
     if (width > height) {
-      print("Changing level to: $level");
-      jsonString['level'] = level;
+      print("Changing level to: $type Landscape");
+      jsonString['orientation'] = "Landscape";
       unityWidgetController?.postJsonMessage(
           'GameManager', 'LoadScene', jsonString);
     } else {
-      print("Changing level to: $level Portrait");
-      jsonString['level'] = "${level}Portrait";
+      print("Changing level to: $type Portrait");
+      jsonString['orientation'] = "Portrait";
       unityWidgetController?.postJsonMessage(
           'GameManager', 'LoadScene', jsonString);
     }
@@ -197,7 +192,7 @@ class _UnityScreenState extends State<UnityScreen> {
             onComplete: () {
               _gameSplash.remove();
               // allow gesture detection
-              changeScene(level);
+              changeScene("");
             },
           );
         });
