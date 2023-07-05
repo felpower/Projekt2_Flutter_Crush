@@ -32,9 +32,9 @@ class CoinBloc extends Bloc<CoinEvent, CoinState> {
     emit(CoinState(newAmount, event.amount));
   }
 
-  void _onGameOver(bool success) async {
-    if (success) {
-      add(AddCoinsEvent(random.nextInt(100)));
+  void _onGameOver(int coins) async {
+    if (coins > 0) {
+      add(AddCoinsEvent(random.nextInt(coins * 10)));
       // add(AddCoinsEvent(100000));
     } else {
       add(LoadCoinsEvent());

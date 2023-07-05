@@ -128,7 +128,7 @@ class GameLevelButton extends StatelessWidget {
 
   Future<void> _startLevel(GameBloc gameBloc, BuildContext context) async {
     Level newLevel = await gameBloc.setLevel(levelNumber);
-    Navigator.of(context).push(GamePage.route(newLevel));
+    // Navigator.of(context).push(GamePage.route(newLevel));
   }
 
   void _showAdvertisement(BuildContext context) {

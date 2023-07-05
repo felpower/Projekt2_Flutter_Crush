@@ -80,8 +80,8 @@ class StreamObjectiveItemState extends State<StreamObjectiveItem> {
     //
     // Trick to get the image of the tile
     //
-    Tile tile = Tile(type: widget.objective.type, level: gameBloc.gameController.level);
-    tile.build();
+    // Tile tile = Tile(type: widget.objective.type, level: gameBloc.gameController.level);
+    // tile.build();
 
     return Container(
       child: Column(
@@ -91,7 +91,7 @@ class StreamObjectiveItemState extends State<StreamObjectiveItem> {
           Container(
             width: 32.0,
             height: 32.0,
-            child: tile.widget,
+            // child: tile.widget,
           ),
           StreamBuilder<int>(
             initialData: widget.objective.count,

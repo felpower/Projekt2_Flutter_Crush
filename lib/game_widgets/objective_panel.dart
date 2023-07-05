@@ -18,7 +18,7 @@ class ObjectivePanel extends StatelessWidget {
     //
     return StreamBuilder<GameController>(
         stream: gameBloc.streamGameController,
-        initialData: gameBloc.gameController,
+        // initialData: gameBloc.gameController,
         builder: (context, snapshot) {
           if (snapshot.data != null) {
             return Padding(

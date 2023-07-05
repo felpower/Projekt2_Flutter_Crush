@@ -14,7 +14,7 @@ class GameMovesLeftPanel extends StatelessWidget {
     final EdgeInsets paddingTop = EdgeInsets.only(top: (orientation == Orientation.portrait ? 10.0 : 0.0));
 
     return StreamBuilder<GameController>(
-      initialData: gameBloc.gameController,
+      // initialData: gameBloc.gameController,
       stream: gameBloc.streamGameController,
       builder: (BuildContext context, AsyncSnapshot<GameController> snapshot) {
         if (snapshot.hasData) {

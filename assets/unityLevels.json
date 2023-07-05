@@ -71,18 +71,18 @@
     {
       "level": 5,
       "type": "Moves",
-      "xDim": 10,
-      "yDim": 10,
-      "numMoves": 22,
-      "score1": 14000,
-      "score2": 17000,
-      "score3": 20000,
-      "targetScore": 14000,
-      "timeInSeconds": 75,
-      "numOfObstacles": 14,
+      "xDim": 7,
+      "yDim": 7,
+      "numMoves": 5,
+      "score1": 1000,
+      "score2": 18000,
+      "score3": 21000,
+      "targetScore": 1000,
+      "timeInSeconds": 60,
+      "numOfObstacles": 10,
       "obstacleTypes": [
-        "Green",
-        "Yellow"
+        "Yellow",
+        "Red"
       ]
     },
     {

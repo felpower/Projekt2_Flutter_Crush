@@ -48,8 +48,8 @@ class DayStreakBloc extends Bloc<DayStreakEvent, DayStreakState> {
     return dayStreakMilestones.contains(dayStreak);
   }
 
-  void _onGameOver(bool success) {
-    if (success) {
+  void _onGameOver(int daystreak) {
+    if (daystreak > 0) {
       add(UpdateDayStreakEvent());
     }
   }

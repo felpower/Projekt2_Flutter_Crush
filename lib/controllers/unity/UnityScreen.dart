@@ -1,9 +1,13 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
+import 'package:rxdart/rxdart.dart';
+import '../../bloc/bloc_provider.dart';
+import '../../bloc/game_bloc.dart';
 import '../../game_widgets/game_over_splash.dart';
 import '../../game_widgets/game_splash.dart';
 
@@ -17,13 +21,19 @@ class UnityScreen extends StatefulWidget {
 class _UnityScreenState extends State<UnityScreen> {
   static final GlobalKey<ScaffoldState> _scaffoldKey =
       GlobalKey<ScaffoldState>();
+
+
+  late GameBloc gameBloc;
   UnityWidgetController? unityWidgetController;
   late OverlayEntry _gameSplash;
+  final PublishSubject<bool> _gameIsOverController = PublishSubject<bool>();
+  Stream<bool> get gameIsOver => _gameIsOverController.stream;
   late int lvl;
   bool gameOver = false;
-
+  late bool _gameOverReceived;
   bool fabVisible = true;
 
+  late StreamSubscription _gameOverSubscription;
   late List<dynamic> data;
 
   @override
@@ -33,12 +43,27 @@ class _UnityScreenState extends State<UnityScreen> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    _gameOverReceived = false;
     WidgetsBinding.instance.addPostFrameCallback(_showGameStartSplash);
     readJson();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    // Now that the context is available, retrieve the gameBloc
+    gameBloc = BlocProvider.of<GameBloc>(context);
+
+    // Reset the objectives
+    gameBloc.reset();
+    // Listen to "game over" notification
+    _gameOverSubscription = gameIsOver.listen(showGameOver);
+  }
+
+  @override
   dispose() {
+    _gameOverSubscription.cancel();
     unityWidgetController?.dispose();
     super.dispose();
   }
@@ -106,11 +131,13 @@ class _UnityScreenState extends State<UnityScreen> {
     print('Received message from unity: ${message.toString()}');
     if (message.startsWith("Score: ")) {
     } else if (message.startsWith("GameOver: Won") && !gameOver) {
+      gameBloc.gameOver(lvl);
+      _gameIsOverController.sink.add(true);
       gameOver = true;
-      showGameOver(true);
     } else if (message.startsWith("GameOver: Lost") && !gameOver) {
       gameOver = true;
-      showGameOver(false);
+      gameBloc.gameOver(0);
+      _gameIsOverController.sink.add(false);
     }
   }
 
@@ -163,7 +190,12 @@ class _UnityScreenState extends State<UnityScreen> {
     data = await json.decode(response)['levels'];
   }
 
-  void showGameOver(bool success) {
+  void showGameOver(bool success) async {
+    // Prevent from bubbling
+    if (_gameOverReceived) {
+      return;
+    }
+    _gameOverReceived = true;
     _gameSplash = OverlayEntry(
         opaque: false,
         builder: (BuildContext context) {
@@ -182,9 +214,6 @@ class _UnityScreenState extends State<UnityScreen> {
   }
 
   void _showGameStartSplash(_) {
-    // No gesture detection during the splash
-
-    // Show the splash
     _gameSplash = OverlayEntry(
         opaque: false,
         builder: (BuildContext context) {

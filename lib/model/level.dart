@@ -18,7 +18,7 @@ class Level extends Object {
   late Array2d grid;
   final int _rows;
   final int _cols;
-  List<Objective> _objectives = [];
+  final List<Objective> _objectives = [];
   final int _maxMoves;
   int _movesLeft = 0;
 
@@ -32,9 +32,9 @@ class Level extends Object {
 
   Level.fromJson(Map<String, dynamic> json)
     : _index = json["level"],
-      _rows = json["rows"],
-      _cols = json["cols"],
-      _maxMoves = json["moves"]
+      _rows = json["xDim"],
+      _cols = json["yDim"],
+      _maxMoves = json["numMoves"]
     {
       // Initialize the grid to the dimensions
       grid = Array2d(_rows, _cols);
@@ -47,21 +47,8 @@ class Level extends Object {
         //  the grid (bottom-up), we need to reverse the
         //  definition from the JSON file.
         //
-      int i = 0;
-      for (var row in (json["grid"] as List).reversed) {
-        int j = 0;
-        row.split(',').forEach((cell){
-          grid[i][j] = cell;
-          ++j;
-        });
-        ++i;
-      }
 
       // Retrieve the objectives
-      _objectives = (json["objective"] as List).map((item){
-        return Objective(item);
-      }).toList();
-
       // First-time initialization
       resetObjectives();
   }
@@ -82,8 +69,6 @@ class Level extends Object {
   // Reset the objectives
   //
   void resetObjectives(){
-    _objectives.forEach((Objective objective) => objective.reset());
-    _movesLeft = _maxMoves;
   }
 
   //
