@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -26,14 +27,11 @@ class GameBloc implements BlocBase {
   // at game load is ready.  This is done as soon as this BLoC receives the
   // dimensions/position of the board as well as the dimensions of a tile
   //
-  final BehaviorSubject<bool> _readyToDisplayTilesController =
-      BehaviorSubject<bool>();
+  final BehaviorSubject<bool> _readyToDisplayTilesController = BehaviorSubject<bool>();
 
-  Function get setReadyToDisplayTiles =>
-      _readyToDisplayTilesController.sink.add;
+  Function get setReadyToDisplayTiles => _readyToDisplayTilesController.sink.add;
 
-  Stream<bool> get outReadyToDisplayTiles =>
-      _readyToDisplayTilesController.stream;
+  Stream<bool> get outReadyToDisplayTiles => _readyToDisplayTilesController.stream;
 
   //
   // Controller aimed at processing the Objective events
@@ -70,7 +68,12 @@ class GameBloc implements BlocBase {
   // Load the levels definitions from assets
   //
   _loadLevels() async {
-    String jsonContent = await rootBundle.loadString("assets/unityLevels.json");
+    String jsonContent;
+    if (kIsWeb) {
+      jsonContent = await rootBundle.loadString('unityLevels.json');
+    } else {
+      jsonContent = await rootBundle.loadString('assets/unityLevels.json');
+    }
     Map<dynamic, dynamic> list = json.decode(jsonContent);
     (list["levels"]).forEach((levelItem) {
       _levels.add(Level.fromJson(levelItem));

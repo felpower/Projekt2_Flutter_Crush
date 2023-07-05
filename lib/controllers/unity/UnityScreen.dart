@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
@@ -20,8 +21,7 @@ class UnityScreen extends StatefulWidget {
 }
 
 class _UnityScreenState extends State<UnityScreen> {
-  static final GlobalKey<ScaffoldState> _scaffoldKey =
-      GlobalKey<ScaffoldState>();
+  static final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   late GameBloc gameBloc;
   UnityWidgetController? unityWidgetController;
@@ -69,8 +69,7 @@ class _UnityScreenState extends State<UnityScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final arguments = (ModalRoute.of(context)?.settings.arguments ??
-        <String, dynamic>{}) as Map;
+    final arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
     lvl = arguments['level'];
     return Scaffold(
       floatingActionButton: PointerInterceptor(
@@ -82,8 +81,7 @@ class _UnityScreenState extends State<UnityScreen> {
                 builder: (BuildContext context) => PointerInterceptor(
                         child: AlertDialog(
                       title: const Text('Abort level'),
-                      content: const Text(
-                          'Are you sure you want to abort the level?'),
+                      content: const Text('Are you sure you want to abort the level?'),
                       elevation: 24,
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(16))),
@@ -92,8 +90,7 @@ class _UnityScreenState extends State<UnityScreen> {
                             onPressed: () => {Navigator.pop(context, 'Cancel')},
                             child: const Text('No')),
                         TextButton(
-                            onPressed: () =>
-                                {changeScene("StartScreen"), popUntil()},
+                            onPressed: () => {changeScene("StartScreen"), popUntil()},
                             child: const Text('Yes')),
                       ],
                     )));
@@ -130,7 +127,7 @@ class _UnityScreenState extends State<UnityScreen> {
     print('Received message from unity: ${message.toString()}');
     if (message.startsWith("Score: ")) {
     } else if (message.startsWith("GameOver: Won") && !gameOver) {
-      var xpCoins = lvl * int.parse(message.replaceAll(RegExp(r'[^0-9]'),''));
+      var xpCoins = lvl * int.parse(message.replaceAll(RegExp(r'[^0-9]'), ''));
       gameBloc.gameOver(xpCoins);
       _gameIsOverController.sink.add(true);
       gameOver = true;
@@ -157,8 +154,7 @@ class _UnityScreenState extends State<UnityScreen> {
 
   void changeScene(String level) {
     if (level == "StartScreen") {
-      unityWidgetController?.postMessage(
-          'GameManager', 'LoadStartScene', level);
+      unityWidgetController?.postMessage('GameManager', 'LoadStartScene', level);
       return;
     }
     Map<String, dynamic> jsonString = {};
@@ -175,18 +171,22 @@ class _UnityScreenState extends State<UnityScreen> {
     if (width > height) {
       print("Changing level to: $type Landscape");
       jsonString['orientation'] = "Landscape";
-      unityWidgetController?.postJsonMessage(
-          'GameManager', 'LoadScene', jsonString);
+      unityWidgetController?.postJsonMessage('GameManager', 'LoadScene', jsonString);
     } else {
       print("Changing level to: $type Portrait");
       jsonString['orientation'] = "Portrait";
-      unityWidgetController?.postJsonMessage(
-          'GameManager', 'LoadScene', jsonString);
+      unityWidgetController?.postJsonMessage('GameManager', 'LoadScene', jsonString);
     }
   }
 
   Future<void> readJson() async {
-    final String response = await rootBundle.loadString('unityLevels.json');
+    final String response;
+    if (kIsWeb) {
+      response = await rootBundle.loadString('unityLevels.json');
+    } else {
+      response = await rootBundle.loadString('assets/unityLevels.json');
+    }
+
     data = await json.decode(response)['levels'];
   }
 
