@@ -40,7 +40,6 @@ class _FortuneWheelState extends State<FortuneWheel>
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Fortune Wheel'),
@@ -99,7 +98,6 @@ class _FortuneWheelState extends State<FortuneWheel>
         _ctrl.reset();
       });
     }
-
   }
 
   int _calIndex(value) {

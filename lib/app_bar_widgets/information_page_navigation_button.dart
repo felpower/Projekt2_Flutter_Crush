@@ -10,8 +10,10 @@ class InformationPageNavigationButton extends StatelessWidget {
       padding: const EdgeInsets.only(right: 0),
       child: IconButton(
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const InformationPage()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const InformationPage()));
           },
           icon: const Icon(Icons.info_outlined)),
     );

@@ -12,7 +12,7 @@ class DayStreakIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
-        builder: (context, state){
+        builder: (context, state) {
       if (state is DarkPatternsActivatedState) {
         return Padding(
             padding: const EdgeInsets.only(left: 7.5, right: 7.5),
@@ -22,17 +22,14 @@ class DayStreakIcon extends StatelessWidget {
                 BlocBuilder<DayStreakBloc, DayStreakState>(
                   builder: (context, state) {
                     return Text(state.dayStreak.toString(),
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold));
+                        style: const TextStyle(fontWeight: FontWeight.bold));
                   },
                 )
               ],
             ));
       } else {
         return Container();
-    }
+      }
+    });
   }
-
-  );
-
-}}
+}

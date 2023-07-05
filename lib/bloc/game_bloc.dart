@@ -57,6 +57,7 @@ class GameBloc implements BlocBase {
   final PublishSubject<int> _maxLevelNumber = PublishSubject<int>();
 
   Stream<int> get maxLevelNumber => _maxLevelNumber.stream;
+
   //
   // List of all level definitions
   //

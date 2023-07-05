@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:bachelor_flutter_crush/bloc/game_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_event.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_state.dart';

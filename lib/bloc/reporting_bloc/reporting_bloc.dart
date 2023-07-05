@@ -41,7 +41,8 @@ class ReportingBloc extends Bloc<ReportingEvent, ReportingState> {
     ReportingService.addStartApp(event.time);
   }
 
-  void _onCloseAppEvent(ReportCloseAppEvent event, Emitter<ReportingState> emit){
+  void _onCloseAppEvent(
+      ReportCloseAppEvent event, Emitter<ReportingState> emit) {
     ReportingService.addCloseApp(event.time);
   }
 }

@@ -10,7 +10,11 @@ class BoardView extends StatefulWidget {
   final double current;
   final List<Luck> items;
 
-  const BoardView({Key? key, required this.angle, required this.current, required this.items})
+  const BoardView(
+      {Key? key,
+      required this.angle,
+      required this.current,
+      required this.items})
       : super(key: key);
 
   @override

@@ -4,7 +4,9 @@ import 'package:bachelor_flutter_crush/persistence/high_score_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HighScoreBloc extends Bloc<HighScoreEvent, HighScoreState> {
-  HighScoreBloc() : super(HighScoreState(HighScoreService.initialHighScore, HighScoreService.updateHighScore)) {
+  HighScoreBloc()
+      : super(HighScoreState(HighScoreService.initialHighScore,
+            HighScoreService.updateHighScore)) {
     on<LoadHighScoreEvent>(_onLoadHighScore);
     add(LoadHighScoreEvent());
   }

@@ -1,12 +1,10 @@
-
 import 'dart:ui';
 
-class Luck{
+class Luck {
   final String image;
   final Color color;
 
   Luck(this.image, this.color);
 
-
-  String get asset =>  "assets/images/bombs/$image.png";
+  String get asset => "assets/images/bombs/$image.png";
 }

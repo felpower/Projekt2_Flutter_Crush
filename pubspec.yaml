@@ -124,14 +124,14 @@ flutter:
     - assets/images/bombs/mine.png
     - assets/images/bombs/tnt.png
     - assets/images/bombs/rocket.png
-      # audio
+    # audio
     - assets/audio/swap.wav
     - assets/audio/move_down.wav
     - assets/audio/bomb.wav
     - assets/audio/game_start.wav
     - assets/audio/win.wav
     - assets/audio/lost.wav
-      # videos
+    # videos
     - assets/videos/spinning_earth.mp4
-      # icons
+    # icons
     - assets/icons/tile.png

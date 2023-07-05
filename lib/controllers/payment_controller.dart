@@ -1,12 +1,12 @@
+import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_event.dart';
 import 'package:bachelor_flutter_crush/helpers/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 import 'package:flutter_credit_card/credit_card_brand.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_event.dart';
 
 import '../bloc/reporting_bloc/reporting_bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 
 class PaymentController extends StatefulWidget {
   const PaymentController({Key? key}) : super(key: key);

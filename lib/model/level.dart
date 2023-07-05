@@ -1,6 +1,6 @@
 ///
 /// Level
-/// 
+///
 /// Definition of a level in terms of:
 ///  - grid template
 ///  - maximum number of moves
@@ -23,30 +23,32 @@ class Level extends Object {
   double boardTop = 0.0;
 
   Level.fromJson(Map<String, dynamic> json)
-    : _index = json["level"],
-      _rows = json["xDim"],
-      _cols = json["yDim"],
-      _maxMoves = json["numMoves"]
-    {
-      resetObjectives();
+      : _index = json["level"],
+        _rows = json["xDim"],
+        _cols = json["yDim"],
+        _maxMoves = json["numMoves"] {
+    resetObjectives();
   }
 
   int get numberOfRows => _rows;
+
   int get numberOfCols => _cols;
+
   int get index => _index;
+
   int get maxMoves => _maxMoves;
+
   int get movesLeft => _movesLeft;
 
   //
   // Reset the objectives
   //
-  void resetObjectives(){
-  }
+  void resetObjectives() {}
 
   //
   // Decrement the number of moves left
   //
-  int decrementMove(){
+  int decrementMove() {
     return (--_movesLeft).clamp(0, _maxMoves);
   }
 }

@@ -1,4 +1,4 @@
-abstract class DayStreakEvent{}
+abstract class DayStreakEvent {}
 
 class UpdateDayStreakEvent extends DayStreakEvent {}
 

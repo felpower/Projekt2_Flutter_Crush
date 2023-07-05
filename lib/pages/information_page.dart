@@ -15,9 +15,8 @@ class InformationPage extends StatelessWidget {
           ),
         ),
         body: const SingleChildScrollView(
-            child:
-                Center(
-                    child: Column(
+            child: Center(
+                child: Column(
           children: <Widget>[
             Text("This game is a so called Match-3 puzzle game.\n"
                 "A player may slide 1 tile of one cell at a time, horizontally or vertically.\n"

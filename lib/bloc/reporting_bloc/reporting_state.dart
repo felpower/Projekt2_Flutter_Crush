@@ -1,3 +1,3 @@
-abstract class ReportingState{}
+abstract class ReportingState {}
 
 class WaitingForReportingEvents extends ReportingState {}

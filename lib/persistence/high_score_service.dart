@@ -28,11 +28,11 @@ class HighScoreService {
     if (currentHighScore == null) {
       prefs.setString(highScore, initialHighScore);
       currentHighScore = initialHighScore;
-      print("currentHighScore"+currentHighScore);
-      print("highScore"+highScore);
+      print("currentHighScore" + currentHighScore);
+      print("highScore" + highScore);
     }
-    print("currentHighScore"+currentHighScore);
-    print("highScore"+highScore);
+    print("currentHighScore" + currentHighScore);
+    print("highScore" + highScore);
     String? currentUpdate = prefs.getString(updateHighScore);
     var dateTime = DateTime.now();
     if (currentUpdate == null) {

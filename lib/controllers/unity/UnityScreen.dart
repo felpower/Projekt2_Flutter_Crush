@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:rxdart/rxdart.dart';
+
 import '../../bloc/bloc_provider.dart';
 import '../../bloc/game_bloc.dart';
 import '../../game_widgets/game_over_splash.dart';
@@ -22,11 +23,11 @@ class _UnityScreenState extends State<UnityScreen> {
   static final GlobalKey<ScaffoldState> _scaffoldKey =
       GlobalKey<ScaffoldState>();
 
-
   late GameBloc gameBloc;
   UnityWidgetController? unityWidgetController;
   late OverlayEntry _gameSplash;
   final PublishSubject<bool> _gameIsOverController = PublishSubject<bool>();
+
   Stream<bool> get gameIsOver => _gameIsOverController.stream;
   late int lvl;
   bool gameOver = false;

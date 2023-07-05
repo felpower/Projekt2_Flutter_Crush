@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/coins_bloc/coin_event.dart';
 import 'package:bachelor_flutter_crush/persistence/coin_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../game_bloc.dart';
 import 'coin_state.dart';
 
@@ -34,7 +35,7 @@ class CoinBloc extends Bloc<CoinEvent, CoinState> {
 
   void _onGameOver(int coins) async {
     if (coins > 0) {
-      add(AddCoinsEvent(random.nextInt(coins * 10 )+ 1));
+      add(AddCoinsEvent(random.nextInt(coins * 10) + 1));
       // add(AddCoinsEvent(100000));
     } else {
       add(LoadCoinsEvent());

@@ -38,8 +38,7 @@ class ReportingService {
 
   static Future<void> addStartOfLevel(int levelNumber) async {
     await _updateDocumentData(
-        startOfLevel,
-        'Level: $levelNumber, Time: ${DateTime.now()}');
+        startOfLevel, 'Level: $levelNumber, Time: ${DateTime.now()}');
   }
 
   static Future<void> addStartApp(DateTime dateTime) async {
@@ -60,15 +59,14 @@ class ReportingService {
 
   static Future<void> removeAdds(bool removed) async {
     await _updateDocumentData(
-        paidForRemovingAdds,
-        'Removed: $removed, Time: ${DateTime.now()}');
+        paidForRemovingAdds, 'Removed: $removed, Time: ${DateTime.now()}');
   }
 
   static Future<void> addNotificationTap(
       DateTime dateTime, String? multiplier) async {
     multiplier ??= '';
-    await _updateDocumentData(notificationTap,
-        'Multiplier: $multiplier, Time: $dateTime');
+    await _updateDocumentData(
+        notificationTap, 'Multiplier: $multiplier, Time: $dateTime');
   }
 
   static Future<void> _updateDocumentData(

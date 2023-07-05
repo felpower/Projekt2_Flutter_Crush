@@ -1,15 +1,14 @@
-import 'package:bachelor_flutter_crush/controllers/unity/UnityScreen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/day_streak_bloc/day_streak_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/level_bloc/level_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_bloc.dart';
+import 'package:bachelor_flutter_crush/controllers/unity/UnityScreen.dart';
 import 'package:bachelor_flutter_crush/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'bloc/bloc_provider.dart' as custom_bloc;
 import 'bloc/game_bloc.dart';
@@ -72,7 +71,7 @@ class Application extends StatelessWidget {
     }
     if (prefs.getBool("hasRated") == null) {
       print("Setting Rated to false");
-      prefs.setBool("hasRated", false);//FixMe: adds and rating are still null
+      prefs.setBool("hasRated", false); //FixMe: adds and rating are still null
     }
   }
 }

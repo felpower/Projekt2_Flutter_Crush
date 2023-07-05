@@ -3,6 +3,7 @@ import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/d
 import 'package:bachelor_flutter_crush/pages/rating_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 /*
 This Class is not used anymore, kept for future implementations, if wanted to be added again
  */

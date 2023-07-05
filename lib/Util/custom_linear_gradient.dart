@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomLinearGradient {
-   static LinearGradient gradient = LinearGradient(
+  static LinearGradient gradient = LinearGradient(
     begin: Alignment.topCenter, // new
     end: Alignment.bottomCenter, // new
     // Add one stop for each color.

@@ -8,9 +8,9 @@ class DayStreakService {
   static Future<int> enhanceDaystreakIfNotAlreadyToday() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     DateTime? lastLoginDateTime = await _getLastLogin();
-    if (lastLoginDateTime == null || !_alreadyLoggedInToday(lastLoginDateTime)) {
-      int currentDayStreak =
-      prefs.get(DayStreakService.dayStreak) as int;
+    if (lastLoginDateTime == null ||
+        !_alreadyLoggedInToday(lastLoginDateTime)) {
+      int currentDayStreak = prefs.get(DayStreakService.dayStreak) as int;
       prefs.setInt(DayStreakService.dayStreak, ++currentDayStreak);
     }
     prefs.setString(DayStreakService.lastLogin,
@@ -22,7 +22,7 @@ class DayStreakService {
   static Future<int?> verifyAndGetDayStreak() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     DateTime? lastLogin = await _getLastLogin();
-    if (lastLogin==null || _shouldDayStreakBeReset(lastLogin)) {
+    if (lastLogin == null || _shouldDayStreakBeReset(lastLogin)) {
       _resetDayStreak(prefs);
     }
     return prefs.getInt(DayStreakService.dayStreak);
@@ -32,15 +32,14 @@ class DayStreakService {
     prefs.setInt(DayStreakService.dayStreak, 0);
   }
 
-
   static bool _shouldDayStreakBeReset(DateTime lastLoginDateTime) {
     return lastLoginDateTime.isBefore(
         DateUtils.dateOnly(DateTime.now()).subtract(const Duration(days: 1)));
   }
 
   static bool _alreadyLoggedInToday(DateTime lastLoginDateTime) {
-    return lastLoginDateTime.isAtSameMomentAs(
-        DateUtils.dateOnly(DateTime.now()));
+    return lastLoginDateTime
+        .isAtSameMomentAs(DateUtils.dateOnly(DateTime.now()));
   }
 
   static Future<DateTime?> _getLastLogin() async {

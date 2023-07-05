@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -50,7 +48,7 @@ class _MyAppState extends State<RatingPage> {
                       color: Colors.white,
                       onPressed: () {
                         ReportingService.addRating(_rating);
-                        print("Rating: "+ _rating.toString());
+                        print("Rating: " + _rating.toString());
                         if (_rating > 3) {
                           setRatingState();
                           Navigator.pop(this.context, 'Ok');
@@ -106,7 +104,7 @@ class _MyAppState extends State<RatingPage> {
                     IconButton(
                         onPressed: () {
                           ReportingService.addRating(_rating);
-                          print("Rating: "+ _rating.toString());
+                          print("Rating: " + _rating.toString());
                           if (_rating > 3) {
                             setRatingState();
                             Navigator.pop(this.context, 'OK');

@@ -30,7 +30,7 @@ class SlotMachineButton extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>  const FortuneWheel()));
+                      builder: (context) => const FortuneWheel()));
             },
             icon: const Icon(Icons.gamepad_outlined)));
   }

@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'notification_event.dart';
 
 class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
-
   final XpBloc xpBloc;
 
   NotificationBloc(this.xpBloc) : super(AwaitingNotificationClicksState()) {
