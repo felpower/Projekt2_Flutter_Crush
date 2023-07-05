@@ -55,8 +55,6 @@ class _UnityScreenState extends State<UnityScreen> {
     // Now that the context is available, retrieve the gameBloc
     gameBloc = BlocProvider.of<GameBloc>(context);
 
-    // Reset the objectives
-    gameBloc.reset();
     // Listen to "game over" notification
     _gameOverSubscription = gameIsOver.listen(showGameOver);
   }

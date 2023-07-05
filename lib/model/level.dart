@@ -1,8 +1,3 @@
-import 'package:quiver/async.dart';
-
-import '../helpers/array_2d.dart';
-import 'objective.dart';
-
 ///
 /// Level
 /// 
@@ -11,14 +6,11 @@ import 'objective.dart';
 ///  - maximum number of moves
 ///  - number of columns
 ///  - number of rows
-///  - list of objectives
 ///
 class Level extends Object {
   final int _index;
-  late Array2d grid;
   final int _rows;
   final int _cols;
-  final List<Objective> _objectives = [];
   final int _maxMoves;
   int _movesLeft = 0;
 
@@ -36,26 +28,7 @@ class Level extends Object {
       _cols = json["yDim"],
       _maxMoves = json["numMoves"]
     {
-      // Initialize the grid to the dimensions
-      grid = Array2d(_rows, _cols);
-
-      // Populate the grid from the definition
-        //
-        // Trick
-        //  As the definition in the JSON file defines the 
-        //  rows (top-down) and also because we are recording
-        //  the grid (bottom-up), we need to reverse the
-        //  definition from the JSON file.
-        //
-
-      // Retrieve the objectives
-      // First-time initialization
       resetObjectives();
-  }
-
-  @override
-  String toString(){
-    return "level: $index \n" + dumpArray2d(grid);
   }
 
   int get numberOfRows => _rows;
@@ -63,7 +36,6 @@ class Level extends Object {
   int get index => _index;
   int get maxMoves => _maxMoves;
   int get movesLeft => _movesLeft;
-  List<Objective> get objectives => List.unmodifiable(_objectives);
 
   //
   // Reset the objectives

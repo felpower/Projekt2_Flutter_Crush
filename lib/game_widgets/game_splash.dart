@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 import '../helpers/audio.dart';
-import '../model/level.dart';
-import '../model/objective.dart';
 import 'double_curved_container.dart';
-import 'objective_item.dart';
 
 class GameSplash extends StatefulWidget {
   GameSplash({
@@ -28,7 +25,7 @@ class _GameSplashState extends State<GameSplash>
     super.initState();
 
     _controller = AnimationController(
-      duration: Duration(seconds: 4),
+      duration: const Duration(seconds: 4),
       vsync: this,
     )
       ..addListener(() {
@@ -36,9 +33,7 @@ class _GameSplashState extends State<GameSplash>
       })
       ..addStatusListener((AnimationStatus status) {
         if (status == AnimationStatus.completed) {
-          if (widget.onComplete != null) {
-            widget.onComplete();
-          }
+          widget.onComplete();
         }
       });
 
@@ -48,7 +43,7 @@ class _GameSplashState extends State<GameSplash>
     ).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: Interval(
+        curve: const Interval(
           0.0,
           0.1,
           curve: Curves.easeIn,

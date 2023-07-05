@@ -8,7 +8,6 @@ import '../bloc/user_state_bloc/coins_bloc/coin_state.dart';
 import '../bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
 import '../bloc/user_state_bloc/xp_bloc/xp_state.dart';
 import '../helpers/audio.dart';
-import '../model/level.dart';
 import 'double_curved_container.dart';
 
 class GameOverSplash extends StatefulWidget {
@@ -117,12 +116,10 @@ class _GameOverSplashState extends State<GameOverSplash>
                             BlocBuilder<XpBloc, XpState>(
                                 builder: (context, state) {
                               String xpText = state is MultipliedXpState
-                                  ? ' x ' + state.multiplier.toString()
+                                  ? ' x ${state.multiplier}'
                                   : '';
                               return Text(
-                                  'Gained XP: ' +
-                                      state.addedAmount.toString() +
-                                      xpText,
+                                  'Gained XP: ${state.addedAmount}$xpText',
                                   style: const TextStyle(
                                     fontSize: 15.0,
                                     color: Colors.white,
@@ -130,9 +127,7 @@ class _GameOverSplashState extends State<GameOverSplash>
                             }),
                             BlocBuilder<CoinBloc, CoinState>(
                                 builder: (context, state) {
-                              return Text(
-                                  'Gained Coins: ' +
-                                      state.addedAmount.toString(),
+                              return Text('Gained Coins: ${state.addedAmount}',
                                   style: const TextStyle(
                                     fontSize: 15.0,
                                     color: Colors.white,
