@@ -130,7 +130,8 @@ class _UnityScreenState extends State<UnityScreen> {
     print('Received message from unity: ${message.toString()}');
     if (message.startsWith("Score: ")) {
     } else if (message.startsWith("GameOver: Won") && !gameOver) {
-      gameBloc.gameOver(lvl);
+      var xpCoins = lvl * int.parse(message.replaceAll(RegExp(r'[^0-9]'),''));
+      gameBloc.gameOver(xpCoins);
       _gameIsOverController.sink.add(true);
       gameOver = true;
     } else if (message.startsWith("GameOver: Lost") && !gameOver) {

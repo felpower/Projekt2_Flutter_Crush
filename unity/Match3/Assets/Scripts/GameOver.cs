@@ -29,12 +29,6 @@ namespace Match3
             scoreParent.SetActive(false);
 
             UnityMessageManager.Instance.SendMessageToFlutter("GameOver: Lost");
-            
-            // Animator animator = GetComponent<Animator>();
-
-            // if (animator) {
-            //     animator.Play("GameOverShow");
-            // }
         }
 
         public void ShowWin(int score, int starCount)
@@ -44,7 +38,7 @@ namespace Match3
 
             scoreText.text = score.ToString();
             scoreText.enabled = false;
-            UnityMessageManager.Instance.SendMessageToFlutter("GameOver: Won");
+            UnityMessageManager.Instance.SendMessageToFlutter("GameOver: Won, StarCount: " + starCount);
             Animator animator = GetComponent<Animator>();
                 
             if (animator) {
