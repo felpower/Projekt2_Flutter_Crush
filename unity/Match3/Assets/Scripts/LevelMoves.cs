@@ -38,5 +38,12 @@ namespace Match3
                 GameLose();
             }
         }
+
+        public override void OnPieceCleared(GamePiece piece, bool includePoints)
+        {
+            base.OnPieceCleared(piece, includePoints);
+            if(currentScore>=score3Star)
+                hud.OnGameWin(currentScore);
+        }
     }
 }

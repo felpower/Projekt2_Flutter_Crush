@@ -67,8 +67,6 @@ namespace Match3
             if (includePoints) {
                 currentScore += piece.score;
                 hud.SetScore(currentScore);
-                if(currentScore>=score3Star)
-                    hud.OnGameWin(currentScore);
             }
         }
 

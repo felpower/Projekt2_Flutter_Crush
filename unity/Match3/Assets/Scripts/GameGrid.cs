@@ -75,16 +75,14 @@ namespace Match3
         private void SpawnBubbles(int numOfObstacles)
         {
             for (int i = 0; i < numOfObstacles; i++) {
-                int x = Random.Range(1, xDim-1);
-                int y = Random.Range(1, yDim-1);
+                int x = Random.Range(1, xDim - 1);
+                int y = Random.Range(1, yDim - 1);
+                while (_pieces[x, y] != null) {
+                    x = Random.Range(1, xDim - 1);
+                    y = Random.Range(1, yDim - 1);
+                }
                 SpawnNewPiece(x, y, PieceType.Bubble);
             }
-            // for (int i = 0; i < initialPieces.Length; i++) {
-            //     if (initialPieces[i].x >= 0 && initialPieces[i].y < xDim
-            //                                 && initialPieces[i].y >= 0 && initialPieces[i].y < yDim) {
-            //         SpawnNewPiece(initialPieces[i].x, initialPieces[i].y, initialPieces[i].type);
-            //     }
-            // }
         }
 
         private IEnumerator Fill()
@@ -194,10 +192,12 @@ namespace Match3
 
         public Vector2 GetWorldPosition(int x, int y)
         {
-            Vector3 transformPosition = transform.position;
+            var transform1 = transform;
+            Vector3 transformPosition = transform1.position;
+            var localScale = transform1.localScale;
             return new Vector2(
-                (transformPosition.x - xDim / 2.0f + x) * transform.localScale.x,
-                (transformPosition.y + yDim / 2.0f - y) * transform.localScale.y);
+                (transformPosition.x - xDim / 2.0f + x) * localScale.x,
+                (transformPosition.y + yDim / 2.0f - y) * localScale.y);
         }
 
         private GamePiece SpawnNewPiece(int x, int y, PieceType type)

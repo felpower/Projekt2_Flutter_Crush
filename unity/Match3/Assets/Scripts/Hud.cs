@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 namespace Match3
@@ -51,7 +52,7 @@ namespace Match3
 
         public void SetRemaining(string remaining) => remainingText.text = remaining;
 
-        public void SetLevelType(LevelType type, ColorType colorType = ColorType.Any)
+        public void SetLevelType(LevelType type, String colorType = "Any")
         {
             switch (type) {
                 case LevelType.Moves:

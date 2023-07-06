@@ -49,8 +49,7 @@ namespace Match3
         {
             base.OnPieceCleared(piece, includePoints);
 
-            for (int i = 0; i < obstacleTypes.Length; i++)
-            {
+            for (int i = 0; i < obstacleTypes.Length; i++) {
                 if (obstacleTypes[i] != piece.Type) continue;
             
                 _numObstaclesLeft--;
