@@ -22,26 +22,19 @@ namespace Match3
 
         public LevelType Type => type;
 
-        private void Start()
-        {
-            
-        }
-
         protected void Setup(SceneInfo sceneInfo)
         {
-            gameObject.AddComponent<UnityMessageManager>();
-            
-            UnityMessageManager.Instance.SendMessageToFlutter("Static Scene Info Level: " + JsonConvert.SerializeObject(sceneInfo));
+            print(gameObject.name + " Setup");
             if (!string.IsNullOrEmpty(sceneInfo.level)) {
+                gameGrid.xDim = sceneInfo.xDim;
+                gameGrid.yDim = sceneInfo.yDim;
                 score1Star = sceneInfo.score1;
                 score2Star = sceneInfo.score2;
                 score3Star = sceneInfo.score3;
                 type = Enum.Parse<LevelType>(sceneInfo.type);
-                gameGrid.xDim = sceneInfo.xDim;
-                gameGrid.yDim = sceneInfo.yDim;
-                
-                
             }
+            gameObject.AddComponent<UnityMessageManager>();
+            UnityMessageManager.Instance.SendMessageToFlutter("Static Scene Info Level: " + JsonConvert.SerializeObject(sceneInfo));
         }
 
         protected virtual void GameWin()

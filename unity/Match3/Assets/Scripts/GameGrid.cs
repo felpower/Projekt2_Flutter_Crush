@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using FlutterUnityIntegration;
 using UnityEngine;
 using Random = UnityEngine.Random;
 namespace Match3
@@ -34,7 +33,7 @@ namespace Match3
 
         private void Awake()
         {
-            float scale = Screen.width < Screen.height ? Screen.width / ((float)Screen.height) : ((float)Screen.height) / Screen.width;
+            float scale = (float)Screen.width < (float)Screen.height ? (float)Screen.width / ((float)Screen.height) : ((float)Screen.height) / (float)Screen.width;
             Debug.Log(scale);
             transform.localScale = new Vector3(scale, scale, scale);
             // populating dictionary with piece prefabs types
@@ -46,7 +45,7 @@ namespace Match3
             // instantiate backgrounds
             for (int x = 0; x < xDim; x++) {
                 for (int y = 0; y < yDim; y++) {
-                    GameObject background = Instantiate(backgroundPrefab, GetWorldPosition(x, y), Quaternion.identity);
+                    GameObject background = Instantiate(backgroundPrefab, GetWorldPosition(x, y), Quaternion.identity, transform);
                     background.transform.parent = transform;
                 }
             }
@@ -406,7 +405,7 @@ namespace Match3
 
             // Traverse vertically if we found a match (for L and T shape)
             if (horizontalPieces.Count >= 3) {
-                for (int i = 0; i < horizontalPieces.Count; i++) {
+                foreach (GamePiece gamePiece in horizontalPieces) {
                     for (int dir = 0; dir <= 1; dir++) {
                         for (int yOffset = 1; yOffset < yDim; yOffset++) {
                             int y;
@@ -421,8 +420,8 @@ namespace Match3
                                 break;
                             }
 
-                            if (_pieces[horizontalPieces[i].X, y].IsColored() && _pieces[horizontalPieces[i].X, y].ColorComponent.Color == color) {
-                                verticalPieces.Add(_pieces[horizontalPieces[i].X, y]);
+                            if (_pieces[gamePiece.X, y].IsColored() && _pieces[gamePiece.X, y].ColorComponent.Color == color) {
+                                verticalPieces.Add(_pieces[gamePiece.X, y]);
                             } else {
                                 break;
                             }
@@ -477,7 +476,7 @@ namespace Match3
 
             // Traverse horizontally if we found a match (for L and T shape)
             if (verticalPieces.Count >= 3) {
-                for (int i = 0; i < verticalPieces.Count; i++) {
+                foreach (GamePiece gamePiece in verticalPieces) {
                     for (int dir = 0; dir <= 1; dir++) {
                         for (int xOffset = 1; xOffset < yDim; xOffset++) {
                             int x;
@@ -492,8 +491,8 @@ namespace Match3
                                 break;
                             }
 
-                            if (_pieces[x, verticalPieces[i].Y].IsColored() && _pieces[x, verticalPieces[i].Y].ColorComponent.Color == color) {
-                                horizontalPieces.Add(_pieces[x, verticalPieces[i].Y]);
+                            if (_pieces[x, gamePiece.Y].IsColored() && _pieces[x, gamePiece.Y].ColorComponent.Color == color) {
+                                horizontalPieces.Add(_pieces[x, gamePiece.Y]);
                             } else {
                                 break;
                             }

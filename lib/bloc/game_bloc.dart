@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -64,15 +63,17 @@ class GameBloc implements BlocBase {
 
   bool gameAlreadyOver = false;
 
-  //
+  List<Level> get levels => _levels;
+
   // Load the levels definitions from assets
   //
   _loadLevels() async {
     String jsonContent;
-    if (kIsWeb) {
-      jsonContent = await rootBundle.loadString('unityLevels.json');
-    } else {
+    jsonContent = await rootBundle.loadString('unityLevels.json');
+    print('jsonContent not empty: $jsonContent');
+    if (jsonContent.isNotEmpty) {
       jsonContent = await rootBundle.loadString('assets/unityLevels.json');
+      print('jsonContent empty: $jsonContent');
     }
     Map<dynamic, dynamic> list = json.decode(jsonContent);
     (list["levels"]).forEach((levelItem) {

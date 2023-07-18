@@ -8,47 +8,71 @@
 ///  - number of rows
 ///
 class Level extends Object {
-  final int _index;
-  final int _rows;
-  final int _cols;
-  final int _maxMoves;
-  int _movesLeft = 0;
+  final int level;
+  final String type;
+  final int xDim;
+  final int yDim;
+  final int numMoves;
+  final int score1;
+  final int score2;
 
-  //
-  // Variables that depend on the physical layout of the device
-  //
-  double tileWidth = 0.0;
-  double tileHeight = 0.0;
-  double boardLeft = 0.0;
-  double boardTop = 0.0;
+  final int score3;
+
+  final int targetScore;
+  final int timeInSeconds;
+  final int numOfObstacles;
+
+  final List<dynamic> obstacleTypes;
 
   Level.fromJson(Map<String, dynamic> json)
-      : _index = json["level"],
-        _rows = json["xDim"],
-        _cols = json["yDim"],
-        _maxMoves = json["numMoves"] {
+      : level = json["level"],
+  type = json["type"],
+        xDim = json["xDim"],
+        yDim = json["yDim"],
+        numMoves = json["numMoves"],
+        score1 = json["score1"],
+        score2 = json["score2"],
+        score3 = json["score3"],
+        targetScore = json["targetScore"],
+        timeInSeconds = json["timeInSeconds"],
+        numOfObstacles = json["numOfObstacles"],
+        obstacleTypes = json["obstacleTypes"] {
     resetObjectives();
   }
 
-  int get numberOfRows => _rows;
+  int get numberOfRows => xDim;
 
-  int get numberOfCols => _cols;
+  int get numberOfCols => yDim;
 
-  int get index => _index;
+  int get index => level;
 
-  int get maxMoves => _maxMoves;
-
-  int get movesLeft => _movesLeft;
+  int get maxMoves => numMoves;
 
   //
   // Reset the objectives
   //
   void resetObjectives() {}
 
-  //
-  // Decrement the number of moves left
-  //
-  int decrementMove() {
-    return (--_movesLeft).clamp(0, _maxMoves);
+
+  @override
+  String toString() {
+    return 'Level{level: $level, type: $type, xDim: $xDim, yDim: $yDim, numMoves: $numMoves, score1: $score1, score2: $score2, score3: $score3, targetScore: $targetScore, timeInSeconds: $timeInSeconds, numOfObstacles: $numOfObstacles, obstacleTypes: $obstacleTypes}';
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "level": level,
+      "type": type,
+      "xDim": xDim,
+      "yDim": yDim,
+      "numMoves": numMoves,
+      "score1": score1,
+      "score2": score2,
+      "score3": score3,
+      "targetScore": targetScore,
+      "timeInSeconds": timeInSeconds,
+      "numOfObstacles": numOfObstacles,
+      "obstacleTypes": obstacleTypes
+    };
   }
 }

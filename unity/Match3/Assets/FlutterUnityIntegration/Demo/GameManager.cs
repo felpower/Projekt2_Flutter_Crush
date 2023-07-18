@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    // Start is called before the first frame update
     private void Start()
     {
         gameObject.AddComponent<UnityMessageManager>();
@@ -19,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene(string json)
     {
+        UnityMessageManager.Instance.SendMessageToFlutter("Static Scene Info Game Manager: " + json);
         var sceneInfo = SceneInfo.CreateFromJson(json);
         SceneInfoExtensions.StaticSave(sceneInfo);
         UnityMessageManager.Instance.SendMessageToFlutter("Static Scene Info Game Manager: " + JsonConvert.SerializeObject(SceneInfoExtensions.GetAsSceneInfo()));

@@ -728,7 +728,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &581336197
 MonoBehaviour:
@@ -742,8 +742,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62fb356db7d2834b87559058d1855a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xDim: 7
-  yDim: 7
+  xDim: 11
+  yDim: 12
   fillTime: 0.1
   level: {fileID: 1773144088}
   piecePrefabs:
@@ -944,7 +944,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1773144087
 GameObject:
@@ -978,11 +978,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameGrid: {fileID: 581336197}
   hud: {fileID: 226560820}
-  score1Star: 15000
-  score2Star: 18000
-  score3Star: 21000
-  numMoves: 14
-  targetScore: 15000
+  score1Star: 32000
+  score2Star: 35000
+  score3Star: 38000
+  numMoves: 30
+  targetScore: 32000
 --- !u!4 &1773144089
 Transform:
   m_ObjectHideFlags: 0
@@ -996,7 +996,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1773144090
 MonoBehaviour:

@@ -35,7 +35,6 @@ class _UnityScreenState extends State<UnityScreen> {
   bool fabVisible = true;
 
   late StreamSubscription _gameOverSubscription;
-  late List<dynamic> data;
 
   @override
   void initState() {
@@ -46,7 +45,6 @@ class _UnityScreenState extends State<UnityScreen> {
     ]);
     _gameOverReceived = false;
     WidgetsBinding.instance.addPostFrameCallback(_showGameStartSplash);
-    readJson();
   }
 
   @override
@@ -158,16 +156,20 @@ class _UnityScreenState extends State<UnityScreen> {
       return;
     }
     Map<String, dynamic> jsonString = {};
-    for (var x in data) {
-      if (x['level'] == lvl) {
-        jsonString = x;
+
+    for (var x in gameBloc.levels) {
+      if (x.level == lvl) {
+        print(x.toString());
+        jsonString = x.toJson();
         break;
       }
     }
 
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    print("before type "+jsonString.toString());
     String type = jsonString['type'];
+    print("after type"+jsonString.toString());
     if (width > height) {
       print("Changing level to: $type Landscape");
       jsonString['orientation'] = "Landscape";
@@ -177,17 +179,6 @@ class _UnityScreenState extends State<UnityScreen> {
       jsonString['orientation'] = "Portrait";
       unityWidgetController?.postJsonMessage('GameManager', 'LoadScene', jsonString);
     }
-  }
-
-  Future<void> readJson() async {
-    final String response;
-    if (kIsWeb) {
-      response = await rootBundle.loadString('unityLevels.json');
-    } else {
-      response = await rootBundle.loadString('assets/unityLevels.json');
-    }
-
-    data = await json.decode(response)['levels'];
   }
 
   void showGameOver(bool success) async {
