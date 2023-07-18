@@ -23,14 +23,10 @@ class Audio {
   static play() async {
     AudioPlayer player = AudioPlayer();
     await player.play('assets/audio/swap.wav', isLocal: true);
-    // await player.play(AssetSource('assets/audio/swap.wav'));
   }
 
   static playAsset(AudioType audioType) {
-    player.play('audio/${describeEnum(audioType)}.wav');
-    // static playAsset(AudioType audioType) async {
-    //   AudioPlayer player = AudioPlayer();
-    //   await player.play(AssetSource('audio/${describeEnum(audioType)}.wav'));
+    // ToDo: player.play('audio/${describeEnum(audioType)}.wav');
   }
 }
 

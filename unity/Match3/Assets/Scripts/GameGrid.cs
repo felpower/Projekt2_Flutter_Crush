@@ -34,7 +34,6 @@ namespace Match3
         private void Awake()
         {
             float scale = (float)Screen.width < (float)Screen.height ? (float)Screen.width / ((float)Screen.height) : ((float)Screen.height) / (float)Screen.width;
-            Debug.Log(scale);
             transform.localScale = new Vector3(scale, scale, scale);
             // populating dictionary with piece prefabs types
             _piecePrefabDict = new Dictionary<PieceType, GameObject>();
@@ -46,7 +45,7 @@ namespace Match3
             for (int x = 0; x < xDim; x++) {
                 for (int y = 0; y < yDim; y++) {
                     GameObject background = Instantiate(backgroundPrefab, GetWorldPosition(x, y), Quaternion.identity, transform);
-                    background.transform.parent = transform;
+                    //background.transform.parent = transform;
                 }
             }
             // instantiating pieces

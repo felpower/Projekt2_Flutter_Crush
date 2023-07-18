@@ -26,7 +26,7 @@ namespace Match3
             }
             type = LevelType.Colors;
             _numObstaclesLeft = numOfObstacles;
-            String obstacles = string.Join(", ", sceneInfo.obstacleTypes);
+            String obstacles = string.Join(", ", obstacleTypes);
             hud.SetLevelType(type, obstacles);
             hud.SetScore(currentScore);
             hud.SetTarget(_numObstaclesLeft);
