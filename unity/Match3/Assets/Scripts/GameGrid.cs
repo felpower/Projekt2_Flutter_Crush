@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 namespace Match3
 {
@@ -29,27 +30,67 @@ namespace Match3
 
         private GamePiece _pressedPiece;
 
+        private Camera _mainCamera;
+
+        private float _scale;
+
         public bool IsFilling { get; private set; }
 
         private void Awake()
         {
-            float scale = (float)Screen.width < (float)Screen.height ? (float)Screen.width / ((float)Screen.height) : ((float)Screen.height) / (float)Screen.width;
-            transform.localScale = new Vector3(scale, scale, scale);
+            _mainCamera = Camera.main;
             // populating dictionary with piece prefabs types
             _piecePrefabDict = new Dictionary<PieceType, GameObject>();
             for (int i = 0; i < piecePrefabs.Length; i++) {
                 _piecePrefabDict.TryAdd(piecePrefabs[i].type, piecePrefabs[i].prefab);
             }
+        }
 
+        public void Instantiate()
+        {
+            print("Instantiate");
             // instantiate backgrounds
             for (int x = 0; x < xDim; x++) {
                 for (int y = 0; y < yDim; y++) {
-                    GameObject background = Instantiate(backgroundPrefab, GetWorldPosition(x, y), Quaternion.identity, transform);
-                    //background.transform.parent = transform;
+                    GameObject background = Instantiate(backgroundPrefab, GetWorldPosition(x, y), Quaternion.identity);
+                    background.transform.parent = transform;
                 }
             }
             // instantiating pieces
             InstantiatePieces();
+        }
+
+        private void Update()
+        {
+            float currentScale = Screen.height / (float)Screen.width;
+            if (Math.Abs(currentScale - _scale) > 0.0001f) {
+                _scale = currentScale;
+                Scene scene = SceneManager.GetActiveScene();
+                print(_scale);
+                float factor = 0f;
+                if (scene.name.Contains("Portrait")) {
+                    if (yDim > 8) {
+                        factor = (float)8 % yDim / 10 + 1;
+                    } else {
+                        factor = ((float)8 % yDim / 10 + 1) * -1;
+                    }
+                    _mainCamera.orthographicSize = Remap(_scale * factor, 1.77f, 1.17f, 8f, 7f);
+                } else {
+                    if (xDim > 8) {
+                        factor += (float)8 % xDim / 10 + 1;
+                    } else {
+                        factor -= ((float)8 % xDim / 10 + 1) * -1;
+                    }
+                    print("Scale: " + _scale);
+                    print("Scale Factor: " + _scale * factor);
+                    _mainCamera.orthographicSize = Remap(_scale * factor, 0.562f, 1f, 4.9f, 8f);
+                }
+            }
+        }
+
+        private float Remap(float value, float from1, float to1, float from2, float to2)
+        {
+            return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
         }
 
         private void InstantiatePieces()
@@ -73,11 +114,11 @@ namespace Match3
         private void SpawnBubbles(int numOfObstacles)
         {
             for (int i = 0; i < numOfObstacles; i++) {
-                int x = Random.Range(1, xDim - 1);
-                int y = Random.Range(1, yDim - 1);
+                int x = Random.Range(0, xDim);
+                int y = Random.Range(0, yDim);
                 while (_pieces[x, y] != null) {
-                    x = Random.Range(1, xDim - 1);
-                    y = Random.Range(1, yDim - 1);
+                    x = Random.Range(0, xDim);
+                    y = Random.Range(0, yDim);
                 }
                 SpawnNewPiece(x, y, PieceType.Bubble);
             }
@@ -176,7 +217,7 @@ namespace Match3
                 if (pieceBelow.Type != PieceType.Empty) continue;
 
                 Destroy(pieceBelow.gameObject);
-                GameObject newPiece = Instantiate(_piecePrefabDict[PieceType.Normal], GetWorldPosition(x, -1), Quaternion.identity, transform);
+                GameObject newPiece = Instantiate(_piecePrefabDict[PieceType.Normal], GetWorldPosition(x, -1), Quaternion.identity);
 
                 _pieces[x, 0] = newPiece.GetComponent<GamePiece>();
                 _pieces[x, 0].Init(x, -1, this, PieceType.Normal);
@@ -190,17 +231,15 @@ namespace Match3
 
         public Vector2 GetWorldPosition(int x, int y)
         {
-            var transform1 = transform;
-            Vector3 transformPosition = transform1.position;
-            var localScale = transform1.localScale;
+            Vector3 transformPosition = transform.position;
             return new Vector2(
-                (transformPosition.x - xDim / 2.0f + x) * localScale.x,
-                (transformPosition.y + yDim / 2.0f - y) * localScale.y);
+                transformPosition.x - xDim / 2.0f + x,
+                transformPosition.y + yDim / 2.0f - y);
         }
 
         private GamePiece SpawnNewPiece(int x, int y, PieceType type)
         {
-            GameObject newPiece = Instantiate(_piecePrefabDict[type], GetWorldPosition(x, y), Quaternion.identity, transform);
+            GameObject newPiece = Instantiate(_piecePrefabDict[type], GetWorldPosition(x, y), Quaternion.identity);
             _pieces[x, y] = newPiece.GetComponent<GamePiece>();
             _pieces[x, y].Init(x, y, this, type);
 

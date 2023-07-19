@@ -20,10 +20,26 @@ namespace Match3
 
         protected LevelType type;
 
+        private bool _isFlutter;
+
         public LevelType Type => type;
 
+        private void Awake()
+        {
+            StartCoroutine(IsFlutter());
+        }
+
+        private IEnumerator IsFlutter()
+        {
+            yield return new WaitForSeconds(2);
+            print("Is Flutter? "+_isFlutter);
+            if (!_isFlutter)
+                gameGrid.Instantiate();
+        }
+        
         protected void Setup(SceneInfo sceneInfo)
         {
+            _isFlutter = true;
             print(gameObject.name + " Setup");
             if (!string.IsNullOrEmpty(sceneInfo.level)) {
                 gameGrid.xDim = sceneInfo.xDim;
@@ -33,6 +49,8 @@ namespace Match3
                 score3Star = sceneInfo.score3;
                 type = Enum.Parse<LevelType>(sceneInfo.type);
             }
+            gameGrid.Instantiate();
+
             gameObject.AddComponent<UnityMessageManager>();
             UnityMessageManager.Instance.SendMessageToFlutter("Static Scene Info Level: " + JsonConvert.SerializeObject(sceneInfo));
         }
@@ -50,7 +68,7 @@ namespace Match3
             _didWin = false;
             StartCoroutine(WaitForGridFill());
         }
-    
+
         public virtual void OnMove()
         {
         }

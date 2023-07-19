@@ -1251,8 +1251,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62fb356db7d2834b87559058d1855a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xDim: 7
-  yDim: 7
+  xDim: 8
+  yDim: 8
   fillTime: 0.1
   level: {fileID: 1147243115}
   piecePrefabs:

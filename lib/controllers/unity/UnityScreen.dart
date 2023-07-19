@@ -167,9 +167,7 @@ class _UnityScreenState extends State<UnityScreen> {
 
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    print("before type "+jsonString.toString());
     String type = jsonString['type'];
-    print("after type"+jsonString.toString());
     if (width > height) {
       print("Changing level to: $type Landscape");
       jsonString['orientation'] = "Landscape";

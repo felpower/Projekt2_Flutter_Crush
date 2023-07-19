@@ -38,7 +38,6 @@ namespace Match3
             _movesUsed++;
 
             hud.SetRemaining(numMoves - _movesUsed);
-
             if (numMoves - _movesUsed == 0 && _numObstaclesLeft > 0) {
                 GameLose();
             }
