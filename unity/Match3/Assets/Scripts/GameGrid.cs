@@ -62,7 +62,7 @@ namespace Match3
 
         private void Update()
         {
-            float currentScale = Screen.height / (float)Screen.width;
+            float currentScale = (float)Screen.width < (float)Screen.height ? (float)Screen.width / ((float)Screen.height) : ((float)Screen.height) / (float)Screen.width;
             if (Math.Abs(currentScale - _scale) > 0.0001f) {
                 _scale = currentScale;
                 Scene scene = SceneManager.GetActiveScene();
@@ -70,9 +70,9 @@ namespace Match3
                 float factor = 0f;
                 if (scene.name.Contains("Portrait")) {
                     if (yDim > 8) {
-                        factor = (float)8 % yDim / 10 + 1;
+                        factor = (float)8 % xDim / 10 + 20;
                     } else {
-                        factor = ((float)8 % yDim / 10 + 1) * -1;
+                        factor = ((float)8 % xDim / 10 + 20);
                     }
                     _mainCamera.orthographicSize = Remap(_scale * factor, 1.77f, 1.17f, 8f, 7f);
                 } else {

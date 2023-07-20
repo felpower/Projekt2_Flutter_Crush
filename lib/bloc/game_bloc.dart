@@ -69,9 +69,11 @@ class GameBloc implements BlocBase {
   //
   _loadLevels() async {
     String jsonContent;
-    jsonContent = await rootBundle.loadString('unityLevels.json');
-    print('jsonContent not empty: $jsonContent');
-    if (jsonContent.isNotEmpty) {
+    print("Load Levels");
+    try {
+      jsonContent = await rootBundle.loadString('unityLevels.json');
+      print('jsonContent not empty: $jsonContent');
+    } catch(e){
       jsonContent = await rootBundle.loadString('assets/unityLevels.json');
       print('jsonContent empty: $jsonContent');
     }

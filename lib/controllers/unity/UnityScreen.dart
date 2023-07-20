@@ -159,7 +159,6 @@ class _UnityScreenState extends State<UnityScreen> {
 
     for (var x in gameBloc.levels) {
       if (x.level == lvl) {
-        print(x.toString());
         jsonString = x.toJson();
         break;
       }
