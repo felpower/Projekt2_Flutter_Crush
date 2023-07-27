@@ -1,7 +1,5 @@
 import 'dart:async';
-import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
@@ -88,7 +86,7 @@ class _UnityScreenState extends State<UnityScreen> {
                             onPressed: () => {Navigator.pop(context, 'Cancel')},
                             child: const Text('No')),
                         TextButton(
-                            onPressed: () => {changeScene("StartScreen"), popUntil()},
+                            onPressed: () => {changeToStart(), popUntil()},
                             child: const Text('Yes')),
                       ],
                     )));
@@ -123,16 +121,23 @@ class _UnityScreenState extends State<UnityScreen> {
 
   void onUnityMessage(message) {
     print('Received message from unity: ${message.toString()}');
+    if(message.startsWith("Resend Level Info")){
+      changeScene();
+      return;
+    }
     if (message.startsWith("Score: ")) {
+      return;
     } else if (message.startsWith("GameOver: Won") && !gameOver) {
       var xpCoins = lvl * int.parse(message.replaceAll(RegExp(r'[^0-9]'), ''));
       gameBloc.gameOver(xpCoins);
       _gameIsOverController.sink.add(true);
       gameOver = true;
+      return;
     } else if (message.startsWith("GameOver: Lost") && !gameOver) {
       gameOver = true;
       gameBloc.gameOver(0);
       _gameIsOverController.sink.add(false);
+      return;
     }
   }
 
@@ -150,11 +155,13 @@ class _UnityScreenState extends State<UnityScreen> {
     unityWidgetController = controller;
   }
 
-  void changeScene(String level) {
-    if (level == "StartScreen") {
-      unityWidgetController?.postMessage('GameManager', 'LoadStartScene', level);
+  void changeToStart(){
+      unityWidgetController?.postMessage('GameManager', 'LoadStartScene', "StartScreen");
       return;
-    }
+  }
+
+  void changeScene() {
+
     Map<String, dynamic> jsonString = {};
 
     for (var x in gameBloc.levels) {
@@ -167,6 +174,10 @@ class _UnityScreenState extends State<UnityScreen> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     String type = jsonString['type'];
+    while(unityWidgetController == null){
+
+      print("Waiting for unityWidgetController");
+    }
     if (width > height) {
       print("Changing level to: $type Landscape");
       jsonString['orientation'] = "Landscape";
@@ -209,7 +220,7 @@ class _UnityScreenState extends State<UnityScreen> {
             onComplete: () {
               _gameSplash.remove();
               // allow gesture detection
-              changeScene("");
+              changeScene();
             },
           );
         });

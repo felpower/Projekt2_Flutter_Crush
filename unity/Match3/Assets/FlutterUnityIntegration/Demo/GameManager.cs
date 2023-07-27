@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
     public void LoadScene(string json)
     {
         var sceneInfo = SceneInfo.CreateFromJson(json);
+        if (sceneInfo.level is null) {
+            UnityMessageManager.Instance.SendMessageToFlutter("Resend Level Info");
+        }
         SceneInfoExtensions.StaticSave(sceneInfo);
         UnityMessageManager.Instance.SendMessageToFlutter("Static Scene Info Game Manager: " + JsonConvert.SerializeObject(SceneInfoExtensions.GetAsSceneInfo()));
         SceneManager.LoadScene(sceneInfo.type+sceneInfo.orientation);

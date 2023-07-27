@@ -26,15 +26,15 @@ namespace Match3
 
         private void Awake()
         {
-            StartCoroutine(IsFlutter());
+            //StartCoroutine(IsFlutter());
         }
 
         private IEnumerator IsFlutter()
         {
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(1);
             print("Is Flutter? "+_isFlutter);
             if (!_isFlutter)
-                gameGrid.Instantiate();
+                 gameGrid.Instantiate();
         }
         
         protected void Setup(SceneInfo sceneInfo)

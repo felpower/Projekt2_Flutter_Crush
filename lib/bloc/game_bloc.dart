@@ -68,14 +68,17 @@ class GameBloc implements BlocBase {
   // Load the levels definitions from assets
   //
   _loadLevels() async {
-    String jsonContent;
+    String jsonContent = "";
     print("Load Levels");
     try {
       jsonContent = await rootBundle.loadString('unityLevels.json');
-      print('jsonContent not empty: $jsonContent');
+      print('after levels jsonContent not empty: $jsonContent');
     } catch(e){
+      print('jsonContent after levels still empty: $e');
+    }
+    if(jsonContent.isEmpty || jsonContent.startsWith("<!DOCTYPE html>")){
       jsonContent = await rootBundle.loadString('assets/unityLevels.json');
-      print('jsonContent empty: $jsonContent');
+      print('after assets/levels jsonContent not empty: $jsonContent');
     }
     Map<dynamic, dynamic> list = json.decode(jsonContent);
     (list["levels"]).forEach((levelItem) {
@@ -83,6 +86,7 @@ class GameBloc implements BlocBase {
       _maxLevel++;
     });
     _maxLevelNumber.add(_maxLevel);
+    print("Added $_maxLevelNumber levels");
   }
 
   void gameOver(int xp) {
