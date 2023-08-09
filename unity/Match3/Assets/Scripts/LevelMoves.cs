@@ -1,49 +1,42 @@
-﻿using UnityEngine;
-namespace Match3
-{
-    public class LevelMoves : Level
-    {
+﻿namespace Match3 {
+	public class LevelMoves : Level {
+		public int numMoves;
+		public int targetScore;
 
-        public int numMoves;
-        public int targetScore;
+		private int _movesUsed;
 
-        private int _movesUsed;
+		private void Start() {
+			type = LevelType.Moves;
+			hud.SetLevelType(type);
+			hud.SetScore(currentScore);
+			var sceneInfo = SceneInfoExtensions.GetAsSceneInfo();
+			if (!string.IsNullOrEmpty(sceneInfo.level)) {
+				Setup(sceneInfo);
+				numMoves = sceneInfo.numMoves;
+				targetScore = sceneInfo.targetScore;
+			}
 
-        private void Start()
-        {
-            type = LevelType.Moves;
-            hud.SetLevelType(type);
-            hud.SetScore(currentScore);
-            var sceneInfo = SceneInfoExtensions.GetAsSceneInfo();
-            if (!string.IsNullOrEmpty(sceneInfo.level)) {
-                Setup(sceneInfo);
-                numMoves = sceneInfo.numMoves;
-                targetScore = sceneInfo.targetScore;
-            }
-            hud.SetTarget(targetScore);
-            hud.SetRemaining(numMoves);
-        }
+			hud.SetTarget(targetScore);
+			hud.SetRemaining(numMoves);
+		}
 
-        public override void OnMove()
-        {
-            _movesUsed++;
+		public override void OnMove() {
+			_movesUsed++;
 
-            hud.SetRemaining(numMoves - _movesUsed);
+			hud.SetRemaining(numMoves - _movesUsed);
 
-            if (numMoves - _movesUsed != 0) return;
+			if (numMoves - _movesUsed != 0) return;
 
-            if (currentScore >= targetScore) {
-                GameWin();
-            } else {
-                GameLose();
-            }
-        }
+			if (currentScore >= targetScore)
+				GameWin();
+			else
+				GameLose();
+		}
 
-        public override void OnPieceCleared(GamePiece piece, bool includePoints)
-        {
-            base.OnPieceCleared(piece, includePoints);
-            if(currentScore>=score3Star)
-                hud.OnGameWin(currentScore);
-        }
-    }
+		public override void OnPieceCleared(GamePiece piece, bool includePoints) {
+			base.OnPieceCleared(piece, includePoints);
+			if (currentScore >= score3Star)
+				hud.OnGameWin(currentScore);
+		}
+	}
 }

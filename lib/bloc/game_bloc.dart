@@ -86,7 +86,7 @@ class GameBloc implements BlocBase {
       _maxLevel++;
     });
     _maxLevelNumber.add(_maxLevel);
-    print("Added $_maxLevelNumber levels");
+    print("Added $_maxLevel levels");
   }
 
   void gameOver(int xp) {

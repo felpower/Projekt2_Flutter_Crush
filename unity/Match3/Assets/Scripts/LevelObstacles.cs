@@ -1,65 +1,52 @@
-﻿using System;
-using System.Linq;
-namespace Match3
-{
-    public class LevelObstacles : Level
-    {
+﻿namespace Match3 {
+	public class LevelObstacles : Level {
+		private const int ScorePerPieceCleared = 1000;
 
-        public int numMoves;
-        public PieceType[] obstacleTypes;
+		public int numMoves;
+		public PieceType[] obstacleTypes;
 
-        private const int ScorePerPieceCleared = 1000;
-    
-        private int _movesUsed = 0;
-        private int _numObstaclesLeft;
+		private int _movesUsed;
+		private int _numObstaclesLeft;
 
-        private void Start ()
-        {
-            
-            var sceneInfo = SceneInfoExtensions.GetAsSceneInfo();
-            if (!string.IsNullOrEmpty(sceneInfo.level)) {
-                Setup(sceneInfo);
-                numMoves = sceneInfo.numMoves;
-            }
-            type = LevelType.Obstacle;
-            for (int i = 0; i < obstacleTypes.Length; i++)
-            {
-                _numObstaclesLeft += gameGrid.GetPiecesOfType(obstacleTypes[i]).Count;
-            }
+		private void Start() {
+			var sceneInfo = SceneInfoExtensions.GetAsSceneInfo();
+			if (!string.IsNullOrEmpty(sceneInfo.level)) {
+				Setup(sceneInfo);
+				numMoves = sceneInfo.numMoves;
+			}
 
-            hud.SetLevelType(type);
-            hud.SetScore(currentScore);
-            hud.SetTarget(_numObstaclesLeft);
-            hud.SetRemaining(numMoves);
-        }
+			type = LevelType.Obstacle;
+			for (var i = 0; i < obstacleTypes.Length; i++)
+				_numObstaclesLeft += gameGrid.GetPiecesOfType(obstacleTypes[i]).Count;
 
-        public override void OnMove()
-        {
-            _movesUsed++;
+			hud.SetLevelType(type);
+			hud.SetScore(currentScore);
+			hud.SetTarget(_numObstaclesLeft);
+			hud.SetRemaining(numMoves);
+		}
 
-            hud.SetRemaining(numMoves - _movesUsed);
+		public override void OnMove() {
+			_movesUsed++;
 
-            if (numMoves - _movesUsed == 0 && _numObstaclesLeft > 0)
-            {
-                GameLose();
-            }
-        }
+			hud.SetRemaining(numMoves - _movesUsed);
 
-        public override void OnPieceCleared(GamePiece piece, bool includePoints)
-        {
-            base.OnPieceCleared(piece, includePoints);
+			if (numMoves - _movesUsed == 0 && _numObstaclesLeft > 0) GameLose();
+		}
 
-            for (int i = 0; i < obstacleTypes.Length; i++) {
-                if (obstacleTypes[i] != piece.Type) continue;
-            
-                _numObstaclesLeft--;
-                hud.SetTarget(_numObstaclesLeft);
-                if (_numObstaclesLeft != 0) continue;
-            
-                currentScore += ScorePerPieceCleared * (numMoves - _movesUsed);
-                hud.SetScore(currentScore);
-                GameWin();
-            }
-        }
-    }
+		public override void OnPieceCleared(GamePiece piece, bool includePoints) {
+			base.OnPieceCleared(piece, includePoints);
+
+			for (var i = 0; i < obstacleTypes.Length; i++) {
+				if (obstacleTypes[i] != piece.Type) continue;
+
+				_numObstaclesLeft--;
+				hud.SetTarget(_numObstaclesLeft);
+				if (_numObstaclesLeft != 0) continue;
+
+				currentScore += ScorePerPieceCleared * (numMoves - _movesUsed);
+				hud.SetScore(currentScore);
+				GameWin();
+			}
+		}
+	}
 }

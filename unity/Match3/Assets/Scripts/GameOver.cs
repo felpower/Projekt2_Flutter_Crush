@@ -1,80 +1,61 @@
 ﻿using System.Collections;
+using FlutterUnityIntegration;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using FlutterUnityIntegration;
 
-namespace Match3
-{
-    public class GameOver : MonoBehaviour
-    {
-        public GameObject screenParent;
-        public GameObject scoreParent;
-        public Text loseText;
-        public Text scoreText;
-        public Image[] stars;
+namespace Match3 {
+	public class GameOver : MonoBehaviour {
+		public GameObject screenParent;
+		public GameObject scoreParent;
+		public Text loseText;
+		public Text scoreText;
+		public Image[] stars;
 
-        private void Start()
-        {
-            screenParent.SetActive(false);
+		private void Start() {
+			screenParent.SetActive(false);
 
-            for (int i = 0; i < stars.Length; i++) {
-                stars[i].enabled = false;
-            }
-        }
+			for (var i = 0; i < stars.Length; i++) stars[i].enabled = false;
+		}
 
-        public void ShowLose()
-        {
-            screenParent.SetActive(true);
-            scoreParent.SetActive(false);
+		public void ShowLose() {
+			screenParent.SetActive(true);
+			scoreParent.SetActive(false);
 
-            UnityMessageManager.Instance.SendMessageToFlutter("GameOver: Lost");
-        }
+			UnityMessageManager.Instance.SendMessageToFlutter("GameOver: Lost");
+		}
 
-        public void ShowWin(int score, int starCount)
-        {
-            screenParent.SetActive(true);
-            loseText.enabled = false;
+		public void ShowWin(int score, int starCount) {
+			screenParent.SetActive(true);
+			loseText.enabled = false;
 
-            scoreText.text = score.ToString();
-            scoreText.enabled = false;
-            UnityMessageManager.Instance.SendMessageToFlutter("GameOver: Won, StarCount: " + starCount);
-            Animator animator = GetComponent<Animator>();
-                
-            if (animator) {
-                animator.Play("GameOverShow");
-            }
+			scoreText.text = score.ToString();
+			scoreText.enabled = false;
+			UnityMessageManager.Instance.SendMessageToFlutter("GameOver: Won, StarCount: " + starCount);
+			var animator = GetComponent<Animator>();
 
-            StartCoroutine(ShowWinCoroutine(starCount));
-        }
+			if (animator) animator.Play("GameOverShow");
 
-        private IEnumerator ShowWinCoroutine(int starCount)
-        {
-            yield return new WaitForSeconds(0.5f);
+			StartCoroutine(ShowWinCoroutine(starCount));
+		}
 
-            if (starCount < stars.Length) {
-                for (int i = 0; i <= starCount; i++) {
-                    stars[i].enabled = true;
+		private IEnumerator ShowWinCoroutine(int starCount) {
+			yield return new WaitForSeconds(0.5f);
 
-                    if (i > 0) {
-                        stars[i - 1].enabled = false;
-                    }
+			if (starCount < stars.Length)
+				for (var i = 0; i <= starCount; i++) {
+					stars[i].enabled = true;
 
-                    yield return new WaitForSeconds(0.5f);
-                }
-            }
-            
-            scoreText.enabled = true;
-        }
+					if (i > 0) stars[i - 1].enabled = false;
 
-        public void OnReplayClicked()
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
+					yield return new WaitForSeconds(0.5f);
+				}
 
-        public void OnDoneClicked()
-        {
-            UnityMessageManager.Instance.SendMessageToFlutter("Score: "+scoreText.text);
-        }
-    }
+			scoreText.enabled = true;
+		}
+
+		public void OnReplayClicked() { SceneManager.LoadScene(SceneManager.GetActiveScene().name); }
+
+		public void OnDoneClicked() { UnityMessageManager.Instance.SendMessageToFlutter("Score: " + scoreText.text); }
+	}
 }

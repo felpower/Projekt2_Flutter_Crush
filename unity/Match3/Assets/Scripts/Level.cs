@@ -3,95 +3,84 @@ using System.Collections;
 using FlutterUnityIntegration;
 using Newtonsoft.Json;
 using UnityEngine;
-namespace Match3
-{
-    public class Level : MonoBehaviour
-    {
-        public GameGrid gameGrid;
-        public Hud hud;
 
-        public int score1Star;
-        public int score2Star;
-        public int score3Star;
+namespace Match3 {
+	public class Level : MonoBehaviour {
+		public GameGrid gameGrid;
+		public Hud hud;
 
-        private bool _didWin;
+		public int score1Star;
+		public int score2Star;
+		public int score3Star;
 
-        protected int currentScore;
+		private bool _didWin;
 
-        protected LevelType type;
+		private bool _isFlutter;
 
-        private bool _isFlutter;
+		protected int currentScore;
 
-        public LevelType Type => type;
+		protected LevelType type;
 
-        private void Awake()
-        {
-            //StartCoroutine(IsFlutter());
-        }
+		public LevelType Type => type;
 
-        private IEnumerator IsFlutter()
-        {
-            yield return new WaitForSeconds(1);
-            print("Is Flutter? "+_isFlutter);
-            if (!_isFlutter)
-                 gameGrid.Instantiate();
-        }
-        
-        protected void Setup(SceneInfo sceneInfo)
-        {
-            _isFlutter = true;
-            print(gameObject.name + " Setup");
-            if (!string.IsNullOrEmpty(sceneInfo.level)) {
-                gameGrid.xDim = sceneInfo.xDim;
-                gameGrid.yDim = sceneInfo.yDim;
-                score1Star = sceneInfo.score1;
-                score2Star = sceneInfo.score2;
-                score3Star = sceneInfo.score3;
-                type = Enum.Parse<LevelType>(sceneInfo.type);
-            }
-            gameGrid.Instantiate();
+		private void Awake() {
+			//StartCoroutine(IsFlutter());
+		}
 
-            gameObject.AddComponent<UnityMessageManager>();
-            UnityMessageManager.Instance.SendMessageToFlutter("Static Scene Info Level: " + JsonConvert.SerializeObject(sceneInfo));
-        }
+		private IEnumerator IsFlutter() {
+			yield return new WaitForSeconds(1);
+			print("Is Flutter? " + _isFlutter);
+			if (!_isFlutter)
+				gameGrid.Instantiate();
+		}
 
-        protected virtual void GameWin()
-        {
-            gameGrid.GameOver();
-            _didWin = true;
-            StartCoroutine(WaitForGridFill());
-        }
+		protected void Setup(SceneInfo sceneInfo) {
+			_isFlutter = true;
+			print(gameObject.name + " Setup");
+			if (!string.IsNullOrEmpty(sceneInfo.level)) {
+				gameGrid.xDim = sceneInfo.xDim;
+				gameGrid.yDim = sceneInfo.yDim;
+				score1Star = sceneInfo.score1;
+				score2Star = sceneInfo.score2;
+				score3Star = sceneInfo.score3;
+				type = Enum.Parse<LevelType>(sceneInfo.type);
+			}
 
-        protected virtual void GameLose()
-        {
-            gameGrid.GameOver();
-            _didWin = false;
-            StartCoroutine(WaitForGridFill());
-        }
+			gameGrid.Instantiate();
 
-        public virtual void OnMove()
-        {
-        }
+			gameObject.AddComponent<UnityMessageManager>();
+			UnityMessageManager.Instance.SendMessageToFlutter("Static Scene Info Level: " +
+			                                                  JsonConvert.SerializeObject(sceneInfo));
+		}
 
-        public virtual void OnPieceCleared(GamePiece piece, bool includePoints)
-        {
-            if (includePoints) {
-                currentScore += piece.score;
-                hud.SetScore(currentScore);
-            }
-        }
+		protected virtual void GameWin() {
+			gameGrid.GameOver();
+			_didWin = true;
+			StartCoroutine(WaitForGridFill());
+		}
 
-        protected virtual IEnumerator WaitForGridFill()
-        {
-            while (gameGrid.IsFilling) {
-                yield return null;
-            }
+		protected virtual void GameLose() {
+			gameGrid.GameOver();
+			_didWin = false;
+			StartCoroutine(WaitForGridFill());
+		}
 
-            if (_didWin) {
-                hud.OnGameWin(currentScore);
-            } else {
-                hud.OnGameLose();
-            }
-        }
-    }
+		public virtual void OnMove() { }
+
+		public virtual void OnPieceCleared(GamePiece piece, bool includePoints) {
+			if (includePoints) {
+				currentScore += piece.score;
+				hud.SetScore(currentScore);
+			}
+		}
+
+		protected virtual IEnumerator WaitForGridFill() {
+			while (gameGrid.IsFilling) yield return null;
+
+			if (_didWin)
+				hud.OnGameWin(currentScore);
+			else
+				hud.OnGameLose();
+		}
+	}
 }
