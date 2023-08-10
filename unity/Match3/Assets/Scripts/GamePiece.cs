@@ -57,6 +57,12 @@ namespace Match3 {
 
 		public bool IsColored() { return ColorComponent != null; }
 
+		public bool IsSameColor(GamePiece gamePiece) {
+			if (gamePiece.ColorComponent == null || ColorComponent == null)
+				return false;
+			return ColorComponent.Color.Equals(gamePiece.ColorComponent.Color);
+		}
+
 		public bool IsClearable() { return ClearableComponent != null; }
 	}
 }

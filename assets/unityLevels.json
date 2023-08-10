@@ -143,8 +143,8 @@
     {
       "level": 9,
       "type": "Moves",
-      "xDim": 11,
-      "yDim": 12,
+      "xDim": 5,
+      "yDim": 5,
       "numMoves": 30,
       "score1": 32000,
       "score2": 35000,

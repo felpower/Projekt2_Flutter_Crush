@@ -15,7 +15,7 @@ namespace Match3 {
 
 		private bool _didWin;
 
-		private bool _isFlutter;
+		public bool _isFlutter;
 
 		protected int currentScore;
 
@@ -24,7 +24,7 @@ namespace Match3 {
 		public LevelType Type => type;
 
 		private void Awake() {
-			//StartCoroutine(IsFlutter());
+			StartCoroutine(IsFlutter());
 		}
 
 		private IEnumerator IsFlutter() {
@@ -53,16 +53,24 @@ namespace Match3 {
 			                                                  JsonConvert.SerializeObject(sceneInfo));
 		}
 
-		protected virtual void GameWin() {
+		protected void GameWin() {
 			gameGrid.GameOver();
 			_didWin = true;
 			StartCoroutine(WaitForGridFill());
 		}
 
-		protected virtual void GameLose() {
+		protected void GameLose() {
 			gameGrid.GameOver();
 			_didWin = false;
 			StartCoroutine(WaitForGridFill());
+		}
+
+		public void ShufflePieces() {
+			gameGrid.ClearAll();
+		}
+
+		public void NoMoreMoves() {
+			UnityMessageManager.Instance.SendMessageToFlutter("Shuffle No more moves");
 		}
 
 		public virtual void OnMove() { }
@@ -74,7 +82,7 @@ namespace Match3 {
 			}
 		}
 
-		protected virtual IEnumerator WaitForGridFill() {
+		protected IEnumerator WaitForGridFill() {
 			while (gameGrid.IsFilling) yield return null;
 
 			if (_didWin)

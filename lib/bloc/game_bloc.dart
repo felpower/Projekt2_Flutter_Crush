@@ -83,8 +83,8 @@ class GameBloc implements BlocBase {
     Map<dynamic, dynamic> list = json.decode(jsonContent);
     (list["levels"]).forEach((levelItem) {
       _levels.add(Level.fromJson(levelItem));
-      _maxLevel++;
     });
+    _maxLevel = _levels.last.level;
     _maxLevelNumber.add(_maxLevel);
     print("Added $_maxLevel levels");
   }

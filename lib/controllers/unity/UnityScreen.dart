@@ -121,24 +121,56 @@ class _UnityScreenState extends State<UnityScreen> {
 
   void onUnityMessage(message) {
     print('Received message from unity: ${message.toString()}');
-    if(message.startsWith("Resend Level Info")){
+    if (message.startsWith("Resend Level Info")) {
       changeScene();
       return;
     }
     if (message.startsWith("Score: ")) {
       return;
+    } else if (message.startsWith("Shuffle")) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) => PointerInterceptor(
+                  child: AlertDialog(
+                title: const Text('No More moves possible'),
+                content: const Text('Do you want to spend 20 coins for a shuffle?'),
+                elevation: 24,
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(16))),
+                actions: <Widget>[
+                  TextButton(
+                      onPressed: () => {
+                            unityWidgetController?.postMessage(
+                                'Level', 'ShufflePieces', "ShufflePieces"),
+                            Navigator.pop(context, 'Cancel')
+                          },
+                      child: const Text('Yes')),
+                  TextButton(
+                      onPressed: () => {gameLost(), popUntil()},
+                      child: const Text('Game Over')),
+                ],
+              )));
+      return;
     } else if (message.startsWith("GameOver: Won") && !gameOver) {
-      var xpCoins = lvl * int.parse(message.replaceAll(RegExp(r'[^0-9]'), ''));
-      gameBloc.gameOver(xpCoins);
-      _gameIsOverController.sink.add(true);
-      gameOver = true;
-      return;
+      gameWon(message);
     } else if (message.startsWith("GameOver: Lost") && !gameOver) {
-      gameOver = true;
-      gameBloc.gameOver(0);
-      _gameIsOverController.sink.add(false);
-      return;
+      gameLost();
     }
+  }
+
+  void gameWon(message) {
+    var xpCoins = lvl * int.parse(message.replaceAll(RegExp(r'[^0-9]'), ''));
+    gameBloc.gameOver(xpCoins);
+    _gameIsOverController.sink.add(true);
+    gameOver = true;
+    return;
+  }
+
+  void gameLost() {
+    gameOver = true;
+    gameBloc.gameOver(0);
+    _gameIsOverController.sink.add(false);
+    return;
   }
 
   void onUnitySceneLoaded(SceneLoaded? scene) {
@@ -155,13 +187,12 @@ class _UnityScreenState extends State<UnityScreen> {
     unityWidgetController = controller;
   }
 
-  void changeToStart(){
-      unityWidgetController?.postMessage('GameManager', 'LoadStartScene', "StartScreen");
-      return;
+  void changeToStart() {
+    unityWidgetController?.postMessage('GameManager', 'LoadStartScene', "StartScreen");
+    return;
   }
 
   void changeScene() {
-
     Map<String, dynamic> jsonString = {};
 
     for (var x in gameBloc.levels) {
@@ -174,8 +205,7 @@ class _UnityScreenState extends State<UnityScreen> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     String type = jsonString['type'];
-    while(unityWidgetController == null){
-
+    while (unityWidgetController == null) {
       print("Waiting for unityWidgetController");
     }
     if (width > height) {
