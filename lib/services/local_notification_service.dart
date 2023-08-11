@@ -1,15 +1,20 @@
+import 'dart:js';
 import 'dart:math';
-
+import 'package:firebase_core/firebase_core.dart';
 import 'package:bachelor_flutter_crush/persistence/reporting_service.dart';
 import 'package:bachelor_flutter_crush/persistence/xp_service.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
+import '../firebase_options.dart';
+
 class LocalNotificationService {
-  static const String notificaitonsAlreadyScheduled =
-      'notificationsAlreadyScheduled';
+  static const String notificationsAlreadyScheduled = 'notificationsAlreadyScheduled';
 
   static final LocalNotificationService _localNotificationService =
       LocalNotificationService._internal();
@@ -28,23 +33,18 @@ class LocalNotificationService {
     const AndroidInitializationSettings androidInitializationSettings =
         AndroidInitializationSettings('tile');
 
-    const DarwinInitializationSettings iosInitializationSettings =
-        DarwinInitializationSettings(
-            requestSoundPermission: false,
-            requestAlertPermission: true,
-            requestBadgePermission: true);
+    const DarwinInitializationSettings iosInitializationSettings = DarwinInitializationSettings(
+        requestSoundPermission: false, requestAlertPermission: true, requestBadgePermission: true);
 
-    const InitializationSettings initializationSettings =
-        InitializationSettings(
-            android: androidInitializationSettings,
-            iOS: iosInitializationSettings);
+    const InitializationSettings initializationSettings = InitializationSettings(
+        android: androidInitializationSettings, iOS: iosInitializationSettings);
+    //if (kIsWeb) getWebToken();
 
     await flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onDidReceiveNotificationResponse: (payload) async {
       return Future(() {
         ReportingService.addNotificationTap(DateTime.now(), payload as String?);
-        XpService.updateMultiplierXpTime(
-            DateTime.now().add(const Duration(minutes: 15)));
+        XpService.updateMultiplierXpTime(DateTime.now().add(const Duration(minutes: 15)));
         if (payload != null) {
           XpService.updateCurrentMultiplier(int.parse(payload as String));
         }
@@ -53,17 +53,13 @@ class LocalNotificationService {
   }
 
   Future<void> showNotification() async {
-    await flutterLocalNotificationsPlugin.show(
-        1,
-        'Flutter Crush',
-        'Play in the next 15 Minutes to get double XP!',
-        createNotificationDetails());
+    await flutterLocalNotificationsPlugin.show(1, 'Flutter Crush',
+        'Play in the next 15 Minutes to get double XP!', createNotificationDetails());
   }
 
   NotificationDetails createNotificationDetails() {
     NotificationDetails notificationDetails = NotificationDetails(
-        android: createAndroidNotificationDetails(),
-        iOS: createIosNotificationDetails());
+        android: createAndroidNotificationDetails(), iOS: createIosNotificationDetails());
     return notificationDetails;
   }
 
@@ -72,8 +68,7 @@ class LocalNotificationService {
   }
 
   DarwinNotificationDetails createIosNotificationDetails() {
-    const DarwinNotificationDetails iosNotificationDetails =
-        DarwinNotificationDetails(
+    const DarwinNotificationDetails iosNotificationDetails = DarwinNotificationDetails(
       presentAlert: true,
       presentBadge: true,
       presentSound: false,
@@ -114,17 +109,50 @@ class LocalNotificationService {
         tz.TZDateTime.now(tz.local).add(const Duration(minutes: 1)),
         createNotificationDetails(),
         androidAllowWhileIdle: true,
-        uiLocalNotificationDateInterpretation:
-            UILocalNotificationDateInterpretation.absoluteTime);
+        uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime);
   }
 
   Future<bool> _notificationsAlreadyScheduled() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? alreadyScheduled = prefs.getBool(notificaitonsAlreadyScheduled);
-    prefs.setBool(notificaitonsAlreadyScheduled, true);
+    bool? alreadyScheduled = prefs.getBool(notificationsAlreadyScheduled);
+    prefs.setBool(notificationsAlreadyScheduled, true);
     if (alreadyScheduled == null) {
       return false;
     }
     return true;
+  }
+
+  Future<void> getWebToken() async {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    getToken();
+    FirebaseMessaging.onMessage.listen(showFlutterNotification);
+  }
+
+  getToken() async {
+    String? token = await FirebaseMessaging.instance.getToken();
+    print("DeviceToken: $token");
+  }
+
+  void showFlutterNotification(RemoteMessage message) {
+    RemoteNotification? notification = message.notification;
+    AndroidNotification? android = message.notification?.android;
+    print("Notification ${notification!.title}");
+    // showModalBottomSheet(
+    //     context: context,
+    //     builder: (context) {
+    //       return Container(
+    //         height: 100,
+    //         color: Colors.white,
+    //         child: Center(
+    //           child: Text(
+    //             notification.title!,
+    //             style: const TextStyle(fontSize: 20),
+    //           ),
+    //         ),
+    //       );
+    //     }
+    // );
   }
 }
