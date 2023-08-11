@@ -19,7 +19,8 @@ class UnityScreen extends StatefulWidget {
 }
 
 class _UnityScreenState extends State<UnityScreen> {
-  static final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  static final GlobalKey<ScaffoldState> _scaffoldKey =
+      GlobalKey<ScaffoldState>();
 
   late GameBloc gameBloc;
   UnityWidgetController? unityWidgetController;
@@ -65,7 +66,8 @@ class _UnityScreenState extends State<UnityScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
+    final arguments = (ModalRoute.of(context)?.settings.arguments ??
+        <String, dynamic>{}) as Map;
     lvl = arguments['level'];
     return Scaffold(
       floatingActionButton: PointerInterceptor(
@@ -77,7 +79,8 @@ class _UnityScreenState extends State<UnityScreen> {
                 builder: (BuildContext context) => PointerInterceptor(
                         child: AlertDialog(
                       title: const Text('Abort level'),
-                      content: const Text('Are you sure you want to abort the level?'),
+                      content: const Text(
+                          'Are you sure you want to abort the level?'),
                       elevation: 24,
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(16))),
@@ -133,7 +136,8 @@ class _UnityScreenState extends State<UnityScreen> {
           builder: (BuildContext context) => PointerInterceptor(
                   child: AlertDialog(
                 title: const Text('No More moves possible'),
-                content: const Text('Do you want to spend 20 coins for a shuffle?'),
+                content:
+                    const Text('Do you want to spend 20 coins for a shuffle?'),
                 elevation: 24,
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(16))),
@@ -188,7 +192,8 @@ class _UnityScreenState extends State<UnityScreen> {
   }
 
   void changeToStart() {
-    unityWidgetController?.postMessage('GameManager', 'LoadStartScene', "StartScreen");
+    unityWidgetController?.postMessage(
+        'GameManager', 'LoadStartScene', "StartScreen");
     return;
   }
 
@@ -211,11 +216,13 @@ class _UnityScreenState extends State<UnityScreen> {
     if (width > height) {
       print("Changing level to: $type Landscape");
       jsonString['orientation'] = "Landscape";
-      unityWidgetController?.postJsonMessage('GameManager', 'LoadScene', jsonString);
+      unityWidgetController?.postJsonMessage(
+          'GameManager', 'LoadScene', jsonString);
     } else {
       print("Changing level to: $type Portrait");
       jsonString['orientation'] = "Portrait";
-      unityWidgetController?.postJsonMessage('GameManager', 'LoadScene', jsonString);
+      unityWidgetController?.postJsonMessage(
+          'GameManager', 'LoadScene', jsonString);
     }
   }
 

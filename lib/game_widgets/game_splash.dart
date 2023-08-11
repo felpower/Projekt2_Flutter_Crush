@@ -33,7 +33,11 @@ class _GameSplashState extends State<GameSplash>
       })
       ..addStatusListener((AnimationStatus status) {
         if (status == AnimationStatus.completed) {
-          widget.onComplete();
+          try {
+            widget.onComplete();
+          } catch (e) {
+            print(e);
+          }
         }
       });
 
