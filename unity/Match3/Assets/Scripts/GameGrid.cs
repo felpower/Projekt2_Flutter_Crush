@@ -17,6 +17,10 @@ namespace Match3 {
 		public GameObject backgroundPrefab;
 
 		public PiecePosition[] initialPieces;
+
+		private readonly float
+			timeBetweenDoingSomething = 2f; //Wait 2 second after we do something to do something again
+
 		private GamePiece _enteredPiece;
 
 		private bool _gameOver;
@@ -32,6 +36,11 @@ namespace Match3 {
 		private GamePiece _pressedPiece;
 
 		private float _scale;
+		private bool checkedMoves;
+
+		private GamePiece[,] checkMovesArray;
+
+		private float timeWhenWeNextDoSomething; //The next time we do something
 
 		public bool IsFilling { get; private set; }
 
@@ -45,24 +54,21 @@ namespace Match3 {
 			timeWhenWeNextDoSomething = Time.time + timeBetweenDoingSomething;
 		}
 
-		private float timeBetweenDoingSomething = 2f; //Wait 2 second after we do something to do something again
-		private float timeWhenWeNextDoSomething; //The next time we do something
-		private bool checkedMoves = true;
-
 		private void Update() {
 			if (timeWhenWeNextDoSomething <= Time.time) {
-				if (!checkedMoves)
+				if (!checkedMoves) {
+					print("Checking for Moves at: " + Time.time);
 					if (!HasAvailableMoves()) {
 						print("No More Moves");
-						checkedMoves = true;
-						if (!level._isFlutter) {
+						if (!level._isFlutter)
 							ClearAll();
-						} else {
+						else {
 							level.NoMoreMoves();
 						}
 					}
 
-				timeWhenWeNextDoSomething = Time.time + timeBetweenDoingSomething;
+					checkedMoves = true;
+				}
 			}
 
 			var currentScale = Screen.width < (float)Screen.height
@@ -79,7 +85,8 @@ namespace Match3 {
 					else
 						factor = (float)8 % xDim / 10 + 20;
 					_mainCamera.orthographicSize = Remap(_scale * factor, 1.77f, 1.17f, 8f, 7f);
-				} else {
+				}
+				else {
 					if (xDim > 8)
 						factor += (float)8 % xDim / 10 + 1;
 					else
@@ -93,12 +100,11 @@ namespace Match3 {
 
 		public void Instantiate() {
 			// instantiate backgrounds
-			for (var x = 0; x < xDim; x++) {
+			for (var x = 0; x < xDim; x++)
 				for (var y = 0; y < yDim; y++) {
 					var background = Instantiate(backgroundPrefab, GetWorldPosition(x, y), Quaternion.identity);
 					background.transform.parent = transform;
 				}
-			}
 
 			// instantiating pieces
 			InstantiatePieces();
@@ -112,11 +118,10 @@ namespace Match3 {
 			_pieces = new GamePiece[xDim, yDim];
 			var sceneInfo = SceneInfoExtensions.GetAsSceneInfo();
 			if (sceneInfo.type == LevelType.Obstacle.ToString()) SpawnBubbles(sceneInfo.numOfObstacles);
-			for (var x = 0; x < xDim; x++) {
+			for (var x = 0; x < xDim; x++)
 				for (var y = 0; y < yDim; y++)
 					if (_pieces[x, y] == null)
 						SpawnNewPiece(x, y, PieceType.Empty);
-			}
 
 			StartCoroutine(Fill());
 		}
@@ -159,7 +164,7 @@ namespace Match3 {
 		private bool FillStep() {
 			var movedPiece = false;
 			// y = 0 is at the top, we ignore the last row, since it can't be moved down.
-			for (var y = yDim - 2; y >= 0; y--) {
+			for (var y = yDim - 2; y >= 0; y--)
 				for (var loopX = 0; loopX < xDim; loopX++) {
 					var x = loopX;
 					if (_inverse) x = xDim - 1 - loopX;
@@ -175,7 +180,8 @@ namespace Match3 {
 						_pieces[x, y + 1] = piece;
 						SpawnNewPiece(x, y, PieceType.Empty);
 						movedPiece = true;
-					} else
+					}
+					else {
 						for (var diag = -1; diag <= 1; diag++) {
 							if (diag == 0) continue;
 
@@ -210,8 +216,8 @@ namespace Match3 {
 							movedPiece = true;
 							break;
 						}
+					}
 				}
-			}
 
 			// the highest row (0) is a special case, we must fill it with new pieces if empty
 			for (var x = 0; x < xDim; x++) {
@@ -221,96 +227,97 @@ namespace Match3 {
 
 				Destroy(pieceBelow.gameObject);
 				var newPiece = Instantiate(_piecePrefabDict[PieceType.Normal], GetWorldPosition(x, -1),
-					Quaternion.identity);
+				                           Quaternion.identity);
 
 				_pieces[x, 0] = newPiece.GetComponent<GamePiece>();
 				_pieces[x, 0].Init(x, -1, this, PieceType.Normal);
 				_pieces[x, 0].MovableComponent.Move(x, 0, fillTime);
 				_pieces[x, 0].ColorComponent
-					.SetColor((ColorType)Random.Range(0, _pieces[x, 0].ColorComponent.NumColors));
+				             .SetColor((ColorType)Random.Range(0, _pieces[x, 0].ColorComponent.NumColors));
 				movedPiece = true;
 			}
 
 			return movedPiece;
 		}
 
-		bool HasAvailableMoves() {
-			for (int row = 0; row < xDim; row++) {
-				for (int col = 0; col < yDim; col++) {
+		private bool HasAvailableMoves() {
+			checkMovesArray = _pieces.Clone() as GamePiece[,];
+
+			for (var row = 0; row < xDim; row++)
+				for (var col = 0; col < yDim; col++) {
 					// Check horizontal swap
-					var piece1 = _pieces[row, col];
+					var piece1 = checkMovesArray![row, col];
 					if (col < yDim - 1) {
-						var piece2 = _pieces[row, col + 1];
-						if (piece1.Type == PieceType.Rainbow || piece2.Type == PieceType.Rainbow)
-							return true;
-						_pieces[row, col] = piece2;
-						_pieces[row, col + 1] = piece1;
-						if (HasMatchAt(row, col) || HasMatchAt(row, col + 1)) {
-							_pieces[row, col] = piece1;
-							_pieces[row, col + 1] = piece2;
+						var piece2 = checkMovesArray[row, col + 1];
+						if (piece1.Type == PieceType.Rainbow || piece2.Type == PieceType.Rainbow) {
+							print("Rainbow Piece found");
 							return true;
 						}
 
-						_pieces[row, col] = piece1;
-						_pieces[row, col + 1] = piece2;
+						checkMovesArray[row, col] = piece2;
+						checkMovesArray[row, col + 1] = piece1;
+						if (HasMatchAt(row, col) || HasMatchAt(row, col + 1)) {
+							checkMovesArray[row, col] = piece1;
+							checkMovesArray[row, col + 1] = piece2;
+							print("Found Move at Row: " + row + ", Col: " + col + ", Color " + piece1.ColorComponent.Color +
+							      ". With Row: " + row + " Col: " + (col + 1) + ", Color: " + piece2.ColorComponent.Color +
+							      ".");
+							return true;
+						}
+
+						checkMovesArray[row, col] = piece1;
+						checkMovesArray[row, col + 1] = piece2;
 					}
 
 					// Check vertical swap
 					if (row < xDim - 1) {
-						var piece2 = _pieces[row + 1, col];
-						if (piece1.Type == PieceType.Rainbow || piece2.Type == PieceType.Rainbow)
-							return true;
-						_pieces[row, col] = piece2;
-						_pieces[row + 1, col] = piece1;
-						if (HasMatchAt(row, col) || HasMatchAt(row + 1, col)) {
-							_pieces[row, col] = piece1;
-							_pieces[row + 1, col] = piece2;
+						var piece2 = checkMovesArray[row + 1, col];
+						if (piece1.Type == PieceType.Rainbow || piece2.Type == PieceType.Rainbow) {
+							print("Rainbow Piece found");
 							return true;
 						}
 
-						_pieces[row, col] = piece1;
-						_pieces[row + 1, col] = piece2;
+						checkMovesArray[row, col] = piece2;
+						checkMovesArray[row + 1, col] = piece1;
+						if (HasMatchAt(row, col) || HasMatchAt(row + 1, col)) {
+							checkMovesArray[row, col] = piece1;
+							checkMovesArray[row + 1, col] = piece2;
+							print("Found Move at Row: " + row + ", Col: " + col + ", Color " + piece1.ColorComponent.Color +
+							      ". With Row: " + (row + 1) + " Col: " + col + ", Color: " + piece2.ColorComponent.Color +
+							      ".");
+							return true;
+						}
+
+						checkMovesArray[row, col] = piece1;
+						checkMovesArray[row + 1, col] = piece2;
 					}
 				}
-			}
 
 			return false;
 		}
 
-		bool HasMatchAt(int row, int col) {
-			GamePiece piece = _pieces[row, col];
+		private bool HasMatchAt(int row, int col) {
+			var piece = checkMovesArray[row, col];
 
 			// Check horizontal matches
-			int startCol = col;
-			int endCol = col;
+			var startCol = col;
+			var endCol = col;
 
-			while (startCol >= 0 && piece.IsSameColor(_pieces[row, startCol])) {
-				startCol--;
-			}
+			while (startCol >= 0 && piece.IsSameColor(checkMovesArray[row, startCol])) startCol--;
 
-			while (endCol < yDim && piece.IsSameColor(_pieces[row, endCol])) {
-				endCol++;
-			}
+			while (endCol < yDim && piece.IsSameColor(checkMovesArray[row, endCol])) endCol++;
 
-			if (endCol - startCol - 1 >= 3) {
-				return true;
-			}
+			if (endCol - startCol - 1 >= 3) return true;
 
 			// Check vertical matches
-			int startRow = row;
-			int endRow = row;
+			var startRow = row;
+			var endRow = row;
 
-			while (startRow >= 0 && piece.IsSameColor(_pieces[startRow, col])) {
-				startRow--;
-			}
+			while (startRow >= 0 && piece.IsSameColor(checkMovesArray[startRow, col])) startRow--;
 
-			while (endRow < xDim && piece.IsSameColor(_pieces[endRow, col])) {
-				endRow++;
-			}
+			while (endRow < xDim && piece.IsSameColor(checkMovesArray[endRow, col])) endRow++;
 
-			if (endRow - startRow - 1 >= 3) {
-				return true;
-			}
+			if (endRow - startRow - 1 >= 3) return true;
 
 			return false;
 		}
@@ -384,7 +391,8 @@ namespace Match3 {
 				StartCoroutine(Fill());
 
 				level.OnMove();
-			} else {
+			}
+			else {
 				var piece1X = piece1.X;
 				var piece1Y = piece1.Y;
 
@@ -412,20 +420,27 @@ namespace Match3 {
 		}
 
 		public void PressPiece(GamePiece piece) {
-			checkedMoves = false;
+			timeWhenWeNextDoSomething = Time.time + 100f;
 			_pressedPiece = piece;
 		}
 
-		public void EnterPiece(GamePiece piece) { _enteredPiece = piece; }
+		public void EnterPiece(GamePiece piece) {
+			_enteredPiece = piece;
+		}
 
 		public void ReleasePiece() {
-			if (IsAdjacent(_pressedPiece, _enteredPiece)) SwapPieces(_pressedPiece, _enteredPiece);
+			if (IsAdjacent(_pressedPiece, _enteredPiece)) {
+				SwapPieces(_pressedPiece, _enteredPiece);
+			}
+
+			checkedMoves = false;
+			timeWhenWeNextDoSomething = Time.time + timeBetweenDoingSomething;
 		}
 
 		private bool ClearAllValidMatches() {
 			var needsRefill = false;
 
-			for (var y = 0; y < yDim; y++) {
+			for (var y = 0; y < yDim; y++)
 				for (var x = 0; x < xDim; x++) {
 					if (!_pieces[x, y].IsClearable()) continue;
 
@@ -448,7 +463,9 @@ namespace Match3 {
 						else
 							specialPieceType = PieceType.ColumnClear;
 					} // Spawning a rainbow piece
-					else if (match.Count >= 5) specialPieceType = PieceType.Rainbow;
+					else if (match.Count >= 5) {
+						specialPieceType = PieceType.Rainbow;
+					}
 
 					foreach (var gamePiece in match) {
 						if (!ClearPiece(gamePiece.X, gamePiece.Y)) continue;
@@ -473,7 +490,6 @@ namespace Match3 {
 					else if (specialPieceType == PieceType.Rainbow && newPiece.IsColored())
 						newPiece.ColorComponent.SetColor(ColorType.Any);
 				}
-			}
 
 			return needsRefill;
 		}
@@ -488,7 +504,7 @@ namespace Match3 {
 			// First check horizontal
 			horizontalPieces.Add(piece);
 
-			for (var dir = 0; dir <= 1; dir++) {
+			for (var dir = 0; dir <= 1; dir++)
 				for (var xOffset = 1; xOffset < xDim; xOffset++) {
 					int x;
 
@@ -506,14 +522,13 @@ namespace Match3 {
 					else
 						break;
 				}
-			}
 
 			if (horizontalPieces.Count >= 3) matchingPieces.AddRange(horizontalPieces);
 
 			// Traverse vertically if we found a match (for L and T shape)
 			if (horizontalPieces.Count >= 3)
 				foreach (var gamePiece in horizontalPieces) {
-					for (var dir = 0; dir <= 1; dir++) {
+					for (var dir = 0; dir <= 1; dir++)
 						for (var yOffset = 1; yOffset < yDim; yOffset++) {
 							int y;
 
@@ -530,10 +545,10 @@ namespace Match3 {
 							else
 								break;
 						}
-					}
 
-					if (verticalPieces.Count < 2)
+					if (verticalPieces.Count < 2) {
 						verticalPieces.Clear();
+					}
 					else {
 						matchingPieces.AddRange(verticalPieces);
 						break;
@@ -549,7 +564,7 @@ namespace Match3 {
 			verticalPieces.Clear();
 			verticalPieces.Add(piece);
 
-			for (var dir = 0; dir <= 1; dir++) {
+			for (var dir = 0; dir <= 1; dir++)
 				for (var yOffset = 1; yOffset < xDim; yOffset++) {
 					int y;
 
@@ -567,14 +582,13 @@ namespace Match3 {
 					else
 						break;
 				}
-			}
 
 			if (verticalPieces.Count >= 3) matchingPieces.AddRange(verticalPieces);
 
 			// Traverse horizontally if we found a match (for L and T shape)
 			if (verticalPieces.Count >= 3)
 				foreach (var gamePiece in verticalPieces) {
-					for (var dir = 0; dir <= 1; dir++) {
+					for (var dir = 0; dir <= 1; dir++)
 						for (var xOffset = 1; xOffset < yDim; xOffset++) {
 							int x;
 
@@ -591,10 +605,10 @@ namespace Match3 {
 							else
 								break;
 						}
-					}
 
-					if (horizontalPieces.Count < 2)
+					if (horizontalPieces.Count < 2) {
 						horizontalPieces.Clear();
+					}
 					else {
 						matchingPieces.AddRange(horizontalPieces);
 						break;
@@ -653,25 +667,25 @@ namespace Match3 {
 		}
 
 		public void ClearColor(ColorType color) {
-			for (var x = 0; x < xDim; x++) {
+			for (var x = 0; x < xDim; x++)
 				for (var y = 0; y < yDim; y++)
 					if ((_pieces[x, y].IsColored() && _pieces[x, y].ColorComponent.Color == color)
 					    || color == ColorType.Any)
 						ClearPiece(x, y);
-			}
 		}
 
-		public void GameOver() { _gameOver = true; }
+		public void GameOver() {
+			_gameOver = true;
+		}
 
 
 		public List<GamePiece> GetPiecesOfType(PieceType type) {
 			var piecesOfType = new List<GamePiece>();
 
-			for (var x = 0; x < xDim; x++) {
+			for (var x = 0; x < xDim; x++)
 				for (var y = 0; y < yDim; y++)
 					if (_pieces[x, y].Type == type)
 						piecesOfType.Add(_pieces[x, y]);
-			}
 
 			return piecesOfType;
 		}
@@ -679,11 +693,10 @@ namespace Match3 {
 		public List<GamePiece> GetPiecesOfColor(ColorType colorType) {
 			var piecesOfColor = new List<GamePiece>();
 
-			for (var x = 0; x < xDim; x++) {
+			for (var x = 0; x < xDim; x++)
 				for (var y = 0; y < yDim; y++)
 					if (_pieces[x, y].ColorComponent.Color == colorType)
 						piecesOfColor.Add(_pieces[x, y]);
-			}
 
 			return piecesOfColor;
 		}

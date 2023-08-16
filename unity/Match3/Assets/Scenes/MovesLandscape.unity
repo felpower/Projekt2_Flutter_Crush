@@ -742,8 +742,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62fb356db7d2834b87559058d1855a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xDim: 11
-  yDim: 12
+  xDim: 5
+  yDim: 5
   fillTime: 0.1
   level: {fileID: 1773144088}
   piecePrefabs:
@@ -981,6 +981,7 @@ MonoBehaviour:
   score1Star: 32000
   score2Star: 35000
   score3Star: 38000
+  _isFlutter: 0
   numMoves: 30
   targetScore: 32000
 --- !u!4 &1773144089

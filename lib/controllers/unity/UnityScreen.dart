@@ -135,6 +135,7 @@ class _UnityScreenState extends State<UnityScreen> {
           context: context,
           builder: (BuildContext context) => PointerInterceptor(
                   child: AlertDialog(
+
                 title: const Text('No More moves possible'),
                 content:
                     const Text('Do you want to spend 20 coins for a shuffle?'),

@@ -1,8 +1,10 @@
 ﻿using System.Runtime.InteropServices;
 using UnityEngine.SceneManagement;
 
-namespace FlutterUnityIntegration {
-	public class NativeAPI {
+namespace FlutterUnityIntegration
+{
+    public class NativeAPI
+    {
 #if UNITY_IOS && !UNITY_EDITOR
     [DllImport("__Internal")]
     public static extern void OnUnityMessage(string message);
@@ -12,13 +14,15 @@ namespace FlutterUnityIntegration {
 #endif
 
 #if UNITY_WEBGL
-		[DllImport("__Internal")] public static extern void OnUnityMessageWeb(string message);
+        [DllImport("__Internal")]
+        public static extern void OnUnityMessageWeb(string message);
 
-		[DllImport("__Internal")]
-		public static extern void OnUnitySceneLoadedWeb(string name, int buildIndex, bool isLoaded, bool isValid);
+        [DllImport("__Internal")]
+        public static extern void OnUnitySceneLoadedWeb(string name, int buildIndex, bool isLoaded, bool isValid);
 #endif
 
-		public static void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        public static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
 #if UNITY_ANDROID
         try
         {
@@ -30,13 +34,14 @@ namespace FlutterUnityIntegration {
             Debug.Log(e.Message);
         }
 #elif UNITY_WEBGL
-			OnUnitySceneLoadedWeb(scene.name, scene.buildIndex, scene.isLoaded, scene.IsValid());
+            OnUnitySceneLoadedWeb(scene.name, scene.buildIndex, scene.isLoaded, scene.IsValid());
 #elif UNITY_IOS && !UNITY_EDITOR
         OnUnitySceneLoaded(scene.name, scene.buildIndex, scene.isLoaded, scene.IsValid());
 #endif
-		}
+        }
 
-		public static void SendMessageToFlutter(string message) {
+        public static void SendMessageToFlutter(string message)
+        {
 #if UNITY_ANDROID
         try
         {
@@ -48,13 +53,14 @@ namespace FlutterUnityIntegration {
             Debug.Log(e.Message);
         }
 #elif UNITY_WEBGL
-			OnUnityMessageWeb(message);
+            OnUnityMessageWeb(message);
 #elif UNITY_IOS && !UNITY_EDITOR
         OnUnityMessage(message);
 #endif
-		}
+        }
 
-		public static void ShowHostMainWindow() {
+        public static void ShowHostMainWindow()
+        {
 #if UNITY_ANDROID
         try
         {
@@ -69,9 +75,10 @@ namespace FlutterUnityIntegration {
 #elif UNITY_IOS && !UNITY_EDITOR
         // NativeAPI.showHostMainWindow();
 #endif
-		}
+        }
 
-		public static void UnloadMainWindow() {
+        public static void UnloadMainWindow()
+        {
 #if UNITY_ANDROID
         try
         {
@@ -86,9 +93,10 @@ namespace FlutterUnityIntegration {
 #elif UNITY_IOS && !UNITY_EDITOR
         // NativeAPI.unloadPlayer();
 #endif
-		}
+        }
 
-		public static void QuitUnityWindow() {
+        public static void QuitUnityWindow()
+        {
 #if UNITY_ANDROID
         try
         {
@@ -103,6 +111,6 @@ namespace FlutterUnityIntegration {
 #elif UNITY_IOS && !UNITY_EDITOR
         // NativeAPI.quitPlayer();
 #endif
-		}
-	}
+        }
+    }
 }

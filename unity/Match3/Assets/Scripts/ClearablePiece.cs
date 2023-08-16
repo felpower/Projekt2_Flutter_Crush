@@ -1,32 +1,40 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Match3 {
-	public class ClearablePiece : MonoBehaviour {
-		public AnimationClip clearAnimation;
+namespace Match3
+{
+    public class ClearablePiece : MonoBehaviour
+    {
+        public AnimationClip clearAnimation;
 
-		protected GamePiece piece;
+        protected GamePiece piece;
 
-		public bool IsBeingCleared { get; private set; }
+        public bool IsBeingCleared { get; private set; }
 
-		private void Awake() { piece = GetComponent<GamePiece>(); }
+        private void Awake()
+        {
+            piece = GetComponent<GamePiece>();
+        }
 
-		public virtual void Clear(bool includePoints) {
-			piece.GameGridRef.level.OnPieceCleared(piece, includePoints);
-			IsBeingCleared = true;
-			StartCoroutine(ClearCoroutine());
-		}
+        public virtual void Clear(bool includePoints)
+        {
+            piece.GameGridRef.level.OnPieceCleared(piece, includePoints);
+            IsBeingCleared = true;
+            StartCoroutine(ClearCoroutine());
+        }
 
-		private IEnumerator ClearCoroutine() {
-			var animator = GetComponent<Animator>();
+        private IEnumerator ClearCoroutine()
+        {
+            var animator = GetComponent<Animator>();
 
-			if (animator) {
-				animator.Play(clearAnimation.name);
+            if (animator)
+            {
+                animator.Play(clearAnimation.name);
 
-				yield return new WaitForSeconds(clearAnimation.length);
+                yield return new WaitForSeconds(clearAnimation.length);
 
-				Destroy(gameObject);
-			}
-		}
-	}
+                Destroy(gameObject);
+            }
+        }
+    }
 }
