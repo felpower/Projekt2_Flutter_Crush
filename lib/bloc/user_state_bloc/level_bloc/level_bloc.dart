@@ -24,7 +24,7 @@ class LevelBloc extends Bloc<LevelEvent, LevelState> {
   }
 
   void _onXpChange(XpState state) async {
-    LevelService.updateLevels(state.amount);
-    add(UpdateLevelsEvent());
+    // LevelService.updateLevels(state.amount);
+    // add(UpdateLevelsEvent()); ToDo: Check if needed for no DarkPatterns activated
   }
 }
