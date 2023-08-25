@@ -116,7 +116,7 @@ class GameLevelButton extends StatelessWidget {
     );
     //ToDo: Put adds before Navigator Push
     var addState = prefs.getBool("addsActive");
-    print("Adds are: " + addState.toString());
+    print("Adds are: $addState");
     if (addState == true) {
       _showAdvertisement(context);
     }
@@ -134,53 +134,55 @@ class GameLevelButton extends StatelessWidget {
     showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-              title: const Text('Buy power up?'),
-              content: Wrap(
+              // title: const Text('Buy power up?'),
+          title: const Text('Start the game'),
+              content: const Wrap( //ToDo: Remove Const, and enable power ups
                 children: [
-                  Text('Do you want to buy'),
-                  Row(
-                    children: [
-                      Image.asset(
-                        'assets/images/bombs/tnt.png',
-                        height: 30,
-                      ),
-                      Text(' for $tntPrice\$',
-                          style: const TextStyle(fontSize: 15)),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Image.asset('assets/images/bombs/mine.png', height: 30),
-                      Text(' for $minePrice\$',
-                          style: const TextStyle(fontSize: 15)),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Image.asset('assets/images/bombs/multi_color.png',
-                          height: 30),
-                      Text(' for $wrappedPrice\$',
-                          style: const TextStyle(fontSize: 15)),
-                    ],
-                  ),
+                  Text('Power ups currently disabled'),
+                  // Text('Do you want to buy'),
+                  // Row(
+                  //   children: [
+                  //     Image.asset(
+                  //       'assets/images/bombs/tnt.png',
+                  //       height: 30,
+                  //     ),
+                  //     Text(' for $tntPrice\$',
+                  //         style: const TextStyle(fontSize: 15)),
+                  //   ],
+                  // ),
+                  // Row(
+                  //   children: [
+                  //     Image.asset('assets/images/bombs/mine.png', height: 30),
+                  //     Text(' for $minePrice\$',
+                  //         style: const TextStyle(fontSize: 15)),
+                  //   ],
+                  // ),
+                  // Row(
+                  //   children: [
+                  //     Image.asset('assets/images/bombs/multi_color.png',
+                  //         height: 30),
+                  //     Text(' for $wrappedPrice\$',
+                  //         style: const TextStyle(fontSize: 15)),
+                  //   ],
+                  // ),
                 ],
               ),
               elevation: 24,
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(8))),
               actions: <Widget>[
-                IconButton(
-                    icon: Image.asset('assets/images/bombs/tnt.png'),
-                    onPressed: () => buyPowerUp("tnt", tntPrice, coinBloc,
-                        reportingBloc, gameBloc, context)),
-                IconButton(
-                    icon: Image.asset('assets/images/bombs/mine.png'),
-                    onPressed: () => buyPowerUp("mine", minePrice, coinBloc,
-                        reportingBloc, gameBloc, context)),
-                IconButton(
-                    icon: Image.asset('assets/images/bombs/multi_color.png'),
-                    onPressed: () => buyPowerUp("wrapped", wrappedPrice,
-                        coinBloc, reportingBloc, gameBloc, context)),
+                // IconButton(
+                //     icon: Image.asset('assets/images/bombs/tnt.png'),
+                //     onPressed: () => buyPowerUp("tnt", tntPrice, coinBloc,
+                //         reportingBloc, gameBloc, context)),
+                // IconButton(
+                //     icon: Image.asset('assets/images/bombs/mine.png'),
+                //     onPressed: () => buyPowerUp("mine", minePrice, coinBloc,
+                //         reportingBloc, gameBloc, context)),
+                // IconButton(
+                //     icon: Image.asset('assets/images/bombs/multi_color.png'),
+                //     onPressed: () => buyPowerUp("wrapped", wrappedPrice,
+                //         coinBloc, reportingBloc, gameBloc, context)),
                 TextButton(
                   onPressed: () => buyPowerUp(
                       "nothing", 0, coinBloc, reportingBloc, gameBloc, context),

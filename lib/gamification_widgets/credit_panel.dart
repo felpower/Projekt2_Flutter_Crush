@@ -18,6 +18,8 @@ class CreditPanel extends StatelessWidget {
           borderRadius: BorderRadius.circular(30.0),
           border: Border.all(width: 5.0, color: Colors.black.withOpacity(0.5)),
         ),
+        height: 80,
+        width: width,
         child: Center(
           child: Text(
             text,
@@ -27,8 +29,6 @@ class CreditPanel extends StatelessWidget {
                 fontWeight: FontWeight.bold),
           ),
         ),
-        height: 80,
-        width: width,
       ),
     );
   }

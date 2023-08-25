@@ -1,11 +1,9 @@
-import 'dart:js';
 import 'dart:math';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:bachelor_flutter_crush/persistence/reporting_service.dart';
 import 'package:bachelor_flutter_crush/persistence/xp_service.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/data/latest_all.dart' as tz;

@@ -100,12 +100,12 @@ class _GameStreakMilestoneReachedSplashState
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                            'Reached DayStreak: ' + widget.daystreak.toString(),
+                            'Reached DayStreak: ${widget.daystreak}',
                             style: const TextStyle(
                               fontSize: 15.0,
                               color: Colors.white,
                             )),
-                        Text('Gained Coins: ' + widget.coins.toString(),
+                        Text('Gained Coins: ${widget.coins}',
                             style: const TextStyle(
                               fontSize: 15.0,
                               color: Colors.white,

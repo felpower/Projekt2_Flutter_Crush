@@ -1,93 +1,88 @@
-﻿using UnityEngine;
+﻿using FlutterUnityIntegration;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Match3
-{
-    public class Hud : MonoBehaviour
-    {
-        public Level level;
-        public GameOver gameOver;
+namespace Match3 {
+	public class Hud : MonoBehaviour {
+		public Level level;
+		public GameOver gameOver;
 
-        public Text remainingText;
-        public Text remainingSubText;
-        public Text targetText;
-        public Text targetSubtext;
-        public Text scoreText;
-        public Image[] stars;
+		public Text remainingText;
+		public Text remainingSubText;
+		public Text targetText;
+		public Text targetSubtext;
+		public Text scoreText;
+		public Image[] stars;
 
-        private int _starIndex;
+		private int _starIndex;
+		private bool _changed;
 
-        private void Start()
-        {
-            for (var i = 0; i < stars.Length; i++) stars[i].enabled = i == _starIndex;
-        }
+		private void Start() {
+			gameObject.AddComponent<UnityMessageManager>();
 
-        public void SetScore(int score)
-        {
-            scoreText.text = score.ToString();
+			for (var i = 0; i < stars.Length; i++) stars[i].enabled = i == _starIndex;
+		}
 
-            var visibleStar = 0;
+		public void SetScore(int score) {
+			scoreText.text = score.ToString();
 
-            if (score >= level.score1Star && score < level.score2Star)
-                visibleStar = 1;
-            else if (score >= level.score2Star && score < level.score3Star)
-                visibleStar = 2;
-            else if (score >= level.score3Star) visibleStar = 3;
+			var visibleStar = 0;
 
-            for (var i = 0; i < stars.Length; i++) stars[i].enabled = i == visibleStar;
+			if (score >= level.score1Star && score < level.score2Star) {
+				visibleStar = 1;
+				_changed = true;
+			} else if (score >= level.score2Star && score < level.score3Star) {
+				visibleStar = 2;
+				_changed = true;
+			} else if (score >= level.score3Star) {
+				visibleStar = 3;
+				_changed = true;
+			}
 
-            _starIndex = visibleStar;
-        }
+			if (_changed) {
+				UnityMessageManager.Instance.SendMessageToFlutter("Reached Star: " + visibleStar);
+				_changed = false;
+			}
 
-        public void SetTarget(int target)
-        {
-            targetText.text = target.ToString();
-        }
+			for (var i = 0; i < stars.Length; i++) stars[i].enabled = i == visibleStar;
 
-        public void SetRemaining(int remaining)
-        {
-            remainingText.text = remaining.ToString();
-        }
+			_starIndex = visibleStar;
+		}
 
-        public void SetRemaining(string remaining)
-        {
-            remainingText.text = remaining;
-        }
+		public void SetTarget(int target) { targetText.text = target.ToString(); }
 
-        public void SetLevelType(LevelType type, string colorType = "Any")
-        {
-            switch (type)
-            {
-                case LevelType.Moves:
-                    remainingSubText.text = "moves remaining";
-                    targetSubtext.text = "target score";
-                    break;
-                case LevelType.Obstacle:
-                    remainingSubText.text = "moves remaining";
-                    targetSubtext.text = "bubbles remaining";
-                    break;
-                case LevelType.Timer:
-                    remainingSubText.text = "time remaining";
-                    targetSubtext.text = "target score";
-                    break;
-                case LevelType.Colors:
-                    remainingSubText.text = "moves remaining";
-                    targetSubtext.text = colorType + " remaining";
-                    break;
-            }
-        }
+		public void SetRemaining(int remaining) { remainingText.text = remaining.ToString(); }
 
-        public void OnGameWin(int score)
-        {
-            gameOver.ShowWin(score, _starIndex);
-            if (_starIndex > PlayerPrefs.GetInt(SceneManager.GetActiveScene().name, 0))
-                PlayerPrefs.SetInt(SceneManager.GetActiveScene().name, _starIndex);
-        }
+		public void SetRemaining(string remaining) { remainingText.text = remaining; }
 
-        public void OnGameLose()
-        {
-            gameOver.ShowLose();
-        }
-    }
+		public void SetLevelType(LevelType type, string colorType = "Any") {
+			switch (type) {
+				case LevelType.Moves:
+					remainingSubText.text = "moves remaining";
+					targetSubtext.text = "target score";
+					break;
+				case LevelType.Obstacle:
+					remainingSubText.text = "moves remaining";
+					targetSubtext.text = "bubbles remaining";
+					break;
+				case LevelType.Timer:
+					remainingSubText.text = "time remaining";
+					targetSubtext.text = "target score";
+					break;
+				case LevelType.Colors:
+					remainingSubText.text = "moves remaining";
+					targetSubtext.text = colorType + " remaining";
+					break;
+			}
+		}
+
+		public void OnGameWin(int score) {
+			gameOver.ShowWin(score, _starIndex);
+			if (_starIndex > PlayerPrefs.GetInt(SceneManager.GetActiveScene().name, 0))
+				PlayerPrefs.SetInt(SceneManager.GetActiveScene().name, _starIndex);
+		}
+
+		public void OnGameLose() { gameOver.ShowLose(); }
+	}
 }

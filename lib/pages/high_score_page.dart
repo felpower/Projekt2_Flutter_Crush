@@ -46,9 +46,9 @@ class HighScoreState extends State<HighScorePage> {
       prefs.setString('updateHighScore', updateHighScore);
     });
     bool update = checkIfUpdateNeeded(now, prefs);
-    final ReportingBloc _reportingBloc =
+    final ReportingBloc reportingBloc =
         flutter_bloc.BlocProvider.of<ReportingBloc>(context);
-    _reportingBloc.add(ReportCheckHighScoreEvent(DateTime.now()));
+    reportingBloc.add(ReportCheckHighScoreEvent(DateTime.now()));
     users = User.decode(highScore);
     sortList();
     randomizeHighScore(prefs, update);

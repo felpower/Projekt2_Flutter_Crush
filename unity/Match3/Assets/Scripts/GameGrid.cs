@@ -656,6 +656,8 @@ namespace Match3 {
 				for (var y = 0; y < yDim; y++)
 					ClearPiece(x, y, false);
 			InstantiatePieces();
+			checkedMoves = false;
+			timeWhenWeNextDoSomething = Time.time + timeBetweenDoingSomething;
 		}
 
 		public void ClearRow(int row) {

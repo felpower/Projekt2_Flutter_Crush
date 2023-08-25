@@ -2,14 +2,20 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../bloc/bloc_provider.dart';
 import '../../bloc/game_bloc.dart';
+import '../../bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
+import '../../bloc/user_state_bloc/coins_bloc/coin_event.dart';
 import '../../game_widgets/game_over_splash.dart';
 import '../../game_widgets/game_splash.dart';
+
+int coins = 0;
 
 class UnityScreen extends StatefulWidget {
   const UnityScreen({Key? key}) : super(key: key);
@@ -19,13 +25,14 @@ class UnityScreen extends StatefulWidget {
 }
 
 class _UnityScreenState extends State<UnityScreen> {
-  static final GlobalKey<ScaffoldState> _scaffoldKey =
-      GlobalKey<ScaffoldState>();
+  static final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   late GameBloc gameBloc;
   UnityWidgetController? unityWidgetController;
   late OverlayEntry _gameSplash;
   final PublishSubject<bool> _gameIsOverController = PublishSubject<bool>();
+  late CoinBloc coinBloc;
+  int shufflePrice = 20;
 
   Stream<bool> get gameIsOver => _gameIsOverController.stream;
   late int lvl;
@@ -44,6 +51,15 @@ class _UnityScreenState extends State<UnityScreen> {
     ]);
     _gameOverReceived = false;
     WidgetsBinding.instance.addPostFrameCallback(_showGameStartSplash);
+    loadCoins();
+  }
+
+  void loadCoins() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      coins = (prefs.getInt('coin') ?? 10);
+      print("Coins: $coins");
+    });
   }
 
   @override
@@ -66,9 +82,12 @@ class _UnityScreenState extends State<UnityScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final arguments = (ModalRoute.of(context)?.settings.arguments ??
-        <String, dynamic>{}) as Map;
+    final arguments = (ModalRoute
+        .of(context)
+        ?.settings
+        .arguments ?? <String, dynamic>{}) as Map;
     lvl = arguments['level'];
+    coinBloc = flutter_bloc.BlocProvider.of<CoinBloc>(context);
     return Scaffold(
       floatingActionButton: PointerInterceptor(
         child: FloatingActionButton(
@@ -76,23 +95,23 @@ class _UnityScreenState extends State<UnityScreen> {
           onPressed: () {
             showDialog(
                 context: context,
-                builder: (BuildContext context) => PointerInterceptor(
+                builder: (BuildContext context) =>
+                    PointerInterceptor(
                         child: AlertDialog(
-                      title: const Text('Abort level'),
-                      content: const Text(
-                          'Are you sure you want to abort the level?'),
-                      elevation: 24,
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(16))),
-                      actions: <Widget>[
-                        TextButton(
-                            onPressed: () => {Navigator.pop(context, 'Cancel')},
-                            child: const Text('No')),
-                        TextButton(
-                            onPressed: () => {changeToStart(), popUntil()},
-                            child: const Text('Yes')),
-                      ],
-                    )));
+                          title: const Text('Abort level'),
+                          content: const Text('Are you sure you want to abort the level?'),
+                          elevation: 24,
+                          shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(16))),
+                          actions: <Widget>[
+                            TextButton(
+                                onPressed: () => {Navigator.pop(context, 'Cancel')},
+                                child: const Text('No')),
+                            TextButton(
+                                onPressed: () => {changeToStart(), popUntil()},
+                                child: const Text('Yes')),
+                          ],
+                        )));
           },
         ),
       ),
@@ -122,6 +141,8 @@ class _UnityScreenState extends State<UnityScreen> {
     Navigator.of(context).popUntil((_) => count++ >= 2);
   }
 
+  int star = 0;
+
   void onUnityMessage(message) {
     print('Received message from unity: ${message.toString()}');
     if (message.startsWith("Resend Level Info")) {
@@ -131,40 +152,71 @@ class _UnityScreenState extends State<UnityScreen> {
     if (message.startsWith("Score: ")) {
       return;
     } else if (message.startsWith("Shuffle")) {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) => PointerInterceptor(
-                  child: AlertDialog(
-
-                title: const Text('No More moves possible'),
-                content:
-                    const Text('Do you want to spend 20 coins for a shuffle?'),
-                elevation: 24,
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(16))),
-                actions: <Widget>[
-                  TextButton(
-                      onPressed: () => {
-                            unityWidgetController?.postMessage(
-                                'Level', 'ShufflePieces', "ShufflePieces"),
-                            Navigator.pop(context, 'Cancel')
-                          },
-                      child: const Text('Yes')),
-                  TextButton(
-                      onPressed: () => {gameLost(), popUntil()},
-                      child: const Text('Game Over')),
-                ],
-              )));
+      shuffleDialog();
       return;
     } else if (message.startsWith("GameOver: Won") && !gameOver) {
       gameWon(message);
     } else if (message.startsWith("GameOver: Lost") && !gameOver) {
       gameLost();
+    } else if (message.startsWith("Reached Star:")) {
+      star = int.parse(message.replaceAll(RegExp(r'[^0-9]'), ''));
     }
   }
 
+  void shuffleDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) =>
+            PointerInterceptor(
+                child: coins > shufflePrice
+                    ? AlertDialog(
+                  title: const Text('No More moves possible'),
+                  content: Text(
+                      'Do you want to spend $shufflePrice coins for a shuffle? You currently have '
+                          '$coins '
+                          'coins.'),
+                  elevation: 24,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                  actions: <Widget>[
+                    TextButton(
+                        onPressed: () => {
+                        unityWidgetController?.postMessage(
+                        'Level', 'ShufflePieces', "ShufflePieces"),
+                        Navigator.pop(context, 'Cancel'),
+                        coinBloc.add(RemoveCoinsEvent(shufflePrice)),
+                        loadCoins()
+                    },
+                        child: const Text('Yes')),
+                    TextButton(
+                        onPressed: () => {star > 0 ? gameWon(star) : gameLost(), popUntil()},
+                        child: const Text('Game Over')),
+                  ],
+                )
+                    : AlertDialog(
+                  title: const Text('No More moves possible'),
+                  content: Text(
+                      'You have insufficient coins ($shufflePrice) for a shuffle? You currently have '
+                          '$coins coins. You just lost the game'),
+                  elevation: 24,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                  actions: <Widget>[
+                    TextButton(
+                        onPressed: () => {star > 0 ? gameWon(star) : gameLost(), popUntil()},
+                        child: const Text('OK')),
+                  ],
+                )));
+  }
+
   void gameWon(message) {
-    var xpCoins = lvl * int.parse(message.replaceAll(RegExp(r'[^0-9]'), ''));
+    var xpCoins = 0;
+    if (message is int) {
+      xpCoins = lvl * message;
+    } else {
+      xpCoins = lvl * int.parse(message.replaceAll(RegExp(r'[^0-9]'), ''));
+    }
+    print("XP Coins: $xpCoins");
     gameBloc.gameOver(xpCoins);
     _gameIsOverController.sink.add(true);
     gameOver = true;
@@ -193,8 +245,7 @@ class _UnityScreenState extends State<UnityScreen> {
   }
 
   void changeToStart() {
-    unityWidgetController?.postMessage(
-        'GameManager', 'LoadStartScene', "StartScreen");
+    unityWidgetController?.postMessage('GameManager', 'LoadStartScene', "StartScreen");
     return;
   }
 
@@ -208,8 +259,14 @@ class _UnityScreenState extends State<UnityScreen> {
       }
     }
 
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery
+        .of(context)
+        .size
+        .width;
+    double height = MediaQuery
+        .of(context)
+        .size
+        .height;
     String type = jsonString['type'];
     while (unityWidgetController == null) {
       print("Waiting for unityWidgetController");
@@ -217,13 +274,11 @@ class _UnityScreenState extends State<UnityScreen> {
     if (width > height) {
       print("Changing level to: $type Landscape");
       jsonString['orientation'] = "Landscape";
-      unityWidgetController?.postJsonMessage(
-          'GameManager', 'LoadScene', jsonString);
+      unityWidgetController?.postJsonMessage('GameManager', 'LoadScene', jsonString);
     } else {
       print("Changing level to: $type Portrait");
       jsonString['orientation'] = "Portrait";
-      unityWidgetController?.postJsonMessage(
-          'GameManager', 'LoadScene', jsonString);
+      unityWidgetController?.postJsonMessage('GameManager', 'LoadScene', jsonString);
     }
   }
 
