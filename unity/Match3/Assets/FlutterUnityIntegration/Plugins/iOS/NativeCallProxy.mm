@@ -4,9 +4,9 @@
 
 @implementation FrameworkLibAPI
 
-id<NativeCallsProtocol> api = NULL;
-+(void) registerAPIforNativeCalls:(id<NativeCallsProtocol>) aApi
-{
+id <NativeCallsProtocol> api = NULL;
+
++ (void)registerAPIforNativeCalls:(id <NativeCallsProtocol>)aApi {
     api = aApi;
 }
 
@@ -14,8 +14,8 @@ id<NativeCallsProtocol> api = NULL;
 
 
 extern "C" {
-    void showHostMainWindow() { return [api showHostMainWindow]; }
-    void unloadPlayer() { return [api unloadPlayer]; }
-    void quitPlayer() { return [api quitPlayer]; }
+void showHostMainWindow() { return [api showHostMainWindow]; }
+void unloadPlayer() { return [api unloadPlayer]; }
+void quitPlayer() { return [api quitPlayer]; }
 }
 

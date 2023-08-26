@@ -12,8 +12,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     on<ClickNotificationEvent>(_onClickNotificationEvent);
   }
 
-  void _onClickNotificationEvent(
-      ClickNotificationEvent event, Emitter<NotificationState> emitter) {
+  void _onClickNotificationEvent(ClickNotificationEvent event, Emitter<NotificationState> emitter) {
     xpBloc.add(AddXpEvent(5));
   }
 }

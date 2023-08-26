@@ -21,13 +21,11 @@ class ReportingBloc extends Bloc<ReportingEvent, ReportingState> {
     ReportingService.addAdvertisementTap(event.x, event.y);
   }
 
-  void _onReportStartLevelEvent(
-      ReportStartLevelEvent event, Emitter<ReportingState> emit) {
+  void _onReportStartLevelEvent(ReportStartLevelEvent event, Emitter<ReportingState> emit) {
     ReportingService.addStartOfLevel(event.levelNumber);
   }
 
-  void _onCheckHighscoreEvent(
-      ReportCheckHighScoreEvent event, Emitter<ReportingState> emit) {
+  void _onCheckHighscoreEvent(ReportCheckHighScoreEvent event, Emitter<ReportingState> emit) {
     ReportingService.checkHighScore(event.time);
   }
 
@@ -36,13 +34,11 @@ class ReportingBloc extends Bloc<ReportingEvent, ReportingState> {
     ReportingService.removeAdds(event.removed);
   }
 
-  void _onStartAppEvent(
-      ReportStartAppEvent event, Emitter<ReportingState> emit) {
+  void _onStartAppEvent(ReportStartAppEvent event, Emitter<ReportingState> emit) {
     ReportingService.addStartApp(event.time);
   }
 
-  void _onCloseAppEvent(
-      ReportCloseAppEvent event, Emitter<ReportingState> emit) {
+  void _onCloseAppEvent(ReportCloseAppEvent event, Emitter<ReportingState> emit) {
     ReportingService.addCloseApp(event.time);
   }
 }

@@ -18,8 +18,7 @@ namespace Match3 {
 
 		public PiecePosition[] initialPieces;
 
-		private readonly float
-			timeBetweenDoingSomething = 2f; //Wait 2 second after we do something to do something again
+		private const float TimeBetweenDoingSomething = 2f; //Wait 2 second after we do something to do something again
 
 		private GamePiece _enteredPiece;
 
@@ -36,11 +35,11 @@ namespace Match3 {
 		private GamePiece _pressedPiece;
 
 		private float _scale;
-		private bool checkedMoves;
+		private bool _checkedMoves;
 
-		private GamePiece[,] checkMovesArray;
+		private GamePiece[,] _checkMovesArray;
 
-		private float timeWhenWeNextDoSomething; //The next time we do something
+		private float _timeWhenWeNextDoSomething; //The next time we do something
 
 		public bool IsFilling { get; private set; }
 
@@ -51,23 +50,23 @@ namespace Match3 {
 			for (var i = 0; i < piecePrefabs.Length; i++)
 				_piecePrefabDict.TryAdd(piecePrefabs[i].type, piecePrefabs[i].prefab);
 
-			timeWhenWeNextDoSomething = Time.time + timeBetweenDoingSomething;
+			_timeWhenWeNextDoSomething = Time.time + TimeBetweenDoingSomething;
 		}
 
 		private void Update() {
-			if (timeWhenWeNextDoSomething <= Time.time) {
-				if (!checkedMoves) {
+			if (_timeWhenWeNextDoSomething <= Time.time) {
+				if (!_checkedMoves) {
 					print("Checking for Moves at: " + Time.time);
 					if (!HasAvailableMoves()) {
 						print("No More Moves");
-						if (!level._isFlutter)
+						if (!level.isFlutter)
 							ClearAll();
 						else {
 							level.NoMoreMoves();
 						}
 					}
 
-					checkedMoves = true;
+					_checkedMoves = true;
 				}
 			}
 
@@ -241,55 +240,55 @@ namespace Match3 {
 		}
 
 		private bool HasAvailableMoves() {
-			checkMovesArray = _pieces.Clone() as GamePiece[,];
+			_checkMovesArray = _pieces.Clone() as GamePiece[,];
 
 			for (var row = 0; row < xDim; row++)
 				for (var col = 0; col < yDim; col++) {
 					// Check horizontal swap
-					var piece1 = checkMovesArray![row, col];
+					var piece1 = _checkMovesArray![row, col];
 					if (col < yDim - 1) {
-						var piece2 = checkMovesArray[row, col + 1];
+						var piece2 = _checkMovesArray[row, col + 1];
 						if (piece1.Type == PieceType.Rainbow || piece2.Type == PieceType.Rainbow) {
 							print("Rainbow Piece found");
 							return true;
 						}
 
-						checkMovesArray[row, col] = piece2;
-						checkMovesArray[row, col + 1] = piece1;
+						_checkMovesArray[row, col] = piece2;
+						_checkMovesArray[row, col + 1] = piece1;
 						if (HasMatchAt(row, col) || HasMatchAt(row, col + 1)) {
-							checkMovesArray[row, col] = piece1;
-							checkMovesArray[row, col + 1] = piece2;
+							_checkMovesArray[row, col] = piece1;
+							_checkMovesArray[row, col + 1] = piece2;
 							print("Found Move at Row: " + row + ", Col: " + col + ", Color " + piece1.ColorComponent.Color +
 							      ". With Row: " + row + " Col: " + (col + 1) + ", Color: " + piece2.ColorComponent.Color +
 							      ".");
 							return true;
 						}
 
-						checkMovesArray[row, col] = piece1;
-						checkMovesArray[row, col + 1] = piece2;
+						_checkMovesArray[row, col] = piece1;
+						_checkMovesArray[row, col + 1] = piece2;
 					}
 
 					// Check vertical swap
 					if (row < xDim - 1) {
-						var piece2 = checkMovesArray[row + 1, col];
+						var piece2 = _checkMovesArray[row + 1, col];
 						if (piece1.Type == PieceType.Rainbow || piece2.Type == PieceType.Rainbow) {
 							print("Rainbow Piece found");
 							return true;
 						}
 
-						checkMovesArray[row, col] = piece2;
-						checkMovesArray[row + 1, col] = piece1;
+						_checkMovesArray[row, col] = piece2;
+						_checkMovesArray[row + 1, col] = piece1;
 						if (HasMatchAt(row, col) || HasMatchAt(row + 1, col)) {
-							checkMovesArray[row, col] = piece1;
-							checkMovesArray[row + 1, col] = piece2;
+							_checkMovesArray[row, col] = piece1;
+							_checkMovesArray[row + 1, col] = piece2;
 							print("Found Move at Row: " + row + ", Col: " + col + ", Color " + piece1.ColorComponent.Color +
 							      ". With Row: " + (row + 1) + " Col: " + col + ", Color: " + piece2.ColorComponent.Color +
 							      ".");
 							return true;
 						}
 
-						checkMovesArray[row, col] = piece1;
-						checkMovesArray[row + 1, col] = piece2;
+						_checkMovesArray[row, col] = piece1;
+						_checkMovesArray[row + 1, col] = piece2;
 					}
 				}
 
@@ -297,15 +296,15 @@ namespace Match3 {
 		}
 
 		private bool HasMatchAt(int row, int col) {
-			var piece = checkMovesArray[row, col];
+			var piece = _checkMovesArray[row, col];
 
 			// Check horizontal matches
 			var startCol = col;
 			var endCol = col;
 
-			while (startCol >= 0 && piece.IsSameColor(checkMovesArray[row, startCol])) startCol--;
+			while (startCol >= 0 && piece.IsSameColor(_checkMovesArray[row, startCol])) startCol--;
 
-			while (endCol < yDim && piece.IsSameColor(checkMovesArray[row, endCol])) endCol++;
+			while (endCol < yDim && piece.IsSameColor(_checkMovesArray[row, endCol])) endCol++;
 
 			if (endCol - startCol - 1 >= 3) return true;
 
@@ -313,9 +312,9 @@ namespace Match3 {
 			var startRow = row;
 			var endRow = row;
 
-			while (startRow >= 0 && piece.IsSameColor(checkMovesArray[startRow, col])) startRow--;
+			while (startRow >= 0 && piece.IsSameColor(_checkMovesArray[startRow, col])) startRow--;
 
-			while (endRow < xDim && piece.IsSameColor(checkMovesArray[endRow, col])) endRow++;
+			while (endRow < xDim && piece.IsSameColor(_checkMovesArray[endRow, col])) endRow++;
 
 			if (endRow - startRow - 1 >= 3) return true;
 
@@ -420,7 +419,7 @@ namespace Match3 {
 		}
 
 		public void PressPiece(GamePiece piece) {
-			timeWhenWeNextDoSomething = Time.time + 100f;
+			_timeWhenWeNextDoSomething = Time.time + 100f;
 			_pressedPiece = piece;
 		}
 
@@ -433,8 +432,8 @@ namespace Match3 {
 				SwapPieces(_pressedPiece, _enteredPiece);
 			}
 
-			checkedMoves = false;
-			timeWhenWeNextDoSomething = Time.time + timeBetweenDoingSomething;
+			_checkedMoves = false;
+			_timeWhenWeNextDoSomething = Time.time + TimeBetweenDoingSomething;
 		}
 
 		private bool ClearAllValidMatches() {
@@ -656,8 +655,8 @@ namespace Match3 {
 				for (var y = 0; y < yDim; y++)
 					ClearPiece(x, y, false);
 			InstantiatePieces();
-			checkedMoves = false;
-			timeWhenWeNextDoSomething = Time.time + timeBetweenDoingSomething;
+			_checkedMoves = false;
+			_timeWhenWeNextDoSomething = Time.time + TimeBetweenDoingSomething;
 		}
 
 		public void ClearRow(int row) {

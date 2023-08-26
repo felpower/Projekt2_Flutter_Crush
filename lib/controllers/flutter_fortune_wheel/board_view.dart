@@ -10,11 +10,7 @@ class BoardView extends StatefulWidget {
   final double current;
   final List<Luck> items;
 
-  const BoardView(
-      {Key? key,
-      required this.angle,
-      required this.current,
-      required this.items})
+  const BoardView({Key? key, required this.angle, required this.current, required this.items})
       : super(key: key);
 
   @override
@@ -24,8 +20,8 @@ class BoardView extends StatefulWidget {
 }
 
 class _BoardViewState extends State<BoardView> {
-  Size get size => Size(MediaQuery.of(context).size.width * 0.8,
-      MediaQuery.of(context).size.width * 0.8);
+  Size get size =>
+      Size(MediaQuery.of(context).size.width * 0.8, MediaQuery.of(context).size.width * 0.8);
 
   double _rotote(int index) => (index / widget.items.length) * 2 * pi;
 
@@ -90,8 +86,7 @@ class _BoardViewState extends State<BoardView> {
         width: size.width,
         alignment: Alignment.topCenter,
         child: ConstrainedBox(
-          constraints:
-              BoxConstraints.expand(height: size.height / 3, width: 44),
+          constraints: BoxConstraints.expand(height: size.height / 3, width: 44),
           child: Image.asset(luck.asset),
         ),
       ),

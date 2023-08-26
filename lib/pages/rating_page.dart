@@ -61,17 +61,13 @@ class _MyAppState extends State<RatingPage> {
                                         'Please try rating the game later, or try to change your rating'),
                                     elevation: 24,
                                     shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(16))),
+                                        borderRadius: BorderRadius.all(Radius.circular(16))),
                                     actions: <Widget>[
                                       TextButton(
-                                          onPressed: () => {
-                                                Navigator.pop(context, 'Cancel')
-                                              },
+                                          onPressed: () => {Navigator.pop(context, 'Cancel')},
                                           child: const Text('Cancel')),
                                       TextButton(
-                                        onPressed: () =>
-                                            {Navigator.pop(context, 'OK')},
+                                        onPressed: () => {Navigator.pop(context, 'OK')},
                                         child: const Text('OK'),
                                       )
                                     ],
@@ -117,18 +113,13 @@ class _MyAppState extends State<RatingPage> {
                                           'Please try rating the game later, or try to change your rating'),
                                       elevation: 24,
                                       shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(16))),
+                                          borderRadius: BorderRadius.all(Radius.circular(16))),
                                       actions: <Widget>[
                                         TextButton(
-                                            onPressed: () => {
-                                                  Navigator.pop(
-                                                      context, 'Cancel')
-                                                },
+                                            onPressed: () => {Navigator.pop(context, 'Cancel')},
                                             child: const Text('Cancel')),
                                         TextButton(
-                                          onPressed: () =>
-                                              {Navigator.pop(context, 'OK')},
+                                          onPressed: () => {Navigator.pop(context, 'OK')},
                                           child: const Text('OK'),
                                         )
                                       ],

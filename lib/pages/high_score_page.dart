@@ -46,8 +46,7 @@ class HighScoreState extends State<HighScorePage> {
       prefs.setString('updateHighScore', updateHighScore);
     });
     bool update = checkIfUpdateNeeded(now, prefs);
-    final ReportingBloc reportingBloc =
-        flutter_bloc.BlocProvider.of<ReportingBloc>(context);
+    final ReportingBloc reportingBloc = flutter_bloc.BlocProvider.of<ReportingBloc>(context);
     reportingBloc.add(ReportCheckHighScoreEvent(DateTime.now()));
     users = User.decode(highScore);
     sortList();
@@ -91,8 +90,7 @@ class HighScoreState extends State<HighScorePage> {
       int randomNumber = random.nextInt(15) + 1;
       users[1].xp = randomNumber + xp;
       for (var i = 2; i < users.length; i++) {
-        users[i].xp = users[i].xp +
-            random.nextInt(xp - users[i].xp); //Make user not loose points
+        users[i].xp = users[i].xp + random.nextInt(xp - users[i].xp); //Make user not loose points
       }
       prefs.setString("highScore", User.encode(users));
     }
@@ -170,22 +168,19 @@ class HighScoreState extends State<HighScorePage> {
     List<DataRow> rows = [];
     for (User user in users) {
       if (user.name == "Patrick") {
-        rows.add(DataRow(
-            color: MaterialStateColor.resolveWith((states) => Colors.redAccent),
-            cells: [
-              DataCell(Text('#' + user.place.toString())),
-              DataCell(Text(user.name)),
-              DataCell(Text(user.xp.toString()))
-            ]));
+        rows.add(
+            DataRow(color: MaterialStateColor.resolveWith((states) => Colors.redAccent), cells: [
+          DataCell(Text('#' + user.place.toString())),
+          DataCell(Text(user.name)),
+          DataCell(Text(user.xp.toString()))
+        ]));
       } else {
-        rows.add(DataRow(
-            color:
-                MaterialStateColor.resolveWith((states) => Colors.yellowAccent),
-            cells: [
-              DataCell(Text('#' + user.place.toString())),
-              DataCell(Text(user.name)),
-              DataCell(Text(user.xp.toString()))
-            ]));
+        rows.add(
+            DataRow(color: MaterialStateColor.resolveWith((states) => Colors.yellowAccent), cells: [
+          DataCell(Text('#' + user.place.toString())),
+          DataCell(Text(user.name)),
+          DataCell(Text(user.xp.toString()))
+        ]));
       }
     }
     return rows;

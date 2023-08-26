@@ -65,28 +65,22 @@ class PaymentState extends State<PaymentController> {
                   height: 30,
                 ),
                 CreditCardWidget(
-                  glassmorphismConfig:
-                      useGlassMorphism ? Glassmorphism.defaultConfig() : null,
+                  glassmorphismConfig: useGlassMorphism ? Glassmorphism.defaultConfig() : null,
                   cardNumber: cardNumber,
                   expiryDate: expiryDate,
                   cardHolderName: cardHolderName,
                   cvvCode: cvvCode,
                   bankName: 'Axis Bank',
-                  frontCardBorder:
-                      !useGlassMorphism ? Border.all(color: Colors.grey) : null,
-                  backCardBorder:
-                      !useGlassMorphism ? Border.all(color: Colors.grey) : null,
+                  frontCardBorder: !useGlassMorphism ? Border.all(color: Colors.grey) : null,
+                  backCardBorder: !useGlassMorphism ? Border.all(color: Colors.grey) : null,
                   showBackView: isCvvFocused,
                   obscureCardNumber: true,
                   obscureCardCvv: true,
                   isHolderNameVisible: true,
                   cardBgColor: AppColors.cardBgColor,
-                  backgroundImage: useBackgroundImage
-                      ? 'assets/images/credit/card_bg.png'
-                      : null,
+                  backgroundImage: useBackgroundImage ? 'assets/images/credit/card_bg.png' : null,
                   isSwipeGestureEnabled: true,
-                  onCreditCardWidgetChange:
-                      (CreditCardBrand creditCardBrand) {},
+                  onCreditCardWidgetChange: (CreditCardBrand creditCardBrand) {},
                   customCardTypeIcons: <CustomCardTypeIcon>[
                     CustomCardTypeIcon(
                       cardType: CardType.mastercard,
@@ -154,8 +148,7 @@ class PaymentState extends State<PaymentController> {
                         GestureDetector(
                           onTap: _onValidate,
                           child: Container(
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
+                            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                             decoration: BoxDecoration(
                               gradient: const LinearGradient(
                                 colors: <Color>[
@@ -210,12 +203,10 @@ class PaymentState extends State<PaymentController> {
                     "Thank you for purchasing the Remove Adds Function, you are getting charged for 2,99€ per month from now on!"),
                 actions: <Widget>[
                   TextButton(
-                      onPressed: () => {Navigator.pop(context, 'Ok')},
-                      child: const Text('Ok')),
+                      onPressed: () => {Navigator.pop(context, 'Ok')}, child: const Text('Ok')),
                 ],
               ));
-      final reportingBloc =
-          flutter_bloc.BlocProvider.of<ReportingBloc>(context);
+      final reportingBloc = flutter_bloc.BlocProvider.of<ReportingBloc>(context);
       reportingBloc.add(ReportPaidForRemovingAddsEvent(true));
       setAddsTo(false);
     } else {

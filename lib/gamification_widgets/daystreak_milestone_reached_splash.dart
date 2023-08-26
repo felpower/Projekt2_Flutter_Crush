@@ -7,18 +7,14 @@ class DayStreakMilestoneReachedSplash extends StatefulWidget {
   final int coins;
   final VoidCallback onComplete;
 
-  const DayStreakMilestoneReachedSplash(
-      this.daystreak, this.coins, this.onComplete,
-      {Key? key})
+  const DayStreakMilestoneReachedSplash(this.daystreak, this.coins, this.onComplete, {Key? key})
       : super(key: key);
 
   @override
-  State<StatefulWidget> createState() =>
-      _GameStreakMilestoneReachedSplashState();
+  State<StatefulWidget> createState() => _GameStreakMilestoneReachedSplashState();
 }
 
-class _GameStreakMilestoneReachedSplashState
-    extends State<DayStreakMilestoneReachedSplash>
+class _GameStreakMilestoneReachedSplashState extends State<DayStreakMilestoneReachedSplash>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animationAppear;
@@ -99,8 +95,7 @@ class _GameStreakMilestoneReachedSplashState
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text(
-                            'Reached DayStreak: ${widget.daystreak}',
+                        Text('Reached DayStreak: ${widget.daystreak}',
                             style: const TextStyle(
                               fontSize: 15.0,
                               color: Colors.white,

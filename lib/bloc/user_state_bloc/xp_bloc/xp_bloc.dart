@@ -15,8 +15,7 @@ class XpBloc extends Bloc<XpEvent, XpState> {
   void _onAddXp(AddXpEvent event, Emitter<XpState> emit) async {
     bool doubleXpActive = await XpService.isDoubleXpActive();
     int multiplier = await XpService.getCurrentMultiplier();
-    int amountToBeAdded =
-        doubleXpActive ? event.amount * multiplier : event.amount;
+    int amountToBeAdded = doubleXpActive ? event.amount * multiplier : event.amount;
     int amount = await XpService.addXp(amountToBeAdded);
 
     doubleXpActive

@@ -3,6 +3,7 @@ using System.Collections;
 using FlutterUnityIntegration;
 using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Match3
 {
@@ -15,7 +16,7 @@ namespace Match3
         public int score2Star;
         public int score3Star;
 
-        public bool _isFlutter;
+        [FormerlySerializedAs("_isFlutter")] public bool isFlutter;
 
         private bool _didWin;
 
@@ -33,14 +34,14 @@ namespace Match3
         private IEnumerator IsFlutter()
         {
             yield return new WaitForSeconds(1);
-            print("Is Flutter? " + _isFlutter);
-            if (!_isFlutter)
+            print("Is Flutter? " + isFlutter);
+            if (!isFlutter)
                 gameGrid.Instantiate();
         }
 
         protected void Setup(SceneInfo sceneInfo)
         {
-            _isFlutter = true;
+            isFlutter = true;
             print(gameObject.name + " Setup");
             if (!string.IsNullOrEmpty(sceneInfo.level))
             {
@@ -96,7 +97,7 @@ namespace Match3
             }
         }
 
-        protected IEnumerator WaitForGridFill()
+        private IEnumerator WaitForGridFill()
         {
             while (gameGrid.IsFilling) yield return null;
 

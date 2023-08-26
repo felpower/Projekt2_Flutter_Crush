@@ -15,8 +15,7 @@ class GameSplash extends StatefulWidget {
   _GameSplashState createState() => _GameSplashState();
 }
 
-class _GameSplashState extends State<GameSplash>
-    with SingleTickerProviderStateMixin {
+class _GameSplashState extends State<GameSplash> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animationAppear;
 

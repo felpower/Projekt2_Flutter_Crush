@@ -9,17 +9,14 @@ class HighScorePageNavigationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
-        builder: (context, state) {
+    return BlocBuilder<DarkPatternsBloc, DarkPatternsState>(builder: (context, state) {
       if (state is DarkPatternsActivatedState) {
         return Padding(
           padding: const EdgeInsets.only(right: 10),
           child: IconButton(
               onPressed: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const HighScorePage()));
+                    context, MaterialPageRoute(builder: (context) => const HighScorePage()));
               },
               icon: const Icon(Icons.scoreboard)),
         );

@@ -40,8 +40,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    final ReportingBloc _reportingBloc =
-        flutter_bloc.BlocProvider.of<ReportingBloc>(context);
+    final ReportingBloc _reportingBloc = flutter_bloc.BlocProvider.of<ReportingBloc>(context);
     switch (state) {
       case AppLifecycleState.resumed:
         _reportingBloc.add(ReportStartAppEvent(DateTime.now()));
@@ -85,19 +84,15 @@ class _HomePageState extends State<HomePage>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    DarkPatternsBloc darkPatternsBloc =
-        flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context);
+    DarkPatternsBloc darkPatternsBloc = flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context);
     _daystreakMilestoneSubscription =
-        flutter_bloc.BlocProvider.of<DayStreakBloc>(context)
-            .stream
-            .listen((state) {
+        flutter_bloc.BlocProvider.of<DayStreakBloc>(context).stream.listen((state) {
       if (state is DayStreakMilestoneState &&
           darkPatternsBloc.state is DarkPatternsActivatedState) {
         OverlayEntry? _dayStreakMileStoneSplash;
         _dayStreakMileStoneSplash = OverlayEntry(
           builder: (context) {
-            return DayStreakMilestoneReachedSplash(
-                state.dayStreak, state.addedCoins, () {
+            return DayStreakMilestoneReachedSplash(state.dayStreak, state.addedCoins, () {
               _dayStreakMileStoneSplash?.remove();
             });
           },
@@ -117,8 +112,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    DarkPatternsBloc darkPatternsBloc =
-        flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context);
+    DarkPatternsBloc darkPatternsBloc = flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context);
     GameBloc gameBloc = BlocProvider.of<GameBloc>(context);
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     Size screenSize = mediaQueryData.size;
@@ -148,8 +142,7 @@ class _HomePageState extends State<HomePage>
               Container(
                 decoration: const BoxDecoration(
                   image: DecorationImage(
-                    image:
-                        AssetImage('assets/images/background/background2.jpg'),
+                    image: AssetImage('assets/images/background/background2.jpg'),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -162,8 +155,7 @@ class _HomePageState extends State<HomePage>
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        flutter_bloc.BlocBuilder<DarkPatternsBloc,
-                            DarkPatternsState>(
+                        flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
                           builder: (context, state) {
                             if (state is DarkPatternsActivatedState) {
                               return Row(
@@ -172,9 +164,7 @@ class _HomePageState extends State<HomePage>
                                   flutter_bloc.BlocBuilder<XpBloc, XpState>(
                                       builder: (context, state) {
                                     return CreditPanel(
-                                        'XP: ' + state.amount.toString(),
-                                        30,
-                                        creditPanelWidth);
+                                        'XP: ' + state.amount.toString(), 30, creditPanelWidth);
                                   }),
                                   // flutter_bloc.BlocBuilder<HighScoreBloc, HighScoreState>(
                                   //     builder: (context, state) {
@@ -183,9 +173,7 @@ class _HomePageState extends State<HomePage>
                                   flutter_bloc.BlocBuilder<CoinBloc, CoinState>(
                                       builder: (context, state) {
                                     return CreditPanel(
-                                        '\$: ' + state.amount.toString(),
-                                        30,
-                                        creditPanelWidth);
+                                        '\$: ' + state.amount.toString(), 30, creditPanelWidth);
                                   })
                                 ],
                               );
@@ -195,8 +183,7 @@ class _HomePageState extends State<HomePage>
                           },
                         ),
                         Align(
-                          alignment: darkPatternsBloc.state
-                                  is DarkPatternsActivatedState
+                          alignment: darkPatternsBloc.state is DarkPatternsActivatedState
                               ? Alignment.bottomCenter
                               : Alignment.topCenter,
                           child: AspectRatio(
@@ -214,10 +201,8 @@ class _HomePageState extends State<HomePage>
                                           crossAxisCount: 3,
                                           childAspectRatio: 1.11,
                                         ),
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-                                          return flutter_bloc.BlocBuilder<
-                                              LevelBloc, LevelState>(
+                                        itemBuilder: (BuildContext context, int index) {
+                                          return flutter_bloc.BlocBuilder<LevelBloc, LevelState>(
                                             builder: (context, state) {
                                               return GameLevelButton(
                                                   width: 80.0,

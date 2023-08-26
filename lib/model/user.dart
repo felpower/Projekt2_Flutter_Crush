@@ -33,9 +33,7 @@ class User {
       );
 
   static List<User> decode(String users) =>
-      (json.decode(users) as List<dynamic>)
-          .map<User>((item) => User.fromJson(item))
-          .toList();
+      (json.decode(users) as List<dynamic>).map<User>((item) => User.fromJson(item)).toList();
 
   @override
   String toString() {

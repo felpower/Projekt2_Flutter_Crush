@@ -94,8 +94,7 @@ Widget blocsTree(
 }) {
   return childlessBlocs.reversed.fold<Widget>(
     child,
-    (Widget nextChild, _BuildWithChild childlessBloc) =>
-        childlessBloc(nextChild),
+    (Widget nextChild, _BuildWithChild childlessBloc) => childlessBloc(nextChild),
   );
 }
 

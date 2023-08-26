@@ -14,8 +14,7 @@ class FortuneWheel extends StatefulWidget {
   }
 }
 
-class _FortuneWheelState extends State<FortuneWheel>
-    with SingleTickerProviderStateMixin {
+class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderStateMixin {
   double _angle = 0;
   double _current = 0;
   late AnimationController _ctrl;

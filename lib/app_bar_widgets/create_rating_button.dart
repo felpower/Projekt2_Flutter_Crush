@@ -12,17 +12,14 @@ class CreateRatingButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
-        builder: (context, state) {
+    return BlocBuilder<DarkPatternsBloc, DarkPatternsState>(builder: (context, state) {
       if (state is DarkPatternsActivatedState) {
         return Padding(
           padding: const EdgeInsets.only(right: 5),
           child: IconButton(
               onPressed: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const RatingPage()));
+                    context, MaterialPageRoute(builder: (context) => const RatingPage()));
               },
               icon: const Icon(Icons.rate_review)),
         );

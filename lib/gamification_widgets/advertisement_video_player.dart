@@ -9,8 +9,7 @@ class AdvertisementVideoPlayer extends StatefulWidget {
   const AdvertisementVideoPlayer({Key? key}) : super(key: key);
 
   @override
-  _AdvertisementVideoPlayerState createState() =>
-      _AdvertisementVideoPlayerState();
+  _AdvertisementVideoPlayerState createState() => _AdvertisementVideoPlayerState();
 }
 
 class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
@@ -21,8 +20,7 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
   void initState() {
     super.initState();
     bool popped = false;
-    controller =
-        VideoPlayerController.asset('assets/videos/spinning_earth.mp4');
+    controller = VideoPlayerController.asset('assets/videos/spinning_earth.mp4');
     controller.addListener(() async {
       if (startedPlaying && !controller.value.isPlaying && !popped) {
         popped = true;
@@ -57,8 +55,7 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
             children: [
               VideoPlayer(controller),
               GestureDetector(
-                onTapDown: (tapDownEvent) =>
-                    _onTapDown(tapDownEvent, reportingBloc),
+                onTapDown: (tapDownEvent) => _onTapDown(tapDownEvent, reportingBloc),
               ),
               Container(
                   padding: const EdgeInsets.all(5),
@@ -66,8 +63,7 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
                   height: 35,
                   margin: const EdgeInsets.only(top: 30),
                   child: FutureBuilder(
-                      future:
-                          Future.delayed(const Duration(milliseconds: 5000)),
+                      future: Future.delayed(const Duration(milliseconds: 5000)),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.done) {
                           return TextButton(

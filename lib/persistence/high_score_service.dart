@@ -19,8 +19,7 @@ class HighScoreService {
 
   HighScoreService._privateConstructor();
 
-  static final HighScoreService instance =
-      HighScoreService._privateConstructor();
+  static final HighScoreService instance = HighScoreService._privateConstructor();
 
   static Future<String> getHighScore() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();

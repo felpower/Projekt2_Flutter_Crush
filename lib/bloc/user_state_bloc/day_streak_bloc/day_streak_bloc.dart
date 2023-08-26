@@ -12,27 +12,23 @@ class DayStreakBloc extends Bloc<DayStreakEvent, DayStreakState> {
 
   final CoinBloc coinBloc;
 
-  DayStreakBloc(GameBloc gameBloc, this.coinBloc)
-      : super(CurrentDayStreakState(0)) {
+  DayStreakBloc(GameBloc gameBloc, this.coinBloc) : super(CurrentDayStreakState(0)) {
     on<UpdateDayStreakEvent>(_onUpdateDayStreak);
     on<LoadDayStreakEvent>(_onLoadDayStreak);
     add(LoadDayStreakEvent());
     gameBloc.gameIsOver.listen(_onGameOver);
   }
 
-  void _onLoadDayStreak(
-      LoadDayStreakEvent event, Emitter<DayStreakState> emit) async {
+  void _onLoadDayStreak(LoadDayStreakEvent event, Emitter<DayStreakState> emit) async {
     int? updatedDayStreak = await DayStreakService.verifyAndGetDayStreak();
     updatedDayStreak != null
         ? emit(CurrentDayStreakState(updatedDayStreak))
         : emit(CurrentDayStreakState(0));
   }
 
-  void _onUpdateDayStreak(
-      UpdateDayStreakEvent event, Emitter<DayStreakState> emit) async {
+  void _onUpdateDayStreak(UpdateDayStreakEvent event, Emitter<DayStreakState> emit) async {
     int currentDayStreak = state.dayStreak;
-    int updatedDayStreak =
-        await DayStreakService.enhanceDaystreakIfNotAlreadyToday();
+    int updatedDayStreak = await DayStreakService.enhanceDaystreakIfNotAlreadyToday();
     if (currentDayStreak != updatedDayStreak) {
       if (_milestoneReached(updatedDayStreak)) {
         int coins = 10 * updatedDayStreak;

@@ -16,8 +16,7 @@ class RemoveAddsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
-        builder: (context, state) {
+    return BlocBuilder<DarkPatternsBloc, DarkPatternsState>(builder: (context, state) {
       if (state is DarkPatternsActivatedState) {
         getSharedPreferences();
         return buyAddRemover(context);
@@ -38,16 +37,13 @@ class RemoveAddsButton extends StatelessWidget {
                   builder: (BuildContext context) => addsActive
                       ? AlertDialog(
                           title: const Text('Remove Adds'),
-                          content: const Text(
-                              'Do you want to remove adds for 2,99€?'),
+                          content: const Text('Do you want to remove adds for 2,99€?'),
                           elevation: 24,
                           shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(16))),
+                              borderRadius: BorderRadius.all(Radius.circular(16))),
                           actions: <Widget>[
                             TextButton(
-                                onPressed: () =>
-                                    {Navigator.pop(context, 'Cancel')},
+                                onPressed: () => {Navigator.pop(context, 'Cancel')},
                                 child: const Text('Cancel')),
                             TextButton(
                               onPressed: () => {
@@ -55,8 +51,7 @@ class RemoveAddsButton extends StatelessWidget {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            const PaymentController())),
+                                        builder: (context) => const PaymentController())),
                               },
                               child: const Text('OK'),
                             )
@@ -68,8 +63,7 @@ class RemoveAddsButton extends StatelessWidget {
                               'You already have bought adds, do you want to cancel your subscription?'),
                           elevation: 24,
                           shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(16))),
+                              borderRadius: BorderRadius.all(Radius.circular(16))),
                           actions: <Widget>[
                             TextButton(
                                 onPressed: () => {Navigator.pop(context, 'No')},
@@ -95,8 +89,7 @@ class RemoveAddsButton extends StatelessWidget {
               content: const Text("Adds are now active again!"),
               actions: <Widget>[
                 TextButton(
-                    onPressed: () => {Navigator.pop(context, 'Ok')},
-                    child: const Text('Ok')),
+                    onPressed: () => {Navigator.pop(context, 'Ok')}, child: const Text('Ok')),
               ],
             ));
     final reportingBloc = flutter_bloc.BlocProvider.of<ReportingBloc>(context);

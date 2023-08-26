@@ -8,6 +8,5 @@ class XpState {
 class MultipliedXpState extends XpState {
   final int multiplier;
 
-  MultipliedXpState(int amount, this.multiplier, [addedAmount = 0])
-      : super(amount, addedAmount);
+  MultipliedXpState(int amount, this.multiplier, [addedAmount = 0]) : super(amount, addedAmount);
 }

@@ -11,8 +11,7 @@ class DayStreakIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
-        builder: (context, state) {
+    return BlocBuilder<DarkPatternsBloc, DarkPatternsState>(builder: (context, state) {
       if (state is DarkPatternsActivatedState) {
         return Padding(
             padding: const EdgeInsets.only(left: 7.5, right: 7.5),

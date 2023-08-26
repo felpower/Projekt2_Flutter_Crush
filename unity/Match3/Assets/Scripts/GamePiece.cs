@@ -9,8 +9,6 @@ namespace Match3
         private int _x;
         private int _y;
 
-        private Touch theTouch;
-
         public int X
         {
             get => _x;

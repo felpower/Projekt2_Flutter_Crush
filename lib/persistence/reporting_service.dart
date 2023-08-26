@@ -23,8 +23,7 @@ class ReportingService {
   static const String notificationTap = 'notificationTap';
   static const String ratingApp = 'rating';
 
-  static const _chars =
-      'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+  static const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
   static final Random _rnd = Random();
 
   static Client client = Client();
@@ -32,13 +31,12 @@ class ReportingService {
   static Account account = Account(client);
 
   static Future<void> addAdvertisementTap(double x, double y) async {
-    await _updateDocumentData(addScreenClick,
-        'x: ${x.toStringAsFixed(2)}, y:${y.toStringAsFixed(2)}');
+    await _updateDocumentData(
+        addScreenClick, 'x: ${x.toStringAsFixed(2)}, y:${y.toStringAsFixed(2)}');
   }
 
   static Future<void> addStartOfLevel(int levelNumber) async {
-    await _updateDocumentData(
-        startOfLevel, 'Level: $levelNumber, Time: ${DateTime.now()}');
+    await _updateDocumentData(startOfLevel, 'Level: $levelNumber, Time: ${DateTime.now()}');
   }
 
   static Future<void> addStartApp(DateTime dateTime) async {
@@ -58,23 +56,17 @@ class ReportingService {
   }
 
   static Future<void> removeAdds(bool removed) async {
-    await _updateDocumentData(
-        paidForRemovingAdds, 'Removed: $removed, Time: ${DateTime.now()}');
+    await _updateDocumentData(paidForRemovingAdds, 'Removed: $removed, Time: ${DateTime.now()}');
   }
 
-  static Future<void> addNotificationTap(
-      DateTime dateTime, String? multiplier) async {
+  static Future<void> addNotificationTap(DateTime dateTime, String? multiplier) async {
     multiplier ??= '';
-    await _updateDocumentData(
-        notificationTap, 'Multiplier: $multiplier, Time: $dateTime');
+    await _updateDocumentData(notificationTap, 'Multiplier: $multiplier, Time: $dateTime');
   }
 
-  static Future<void> _updateDocumentData(
-      String documentPropertyName, String data) async {
+  static Future<void> _updateDocumentData(String documentPropertyName, String data) async {
     models.Document document = await database.getDocument(
-        collectionId: collectionId,
-        documentId: await _getUuid(),
-        databaseId: databaseId);
+        collectionId: collectionId, documentId: await _getUuid(), databaseId: databaseId);
     List<dynamic> dataList = document.data[documentPropertyName];
     List<String> documentData = dataList.cast<String>();
     dataList.add(data);
@@ -106,9 +98,7 @@ class ReportingService {
     models.Document? document;
     try {
       document = await database.getDocument(
-          collectionId: collectionId,
-          databaseId: databaseId,
-          documentId: await _getUuid());
+          collectionId: collectionId, databaseId: databaseId, documentId: await _getUuid());
     } catch (e) {
       dev.log(e.toString());
       dev.log("could not find file");
@@ -117,8 +107,7 @@ class ReportingService {
     if (document != null) {
       return;
     }
-    bool shouldDarkPatternsBeVisible =
-        await DarkPatternsService.shouldDarkPatternsBeVisible();
+    bool shouldDarkPatternsBeVisible = await DarkPatternsService.shouldDarkPatternsBeVisible();
     final planetsByDiameter = {
       uuid: await _getUuid(),
       darkPatterns: shouldDarkPatternsBeVisible,
@@ -140,10 +129,7 @@ class ReportingService {
   }
 
   static void _initClient() {
-    client
-        .setEndpoint(endpointUrl)
-        .setProject(projectId)
-        .setSelfSigned(status: true);
+    client.setEndpoint(endpointUrl).setProject(projectId).setSelfSigned(status: true);
   }
 
   static Future<String> _getUuid() async {
@@ -157,7 +143,6 @@ class ReportingService {
     return newUuid;
   }
 
-  static String _getRandomString(int length) =>
-      String.fromCharCodes(Iterable.generate(
-          length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
+  static String _getRandomString(int length) => String.fromCharCodes(
+      Iterable.generate(length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
 }

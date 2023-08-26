@@ -12,8 +12,7 @@ class SlotMachineButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
-        builder: (context, state) {
+    return BlocBuilder<DarkPatternsBloc, DarkPatternsState>(builder: (context, state) {
       if (state is DarkPatternsActivatedState) {
         return startFortuneWheel(context);
       } else {
@@ -28,9 +27,7 @@ class SlotMachineButton extends StatelessWidget {
         child: IconButton(
             onPressed: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const FortuneWheel()));
+                  context, MaterialPageRoute(builder: (context) => const FortuneWheel()));
             },
             icon: const Icon(Icons.gamepad_outlined)));
   }

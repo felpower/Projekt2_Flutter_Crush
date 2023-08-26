@@ -24,8 +24,7 @@ class GameOverSplash extends StatefulWidget {
   _GameOverSplashState createState() => _GameOverSplashState();
 }
 
-class _GameOverSplashState extends State<GameOverSplash>
-    with SingleTickerProviderStateMixin {
+class _GameOverSplashState extends State<GameOverSplash> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animationAppear;
 
@@ -107,26 +106,21 @@ class _GameOverSplashState extends State<GameOverSplash>
                             color: Colors.white,
                           )),
                     ),
-                    BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
-                        builder: (context, state) {
+                    BlocBuilder<DarkPatternsBloc, DarkPatternsState>(builder: (context, state) {
                       if (state is DarkPatternsActivatedState) {
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            BlocBuilder<XpBloc, XpState>(
-                                builder: (context, state) {
-                              String xpText = state is MultipliedXpState
-                                  ? ' x ${state.multiplier}'
-                                  : '';
-                              return Text(
-                                  'Gained XP: ${state.addedAmount}$xpText',
+                            BlocBuilder<XpBloc, XpState>(builder: (context, state) {
+                              String xpText =
+                                  state is MultipliedXpState ? ' x ${state.multiplier}' : '';
+                              return Text('Gained XP: ${state.addedAmount}$xpText',
                                   style: const TextStyle(
                                     fontSize: 15.0,
                                     color: Colors.white,
                                   ));
                             }),
-                            BlocBuilder<CoinBloc, CoinState>(
-                                builder: (context, state) {
+                            BlocBuilder<CoinBloc, CoinState>(builder: (context, state) {
                               return Text('Gained Coins: ${state.addedAmount}',
                                   style: const TextStyle(
                                     fontSize: 15.0,

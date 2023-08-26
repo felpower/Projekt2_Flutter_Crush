@@ -35,11 +35,9 @@ class GameLevelButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final GameBloc gameBloc = BlocProvider.of<GameBloc>(context);
-    final LevelBloc levelBloc =
-        flutter_bloc.BlocProvider.of<LevelBloc>(context);
+    final LevelBloc levelBloc = flutter_bloc.BlocProvider.of<LevelBloc>(context);
     final CoinBloc coinBloc = flutter_bloc.BlocProvider.of<CoinBloc>(context);
-    final ReportingBloc reportingBloc =
-        flutter_bloc.BlocProvider.of<ReportingBloc>(context);
+    final ReportingBloc reportingBloc = flutter_bloc.BlocProvider.of<ReportingBloc>(context);
     final DarkPatternsBloc darkPatternsBloc =
         flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context);
     bool disabled = !levelBloc.state.levels.contains(levelNumber) &&
@@ -50,8 +48,7 @@ class GameLevelButton extends StatelessWidget {
       onTap: () async {
         disabled
             ? showBuyLevelDialog(levelBloc, coinBloc, context)
-            : showBuyPowerUpDialog(
-                reportingBloc, gameBloc, levelBloc, coinBloc, context);
+            : showBuyPowerUpDialog(reportingBloc, gameBloc, levelBloc, coinBloc, context);
       },
       child: Center(
         child: Padding(
@@ -106,8 +103,8 @@ class GameLevelButton extends StatelessWidget {
     );
   }
 
-  Future<void> openGame(ReportingBloc reportingBloc, GameBloc gameBloc,
-      SharedPreferences prefs, BuildContext context) async {
+  Future<void> openGame(ReportingBloc reportingBloc, GameBloc gameBloc, SharedPreferences prefs,
+      BuildContext context) async {
     reportingBloc.add(ReportStartLevelEvent(levelNumber));
 
     Navigator.of(context).pushNamed(
@@ -124,19 +121,18 @@ class GameLevelButton extends StatelessWidget {
 
   void _showAdvertisement(BuildContext context) {
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => const AdvertisementVideoPlayer()));
+        context, MaterialPageRoute(builder: (context) => const AdvertisementVideoPlayer()));
   }
 
-  void showBuyPowerUpDialog(ReportingBloc reportingBloc, GameBloc gameBloc,
-      LevelBloc levelBloc, CoinBloc coinBloc, BuildContext context) {
+  void showBuyPowerUpDialog(ReportingBloc reportingBloc, GameBloc gameBloc, LevelBloc levelBloc,
+      CoinBloc coinBloc, BuildContext context) {
     showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialog(
               // title: const Text('Buy power up?'),
-          title: const Text('Start the game'),
-              content: const Wrap( //ToDo: Remove Const, and enable power ups
+              title: const Text('Start the game'),
+              content: const Wrap(
+                //ToDo: Remove Const, and enable power ups
                 children: [
                   Text('Power ups currently disabled'),
                   // Text('Do you want to buy'),
@@ -168,8 +164,8 @@ class GameLevelButton extends StatelessWidget {
                 ],
               ),
               elevation: 24,
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8))),
+              shape:
+                  const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
               actions: <Widget>[
                 // IconButton(
                 //     icon: Image.asset('assets/images/bombs/tnt.png'),
@@ -184,21 +180,16 @@ class GameLevelButton extends StatelessWidget {
                 //     onPressed: () => buyPowerUp("wrapped", wrappedPrice,
                 //         coinBloc, reportingBloc, gameBloc, context)),
                 TextButton(
-                  onPressed: () => buyPowerUp(
-                      "nothing", 0, coinBloc, reportingBloc, gameBloc, context),
+                  onPressed: () =>
+                      buyPowerUp("nothing", 0, coinBloc, reportingBloc, gameBloc, context),
                   child: const Text('Start Game'),
                 )
               ],
             ));
   }
 
-  Future<void> buyPowerUp(
-      item,
-      powerUpPrice,
-      CoinBloc coinBloc,
-      ReportingBloc reportingBloc,
-      GameBloc gameBloc,
-      BuildContext context) async {
+  Future<void> buyPowerUp(item, powerUpPrice, CoinBloc coinBloc, ReportingBloc reportingBloc,
+      GameBloc gameBloc, BuildContext context) async {
     if (coinBloc.state.amount >= powerUpPrice) {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString("powerUp", item);
@@ -210,8 +201,8 @@ class GameLevelButton extends StatelessWidget {
           context: context,
           builder: (BuildContext context) => AlertDialog(
                 title: const Text('Not enough money to buy power up'),
-                content: const Text(
-                    'You can get coins by playing levels or watching advertisements'),
+                content:
+                    const Text('You can get coins by playing levels or watching advertisements'),
                 elevation: 24,
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(16))),
@@ -225,15 +216,13 @@ class GameLevelButton extends StatelessWidget {
     }
   }
 
-  void showBuyLevelDialog(
-      LevelBloc levelBloc, CoinBloc coinBloc, BuildContext context) {
+  void showBuyLevelDialog(LevelBloc levelBloc, CoinBloc coinBloc, BuildContext context) {
     showDialog(
         context: context,
         builder: (BuildContext context) => coinBloc.state.amount >= 500
             ? AlertDialog(
                 title: Text('Unlock level $levelNumber'),
-                content: Text(
-                    'Do you want to buy level $levelNumber for $lvlPrice\$?'),
+                content: Text('Do you want to buy level $levelNumber for $lvlPrice\$?'),
                 elevation: 24,
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(16))),
@@ -242,16 +231,15 @@ class GameLevelButton extends StatelessWidget {
                       onPressed: () => {Navigator.pop(context, 'Cancel')},
                       child: const Text('Cancel')),
                   TextButton(
-                    onPressed: () =>
-                        buyLevel(coinBloc, levelBloc, 'Ok', context),
+                    onPressed: () => buyLevel(coinBloc, levelBloc, 'Ok', context),
                     child: const Text('OK'),
                   )
                 ],
               )
             : AlertDialog(
                 title: const Text('Not enough money to buy level'),
-                content: const Text(
-                    'You can get coins by playing levels or watching advertisements'),
+                content:
+                    const Text('You can get coins by playing levels or watching advertisements'),
                 elevation: 24,
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(16))),
@@ -264,8 +252,7 @@ class GameLevelButton extends StatelessWidget {
               ));
   }
 
-  void buyLevel(CoinBloc coinBloc, LevelBloc levelBloc, String text,
-      BuildContext context) {
+  void buyLevel(CoinBloc coinBloc, LevelBloc levelBloc, String text, BuildContext context) {
     coinBloc.add(RemoveCoinsEvent(lvlPrice));
     levelBloc.add(AddLevelEvent(levelNumber));
     Navigator.pop(context, 'OK');

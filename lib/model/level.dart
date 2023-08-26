@@ -26,7 +26,7 @@ class Level extends Object {
 
   Level.fromJson(Map<String, dynamic> json)
       : level = json["level"],
-  type = json["type"],
+        type = json["type"],
         xDim = json["xDim"],
         yDim = json["yDim"],
         numMoves = json["numMoves"],
@@ -52,7 +52,6 @@ class Level extends Object {
   // Reset the objectives
   //
   void resetObjectives() {}
-
 
   @override
   String toString() {

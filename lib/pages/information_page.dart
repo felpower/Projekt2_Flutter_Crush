@@ -47,8 +47,7 @@ class InformationPage extends StatelessWidget {
               ),
               height: 30,
             ),
-            Text(
-                "A WRAPPED removes the tiles up to 3 cells around the WRAPPED\n"
+            Text("A WRAPPED removes the tiles up to 3 cells around the WRAPPED\n"
                 "A combo of 7 tiles. All tiles of the chains are removed and the common tile is replaced by a FIREBALL:\n"),
             Image(
               image: AssetImage(
