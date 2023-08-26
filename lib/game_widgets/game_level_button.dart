@@ -131,57 +131,44 @@ class GameLevelButton extends StatelessWidget {
         builder: (BuildContext context) => AlertDialog(
               // title: const Text('Buy power up?'),
               title: const Text('Start the game'),
-              content: const Wrap(
+              content: Wrap(
                 //ToDo: Remove Const, and enable power ups
                 children: [
-                  Text('Power ups currently disabled'),
-                  // Text('Do you want to buy'),
-                  // Row(
-                  //   children: [
-                  //     Image.asset(
-                  //       'assets/images/bombs/tnt.png',
-                  //       height: 30,
-                  //     ),
-                  //     Text(' for $tntPrice\$',
-                  //         style: const TextStyle(fontSize: 15)),
-                  //   ],
-                  // ),
-                  // Row(
-                  //   children: [
-                  //     Image.asset('assets/images/bombs/mine.png', height: 30),
-                  //     Text(' for $minePrice\$',
-                  //         style: const TextStyle(fontSize: 15)),
-                  //   ],
-                  // ),
-                  // Row(
-                  //   children: [
-                  //     Image.asset('assets/images/bombs/multi_color.png',
-                  //         height: 30),
-                  //     Text(' for $wrappedPrice\$',
-                  //         style: const TextStyle(fontSize: 15)),
-                  //   ],
-                  // ),
+                  const Text('Do you want to buy'),
+                  Row(
+                    children: [
+                      Image.asset(
+                        'assets/images/bombs/fish_1.png',
+                        height: 30,
+                      ),
+                      Text(' for $tntPrice\$',
+                          style: const TextStyle(fontSize: 15)),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Image.asset('assets/images/bombs/rainbow_fish.png', height: 30),
+                      Text(' for $minePrice\$',
+                          style: const TextStyle(fontSize: 15)),
+                    ],
+                  ),
                 ],
               ),
               elevation: 24,
               shape:
                   const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
               actions: <Widget>[
-                // IconButton(
-                //     icon: Image.asset('assets/images/bombs/tnt.png'),
-                //     onPressed: () => buyPowerUp("tnt", tntPrice, coinBloc,
-                //         reportingBloc, gameBloc, context)),
-                // IconButton(
-                //     icon: Image.asset('assets/images/bombs/mine.png'),
-                //     onPressed: () => buyPowerUp("mine", minePrice, coinBloc,
-                //         reportingBloc, gameBloc, context)),
-                // IconButton(
-                //     icon: Image.asset('assets/images/bombs/multi_color.png'),
-                //     onPressed: () => buyPowerUp("wrapped", wrappedPrice,
-                //         coinBloc, reportingBloc, gameBloc, context)),
+                IconButton(
+                    icon: Image.asset('assets/images/bombs/fish_1.png'),
+                    onPressed: () => buyPowerUp("Clear", tntPrice, coinBloc,
+                        reportingBloc, gameBloc, context)),
+                IconButton(
+                    icon: Image.asset('assets/images/bombs/rainbow_fish.png'),
+                    onPressed: () => buyPowerUp("Rainbow", minePrice, coinBloc,
+                        reportingBloc, gameBloc, context)),
                 TextButton(
                   onPressed: () =>
-                      buyPowerUp("nothing", 0, coinBloc, reportingBloc, gameBloc, context),
+                      buyPowerUp("", 0, coinBloc, reportingBloc, gameBloc, context),
                   child: const Text('Start Game'),
                 )
               ],

@@ -34,6 +34,8 @@ class _UnityScreenState extends State<UnityScreen> {
   late CoinBloc coinBloc;
   int shufflePrice = 20;
 
+  String powerUp = "";
+
   Stream<bool> get gameIsOver => _gameIsOverController.stream;
   late int lvl;
   bool gameOver = false;
@@ -58,6 +60,7 @@ class _UnityScreenState extends State<UnityScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       coins = (prefs.getInt('coin') ?? 10);
+      powerUp = (prefs.getString("powerUp") ?? "");
       print("Coins: $coins");
     });
   }
@@ -258,6 +261,7 @@ class _UnityScreenState extends State<UnityScreen> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     String type = jsonString['type'];
+    jsonString['powerUp'] = powerUp;
     while (unityWidgetController == null) {
       print("Waiting for unityWidgetController");
     }

@@ -110,6 +110,8 @@ flutter:
     - assets/images/tiles/purple.png
     - assets/images/tiles/red.png
     - assets/images/tiles/yellow.png
+    - assets/images/bombs/fish_1.png
+    - assets/images/bombs/rainbow_fish.png
     - assets/images/tiles/multicolor.png
     - assets/images/deco/wall.png
     - assets/images/deco/ice_01.png

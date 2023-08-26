@@ -27,7 +27,7 @@ namespace Match3
             }
         }
 
-        public PieceType Type { get; private set; }
+        public PieceType Type { get; set; }
 
         public GameGrid GameGridRef { get; private set; }
 

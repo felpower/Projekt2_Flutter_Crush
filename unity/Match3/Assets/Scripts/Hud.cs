@@ -41,7 +41,8 @@ namespace Match3 {
 			}
 
 			if (_changed) {
-				UnityMessageManager.Instance.SendMessageToFlutter("Reached Star: " + visibleStar);
+				if (level.isFlutter)
+					UnityMessageManager.Instance.SendMessageToFlutter("Reached Star: " + visibleStar);
 				_changed = false;
 			}
 
@@ -78,11 +79,11 @@ namespace Match3 {
 		}
 
 		public void OnGameWin(int score) {
-			gameOver.ShowWin(score, _starIndex);
+			gameOver.ShowWin(score, _starIndex, level.isFlutter);
 			if (_starIndex > PlayerPrefs.GetInt(SceneManager.GetActiveScene().name, 0))
 				PlayerPrefs.SetInt(SceneManager.GetActiveScene().name, _starIndex);
 		}
 
-		public void OnGameLose() { gameOver.ShowLose(); }
+		public void OnGameLose() { gameOver.ShowLose(level.isFlutter); }
 	}
 }

@@ -26,6 +26,8 @@ namespace Match3 {
 
 		private bool _inverse;
 
+		private bool _isFirst = true;
+
 		private Camera _mainCamera;
 
 		private Dictionary<PieceType, GameObject> _piecePrefabDict;
@@ -84,8 +86,7 @@ namespace Match3 {
 					else
 						factor = (float)8 % xDim / 10 + 20;
 					_mainCamera.orthographicSize = Remap(_scale * factor, 1.77f, 1.17f, 8f, 7f);
-				}
-				else {
+				} else {
 					if (xDim > 8)
 						factor += (float)8 % xDim / 10 + 1;
 					else
@@ -113,14 +114,17 @@ namespace Match3 {
 			return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
 		}
 
+		readonly bool _testPowerUp = true;
+
 		private void InstantiatePieces() {
 			_pieces = new GamePiece[xDim, yDim];
 			var sceneInfo = SceneInfoExtensions.GetAsSceneInfo();
 			if (sceneInfo.type == LevelType.Obstacle.ToString()) SpawnBubbles(sceneInfo.numOfObstacles);
 			for (var x = 0; x < xDim; x++)
 				for (var y = 0; y < yDim; y++)
-					if (_pieces[x, y] == null)
+					if (_pieces[x, y] == null) {
 						SpawnNewPiece(x, y, PieceType.Empty);
+					}
 
 			StartCoroutine(Fill());
 		}
@@ -153,6 +157,42 @@ namespace Match3 {
 			}
 
 			IsFilling = false;
+			if (_isFirst) {
+				_isFirst = false;
+				var sceneInfo = SceneInfoExtensions.GetAsSceneInfo();
+				int powerX, powerY;
+				var powerUp = sceneInfo.powerUp;
+				if (level.isFlutter && !string.IsNullOrEmpty(powerUp)) {
+					print("PowerUpBought: " + powerUp);
+					powerX = Random.Range(0, xDim);
+					powerY = Random.Range(0, yDim);
+					yield return new WaitForSeconds(fillTime * 12);
+					ClearPiece(powerX, powerY);
+					PieceType realPowerUp;
+					if (powerUp.Contains("Clear")) {
+						realPowerUp = Random.Range(0, 2) == 0 ? PieceType.RowClear : PieceType.ColumnClear;
+					} else {
+						realPowerUp = PieceType.Rainbow;
+					}
+
+					var newPiece = SpawnNewPiece(powerX, powerY,
+						(PieceType)Enum.Parse(typeof(PieceType), realPowerUp.ToString()));
+					newPiece.ColorComponent.SetColor((ColorType)Random.Range(0, _pieces[0, 0].ColorComponent.NumColors));
+				}
+
+				if (!level.isFlutter && _testPowerUp) {
+					print("TestPowerUp: " + _testPowerUp);
+					powerX = Random.Range(0, xDim);
+					powerY = Random.Range(0, yDim);
+					yield return new WaitForSeconds(fillTime * 12);
+					ClearPiece(powerX, powerY);
+					var newPiece = SpawnNewPiece(powerX, powerY, PieceType.ColumnClear);
+					newPiece.ColorComponent.SetColor((ColorType)Random.Range(0, _pieces[0, 0].ColorComponent.NumColors));
+				}
+
+				StartCoroutine(Fill());
+			}
+
 			yield return new WaitForSeconds(fillTime * 3);
 		}
 
@@ -179,8 +219,7 @@ namespace Match3 {
 						_pieces[x, y + 1] = piece;
 						SpawnNewPiece(x, y, PieceType.Empty);
 						movedPiece = true;
-					}
-					else {
+					} else {
 						for (var diag = -1; diag <= 1; diag++) {
 							if (diag == 0) continue;
 
@@ -226,13 +265,13 @@ namespace Match3 {
 
 				Destroy(pieceBelow.gameObject);
 				var newPiece = Instantiate(_piecePrefabDict[PieceType.Normal], GetWorldPosition(x, -1),
-				                           Quaternion.identity);
+					Quaternion.identity);
 
 				_pieces[x, 0] = newPiece.GetComponent<GamePiece>();
 				_pieces[x, 0].Init(x, -1, this, PieceType.Normal);
 				_pieces[x, 0].MovableComponent.Move(x, 0, fillTime);
 				_pieces[x, 0].ColorComponent
-				             .SetColor((ColorType)Random.Range(0, _pieces[x, 0].ColorComponent.NumColors));
+					.SetColor((ColorType)Random.Range(0, _pieces[x, 0].ColorComponent.NumColors));
 				movedPiece = true;
 			}
 
@@ -258,8 +297,10 @@ namespace Match3 {
 						if (HasMatchAt(row, col) || HasMatchAt(row, col + 1)) {
 							_checkMovesArray[row, col] = piece1;
 							_checkMovesArray[row, col + 1] = piece2;
-							print("Found Move at Row: " + row + ", Col: " + col + ", Color " + piece1.ColorComponent.Color +
-							      ". With Row: " + row + " Col: " + (col + 1) + ", Color: " + piece2.ColorComponent.Color +
+							print("Found Move at Row: " + row + ", Col: " + col + ", Color " +
+							      piece1.ColorComponent.Color +
+							      ". With Row: " + row + " Col: " + (col + 1) + ", Color: " +
+							      piece2.ColorComponent.Color +
 							      ".");
 							return true;
 						}
@@ -281,8 +322,10 @@ namespace Match3 {
 						if (HasMatchAt(row, col) || HasMatchAt(row + 1, col)) {
 							_checkMovesArray[row, col] = piece1;
 							_checkMovesArray[row + 1, col] = piece2;
-							print("Found Move at Row: " + row + ", Col: " + col + ", Color " + piece1.ColorComponent.Color +
-							      ". With Row: " + (row + 1) + " Col: " + col + ", Color: " + piece2.ColorComponent.Color +
+							print("Found Move at Row: " + row + ", Col: " + col + ", Color " +
+							      piece1.ColorComponent.Color +
+							      ". With Row: " + (row + 1) + " Col: " + col + ", Color: " +
+							      piece2.ColorComponent.Color +
 							      ".");
 							return true;
 						}
@@ -390,8 +433,7 @@ namespace Match3 {
 				StartCoroutine(Fill());
 
 				level.OnMove();
-			}
-			else {
+			} else {
 				var piece1X = piece1.X;
 				var piece1Y = piece1.Y;
 
@@ -423,9 +465,7 @@ namespace Match3 {
 			_pressedPiece = piece;
 		}
 
-		public void EnterPiece(GamePiece piece) {
-			_enteredPiece = piece;
-		}
+		public void EnterPiece(GamePiece piece) { _enteredPiece = piece; }
 
 		public void ReleasePiece() {
 			if (IsAdjacent(_pressedPiece, _enteredPiece)) {
@@ -547,8 +587,7 @@ namespace Match3 {
 
 					if (verticalPieces.Count < 2) {
 						verticalPieces.Clear();
-					}
-					else {
+					} else {
 						matchingPieces.AddRange(verticalPieces);
 						break;
 					}
@@ -607,8 +646,7 @@ namespace Match3 {
 
 					if (horizontalPieces.Count < 2) {
 						horizontalPieces.Clear();
-					}
-					else {
+					} else {
 						matchingPieces.AddRange(horizontalPieces);
 						break;
 					}
@@ -675,9 +713,7 @@ namespace Match3 {
 						ClearPiece(x, y);
 		}
 
-		public void GameOver() {
-			_gameOver = true;
-		}
+		public void GameOver() { _gameOver = true; }
 
 
 		public List<GamePiece> GetPiecesOfType(PieceType type) {
