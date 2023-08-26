@@ -463,6 +463,7 @@ namespace Match3 {
 		public void PressPiece(GamePiece piece) {
 			_timeWhenWeNextDoSomething = Time.time + 100f;
 			_pressedPiece = piece;
+            print("Piece at X: "+_pressedPiece.X+", Y: "+ _pressedPiece.Y+", Color: "+_pressedPiece.ColorComponent.Color);
 		}
 
 		public void EnterPiece(GamePiece piece) { _enteredPiece = piece; }
