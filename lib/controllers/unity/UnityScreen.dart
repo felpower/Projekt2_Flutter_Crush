@@ -25,7 +25,8 @@ class UnityScreen extends StatefulWidget {
 }
 
 class _UnityScreenState extends State<UnityScreen> {
-  static final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  static final GlobalKey<ScaffoldState> _scaffoldKey =
+      GlobalKey<ScaffoldState>();
 
   late GameBloc gameBloc;
   UnityWidgetController? unityWidgetController;
@@ -85,7 +86,8 @@ class _UnityScreenState extends State<UnityScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
+    final arguments = (ModalRoute.of(context)?.settings.arguments ??
+        <String, dynamic>{}) as Map;
     lvl = arguments['level'];
     coinBloc = flutter_bloc.BlocProvider.of<CoinBloc>(context);
     return Scaffold(
@@ -98,7 +100,8 @@ class _UnityScreenState extends State<UnityScreen> {
                 builder: (BuildContext context) => PointerInterceptor(
                         child: AlertDialog(
                       title: const Text('Abort level'),
-                      content: const Text('Are you sure you want to abort the level?'),
+                      content: const Text(
+                          'Are you sure you want to abort the level?'),
                       elevation: 24,
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(16))),
@@ -163,49 +166,59 @@ class _UnityScreenState extends State<UnityScreen> {
   }
 
   void shuffleDialog() {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) => PointerInterceptor(
-            child: coins > shufflePrice
-                ? AlertDialog(
-                    title: const Text('No More moves possible'),
-                    content: Text(
-                        'Do you want to spend $shufflePrice coins for a shuffle? You currently have '
-                        '$coins '
-                        'coins.'),
-                    elevation: 24,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(16))),
-                    actions: <Widget>[
-                      TextButton(
-                          onPressed: () => {
-                                unityWidgetController?.postMessage(
-                                    'Level', 'ShufflePieces', "ShufflePieces"),
-                                Navigator.pop(context, 'Cancel'),
-                                coinBloc.add(RemoveCoinsEvent(shufflePrice)),
-                                loadCoins()
-                              },
-                          child: const Text('Yes')),
-                      TextButton(
-                          onPressed: () =>
-                              {star > 0 ? gameWon(star) : gameLost(), Navigator.of(context).pop()},
-                          child: const Text('Game Over')),
-                    ],
-                  )
-                : AlertDialog(
-                    title: const Text('No More moves possible'),
-                    content: Text(
-                        'You have insufficient coins ($shufflePrice) for a shuffle? You currently have '
-                        '$coins coins. You just lost the game'),
-                    elevation: 24,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(16))),
-                    actions: <Widget>[
-                      TextButton(
-                          onPressed: () => {star > 0 ? gameWon(star) : gameLost(), popUntil()},
-                          child: const Text('OK')),
-                    ],
-                  )));
+    !gameOver
+        ? showDialog(
+            context: context,
+            builder: (BuildContext context) => PointerInterceptor(
+                child: coins > shufflePrice
+                    ? AlertDialog(
+                        title: const Text('No More moves possible'),
+                        content: Text(
+                            'Do you want to spend $shufflePrice coins for a shuffle? You currently have '
+                            '$coins '
+                            'coins.'),
+                        elevation: 24,
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(16))),
+                        actions: <Widget>[
+                          TextButton(
+                              onPressed: () => {
+                                    unityWidgetController?.postMessage('Level',
+                                        'ShufflePieces', "ShufflePieces"),
+                                    Navigator.pop(context, 'Cancel'),
+                                    coinBloc
+                                        .add(RemoveCoinsEvent(shufflePrice)),
+                                    loadCoins()
+                                  },
+                              child: const Text('Yes')),
+                          TextButton(
+                              onPressed: () => {
+                                    star > 0 ? gameWon(star) : gameLost(),
+                                    Navigator.of(context).pop()
+                                  },
+                              child: const Text('Game Over')),
+                        ],
+                      )
+                    : AlertDialog(
+                        title: const Text('No More moves possible'),
+                        content: Text(
+                            'You have insufficient coins ($shufflePrice) for a shuffle? You currently have '
+                            '$coins coins. You just lost the game'),
+                        elevation: 24,
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(16))),
+                        actions: <Widget>[
+                          TextButton(
+                              onPressed: () => {
+                                    star > 0 ? gameWon(star) : gameLost(),
+                                    popUntil()
+                                  },
+                              child: const Text('OK')),
+                        ],
+                      )))
+        : null;
   }
 
   void gameWon(message) {
@@ -244,7 +257,8 @@ class _UnityScreenState extends State<UnityScreen> {
   }
 
   void changeToStart() {
-    unityWidgetController?.postMessage('GameManager', 'LoadStartScene', "StartScreen");
+    unityWidgetController?.postMessage(
+        'GameManager', 'LoadStartScene', "StartScreen");
     return;
   }
 
@@ -279,7 +293,8 @@ class _UnityScreenState extends State<UnityScreen> {
 
   void postMessage(Map<String, dynamic> jsonString) async {
     try {
-      unityWidgetController?.postJsonMessage('GameManager', 'LoadScene', jsonString);
+      unityWidgetController?.postJsonMessage(
+          'GameManager', 'LoadScene', jsonString);
     } catch (e) {
       print("Error: $e");
       Future.delayed(const Duration(seconds: 1));
