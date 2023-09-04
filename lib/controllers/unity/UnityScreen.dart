@@ -92,30 +92,34 @@ class _UnityScreenState extends State<UnityScreen> {
     coinBloc = flutter_bloc.BlocProvider.of<CoinBloc>(context);
     return Scaffold(
       floatingActionButton: PointerInterceptor(
-        child: FloatingActionButton(
-          child: const Icon(Icons.close),
-          onPressed: () {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) => PointerInterceptor(
-                        child: AlertDialog(
-                      title: const Text('Abort level'),
-                      content: const Text(
-                          'Are you sure you want to abort the level?'),
-                      elevation: 24,
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(16))),
-                      actions: <Widget>[
-                        TextButton(
-                            onPressed: () => {Navigator.pop(context, 'Cancel')},
-                            child: const Text('No')),
-                        TextButton(
-                            onPressed: () => {changeToStart(), popUntil()},
-                            child: const Text('Yes')),
-                      ],
-                    )));
-          },
-        ),
+        child: Visibility(
+            visible: !gameOver,
+            child: FloatingActionButton(
+              child: const Icon(Icons.close),
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) => PointerInterceptor(
+                            child: AlertDialog(
+                          title: const Text('Abort level'),
+                          content: const Text(
+                              'Are you sure you want to abort the level?'),
+                          elevation: 24,
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(16))),
+                          actions: <Widget>[
+                            TextButton(
+                                onPressed: () =>
+                                    {Navigator.pop(context, 'Cancel')},
+                                child: const Text('No')),
+                            TextButton(
+                                onPressed: () => {changeToStart(), popUntil()},
+                                child: const Text('Yes')),
+                          ],
+                        )));
+              },
+            )),
       ),
       key: _scaffoldKey,
       body: Card(
