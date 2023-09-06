@@ -294,6 +294,19 @@ class _UnityScreenState extends State<UnityScreen> {
       postMessage(jsonString);
     }
   }
+  // void postMessage(Map<String, dynamic> jsonString) async {
+  //   print("Check if Unity is Ready");
+  //   while (!unityReady) {
+  //     try {
+  //       unityWidgetController?.postMessage('GameManager', 'CheckReady', 'checkReady');
+  //     } catch (e) {
+  //       print("Unity is not Ready");
+  //     }
+  //     await Future.delayed(const Duration(seconds: 1));
+  //   }
+  //   print("Unity is Ready");
+  //   unityWidgetController!.postJsonMessage('GameManager', 'LoadScene', jsonString);
+  // }
 
   void postMessage(Map<String, dynamic> jsonString) async {
     try {

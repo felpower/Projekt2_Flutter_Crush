@@ -32,6 +32,12 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(startScreen);
     }
+    
+    public void CheckReady(string checkReady)
+    {
+        Debug.Log(checkReady);
+        UnityMessageManager.Instance.SendMessageToFlutter("checkReady");
+    }
 
     private void HandleWebFnCall(string action)
     {

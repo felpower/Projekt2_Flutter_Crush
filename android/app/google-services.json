@@ -29,6 +29,13 @@
             {
               "client_id": "287711278777-a1tb57rpcbhmmb374j6qolb1ko5rlkd6.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "287711278777-g2l2ojeocifh7a6g0fo2jlkc95jv7k4r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.felpower.fluttercrush"
+              }
             }
           ]
         }
