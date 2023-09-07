@@ -25,8 +25,7 @@ class UnityScreen extends StatefulWidget {
 }
 
 class _UnityScreenState extends State<UnityScreen> {
-  static final GlobalKey<ScaffoldState> _scaffoldKey =
-      GlobalKey<ScaffoldState>();
+  static final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   late GameBloc gameBloc;
   UnityWidgetController? unityWidgetController;
@@ -34,7 +33,7 @@ class _UnityScreenState extends State<UnityScreen> {
   final PublishSubject<bool> _gameIsOverController = PublishSubject<bool>();
   late CoinBloc coinBloc;
   int shufflePrice = 20;
-
+  bool unityReady = false;
   String powerUp = "";
 
   Stream<bool> get gameIsOver => _gameIsOverController.stream;
@@ -86,8 +85,7 @@ class _UnityScreenState extends State<UnityScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final arguments = (ModalRoute.of(context)?.settings.arguments ??
-        <String, dynamic>{}) as Map;
+    final arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
     lvl = arguments['level'];
     coinBloc = flutter_bloc.BlocProvider.of<CoinBloc>(context);
     return Scaffold(
@@ -102,16 +100,13 @@ class _UnityScreenState extends State<UnityScreen> {
                     builder: (BuildContext context) => PointerInterceptor(
                             child: AlertDialog(
                           title: const Text('Abort level'),
-                          content: const Text(
-                              'Are you sure you want to abort the level?'),
+                          content: const Text('Are you sure you want to abort the level?'),
                           elevation: 24,
                           shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(16))),
+                              borderRadius: BorderRadius.all(Radius.circular(16))),
                           actions: <Widget>[
                             TextButton(
-                                onPressed: () =>
-                                    {Navigator.pop(context, 'Cancel')},
+                                onPressed: () => {Navigator.pop(context, 'Cancel')},
                                 child: const Text('No')),
                             TextButton(
                                 onPressed: () => {changeToStart(), popUntil()},
@@ -149,26 +144,6 @@ class _UnityScreenState extends State<UnityScreen> {
 
   int star = 0;
 
-  void onUnityMessage(message) {
-    print('Received message from unity: ${message.toString()}');
-    if (message.startsWith("Resend Level Info")) {
-      changeScene();
-      return;
-    }
-    if (message.startsWith("Score: ")) {
-      return;
-    } else if (message.startsWith("Shuffle")) {
-      shuffleDialog();
-      return;
-    } else if (message.startsWith("GameOver: Won") && !gameOver) {
-      gameWon(message);
-    } else if (message.startsWith("GameOver: Lost") && !gameOver) {
-      gameLost();
-    } else if (message.startsWith("Reached Star:")) {
-      star = int.parse(message.replaceAll(RegExp(r'[^0-9]'), ''));
-    }
-  }
-
   void shuffleDialog() {
     !gameOver
         ? showDialog(
@@ -183,16 +158,14 @@ class _UnityScreenState extends State<UnityScreen> {
                             'coins.'),
                         elevation: 24,
                         shape: const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(16))),
+                            borderRadius: BorderRadius.all(Radius.circular(16))),
                         actions: <Widget>[
                           TextButton(
                               onPressed: () => {
-                                    unityWidgetController?.postMessage('Level',
-                                        'ShufflePieces', "ShufflePieces"),
+                                    unityWidgetController?.postMessage(
+                                        'Level', 'ShufflePieces', "ShufflePieces"),
                                     Navigator.pop(context, 'Cancel'),
-                                    coinBloc
-                                        .add(RemoveCoinsEvent(shufflePrice)),
+                                    coinBloc.add(RemoveCoinsEvent(shufflePrice)),
                                     loadCoins()
                                   },
                               child: const Text('Yes')),
@@ -211,14 +184,10 @@ class _UnityScreenState extends State<UnityScreen> {
                             '$coins coins. You just lost the game'),
                         elevation: 24,
                         shape: const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(16))),
+                            borderRadius: BorderRadius.all(Radius.circular(16))),
                         actions: <Widget>[
                           TextButton(
-                              onPressed: () => {
-                                    star > 0 ? gameWon(star) : gameLost(),
-                                    popUntil()
-                                  },
+                              onPressed: () => {star > 0 ? gameWon(star) : gameLost(), popUntil()},
                               child: const Text('OK')),
                         ],
                       )))
@@ -246,6 +215,29 @@ class _UnityScreenState extends State<UnityScreen> {
     return;
   }
 
+  void onUnityMessage(message) {
+    print('Received message from unity: ${message.toString()}');
+    if (message.startsWith("checkReady")) {
+      unityReady = true;
+    }
+    if (message.startsWith("Resend Level Info")) {
+      changeScene();
+      return;
+    }
+    if (message.startsWith("Score: ")) {
+      return;
+    } else if (message.startsWith("Shuffle")) {
+      shuffleDialog();
+      return;
+    } else if (message.startsWith("GameOver: Won") && !gameOver) {
+      gameWon(message);
+    } else if (message.startsWith("GameOver: Lost") && !gameOver) {
+      gameLost();
+    } else if (message.startsWith("Reached Star:")) {
+      star = int.parse(message.replaceAll(RegExp(r'[^0-9]'), ''));
+    }
+  }
+
   void onUnitySceneLoaded(SceneLoaded? scene) {
     if (scene != null) {
       print('Received scene loaded from unity: ${scene.name}');
@@ -261,8 +253,7 @@ class _UnityScreenState extends State<UnityScreen> {
   }
 
   void changeToStart() {
-    unityWidgetController?.postMessage(
-        'GameManager', 'LoadStartScene', "StartScreen");
+    unityWidgetController?.postMessage('GameManager', 'LoadStartScene', "StartScreen");
     return;
   }
 
@@ -294,30 +285,31 @@ class _UnityScreenState extends State<UnityScreen> {
       postMessage(jsonString);
     }
   }
-  // void postMessage(Map<String, dynamic> jsonString) async {
-  //   print("Check if Unity is Ready");
-  //   while (!unityReady) {
-  //     try {
-  //       unityWidgetController?.postMessage('GameManager', 'CheckReady', 'checkReady');
-  //     } catch (e) {
-  //       print("Unity is not Ready");
-  //     }
-  //     await Future.delayed(const Duration(seconds: 1));
-  //   }
-  //   print("Unity is Ready");
-  //   unityWidgetController!.postJsonMessage('GameManager', 'LoadScene', jsonString);
-  // }
 
   void postMessage(Map<String, dynamic> jsonString) async {
-    try {
-      unityWidgetController?.postJsonMessage(
-          'GameManager', 'LoadScene', jsonString);
-    } catch (e) {
-      print("Error: $e");
-      Future.delayed(const Duration(seconds: 1));
-      postMessage(jsonString);
+    print("Check if Unity is Ready");
+    while (!unityReady) {
+      try {
+        unityWidgetController?.postMessage('GameManager', 'CheckReady', 'checkReady');
+      } catch (e) {
+        print("Unity is not Ready");
+      }
+      await Future.delayed(const Duration(seconds: 1));
     }
+    print("Unity is Ready");
+    unityWidgetController!.postJsonMessage('GameManager', 'LoadScene', jsonString);
   }
+
+  // void postMessage(Map<String, dynamic> jsonString) async {
+  //   try {
+  //     unityWidgetController?.postJsonMessage(
+  //         'GameManager', 'LoadScene', jsonString);
+  //   } catch (e) {
+  //     print("Error: $e");
+  //     Future.delayed(const Duration(seconds: 1));
+  //     postMessage(jsonString);
+  //   }
+  // }
 
   void showGameOver(bool success) async {
     // Prevent from bubbling
