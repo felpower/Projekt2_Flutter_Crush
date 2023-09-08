@@ -4,8 +4,11 @@ import '../helpers/audio.dart';
 import 'double_curved_container.dart';
 
 class GameSplash extends StatefulWidget {
-  GameSplash({
+  final int level;
+
+  const GameSplash({
     Key? key,
+    required this.level,
     required this.onComplete,
   }) : super(key: key);
 
@@ -86,17 +89,20 @@ class _GameSplashState extends State<GameSplash> with SingleTickerProviderStateM
           innerColor: Colors.blue,
           child: Center(
             child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        // widget.onComplete(); //ToDo: ReAdd when working
-                      });
-                    },
-                  ),
-                ]),
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Level:  ${widget.level}',
+                  style: const TextStyle(fontSize: 24.0, color: Colors.white),
+                ),
+                const SizedBox(height: 8.0),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  // children: objectiveWidgets,
+                ),
+              ],
+            ),
           ),
         ),
       ),

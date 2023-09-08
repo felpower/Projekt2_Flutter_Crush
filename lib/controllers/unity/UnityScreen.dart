@@ -300,17 +300,6 @@ class _UnityScreenState extends State<UnityScreen> {
     unityWidgetController!.postJsonMessage('GameManager', 'LoadScene', jsonString);
   }
 
-  // void postMessage(Map<String, dynamic> jsonString) async {
-  //   try {
-  //     unityWidgetController?.postJsonMessage(
-  //         'GameManager', 'LoadScene', jsonString);
-  //   } catch (e) {
-  //     print("Error: $e");
-  //     Future.delayed(const Duration(seconds: 1));
-  //     postMessage(jsonString);
-  //   }
-  // }
-
   void showGameOver(bool success) async {
     // Prevent from bubbling
     if (_gameOverReceived) {
@@ -339,6 +328,7 @@ class _UnityScreenState extends State<UnityScreen> {
         opaque: false,
         builder: (BuildContext context) {
           return GameSplash(
+            level: lvl,
             onComplete: () {
               _gameSplash.remove();
               // allow gesture detection

@@ -1143,8 +1143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62fb356db7d2834b87559058d1855a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xDim: 5
-  yDim: 5
+  xDim: 10
+  yDim: 10
   fillTime: 0.1
   level: {fileID: 1807374805}
   piecePrefabs:
@@ -1255,6 +1255,7 @@ MonoBehaviour:
   score1Star: 10000
   score2Star: 20000
   score3Star: 30000
+  isFlutter: 0
   numMoves: 15
   obstacleTypes: 00000000
   numOfObstacles: 15

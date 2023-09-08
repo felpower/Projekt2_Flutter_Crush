@@ -80,12 +80,9 @@ namespace Match3 {
 				var scene = SceneManager.GetActiveScene();
 				print(_scale);
 				var factor = 0f;
+				print(scene.name);
 				if (scene.name.Contains("Portrait")) {
-					if (yDim > 8)
-						factor = (float)8 % xDim / 10 + 20;
-					else
-						factor = (float)8 % xDim / 10 + 20;
-					_mainCamera.orthographicSize = Remap(_scale * factor, 1.77f, 1.17f, 8f, 7f);
+					_mainCamera.orthographicSize = yDim+2;
 				} else {
 					if (xDim > 8)
 						factor += (float)8 % xDim / 10 + 1;
@@ -177,7 +174,8 @@ namespace Match3 {
 
 					var newPiece = SpawnNewPiece(powerX, powerY,
 						(PieceType)Enum.Parse(typeof(PieceType), realPowerUp.ToString()));
-					newPiece.ColorComponent.SetColor((ColorType)Random.Range(0, _pieces[0, 0].ColorComponent.NumColors));
+					newPiece.ColorComponent.SetColor((ColorType)Random.Range(0,
+						_pieces[0, 0].ColorComponent.NumColors));
 				}
 
 				if (!level.isFlutter && _testPowerUp) {
@@ -187,7 +185,8 @@ namespace Match3 {
 					yield return new WaitForSeconds(fillTime * 12);
 					ClearPiece(powerX, powerY);
 					var newPiece = SpawnNewPiece(powerX, powerY, PieceType.ColumnClear);
-					newPiece.ColorComponent.SetColor((ColorType)Random.Range(0, _pieces[0, 0].ColorComponent.NumColors));
+					newPiece.ColorComponent.SetColor((ColorType)Random.Range(0,
+						_pieces[0, 0].ColorComponent.NumColors));
 				}
 
 				StartCoroutine(Fill());
@@ -463,7 +462,8 @@ namespace Match3 {
 		public void PressPiece(GamePiece piece) {
 			_timeWhenWeNextDoSomething = Time.time + 100f;
 			_pressedPiece = piece;
-            print("Piece at X: "+_pressedPiece.X+", Y: "+ _pressedPiece.Y+", Color: "+_pressedPiece.ColorComponent.Color);
+			print("Piece at X: " + _pressedPiece.X + ", Y: " + _pressedPiece.Y + ", Color: " +
+			      _pressedPiece.ColorComponent.Color);
 		}
 
 		public void EnterPiece(GamePiece piece) { _enteredPiece = piece; }
