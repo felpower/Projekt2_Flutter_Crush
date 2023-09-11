@@ -46,3 +46,27 @@ ipconfig check for IP4 address
 On mobile go to: 192.168.0.80:8080
 
 On PC go to chrome://inspect/#devices
+
+## Test Notifications
+
+oAuth Playground:
+https://developers.google.com/oauthplayground/
+Step 1: https://www.googleapis.com/auth/firebase.messaging
+Step 2: https://fcm.googleapis.com/v1/projects/flutter-crush-4ece9/messages:send
+Step 3: Send Post requests
+
+{
+    "message":{
+        "token":"czm7cFL9Fr8taHBHNYVzIb:APA91bHYq5YxDbrvxvdX-E-uPHxGcLCMEXFn6b6jHzey4Tv2C1azb0FiDNOeOH2qC6Yfjz1MNQKLpXoHNelaVC5IALS-5yXfk68OV3b23BufYIyarrAvXzRZeeqC2BzJ03fK51tZiDGs",
+        "notification":{
+            "title":"Test",
+            "body":"Test"
+        },
+        "data":{
+            "site": "https://flutter-crush-4ece9.web.app/",
+            "click_action":"FLUTTER_NOTIFICATION_CLICK",
+            "id":"1",
+            "status":"done"
+        }
+    }
+}

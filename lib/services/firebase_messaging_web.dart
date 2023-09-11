@@ -1,13 +1,22 @@
+import 'dart:math';
+
+import 'package:bachelor_flutter_crush/persistence/xp_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class FirebaseMessagingWeb {
   Future<void> init() async {
     print("INIT NOTIFICATION Firebase Web");
+    tz.initializeTimeZones();
     initMobileNotifications();
     getWebToken();
   }
+
+  static const String notificationsAlreadyScheduled = 'notificationsAlreadyScheduled';
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
@@ -16,7 +25,7 @@ class FirebaseMessagingWeb {
   final DarwinInitializationSettings iosInitializationSettings = const DarwinInitializationSettings(
       requestSoundPermission: false, requestAlertPermission: true, requestBadgePermission: true);
 
-  final AndroidNotificationChannel channel = AndroidNotificationChannel(
+  final AndroidNotificationChannel channel = const AndroidNotificationChannel(
     'messages', // id
     'Messages', // title
     description: 'This channel is used for important notifications.', // description
@@ -65,6 +74,33 @@ class FirebaseMessagingWeb {
     );
   }
 
+  Future<void> scheduleNotification() async {
+    int min = 2;
+    int max = 4;
+    if (!await _notificationsAlreadyScheduled()) {
+      for (int i = 0; i < 7; i++) {
+        int multiplier = min + Random().nextInt(max - min);
+        await flutterLocalNotificationsPlugin.zonedSchedule(
+            i,
+            'Flutter Crush',
+            'Tap here to get ${multiplier}x XP for the next 15 minutes!',
+            tz.TZDateTime.now(tz.local).add(Duration(days: i, hours: 1)),
+            createNotificationDetails(),
+            androidAllowWhileIdle: true,
+            payload: multiplier.toString(),
+            uiLocalNotificationDateInterpretation:
+                UILocalNotificationDateInterpretation.absoluteTime);
+        XpService.addMultiplier(multiplier);
+      }
+    }
+  }
+
+  NotificationDetails createNotificationDetails() {
+    NotificationDetails notificationDetails = NotificationDetails(
+        android: createAndroidNotificationDetails(), iOS: createIosNotificationDetails());
+    return notificationDetails;
+  }
+
   getToken() async {
     String? token = await FirebaseMessaging.instance.getToken();
     print("DeviceToken: $token");
@@ -78,13 +114,35 @@ class FirebaseMessagingWeb {
           notification.title ?? "No Title",
           notification.body ?? "No Body",
           NotificationDetails(
-            android: AndroidNotificationDetails(
-              channel.id,
-              channel.name,
-              channelDescription: channel.description,
-              icon: android.smallIcon,
-            ),
+            android: createAndroidNotificationDetails(),
           ));
     }
+  }
+
+  Future<bool> _notificationsAlreadyScheduled() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? alreadyScheduled = prefs.getBool(notificationsAlreadyScheduled);
+    prefs.setBool(notificationsAlreadyScheduled, true);
+    if (alreadyScheduled == null) {
+      return false;
+    }
+    return true;
+  }
+
+  createAndroidNotificationDetails() {
+    return AndroidNotificationDetails(
+      channel.id,
+      channel.name,
+      channelDescription: channel.description,
+    );
+  }
+
+  DarwinNotificationDetails createIosNotificationDetails() {
+    const DarwinNotificationDetails iosNotificationDetails = DarwinNotificationDetails(
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: false,
+    );
+    return iosNotificationDetails;
   }
 }
