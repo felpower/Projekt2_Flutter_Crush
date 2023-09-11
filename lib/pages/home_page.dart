@@ -14,6 +14,7 @@ import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_bloc.dart
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_state.dart';
 import 'package:bachelor_flutter_crush/game_widgets/game_level_button.dart';
 import 'package:bachelor_flutter_crush/gamification_widgets/daystreak_milestone_reached_splash.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
@@ -25,6 +26,7 @@ import '../bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
 import '../bloc/user_state_bloc/coins_bloc/coin_state.dart';
 import '../bloc/user_state_bloc/day_streak_bloc/day_streak_state.dart';
 import '../gamification_widgets/credit_panel.dart';
+import '../services/firebase_messaging_web.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -79,6 +81,28 @@ class _HomePageState extends State<HomePage>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _controller.forward();
     });
+    FirebaseMessaging.onMessage.listen(showFlutterNotification);
+  }
+
+  void showFlutterNotification(RemoteMessage message) {
+    RemoteNotification? notification = message.notification;
+    final android = message.notification?.android;
+    print('Notification TITLE: ${notification?.title}');
+    if (notification != null || android != null) {
+      FirebaseMessagingWeb().showNotification(notification);
+    } else {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return Material(
+                child: Column(
+              children: [
+                Text(notification?.title ?? "No Title"),
+                Text(notification?.body ?? "No Body"),
+              ],
+            ));
+          });
+    }
   }
 
   @override

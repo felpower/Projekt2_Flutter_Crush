@@ -1,15 +1,16 @@
+import 'dart:js';
 import 'dart:math';
 
 import 'package:bachelor_flutter_crush/persistence/reporting_service.dart';
 import 'package:bachelor_flutter_crush/persistence/xp_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
-
-import '../firebase_options.dart';
 
 class LocalNotificationService {
   static const String notificationsAlreadyScheduled = 'notificationsAlreadyScheduled';
@@ -27,6 +28,7 @@ class LocalNotificationService {
       FlutterLocalNotificationsPlugin();
 
   Future<void> init() async {
+    print("INIT NOTIFICATION");
     tz.initializeTimeZones();
     const AndroidInitializationSettings androidInitializationSettings =
         AndroidInitializationSettings('tile');
@@ -36,7 +38,6 @@ class LocalNotificationService {
 
     const InitializationSettings initializationSettings = InitializationSettings(
         android: androidInitializationSettings, iOS: iosInitializationSettings);
-    //if (kIsWeb) getWebToken();
 
     await flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onDidReceiveNotificationResponse: (payload) async {
@@ -51,6 +52,7 @@ class LocalNotificationService {
   }
 
   Future<void> showNotification() async {
+
     await flutterLocalNotificationsPlugin.show(1, 'Flutter Crush',
         'Play in the next 15 Minutes to get double XP!', createNotificationDetails());
   }
@@ -118,39 +120,5 @@ class LocalNotificationService {
       return false;
     }
     return true;
-  }
-
-  Future<void> getWebToken() async {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-    getToken();
-    FirebaseMessaging.onMessage.listen(showFlutterNotification);
-  }
-
-  getToken() async {
-    String? token = await FirebaseMessaging.instance.getToken();
-    print("DeviceToken: $token");
-  }
-
-  void showFlutterNotification(RemoteMessage message) {
-    RemoteNotification? notification = message.notification;
-    AndroidNotification? android = message.notification?.android;
-    print("Notification ${notification!.title}");
-    // showModalBottomSheet(
-    //     context: context,
-    //     builder: (context) {
-    //       return Container(
-    //         height: 100,
-    //         color: Colors.white,
-    //         child: Center(
-    //           child: Text(
-    //             notification.title!,
-    //             style: const TextStyle(fontSize: 20),
-    //           ),
-    //         ),
-    //       );
-    //     }
-    // );
   }
 }

@@ -36,3 +36,13 @@ Go to project_flutter_crush folder
 run 'flutter build web'
 copy 'project_flutter_crush\build\web' folder 'into bachelor_flutter_crush\build\web' folder
 run 'firebase deploy'
+
+## How to test the app on mobile web
+
+flutter run -d web-server --web-port 8080 --web-hostname 0.0.0.0
+
+ipconfig check for IP4 address
+
+On mobile go to: 192.168.0.80:8080
+
+On PC go to chrome://inspect/#devices
