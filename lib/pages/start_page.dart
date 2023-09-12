@@ -126,7 +126,7 @@ class _RegisterState extends State<StartPage> {
                     },
                     validator: MultiValidator([
                       RequiredValidator(errorText: 'Enter mobile number'),
-                      PatternValidator(r'(^[0-9]{10}$)', errorText: 'enter vaid mobile number'),
+                      PatternValidator(r'(^[0-9]{8,16}$)', errorText: 'enter valid mobile number'),
                     ]),
                     decoration: const InputDecoration(
                         hintText: 'Mobile',
@@ -146,6 +146,16 @@ class _RegisterState extends State<StartPage> {
                       onSaved: (value) {
                         userData['dob'] = value;
                       },
+                      validator: MultiValidator([
+                        RequiredValidator(errorText: 'Enter date of birth'),
+                        PatternValidator(
+                            r'^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)('
+                            r'\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29('
+                            r'\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])'
+                            r'|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\'
+                            r'.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$',
+                            errorText: 'enter valid date of birth'),
+                      ]),
                       controller: dateCtl,
                       decoration: const InputDecoration(
                           hintText: "Date of birth",
