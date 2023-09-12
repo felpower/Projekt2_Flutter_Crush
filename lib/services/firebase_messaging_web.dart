@@ -123,6 +123,7 @@ class FirebaseMessagingWeb {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     bool? alreadyScheduled = prefs.getBool(notificationsAlreadyScheduled);
     prefs.setBool(notificationsAlreadyScheduled, true);
+    print("Notifications already scheduled: $alreadyScheduled");
     if (alreadyScheduled == null) {
       return false;
     }

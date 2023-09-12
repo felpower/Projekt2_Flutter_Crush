@@ -14,6 +14,7 @@ void main() async {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   ReportingService.init();
   await FirebaseMessagingWeb().init();
+  FirebaseMessagingWeb().scheduleNotification();
   // LocalNotificationService().scheduleNotification();
   return runApp(const Application());
 }

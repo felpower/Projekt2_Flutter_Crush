@@ -7,10 +7,10 @@ import 'package:bachelor_flutter_crush/persistence/dark_patterns_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ReportingService {
-  static const String endpointUrl = 'http://161.35.65.172/v1';
-  static const String projectId = '64182b7ea21e448ad259';
-  static const String databaseId = '64182c07743312a32653';
-  static const String collectionId = '64182c149865b2351b17';
+  static const String endpointUrl = 'https://cloud.appwrite.io/v1';
+  static const String projectId = '650033bf2a56bd416943';
+  static const String databaseId = '6500415a6fabcd65fbab';
+  static const String collectionId = '6500416c5d0dc4c25a24';
 
   static const String uuid = 'uuid';
   static const String darkPatterns = 'darkPatterns';
@@ -19,6 +19,7 @@ class ReportingService {
   static const String startOfLevel = 'startOfLevel';
   static const String checkHighScoreTime = 'checkHighScoreTime';
   static const String bootAppStartTime = 'bootAppStartTime';
+  static const String initAppStartTime = 'initAppStartTime';
   static const String closeAppTime = 'closeAppTime';
   static const String notificationTap = 'notificationTap';
   static const String ratingApp = 'rating';
@@ -41,6 +42,10 @@ class ReportingService {
 
   static Future<void> addStartApp(DateTime dateTime) async {
     await _updateDocumentData(bootAppStartTime, dateTime.toString());
+  }
+
+  static Future<void> addInitApp(DateTime dateTime) async {
+    await _updateDocumentData(initAppStartTime, dateTime.toString());
   }
 
   static Future<void> checkHighScore(DateTime dateTime) async {
@@ -121,11 +126,12 @@ class ReportingService {
       paidForRemovingAdds: []
     };
 
-    database.createDocument(
+    await database.createDocument(
         collectionId: collectionId,
         documentId: await _getUuid(),
         databaseId: databaseId,
         data: planetsByDiameter);
+    addInitApp(DateTime.now());
   }
 
   static void _initClient() {
