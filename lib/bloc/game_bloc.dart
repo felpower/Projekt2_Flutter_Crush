@@ -76,7 +76,9 @@ class GameBloc implements BlocBase {
     } catch (e) {
       print('jsonContent after levels still empty: $e');
     }
-    if (jsonContent.isEmpty || jsonContent.startsWith("<!DOCTYPE html>")) {
+    if (jsonContent.isEmpty ||
+        jsonContent.startsWith("<!DOCTYPE html>") ||
+        jsonContent.startsWith("<html>")) {
       jsonContent = await rootBundle.loadString('assets/unityLevels.json');
       print('after assets/levels jsonContent not empty: $jsonContent');
     }

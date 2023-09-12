@@ -4,16 +4,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../persistence/reporting_service.dart';
 
-void main() => runApp(const RatingPage());
-
 class RatingPage extends StatefulWidget {
   const RatingPage({Key? key}) : super(key: key);
 
   @override
-  _MyAppState createState() => _MyAppState();
+  _RatingState createState() => _RatingState();
 }
 
-class _MyAppState extends State<RatingPage> {
+class _RatingState extends State<RatingPage> {
   late double _rating;
 
   final double _initialRating = 3;

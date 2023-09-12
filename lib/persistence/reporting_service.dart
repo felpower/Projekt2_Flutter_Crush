@@ -22,6 +22,7 @@ class ReportingService {
   static const String initAppStartTime = 'initAppStartTime';
   static const String closeAppTime = 'closeAppTime';
   static const String notificationTap = 'notificationTap';
+  static const String completeUserData = 'completeUserData';
   static const String ratingApp = 'rating';
 
   static const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
@@ -67,6 +68,16 @@ class ReportingService {
   static Future<void> addNotificationTap(DateTime dateTime, String? multiplier) async {
     multiplier ??= '';
     await _updateDocumentData(notificationTap, 'Multiplier: $multiplier, Time: $dateTime');
+  }
+
+  static Future<void> addUserData(Map userData) async {
+    String firstName = userData['firstName'];
+    String lastName = userData['lastName'];
+    String email = userData['email'];
+    String mobile = userData['mobile'];
+    String dob = userData['dob'];
+    await _updateDocumentData(
+        completeUserData, 'Name: $firstName $lastName, Email: $email, Mobile: $mobile, DOB: $dob');
   }
 
   static Future<void> _updateDocumentData(String documentPropertyName, String data) async {
