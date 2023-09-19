@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using FlutterUnityIntegration;
+using Match3.FlutterUnityIntegration;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -15,7 +16,8 @@ namespace Match3 {
 		private void Start() {
 			screenParent.SetActive(false);
 
-			for (var i = 0; i < stars.Length; i++) stars[i].enabled = false;
+			foreach (var star in stars)
+				star.enabled = false;
 		}
 
 		public void ShowLose(bool levelIsFlutter) {

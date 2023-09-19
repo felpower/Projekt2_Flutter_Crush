@@ -1,4 +1,5 @@
 ﻿using FlutterUnityIntegration;
+using Match3.FlutterUnityIntegration;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,9 +15,9 @@ namespace Match3 {
 		public Text targetSubtext;
 		public Text scoreText;
 		public Image[] stars;
+		private bool _changed;
 
 		private int _starIndex;
-		private bool _changed;
 
 		private void Start() {
 			gameObject.AddComponent<UnityMessageManager>();

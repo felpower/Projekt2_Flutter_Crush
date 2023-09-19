@@ -108,9 +108,7 @@ class _UnityScreenState extends State<UnityScreen> {
                             TextButton(
                                 onPressed: () => {Navigator.pop(context, 'Cancel')},
                                 child: const Text('No')),
-                            TextButton(
-                                onPressed: () => {changeToStart(), popUntil()},
-                                child: const Text('Yes')),
+                            TextButton(onPressed: () => {popUntil()}, child: const Text('Yes')),
                           ],
                         )));
               },
@@ -250,11 +248,6 @@ class _UnityScreenState extends State<UnityScreen> {
   void onUnityCreated(controller) {
     controller.resume();
     unityWidgetController = controller;
-  }
-
-  void changeToStart() {
-    unityWidgetController?.postMessage('GameManager', 'LoadStartScene', "StartScreen");
-    return;
   }
 
   void changeScene() {

@@ -7,6 +7,9 @@ using Random = UnityEngine.Random;
 
 namespace Match3 {
 	public class GameGrid : MonoBehaviour {
+		private const float TimeBetweenDoingSomething = 2f; //Wait 2 second after we do something to do something again
+
+		private const bool TestPowerUp = true;
 		public int xDim;
 		public int yDim;
 		public float fillTime;
@@ -15,10 +18,10 @@ namespace Match3 {
 
 		public PiecePrefab[] piecePrefabs;
 		public GameObject backgroundPrefab;
+		private bool _checkedMoves;
 
-		public PiecePosition[] initialPieces;
-
-		private const float TimeBetweenDoingSomething = 2f; //Wait 2 second after we do something to do something again
+		private GamePiece[,] _checkMovesArray;
+		private IEnumerator _checkMovesCoroutine;
 
 		private GamePiece _enteredPiece;
 
@@ -31,15 +34,11 @@ namespace Match3 {
 		private Camera _mainCamera;
 
 		private Dictionary<PieceType, GameObject> _piecePrefabDict;
-
 		private GamePiece[,] _pieces;
 
 		private GamePiece _pressedPiece;
 
 		private float _scale;
-		private bool _checkedMoves;
-
-		private GamePiece[,] _checkMovesArray;
 
 		private float _timeWhenWeNextDoSomething; //The next time we do something
 
@@ -56,21 +55,12 @@ namespace Match3 {
 		}
 
 		private void Update() {
-			if (_timeWhenWeNextDoSomething <= Time.time) {
+			if (_timeWhenWeNextDoSomething <= Time.time)
 				if (!_checkedMoves) {
 					print("Checking for Moves at: " + Time.time);
-					if (!HasAvailableMoves()) {
-						print("No More Moves");
-						if (!level.isFlutter)
-							ClearAll();
-						else {
-							level.NoMoreMoves();
-						}
-					}
-
-					_checkedMoves = true;
+					_checkMovesCoroutine = CheckMoves();
+					StartCoroutine(_checkMovesCoroutine);
 				}
-			}
 
 			var currentScale = Screen.width < (float)Screen.height
 				? Screen.width / (float)Screen.height
@@ -81,9 +71,9 @@ namespace Match3 {
 				print(_scale);
 				var factor = 0f;
 				print(scene.name);
-				if (scene.name.Contains("Portrait")) {
-					_mainCamera.orthographicSize = yDim+2;
-				} else {
+				if (scene.name.Contains("Portrait"))
+					_mainCamera.orthographicSize = yDim + 2;
+				else {
 					if (xDim > 8)
 						factor += (float)8 % xDim / 10 + 1;
 					else
@@ -93,6 +83,19 @@ namespace Match3 {
 					_mainCamera.orthographicSize = Remap(_scale * factor, 0.562f, 1f, 4.9f, 8f);
 				}
 			}
+		}
+
+		private IEnumerator CheckMoves() {
+			if (!HasAvailableMoves()) {
+				print("No More Moves");
+				if (!level.isFlutter)
+					ClearAll();
+				else
+					level.NoMoreMoves();
+			}
+
+			_checkedMoves = true;
+			yield return null;
 		}
 
 		public void Instantiate() {
@@ -111,17 +114,14 @@ namespace Match3 {
 			return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
 		}
 
-		readonly bool _testPowerUp = true;
-
 		private void InstantiatePieces() {
 			_pieces = new GamePiece[xDim, yDim];
 			var sceneInfo = SceneInfoExtensions.GetAsSceneInfo();
 			if (sceneInfo.type == LevelType.Obstacle.ToString()) SpawnBubbles(sceneInfo.numOfObstacles);
 			for (var x = 0; x < xDim; x++)
 				for (var y = 0; y < yDim; y++)
-					if (_pieces[x, y] == null) {
+					if (_pieces[x, y] == null)
 						SpawnNewPiece(x, y, PieceType.Empty);
-					}
 
 			StartCoroutine(Fill());
 		}
@@ -166,11 +166,10 @@ namespace Match3 {
 					yield return new WaitForSeconds(fillTime * 12);
 					ClearPiece(powerX, powerY);
 					PieceType realPowerUp;
-					if (powerUp.Contains("Clear")) {
+					if (powerUp.Contains("Clear"))
 						realPowerUp = Random.Range(0, 2) == 0 ? PieceType.RowClear : PieceType.ColumnClear;
-					} else {
+					else
 						realPowerUp = PieceType.Rainbow;
-					}
 
 					var newPiece = SpawnNewPiece(powerX, powerY,
 						(PieceType)Enum.Parse(typeof(PieceType), realPowerUp.ToString()));
@@ -178,8 +177,8 @@ namespace Match3 {
 						_pieces[0, 0].ColorComponent.NumColors));
 				}
 
-				if (!level.isFlutter && _testPowerUp) {
-					print("TestPowerUp: " + _testPowerUp);
+				if (!level.isFlutter && TestPowerUp) {
+					print("TestPowerUp: " + TestPowerUp);
 					powerX = Random.Range(0, xDim);
 					powerY = Random.Range(0, yDim);
 					yield return new WaitForSeconds(fillTime * 12);
@@ -218,7 +217,7 @@ namespace Match3 {
 						_pieces[x, y + 1] = piece;
 						SpawnNewPiece(x, y, PieceType.Empty);
 						movedPiece = true;
-					} else {
+					} else
 						for (var diag = -1; diag <= 1; diag++) {
 							if (diag == 0) continue;
 
@@ -253,7 +252,6 @@ namespace Match3 {
 							movedPiece = true;
 							break;
 						}
-					}
 				}
 
 			// the highest row (0) is a special case, we must fill it with new pieces if empty
@@ -469,9 +467,7 @@ namespace Match3 {
 		public void EnterPiece(GamePiece piece) { _enteredPiece = piece; }
 
 		public void ReleasePiece() {
-			if (IsAdjacent(_pressedPiece, _enteredPiece)) {
-				SwapPieces(_pressedPiece, _enteredPiece);
-			}
+			if (IsAdjacent(_pressedPiece, _enteredPiece)) SwapPieces(_pressedPiece, _enteredPiece);
 
 			_checkedMoves = false;
 			_timeWhenWeNextDoSomething = Time.time + TimeBetweenDoingSomething;
@@ -503,9 +499,7 @@ namespace Match3 {
 						else
 							specialPieceType = PieceType.ColumnClear;
 					} // Spawning a rainbow piece
-					else if (match.Count >= 5) {
-						specialPieceType = PieceType.Rainbow;
-					}
+					else if (match.Count >= 5) specialPieceType = PieceType.Rainbow;
 
 					foreach (var gamePiece in match) {
 						if (!ClearPiece(gamePiece.X, gamePiece.Y)) continue;
@@ -586,9 +580,9 @@ namespace Match3 {
 								break;
 						}
 
-					if (verticalPieces.Count < 2) {
+					if (verticalPieces.Count < 2)
 						verticalPieces.Clear();
-					} else {
+					else {
 						matchingPieces.AddRange(verticalPieces);
 						break;
 					}
@@ -645,9 +639,9 @@ namespace Match3 {
 								break;
 						}
 
-					if (horizontalPieces.Count < 2) {
+					if (horizontalPieces.Count < 2)
 						horizontalPieces.Clear();
-					} else {
+					else {
 						matchingPieces.AddRange(horizontalPieces);
 						break;
 					}
@@ -695,6 +689,7 @@ namespace Match3 {
 					ClearPiece(x, y, false);
 			InstantiatePieces();
 			_checkedMoves = false;
+			StopCoroutine(_checkMovesCoroutine);
 			_timeWhenWeNextDoSomething = Time.time + TimeBetweenDoingSomething;
 		}
 

@@ -60,7 +60,7 @@ class _GameOverSplashState extends State<GameOverSplash> with SingleTickerProvid
     );
 
     // Play the intro
-    Audio.playAsset(AudioType.game_start);
+    // Audio.playAsset(AudioType.game_start);
 
     // Launch the animation
     _controller.forward();

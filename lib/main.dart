@@ -9,7 +9,6 @@ import 'helpers/audio.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Audio.init();
   usePathUrlStrategy();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   ReportingService.init();

@@ -62,7 +62,7 @@
       "score3": 35000,
       "targetScore": 27000,
       "timeInSeconds": 90,
-      "numOfObstacles": 25,
+      "numOfObstacles": 50,
       "obstacleTypes": [
         "Red",
         "Blue"
@@ -133,7 +133,7 @@
       "score3": 36000,
       "targetScore": 30000,
       "timeInSeconds": 110,
-      "numOfObstacles": 20,
+      "numOfObstacles": 50,
       "obstacleTypes": [
         "Green",
         "Blue",

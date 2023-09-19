@@ -2,48 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Match3
-{
-    public class ColorPiece : MonoBehaviour
-    {
-        public ColorSprite[] colorSprites;
+namespace Match3 {
+	public class ColorPiece : MonoBehaviour {
+		public ColorSprite[] colorSprites;
 
-        private ColorType _color;
-        private Dictionary<ColorType, Sprite> _colorSpriteDict;
+		private Dictionary<ColorType, Sprite> _colorSpriteDict;
 
-        private SpriteRenderer _sprite;
+		private SpriteRenderer _sprite;
 
-        public ColorType Color
-        {
-            get => _color;
-            set => SetColor(value);
-        }
+		public ColorType Color { get; private set; }
 
-        public int NumColors => colorSprites.Length;
+		public int NumColors => colorSprites.Length;
 
-        private void Awake()
-        {
-            _sprite = transform.Find("piece").GetComponent<SpriteRenderer>();
+		private void Awake() {
+			_sprite = transform.Find("piece").GetComponent<SpriteRenderer>();
 
-            // instantiating and populating a Dictionary of all Color Types / Sprites (for fast lookup)
-            _colorSpriteDict = new Dictionary<ColorType, Sprite>();
+			// instantiating and populating a Dictionary of all Color Types / Sprites (for fast lookup)
+			_colorSpriteDict = new Dictionary<ColorType, Sprite>();
 
-            for (var i = 0; i < colorSprites.Length; i++)
-                _colorSpriteDict.TryAdd(colorSprites[i].color, colorSprites[i].sprite);
-        }
+			for (var i = 0; i < colorSprites.Length; i++)
+				_colorSpriteDict.TryAdd(colorSprites[i].color, colorSprites[i].sprite);
+		}
 
-        public void SetColor(ColorType newColor)
-        {
-            _color = newColor;
+		public void SetColor(ColorType newColor) {
+			Color = newColor;
 
-            if (_colorSpriteDict.TryGetValue(newColor, out var value)) _sprite.sprite = value;
-        }
+			if (_colorSpriteDict.TryGetValue(newColor, out var value)) _sprite.sprite = value;
+		}
 
-        [Serializable]
-        public struct ColorSprite
-        {
-            public ColorType color;
-            public Sprite sprite;
-        }
-    }
+		[Serializable]
+		public struct ColorSprite {
+			public ColorType color;
+			public Sprite sprite;
+		}
+	}
 }

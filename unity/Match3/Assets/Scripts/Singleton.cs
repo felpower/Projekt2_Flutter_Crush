@@ -1,21 +1,21 @@
 using FlutterUnityIntegration;
+using Match3.FlutterUnityIntegration;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameLoader : MonoBehaviour
-{
-    public static GameLoader instance { get; private set; }
+namespace Match3 {
+	public class GameLoader : MonoBehaviour {
+		public static GameLoader Instance { get; private set; }
 
-    private void Awake()
-    {
-        gameObject.AddComponent<UnityMessageManager>();
-        if (instance == null)
-            instance = this;
-    }
+		private void Awake() {
+			gameObject.AddComponent<UnityMessageManager>();
+			if (Instance == null)
+				Instance = this;
+		}
 
-    public void LoadScene(string levelName)
-    {
-        SceneManager.LoadScene(levelName);
-        UnityMessageManager.Instance.SendMessageToFlutter("Scene Loaded");
-    }
+		public void LoadScene(string levelName) {
+			SceneManager.LoadScene(levelName);
+			UnityMessageManager.Instance.SendMessageToFlutter("Scene Loaded");
+		}
+	}
 }
