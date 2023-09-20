@@ -86,5 +86,7 @@ namespace Match3 {
 			else
 				hud.OnGameLose();
 		}
+
+		public virtual void SetNumOfObstacles() { throw new NotImplementedException(); }
 	}
 }

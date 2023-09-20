@@ -117,7 +117,11 @@ namespace Match3 {
 		private void InstantiatePieces() {
 			_pieces = new GamePiece[xDim, yDim];
 			var sceneInfo = SceneInfoExtensions.GetAsSceneInfo();
-			if (sceneInfo.type == LevelType.Obstacle.ToString()) SpawnBubbles(sceneInfo.numOfObstacles);
+			if (sceneInfo.type == LevelType.Obstacle.ToString()) {
+				SpawnBubbles(sceneInfo.numOfObstacles);
+				level.SetNumOfObstacles();
+			}
+
 			for (var x = 0; x < xDim; x++)
 				for (var y = 0; y < yDim; y++)
 					if (_pieces[x, y] == null)
@@ -155,7 +159,6 @@ namespace Match3 {
 
 			IsFilling = false;
 			if (_isFirst) {
-				_isFirst = false;
 				var sceneInfo = SceneInfoExtensions.GetAsSceneInfo();
 				int powerX, powerY;
 				var powerUp = sceneInfo.powerUp;
@@ -164,7 +167,7 @@ namespace Match3 {
 					powerX = Random.Range(0, xDim);
 					powerY = Random.Range(0, yDim);
 					yield return new WaitForSeconds(fillTime * 12);
-					ClearPiece(powerX, powerY);
+					ClearPiece(powerX, powerY, false, false);
 					PieceType realPowerUp;
 					if (powerUp.Contains("Clear"))
 						realPowerUp = Random.Range(0, 2) == 0 ? PieceType.RowClear : PieceType.ColumnClear;
@@ -188,6 +191,7 @@ namespace Match3 {
 						_pieces[0, 0].ColorComponent.NumColors));
 				}
 
+				_isFirst = false;
 				StartCoroutine(Fill());
 			}
 
@@ -276,64 +280,74 @@ namespace Match3 {
 		}
 
 		private bool HasAvailableMoves() {
+			if (_pieces is null) return true;
 			_checkMovesArray = _pieces.Clone() as GamePiece[,];
 
 			for (var row = 0; row < xDim; row++)
 				for (var col = 0; col < yDim; col++) {
-					// Check horizontal swap
-					var piece1 = _checkMovesArray![row, col];
-					if (col < yDim - 1) {
-						var piece2 = _checkMovesArray[row, col + 1];
-						if (piece1.Type == PieceType.Rainbow || piece2.Type == PieceType.Rainbow) {
-							print("Rainbow Piece found");
-							return true;
+					try {
+						// Check horizontal swap
+						if (_checkMovesArray != null) {
+							var piece1 = _checkMovesArray[row, col];
+							if (col < yDim - 1) {
+								var piece2 = _checkMovesArray[row, col + 1];
+								if (piece1 == null || piece2 == null) continue;
+								if (piece1.Type == PieceType.Rainbow || piece2.Type == PieceType.Rainbow) {
+									print("Rainbow Piece found");
+									return true;
+								}
+
+								_checkMovesArray[row, col] = piece2;
+								_checkMovesArray[row, col + 1] = piece1;
+								if (HasMatchAt(row, col) || HasMatchAt(row, col + 1)) {
+									_checkMovesArray[row, col] = piece1;
+									_checkMovesArray[row, col + 1] = piece2;
+									print("Found Move at Row: " + row + ", Col: " + col + ", Color " +
+									      piece1.ColorComponent.Color +
+									      ". With Row: " + row + " Col: " + (col + 1) + ", Color: " +
+									      piece2.ColorComponent.Color +
+									      ".");
+									return true;
+								}
+
+								_checkMovesArray[row, col] = piece1;
+								_checkMovesArray[row, col + 1] = piece2;
+							}
+
+							// Check vertical swap
+							if (row < xDim - 1) {
+								var piece2 = _checkMovesArray[row + 1, col];
+								if (piece1 == null || piece2 == null) continue;
+								if (piece1.Type == PieceType.Rainbow || piece2.Type == PieceType.Rainbow) {
+									print("Rainbow Piece found");
+									return true;
+								}
+
+								_checkMovesArray[row, col] = piece2;
+								_checkMovesArray[row + 1, col] = piece1;
+								if (HasMatchAt(row, col) || HasMatchAt(row + 1, col)) {
+									_checkMovesArray[row, col] = piece1;
+									_checkMovesArray[row + 1, col] = piece2;
+									print("Found Move at Row: " + row + ", Col: " + col + ", Color " +
+									      piece1.ColorComponent.Color +
+									      ". With Row: " + (row + 1) + " Col: " + col + ", Color: " +
+									      piece2.ColorComponent.Color +
+									      ".");
+									return true;
+								}
+
+								_checkMovesArray[row, col] = piece1;
+								_checkMovesArray[row + 1, col] = piece2;
+							}
 						}
-
-						_checkMovesArray[row, col] = piece2;
-						_checkMovesArray[row, col + 1] = piece1;
-						if (HasMatchAt(row, col) || HasMatchAt(row, col + 1)) {
-							_checkMovesArray[row, col] = piece1;
-							_checkMovesArray[row, col + 1] = piece2;
-							print("Found Move at Row: " + row + ", Col: " + col + ", Color " +
-							      piece1.ColorComponent.Color +
-							      ". With Row: " + row + " Col: " + (col + 1) + ", Color: " +
-							      piece2.ColorComponent.Color +
-							      ".");
-							return true;
-						}
-
-						_checkMovesArray[row, col] = piece1;
-						_checkMovesArray[row, col + 1] = piece2;
-					}
-
-					// Check vertical swap
-					if (row < xDim - 1) {
-						var piece2 = _checkMovesArray[row + 1, col];
-						if (piece1.Type == PieceType.Rainbow || piece2.Type == PieceType.Rainbow) {
-							print("Rainbow Piece found");
-							return true;
-						}
-
-						_checkMovesArray[row, col] = piece2;
-						_checkMovesArray[row + 1, col] = piece1;
-						if (HasMatchAt(row, col) || HasMatchAt(row + 1, col)) {
-							_checkMovesArray[row, col] = piece1;
-							_checkMovesArray[row + 1, col] = piece2;
-							print("Found Move at Row: " + row + ", Col: " + col + ", Color " +
-							      piece1.ColorComponent.Color +
-							      ". With Row: " + (row + 1) + " Col: " + col + ", Color: " +
-							      piece2.ColorComponent.Color +
-							      ".");
-							return true;
-						}
-
-						_checkMovesArray[row, col] = piece1;
-						_checkMovesArray[row + 1, col] = piece2;
+					} catch (Exception e) {
+						Debug.LogWarning("Check if null-pointer appears here" + e);
 					}
 				}
 
 			return false;
 		}
+
 
 		private bool HasMatchAt(int row, int col) {
 			var piece = _checkMovesArray[row, col];
@@ -457,21 +471,6 @@ namespace Match3 {
 			piece2.MovableComponent.Move(piece2X, piece2Y, fillTime);
 		}
 
-		public void PressPiece(GamePiece piece) {
-			_timeWhenWeNextDoSomething = Time.time + 100f;
-			_pressedPiece = piece;
-			print("Piece at X: " + _pressedPiece.X + ", Y: " + _pressedPiece.Y + ", Color: " +
-			      _pressedPiece.ColorComponent.Color);
-		}
-
-		public void EnterPiece(GamePiece piece) { _enteredPiece = piece; }
-
-		public void ReleasePiece() {
-			if (IsAdjacent(_pressedPiece, _enteredPiece)) SwapPieces(_pressedPiece, _enteredPiece);
-
-			_checkedMoves = false;
-			_timeWhenWeNextDoSomething = Time.time + TimeBetweenDoingSomething;
-		}
 
 		private bool ClearAllValidMatches() {
 			var needsRefill = false;
@@ -652,13 +651,13 @@ namespace Match3 {
 			return null;
 		}
 
-		private bool ClearPiece(int x, int y, bool includePoints = true) {
+		private bool ClearPiece(int x, int y, bool includePoints = true, bool clearBubble = true) {
 			if (!_pieces[x, y].IsClearable() || _pieces[x, y].ClearableComponent.IsBeingCleared) return false;
 
 			_pieces[x, y].ClearableComponent.Clear(includePoints);
 			SpawnNewPiece(x, y, PieceType.Empty);
-
-			ClearObstacles(x, y);
+			if (clearBubble)
+				ClearObstacles(x, y);
 
 			return true;
 		}
@@ -717,7 +716,7 @@ namespace Match3 {
 
 			for (var x = 0; x < xDim; x++)
 				for (var y = 0; y < yDim; y++)
-					if (_pieces[x, y].Type == type)
+					if (_pieces?[x, y] != null && _pieces[x, y].Type == type)
 						piecesOfType.Add(_pieces[x, y]);
 
 			return piecesOfType;
@@ -732,6 +731,34 @@ namespace Match3 {
 						piecesOfColor.Add(_pieces[x, y]);
 
 			return piecesOfColor;
+		}
+
+		public void PressPiece(GamePiece piece) {
+			_timeWhenWeNextDoSomething = Time.time + 100f;
+			_pressedPiece = piece;
+			print("Piece at X: " + _pressedPiece.X + ", Y: " + _pressedPiece.Y + ", Color: " +
+			      _pressedPiece.ColorComponent.Color);
+		}
+
+		public void EnterPiece(GamePiece piece) { _enteredPiece = piece; }
+
+		public void ReleasePiece() {
+			if (IsFilling) {
+				Debug.Log("Still Filling");
+				return;
+			}
+
+			if (_isFirst) {
+				Debug.Log("Still Waiting for PowerUp");
+				if (GetPiecesOfType(PieceType.Rainbow).Count > 0)
+					_isFirst = false;
+				return;
+			}
+
+			if (IsAdjacent(_pressedPiece, _enteredPiece)) SwapPieces(_pressedPiece, _enteredPiece);
+
+			_checkedMoves = false;
+			_timeWhenWeNextDoSomething = Time.time + TimeBetweenDoingSomething;
 		}
 
 		[Serializable]

@@ -21,7 +21,7 @@ class UnityScreen extends StatefulWidget {
   const UnityScreen({Key? key}) : super(key: key);
 
   @override
-  _UnityScreenState createState() => _UnityScreenState();
+  State<UnityScreen> createState() => _UnityScreenState();
 }
 
 class _UnityScreenState extends State<UnityScreen> {
@@ -199,7 +199,6 @@ class _UnityScreenState extends State<UnityScreen> {
     } else {
       xpCoins = lvl * int.parse(message.replaceAll(RegExp(r'[^0-9]'), ''));
     }
-    print("XP Coins: $xpCoins");
     gameBloc.gameOver(xpCoins);
     _gameIsOverController.sink.add(true);
     gameOver = true;

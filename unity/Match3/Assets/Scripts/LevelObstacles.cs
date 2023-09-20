@@ -16,12 +16,10 @@
 			}
 
 			type = LevelType.Obstacle;
-			foreach (var obstacleType in obstacleTypes)
-				_numObstaclesLeft += gameGrid.GetPiecesOfType(obstacleType).Count;
+
 
 			hud.SetLevelType(type);
 			hud.SetScore(currentScore);
-			hud.SetTarget(_numObstaclesLeft);
 			hud.SetRemaining(numMoves);
 		}
 
@@ -31,6 +29,12 @@
 			hud.SetRemaining(numMoves - _movesUsed);
 
 			if (numMoves - _movesUsed == 0 && _numObstaclesLeft > 0) GameLose();
+		}
+
+		public override void SetNumOfObstacles() {
+			foreach (var obstacleType in obstacleTypes)
+				_numObstaclesLeft += gameGrid.GetPiecesOfType(obstacleType).Count;
+			hud.SetTarget(_numObstaclesLeft);
 		}
 
 		public override void OnPieceCleared(GamePiece piece, bool includePoints) {
