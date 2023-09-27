@@ -72,7 +72,6 @@ class GameBloc implements BlocBase {
     print("Load Levels");
     try {
       jsonContent = await rootBundle.loadString('unityLevels.json');
-      print('after levels jsonContent not empty: $jsonContent');
     } catch (e) {
       print('jsonContent after levels still empty: $e');
     }
@@ -80,7 +79,6 @@ class GameBloc implements BlocBase {
         jsonContent.startsWith("<!DOCTYPE html>") ||
         jsonContent.startsWith("<html>")) {
       jsonContent = await rootBundle.loadString('assets/unityLevels.json');
-      print('after assets/levels jsonContent not empty: $jsonContent');
     }
     Map<dynamic, dynamic> list = json.decode(jsonContent);
     (list["levels"]).forEach((levelItem) {

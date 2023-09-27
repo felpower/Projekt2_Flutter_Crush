@@ -18,7 +18,9 @@ import '../../game_widgets/game_splash.dart';
 int coins = 0;
 
 class UnityScreen extends StatefulWidget {
-  const UnityScreen({Key? key}) : super(key: key);
+  const UnityScreen({Key? key, required this.levelNumber}) : super(key: key);
+
+  final int levelNumber;
 
   @override
   State<UnityScreen> createState() => _UnityScreenState();
@@ -85,8 +87,7 @@ class _UnityScreenState extends State<UnityScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
-    lvl = arguments['level'];
+    lvl = widget.levelNumber;
     coinBloc = flutter_bloc.BlocProvider.of<CoinBloc>(context);
     return Scaffold(
       floatingActionButton: PointerInterceptor(

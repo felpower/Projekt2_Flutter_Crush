@@ -4,7 +4,6 @@ import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/d
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/day_streak_bloc/day_streak_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/level_bloc/level_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_bloc.dart';
-import 'package:bachelor_flutter_crush/controllers/unity/UnityScreen.dart';
 import 'package:bachelor_flutter_crush/pages/home_page.dart';
 import 'package:bachelor_flutter_crush/pages/start_page.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +32,6 @@ class Application extends StatelessWidget {
             home: const HomePage(),
             routes: {
               '/start': (context) => const StartPage(),
-              '/simple': (context) => const UnityScreen(),
             },
           ),
         ));

@@ -21,7 +21,7 @@ class Audio {
 
   static play() async {
     AudioPlayer player = AudioPlayer();
-    await player.play('assets/audio/swap.wav', isLocal: true);
+    // await player.play('assets/audio/swap.wav', isLocal: true);
   }
 
   static playAsset(AudioType audioType) {

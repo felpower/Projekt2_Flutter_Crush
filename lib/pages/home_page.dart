@@ -33,7 +33,7 @@ class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage>
@@ -43,18 +43,20 @@ class _HomePageState extends State<HomePage>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    final ReportingBloc _reportingBloc = flutter_bloc.BlocProvider.of<ReportingBloc>(context);
+    final ReportingBloc reportingBloc = flutter_bloc.BlocProvider.of<ReportingBloc>(context);
     switch (state) {
       case AppLifecycleState.resumed:
-        _reportingBloc.add(ReportStartAppEvent(DateTime.now()));
+        reportingBloc.add(ReportStartAppEvent(DateTime.now()));
         break;
       case AppLifecycleState.inactive:
-        _reportingBloc.add(ReportCloseAppEvent(DateTime.now()));
+        reportingBloc.add(ReportCloseAppEvent(DateTime.now()));
         break;
       case AppLifecycleState.detached:
-        _reportingBloc.add(ReportCloseAppEvent(DateTime.now()));
+        reportingBloc.add(ReportCloseAppEvent(DateTime.now()));
         break;
       case AppLifecycleState.paused:
+        break;
+      case AppLifecycleState.hidden:
         break;
     }
   }
@@ -114,15 +116,15 @@ class _HomePageState extends State<HomePage>
         flutter_bloc.BlocProvider.of<DayStreakBloc>(context).stream.listen((state) {
       if (state is DayStreakMilestoneState &&
           darkPatternsBloc.state is DarkPatternsActivatedState) {
-        OverlayEntry? _dayStreakMileStoneSplash;
-        _dayStreakMileStoneSplash = OverlayEntry(
+        OverlayEntry? dayStreakMileStoneSplash;
+        dayStreakMileStoneSplash = OverlayEntry(
           builder: (context) {
             return DayStreakMilestoneReachedSplash(state.dayStreak, state.addedCoins, () {
-              _dayStreakMileStoneSplash?.remove();
+              dayStreakMileStoneSplash?.remove();
             });
           },
         );
-        Overlay.of(context).insert(_dayStreakMileStoneSplash);
+        Overlay.of(context).insert(dayStreakMileStoneSplash);
       }
     });
   }
@@ -160,9 +162,8 @@ class _HomePageState extends State<HomePage>
             StartPageNavigationButton(),
           ],
         ),
-        body: WillPopScope(
+        body: PopScope(
           // No way to get back
-          onWillPop: () async => false,
           child: Stack(
             children: <Widget>[
               Container(
@@ -190,7 +191,7 @@ class _HomePageState extends State<HomePage>
                                   flutter_bloc.BlocBuilder<XpBloc, XpState>(
                                       builder: (context, state) {
                                     return CreditPanel(
-                                        'XP: ' + state.amount.toString(), 30, creditPanelWidth);
+                                        'XP: ${state.amount}', 30, creditPanelWidth);
                                   }),
                                   // flutter_bloc.BlocBuilder<HighScoreBloc, HighScoreState>(
                                   //     builder: (context, state) {
@@ -199,7 +200,7 @@ class _HomePageState extends State<HomePage>
                                   flutter_bloc.BlocBuilder<CoinBloc, CoinState>(
                                       builder: (context, state) {
                                     return CreditPanel(
-                                        '\$: ' + state.amount.toString(), 30, creditPanelWidth);
+                                        '\$: ${state.amount}', 30, creditPanelWidth);
                                   })
                                 ],
                               );

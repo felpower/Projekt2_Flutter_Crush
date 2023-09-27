@@ -5,6 +5,7 @@ import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/d
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/level_bloc/level_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/level_bloc/level_event.dart';
+import 'package:bachelor_flutter_crush/controllers/unity/UnityScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -107,10 +108,13 @@ class GameLevelButton extends StatelessWidget {
       BuildContext context) async {
     reportingBloc.add(ReportStartLevelEvent(levelNumber));
 
-    Navigator.of(context).pushNamed(
-      "/simple",
-      arguments: {'level': levelNumber},
-    );
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => UnityScreen(
+            levelNumber: levelNumber,
+          ),
+        ));
     //ToDo: Put adds before Navigator Push
     var addState = prefs.getBool("addsActive");
     print("Adds are: $addState");
@@ -141,15 +145,13 @@ class GameLevelButton extends StatelessWidget {
                         'assets/images/bombs/fish_1.png',
                         height: 30,
                       ),
-                      Text(' for $tntPrice\$',
-                          style: const TextStyle(fontSize: 15)),
+                      Text(' for $tntPrice\$', style: const TextStyle(fontSize: 15)),
                     ],
                   ),
                   Row(
                     children: [
                       Image.asset('assets/images/bombs/rainbow_fish.png', height: 30),
-                      Text(' for $minePrice\$',
-                          style: const TextStyle(fontSize: 15)),
+                      Text(' for $minePrice\$', style: const TextStyle(fontSize: 15)),
                     ],
                   ),
                 ],
@@ -160,15 +162,14 @@ class GameLevelButton extends StatelessWidget {
               actions: <Widget>[
                 IconButton(
                     icon: Image.asset('assets/images/bombs/fish_1.png'),
-                    onPressed: () => buyPowerUp("Clear", tntPrice, coinBloc,
-                        reportingBloc, gameBloc, context)),
+                    onPressed: () =>
+                        buyPowerUp("Clear", tntPrice, coinBloc, reportingBloc, gameBloc, context)),
                 IconButton(
                     icon: Image.asset('assets/images/bombs/rainbow_fish.png'),
-                    onPressed: () => buyPowerUp("Rainbow", minePrice, coinBloc,
-                        reportingBloc, gameBloc, context)),
+                    onPressed: () => buyPowerUp(
+                        "Rainbow", minePrice, coinBloc, reportingBloc, gameBloc, context)),
                 TextButton(
-                  onPressed: () =>
-                      buyPowerUp("", 0, coinBloc, reportingBloc, gameBloc, context),
+                  onPressed: () => buyPowerUp("", 0, coinBloc, reportingBloc, gameBloc, context),
                   child: const Text('Start Game'),
                 )
               ],
