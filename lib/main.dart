@@ -4,16 +4,16 @@ import 'package:bachelor_flutter_crush/services/firebase_messaging_web.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
-
-import 'helpers/audio.dart';
+import 'dart:js' as js;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   usePathUrlStrategy();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   ReportingService.init();
-  await FirebaseMessagingWeb().init();
-  FirebaseMessagingWeb().scheduleNotification();
+  // await FirebaseMessagingWeb().init();
+  // FirebaseMessagingWeb().scheduleNotification();
   // LocalNotificationService().scheduleNotification();
-  return runApp(const Application());
+  runApp(const Application());
+
 }
