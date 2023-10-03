@@ -20,15 +20,15 @@ class SendNotificationButton extends StatelessWidget {
   }
 
   void sendNotification() {
-    print("sendNotification");
-    ServiceWorkerNotification().checkNotificiation();
+    ServiceWorkerNotification().checkNotificationPermission();
     final sw = window.navigator.serviceWorker;
+    var timeToNotification =  10 * 1000;
     sw?.controller?.postMessage({
       'action': 'scheduleNotification',
-      'delay': 2 * 60 * 1000, // 2 minutes in milliseconds
+      'delay': timeToNotification, // 2 minutes in milliseconds
       'title': 'Delayed Notification Title',
       'body': 'This is the notification body',
-      'icon': '/path_to_icon.png', // Optional
+      'icon': 'icons/Icon-192.png', // Optional
     });
   }
 }

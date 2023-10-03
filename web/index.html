@@ -35,8 +35,6 @@
     // The value below is injected by flutter build, do not touch.
     var serviceWorkerVersion = null;
 
-
-
     </script>
     <!-- This script adds the flutter initialization JS code -->
     <script defer src="flutter.js"></script>
@@ -44,16 +42,6 @@
 <body>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyDDC-2IZHc3NCXp1lQtOauQMyZ-1Wz5RrE",
-      authDomain: "flutter-crush-4ece9.firebaseapp.com",
-      projectId: "flutter-crush-4ece9",
-      storageBucket: "flutter-crush-4ece9.appspot.com",
-      messagingSenderId: "287711278777",
-      appId: "1:287711278777:web:07e4db55dcb6ef0be44d68",
-      measurementId: "G-0ZT7HMRWNX"
-    };
-    firebase.initializeApp(firebaseConfig);
     window.addEventListener('load', function(ev) {
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
@@ -67,25 +55,6 @@
         }
       });
     });
-</script>
-<script>
-    if("serviceWorker" in navigator){
-        window.addEventListener("load", function() {
-            navigator.serviceWorker.register("/firebase-messaging-sw.js");
-        });
-    }
-</script>
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js')
-    .then(function(registration) {
-      console.log('Service Worker registered with scope:', registration.scope);
-    })
-    .catch(function(error) {
-      console.log('Service Worker registration failed:', error);
-    });
-}
-
 
 </script>
 </body>

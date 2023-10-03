@@ -7,15 +7,8 @@ class ServiceWorkerNotification {
       Notification.requestPermission();
     }
   }
-  void sendWebNotification(String title, String body) {
-    print("sendWebNotification");
 
-    if (Notification.permission == "granted") {
-      Notification(title, body: body);
-    }
-  }
-
-  void checkNotificiation(){
+  void checkNotificationPermission(){
     print("Notification.permission: ${Notification.permission}");
   }
 }
