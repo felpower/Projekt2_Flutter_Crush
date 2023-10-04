@@ -45,7 +45,8 @@ ipconfig check for IP4 address
 
 On mobile go to: 192.168.0.80:8080
 
-On PC go to chrome://inspect/#devices
+On PC go to 
+chrome://inspect/#devices
 
 ## Test Notifications
 

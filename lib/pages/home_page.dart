@@ -51,14 +51,18 @@ class _HomePageState extends State<HomePage>
         reportingBloc.add(ReportStartAppEvent(DateTime.now()));
         break;
       case AppLifecycleState.inactive:
+        ServiceWorkerNotification().scheduleNotification();
         reportingBloc.add(ReportCloseAppEvent(DateTime.now()));
         break;
       case AppLifecycleState.detached:
+        ServiceWorkerNotification().scheduleNotification();
         reportingBloc.add(ReportCloseAppEvent(DateTime.now()));
         break;
       case AppLifecycleState.paused:
+        ServiceWorkerNotification().scheduleNotification();
         break;
       case AppLifecycleState.hidden:
+        ServiceWorkerNotification().scheduleNotification();
         break;
     }
   }
@@ -87,6 +91,7 @@ class _HomePageState extends State<HomePage>
       _controller.forward();
     });
     ServiceWorkerNotification().requestNotificationPermission();
+
     // FirebaseMessaging.onMessage.listen(showFlutterNotification);
   }
 

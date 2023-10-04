@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 
 import '../services/ServiceWorkerNotification.dart';
@@ -13,22 +11,10 @@ class SendNotificationButton extends StatelessWidget {
       padding: const EdgeInsets.only(right: 0),
       child: IconButton(
           onPressed: () {
-            sendNotification();
+            ServiceWorkerNotification().sendNotification(
+                "Test Notification", "This is the body of the test Notification", 10);
           },
           icon: const Icon(Icons.notification_add)),
     );
-  }
-
-  void sendNotification() {
-    ServiceWorkerNotification().checkNotificationPermission();
-    final sw = window.navigator.serviceWorker;
-    var timeToNotification =  10 * 1000;
-    sw?.controller?.postMessage({
-      'action': 'scheduleNotification',
-      'delay': timeToNotification, // 2 minutes in milliseconds
-      'title': 'Delayed Notification Title',
-      'body': 'This is the notification body',
-      'icon': 'icons/Icon-192.png', // Optional
-    });
   }
 }
