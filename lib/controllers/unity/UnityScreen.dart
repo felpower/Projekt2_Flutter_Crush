@@ -14,6 +14,7 @@ import '../../bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
 import '../../bloc/user_state_bloc/coins_bloc/coin_event.dart';
 import '../../game_widgets/game_over_splash.dart';
 import '../../game_widgets/game_splash.dart';
+import '../fortune_wheel/FortuneWheel.dart';
 
 int coins = 0;
 
@@ -194,23 +195,46 @@ class _UnityScreenState extends State<UnityScreen> {
   }
 
   void gameWon(message) {
+    setState(() {
+      fabVisible = false;
+    });
     var xpCoins = 0;
     if (message is int) {
       xpCoins = lvl * message;
     } else {
       xpCoins = lvl * int.parse(message.replaceAll(RegExp(r'[^0-9]'), ''));
     }
-    gameBloc.gameOver(xpCoins);
-    _gameIsOverController.sink.add(true);
+    print("Game Won method");
+    showFortuneWheel(xpCoins);
     gameOver = true;
-    return;
+  }
+
+  void showFortuneWheel(int xpCoins) async {
+    List<int> itemList = [
+      xpCoins,
+      (xpCoins * 0.5).toInt(),
+      (xpCoins * 0.75).toInt(),
+      xpCoins * 2,
+      xpCoins * 3,
+      0
+    ];
+    Future.delayed(const Duration(seconds: 3), () {
+      print("Navigate to Fortune Wheel");
+      // Navigate after a delay of 3 seconds
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => FortuneWheel(
+            items: itemList, gameBloc: gameBloc, gameIsOverController: _gameIsOverController),
+      ));
+    });
   }
 
   void gameLost() {
+    setState(() {
+      fabVisible = false;
+    });
     gameOver = true;
     gameBloc.gameOver(0);
     _gameIsOverController.sink.add(false);
-    return;
   }
 
   void onUnityMessage(message) {

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bachelor_flutter_crush/app_bar_widgets/day_streak_icon.dart';
 import 'package:bachelor_flutter_crush/app_bar_widgets/information_page_navigation_button.dart';
-import 'package:bachelor_flutter_crush/app_bar_widgets/slot_machine_button.dart';
 import 'package:bachelor_flutter_crush/app_bar_widgets/start_page_navigation_button.dart';
 import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_event.dart';
@@ -165,7 +164,6 @@ class _HomePageState extends State<HomePage>
           title: const Text('Flutter Crush'),
           actions: const <Widget>[
             InformationPageNavigationButton(),
-            SlotMachineButton(),
             HighScorePageNavigationButton(),
             StartPageNavigationButton(),
             SendNotificationButton(),

@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/user_state_bloc/coins_bloc/coin_state.dart';
 import '../bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
 import '../bloc/user_state_bloc/xp_bloc/xp_state.dart';
-import '../helpers/audio.dart';
 import 'double_curved_container.dart';
 
 class GameOverSplash extends StatefulWidget {
@@ -21,7 +20,7 @@ class GameOverSplash extends StatefulWidget {
   final bool success;
 
   @override
-  _GameOverSplashState createState() => _GameOverSplashState();
+  State<GameOverSplash> createState() => _GameOverSplashState();
 }
 
 class _GameOverSplashState extends State<GameOverSplash> with SingleTickerProviderStateMixin {
