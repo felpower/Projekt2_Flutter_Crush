@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bachelor_flutter_crush/app_bar_widgets/day_streak_icon.dart';
+import 'package:bachelor_flutter_crush/app_bar_widgets/force_error_button.dart';
 import 'package:bachelor_flutter_crush/app_bar_widgets/information_page_navigation_button.dart';
 import 'package:bachelor_flutter_crush/app_bar_widgets/start_page_navigation_button.dart';
 import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_bloc.dart';
@@ -167,6 +168,7 @@ class _HomePageState extends State<HomePage>
             HighScorePageNavigationButton(),
             StartPageNavigationButton(),
             SendNotificationButton(),
+            ForceErrorButton(),
           ],
         ),
         body: PopScope(

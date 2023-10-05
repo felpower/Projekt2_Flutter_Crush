@@ -1,9 +1,11 @@
 import 'dart:developer' as dev;
+import 'dart:html' as html;
 import 'dart:math';
 
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart' as models;
 import 'package:bachelor_flutter_crush/persistence/dark_patterns_service.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ReportingService {
@@ -11,6 +13,8 @@ class ReportingService {
   static const String projectId = '650033bf2a56bd416943';
   static const String databaseId = '6500415a6fabcd65fbab';
   static const String collectionId = '6500416c5d0dc4c25a24';
+
+  static const String errorCollectionId = '651ecf01ea5bfd9d7d47';
 
   static const String uuid = 'uuid';
   static const String darkPatterns = 'darkPatterns';
@@ -108,6 +112,10 @@ class ReportingService {
       await account.createAnonymousSession();
     }
     _addDocumentIfItDoesNotExist();
+
+    FlutterError.onError = (FlutterErrorDetails details) {
+      sendErrorToAppwrite(details.exceptionAsString(), isFlutterError: true);
+    };
   }
 
   static void _addDocumentIfItDoesNotExist() async {
@@ -158,6 +166,27 @@ class ReportingService {
     final newUuid = _getRandomString(15);
     prefs.setString(uuid, newUuid);
     return newUuid;
+  }
+
+  static void sendErrorToAppwrite(String error, {stacktrace = "", isFlutterError = false}) async {
+    try {
+      final String userAgent = html.window.navigator.userAgent;
+      print(userAgent);
+      database.createDocument(
+        collectionId: errorCollectionId,
+        documentId: _getRandomString(15),
+        databaseId: databaseId,
+        data: {
+          'error': error,
+          'stacktrace': stacktrace,
+          'userAgent': userAgent,
+          'isFlutterError': isFlutterError,
+          'timestamp': DateTime.now().toIso8601String(),
+        },
+      );
+    } catch (e) {
+      print('Failed to send error to Appwrite: $e');
+    }
   }
 
   static String _getRandomString(int length) => String.fromCharCodes(

@@ -1,3 +1,4 @@
+import 'dart:async';
 
 import 'package:bachelor_flutter_crush/application.dart';
 import 'package:bachelor_flutter_crush/persistence/reporting_service.dart';
@@ -12,6 +13,10 @@ void main() async {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   ReportingService.init();
   ServiceWorkerNotification().serviceWorkerNotification();
-
+  runZonedGuarded(() {
+    runApp(const Application());
+  }, (error, stackTrace) {
+    ReportingService.sendErrorToAppwrite(error.toString(), stacktrace: stackTrace.toString());
+  });
   runApp(const Application());
 }
