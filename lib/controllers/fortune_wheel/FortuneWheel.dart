@@ -144,45 +144,35 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
   }
 
   Widget _buildFortuneWheel() {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    double wheelSize = min(screenWidth, screenHeight) * 0.8; // Taking 80% of the smaller dimension
+
     return Container(
-        color: Colors.black,
-        child: Center(
-            child: GestureDetector(
-          onTap: spin,
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              double size =
-                  constraints.biggest.shortestSide; // Use the shortest side to determine the size
-              return Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    AspectRatio(
-                      aspectRatio: 1, // To maintain a square shape
-                      child: SizedBox(
-                        width: size,
-                        height: size,
-                        child: CustomPaint(
-                          painter:
-                              _WheelPainter(items: widget.items, rotation: _accumulatedRotation),
-                        ),
-                      ),
-                    ),
-                    const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(left: 8.0),
-                          child: Icon(Icons.arrow_back, size: 40, color: Colors.red),
-                        ),
-                      ],
-                    )
-                  ],
+      color: Colors.black,
+      child: Center(
+        child: GestureDetector(
+          onPanEnd: (details) => spin(),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Transform.rotate(
+                angle: _accumulatedRotation,
+                child: CustomPaint(
+                  size: Size(wheelSize, wheelSize),
+                  painter: _WheelPainter(widget.items),
                 ),
-              );
-            },
+              ),
+              const Positioned(
+                top: 10,
+                child: Icon(Icons.arrow_downward,
+                    size: 50, color: Colors.black), // Adjust size/color as needed
+              ),
+            ],
           ),
-        )));
+        ),
+      ),
+    );
   }
 
   @override
@@ -194,49 +184,55 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
 
 class _WheelPainter extends CustomPainter {
   final List<int> items;
-  final double rotation;
 
-  _WheelPainter({required this.items, required this.rotation});
+  _WheelPainter(this.items);
 
   @override
   void paint(Canvas canvas, Size size) {
-    final double itemAngle = 2 * pi / items.length;
-    final Offset center = Offset(size.width / 2, size.height / 2);
-    final double radius = size.width / 2;
+    double wheelRadius = size.width / 2;
+    double anglePerItem = 2 * pi / items.length;
+    double startAngle = -pi / 2; // Start from the top of the circle
 
     for (int i = 0; i < items.length; i++) {
-      final startAngle = i * itemAngle + rotation;
-      final sweepAngle = itemAngle;
-      final paint = Paint()
+      final angle = startAngle + i * anglePerItem;
+      final sweepAngle = anglePerItem;
+
+      // Colors
+      final rect = Rect.fromCircle(
+        center: Offset(wheelRadius, wheelRadius),
+        radius: wheelRadius,
+      );
+
+      final Paint paint = Paint()
         ..color = Colors.primaries[i % Colors.primaries.length]
         ..style = PaintingStyle.fill;
 
-      canvas.drawArc(
-          Rect.fromCircle(center: center, radius: radius), startAngle, sweepAngle, true, paint);
+      canvas.drawArc(rect, angle, sweepAngle, true, paint);
 
-      // Drawing text can be more complex, depending on your design.
-      // This is a basic way to position the text on each slice:
-      final textPainter = TextPainter(
-        text: TextSpan(
-          text: items[i].toString(),
-          style: const TextStyle(color: Colors.white),
-        ),
-        textDirection: TextDirection.ltr,
-      )..layout();
-      final position = Offset(
-        center.dx +
-            (size.shortestSide / 4) * cos(startAngle + sweepAngle / 2) -
-            textPainter.width / 2,
-        center.dy +
-            (size.shortestSide / 4) * sin(startAngle + sweepAngle / 2) -
-            textPainter.height / 2,
+      // Draw text
+      final textSpan = TextSpan(
+        text: items[i].toString(),
+        style: const TextStyle(color: Colors.white, fontSize: 20),
       );
-      textPainter.paint(canvas, position);
+      final textPainter = TextPainter(
+        text: textSpan,
+        textDirection: TextDirection.ltr,
+      );
+      textPainter.layout();
+
+      // Calculate text position
+      final labelRadius = wheelRadius - 40; // Adjust this for label positioning
+      final xOffset =
+          wheelRadius + labelRadius * cos(angle + sweepAngle / 2) - textPainter.width / 2;
+      final yOffset =
+          wheelRadius + labelRadius * sin(angle + sweepAngle / 2) - textPainter.height / 2;
+
+      textPainter.paint(canvas, Offset(xOffset, yOffset));
     }
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return true;
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true; // Repaint always for simplicity, optimize if necessary
   }
 }
