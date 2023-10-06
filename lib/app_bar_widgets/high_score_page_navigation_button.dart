@@ -4,8 +4,8 @@ import 'package:bachelor_flutter_crush/pages/high_score_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HighScorePageNavigationButton extends StatelessWidget {
-  const HighScorePageNavigationButton({Key? key}) : super(key: key);
+class HighScorePageButton extends StatelessWidget {
+  const HighScorePageButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

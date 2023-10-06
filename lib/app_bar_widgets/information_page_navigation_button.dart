@@ -1,8 +1,8 @@
 import 'package:bachelor_flutter_crush/pages/information_page.dart';
 import 'package:flutter/material.dart';
 
-class InformationPageNavigationButton extends StatelessWidget {
-  const InformationPageNavigationButton({Key? key}) : super(key: key);
+class InformationPageButton extends StatelessWidget {
+  const InformationPageButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

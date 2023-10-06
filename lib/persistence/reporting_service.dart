@@ -1,11 +1,15 @@
+import 'dart:async';
 import 'dart:developer' as dev;
 import 'dart:html' as html;
+import 'dart:html';
 import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart' as models;
 import 'package:bachelor_flutter_crush/persistence/dark_patterns_service.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ReportingService {
@@ -13,9 +17,9 @@ class ReportingService {
   static const String projectId = '650033bf2a56bd416943';
   static const String databaseId = '6500415a6fabcd65fbab';
   static const String collectionId = '6500416c5d0dc4c25a24';
-
   static const String errorCollectionId = '651ecf01ea5bfd9d7d47';
-
+  static const String feedbackCollectionId = '651fe3520770d805b449';
+  static const String feedbackBucketId = '651fe28fc0074e462967';
   static const String uuid = 'uuid';
   static const String darkPatterns = 'darkPatterns';
   static const String addScreenClick = 'addScreenClick';
@@ -35,6 +39,8 @@ class ReportingService {
   static Client client = Client();
   static Databases database = Databases(client);
   static Account account = Account(client);
+
+  static Storage storage = Storage(client);
 
   static Future<void> addAdvertisementTap(double x, double y) async {
     await _updateDocumentData(
@@ -171,7 +177,6 @@ class ReportingService {
   static void sendErrorToAppwrite(String error, {stacktrace = "", isFlutterError = false}) async {
     try {
       final String userAgent = html.window.navigator.userAgent;
-      print(userAgent);
       database.createDocument(
         collectionId: errorCollectionId,
         documentId: _getRandomString(15),
@@ -187,6 +192,53 @@ class ReportingService {
     } catch (e) {
       print('Failed to send error to Appwrite: $e');
     }
+  }
+
+  static Future<void> sendFeedback(String info, File? file) async {
+    try {
+      print("Sending feedback");
+      final String userAgent = html.window.navigator.userAgent;
+      String uploadedFileId = _getRandomString(15);
+      database.createDocument(
+        collectionId: feedbackCollectionId,
+        documentId: _getRandomString(15),
+        databaseId: databaseId,
+        data: {
+          'info': info,
+          'userAgent': userAgent,
+          'fileId': uploadedFileId,
+          'timestamp': DateTime.now().toIso8601String(),
+        },
+      );
+      if (file != null) {
+        storage.createFile(
+            bucketId: feedbackBucketId,
+            fileId: uploadedFileId,
+            file: InputFile.fromBytes(
+                bytes: await convertHtmlFileToBytes(file), filename: file.name));
+        Fluttertoast.showToast(msg: 'Feedback sent successfully!');
+      }
+    } catch (e) {
+      Fluttertoast.showToast(msg: 'Error sending feedback: $e');
+    }
+  }
+
+  static Future<Uint8List> convertHtmlFileToBytes(html.File file) async {
+    final Completer<Uint8List> completer = Completer<Uint8List>();
+
+    final reader = html.FileReader();
+
+    reader.onLoadEnd.listen((e) {
+      completer.complete(reader.result as Uint8List);
+    });
+
+    reader.onError.listen((error) {
+      completer.completeError(error);
+    });
+
+    reader.readAsArrayBuffer(file);
+
+    return completer.future;
   }
 
   static String _getRandomString(int length) => String.fromCharCodes(

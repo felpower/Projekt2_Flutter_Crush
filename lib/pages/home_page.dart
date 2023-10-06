@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bachelor_flutter_crush/app_bar_widgets/day_streak_icon.dart';
 import 'package:bachelor_flutter_crush/app_bar_widgets/force_error_button.dart';
 import 'package:bachelor_flutter_crush/app_bar_widgets/information_page_navigation_button.dart';
+import 'package:bachelor_flutter_crush/app_bar_widgets/send_feedback_button.dart';
 import 'package:bachelor_flutter_crush/app_bar_widgets/start_page_navigation_button.dart';
 import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_event.dart';
@@ -147,116 +148,97 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    DarkPatternsBloc darkPatternsBloc = flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context);
     GameBloc gameBloc = BlocProvider.of<GameBloc>(context);
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     Size screenSize = mediaQueryData.size;
     double webWidth = 500;
     double webHeight = 1000;
-    double levelsWidth = -100.0 +
-        ((mediaQueryData.orientation == Orientation.portrait)
-            ? screenSize.width
-            : screenSize.height);
     double creditPanelWidth = kIsWeb ? webWidth / 4 : screenSize.width / 4;
 
     return Scaffold(
-        appBar: AppBar(
-          leading: const DayStreakIcon(1),
-          title: const Text('Flutter Crush'),
-          actions: const <Widget>[
-            InformationPageNavigationButton(),
-            HighScorePageNavigationButton(),
-            StartPageNavigationButton(),
-            SendNotificationButton(),
-            ForceErrorButton(),
-          ],
-        ),
-        body: PopScope(
-          // No way to get back
-          child: Stack(
-            children: <Widget>[
-              Container(
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/background/background2.jpg'),
-                    fit: BoxFit.cover,
-                  ),
+      appBar: AppBar(
+        leading: const DayStreakIcon(1),
+        title: const Text('Flutter Crush'),
+        actions: const <Widget>[
+          InformationPageButton(),
+          HighScorePageButton(),
+          StartPageNavigationButton(),
+          SendNotificationButton(),
+          ForceErrorButton(),
+          FeedbackPageButton(),
+        ],
+      ),
+      body: PopScope(
+        child: Stack(
+          children: <Widget>[
+            Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/background/background2.jpg'),
+                  fit: BoxFit.cover,
                 ),
               ),
-              Center(
-                  heightFactor: 1,
-                  child: SizedBox(
-                    width: kIsWeb ? webWidth : null,
-                    height: kIsWeb ? webHeight : null,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
-                          builder: (context, state) {
-                            if (state is DarkPatternsActivatedState) {
-                              return Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  flutter_bloc.BlocBuilder<XpBloc, XpState>(
-                                      builder: (context, state) {
-                                    return CreditPanel(
-                                        'XP: ${state.amount}', 30, creditPanelWidth);
-                                  }),
-                                  // flutter_bloc.BlocBuilder<HighScoreBloc, HighScoreState>(
-                                  //     builder: (context, state) {
-                                  //       return HighScorePageNavigationButton();
-                                  //     }),
-                                  flutter_bloc.BlocBuilder<CoinBloc, CoinState>(
-                                      builder: (context, state) {
-                                    return CreditPanel(
-                                        '\$: ${state.amount}', 30, creditPanelWidth);
-                                  })
-                                ],
-                              );
-                            } else {
-                              return Container();
-                            }
-                          },
-                        ),
-                        Align(
-                          alignment: darkPatternsBloc.state is DarkPatternsActivatedState
-                              ? Alignment.bottomCenter
-                              : Alignment.topCenter,
-                          child: AspectRatio(
-                            aspectRatio: 0.65,
-                            child: SizedBox(
-                                width: levelsWidth,
-                                height: levelsWidth,
-                                child: StreamBuilder<int>(
-                                    stream: gameBloc.maxLevelNumber,
-                                    builder: (context, snapshot) {
-                                      return GridView.builder(
-                                        itemCount: snapshot.data,
-                                        gridDelegate:
-                                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 3,
-                                          childAspectRatio: 1.11,
-                                        ),
-                                        itemBuilder: (BuildContext context, int index) {
-                                          return flutter_bloc.BlocBuilder<LevelBloc, LevelState>(
-                                            builder: (context, state) {
-                                              return GameLevelButton(
-                                                  width: 80.0,
-                                                  height: 60.0,
-                                                  borderRadius: 50.0,
-                                                  levelNumber: index + 1);
-                                            },
-                                          );
-                                        },
-                                      );
-                                    })),
-                          ),
-                        ),
-                      ],
+            ),
+            Center(
+              heightFactor: 1,
+              child: SizedBox(
+                width: kIsWeb ? webWidth : null,
+                height: kIsWeb ? webHeight : null,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
+                      builder: (context, state) {
+                        if (state is DarkPatternsActivatedState) {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              flutter_bloc.BlocBuilder<XpBloc, XpState>(builder: (context, state) {
+                                return CreditPanel('XP: ${state.amount}', 30, creditPanelWidth);
+                              }),
+                              flutter_bloc.BlocBuilder<CoinBloc, CoinState>(
+                                  builder: (context, state) {
+                                return CreditPanel('\$: ${state.amount}', 30, creditPanelWidth);
+                              })
+                            ],
+                          );
+                        } else {
+                          return Container();
+                        }
+                      },
                     ),
-                  ))
-            ],
-          ),
-        ));
+                    Expanded(
+                      // Added Expanded to ensure GridView takes up all available space
+                      child: StreamBuilder<int>(
+                          stream: gameBloc.maxLevelNumber,
+                          builder: (context, snapshot) {
+                            return GridView.builder(
+                              itemCount: snapshot.data,
+                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3,
+                                childAspectRatio: 1.11,
+                              ),
+                              itemBuilder: (BuildContext context, int index) {
+                                return flutter_bloc.BlocBuilder<LevelBloc, LevelState>(
+                                  builder: (context, state) {
+                                    return GameLevelButton(
+                                        width: 80.0,
+                                        height: 60.0,
+                                        borderRadius: 50.0,
+                                        levelNumber: index + 1);
+                                  },
+                                );
+                              },
+                            );
+                          }),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -177,6 +177,78 @@
         "Green",
         "Red"
       ]
+    },{
+      "level": 11,
+      "type": "Moves",
+      "xDim": 5,
+      "yDim": 5,
+      "numMoves": 30,
+      "score1": 32000,
+      "score2": 35000,
+      "score3": 38000,
+      "targetScore": 32000,
+      "timeInSeconds": 120,
+      "numOfObstacles": 23,
+      "obstacleTypes": [
+        "Red",
+        "Blue",
+        "Green",
+        "Yellow"
+      ]
+    },{
+      "level": 12,
+      "type": "Moves",
+      "xDim": 5,
+      "yDim": 5,
+      "numMoves": 30,
+      "score1": 32000,
+      "score2": 35000,
+      "score3": 38000,
+      "targetScore": 32000,
+      "timeInSeconds": 120,
+      "numOfObstacles": 23,
+      "obstacleTypes": [
+        "Red",
+        "Blue",
+        "Green",
+        "Yellow"
+      ]
+    },{
+      "level": 13,
+      "type": "Moves",
+      "xDim": 5,
+      "yDim": 5,
+      "numMoves": 30,
+      "score1": 32000,
+      "score2": 35000,
+      "score3": 38000,
+      "targetScore": 32000,
+      "timeInSeconds": 120,
+      "numOfObstacles": 23,
+      "obstacleTypes": [
+        "Red",
+        "Blue",
+        "Green",
+        "Yellow"
+      ]
+    },{
+      "level": 14,
+      "type": "Moves",
+      "xDim": 5,
+      "yDim": 5,
+      "numMoves": 30,
+      "score1": 32000,
+      "score2": 35000,
+      "score3": 38000,
+      "targetScore": 32000,
+      "timeInSeconds": 120,
+      "numOfObstacles": 23,
+      "obstacleTypes": [
+        "Red",
+        "Blue",
+        "Green",
+        "Yellow"
+      ]
     }
   ]
 }

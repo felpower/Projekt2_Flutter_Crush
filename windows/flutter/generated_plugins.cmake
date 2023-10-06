@@ -3,6 +3,8 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  audioplayers_windows
+  file_selector_windows
   firebase_core
   flutter_unity_widget
   local_auth_windows
