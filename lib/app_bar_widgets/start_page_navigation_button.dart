@@ -3,8 +3,6 @@ import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/d
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../pages/start_page.dart';
-
 class StartPageNavigationButton extends StatelessWidget {
   const StartPageNavigationButton({Key? key}) : super(key: key);
 

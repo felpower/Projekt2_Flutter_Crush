@@ -39,9 +39,7 @@ class LocalNotificationService {
       return Future(() {
         ReportingService.addNotificationTap(DateTime.now(), payload as String?);
         XpService.updateMultiplierXpTime(DateTime.now().add(const Duration(minutes: 15)));
-        if (payload != null) {
-          XpService.updateCurrentMultiplier(int.parse(payload as String));
-        }
+        XpService.updateCurrentMultiplier(int.parse(payload as String));
       });
     });
   }

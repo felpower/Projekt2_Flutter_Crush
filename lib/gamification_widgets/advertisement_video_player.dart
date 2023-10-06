@@ -9,7 +9,7 @@ class AdvertisementVideoPlayer extends StatefulWidget {
   const AdvertisementVideoPlayer({Key? key}) : super(key: key);
 
   @override
-  _AdvertisementVideoPlayerState createState() => _AdvertisementVideoPlayerState();
+  State<AdvertisementVideoPlayer> createState() => _AdvertisementVideoPlayerState();
 }
 
 class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {

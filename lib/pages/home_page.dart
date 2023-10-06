@@ -1,10 +1,6 @@
 import 'dart:async';
 
 import 'package:bachelor_flutter_crush/app_bar_widgets/day_streak_icon.dart';
-import 'package:bachelor_flutter_crush/app_bar_widgets/force_error_button.dart';
-import 'package:bachelor_flutter_crush/app_bar_widgets/information_page_navigation_button.dart';
-import 'package:bachelor_flutter_crush/app_bar_widgets/send_feedback_button.dart';
-import 'package:bachelor_flutter_crush/app_bar_widgets/start_page_navigation_button.dart';
 import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_event.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_bloc.dart';
@@ -22,8 +18,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 
-import '../app_bar_widgets/high_score_page_navigation_button.dart';
-import '../app_bar_widgets/send_notification_button.dart';
 import '../bloc/bloc_provider.dart';
 import '../bloc/game_bloc.dart';
 import '../bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
@@ -31,6 +25,9 @@ import '../bloc/user_state_bloc/coins_bloc/coin_state.dart';
 import '../bloc/user_state_bloc/day_streak_bloc/day_streak_state.dart';
 import '../gamification_widgets/credit_panel.dart';
 import '../services/firebase_messaging_web.dart';
+import 'feedback_page.dart';
+import 'high_score_page.dart';
+import 'information_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -159,15 +156,21 @@ class _HomePageState extends State<HomePage>
       appBar: AppBar(
         leading: const DayStreakIcon(1),
         title: const Text('Flutter Crush'),
-        actions: const <Widget>[
-          InformationPageButton(),
-          HighScorePageButton(),
-          StartPageNavigationButton(),
-          SendNotificationButton(),
-          ForceErrorButton(),
-          FeedbackPageButton(),
+        actions: [
+          Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                icon: const Icon(Icons.menu),
+                onPressed: () {
+                  Scaffold.of(context).openEndDrawer();
+                },
+                tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+              );
+            },
+          ),
         ],
       ),
+      endDrawer: buildBurgerMenu(context),
       body: PopScope(
         child: Stack(
           children: <Widget>[
@@ -238,6 +241,93 @@ class _HomePageState extends State<HomePage>
             )
           ],
         ),
+      ),
+    );
+  }
+
+  Drawer buildBurgerMenu(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        children: <Widget>[
+          const DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.blue,
+            ),
+            child: Text('Menu'),
+          ),
+          ListTile(
+            leading: const Icon(Icons.info_outlined),
+            title: const Text('Info Page'),
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => const InformationPage()));
+            },
+            tileColor: Colors.grey[200],
+            // Background color to make it feel like a button
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
+          ),
+          ListTile(
+            leading: const Icon(Icons.insert_drive_file_outlined),
+            title: const Text('Start Page'),
+            onTap: () {
+              Navigator.of(context).pushNamed(
+                "/start",
+              );
+            },
+            tileColor: Colors.grey[200],
+            // Background color to make it feel like a button
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
+          ),
+          ListTile(
+            leading: const Icon(Icons.scoreboard),
+            title: const Text('HighScore'),
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => const HighScorePage()));
+            },
+            tileColor: Colors.grey[200],
+            // Background color to make it feel like a button
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
+          ),
+          ListTile(
+            leading: const Icon(Icons.notification_add),
+            title: const Text('Send Notification'),
+            onTap: () {
+              ServiceWorkerNotification().sendNotification(
+                  "Test Notification", "This is the body of the test Notification", 10);
+            },
+            tileColor: Colors.grey[200],
+            // Background color to make it feel like a button
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
+          ),
+          ListTile(
+            leading: const Icon(Icons.error),
+            title: const Text('Exception Test'),
+            onTap: () {
+              throw Exception('This is a forced exception for testing purposes.');
+            },
+            tileColor: Colors.grey[200],
+            // Background color to make it feel like a button
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
+          ),
+          ListTile(
+            leading: const Icon(Icons.feedback),
+            title: const Text('Send Feedback'),
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => const FeedbackPage()));
+            },
+            tileColor: Colors.grey[200],
+            // Background color to make it feel like a button
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
+          ),
+        ],
       ),
     );
   }

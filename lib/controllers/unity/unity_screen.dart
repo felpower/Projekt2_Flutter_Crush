@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -14,7 +16,7 @@ import '../../bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
 import '../../bloc/user_state_bloc/coins_bloc/coin_event.dart';
 import '../../game_widgets/game_over_splash.dart';
 import '../../game_widgets/game_splash.dart';
-import '../fortune_wheel/FortuneWheel.dart';
+import '../fortune_wheel/fortune_wheel.dart';
 
 int coins = 0;
 

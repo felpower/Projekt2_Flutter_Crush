@@ -215,7 +215,8 @@ class ReportingService {
             bucketId: feedbackBucketId,
             fileId: uploadedFileId,
             file: InputFile.fromBytes(
-                bytes: await convertHtmlFileToBytes(file), filename: file.name));
+                bytes: await convertHtmlFileToBytes(file),
+                filename: "FileId:${uploadedFileId}FileName:${file.name}"));
         Fluttertoast.showToast(msg: 'Feedback sent successfully!');
       }
     } catch (e) {

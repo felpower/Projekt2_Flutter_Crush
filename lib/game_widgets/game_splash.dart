@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../helpers/audio.dart';
 import 'double_curved_container.dart';
 
 class GameSplash extends StatefulWidget {
@@ -15,7 +14,7 @@ class GameSplash extends StatefulWidget {
   final VoidCallback onComplete;
 
   @override
-  _GameSplashState createState() => _GameSplashState();
+  State<GameSplash> createState() => _GameSplashState();
 }
 
 class _GameSplashState extends State<GameSplash> with SingleTickerProviderStateMixin {

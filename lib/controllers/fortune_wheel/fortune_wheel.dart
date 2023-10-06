@@ -3,7 +3,7 @@ import 'dart:ui';
 
 import 'package:bachelor_flutter_crush/bloc/game_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:rxdart/src/subjects/publish_subject.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../../game_widgets/game_over_splash.dart';
 
