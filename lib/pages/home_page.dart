@@ -11,6 +11,8 @@ import 'package:bachelor_flutter_crush/bloc/user_state_bloc/level_bloc/level_sta
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_state.dart';
 import 'package:bachelor_flutter_crush/controllers/fortune_wheel/fortune_wheel.dart';
+import 'package:bachelor_flutter_crush/controllers/scratcher/scratcher.dart';
+import 'package:bachelor_flutter_crush/controllers/slot_machine/slot_machne.dart';
 import 'package:bachelor_flutter_crush/game_widgets/game_level_button.dart';
 import 'package:bachelor_flutter_crush/gamification_widgets/daystreak_milestone_reached_splash.dart';
 import 'package:bachelor_flutter_crush/persistence/reporting_service.dart';
@@ -25,6 +27,7 @@ import '../bloc/game_bloc.dart';
 import '../bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
 import '../bloc/user_state_bloc/coins_bloc/coin_state.dart';
 import '../bloc/user_state_bloc/day_streak_bloc/day_streak_state.dart';
+import '../controllers/roll_machine/roll_slot_page.dart';
 import '../gamification_widgets/credit_panel.dart';
 import 'feedback_page.dart';
 import 'high_score_page.dart';
@@ -308,6 +311,39 @@ class _HomePageState extends State<HomePage>
             // Background color to make it feel like a button
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
+          ),
+          ListTile(
+            leading: const Icon(Icons.casino),
+            title: const Text('Slot Machine'),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const SlotMachine()));
+            },
+            tileColor: Colors.grey[200],
+            // Background color to make it feel like a button
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
+          ),
+          ListTile(
+            leading: const Icon(Icons.casino_outlined),
+            title: const Text('2nd Slot Machine'),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const SlotsPage()));
+            },
+            tileColor: Colors.grey[200],
+            // Background color to make it feel like a button
+            shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
+          ),
+          ListTile(
+            leading: const Icon(Icons.airplane_ticket_outlined),
+            title: const Text('Scratch ticket'),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Scratcher()));
+            },
+            tileColor: Colors.grey[200],
+            // Background color to make it feel like a button
+            shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
           ),
           GestureDetector(
               onTap: () {
