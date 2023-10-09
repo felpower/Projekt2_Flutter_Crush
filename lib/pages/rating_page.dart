@@ -46,7 +46,6 @@ class _RatingState extends State<RatingPage> {
                       color: Colors.white,
                       onPressed: () {
                         ReportingService.addRating(_rating);
-                        print("Rating: " + _rating.toString());
                         if (_rating > 3) {
                           setRatingState();
                           Navigator.pop(this.context, 'Ok');
@@ -98,7 +97,6 @@ class _RatingState extends State<RatingPage> {
                     IconButton(
                         onPressed: () {
                           ReportingService.addRating(_rating);
-                          print("Rating: " + _rating.toString());
                           if (_rating > 3) {
                             setRatingState();
                             Navigator.pop(this.context, 'OK');

@@ -164,20 +164,22 @@ namespace Match3 {
 				var powerUp = sceneInfo.powerUp;
 				if (level.isFlutter && !string.IsNullOrEmpty(powerUp)) {
 					print("PowerUpBought: " + powerUp);
-					powerX = Random.Range(0, xDim);
-					powerY = Random.Range(0, yDim);
+					do {
+						powerX = Random.Range(0, xDim);
+						powerY = Random.Range(0, yDim);
+					} while (IsBubble(powerX, powerY));
+
 					yield return new WaitForSeconds(fillTime * 12);
 					ClearPiece(powerX, powerY, false, false);
-					PieceType realPowerUp;
-					if (powerUp.Contains("Clear"))
-						realPowerUp = Random.Range(0, 2) == 0 ? PieceType.RowClear : PieceType.ColumnClear;
-					else
-						realPowerUp = PieceType.Rainbow;
-
-					var newPiece = SpawnNewPiece(powerX, powerY,
-						(PieceType)Enum.Parse(typeof(PieceType), realPowerUp.ToString()));
-					newPiece.ColorComponent.SetColor((ColorType)Random.Range(0,
-						_pieces[0, 0].ColorComponent.NumColors));
+					if (powerUp.Contains("Clear")) {
+						var realPowerUp = Random.Range(0, 2) == 0 ? PieceType.RowClear : PieceType.ColumnClear;
+						var newPiece = SpawnNewPiece(powerX, powerY, realPowerUp);
+						newPiece.ColorComponent.SetColor((ColorType)Random.Range(0,
+							_pieces[0, 0].ColorComponent.NumColors));
+					} else {
+						var newPiece = SpawnNewPiece(powerX, powerY, PieceType.Rainbow);
+						newPiece.ColorComponent.SetColor(ColorType.Any);
+					}
 				}
 
 				if (!level.isFlutter && TestPowerUp) {
@@ -197,6 +199,8 @@ namespace Match3 {
 
 			yield return new WaitForSeconds(fillTime * 3);
 		}
+
+		bool IsBubble(int x, int y) { return _pieces[x, y].Type == PieceType.Bubble; }
 
 		/// <summary>
 		///     One pass through all grid cells, moving them down one grid, if possible.
@@ -517,11 +521,15 @@ namespace Match3 {
 					Destroy(_pieces[specialPieceX, specialPieceY]);
 					var newPiece = SpawnNewPiece(specialPieceX, specialPieceY, specialPieceType);
 
-					if ((specialPieceType == PieceType.RowClear || specialPieceType == PieceType.ColumnClear)
-					    && newPiece.IsColored() && match[0].IsColored())
-						newPiece.ColorComponent.SetColor(match[0].ColorComponent.Color);
-					else if (specialPieceType == PieceType.Rainbow && newPiece.IsColored())
-						newPiece.ColorComponent.SetColor(ColorType.Any);
+					switch (specialPieceType) {
+						case PieceType.RowClear or PieceType.ColumnClear
+							when newPiece.IsColored() && match[0].IsColored():
+							newPiece.ColorComponent.SetColor(match[0].ColorComponent.Color);
+							break;
+						case PieceType.Rainbow when newPiece.IsColored():
+							newPiece.ColorComponent.SetColor(ColorType.Any);
+							break;
+					}
 				}
 
 			return needsRefill;

@@ -10,7 +10,6 @@ class ServiceWorkerNotification {
   static const String notificationsAlreadyScheduled = 'notificationsAlreadyScheduled';
 
   Future<void> requestNotificationPermission() async {
-    print("requestNotificationPermission");
     if (Notification.permission == "default") {
       Notification.requestPermission();
     }

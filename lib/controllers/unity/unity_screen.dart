@@ -66,7 +66,6 @@ class _UnityScreenState extends State<UnityScreen> {
     setState(() {
       coins = (prefs.getInt('coin') ?? 10);
       powerUp = (prefs.getString("powerUp") ?? "");
-      print("Coins: $coins");
     });
   }
 
@@ -206,7 +205,6 @@ class _UnityScreenState extends State<UnityScreen> {
     } else {
       xpCoins = lvl * int.parse(message.replaceAll(RegExp(r'[^0-9]'), ''));
     }
-    print("Game Won method");
     showFortuneWheel(xpCoins);
     gameOver = true;
   }
@@ -221,8 +219,6 @@ class _UnityScreenState extends State<UnityScreen> {
       0
     ];
     Future.delayed(const Duration(seconds: 3), () {
-      print("Navigate to Fortune Wheel");
-      // Navigate after a delay of 3 seconds
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => FortuneWheel(
             items: itemList),
@@ -264,9 +260,7 @@ class _UnityScreenState extends State<UnityScreen> {
 
   void onUnitySceneLoaded(SceneLoaded? scene) {
     if (scene != null) {
-      print('Received scene loaded from unity: ${scene.name}');
     } else {
-      print('Received scene loaded from unity: null');
     }
   }
 
@@ -300,13 +294,11 @@ class _UnityScreenState extends State<UnityScreen> {
     } else {
       print("Changing level to: $type Portrait");
       jsonString['orientation'] = "Portrait";
-      print(jsonString.toString());
       postMessage(jsonString);
     }
   }
 
   void postMessage(Map<String, dynamic> jsonString) async {
-    print("Check if Unity is Ready");
     while (!unityReady) {
       try {
         unityWidgetController?.postMessage('GameManager', 'CheckReady', 'checkReady');
@@ -315,7 +307,6 @@ class _UnityScreenState extends State<UnityScreen> {
       }
       await Future.delayed(const Duration(seconds: 1));
     }
-    print("Unity is Ready");
     unityWidgetController!.postJsonMessage('GameManager', 'LoadScene', jsonString);
   }
 

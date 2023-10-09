@@ -13,8 +13,8 @@ import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_state.dar
 import 'package:bachelor_flutter_crush/controllers/fortune_wheel/fortune_wheel.dart';
 import 'package:bachelor_flutter_crush/game_widgets/game_level_button.dart';
 import 'package:bachelor_flutter_crush/gamification_widgets/daystreak_milestone_reached_splash.dart';
+import 'package:bachelor_flutter_crush/persistence/reporting_service.dart';
 import 'package:bachelor_flutter_crush/services/ServiceWorkerNotification.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
@@ -26,7 +26,6 @@ import '../bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
 import '../bloc/user_state_bloc/coins_bloc/coin_state.dart';
 import '../bloc/user_state_bloc/day_streak_bloc/day_streak_state.dart';
 import '../gamification_widgets/credit_panel.dart';
-import '../services/firebase_messaging_web.dart';
 import 'feedback_page.dart';
 import 'high_score_page.dart';
 import 'information_page.dart';
@@ -92,30 +91,8 @@ class _HomePageState extends State<HomePage>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _controller.forward();
     });
+    loadDailyReward();
     ServiceWorkerNotification().requestNotificationPermission();
-
-    // FirebaseMessaging.onMessage.listen(showFlutterNotification);
-  }
-
-  void showFlutterNotification(RemoteMessage message) {
-    RemoteNotification? notification = message.notification;
-    final android = message.notification?.android;
-    print('Notification TITLE: ${notification?.title}');
-    if (notification != null || android != null) {
-      FirebaseMessagingWeb().showNotification(notification);
-    } else {
-      showDialog(
-          context: context,
-          builder: (context) {
-            return Material(
-                child: Column(
-              children: [
-                Text(notification?.title ?? "No Title"),
-                Text(notification?.body ?? "No Body"),
-              ],
-            ));
-          });
-    }
   }
 
   @override
@@ -137,7 +114,6 @@ class _HomePageState extends State<HomePage>
         Overlay.of(context).insert(dayStreakMileStoneSplash);
       }
     });
-    loadDailyReward();
   }
 
   @override
@@ -167,6 +143,7 @@ class _HomePageState extends State<HomePage>
               return IconButton(
                 icon: const Icon(Icons.menu),
                 onPressed: () {
+                  loadDailyReward();
                   Scaffold.of(context).openEndDrawer();
                 },
                 tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
@@ -332,61 +309,84 @@ class _HomePageState extends State<HomePage>
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
           ),
-          Visibility(
-            visible: !dailyRewardCollected,
-            child: ListTile(
-              leading: const Icon(Icons.card_giftcard),
-              title: const Text('Daily Reward'),
+          GestureDetector(
               onTap: () {
-                dailyRewardCollected = true;
-                List<int> itemList = [
-                  10,
-                  (10 * 0.5).toInt(),
-                  (10 * 0.75).toInt(),
-                  10 * 2,
-                  10 * 3,
-                  0
-                ];
-
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => FortuneWheel(items: itemList)));
-                setDailyRewards();
+                if (dailyRewardCollected) {
+                  _showDailyRewardsCollectedDialog();
+                }
               },
-              tileColor: Colors.grey[200],
-              // Background color to make it feel like a button
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12)), // Rounded corners
-            ),
-          ),
+              child: ListTile(
+                enabled: !dailyRewardCollected,
+                leading: const Icon(Icons.card_giftcard),
+                title: const Text('Daily Reward'),
+                onTap: () {
+                  List<int> itemList = [
+                    10,
+                    (10 * 0.5).toInt(),
+                    (10 * 0.75).toInt(),
+                    10 * 2,
+                    10 * 3,
+                    0
+                  ];
+                  setState(() {
+                    dailyRewardCollected = true;
+                    setDailyRewards();
+                    ReportingService.checkHighScore(DateTime.now());
+                  });
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => FortuneWheel(items: itemList)));
+                },
+                tileColor: Colors.grey[200],
+                // Background color to make it feel like a button
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)), // Rounded corners
+              )),
         ],
       ),
     );
   }
 
+  late int difference;
+
   void loadDailyReward() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     var dailyReward = sp.getString("dailyRewards");
-    print("DailyReward: $dailyReward");
     if (dailyReward == null) {
       dailyRewardCollected = false;
       setDailyRewards();
-      print("dailyReward == null");
     }
     if (dailyReward != null) {
-      var difference = DateTime.now().difference(DateTime.parse(dailyReward)).inHours;
-      print(difference);
+      setState(() {
+        difference = DateTime.now().difference(DateTime.parse(dailyReward)).inHours;
+      });
       if (difference >= 24) {
         dailyRewardCollected = false;
         setDailyRewards();
-        print("dailyReward updated");
       }
     }
-    print(dailyRewardCollected);
-    print("DailyReward: $dailyReward");
   }
 
   void setDailyRewards() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     sp.setString("dailyRewards", DateTime.now().toString());
+  }
+
+  void _showDailyRewardsCollectedDialog() {
+    var actualDifference = 24 - difference;
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Daily rewards already collected'),
+          content: Text('Daily rewards will be ready in $actualDifference hours'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

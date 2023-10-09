@@ -117,7 +117,6 @@ class GameLevelButton extends StatelessWidget {
         ));
     //ToDo: Put adds before Navigator Push
     var addState = prefs.getBool("addsActive");
-    print("Adds are: $addState");
     if (addState == true) {
       _showAdvertisement(context);
     }

@@ -26,6 +26,8 @@ class ReportingService {
   static const String paidForRemovingAdds = 'paidForRemovingAdds';
   static const String startOfLevel = 'startOfLevel';
   static const String checkHighScoreTime = 'checkHighScoreTime';
+
+  static const String collectDailyRewardsTime = 'collectDailyRewardsTime';
   static const String bootAppStartTime = 'bootAppStartTime';
   static const String initAppStartTime = 'initAppStartTime';
   static const String closeAppTime = 'closeAppTime';
@@ -61,6 +63,10 @@ class ReportingService {
 
   static Future<void> checkHighScore(DateTime dateTime) async {
     await _updateDocumentData(checkHighScoreTime, dateTime.toString());
+  }
+
+  static Future<void> collectedDailyRewards(DateTime dateTime) async {
+    await _updateDocumentData(collectDailyRewardsTime, dateTime.toString());
   }
 
   static Future<void> addCloseApp(DateTime dateTime) async {
@@ -148,6 +154,7 @@ class ReportingService {
       notificationTap: [],
       ratingApp: [],
       checkHighScoreTime: [],
+      collectDailyRewardsTime: [],
       paidForRemovingAdds: []
     };
 
@@ -196,7 +203,6 @@ class ReportingService {
 
   static Future<void> sendFeedback(String info, File? file) async {
     try {
-      print("Sending feedback");
       final String userAgent = html.window.navigator.userAgent;
       String uploadedFileId = _getRandomString(15);
       database.createDocument(

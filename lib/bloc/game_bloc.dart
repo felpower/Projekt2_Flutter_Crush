@@ -69,7 +69,6 @@ class GameBloc implements BlocBase {
   //
   _loadLevels() async {
     String jsonContent = "";
-    print("Load Levels");
     try {
       jsonContent = await rootBundle.loadString('unityLevels.json');
     } catch (e) {
@@ -86,7 +85,6 @@ class GameBloc implements BlocBase {
     });
     _maxLevel = _levels.last.level;
     _maxLevelNumber.add(_maxLevel);
-    print("Added $_maxLevel levels");
   }
 
   void gameOver(int xp) {
