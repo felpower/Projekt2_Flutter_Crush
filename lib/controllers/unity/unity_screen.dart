@@ -225,7 +225,7 @@ class _UnityScreenState extends State<UnityScreen> {
       // Navigate after a delay of 3 seconds
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => FortuneWheel(
-            items: itemList, gameBloc: gameBloc, gameIsOverController: _gameIsOverController),
+            items: itemList),
       ));
     });
   }

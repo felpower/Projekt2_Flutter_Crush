@@ -5,18 +5,13 @@ import 'package:bachelor_flutter_crush/bloc/game_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../../bloc/bloc_provider.dart';
 import '../../game_widgets/game_over_splash.dart';
 
 class FortuneWheel extends StatefulWidget {
   final List<int> items;
 
-  final GameBloc gameBloc;
-
-  final PublishSubject<bool> gameIsOverController;
-
-  const FortuneWheel(
-      {Key? key, required this.items, required this.gameBloc, required this.gameIsOverController})
-      : super(key: key);
+  FortuneWheel({Key? key, required this.items}) : super(key: key);
 
   @override
   State<FortuneWheel> createState() => _FortuneWheelState();
@@ -24,9 +19,9 @@ class FortuneWheel extends StatefulWidget {
 
 class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-
+  late GameBloc gameBloc;
   late Animation<double> _animation;
-
+  final PublishSubject<bool> gameIsOverController = PublishSubject<bool>();
   double _targetRotation = 0.0;
   double _accumulatedRotation = 0.0; // New variable to store the accumulated rotation over time
   bool isSpun = false;
@@ -39,6 +34,7 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
   void initState() {
     super.initState();
 
+    gameBloc = BlocProvider.of<GameBloc>(context);
     _controller = AnimationController(vsync: this, duration: const Duration(seconds: 5));
 
     _animation = CurvedAnimation(parent: _controller, curve: Curves.easeOutQuart)
@@ -116,8 +112,8 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
             ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
-                widget.gameBloc.gameOver(_selectedItem!);
-                widget.gameIsOverController.sink.add(true);
+                gameBloc.gameOver(_selectedItem!);
+                gameIsOverController.sink.add(true);
                 showGameOver(true);
               },
               child: const Text('Go Back'),
