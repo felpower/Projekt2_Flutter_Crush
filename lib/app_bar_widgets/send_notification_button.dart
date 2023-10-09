@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../services/ServiceWorkerNotification.dart';
+import '../services/service_worker_notification.dart';
 
 class SendNotificationButton extends StatelessWidget {
   const SendNotificationButton({Key? key}) : super(key: key);

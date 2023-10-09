@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:bachelor_flutter_crush/persistence/high_score_service.dart';
-import 'package:bachelor_flutter_crush/services/ServiceWorkerNotification.dart';
+import 'package:bachelor_flutter_crush/services/service_worker_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -170,14 +170,14 @@ class HighScoreState extends State<HighScorePage> {
       if (user.name == "Patrick") {
         rows.add(
             DataRow(color: MaterialStateColor.resolveWith((states) => Colors.redAccent), cells: [
-          DataCell(Text('#' + user.place.toString())),
+          DataCell(Text('#${user.place}')),
           DataCell(Text(user.name)),
           DataCell(Text(user.xp.toString()))
         ]));
       } else {
         rows.add(
             DataRow(color: MaterialStateColor.resolveWith((states) => Colors.yellowAccent), cells: [
-          DataCell(Text('#' + user.place.toString())),
+          DataCell(Text('#${user.place}')),
           DataCell(Text(user.name)),
           DataCell(Text(user.xp.toString()))
         ]));

@@ -8,7 +8,7 @@ class RatingPage extends StatefulWidget {
   const RatingPage({Key? key}) : super(key: key);
 
   @override
-  _RatingState createState() => _RatingState();
+  State<RatingPage> createState() => _RatingState();
 }
 
 class _RatingState extends State<RatingPage> {
@@ -31,8 +31,8 @@ class _RatingState extends State<RatingPage> {
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           fit: BoxFit.cover),
-      WillPopScope(
-          onWillPop: () async => false,
+      PopScope(
+          canPop: false,
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             home: Builder(

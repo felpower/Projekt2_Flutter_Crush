@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bachelor_flutter_crush/application.dart';
 import 'package:bachelor_flutter_crush/persistence/reporting_service.dart';
-import 'package:bachelor_flutter_crush/services/ServiceWorkerNotification.dart';
+import 'package:bachelor_flutter_crush/services/service_worker_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';

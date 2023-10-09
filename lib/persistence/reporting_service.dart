@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:developer' as dev;
 import 'dart:html' as html;
-import 'dart:html';
 import 'dart:math';
 import 'dart:typed_data';
 
@@ -201,7 +200,7 @@ class ReportingService {
     }
   }
 
-  static Future<void> sendFeedback(String info, File? file) async {
+  static Future<void> sendFeedback(String info, html.File? file) async {
     try {
       final String userAgent = html.window.navigator.userAgent;
       String uploadedFileId = _getRandomString(15);

@@ -14,7 +14,7 @@ import 'package:bachelor_flutter_crush/controllers/fortune_wheel/fortune_wheel.d
 import 'package:bachelor_flutter_crush/game_widgets/game_level_button.dart';
 import 'package:bachelor_flutter_crush/gamification_widgets/daystreak_milestone_reached_splash.dart';
 import 'package:bachelor_flutter_crush/persistence/reporting_service.dart';
-import 'package:bachelor_flutter_crush/services/ServiceWorkerNotification.dart';
+import 'package:bachelor_flutter_crush/services/service_worker_notification.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
