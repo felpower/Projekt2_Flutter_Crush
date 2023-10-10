@@ -19,6 +19,7 @@ class _SlotMachineState extends State<SlotMachine> {
     ScrollController()
   ];
   List<String> result = ["", "", ""];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +38,9 @@ class _SlotMachineState extends State<SlotMachine> {
                     controller: controller,
                     itemExtent: 60,
                     itemBuilder: (context, index) {
-                      return Center(child: Text(items[index % items.length], style: const TextStyle(fontSize: 50)));
+                      return Center(
+                          child: Text(items[index % items.length],
+                              style: const TextStyle(fontSize: 50)));
                     },
                   ),
                 );
@@ -93,5 +96,4 @@ class _SlotMachineState extends State<SlotMachine> {
       ),
     );
   }
-
 }

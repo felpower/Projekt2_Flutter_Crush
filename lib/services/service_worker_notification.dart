@@ -76,11 +76,11 @@ class ServiceWorkerNotification {
     int min = 2;
     int max = 4;
     if (!await _notificationsAlreadyScheduled()) {
-        int multiplier = min + Random().nextInt(max - min);
-        sendNotification('Flutter Crush',
-            'Tap here to get ${multiplier}x XP for the next 15 minutes!', 60 * 60,
-            icon: 'icons/Icon-192.png');
-        XpService.addMultiplier(multiplier);
+      int multiplier = min + Random().nextInt(max - min);
+      sendNotification(
+          'Flutter Crush', 'Tap here to get ${multiplier}x XP for the next 15 minutes!', 60 * 60,
+          icon: 'icons/Icon-192.png');
+      XpService.addMultiplier(multiplier);
     }
   }
 

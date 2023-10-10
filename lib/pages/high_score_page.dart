@@ -168,19 +168,21 @@ class HighScoreState extends State<HighScorePage> {
     List<DataRow> rows = [];
     for (User user in users) {
       if (user.name == "Patrick") {
-        rows.add(
-            DataRow(color: MaterialStateColor.resolveWith((states) => Colors.redAccent), cells: [
-          DataCell(Text('#${user.place}')),
-          DataCell(Text(user.name)),
-          DataCell(Text(user.xp.toString()))
-        ]));
+        rows.add(DataRow(
+            color: MaterialStateColor.resolveWith((states) => Colors.redAccent),
+            cells: [
+              DataCell(Text('#${user.place}')),
+              DataCell(Text(user.name)),
+              DataCell(Text(user.xp.toString()))
+            ]));
       } else {
-        rows.add(
-            DataRow(color: MaterialStateColor.resolveWith((states) => Colors.yellowAccent), cells: [
-          DataCell(Text('#${user.place}')),
-          DataCell(Text(user.name)),
-          DataCell(Text(user.xp.toString()))
-        ]));
+        rows.add(DataRow(
+            color: MaterialStateColor.resolveWith((states) => Colors.yellowAccent),
+            cells: [
+              DataCell(Text('#${user.place}')),
+              DataCell(Text(user.name)),
+              DataCell(Text(user.xp.toString()))
+            ]));
       }
     }
     return rows;

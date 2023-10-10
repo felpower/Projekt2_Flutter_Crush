@@ -14,7 +14,9 @@ class RollSlotController extends ChangeNotifier {
   int _bottomIndex = 0;
 
   int get centerIndex => _centerIndex;
+
   int get bottomIndex => _bottomIndex;
+
   int get topIndex => _topIndex;
 
   final int? secondsBeforeStop;
@@ -65,6 +67,8 @@ class RollSlotController extends ChangeNotifier {
 
 extension RollSlotControllerStateExt on RollSlotControllerState {
   bool get isNone => this == RollSlotControllerState.none;
+
   bool get isAnimateRandomly => this == RollSlotControllerState.animateRandomly;
+
   bool get isStopped => this == RollSlotControllerState.stopped;
 }

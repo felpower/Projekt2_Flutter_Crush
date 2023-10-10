@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:scratcher/scratcher.dart';
 
 class ScratchBox extends StatefulWidget {
-  const ScratchBox({Key? key,
+  const ScratchBox({
+    Key? key,
     required this.image,
     this.onScratch,
     this.animation,
@@ -54,9 +55,9 @@ class _ScratchBoxState extends State<ScratchBox> {
           child: widget.animation == null
               ? icon
               : ScaleTransition(
-            scale: widget.animation!,
-            child: icon,
-          ),
+                  scale: widget.animation!,
+                  child: icon,
+                ),
         ),
       ),
     );

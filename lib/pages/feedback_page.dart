@@ -1,4 +1,5 @@
 import 'dart:html' as html;
+
 import 'package:bachelor_flutter_crush/persistence/reporting_service.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
 
   void _pickFile() {
     final input = html.FileUploadInputElement()
-      ..accept = 'image/*,.pdf,.doc,.docx'  // Modify this to restrict/select the files you want
+      ..accept = 'image/*,.pdf,.doc,.docx' // Modify this to restrict/select the files you want
       ..click();
 
     input.onChange.listen((event) {

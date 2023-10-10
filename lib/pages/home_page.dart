@@ -332,7 +332,7 @@ class _HomePageState extends State<HomePage>
             tileColor: Colors.grey[200],
             // Background color to make it feel like a button
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
           ),
           ListTile(
             leading: const Icon(Icons.airplane_ticket_outlined),
@@ -343,7 +343,7 @@ class _HomePageState extends State<HomePage>
             tileColor: Colors.grey[200],
             // Background color to make it feel like a button
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
           ),
           GestureDetector(
               onTap: () {

@@ -177,7 +177,8 @@
         "Green",
         "Red"
       ]
-    },{
+    },
+    {
       "level": 11,
       "type": "Moves",
       "xDim": 5,
@@ -195,7 +196,8 @@
         "Green",
         "Yellow"
       ]
-    },{
+    },
+    {
       "level": 12,
       "type": "Moves",
       "xDim": 5,
@@ -213,7 +215,8 @@
         "Green",
         "Yellow"
       ]
-    },{
+    },
+    {
       "level": 13,
       "type": "Moves",
       "xDim": 5,
@@ -231,7 +234,8 @@
         "Green",
         "Yellow"
       ]
-    },{
+    },
+    {
       "level": 14,
       "type": "Moves",
       "xDim": 5,

@@ -220,8 +220,7 @@ class _UnityScreenState extends State<UnityScreen> {
     ];
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => FortuneWheel(
-            items: itemList),
+        builder: (context) => FortuneWheel(items: itemList),
       ));
     });
   }
@@ -260,8 +259,7 @@ class _UnityScreenState extends State<UnityScreen> {
 
   void onUnitySceneLoaded(SceneLoaded? scene) {
     if (scene != null) {
-    } else {
-    }
+    } else {}
   }
 
   // Callback that connects the created controller to the unity controller

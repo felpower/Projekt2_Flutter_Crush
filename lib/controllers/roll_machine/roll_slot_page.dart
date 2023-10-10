@@ -20,7 +20,6 @@ class Assets {
 class SlotsPage extends StatefulWidget {
   const SlotsPage({Key? key}) : super(key: key);
 
-
   @override
   State<SlotsPage> createState() => _SlotsPageState();
 }
@@ -131,7 +130,7 @@ class RollSlotWidget extends StatelessWidget {
                 itemExtend: 115,
                 rollSlotController: rollSlotController,
                 children: prizesList.map(
-                      (e) {
+                  (e) {
                     return BuildItem(
                       asset: e,
                     );
