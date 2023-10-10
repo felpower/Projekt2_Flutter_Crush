@@ -57,6 +57,7 @@ dependencies:
   infinite_carousel: ^1.0.3
   flutter_svg: ^2.0.7
   scratcher: ^2.4.0
+  flutter_survey: '^0.1.4'
 
   flutter_web_plugins:
     sdk: flutter

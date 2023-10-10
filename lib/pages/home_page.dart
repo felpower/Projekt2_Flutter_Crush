@@ -15,6 +15,7 @@ import 'package:bachelor_flutter_crush/controllers/scratcher/scratcher.dart';
 import 'package:bachelor_flutter_crush/controllers/slot_machine/slot_machne.dart';
 import 'package:bachelor_flutter_crush/game_widgets/game_level_button.dart';
 import 'package:bachelor_flutter_crush/gamification_widgets/daystreak_milestone_reached_splash.dart';
+import 'package:bachelor_flutter_crush/pages/survey_page.dart';
 import 'package:bachelor_flutter_crush/persistence/reporting_service.dart';
 import 'package:bachelor_flutter_crush/services/service_worker_notification.dart';
 import 'package:flutter/foundation.dart';
@@ -294,6 +295,18 @@ class _HomePageState extends State<HomePage>
             title: const Text('Exception Test'),
             onTap: () {
               throw Exception('This is a forced exception for testing purposes.');
+            },
+            tileColor: Colors.grey[200],
+            // Background color to make it feel like a button
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
+          ),
+          ListTile(
+            leading: const Icon(Icons.question_mark),
+            title: const Text('Survey'),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const SurveyPage(title: "title")));
             },
             tileColor: Colors.grey[200],
             // Background color to make it feel like a button
