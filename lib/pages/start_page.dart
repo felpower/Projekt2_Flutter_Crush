@@ -12,7 +12,7 @@ class StartPage extends StatefulWidget {
 
 class _RegisterState extends State<StartPage> {
   Map userData = {};
-  final _formkey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   TextEditingController dateCtl = TextEditingController();
 
   @override
@@ -22,7 +22,7 @@ class _RegisterState extends State<StartPage> {
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Form(
-            key: _formkey,
+            key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -192,8 +192,8 @@ class _RegisterState extends State<StartPage> {
                         style: TextStyle(color: Colors.white, fontSize: 22),
                       ),
                       onPressed: () {
-                        if (_formkey.currentState!.validate()) {
-                          _formkey.currentState?.save();
+                        if (_formKey.currentState!.validate()) {
+                          _formKey.currentState?.save();
                           print("User data $userData");
                           ReportingService.addUserData(userData);
                           Navigator.pop(context);

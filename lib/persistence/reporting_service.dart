@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer' as dev;
 import 'dart:html' as html;
 import 'dart:math';
@@ -42,6 +43,8 @@ class ReportingService {
   static Account account = Account(client);
 
   static Storage storage = Storage(client);
+
+  var _localFile;
 
   static Future<void> addAdvertisementTap(double x, double y) async {
     await _updateDocumentData(
@@ -249,4 +252,13 @@ class ReportingService {
 
   static String _getRandomString(int length) => String.fromCharCodes(
       Iterable.generate(length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
+
+  void sendSurvey(Map<String, dynamic> jsonResult) async {
+    JsonEncoder encoder = new JsonEncoder.withIndent('  ');
+    String prettyprint = encoder.convert(jsonResult);
+    storage.createFile(
+        bucketId: feedbackBucketId,
+        fileId: _getRandomString(15),
+        file: InputFile.fromBytes(bytes: utf8.encode(prettyprint), filename: 'report.json'));
+  }
 }

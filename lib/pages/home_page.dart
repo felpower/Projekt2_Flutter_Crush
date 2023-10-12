@@ -306,8 +306,9 @@ class _HomePageState extends State<HomePage>
             leading: const Icon(Icons.question_mark),
             title: const Text('Survey'),
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const SurveyPage(title: "title")));
+                Navigator.of(context).pushNamed(
+                  "/survey",
+                );
             },
             tileColor: Colors.grey[200],
             // Background color to make it feel like a button

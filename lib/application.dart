@@ -6,6 +6,7 @@ import 'package:bachelor_flutter_crush/bloc/user_state_bloc/level_bloc/level_blo
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_bloc.dart';
 import 'package:bachelor_flutter_crush/pages/home_page.dart';
 import 'package:bachelor_flutter_crush/pages/start_page.dart';
+import 'package:bachelor_flutter_crush/pages/survey_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -32,6 +33,7 @@ class Application extends StatelessWidget {
             home: const HomePage(),
             routes: {
               '/start': (context) => const StartPage(),
+              '/survey': (context) => const SurveyPage(title: "Survey"),
             },
           ),
         ));
