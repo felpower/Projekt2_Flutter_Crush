@@ -13,6 +13,7 @@ import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_state.dar
 import 'package:bachelor_flutter_crush/controllers/fortune_wheel/fortune_wheel.dart';
 import 'package:bachelor_flutter_crush/controllers/scratcher/scratcher.dart';
 import 'package:bachelor_flutter_crush/controllers/slot_machine/slot_machne.dart';
+import 'package:bachelor_flutter_crush/controllers/tic_tac_toe/tic_tac_toe.dart';
 import 'package:bachelor_flutter_crush/game_widgets/game_level_button.dart';
 import 'package:bachelor_flutter_crush/gamification_widgets/daystreak_milestone_reached_splash.dart';
 import 'package:bachelor_flutter_crush/pages/survey_page.dart';
@@ -357,6 +358,17 @@ class _HomePageState extends State<HomePage>
             // Background color to make it feel like a button
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
+          ),
+          ListTile(
+            leading: const Icon(Icons.gamepad),
+            title: const Text('Tic Tac Toe'),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const TicTacToe()));
+            },
+            tileColor: Colors.grey[200],
+            // Background color to make it feel like a button
+            shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
           ),
           GestureDetector(
               onTap: () {
