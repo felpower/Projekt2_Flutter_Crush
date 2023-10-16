@@ -173,7 +173,9 @@ class _HomePageState extends State<HomePage>
               child: SizedBox(
                 width: kIsWeb ? webWidth : null,
                 height: kIsWeb ? webHeight : null,
-                child: Column(
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 20.0),
+                  child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
@@ -207,11 +209,18 @@ class _HomePageState extends State<HomePage>
                               itemBuilder: (BuildContext context, int index) {
                                 // If it's the 7th, 14th, etc. item, return a divider
                                 if ((index + 1) % 3 == 0 && index < itemCount / 3) {
-                                  return const Divider(
-                                    color: Colors.black, // or whatever color you prefer
-                                    thickness: 10.0, // Adjust the thickness of the divider
-                                    height: 10.0, // Adjust the height to control spacing
+                                  return const SizedBox(
+                                    height: 50.0,
+                                    child: Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: Divider(
+                                        color: Colors.black,
+                                        thickness: 5.0,
+                                      ),
+                                    ),
                                   );
+
+
                                 } else {
                                   // Calculate which row of game buttons we're on
                                   int rowIndex = (index / 3).floor();
@@ -248,7 +257,7 @@ class _HomePageState extends State<HomePage>
                     ),
                   ],
                 ),
-              ),
+              ),),
             )
           ],
         ),
