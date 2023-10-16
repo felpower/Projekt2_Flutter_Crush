@@ -12,11 +12,10 @@ import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_bloc.dart
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_state.dart';
 import 'package:bachelor_flutter_crush/controllers/fortune_wheel/fortune_wheel.dart';
 import 'package:bachelor_flutter_crush/controllers/scratcher/scratcher.dart';
-import 'package:bachelor_flutter_crush/controllers/slot_machine/slot_machne.dart';
+import 'package:bachelor_flutter_crush/controllers/slot_machine/slot_machine.dart';
 import 'package:bachelor_flutter_crush/controllers/tic_tac_toe/tic_tac_toe.dart';
 import 'package:bachelor_flutter_crush/game_widgets/game_level_button.dart';
 import 'package:bachelor_flutter_crush/gamification_widgets/daystreak_milestone_reached_splash.dart';
-import 'package:bachelor_flutter_crush/pages/survey_page.dart';
 import 'package:bachelor_flutter_crush/persistence/reporting_service.dart';
 import 'package:bachelor_flutter_crush/services/service_worker_notification.dart';
 import 'package:flutter/foundation.dart';
@@ -202,22 +201,47 @@ class _HomePageState extends State<HomePage>
                       child: StreamBuilder<int>(
                           stream: gameBloc.maxLevelNumber,
                           builder: (context, snapshot) {
-                            return GridView.builder(
-                              itemCount: snapshot.data,
-                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 3,
-                                childAspectRatio: 1.11,
-                              ),
+                            var itemCount = (snapshot.data! / 6).ceil() + snapshot.data!;
+                            return ListView.builder(
+                              itemCount: itemCount,
                               itemBuilder: (BuildContext context, int index) {
-                                return flutter_bloc.BlocBuilder<LevelBloc, LevelState>(
-                                  builder: (context, state) {
-                                    return GameLevelButton(
-                                        width: 80.0,
-                                        height: 60.0,
-                                        borderRadius: 50.0,
-                                        levelNumber: index + 1);
-                                  },
-                                );
+                                // If it's the 7th, 14th, etc. item, return a divider
+                                if ((index + 1) % 3 == 0 && index < itemCount / 3) {
+                                  return const Divider(
+                                    color: Colors.black, // or whatever color you prefer
+                                    thickness: 10.0, // Adjust the thickness of the divider
+                                    height: 10.0, // Adjust the height to control spacing
+                                  );
+                                } else {
+                                  // Calculate which row of game buttons we're on
+                                  int rowIndex = (index / 3).floor();
+                                  int levelStart = index - rowIndex; // Adjust due to added dividers
+
+                                  // Return a row of 3 game buttons
+                                  return Row(
+                                    children: [
+                                      for (int i = 0; i < 3; i++)
+                                        Expanded(
+                                          child: flutter_bloc.BlocBuilder<LevelBloc, LevelState>(
+                                            builder: (context, state) {
+                                              int levelNumber = levelStart * 3 + i + 1;
+                                              if (levelNumber <= snapshot.data!) {
+                                                return GameLevelButton(
+                                                  width: 80.0,
+                                                  height: 60.0,
+                                                  borderRadius: 50.0,
+                                                  levelNumber: levelNumber,
+                                                );
+                                              } else {
+                                                return const SizedBox
+                                                    .shrink(); // Return an empty widget if there's no level for this button
+                                              }
+                                            },
+                                          ),
+                                        ),
+                                    ],
+                                  );
+                                }
                               },
                             );
                           }),
@@ -306,9 +330,9 @@ class _HomePageState extends State<HomePage>
             leading: const Icon(Icons.question_mark),
             title: const Text('Survey'),
             onTap: () {
-                Navigator.of(context).pushNamed(
-                  "/survey",
-                );
+              Navigator.of(context).pushNamed(
+                "/survey",
+              );
             },
             tileColor: Colors.grey[200],
             // Background color to make it feel like a button
@@ -369,7 +393,7 @@ class _HomePageState extends State<HomePage>
             tileColor: Colors.grey[200],
             // Background color to make it feel like a button
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
           ),
           GestureDetector(
               onTap: () {

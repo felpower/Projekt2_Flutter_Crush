@@ -124,16 +124,12 @@ class _UnityScreenState extends State<UnityScreen> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),
           ),
-          child: Stack(
-            children: [
-              UnityWidget(
-                onUnityCreated: onUnityCreated,
-                onUnityMessage: onUnityMessage,
-                onUnitySceneLoaded: onUnitySceneLoaded,
-                useAndroidViewSurface: false,
-                borderRadius: const BorderRadius.all(Radius.circular(70)),
-              ),
-            ],
+          child: UnityWidget(
+            onUnityCreated: onUnityCreated,
+            onUnityMessage: onUnityMessage,
+            onUnitySceneLoaded: onUnitySceneLoaded,
+            useAndroidViewSurface: false,
+            borderRadius: const BorderRadius.all(Radius.circular(70)),
           )),
     );
   }
