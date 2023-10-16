@@ -204,39 +204,51 @@ class GameLevelButton extends StatelessWidget {
   }
 
   void showBuyLevelDialog(LevelBloc levelBloc, CoinBloc coinBloc, BuildContext context) {
-    showDialog(
+    if (!levelBloc.state.levels.contains(levelNumber - 1)) {
+      showDialog(
         context: context,
-        builder: (BuildContext context) => coinBloc.state.amount >= 500
-            ? AlertDialog(
-                title: Text('Unlock level $levelNumber'),
-                content: Text('Do you want to buy level $levelNumber for $lvlPrice\$?'),
-                elevation: 24,
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(16))),
-                actions: <Widget>[
-                  TextButton(
-                      onPressed: () => {Navigator.pop(context, 'Cancel')},
-                      child: const Text('Cancel')),
-                  TextButton(
-                    onPressed: () => buyLevel(coinBloc, levelBloc, 'Ok', context),
-                    child: const Text('OK'),
-                  )
-                ],
-              )
-            : AlertDialog(
-                title: const Text('Not enough money to buy level'),
-                content:
-                    const Text('You can get coins by playing levels or watching advertisements'),
-                elevation: 24,
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(16))),
-                actions: <Widget>[
-                  TextButton(
-                    onPressed: () => {Navigator.pop(context, 'Ok')},
-                    child: const Text('OK'),
-                  )
-                ],
-              ));
+        builder: (context) => AlertDialog(
+          title: Text('Need to unlock level ${levelNumber - 1} first'),
+          actions: <Widget>[
+            TextButton(onPressed: () => {Navigator.pop(context, 'Ok')}, child: const Text('Ok')),
+          ],
+        ),
+      );
+    } else {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) => coinBloc.state.amount >= 500
+              ? AlertDialog(
+                  title: Text('Unlock level $levelNumber'),
+                  content: Text('Do you want to buy level $levelNumber for $lvlPrice\$?'),
+                  elevation: 24,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                  actions: <Widget>[
+                    TextButton(
+                        onPressed: () => {Navigator.pop(context, 'Cancel')},
+                        child: const Text('Cancel')),
+                    TextButton(
+                      onPressed: () => buyLevel(coinBloc, levelBloc, 'Ok', context),
+                      child: const Text('OK'),
+                    )
+                  ],
+                )
+              : AlertDialog(
+                  title: const Text('Not enough money to buy level'),
+                  content:
+                      const Text('You can get coins by playing levels or watching advertisements'),
+                  elevation: 24,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => {Navigator.pop(context, 'Ok')},
+                      child: const Text('OK'),
+                    )
+                  ],
+                ));
+    }
   }
 
   void buyLevel(CoinBloc coinBloc, LevelBloc levelBloc, String text, BuildContext context) {
