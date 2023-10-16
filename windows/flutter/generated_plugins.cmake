@@ -4,9 +4,7 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   file_selector_windows
-  firebase_core
   flutter_unity_widget
-  local_auth_windows
   url_launcher_windows
   window_to_front
 )

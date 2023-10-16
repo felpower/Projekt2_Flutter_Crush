@@ -45,7 +45,7 @@ class _SurveyPageState extends State<SurveyPage> {
                     }
                     print("final Score is $resultString");
                     /* call a new widget to show the results*/
-                    final jsonResult = result.toJson();
+                    // final jsonResult = result.toJson();
                     // print("ToJSON: $jsonResult");
                     // ReportingService().sendSurvey(jsonResult); //FixMe: Add to DB
                     Navigator.pop(context);

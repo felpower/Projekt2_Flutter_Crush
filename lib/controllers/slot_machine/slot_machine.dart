@@ -59,7 +59,7 @@ class _SlotMachineState extends State<SlotMachine> {
   void spin() {
     final random = Random();
 
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 2), () {
       // After spinning, retrieve the result
       retrieveResult();
     });
@@ -67,7 +67,7 @@ class _SlotMachineState extends State<SlotMachine> {
     for (var controller in controllers) {
       final position = controller.position;
       final offset = position.pixels + (500 + random.nextInt(1500));
-      controller.animateTo(offset, duration: Duration(seconds: 2), curve: Curves.easeOutCubic);
+      controller.animateTo(offset, duration: const Duration(seconds: 2), curve: Curves.easeOutCubic);
     }
   }
 
@@ -85,12 +85,12 @@ class _SlotMachineState extends State<SlotMachine> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Result'),
+        title: const Text('Result'),
         content: Text(results.join(' - ')),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text('OK'),
+            child: const Text('OK'),
           ),
         ],
       ),

@@ -44,8 +44,6 @@ class ReportingService {
 
   static Storage storage = Storage(client);
 
-  var _localFile;
-
   static Future<void> addAdvertisementTap(double x, double y) async {
     await _updateDocumentData(
         addScreenClick, 'x: ${x.toStringAsFixed(2)}, y:${y.toStringAsFixed(2)}');
@@ -254,7 +252,7 @@ class ReportingService {
       Iterable.generate(length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
 
   void sendSurvey(Map<String, dynamic> jsonResult) async {
-    JsonEncoder encoder = new JsonEncoder.withIndent('  ');
+    JsonEncoder encoder = const JsonEncoder.withIndent('  ');
     String prettyprint = encoder.convert(jsonResult);
     storage.createFile(
         bucketId: feedbackBucketId,

@@ -11,7 +11,7 @@ import '../../game_widgets/game_over_splash.dart';
 class FortuneWheel extends StatefulWidget {
   final List<int> items;
 
-  FortuneWheel({Key? key, required this.items}) : super(key: key);
+  const FortuneWheel({Key? key, required this.items}) : super(key: key);
 
   @override
   State<FortuneWheel> createState() => _FortuneWheelState();
