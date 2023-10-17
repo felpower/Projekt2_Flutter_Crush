@@ -188,9 +188,11 @@ namespace Match3 {
 					powerY = Random.Range(0, yDim);
 					yield return new WaitForSeconds(fillTime * 12);
 					ClearPiece(powerX, powerY);
-					var newPiece = SpawnNewPiece(powerX, powerY, PieceType.ColumnClear);
-					newPiece.ColorComponent.SetColor((ColorType)Random.Range(0,
-						_pieces[0, 0].ColorComponent.NumColors));
+					var newPiece = SpawnNewPiece(powerX, powerY, PieceType.Rainbow);
+					newPiece.ColorComponent.SetColor(ColorType.Any);
+					// var newPiece = SpawnNewPiece(powerX, powerY, PieceType.ColumnClear);
+					// newPiece.ColorComponent.SetColor((ColorType)Random.Range(0,
+					// 	_pieces[0, 0].ColorComponent.NumColors));
 				}
 
 				_isFirst = false;
