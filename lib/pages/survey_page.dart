@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:survey_kit/survey_kit.dart';
 
 class SurveyPage extends StatefulWidget {
@@ -23,7 +20,7 @@ class _SurveyPageState extends State<SurveyPage> {
         child: Align(
           alignment: Alignment.center,
           child: FutureBuilder<Task>(
-            future: getSampleTask(),
+            future: widget.title=="Start" ? buildStartSurvey():buildEndSurvey(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done &&
                   snapshot.hasData &&
@@ -167,7 +164,7 @@ class _SurveyPageState extends State<SurveyPage> {
     );
   }
 
-  Future<Task> getSampleTask() {
+  Future<Task> buildStartSurvey() {
     var task = NavigableTask(
       id: TaskIdentifier(),
       steps: [
@@ -262,7 +259,8 @@ class _SurveyPageState extends State<SurveyPage> {
               hint: 'Gerundet auf ganze Stunden',
             )),
         QuestionStep(
-            title: "Wie viel Geld geben Sie durchschnittlich pro Monat IN Spielen am Handy/am Tablet aus?",
+            title:
+                "Wie viel Geld geben Sie durchschnittlich pro Monat IN Spielen am Handy/am Tablet aus?",
             stepIdentifier: StepIdentifier(id: '9'),
             answerFormat: const IntegerAnswerFormat(
               hint: 'Gerundet auf ganze Euros',
@@ -303,6 +301,131 @@ class _SurveyPageState extends State<SurveyPage> {
             return task.steps[9].stepIdentifier;
           default:
             return task.steps[9].stepIdentifier;
+        }
+      }),
+    );
+    return Future.value(task);
+  }
+
+  Future<Task> buildEndSurvey() {
+    var task = NavigableTask(
+      id: TaskIdentifier(),
+      steps: [
+        InstructionStep(
+          title: 'Vielen dank dass Sie sich Zeit nahmen um an der an der Studie teilzunehmen',
+          text: 'Abschließend haben wir noch einige Fragen zur Studie!',
+          buttonText: 'Los geht\'s!',
+        ),
+        QuestionStep(
+            title: 'Haben Sie das Spiel bis zuletzt aktiv gespielt?',
+            stepIdentifier: StepIdentifier(id: '1'),
+            answerFormat: const SingleChoiceAnswerFormat(
+              textChoices: [
+                TextChoice(text: 'Ja', value: 'ZuletztJa'),
+                TextChoice(text: 'Nein', value: 'ZuletztNein'),
+              ],
+            )),
+        QuestionStep(
+            title: "Warum haben Sie das Spiel nicht bis zuletzt gespielt?",
+            stepIdentifier: StepIdentifier(id: '2'),
+            answerFormat: const SingleChoiceAnswerFormat(
+              textChoices: [
+                TextChoice(text: 'Technische Probleme', value: 'TechProb'),
+                TextChoice(text: 'Datenschutzbedenken', value: 'DatenschutzProb'),
+                TextChoice(text: 'Grafik/Design gefiel mir nicht', value: 'GrafikNichtGut'),
+                TextChoice(text: 'Spiel war langweilig', value: 'SpielLangweilig'),
+                TextChoice(text: 'Spiel war zu schwierig', value: 'SpielSchwer'),
+                TextChoice(text: 'Nicht mehr daran gedacht', value: 'NichtGedacht'),
+                TextChoice(text: 'fehlende Zeit', value: 'KeineZeit'),
+                TextChoice(text: 'anderer Grund', value: 'AndGrund'),
+              ],
+            )),
+        QuestionStep(
+            title:
+                "Wurde Ihr Spielverhalten durch bestimmte Aktionen/Features im Spiel beeinflusst ? ",
+            stepIdentifier: StepIdentifier(id: '3'),
+            answerFormat: const SingleChoiceAnswerFormat(
+              textChoices: [
+                TextChoice(text: 'Ja', value: 'VerhaltenJa'),
+                TextChoice(text: 'Nein', value: 'VerhaltenNein'),
+              ],
+            )),
+        QuestionStep(
+            title: "Wie wurde durch diese Aktionen/Features die Dauer des Spielens beeinflusst?",
+            stepIdentifier: StepIdentifier(id: '4'),
+            answerFormat: const SingleChoiceAnswerFormat(
+              textChoices: [
+                TextChoice(text: 'längere Spielzeit', value: 'längerSpiel'),
+                TextChoice(text: 'kürzere Spielzeit', value: 'kürzerSpiel'),
+                TextChoice(text: 'nicht beeinflusst', value: 'DauerNichtBeeinflusst'),
+              ],
+            )),
+        QuestionStep(
+            title: "Wie wurde durch diese Aktionen/Features die Häufigkeit des Spielens "
+                "beeinflusst?",
+            stepIdentifier: StepIdentifier(id: '5'),
+            answerFormat: const SingleChoiceAnswerFormat(
+              textChoices: [
+                TextChoice(text: 'häufiger gespielt', value: 'öfterSpiel'),
+                TextChoice(text: 'seltener gespielt', value: 'seltenerSpiel'),
+                TextChoice(text: 'nicht beeinflusst', value: 'HäufigkeitNichtBeeinflusst'),
+              ],
+            )),
+        QuestionStep(
+            title: "Was ist ihnen aufgefallen?",
+            stepIdentifier: StepIdentifier(id: '6'),
+            answerFormat: const MultipleChoiceAnswerFormat(
+              textChoices: [
+                TextChoice(text: 'Tägliche Belohnung zum Einsammeln', value: 'TäglicheBelohnungen'),
+                TextChoice(text: 'Variable Belohnungen (=Glücksrad)', value: 'VariableBelohnungen'),
+                TextChoice(
+                    text: 'Punktetabelle mit Rangfolge der Spieler*innen', value: 'HighScore'),
+                TextChoice(
+                    text: 'Push-Nachrichten die zum Spielen animieren', value: 'PushNachrichten'),
+                TextChoice(text: 'Level waren in Blöcken angeordnet', value: 'LevelBlöcke'),
+                TextChoice(text: 'alle der genannten', value: 'AlleGenannten'),
+                TextChoice(text: 'keines der genannten ', value: 'KeineGenannten'),
+              ],
+            )),
+        QuestionStep(
+            title: "Was davon hat Ihr Spielverhalten beeinflusst?",
+            stepIdentifier: StepIdentifier(id: '7'),
+            answerFormat: const MultipleChoiceAnswerFormat(
+              textChoices: [
+                TextChoice(
+                    text: 'Tägliche Belohnung zum Einsammeln',
+                    value: 'TäglicheBelohnungenBeeinflusst'),
+                TextChoice(
+                    text: 'Variable Belohnungen (=Glücksrad)',
+                    value: 'VariableBelohnungenBeeinflusst'),
+                TextChoice(
+                    text: 'Punktetabelle mit Rangfolge der Spieler*innen',
+                    value: 'HighScoreBeeinflusst'),
+                TextChoice(
+                    text: 'Push-Nachrichten die zum Spielen animieren',
+                    value: 'PushNachrichtenBeeinflusst'),
+                TextChoice(
+                    text: 'Level waren in Blöcken angeordnet', value: 'LevelBlöckeBeeinflusst'),
+                TextChoice(text: 'alle der genannten', value: 'AlleGenanntenBeeinflusst'),
+                TextChoice(text: 'keines der genannten ', value: 'KeineGenanntenBeeinflusst'),
+              ],
+            )),
+        CompletionStep(
+          stepIdentifier: StepIdentifier(id: '8'),
+          text: 'Danke für die Teilnahme an der Umfrage und an der Studie',
+          title: 'Fertig!',
+          buttonText: 'Studie beenden',
+        ),
+      ],
+    );
+    task.addNavigationRule(
+      forTriggerStepIdentifier: task.steps[1].stepIdentifier,
+      navigationRule: ConditionalNavigationRule(resultToStepIdentifierMapper: (input) {
+        switch (input) {
+          case "ZuletztNein":
+            return task.steps[8].stepIdentifier;
+          default:
+            return task.steps[2].stepIdentifier;
         }
       }),
     );

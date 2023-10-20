@@ -26,7 +26,7 @@ void main() async {
 }
 
 Future<bool> checkForMobile() async {
-  // return true;//ToDo: remove return true
+  return true;//ToDo: remove return true
   DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
   var platform = (await deviceInfoPlugin.webBrowserInfo).platform!;
   if (equalsIgnoreCase(platform, "macOS") || equalsIgnoreCase(platform, "Win32")) {

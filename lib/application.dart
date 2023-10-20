@@ -33,7 +33,8 @@ class Application extends StatelessWidget {
             home: const HomePage(),
             routes: {
               '/start': (context) => const StartPage(),
-              '/survey': (context) => const SurveyPage(title: "Survey"),
+              '/startSurvey': (context) => const SurveyPage(title: "Start"),
+              '/endSurvey': (context) => const SurveyPage(title: "End"),
             },
           ),
         ));

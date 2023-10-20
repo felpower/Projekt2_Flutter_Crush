@@ -338,10 +338,23 @@ class _HomePageState extends State<HomePage>
           ),
           ListTile(
             leading: const Icon(Icons.question_mark),
-            title: const Text('Survey'),
+            title: const Text('Start Survey'),
             onTap: () {
               Navigator.of(context).pushNamed(
-                "/survey",
+                "/startSurvey",
+              );
+            },
+            tileColor: Colors.grey[200],
+            // Background color to make it feel like a button
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
+          ),
+          ListTile(
+            leading: const Icon(Icons.question_mark),
+            title: const Text('End Survey'),
+            onTap: () {
+              Navigator.of(context).pushNamed(
+                "/endSurvey",
               );
             },
             tileColor: Colors.grey[200],
