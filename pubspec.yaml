@@ -48,6 +48,7 @@ dependencies:
   dependency_validator: ^3.2.3
   survey_kit: ^0.1.2
   intl: ^0.18.1
+  device_info_plus: ^9.1.0
 
   flutter_web_plugins:
     sdk: flutter

@@ -174,7 +174,7 @@ class _SurveyPageState extends State<SurveyPage> {
         InstructionStep(
           title: 'Willkommen zur \nArbeiterkammer\n Survey',
           text: 'Mach Sie sich bereit für einen Haufen super zufälliger Fragen!',
-          buttonText: 'Let\'s go!',
+          buttonText: 'Los geht\'s!',
         ),
         QuestionStep(
           title: 'Wie alt sind Sie?',
@@ -237,11 +237,11 @@ class _SurveyPageState extends State<SurveyPage> {
         InstructionStep(
           stepIdentifier: StepIdentifier(id: '6'),
           title: 'Handyspezifische Fragen',
-          text: 'Als nächstes werden wir Ihnen einige Fragen zum Handyspielen stellen!',
-          buttonText: 'Let\'s go!',
+          text: 'Als nächstes werden wir Ihnen einige Fragen zu Handyspielen stellen!',
+          buttonText: 'Los geht\'s!',
         ),
         QuestionStep(
-            title: "Wie oft spielen sie mit Ihrem Handy/Tablet",
+            title: "Wie häufig spielen Sie Spiele am Handy/Tablet?",
             stepIdentifier: StepIdentifier(id: '7'),
             answerFormat: const SingleChoiceAnswerFormat(
               textChoices: [
@@ -255,80 +255,23 @@ class _SurveyPageState extends State<SurveyPage> {
               ],
             )),
         QuestionStep(
-            title: "Wie lange spielen sie im Durchschnitt täglich am Handy/Tablet in Stunden",
+            title:
+                "An Tagen an denen Sie am Handy/Tablet spielen. Wie viele Stunden spielen Sie durchschnittlich?",
             stepIdentifier: StepIdentifier(id: '8'),
-            answerFormat: const ScaleAnswerFormat(
-              minimumValue: 0,
-              maximumValue: 24,
-              defaultValue: 12,
-              step: 1,
+            answerFormat: const IntegerAnswerFormat(
+              hint: 'Gerundet auf ganze Stunden',
             )),
         QuestionStep(
-            title: "Wie lange spielen sie im Durchschnitt wöchentlich am Handy/Tablet in Stunden",
+            title: "Wie viel Geld geben Sie durchschnittlich pro Monat IN Spielen am Handy/am Tablet aus?",
             stepIdentifier: StepIdentifier(id: '9'),
-            answerFormat: const ScaleAnswerFormat(
-              minimumValue: 0,
-              maximumValue: 30,
-              defaultValue: 15,
-              step: 1,
-            )),
-        QuestionStep(
-            title: "Wie lange spielen sie im Durchschnitt monatlich am Handy/Tablet in Stunden",
-            stepIdentifier: StepIdentifier(id: '10'),
-            answerFormat: const ScaleAnswerFormat(
-              minimumValue: 0,
-              maximumValue: 30,
-              defaultValue: 15,
-              step: 1,
-            )),
-        QuestionStep(
-            title: "Wie oft geben Sie Geld bei Spielen am Handy/Tablet aus",
-            stepIdentifier: StepIdentifier(id: '11'),
-            answerFormat: const SingleChoiceAnswerFormat(
-              textChoices: [
-                TextChoice(text: 'Täglich', value: 'GELDTAG'),
-                TextChoice(text: 'Jeden 2 Tag', value: 'GELD2TAG'),
-                TextChoice(text: 'Ca. 1x die Woche', value: 'GELD1WOCH'),
-                TextChoice(text: 'alle 2 Wochen', value: 'GELD2WOCH'),
-                TextChoice(text: '1x im Monat', value: 'GELDMON'),
-                TextChoice(text: 'seltener', value: 'GELDSEL'),
-                TextChoice(text: 'Nie', value: 'GELDNIE'),
-              ],
-            )),
-        QuestionStep(
-            title: "Wie wie Geld geben sie im Durchschnitt täglich am Handy/Tablet aus",
-            stepIdentifier: StepIdentifier(id: '12'),
-            answerFormat: const ScaleAnswerFormat(
-              minimumValue: 0,
-              maximumValue: 24,
-              defaultValue: 12,
-              step: 1,
-            )),
-        QuestionStep(
-            title: "Wie wie Geld geben sie im Durchschnitt wöchentlich am Handy/Tablet in Stunden"
-                " aus",
-            stepIdentifier: StepIdentifier(id: '13'),
-            answerFormat: const ScaleAnswerFormat(
-              minimumValue: 0,
-              maximumValue: 30,
-              defaultValue: 15,
-              step: 1,
-            )),
-        QuestionStep(
-            title: "Wie wie Geld geben sie im Durchschnitt monatlich am Handy/Tablet in Stunden "
-                "aus",
-            stepIdentifier: StepIdentifier(id: '14'),
-            answerFormat: const ScaleAnswerFormat(
-              minimumValue: 0,
-              maximumValue: 30,
-              defaultValue: 15,
-              step: 1,
+            answerFormat: const IntegerAnswerFormat(
+              hint: 'Gerundet auf ganze Euros',
             )),
         CompletionStep(
-          stepIdentifier: StepIdentifier(id: '15'),
-          text: 'Thanks for taking the survey, we will contact you soon!',
-          title: 'Done!',
-          buttonText: 'Submit survey',
+          stepIdentifier: StepIdentifier(id: '10'),
+          text: 'Danke für die Teilnahme an der Umfrage, und viel Spaß beim Spielen',
+          title: 'Fertig!',
+          buttonText: 'Umfrage beenden',
         ),
       ],
     );
@@ -338,7 +281,7 @@ class _SurveyPageState extends State<SurveyPage> {
         resultToStepIdentifierMapper: (input) {
           int age = int.parse(input!);
           if (age < 18 || age > 120) {
-            return task.steps[15].stepIdentifier;
+            return task.steps[10].stepIdentifier;
           } else {
             return task.steps[2].stepIdentifier;
           }
@@ -351,63 +294,18 @@ class _SurveyPageState extends State<SurveyPage> {
         switch (input) {
           case "ZEITTAG":
           case 'ZEIT2TAG':
-            return task.steps[8].stepIdentifier;
           case 'ZEIT1WOCH':
           case "ZEIT2WOCH":
-            return task.steps[9].stepIdentifier;
           case "ZEITMON":
-            return task.steps[10].stepIdentifier;
           case "ZEITSEL":
+            return task.steps[8].stepIdentifier;
           case "ZEITNIE":
-            return task.steps[11].stepIdentifier;
+            return task.steps[9].stepIdentifier;
           default:
-            return task.steps[11].stepIdentifier;
+            return task.steps[9].stepIdentifier;
         }
       }),
-    );
-    task.addNavigationRule(
-      forTriggerStepIdentifier: task.steps[8].stepIdentifier,
-      navigationRule: DirectNavigationRule(task.steps[11].stepIdentifier),
-    );
-    task.addNavigationRule(
-      forTriggerStepIdentifier: task.steps[9].stepIdentifier,
-      navigationRule: DirectNavigationRule(task.steps[11].stepIdentifier),
-    );
-    task.addNavigationRule(
-      forTriggerStepIdentifier: task.steps[11].stepIdentifier,
-      navigationRule: ConditionalNavigationRule(resultToStepIdentifierMapper: (input) {
-        switch (input) {
-          case "GELDTAG":
-          case 'GELD2TAG':
-            return task.steps[12].stepIdentifier;
-          case 'GELD1WOCH':
-          case "GELD2WOCH":
-            return task.steps[13].stepIdentifier;
-          case "GELDMON":
-            return task.steps[14].stepIdentifier;
-          case "GELDSEL":
-          case "GELDNIE":
-            return task.steps[15].stepIdentifier;
-          default:
-            return task.steps[15].stepIdentifier;
-        }
-      }),
-    );
-    task.addNavigationRule(
-      forTriggerStepIdentifier: task.steps[12].stepIdentifier,
-      navigationRule: DirectNavigationRule(task.steps[15].stepIdentifier),
-    );
-    task.addNavigationRule(
-      forTriggerStepIdentifier: task.steps[13].stepIdentifier,
-      navigationRule: DirectNavigationRule(task.steps[15].stepIdentifier),
     );
     return Future.value(task);
-  }
-
-  Future<Task> getJsonTask() async {
-    final taskJson = await rootBundle.loadString('assets/example_json.json');
-    final taskMap = json.decode(taskJson);
-
-    return Task.fromJson(taskMap);
   }
 }

@@ -176,88 +176,89 @@ class _HomePageState extends State<HomePage>
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 20.0),
                   child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
-                      builder: (context, state) {
-                        if (state is DarkPatternsActivatedState) {
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              flutter_bloc.BlocBuilder<XpBloc, XpState>(builder: (context, state) {
-                                return CreditPanel('XP: ${state.amount}', 30, creditPanelWidth);
-                              }),
-                              flutter_bloc.BlocBuilder<CoinBloc, CoinState>(
-                                  builder: (context, state) {
-                                return CreditPanel('\$: ${state.amount}', 30, creditPanelWidth);
-                              })
-                            ],
-                          );
-                        } else {
-                          return Container();
-                        }
-                      },
-                    ),
-                    Expanded(
-                      // Added Expanded to ensure GridView takes up all available space
-                      child: StreamBuilder<int>(
-                          stream: gameBloc.maxLevelNumber,
-                          builder: (context, snapshot) {
-                            var itemCount = (snapshot.data! / 6).ceil() + snapshot.data!;
-                            return ListView.builder(
-                              itemCount: itemCount,
-                              itemBuilder: (BuildContext context, int index) {
-                                // If it's the 7th, 14th, etc. item, return a divider
-                                if ((index + 1) % 3 == 0 && index < itemCount / 3) {
-                                  return const SizedBox(
-                                    height: 50.0,
-                                    child: Align(
-                                      alignment: Alignment.bottomCenter,
-                                      child: Divider(
-                                        color: Colors.black,
-                                        thickness: 5.0,
-                                      ),
-                                    ),
-                                  );
-
-
-                                } else {
-                                  // Calculate which row of game buttons we're on
-                                  int rowIndex = (index / 3).floor();
-                                  int levelStart = index - rowIndex; // Adjust due to added dividers
-
-                                  // Return a row of 3 game buttons
-                                  return Row(
-                                    children: [
-                                      for (int i = 0; i < 3; i++)
-                                        Expanded(
-                                          child: flutter_bloc.BlocBuilder<LevelBloc, LevelState>(
-                                            builder: (context, state) {
-                                              int levelNumber = levelStart * 3 + i + 1;
-                                              if (levelNumber <= snapshot.data!) {
-                                                return GameLevelButton(
-                                                  width: 80.0,
-                                                  height: 60.0,
-                                                  borderRadius: 50.0,
-                                                  levelNumber: levelNumber,
-                                                );
-                                              } else {
-                                                return const SizedBox
-                                                    .shrink(); // Return an empty widget if there's no level for this button
-                                              }
-                                            },
-                                          ),
-                                        ),
-                                    ],
-                                  );
-                                }
-                              },
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
+                        builder: (context, state) {
+                          if (state is DarkPatternsActivatedState) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                flutter_bloc.BlocBuilder<XpBloc, XpState>(
+                                    builder: (context, state) {
+                                  return CreditPanel('XP: ${state.amount}', 30, creditPanelWidth);
+                                }),
+                                flutter_bloc.BlocBuilder<CoinBloc, CoinState>(
+                                    builder: (context, state) {
+                                  return CreditPanel('\$: ${state.amount}', 30, creditPanelWidth);
+                                })
+                              ],
                             );
-                          }),
-                    ),
-                  ],
+                          } else {
+                            return Container();
+                          }
+                        },
+                      ),
+                      Expanded(
+                        // Added Expanded to ensure GridView takes up all available space
+                        child: StreamBuilder<int>(
+                            stream: gameBloc.maxLevelNumber,
+                            builder: (context, snapshot) {
+                              var itemCount = (snapshot.data! / 6).ceil() + snapshot.data!;
+                              return ListView.builder(
+                                itemCount: itemCount,
+                                itemBuilder: (BuildContext context, int index) {
+                                  // If it's the 7th, 14th, etc. item, return a divider
+                                  if ((index + 1) % 3 == 0 && index < itemCount / 3) {
+                                    return const SizedBox(
+                                      height: 50.0,
+                                      child: Align(
+                                        alignment: Alignment.bottomCenter,
+                                        child: Divider(
+                                          color: Colors.black,
+                                          thickness: 5.0,
+                                        ),
+                                      ),
+                                    );
+                                  } else {
+                                    // Calculate which row of game buttons we're on
+                                    int rowIndex = (index / 3).floor();
+                                    int levelStart =
+                                        index - rowIndex; // Adjust due to added dividers
+
+                                    // Return a row of 3 game buttons
+                                    return Row(
+                                      children: [
+                                        for (int i = 0; i < 3; i++)
+                                          Expanded(
+                                            child: flutter_bloc.BlocBuilder<LevelBloc, LevelState>(
+                                              builder: (context, state) {
+                                                int levelNumber = levelStart * 3 + i + 1;
+                                                if (levelNumber <= snapshot.data!) {
+                                                  return GameLevelButton(
+                                                    width: 80.0,
+                                                    height: 60.0,
+                                                    borderRadius: 50.0,
+                                                    levelNumber: levelNumber,
+                                                  );
+                                                } else {
+                                                  return const SizedBox
+                                                      .shrink(); // Return an empty widget if there's no level for this button
+                                                }
+                                              },
+                                            ),
+                                          ),
+                                      ],
+                                    );
+                                  }
+                                },
+                              );
+                            }),
+                      ),
+                    ],
+                  ),
                 ),
-              ),),
+              ),
             )
           ],
         ),
