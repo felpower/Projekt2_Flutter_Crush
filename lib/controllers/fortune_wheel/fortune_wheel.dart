@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'dart:ui';
+import 'dart:ui' as uiWeb;
 
 import 'package:bachelor_flutter_crush/bloc/game_bloc.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +40,7 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
     _animation = CurvedAnimation(parent: _controller, curve: Curves.easeOutQuart)
       ..addListener(() {
         setState(() {
-          _accumulatedRotation = lerpDouble(0, _targetRotation, _animation.value)!;
+          _accumulatedRotation = uiWeb.lerpDouble(0, _targetRotation, _animation.value)!;
         });
       })
       ..addStatusListener((status) {

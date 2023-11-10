@@ -17,10 +17,12 @@ import 'package:bachelor_flutter_crush/controllers/tic_tac_toe/tic_tac_toe.dart'
 import 'package:bachelor_flutter_crush/game_widgets/game_level_button.dart';
 import 'package:bachelor_flutter_crush/gamification_widgets/daystreak_milestone_reached_splash.dart';
 import 'package:bachelor_flutter_crush/persistence/reporting_service.dart';
-import 'package:bachelor_flutter_crush/services/service_worker_notification.dart';
+import 'package:bachelor_flutter_crush/services/firebase_messaging.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
+import 'package:pwa_install/pwa_install.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../bloc/bloc_provider.dart';
@@ -56,18 +58,14 @@ class _HomePageState extends State<HomePage>
         reportingBloc.add(ReportStartAppEvent(DateTime.now()));
         break;
       case AppLifecycleState.inactive:
-        ServiceWorkerNotification().scheduleNotification();
         reportingBloc.add(ReportCloseAppEvent(DateTime.now()));
         break;
       case AppLifecycleState.detached:
-        ServiceWorkerNotification().scheduleNotification();
         reportingBloc.add(ReportCloseAppEvent(DateTime.now()));
         break;
       case AppLifecycleState.paused:
-        ServiceWorkerNotification().scheduleNotification();
         break;
       case AppLifecycleState.hidden:
-        ServiceWorkerNotification().scheduleNotification();
         break;
     }
   }
@@ -96,8 +94,39 @@ class _HomePageState extends State<HomePage>
       _controller.forward();
     });
     loadDailyReward();
-    ServiceWorkerNotification().requestNotificationPermission();
+    FirebaseMessaging.onMessage.listen(showFlutterNotification);
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   }
+
+  @pragma('vm:entry-point')
+  Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+    showFlutterNotification(message);
+    // If you're going to use other Firebase services in the background, such as Firestore,
+    // make sure you call `initializeApp` before using other Firebase services.
+    print('Handling a background message ${message.messageId}');
+  }
+
+
+  void showFlutterNotification(RemoteMessage message) {
+    RemoteNotification? notification = message.notification;
+    final android = message.notification?.android;
+    print('Notification TITLE: ${notification?.title}');
+    if (notification != null || android != null) {
+      FirebaseMessagingWeb().showNotification(notification);
+    } else {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return Material(
+                child: Column(
+                  children: [
+                    Text(notification?.title ?? "No Title"),
+                    Text(notification?.body ?? "No Body"),
+                  ],
+                ));
+          });
+    }
+}
 
   @override
   void didChangeDependencies() {
@@ -317,8 +346,6 @@ class _HomePageState extends State<HomePage>
             leading: const Icon(Icons.notification_add),
             title: const Text('Send Notification'),
             onTap: () {
-              ServiceWorkerNotification().sendNotification(
-                  "Test Notification", "This is the body of the test Notification", 10);
             },
             tileColor: Colors.grey[200],
             // Background color to make it feel like a button
@@ -412,6 +439,24 @@ class _HomePageState extends State<HomePage>
             title: const Text('Tic Tac Toe'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => const TicTacToe()));
+            },
+            tileColor: Colors.grey[200],
+            // Background color to make it feel like a button
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
+          ),
+          ListTile(
+            leading: const Icon(Icons.install_mobile),
+            title: const Text('Install PWA'),
+            onTap: () {
+              print("Install PWA${PWAInstall().installPromptEnabled}");
+              // if(PWAInstall().installPromptEnabled) {
+              try {
+                PWAInstall().promptInstall_();
+              } catch (e) {
+                setState(() {});
+                // }
+              }
             },
             tileColor: Colors.grey[200],
             // Background color to make it feel like a button
