@@ -3,19 +3,18 @@ import 'dart:async';
 import 'package:bachelor_flutter_crush/application.dart';
 import 'package:bachelor_flutter_crush/pages/non_mobile_page.dart';
 import 'package:bachelor_flutter_crush/persistence/reporting_service.dart';
-import 'package:bachelor_flutter_crush/services/service_worker_notification.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
-
+import 'services/firebase_messaging.dart';
 void main() async {
   // BindingBase.debugZoneErrorsAreFatal = true;
   WidgetsFlutterBinding.ensureInitialized();
   usePathUrlStrategy();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   ReportingService.init();
-  ServiceWorkerNotification().serviceWorkerNotification();
+  await FirebaseMessagingWeb().init();
   if (await checkForMobile()) {
     runZonedGuarded(() {
       runApp(const Application());

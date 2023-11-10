@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:bachelor_flutter_crush/persistence/high_score_service.dart';
-import 'package:bachelor_flutter_crush/services/service_worker_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -99,8 +98,9 @@ class HighScoreState extends State<HighScorePage> {
   void scheduleNotification() {
     if (users[0].isUser) {
       print("Notification scheduled for: ${DateTime.now().add(const Duration(minutes: 1))}");
-      ServiceWorkerNotification().sendNotification(
-          "Flutter Crush", "You just got passed on the HighScore, play now to pass him again!", 60);
+      //ToDo: Change Notification
+      // ServiceWorkerNotification().sendNotification(
+      //     "Flutter Crush", "You just got passed on the HighScore, play now to pass him again!", 60);
     }
   }
 

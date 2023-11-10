@@ -57,7 +57,7 @@ class _RegisterState extends State<StartPage> {
                     validator: MultiValidator([
                       RequiredValidator(errorText: 'Enter first named'),
                       MinLengthValidator(3, errorText: 'Minimum 3 charecter filled name'),
-                    ]),
+                    ]).call,
 
                     decoration: const InputDecoration(
                         hintText: 'Enter first Name',
@@ -81,7 +81,7 @@ class _RegisterState extends State<StartPage> {
                     validator: MultiValidator([
                       RequiredValidator(errorText: 'Enter last named'),
                       MinLengthValidator(3, errorText: 'Last name should be atleast 3 charater'),
-                    ]),
+                    ]).call,
                     decoration: const InputDecoration(
                         hintText: 'Enter last Name',
                         labelText: 'Last named',
@@ -104,7 +104,7 @@ class _RegisterState extends State<StartPage> {
                     validator: MultiValidator([
                       RequiredValidator(errorText: 'Enter email address'),
                       EmailValidator(errorText: 'Please correct email filled'),
-                    ]),
+                    ]).call,
                     decoration: const InputDecoration(
                         hintText: 'Email',
                         labelText: 'Email',
@@ -127,7 +127,7 @@ class _RegisterState extends State<StartPage> {
                     validator: MultiValidator([
                       RequiredValidator(errorText: 'Enter mobile number'),
                       PatternValidator(r'(^[0-9]{8,16}$)', errorText: 'enter valid mobile number'),
-                    ]),
+                    ]).call,
                     decoration: const InputDecoration(
                         hintText: 'Mobile',
                         labelText: 'Mobile',
@@ -155,7 +155,7 @@ class _RegisterState extends State<StartPage> {
                             r'|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\'
                             r'.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$',
                             errorText: 'enter valid date of birth'),
-                      ]),
+                      ]).call,
                       controller: dateCtl,
                       decoration: const InputDecoration(
                           hintText: "Date of birth",
