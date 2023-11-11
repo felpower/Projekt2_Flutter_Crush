@@ -36,6 +36,7 @@
     var serviceWorkerVersion = null;
 
 
+
     </script>
     <!-- This script adds the flutter initialization JS code -->
     <script src="flutter.js" defer></script>
@@ -56,6 +57,7 @@
         }
       });
     });
+
 </script>
 <script>
        if ('serviceWorker' in navigator) {
@@ -63,37 +65,37 @@
             navigator.serviceWorker.register('/firebase-messaging-sw.js');
           });
       }
-  </script>
-<!-- Capture PWA install prompt event -->
-<!--<script>-->
-<!--    let deferredPrompt;-->
 
-<!--    window.addEventListener('beforeinstallprompt', (e) => {-->
-<!--      deferredPrompt = e;-->
-<!--    });-->
+</script>
+<script>
+    let deferredPrompt;
 
-<!--    function promptInstall(){-->
-<!--       deferredPrompt.prompt();-->
-<!--    }-->
+    window.addEventListener('beforeinstallprompt', (e) => {
+      deferredPrompt = e;
+    });
 
-<!--    // Listen for app install event-->
-<!--    window.addEventListener('appinstalled', () => {-->
-<!--      deferredPrompt = null;-->
-<!--      appInstalled();-->
-<!--    });-->
+    function promptInstall(){
+       deferredPrompt.prompt();
+    }
 
-<!--    // Track how PWA was launched (either from browser or as PWA)-->
-<!--    function getLaunchMode() {-->
-<!--      const isStandalone = window.matchMedia('(display-mode: standalone)').matches;-->
-<!--      if(deferredPrompt) hasPrompt();-->
-<!--      if (document.referrer.startsWith('android-app://')) {-->
-<!--        appLaunchedAsTWA();-->
-<!--      } else if (navigator.standalone || isStandalone) {-->
-<!--        appLaunchedAsPWA();-->
-<!--      } else {-->
-<!--        window.appLaunchedInBrowser();-->
-<!--      }-->
-<!--    }-->
-<!--</script>-->
+    // Listen for app install event
+    window.addEventListener('appinstalled', () => {
+      deferredPrompt = null;
+      appInstalled();
+    });
+
+    // Track how PWA was launched (either from browser or as PWA)
+    function getLaunchMode() {
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+      if(deferredPrompt) hasPrompt();
+      if (document.referrer.startsWith('android-app://')) {
+        appLaunchedAsTWA();
+      } else if (navigator.standalone || isStandalone) {
+        appLaunchedAsPWA();
+      } else {
+        window.appLaunchedInBrowser();
+      }
+    }
+</script>
 </body>
 </html>

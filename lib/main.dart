@@ -7,6 +7,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
+import 'package:pwa_install/pwa_install.dart';
 import 'services/firebase_messaging.dart';
 void main() async {
   // BindingBase.debugZoneErrorsAreFatal = true;
@@ -15,6 +16,9 @@ void main() async {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   ReportingService.init();
   await FirebaseMessagingWeb().init();
+  PWAInstall().setup(installCallback: () {
+    debugPrint('APP INSTALLED!');
+  });
   if (await checkForMobile()) {
     runZonedGuarded(() {
       runApp(const Application());

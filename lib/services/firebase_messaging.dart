@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FirebaseMessagingWeb {
   Future<void> init() async {
@@ -9,10 +10,14 @@ class FirebaseMessagingWeb {
     getWebToken();
   }
 
+  late FirebaseMessaging messaging ;
+
+  late NotificationSettings settings;
+
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-  FlutterLocalNotificationsPlugin();
+      FlutterLocalNotificationsPlugin();
   final AndroidInitializationSettings androidInitializationSettings =
-  const AndroidInitializationSettings('tile');
+      const AndroidInitializationSettings('tile');
   final DarwinInitializationSettings iosInitializationSettings = const DarwinInitializationSettings(
       requestSoundPermission: false, requestAlertPermission: true, requestBadgePermission: true);
 
@@ -29,6 +34,7 @@ class FirebaseMessagingWeb {
 
     createChannel(channel);
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
+    print("Channel ID: ${channel.id}");
   }
 
   void createChannel(AndroidNotificationChannel channel) async {
@@ -55,23 +61,24 @@ class FirebaseMessagingWeb {
     print("showFlutterNotification");
     RemoteNotification? notification = message.notification;
     AndroidNotification? android = message.notification?.android;
-      flutterLocalNotificationsPlugin.show(
-        notification.hashCode,
-        notification!.title,
-        notification.body,
-        NotificationDetails(
-          android: AndroidNotificationDetails(
-            channel.id,
-            channel.name,
-            channelDescription: channel.description,
-            // TODO add a proper drawable resource to android, for now using
-            //      one that already exists in example app.
-          ),
+    flutterLocalNotificationsPlugin.show(
+      notification.hashCode,
+      notification!.title,
+      notification.body,
+      NotificationDetails(
+        android: AndroidNotificationDetails(
+          channel.id,
+          channel.name,
+          channelDescription: channel.description,
+          // TODO add a proper drawable resource to android, for now using
+          //      one that already exists in example app.
         ),
-      );
+      ),
+    );
   }
 
   Future<void> initializeFirebase() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     await Firebase.initializeApp(
         options: const FirebaseOptions(
             apiKey: "AIzaSyCcBYFUJbTyRWUjy6dhLbLLEj_lwhqnsh4",
@@ -80,8 +87,8 @@ class FirebaseMessagingWeb {
             storageBucket: "darkpatterns-ac762.appspot.com",
             messagingSenderId: "552263184384",
             appId: "1:552263184384:web:87e17944dc571dc4e028e5"));
-    FirebaseMessaging messaging = FirebaseMessaging.instance;
-    await messaging.requestPermission(
+    messaging = FirebaseMessaging.instance;
+    settings = await messaging.requestPermission(
       alert: true,
       announcement: false,
       badge: true,
@@ -90,11 +97,19 @@ class FirebaseMessagingWeb {
       provisional: false,
       sound: true,
     );
+    prefs.setString("notificationSettings", settings.authorizationStatus.toString());
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      print('User granted permission');
+    } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
+      print('User granted provisional permission');
+    } else {
+      print('User declined or has not accepted permission');
+    }
   }
 
-  getToken() async {
+  Future<String> getToken() async {
     String? token = await FirebaseMessaging.instance.getToken();
-    print("DeviceToken: $token");
+    return token!;
   }
 
   void showNotification(RemoteNotification? notification) {

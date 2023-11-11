@@ -41,7 +41,7 @@ dependencies:
   flutter_unity_widget: ^2022.2.0
   pointer_interceptor: ^0.9.3+7
   form_field_validator: ^1.1.0
-  fluttertoast: ^8.2.3
+  fluttertoast: ^8.2.4
   infinite_carousel: ^1.0.3
   flutter_svg: ^2.0.9
   scratcher: ^2.4.0
@@ -53,6 +53,7 @@ dependencies:
   firebase_messaging: ^14.7.4
   firebase_core: ^2.22.0
   flutter_local_notifications: ^16.1.0
+  permission_handler: ^11.0.1
 
   flutter_web_plugins:
     sdk: flutter

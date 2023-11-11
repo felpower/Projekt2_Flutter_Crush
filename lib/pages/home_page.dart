@@ -11,9 +11,6 @@ import 'package:bachelor_flutter_crush/bloc/user_state_bloc/level_bloc/level_sta
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_state.dart';
 import 'package:bachelor_flutter_crush/controllers/fortune_wheel/fortune_wheel.dart';
-import 'package:bachelor_flutter_crush/controllers/scratcher/scratcher.dart';
-import 'package:bachelor_flutter_crush/controllers/slot_machine/slot_machine.dart';
-import 'package:bachelor_flutter_crush/controllers/tic_tac_toe/tic_tac_toe.dart';
 import 'package:bachelor_flutter_crush/game_widgets/game_level_button.dart';
 import 'package:bachelor_flutter_crush/gamification_widgets/daystreak_milestone_reached_splash.dart';
 import 'package:bachelor_flutter_crush/persistence/reporting_service.dart';
@@ -30,7 +27,7 @@ import '../bloc/game_bloc.dart';
 import '../bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
 import '../bloc/user_state_bloc/coins_bloc/coin_state.dart';
 import '../bloc/user_state_bloc/day_streak_bloc/day_streak_state.dart';
-import '../controllers/roll_machine/roll_slot_page.dart';
+import '../controllers/device_token/device_token.dart';
 import '../gamification_widgets/credit_panel.dart';
 import 'feedback_page.dart';
 import 'high_score_page.dart';
@@ -106,7 +103,6 @@ class _HomePageState extends State<HomePage>
     print('Handling a background message ${message.messageId}');
   }
 
-
   void showFlutterNotification(RemoteMessage message) {
     RemoteNotification? notification = message.notification;
     final android = message.notification?.android;
@@ -119,14 +115,14 @@ class _HomePageState extends State<HomePage>
           builder: (context) {
             return Material(
                 child: Column(
-                  children: [
-                    Text(notification?.title ?? "No Title"),
-                    Text(notification?.body ?? "No Body"),
-                  ],
-                ));
+              children: [
+                Text(notification?.title ?? "No Title"),
+                Text(notification?.body ?? "No Body"),
+              ],
+            ));
           });
     }
-}
+  }
 
   @override
   void didChangeDependencies() {
@@ -345,8 +341,7 @@ class _HomePageState extends State<HomePage>
           ListTile(
             leading: const Icon(Icons.notification_add),
             title: const Text('Send Notification'),
-            onTap: () {
-            },
+            onTap: () {},
             tileColor: Colors.grey[200],
             // Background color to make it feel like a button
             shape:
@@ -402,61 +397,31 @@ class _HomePageState extends State<HomePage>
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
           ),
           ListTile(
-            leading: const Icon(Icons.casino),
-            title: const Text('Slot Machine'),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const SlotMachine()));
-            },
-            tileColor: Colors.grey[200],
-            // Background color to make it feel like a button
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
-          ),
-          ListTile(
-            leading: const Icon(Icons.casino_outlined),
-            title: const Text('2nd Slot Machine'),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const SlotsPage()));
-            },
-            tileColor: Colors.grey[200],
-            // Background color to make it feel like a button
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
-          ),
-          ListTile(
-            leading: const Icon(Icons.airplane_ticket_outlined),
-            title: const Text('Scratch ticket'),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const Scratcher()));
-            },
-            tileColor: Colors.grey[200],
-            // Background color to make it feel like a button
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
-          ),
-          ListTile(
-            leading: const Icon(Icons.gamepad),
-            title: const Text('Tic Tac Toe'),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const TicTacToe()));
-            },
-            tileColor: Colors.grey[200],
-            // Background color to make it feel like a button
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
-          ),
-          ListTile(
             leading: const Icon(Icons.install_mobile),
             title: const Text('Install PWA'),
             onTap: () {
               print("Install PWA${PWAInstall().installPromptEnabled}");
               // if(PWAInstall().installPromptEnabled) {
               try {
+                PWAInstall().setup(installCallback: () {
+                  debugPrint('APP INSTALLED!');
+                });
                 PWAInstall().promptInstall_();
               } catch (e) {
                 setState(() {});
                 // }
               }
+            },
+            tileColor: Colors.grey[200],
+            // Background color to make it feel like a button
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
+          ),
+          ListTile(
+            leading: const Icon(Icons.token),
+            title: const Text('Device Token'),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const DeviceToken()));
             },
             tileColor: Colors.grey[200],
             // Background color to make it feel like a button
