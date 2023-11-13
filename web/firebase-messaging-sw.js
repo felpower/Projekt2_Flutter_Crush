@@ -4,6 +4,7 @@ importScripts("https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js")
 const firebaseConfig = {
   apiKey: "AIzaSyCcBYFUJbTyRWUjy6dhLbLLEj_lwhqnsh4",
   authDomain: "darkpatterns-ac762.firebaseapp.com",
+  databaseURL: "https://darkpatterns-ac762-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "darkpatterns-ac762",
   storageBucket: "darkpatterns-ac762.appspot.com",
   messagingSenderId: "552263184384",

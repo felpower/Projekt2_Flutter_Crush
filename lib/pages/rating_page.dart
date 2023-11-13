@@ -1,8 +1,7 @@
+import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../persistence/reporting_service.dart';
 
 class RatingPage extends StatefulWidget {
   const RatingPage({Key? key}) : super(key: key);
@@ -45,7 +44,7 @@ class _RatingState extends State<RatingPage> {
                       icon: const Icon(Icons.check),
                       color: Colors.white,
                       onPressed: () {
-                        ReportingService.addRating(_rating);
+                        FirebaseStore.addRating(_rating);
                         if (_rating > 3) {
                           setRatingState();
                           Navigator.pop(this.context, 'Ok');
@@ -96,7 +95,7 @@ class _RatingState extends State<RatingPage> {
                     ),
                     IconButton(
                         onPressed: () {
-                          ReportingService.addRating(_rating);
+                          FirebaseStore.addRating(_rating);
                           if (_rating > 3) {
                             setRatingState();
                             Navigator.pop(this.context, 'OK');

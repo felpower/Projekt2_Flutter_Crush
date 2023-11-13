@@ -58,6 +58,7 @@ class _DeviceTokenState extends State<DeviceToken> {
               child: const Text('Check Push Permission'),
               onPressed: () {
                 getNotification();
+                FirebaseMessagingWeb.requestPermission();
               }),
           TextField(controller: autohrizationStatus, textAlign: TextAlign.center, readOnly: true),
         ])));

@@ -1,5 +1,6 @@
 import 'dart:html' as html;
 
+import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:bachelor_flutter_crush/persistence/reporting_service.dart';
 import 'package:flutter/material.dart';
 
@@ -58,7 +59,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                ReportingService.sendFeedback(_feedbackController.text, _selectedFile);
+                FirebaseStore.sendFeedback(_feedbackController.text, _selectedFile);
               },
               child: const Text('Submit Feedback'),
             ),

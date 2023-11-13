@@ -1,4 +1,4 @@
-import 'package:bachelor_flutter_crush/persistence/reporting_service.dart';
+import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:intl/intl.dart';
@@ -195,7 +195,7 @@ class _RegisterState extends State<StartPage> {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState?.save();
                           print("User data $userData");
-                          ReportingService.addUserData(userData);
+                          FirebaseStore.addUserData(userData);
                           Navigator.pop(context);
                         }
                       },

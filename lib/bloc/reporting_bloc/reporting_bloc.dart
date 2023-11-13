@@ -1,15 +1,14 @@
 import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_event.dart';
 import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_state.dart';
+import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../persistence/reporting_service.dart';
 
 class ReportingBloc extends Bloc<ReportingEvent, ReportingState> {
   ReportingBloc() : super(WaitingForReportingEvents()) {
     on<ReportAdvertisementTapEvent>(_onReportAdvertisementTapEvent);
     on<ReportStartLevelEvent>(_onReportStartLevelEvent);
     on<ReportStartAppEvent>(_onStartAppEvent);
-    on<ReportCheckHighScoreEvent>(_onCheckHighscoreEvent);
+    on<ReportCheckHighScoreEvent>(_onCheckHighScoreEvent);
     on<ReportPaidForRemovingAddsEvent>(_onPaidForRemovingAddsEvent);
     on<ReportCloseAppEvent>(_onCloseAppEvent);
 
@@ -18,27 +17,27 @@ class ReportingBloc extends Bloc<ReportingEvent, ReportingState> {
 
   void _onReportAdvertisementTapEvent(
       ReportAdvertisementTapEvent event, Emitter<ReportingState> emit) {
-    ReportingService.addAdvertisementTap(event.x, event.y);
+    FirebaseStore.addAdvertisementTap(event.x, event.y);
   }
 
   void _onReportStartLevelEvent(ReportStartLevelEvent event, Emitter<ReportingState> emit) {
-    ReportingService.addStartOfLevel(event.levelNumber);
+    FirebaseStore.addStartOfLevel(event.levelNumber);
   }
 
-  void _onCheckHighscoreEvent(ReportCheckHighScoreEvent event, Emitter<ReportingState> emit) {
-    ReportingService.checkHighScore(event.time);
+  void _onCheckHighScoreEvent(ReportCheckHighScoreEvent event, Emitter<ReportingState> emit) {
+    FirebaseStore.checkHighScore(event.time);
   }
 
   void _onPaidForRemovingAddsEvent(
       ReportPaidForRemovingAddsEvent event, Emitter<ReportingState> emit) {
-    ReportingService.removeAdds(event.removed);
+    FirebaseStore.removeAdds(event.removed);
   }
 
   void _onStartAppEvent(ReportStartAppEvent event, Emitter<ReportingState> emit) {
-    ReportingService.addStartApp(event.time);
+    FirebaseStore.addStartApp(event.time);
   }
 
   void _onCloseAppEvent(ReportCloseAppEvent event, Emitter<ReportingState> emit) {
-    ReportingService.addCloseApp(event.time);
+    FirebaseStore.addCloseApp(event.time);
   }
 }

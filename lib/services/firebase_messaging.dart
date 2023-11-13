@@ -1,7 +1,12 @@
+import 'dart:async';
+
+import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:universal_html/html.dart' as html;
 
 class FirebaseMessagingWeb {
   Future<void> init() async {
@@ -10,7 +15,7 @@ class FirebaseMessagingWeb {
     getWebToken();
   }
 
-  late FirebaseMessaging messaging ;
+  late FirebaseMessaging messaging;
 
   late NotificationSettings settings;
 
@@ -83,6 +88,8 @@ class FirebaseMessagingWeb {
         options: const FirebaseOptions(
             apiKey: "AIzaSyCcBYFUJbTyRWUjy6dhLbLLEj_lwhqnsh4",
             authDomain: "darkpatterns-ac762.firebaseapp.com",
+            databaseURL:
+                "https://darkpatterns-ac762-default-rtdb.europe-west1.firebasedatabase.app",
             projectId: "darkpatterns-ac762",
             storageBucket: "darkpatterns-ac762.appspot.com",
             messagingSenderId: "552263184384",
@@ -98,13 +105,8 @@ class FirebaseMessagingWeb {
       sound: true,
     );
     prefs.setString("notificationSettings", settings.authorizationStatus.toString());
-    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      print('User granted permission');
-    } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
-      print('User granted provisional permission');
-    } else {
-      print('User declined or has not accepted permission');
-    }
+    FirebaseStore.grantPushPermission(
+        settings.authorizationStatus == AuthorizationStatus.authorized ? true : false);
   }
 
   Future<String> getToken() async {
@@ -127,6 +129,18 @@ class FirebaseMessagingWeb {
               icon: android.smallIcon,
             ),
           ));
+    }
+  }
+
+  static void requestPermission() async {
+    print("requestPermission");
+    html.PermissionStatus permission =
+        await html.window.navigator.permissions!.query({"name": "push", "userVisibleOnly": true});
+
+    print(permission.state);
+    if (permission.state != "granted") {
+      print("Permission not granted");
+      Permission.notification.request();
     }
   }
 }

@@ -13,7 +13,7 @@ import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_state.dar
 import 'package:bachelor_flutter_crush/controllers/fortune_wheel/fortune_wheel.dart';
 import 'package:bachelor_flutter_crush/game_widgets/game_level_button.dart';
 import 'package:bachelor_flutter_crush/gamification_widgets/daystreak_milestone_reached_splash.dart';
-import 'package:bachelor_flutter_crush/persistence/reporting_service.dart';
+import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:bachelor_flutter_crush/services/firebase_messaging.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -229,7 +229,10 @@ class _HomePageState extends State<HomePage>
                         child: StreamBuilder<int>(
                             stream: gameBloc.maxLevelNumber,
                             builder: (context, snapshot) {
-                              var itemCount = (snapshot.data! / 6).ceil() + snapshot.data!;
+                              var itemCount = 0;
+                              if (snapshot.data != null) {
+                                itemCount = (snapshot.data! / 6).ceil() + snapshot.data!;
+                              }
                               return ListView.builder(
                                 itemCount: itemCount,
                                 itemBuilder: (BuildContext context, int index) {
@@ -450,7 +453,7 @@ class _HomePageState extends State<HomePage>
                   setState(() {
                     dailyRewardCollected = true;
                     setDailyRewards();
-                    ReportingService.checkHighScore(DateTime.now());
+                    FirebaseStore.collectedDailyRewards(DateTime.now());
                   });
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) => FortuneWheel(items: itemList)));
