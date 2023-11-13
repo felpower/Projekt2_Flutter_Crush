@@ -31,7 +31,6 @@ class FirebaseStore {
   static const String ratingApp = 'rating';
   static const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
   static final Random _rnd = Random();
-  static late final String userId;
 
   static Future<void> init() async {
     await _getUuid();
@@ -105,18 +104,20 @@ class FirebaseStore {
   }
 
   static Future<void> _updateDocument(String documentPropertyName, String information) async {
+    var userId = await _getUuid();
     DatabaseReference ref = database.ref("users/$userId");
     ref.child(documentPropertyName).push().set(information);
   }
 
   static addUser() async {
+    var userId = await _getUuid();
     bool shouldDarkPatternsBeVisible = await DarkPatternsService.shouldDarkPatternsBeVisible();
     final data = {
       uuid: userId,
       darkPatterns: shouldDarkPatternsBeVisible,
     };
     DatabaseReference ref = database.ref("users/$userId");
-    ref.set(data);
+    ref.update(data);
 
     FlutterError.onError = (FlutterErrorDetails details) {
       sendError(details.exceptionAsString(), isFlutterError: true);
@@ -125,6 +126,7 @@ class FirebaseStore {
 
   static void sendError(String error, {stacktrace = "", isFlutterError = false}) async {
     try {
+      var userId = await _getUuid();
       final data = {
         'error': error,
         'stacktrace': stacktrace,
@@ -141,6 +143,7 @@ class FirebaseStore {
 
   static Future<void> sendFeedback(String info, html.File? file) async {
     try {
+      var userId = await _getUuid();
       final String userAgent = html.window.navigator.userAgent;
       String uploadedFileId = _getRandomString(15);
       var taskSnapshot = await storage.ref('feedback/$uploadedFileId').putBlob(file);
@@ -170,7 +173,6 @@ class FirebaseStore {
     }
     final newUuid = _getRandomString(15);
     prefs.setString(uuid, newUuid);
-    userId = newUuid;
     return newUuid;
   }
 

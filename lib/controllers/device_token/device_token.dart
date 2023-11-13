@@ -29,7 +29,7 @@ class _DeviceTokenState extends State<DeviceToken> {
         body: Center(
             child: Column(children: [
           FutureBuilder<String>(
-              future: FirebaseMessagingWeb().getToken(),
+              future: FirebaseMessagingWeb.getToken(),
               builder: (context, snapshot) {
                 if (snapshot.hasData && snapshot.connectionState == ConnectionState.done) {
                   text = snapshot.data!;

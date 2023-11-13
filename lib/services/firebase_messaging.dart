@@ -15,10 +15,6 @@ class FirebaseMessagingWeb {
     getWebToken();
   }
 
-  late FirebaseMessaging messaging;
-
-  late NotificationSettings settings;
-
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   final AndroidInitializationSettings androidInitializationSettings =
@@ -39,7 +35,6 @@ class FirebaseMessagingWeb {
 
     createChannel(channel);
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
-    print("Channel ID: ${channel.id}");
   }
 
   void createChannel(AndroidNotificationChannel channel) async {
@@ -48,9 +43,8 @@ class FirebaseMessagingWeb {
         ?.createNotificationChannel(channel);
   }
 
-  Future<void> getWebToken() async {
+  static Future<void> getWebToken() async {
     await initializeFirebase();
-
     getToken();
   }
 
@@ -82,7 +76,7 @@ class FirebaseMessagingWeb {
     );
   }
 
-  Future<void> initializeFirebase() async {
+  static Future<void> initializeFirebase() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await Firebase.initializeApp(
         options: const FirebaseOptions(
@@ -94,8 +88,8 @@ class FirebaseMessagingWeb {
             storageBucket: "darkpatterns-ac762.appspot.com",
             messagingSenderId: "552263184384",
             appId: "1:552263184384:web:87e17944dc571dc4e028e5"));
-    messaging = FirebaseMessaging.instance;
-    settings = await messaging.requestPermission(
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    var settings = await messaging.requestPermission(
       alert: true,
       announcement: false,
       badge: true,
@@ -109,7 +103,7 @@ class FirebaseMessagingWeb {
         settings.authorizationStatus == AuthorizationStatus.authorized ? true : false);
   }
 
-  Future<String> getToken() async {
+  static Future<String> getToken() async {
     String? token = await FirebaseMessaging.instance.getToken();
     return token!;
   }
