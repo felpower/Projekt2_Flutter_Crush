@@ -27,7 +27,7 @@ class InformationPage extends StatelessWidget {
                 "A combo of  4 tiles. All tiles of the chains are removed and the common tile is replaced by a TNT:\n"),
             Image(
               image: AssetImage(
-                'assets/images/bombs/tnt.png',
+                'assets/images/bombs/fish_1.png',
               ),
               height: 30,
             ),
@@ -35,7 +35,7 @@ class InformationPage extends StatelessWidget {
                 "A combo of  5 tiles. All tiles of the chains are removed and the common tile is replaced by a BOMB:\n"),
             Image(
               image: AssetImage(
-                'assets/images/bombs/mine.png',
+                'assets/images/bombs/fish_1.png',
               ),
               height: 30,
             ),
@@ -43,7 +43,7 @@ class InformationPage extends StatelessWidget {
                 "A combo of 6 tiles. All tiles of the chains are removed and the common tile is replaced by a WRAPPED:\n"),
             Image(
               image: AssetImage(
-                'assets/images/bombs/multi_color.png',
+                'assets/images/bombs/fish_1.png',
               ),
               height: 30,
             ),
@@ -51,7 +51,7 @@ class InformationPage extends StatelessWidget {
                 "A combo of 7 tiles. All tiles of the chains are removed and the common tile is replaced by a FIREBALL:\n"),
             Image(
               image: AssetImage(
-                'assets/images/bombs/fireball.png',
+                'assets/images/bombs/fish_1.png',
               ),
               height: 30,
             ),
@@ -61,7 +61,7 @@ class InformationPage extends StatelessWidget {
             ),
             Image(
               image: AssetImage(
-                'assets/images/bombs/rocket.png',
+                'assets/images/bombs/fish_1.png',
               ),
               height: 30,
             ),

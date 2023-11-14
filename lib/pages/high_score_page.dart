@@ -122,7 +122,7 @@ class HighScoreState extends State<HighScorePage> {
                 Container(
                     decoration: const BoxDecoration(
                         image: DecorationImage(
-                  image: AssetImage('assets/images/background/background2.jpg'),
+                          image: AssetImage('assets/images/background/background_new.png'),
                   fit: BoxFit.cover,
                 ))),
                 ListView(

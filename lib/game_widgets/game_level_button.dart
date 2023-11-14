@@ -45,7 +45,6 @@ class GameLevelButton extends StatelessWidget {
         flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context);
     bool disabled = !levelBloc.state.levels.contains(levelNumber) &&
         darkPatternsBloc.state is DarkPatternsActivatedState;
-    Color disabledColor = Colors.grey;
 
     return InkWell(
       onTap: () async {

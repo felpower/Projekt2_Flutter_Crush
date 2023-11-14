@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:ui' as uiWeb;
 
 import 'package:bachelor_flutter_crush/bloc/game_bloc.dart';
+import 'package:bachelor_flutter_crush/helpers/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -23,11 +24,8 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
   late Animation<double> _animation;
   final PublishSubject<bool> gameIsOverController = PublishSubject<bool>();
   double _targetRotation = 0.0;
-  double _accumulatedRotation = 0.0; // New variable to store the accumulated rotation over time
   bool isSpun = false;
   int? _selectedItem;
-  bool showResult = false;
-
   late OverlayEntry _gameSplash;
 
   @override
@@ -47,8 +45,7 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
         if (status == AnimationStatus.completed) {
           // Here, _selectedItem has the value on which the wheel stopped.
           print("Wheel stopped on: $_selectedItem");
-          showResult = true;
-
+          _buildResultOverlay();
           // If you want to notify some other part of the app,
           // you can use a callback or some other state management solution here.
         }
@@ -84,44 +81,40 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        _buildFortuneWheel(),
-        if (showResult) _buildResultOverlay(),
-      ],
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/background/background_new.png'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: _buildFortuneWheel(),
     );
   }
 
-  Widget _buildResultOverlay() {
-    return Center(
-      child: Container(
-        width: double.infinity,
-        height: double.infinity,
-        color: Colors.black.withOpacity(0.7), // This gives a semi-transparent background.
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              _selectedItem != 0
-                  ? 'You won $_selectedItem XP. Congratulations!'
-                  : 'Better luck next time!',
-              style:
-                  const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-                gameBloc.gameOver(_selectedItem!);
-                gameIsOverController.sink.add(true);
-                showGameOver(true);
-              },
-              child: const Text('Go Back'),
-            ),
-          ],
-        ),
-      ),
-    );
+  _buildResultOverlay() {
+    String x = _selectedItem != 0
+        ? 'You won $_selectedItem XP. Congratulations!'
+        : 'Better luck next time!';
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+              title: Text(x),
+              shape:
+                  const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16))),
+              actions: <Widget>[
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                    gameBloc.gameOver(_selectedItem!);
+                    gameIsOverController.sink.add(true);
+                    showGameOver(true);
+                  },
+                  child: const Text('Go Back'),
+                ),
+              ],
+            ));
   }
 
   void showGameOver(bool success) async {
@@ -144,28 +137,25 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
     double screenHeight = MediaQuery.of(context).size.height;
     double wheelSize = min(screenWidth, screenHeight) * 0.8; // Taking 80% of the smaller dimension
 
-    return Container(
-      color: Colors.black,
-      child: Center(
-        child: GestureDetector(
-          onPanEnd: (details) => spin(),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Transform.rotate(
-                angle: _accumulatedRotation,
-                child: CustomPaint(
-                  size: Size(wheelSize, wheelSize),
-                  painter: _WheelPainter(widget.items),
-                ),
+    return Center(
+      child: GestureDetector(
+        onPanEnd: (details) => spin(),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Transform.rotate(
+              angle: _accumulatedRotation,
+              child: CustomPaint(
+                size: Size(wheelSize, wheelSize),
+                painter: _WheelPainter(widget.items),
               ),
-              const Positioned(
-                top: 10,
-                child: Icon(Icons.arrow_downward,
-                    size: 50, color: Colors.black), // Adjust size/color as needed
-              ),
-            ],
-          ),
+            ),
+            const Positioned(
+              top: 10,
+              child: Icon(Icons.arrow_downward,
+                  size: 50, color: Colors.black), // Adjust size/color as needed
+            ),
+          ],
         ),
       ),
     );
@@ -200,7 +190,7 @@ class _WheelPainter extends CustomPainter {
       );
 
       final Paint paint = Paint()
-        ..color = Colors.primaries[i % Colors.primaries.length]
+        ..color = AppColors.getColorFortune(i)
         ..style = PaintingStyle.fill;
 
       canvas.drawArc(rect, angle, sweepAngle, true, paint);
@@ -232,3 +222,5 @@ class _WheelPainter extends CustomPainter {
     return true; // Repaint always for simplicity, optimize if necessary
   }
 }
+
+double _accumulatedRotation = 0.0; // New variable to store the accumulated rotation over time

@@ -29,6 +29,7 @@ import '../bloc/user_state_bloc/coins_bloc/coin_state.dart';
 import '../bloc/user_state_bloc/day_streak_bloc/day_streak_state.dart';
 import '../controllers/device_token/device_token.dart';
 import '../gamification_widgets/credit_panel.dart';
+import '../helpers/app_colors.dart';
 import 'feedback_page.dart';
 import 'high_score_page.dart';
 import 'information_page.dart';
@@ -170,6 +171,17 @@ class _HomePageState extends State<HomePage>
           Builder(
             builder: (BuildContext context) {
               return IconButton(
+                icon: const Icon(Icons.scoreboard),
+                onPressed: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => const HighScorePage()));
+                },
+              );
+            },
+          ),
+          Builder(
+            builder: (BuildContext context) {
+              return IconButton(
                 icon: const Icon(Icons.menu),
                 onPressed: () {
                   loadDailyReward();
@@ -188,7 +200,7 @@ class _HomePageState extends State<HomePage>
             Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/background/background2.jpg'),
+                  image: AssetImage('assets/images/background/background_new2.png'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -268,7 +280,7 @@ class _HomePageState extends State<HomePage>
                                                     height: 60.0,
                                                     borderRadius: 50.0,
                                                     levelNumber: levelNumber,
-                                                    color: getColor(levelNumber),
+                                                    color: AppColors.getColorLevel(levelNumber),
                                                   );
                                                 } else {
                                                   return const SizedBox
@@ -293,29 +305,6 @@ class _HomePageState extends State<HomePage>
         ),
       ),
     );
-  }
-
-  getColor(int levelNumber) {
-    if (levelNumber > 30) {
-      levelNumber -= 30;
-    }
-    int level = (levelNumber / 6).floor();
-    if (levelNumber % 6 == 0) {
-      level--;
-    }
-    if (level == 0) {
-      return Colors.red;
-    } else if (level == 1) {
-      return Colors.blue;
-    } else if (level == 2) {
-      return Colors.green;
-    } else if (level == 3) {
-      return Colors.yellow;
-    } else if (level == 4) {
-      return Colors.purple;
-    } else if (level == 5) {
-      return Colors.tealAccent;
-    }
   }
 
   Drawer buildBurgerMenu(BuildContext context) {
@@ -348,27 +337,6 @@ class _HomePageState extends State<HomePage>
                 "/start",
               );
             },
-            tileColor: Colors.grey[200],
-            // Background color to make it feel like a button
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
-          ),
-          ListTile(
-            leading: const Icon(Icons.scoreboard),
-            title: const Text('HighScore'),
-            onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const HighScorePage()));
-            },
-            tileColor: Colors.grey[200],
-            // Background color to make it feel like a button
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
-          ),
-          ListTile(
-            leading: const Icon(Icons.notification_add),
-            title: const Text('Send Notification'),
-            onTap: () {},
             tileColor: Colors.grey[200],
             // Background color to make it feel like a button
             shape:
