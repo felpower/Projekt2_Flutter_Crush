@@ -92,6 +92,7 @@ class _HomePageState extends State<HomePage>
       _controller.forward();
     });
     loadDailyReward();
+    checkForFirstTimeStart();
     FirebaseMessaging.onMessage.listen(showFlutterNotification);
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   }
@@ -502,5 +503,17 @@ class _HomePageState extends State<HomePage>
         );
       },
     );
+  }
+
+  void checkForFirstTimeStart() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getBool("firstTimeStart") == null) {
+      FirebaseMessagingWeb.getToken();
+      FirebaseStore.addInitApp(DateTime.now());
+      prefs.setBool("firstTimeStart", false);
+      Navigator.of(context).pushNamed(
+        "/startSurvey",
+      );
+    }
   }
 }

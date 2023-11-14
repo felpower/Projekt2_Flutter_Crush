@@ -1,3 +1,4 @@
+import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_kit/survey_kit.dart';
@@ -20,7 +21,7 @@ class _SurveyPageState extends State<SurveyPage> {
         child: Align(
           alignment: Alignment.center,
           child: FutureBuilder<Task>(
-            future: widget.title=="Start" ? buildStartSurvey():buildEndSurvey(),
+            future: widget.title == "Start" ? buildStartSurvey() : buildEndSurvey(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done &&
                   snapshot.hasData &&
@@ -40,11 +41,7 @@ class _SurveyPageState extends State<SurveyPage> {
                         }
                       }
                     }
-                    print("final Score is $resultString");
-                    /* call a new widget to show the results*/
-                    // final jsonResult = result.toJson();
-                    // print("ToJSON: $jsonResult");
-                    // ReportingService().sendSurvey(jsonResult); //FixMe: Add to DB
+                    FirebaseStore.sendSurvey(resultString);
                     Navigator.pop(context);
                   },
                   task: task,

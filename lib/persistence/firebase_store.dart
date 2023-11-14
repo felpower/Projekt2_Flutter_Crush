@@ -29,6 +29,7 @@ class FirebaseStore {
   static const String initAppStartTime = 'initAppStartTime';
   static const String closeAppTime = 'closeAppTime';
   static const String notificationTap = 'notificationTap';
+  static const String survey = 'survey';
   static const String completeUserData = 'completeUserData';
   static const String ratingApp = 'rating';
   static const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
@@ -47,7 +48,6 @@ class FirebaseStore {
             messagingSenderId: "552263184384",
             appId: "1:552263184384:web:87e17944dc571dc4e028e5"));
     addUser();
-    addInitApp(DateTime.now());
   }
 
   static Future<void> addInitApp(DateTime dateTime) async {
@@ -102,6 +102,10 @@ class FirebaseStore {
   static Future<void> addNotificationTap(DateTime dateTime, String? multiplier) async {
     multiplier ??= '';
     await _updateDocument(notificationTap, 'Multiplier: $multiplier, Time: $dateTime');
+  }
+
+  static void sendSurvey(List<String> jsonResult) async {
+    await _updateDocument(survey, 'SurveyResult: $jsonResult');
   }
 
   static Future<void> addUserData(Map userData) async {

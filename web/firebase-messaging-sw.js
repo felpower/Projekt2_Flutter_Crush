@@ -16,6 +16,15 @@ firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
 
 // Optional:
-messaging.onBackgroundMessage((message) => {
-  console.log("onBackgroundMessage", message);
-});
+messaging.onBackgroundMessage(function(payload) {
+    console.log('Received background message ', payload);
+
+    const notificationTitle = payload.notification.title;
+    const notificationOptions = {
+      body: payload.notification.body,
+    };
+
+    self.registration.showNotification(notificationTitle,
+      notificationOptions);
+  console.log('Title: ', notificationTitle, 'Options: ', notificationOptions);
+  });
