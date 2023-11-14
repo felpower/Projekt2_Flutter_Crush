@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bachelor_flutter_crush/application.dart';
 import 'package:bachelor_flutter_crush/pages/non_mobile_page.dart';
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
-import 'package:bachelor_flutter_crush/persistence/reporting_service.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

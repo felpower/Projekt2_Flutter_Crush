@@ -1,7 +1,6 @@
 import 'dart:html' as html;
 
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
-import 'package:bachelor_flutter_crush/persistence/reporting_service.dart';
 import 'package:flutter/material.dart';
 
 class FeedbackPage extends StatefulWidget {

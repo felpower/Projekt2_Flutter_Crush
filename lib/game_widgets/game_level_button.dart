@@ -21,13 +21,15 @@ class GameLevelButton extends StatelessWidget {
       required this.levelNumber,
       this.width = 60.0,
       this.height = 60.0,
-      this.borderRadius = 50.0})
+      this.borderRadius = 50.0,
+      required this.color})
       : super(key: key);
 
   final int levelNumber;
   final double width;
   final double height;
   final double borderRadius;
+  final Color color;
   final lvlPrice = 500;
   final tntPrice = 100;
   final minePrice = 200;
@@ -59,11 +61,11 @@ class GameLevelButton extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(3.0),
             decoration: BoxDecoration(
-              color: disabled ? disabledColor : Colors.white,
+              color: disabled ? color.withOpacity(0.5) : color,
               borderRadius: BorderRadius.circular(borderRadius),
               border: Border.all(
                 width: 0.3,
-                color: Colors.black38,
+                color: color,
               ),
               boxShadow: const [
                 BoxShadow(
@@ -77,11 +79,11 @@ class GameLevelButton extends StatelessWidget {
             height: height,
             child: Container(
               decoration: BoxDecoration(
-                color: disabled ? disabledColor : Colors.white,
+                color: disabled ? color.withOpacity(0.1) : color,
                 borderRadius: BorderRadius.circular(borderRadius),
                 border: Border.all(
                   width: 0.3,
-                  color: Colors.black26,
+                  color: color,
                 ),
                 boxShadow: const [
                   BoxShadow(

@@ -268,6 +268,7 @@ class _HomePageState extends State<HomePage>
                                                     height: 60.0,
                                                     borderRadius: 50.0,
                                                     levelNumber: levelNumber,
+                                                    color: getColor(levelNumber),
                                                   );
                                                 } else {
                                                   return const SizedBox
@@ -292,6 +293,29 @@ class _HomePageState extends State<HomePage>
         ),
       ),
     );
+  }
+
+  getColor(int levelNumber) {
+    if (levelNumber > 30) {
+      levelNumber -= 30;
+    }
+    int level = (levelNumber / 6).floor();
+    if (levelNumber % 6 == 0) {
+      level--;
+    }
+    if (level == 0) {
+      return Colors.red;
+    } else if (level == 1) {
+      return Colors.blue;
+    } else if (level == 2) {
+      return Colors.green;
+    } else if (level == 3) {
+      return Colors.yellow;
+    } else if (level == 4) {
+      return Colors.purple;
+    } else if (level == 5) {
+      return Colors.tealAccent;
+    }
   }
 
   Drawer buildBurgerMenu(BuildContext context) {
