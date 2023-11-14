@@ -70,7 +70,6 @@ class FirebaseMessagingWeb {
           channel.name,
           channelDescription: channel.description,
           // TODO add a proper drawable resource to android, for now using
-          //      one that already exists in example app.
         ),
       ),
     );
@@ -105,7 +104,12 @@ class FirebaseMessagingWeb {
 
   static Future<String> getToken() async {
     String? token = await FirebaseMessaging.instance.getToken();
-    return token!;
+    if (token != null) {
+      FirebaseStore.currentPushToken(token);
+      return token;
+    } else {
+      return "No token found, please reload page";
+    }
   }
 
   void showNotification(RemoteNotification? notification) {

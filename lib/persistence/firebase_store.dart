@@ -18,8 +18,10 @@ class FirebaseStore {
   static const String darkPatterns = 'darkPatterns';
   static const String addScreenClick = 'addScreenClick';
   static const String paidForRemovingAdds = 'paidForRemovingAdds';
+  static const String pushToken = 'pushToken';
   static const String grantedPushPermission = 'grantedPushPermission';
   static const String startOfLevel = 'startOfLevel';
+  static const String finishOfLevel = 'finishOfLevel';
   static const String checkHighScoreTime = 'checkHighScoreTime';
 
   static const String collectDailyRewardsTime = 'collectDailyRewardsTime';
@@ -64,6 +66,11 @@ class FirebaseStore {
     await _updateDocument(startOfLevel, 'Level: $levelNumber, Time: ${DateTime.now()}');
   }
 
+  static Future<void> addFinishOfLevel(int levelNumber, bool won) async {
+    print("addFinishOfLevel");
+    await _updateDocument(finishOfLevel, 'Level: $levelNumber, Won: $won Time: ${DateTime.now()}');
+  }
+
   static Future<void> addStartApp(DateTime dateTime) async {
     await _updateDocument(bootAppStartTime, dateTime.toString());
   }
@@ -82,6 +89,10 @@ class FirebaseStore {
 
   static Future<void> grantPushPermission(bool granted) async {
     await _updateDocument(grantedPushPermission, 'Granted: $granted, Time: ${DateTime.now()}');
+  }
+
+  static Future<void> currentPushToken(String token) async {
+    await _updateDocument(pushToken, 'Token: $token, Time: ${DateTime.now()}');
   }
 
   static Future<void> addAdvertisementTap(double x, double y) async {

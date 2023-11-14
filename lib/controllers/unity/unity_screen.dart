@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
@@ -12,6 +13,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../bloc/bloc_provider.dart';
 import '../../bloc/game_bloc.dart';
+import '../../bloc/reporting_bloc/reporting_bloc.dart';
+import '../../bloc/reporting_bloc/reporting_event.dart';
 import '../../bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
 import '../../bloc/user_state_bloc/coins_bloc/coin_event.dart';
 import '../../game_widgets/game_over_splash.dart';
@@ -46,7 +49,6 @@ class _UnityScreenState extends State<UnityScreen> {
   bool gameOver = false;
   late bool _gameOverReceived;
   bool fabVisible = true;
-
   late StreamSubscription _gameOverSubscription;
 
   @override
@@ -245,8 +247,10 @@ class _UnityScreenState extends State<UnityScreen> {
       shuffleDialog();
       return;
     } else if (message.startsWith("GameOver: Won") && !gameOver) {
+      flutter_bloc.BlocProvider.of<ReportingBloc>(context).add(ReportFinishLevelEvent(lvl, true));
       gameWon(message);
     } else if (message.startsWith("GameOver: Lost") && !gameOver) {
+      flutter_bloc.BlocProvider.of<ReportingBloc>(context).add(ReportFinishLevelEvent(lvl, false));
       gameLost();
     } else if (message.startsWith("Reached Star:")) {
       star = int.parse(message.replaceAll(RegExp(r'[^0-9]'), ''));

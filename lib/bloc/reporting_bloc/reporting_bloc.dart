@@ -7,6 +7,7 @@ class ReportingBloc extends Bloc<ReportingEvent, ReportingState> {
   ReportingBloc() : super(WaitingForReportingEvents()) {
     on<ReportAdvertisementTapEvent>(_onReportAdvertisementTapEvent);
     on<ReportStartLevelEvent>(_onReportStartLevelEvent);
+    on<ReportFinishLevelEvent>(_onReportFinishLevelEvent);
     on<ReportStartAppEvent>(_onStartAppEvent);
     on<ReportCheckHighScoreEvent>(_onCheckHighScoreEvent);
     on<ReportPaidForRemovingAddsEvent>(_onPaidForRemovingAddsEvent);
@@ -22,6 +23,10 @@ class ReportingBloc extends Bloc<ReportingEvent, ReportingState> {
 
   void _onReportStartLevelEvent(ReportStartLevelEvent event, Emitter<ReportingState> emit) {
     FirebaseStore.addStartOfLevel(event.levelNumber);
+  }
+
+  void _onReportFinishLevelEvent(ReportFinishLevelEvent event, Emitter<ReportingState> emit) {
+    FirebaseStore.addFinishOfLevel(event.levelNumber, event.won);
   }
 
   void _onCheckHighScoreEvent(ReportCheckHighScoreEvent event, Emitter<ReportingState> emit) {
