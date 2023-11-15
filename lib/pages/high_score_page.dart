@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_print
 import 'dart:math';
 
 import 'package:bachelor_flutter_crush/persistence/high_score_service.dart';
@@ -45,8 +46,7 @@ class HighScoreState extends State<HighScorePage> {
       prefs.setString('updateHighScore', updateHighScore);
     });
     bool update = checkIfUpdateNeeded(now, prefs);
-    final ReportingBloc reportingBloc = flutter_bloc.BlocProvider.of<ReportingBloc>(context);
-    reportingBloc.add(ReportCheckHighScoreEvent(DateTime.now()));
+    flutter_bloc.BlocProvider.of<ReportingBloc>(context).add(ReportCheckHighScoreEvent(DateTime.now()));
     users = User.decode(highScore);
     sortList();
     randomizeHighScore(prefs, update);

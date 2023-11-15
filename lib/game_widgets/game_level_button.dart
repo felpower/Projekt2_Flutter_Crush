@@ -145,13 +145,13 @@ class GameLevelButton extends StatelessWidget {
                         'assets/images/bombs/fish_1.png',
                         height: 30,
                       ),
-                      Text(' for $tntPrice\$', style: TextStyle(fontSize: 15)),
+                      Text(' for $tntPrice\$', style: const TextStyle(fontSize: 15)),
                     ],
                   ),
                   Row(
                     children: [
                       Image.asset('assets/images/bombs/rainbow_fish.png', height: 30),
-                      Text(' for $minePrice\$', style: TextStyle(fontSize: 15)),
+                      Text(' for $minePrice\$', style: const TextStyle(fontSize: 15)),
                     ],
                   ),
                 ],

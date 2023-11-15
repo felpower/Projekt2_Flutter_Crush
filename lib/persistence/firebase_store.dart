@@ -1,4 +1,5 @@
-import 'dart:html' as html;
+// ignore_for_file: avoid_print
+import 'package:universal_html/html.dart' as html;
 import 'dart:math';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -140,6 +141,7 @@ class FirebaseStore {
   }
 
   static void sendError(String error, {stacktrace = "", isFlutterError = false}) async {
+    print(error);
     try {
       var userId = await _getUuid();
       final data = {

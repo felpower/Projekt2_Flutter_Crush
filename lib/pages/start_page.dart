@@ -194,7 +194,6 @@ class _RegisterState extends State<StartPage> {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState?.save();
-                          print("User data $userData");
                           FirebaseStore.addUserData(userData);
                           Navigator.pop(context);
                         }

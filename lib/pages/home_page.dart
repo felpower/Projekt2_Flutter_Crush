@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_print
 import 'dart:async';
 
 import 'package:bachelor_flutter_crush/app_bar_widgets/day_streak_icon.dart';
@@ -511,9 +512,9 @@ class _HomePageState extends State<HomePage>
       FirebaseMessagingWeb.getToken();
       FirebaseStore.addInitApp(DateTime.now());
       prefs.setBool("firstTimeStart", false);
-      Navigator.of(context).pushNamed(
-        "/startSurvey",
-      );
+      // Navigator.of(context).pushNamed( ToDo: add this route
+      //   "/startSurvey",
+      // );
     }
   }
 }

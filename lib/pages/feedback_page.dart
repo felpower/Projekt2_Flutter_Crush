@@ -1,4 +1,5 @@
-import 'dart:html' as html;
+import 'package:universal_html/html.dart' as html;
+
 
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:flutter/material.dart';

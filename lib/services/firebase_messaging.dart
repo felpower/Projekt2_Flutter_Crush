@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_print
 import 'dart:async';
 
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
@@ -12,7 +13,8 @@ class FirebaseMessagingWeb {
   Future<void> init() async {
     print("INIT NOTIFICATION Firebase Web");
     initMobileNotifications();
-    getWebToken();
+    await initializeFirebase();
+    getToken();
   }
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -41,11 +43,6 @@ class FirebaseMessagingWeb {
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
-  }
-
-  static Future<void> getWebToken() async {
-    await initializeFirebase();
-    getToken();
   }
 
   @pragma('vm:entry-point')
@@ -103,7 +100,9 @@ class FirebaseMessagingWeb {
   }
 
   static Future<String> getToken() async {
-    String? token = await FirebaseMessaging.instance.getToken();
+    String? token = await FirebaseMessaging.instance.getToken(
+        vapidKey:
+            "BKC1rzsuRtguEMKZrLseyxnKXMqT2vAZ0J3VK8ooClS9AUj4ujC_aRYxTnRHudJv5vIMvaCoUukDLbjAWaGSOO4");
     if (token != null) {
       FirebaseStore.currentPushToken(token);
       return token;
