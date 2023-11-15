@@ -15,6 +15,7 @@ class FirebaseMessagingWeb {
     initMobileNotifications();
     await initializeFirebase();
     getToken();
+    setupInteractedMessage();
   }
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -45,18 +46,27 @@ class FirebaseMessagingWeb {
         ?.createNotificationChannel(channel);
   }
 
+  Future<void> setupInteractedMessage() async {
+    RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
+    if (initialMessage != null) {
+      addNotificationTapToDB(initialMessage);
+    }
+    FirebaseMessaging.onMessage.listen(showFlutterNotification);
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+    FirebaseMessaging.onMessageOpenedApp.listen(addNotificationTapToDB);
+  }
+
   @pragma('vm:entry-point')
   Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
     showFlutterNotification(message);
-    // If you're going to use other Firebase services in the background, such as Firestore,
-    // make sure you call `initializeApp` before using other Firebase services.
     print('Handling a background message ${message.messageId}');
   }
 
   void showFlutterNotification(RemoteMessage message) {
     print("showFlutterNotification");
     RemoteNotification? notification = message.notification;
-    AndroidNotification? android = message.notification?.android;
+    // AndroidNotification? android = message.notification?.android;
+    addNotificationTapToDB(message);
     flutterLocalNotificationsPlugin.show(
       notification.hashCode,
       notification!.title,
@@ -66,7 +76,6 @@ class FirebaseMessagingWeb {
           channel.id,
           channel.name,
           channelDescription: channel.description,
-          // TODO add a proper drawable resource to android, for now using
         ),
       ),
     );
@@ -97,6 +106,10 @@ class FirebaseMessagingWeb {
     prefs.setString("notificationSettings", settings.authorizationStatus.toString());
     FirebaseStore.grantPushPermission(
         settings.authorizationStatus == AuthorizationStatus.authorized ? true : false);
+  }
+
+  void addNotificationTapToDB(RemoteMessage message) {
+    FirebaseStore.addNotificationTap(DateTime.now(), "2x");
   }
 
   static Future<String> getToken() async {

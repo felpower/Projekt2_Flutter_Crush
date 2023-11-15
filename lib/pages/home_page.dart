@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 import 'dart:async';
+import 'dart:js' as js;
 
 import 'package:bachelor_flutter_crush/app_bar_widgets/day_streak_icon.dart';
 import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_bloc.dart';
@@ -20,7 +21,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
-import 'package:pwa_install/pwa_install.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../bloc/bloc_provider.dart';
@@ -94,38 +94,9 @@ class _HomePageState extends State<HomePage>
     });
     loadDailyReward();
     checkForFirstTimeStart();
-    FirebaseMessaging.onMessage.listen(showFlutterNotification);
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   }
 
-  @pragma('vm:entry-point')
-  Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-    showFlutterNotification(message);
-    // If you're going to use other Firebase services in the background, such as Firestore,
-    // make sure you call `initializeApp` before using other Firebase services.
-    print('Handling a background message ${message.messageId}');
-  }
 
-  void showFlutterNotification(RemoteMessage message) {
-    RemoteNotification? notification = message.notification;
-    final android = message.notification?.android;
-    print('Notification TITLE: ${notification?.title}');
-    if (notification != null || android != null) {
-      FirebaseMessagingWeb().showNotification(notification);
-    } else {
-      showDialog(
-          context: context,
-          builder: (context) {
-            return Material(
-                child: Column(
-              children: [
-                Text(notification?.title ?? "No Title"),
-                Text(notification?.body ?? "No Body"),
-              ],
-            ));
-          });
-    }
-  }
 
   @override
   void didChangeDependencies() {
@@ -345,10 +316,10 @@ class _HomePageState extends State<HomePage>
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
           ),
           ListTile(
-            leading: const Icon(Icons.error),
-            title: const Text('Exception Test'),
+            leading: const Icon(Icons.install_mobile),
+            title: const Text('PWA install'),
             onTap: () {
-              throw Exception('This is a forced exception for testing purposes.');
+              js.context.callMethod('showInstallPrompt');
             },
             tileColor: Colors.grey[200],
             // Background color to make it feel like a button
@@ -387,27 +358,6 @@ class _HomePageState extends State<HomePage>
             onTap: () {
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => const FeedbackPage()));
-            },
-            tileColor: Colors.grey[200],
-            // Background color to make it feel like a button
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
-          ),
-          ListTile(
-            leading: const Icon(Icons.install_mobile),
-            title: const Text('Install PWA'),
-            onTap: () {
-              print("Install PWA${PWAInstall().installPromptEnabled}");
-              // if(PWAInstall().installPromptEnabled) {
-              try {
-                PWAInstall().setup(installCallback: () {
-                  debugPrint('APP INSTALLED!');
-                });
-                PWAInstall().promptInstall_();
-              } catch (e) {
-                setState(() {});
-                // }
-              }
             },
             tileColor: Colors.grey[200],
             // Background color to make it feel like a button

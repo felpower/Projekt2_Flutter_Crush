@@ -46,7 +46,6 @@ dependencies:
   survey_kit: ^0.1.2
   intl: ^0.18.1
   device_info_plus: ^9.1.0
-  pwa_install: ^0.0.5
   flutter_local_notifications: ^16.1.0
   permission_handler: ^11.0.1
   firebase_core: ^2.22.0
