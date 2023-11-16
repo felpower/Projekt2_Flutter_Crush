@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_kit/survey_kit.dart';
 
+import '../controllers/device_token/device_token.dart';
+
 class SurveyPage extends StatefulWidget {
   final String title;
 
@@ -43,6 +45,8 @@ class _SurveyPageState extends State<SurveyPage> {
                     }
                     FirebaseStore.sendSurvey(resultString);
                     Navigator.pop(context);
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (context) => const DeviceToken()));
                   },
                   task: task,
                   showProgress: true,

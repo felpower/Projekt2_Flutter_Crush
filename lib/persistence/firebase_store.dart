@@ -1,5 +1,4 @@
 // ignore_for_file: avoid_print
-import 'package:universal_html/html.dart' as html;
 import 'dart:math';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -7,7 +6,9 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:universal_html/html.dart' as html;
 
 import 'dark_patterns_service.dart';
 
@@ -193,6 +194,9 @@ class FirebaseStore {
     return newUuid;
   }
 
-  static String _getRandomString(int length) => String.fromCharCodes(
-      Iterable.generate(length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
+  static String _getRandomString(int length) {
+    return DateFormat('yy-MM-dd–kk:mm').format(DateTime.now()) +
+        String.fromCharCodes(
+            Iterable.generate(length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
+  }
 }

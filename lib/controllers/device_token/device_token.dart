@@ -28,39 +28,61 @@ class _DeviceTokenState extends State<DeviceToken> {
         ),
         body: Center(
             child: Column(children: [
-          FutureBuilder<String>(
-              future: FirebaseMessagingWeb.getToken(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData && snapshot.connectionState == ConnectionState.done) {
-                  text = snapshot.data!;
-                  return SelectableText(snapshot.data!);
-                }
-                return const CircularProgressIndicator();
-              }),
-          ElevatedButton(
-            child: const Text('Copy'),
-            onPressed: () {
-              Clipboard.setData(ClipboardData(text: text)).then((result) {
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text('Device Token copied to ClipBoard successfully'),
-                  duration: Duration(seconds: 1),
-                ));
-              });
-            },
+          Visibility(
+            visible: false,
+            child: FutureBuilder<String>(
+                future: FirebaseMessagingWeb.getToken(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData && snapshot.connectionState == ConnectionState.done) {
+                    text = snapshot.data!;
+                    return SelectableText(snapshot.data!);
+                  }
+                  return const CircularProgressIndicator();
+                }),
           ),
-          ElevatedButton(
-            child: const Text('Token not showing, reload page'),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          ElevatedButton(
-              child: const Text('Check Push Permission'),
+          Visibility(
+            visible: false,
+            child: ElevatedButton(
+              child: const Text('Copy'),
               onPressed: () {
-                getNotification();
-                FirebaseMessagingWeb.requestPermission();
-              }),
-          TextField(controller: autohrizationStatus, textAlign: TextAlign.center, readOnly: true),
+                Clipboard.setData(ClipboardData(text: text)).then((result) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text('Device Token copied to ClipBoard successfully'),
+                    duration: Duration(seconds: 1),
+                  ));
+                });
+              },
+            ),
+          ),
+          Visibility(
+            visible: false,
+            child: ElevatedButton(
+              child: const Text('Token not showing, reload page'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
+          Visibility(
+            visible: false,
+            child: ElevatedButton(
+                child: const Text('Check Push Permission'),
+                onPressed: () {
+                  getNotification();
+                  FirebaseMessagingWeb.requestPermission();
+                }),
+          ),
+          Visibility(
+            visible: false,
+            child: TextField(
+                controller: autohrizationStatus, textAlign: TextAlign.center, readOnly: true),
+          ),
+              const Text("Hier wird eine Seite angezeigt, die in Zukunft das Spiel erklären wird"),
+              ElevatedButton(
+                  child: const Text('Continue to Start'),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }),
         ])));
   }
 

@@ -17,7 +17,6 @@ import 'package:bachelor_flutter_crush/game_widgets/game_level_button.dart';
 import 'package:bachelor_flutter_crush/gamification_widgets/daystreak_milestone_reached_splash.dart';
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:bachelor_flutter_crush/services/firebase_messaging.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
@@ -95,8 +94,6 @@ class _HomePageState extends State<HomePage>
     loadDailyReward();
     checkForFirstTimeStart();
   }
-
-
 
   @override
   void didChangeDependencies() {
@@ -458,13 +455,22 @@ class _HomePageState extends State<HomePage>
 
   void checkForFirstTimeStart() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    FutureBuilder<String>(
+        future: FirebaseMessagingWeb.getToken(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData && snapshot.connectionState == ConnectionState.done) {
+            print(snapshot.data!);
+            return Text(snapshot.data!);
+          }
+          return const CircularProgressIndicator();
+        });
+    FirebaseMessagingWeb.requestPermission();
     if (prefs.getBool("firstTimeStart") == null) {
-      FirebaseMessagingWeb.getToken();
       FirebaseStore.addInitApp(DateTime.now());
       prefs.setBool("firstTimeStart", false);
-      // Navigator.of(context).pushNamed( ToDo: add this route
-      //   "/startSurvey",
-      // );
+      Navigator.of(context).pushNamed( //ToDo: add this route
+        "/startSurvey",
+      );
     }
   }
 }
