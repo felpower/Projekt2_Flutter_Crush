@@ -7,6 +7,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
+import 'package:universal_html/html.dart';
 
 import 'services/firebase_messaging.dart';
 
@@ -17,6 +18,9 @@ void main() async {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     await FirebaseMessagingWeb().init();
     FirebaseStore.init();
+    window.onBeforeUnload.listen((event) {
+      FirebaseStore.addCloseApp(DateTime.now());
+    });
     if (await checkForMobile()) {
       runApp(const Application());
     }

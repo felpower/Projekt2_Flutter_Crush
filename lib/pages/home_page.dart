@@ -368,7 +368,7 @@ class _HomePageState extends State<HomePage>
             leading: const Icon(Icons.token),
             title: const Text('Device Token'),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const DeviceToken()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => DeviceToken()));
             },
             tileColor: Colors.grey[200],
             // Background color to make it feel like a button
@@ -458,6 +458,10 @@ class _HomePageState extends State<HomePage>
 
   void checkForFirstTimeStart() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.getBool("isUnder18");
+    if (prefs.getBool("isUnder18") == true) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const InformationPage()));
+    }
     FutureBuilder<String>(
         future: FirebaseMessagingWeb.getToken(),
         builder: (context, snapshot) {
@@ -472,7 +476,6 @@ class _HomePageState extends State<HomePage>
       FirebaseStore.addInitApp(DateTime.now());
       prefs.setBool("firstTimeStart", false);
       Navigator.of(context).pushNamed(
-        //ToDo: add this route
         "/startSurvey",
       );
     }

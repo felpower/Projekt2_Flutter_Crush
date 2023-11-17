@@ -77,12 +77,20 @@ class _DeviceTokenState extends State<DeviceToken> {
             child: TextField(
                 controller: autohrizationStatus, textAlign: TextAlign.center, readOnly: true),
           ),
-              const Text("Hier wird eine Seite angezeigt, die in Zukunft das Spiel erklären wird"),
-              ElevatedButton(
-                  child: const Text('Continue to Start'),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  }),
+          Container(
+              alignment: Alignment.center,
+              width: 300,
+              child: const Text("Wenn Sie über 18 Jahre alt sind und an der "
+                  "Studie "
+                  "teilnehmen möchten,\n "
+                  "klicken Sie bitte auf „Ich bin mit der Studienteilnahme einverstanden.“ und "
+                  "bestätigen so Ihr Einverständnis für die Studienteilnahme. ")),
+          ElevatedButton(
+              child: const Text('Ich bin mit der Studienteilnahme einverstanden', textAlign:
+              TextAlign.center),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
         ])));
   }
 

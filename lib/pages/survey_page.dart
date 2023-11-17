@@ -1,3 +1,4 @@
+import 'package:bachelor_flutter_crush/pages/information_page.dart';
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -35,18 +36,19 @@ class _SurveyPageState extends State<SurveyPage> {
                     for (var stepResult in result.results) {
                       for (var questionResult in stepResult.results) {
                         if (questionResult.result != null && questionResult.result != "") {
-                          if (questionResult.result is TextChoice) {
-                            resultString.add((questionResult.result as TextChoice).text);
-                          } else {
-                            resultString.add(questionResult.result.toString());
-                          }
+                          resultString.add(questionResult.valueIdentifier.toString());
                         }
                       }
                     }
                     FirebaseStore.sendSurvey(resultString);
                     Navigator.pop(context);
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (context) => const DeviceToken()));
+                    if (int.parse(resultString[0])>= 18) {
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (context) => const DeviceToken()));
+                    } else {
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (context) => const InformationPage()));
+                    }
                   },
                   task: task,
                   showProgress: true,
@@ -170,9 +172,34 @@ class _SurveyPageState extends State<SurveyPage> {
       id: TaskIdentifier(),
       steps: [
         InstructionStep(
-          title: 'Willkommen zur \nArbeiterkammer\n Survey',
-          text: 'Mach Sie sich bereit für einen Haufen super zufälliger Fragen!',
-          buttonText: 'Los geht\'s!',
+          title: 'Sehr geehrte StudienteilnehmerInnen,',
+          text: 'vielen Dank für die Teilnahme an unserer Studie. \n'
+              'Im Rahmen der Studie möchten wir das Spielverhalten auf Handy oder Tablet von '
+              'Erwachsenen (über 18 Jahre) möglichst realistisch erheben, daher bitten wie Sie, auch wenn das Spiel Teil einer Studie ist, genauso zu behandeln, wie jedes andere Spiel, das sie auf ihrem Gerät installiert haben.',
+          buttonText: 'weiter',
+        ),
+        InstructionStep(
+          title: 'Homescreen/Startbildschirm',
+          text: 'Bitte fügen Sie dazu diese Seite auf Ihren Homescreen/Startbildschirm hinzu, '
+              'danach können Sie dies wie jede andere App handhaben. Die Installation '
+              'funktioniert wie folgt: \n'
+              'für Android (alle Handys außer iPhone): Drücken Sie '
+              'auf die drei kleinen Punkte rechts oben auf dem Bildschirm -> App Installieren'
+              '\n'
+              'für Apple (iPhone): Drücken Sie auf den „Teilen“-Button (kleine Viereck mit '
+              'dem Pfeil nach oben) -> Option -> zum Home-Bildschirm',
+          buttonText: 'weiter',
+        ),
+        InstructionStep(
+          title: 'Vor dem Spielstart',
+          text: 'Vor dem Spielstart werden Ihnen noch ein paar Fragen zu Ihrer Person und Ihrem '
+              'üblichen Spielverhalten gestellt. \n'
+              'Bitte beantworten Sie diese ehrlich.Ihre Daten'
+              ' werden auf einem Server der Universität Wien anonymisiert (d.h. ohne einen '
+              'möglichen Rückschluss auf Ihre Person; es werden keine personenbezogenen Daten '
+              'erfasst) gespeichert und anschließend für wissenschaftliche Zwecke ausgewertet.\n'
+              'Sie können jederzeit die Studienteilnahme beenden.',
+          buttonText: 'weiter',
         ),
         QuestionStep(
           title: 'Wie alt sind Sie?',
@@ -188,48 +215,50 @@ class _SurveyPageState extends State<SurveyPage> {
             stepIdentifier: StepIdentifier(id: '2'),
             answerFormat: const SingleChoiceAnswerFormat(
               textChoices: [
-                TextChoice(text: 'Männlich', value: 'M'),
-                TextChoice(text: 'Weiblich', value: 'W'),
-                TextChoice(text: 'Nicht-Binär', value: 'NB'),
+                TextChoice(text: 'Männlich', value: '0'),
+                TextChoice(text: 'Weiblich', value: '1'),
+                TextChoice(text: 'Nicht-Binär', value: '2'),
               ],
             )),
         QuestionStep(
-            title: "Was ist ihr höchster Bildungsabschluss",
+            title: "Höchster Bildungsabschluss",
             stepIdentifier: StepIdentifier(id: '3'),
             answerFormat: const SingleChoiceAnswerFormat(
               textChoices: [
-                TextChoice(text: 'Neue Mittelschule', value: 'NMS'),
-                TextChoice(text: 'höhere Schule/Fachschule', value: 'ABHSA'),
-                TextChoice(text: 'Lehrabschluss', value: 'LA'),
-                TextChoice(text: 'Matura', value: 'MA'),
-                TextChoice(text: 'Diplomstudium', value: 'DS'),
-                TextChoice(text: 'Bachelor', value: 'MS'),
-                TextChoice(text: 'Master', value: 'MS'),
-                TextChoice(text: 'Doktor', value: 'DR'),
+                TextChoice(text: 'Pflichtschule/Hauptschule/Realschule', value: '0'),
+                TextChoice(text: 'Lehre', value: '1'),
+                TextChoice(text: 'Fachschule/Handelsschule', value: '2'),
+                TextChoice(text: 'Matura/Abitur', value: '3'),
+                TextChoice(text: 'Universität/Fachhochschule', value: '4'),
               ],
             )),
         QuestionStep(
-            title: "Was ist ihr derzeitiger Berufs-status",
+            title:
+                "In Ihrer (beruflichen) Haupttätigkeit (Tätigkeit mit den meisten Stunden), sind Sie…?",
             stepIdentifier: StepIdentifier(id: '4'),
             answerFormat: const SingleChoiceAnswerFormat(
               textChoices: [
-                TextChoice(text: 'Arbeiter*in', value: 'ARB'),
-                TextChoice(text: 'Angestellte*r', value: 'ANG'),
-                TextChoice(text: 'Pensionist*in', value: 'PEN'),
-                TextChoice(text: 'Student*in', value: 'Stu'),
-                TextChoice(text: 'Erwerbslos', value: 'ERW'),
-                TextChoice(text: 'Schüler*in', value: 'SCH'),
+                TextChoice(
+                    text:
+                        'Unselbstständig erwerbstätig (Lehrling, Arbeiter:in, Angestellte:r, Vertragsbedienstete, Beamter/Beamtin)',
+                    value: '0'),
+                TextChoice(
+                    text:
+                        'Selbstständig erwerbstätig (Selbstständige:r, Freie Dienstnehmer:in, Werkvertragsnehmer:in)',
+                    value: '1'),
+                TextChoice(text: 'Arbeitssuchend ', value: '2'),
+                TextChoice(text: 'Schüler:in, Student:in', value: '3'),
+                TextChoice(text: 'Pensionist:in', value: '4'),
               ],
             )),
         QuestionStep(
-            title: "Wo ist ihr aktueller Wohnort?",
+            title: "Wohnort?",
             stepIdentifier: StepIdentifier(id: '5'),
             answerFormat: const SingleChoiceAnswerFormat(
               textChoices: [
-                TextChoice(text: 'Österreich', value: 'AT'),
-                TextChoice(text: 'Deutschland', value: 'DE'),
-                TextChoice(text: 'Schweiz', value: 'SW'),
-                TextChoice(text: 'Anderes', value: 'AND'),
+                TextChoice(text: 'Österreich', value: '0'),
+                TextChoice(text: 'Deutschland', value: '1'),
+                TextChoice(text: 'Anderes Land', value: '2'),
               ],
             )),
         InstructionStep(
@@ -243,65 +272,65 @@ class _SurveyPageState extends State<SurveyPage> {
             stepIdentifier: StepIdentifier(id: '7'),
             answerFormat: const SingleChoiceAnswerFormat(
               textChoices: [
-                TextChoice(text: 'Täglich', value: 'ZEITTAG'),
-                TextChoice(text: 'Jeden 2 Tag', value: 'ZEIT2TAG'),
-                TextChoice(text: 'Ca. 1x die Woche', value: 'ZEIT1WOCH'),
-                TextChoice(text: 'alle 2 Wochen', value: 'ZEIT2WOCH'),
-                TextChoice(text: '1x im Monat', value: 'ZEITMON'),
-                TextChoice(text: 'seltener', value: 'ZEITSEL'),
-                TextChoice(text: 'Nie', value: 'ZEITNIE'),
+                TextChoice(text: 'Täglich', value: '0'),
+                TextChoice(text: 'Jeden 2. Tag', value: '1'),
+                TextChoice(text: '1x/Woche', value: '2'),
+                TextChoice(text: 'alle 2 Wochen', value: '3'),
+                TextChoice(text: '1x/Monat', value: '4'),
+                TextChoice(text: 'Seltener', value: '5'),
+                TextChoice(text: 'Nie', value: '6'),
               ],
             )),
         QuestionStep(
             title:
-                "An Tagen an denen Sie am Handy/Tablet spielen. Wie viele Stunden spielen Sie durchschnittlich?",
+                "An Tagen an denen Sie am Handy/Tablet spielen: Wie viele Stunden spielen Sie durchschnittlich?",
             stepIdentifier: StepIdentifier(id: '8'),
-            answerFormat: const IntegerAnswerFormat(
+            answerFormat: const DoubleAnswerFormat(
               hint: 'Gerundet auf ganze Stunden',
             )),
         QuestionStep(
             title:
-                "Wie viel Geld geben Sie durchschnittlich pro Monat IN Spielen am Handy/am Tablet aus?",
+                "Wie viel Geld geben Sie durchschnittlich pro Monat innerhalb von Spielen für kostenpflichtige Zusatzfunktionen wie z.B. Spiele-Levels, Skins, Upgrades am Handy/am Tablet aus („In-App-Kauf“)?",
             stepIdentifier: StepIdentifier(id: '9'),
             answerFormat: const IntegerAnswerFormat(
               hint: 'Gerundet auf ganze Euros',
             )),
         CompletionStep(
           stepIdentifier: StepIdentifier(id: '10'),
-          text: 'Danke für die Teilnahme an der Umfrage, und viel Spaß beim Spielen',
+          text: 'Danke für die Teilnahme an der Umfrage',
           title: 'Fertig!',
           buttonText: 'Umfrage beenden',
         ),
       ],
     );
     task.addNavigationRule(
-      forTriggerStepIdentifier: task.steps[1].stepIdentifier,
+      forTriggerStepIdentifier: getStepIdentifier(task, "1"),
       navigationRule: ConditionalNavigationRule(
         resultToStepIdentifierMapper: (input) {
           int age = int.parse(input!);
-          if (age < 18 || age > 120) {
-            return task.steps[10].stepIdentifier;
+          if (age < 18 || age > 200) {
+            return getStepIdentifier(task, "10");
           } else {
-            return task.steps[2].stepIdentifier;
+            return getStepIdentifier(task, "2");
           }
         },
       ),
     );
     task.addNavigationRule(
-      forTriggerStepIdentifier: task.steps[7].stepIdentifier,
+      forTriggerStepIdentifier: getStepIdentifier(task, "7"),
       navigationRule: ConditionalNavigationRule(resultToStepIdentifierMapper: (input) {
         switch (input) {
-          case "ZEITTAG":
-          case 'ZEIT2TAG':
-          case 'ZEIT1WOCH':
-          case "ZEIT2WOCH":
-          case "ZEITMON":
-          case "ZEITSEL":
-            return task.steps[8].stepIdentifier;
-          case "ZEITNIE":
-            return task.steps[9].stepIdentifier;
+          case "0":
+          case '1':
+          case '2':
+          case "3":
+          case "4":
+          case "5":
+            return getStepIdentifier(task, "8");
+          case "6":
+            return getStepIdentifier(task, "9");
           default:
-            return task.steps[9].stepIdentifier;
+            return getStepIdentifier(task, "9");
         }
       }),
     );
@@ -322,8 +351,8 @@ class _SurveyPageState extends State<SurveyPage> {
             stepIdentifier: StepIdentifier(id: '1'),
             answerFormat: const SingleChoiceAnswerFormat(
               textChoices: [
-                TextChoice(text: 'Ja', value: 'ZuletztJa'),
-                TextChoice(text: 'Nein', value: 'ZuletztNein'),
+                TextChoice(text: 'Ja', value: '0'),
+                TextChoice(text: 'Nein', value: '1'),
               ],
             )),
         QuestionStep(
@@ -331,14 +360,14 @@ class _SurveyPageState extends State<SurveyPage> {
             stepIdentifier: StepIdentifier(id: '2'),
             answerFormat: const SingleChoiceAnswerFormat(
               textChoices: [
-                TextChoice(text: 'Technische Probleme', value: 'TechProb'),
-                TextChoice(text: 'Datenschutzbedenken', value: 'DatenschutzProb'),
-                TextChoice(text: 'Grafik/Design gefiel mir nicht', value: 'GrafikNichtGut'),
-                TextChoice(text: 'Spiel war langweilig', value: 'SpielLangweilig'),
-                TextChoice(text: 'Spiel war zu schwierig', value: 'SpielSchwer'),
-                TextChoice(text: 'Nicht mehr daran gedacht', value: 'NichtGedacht'),
-                TextChoice(text: 'fehlende Zeit', value: 'KeineZeit'),
-                TextChoice(text: 'anderer Grund', value: 'AndGrund'),
+                TextChoice(text: 'Technische Probleme', value: '0'),
+                TextChoice(text: 'Datenschutzbedenken', value: '1'),
+                TextChoice(text: 'Grafik/Design gefiel mir nicht', value: '2'),
+                TextChoice(text: 'Spiel war langweilig', value: '3'),
+                TextChoice(text: 'Spiel war zu schwierig', value: '4'),
+                TextChoice(text: 'Nicht mehr daran gedacht', value: '5'),
+                TextChoice(text: 'fehlende Zeit', value: '6'),
+                TextChoice(text: 'anderer Grund', value: '7'),
               ],
             )),
         QuestionStep(
@@ -347,8 +376,8 @@ class _SurveyPageState extends State<SurveyPage> {
             stepIdentifier: StepIdentifier(id: '3'),
             answerFormat: const SingleChoiceAnswerFormat(
               textChoices: [
-                TextChoice(text: 'Ja', value: 'VerhaltenJa'),
-                TextChoice(text: 'Nein', value: 'VerhaltenNein'),
+                TextChoice(text: 'Ja', value: '0'),
+                TextChoice(text: 'Nein', value: '1'),
               ],
             )),
         QuestionStep(
@@ -356,9 +385,9 @@ class _SurveyPageState extends State<SurveyPage> {
             stepIdentifier: StepIdentifier(id: '4'),
             answerFormat: const SingleChoiceAnswerFormat(
               textChoices: [
-                TextChoice(text: 'längere Spielzeit', value: 'längerSpiel'),
-                TextChoice(text: 'kürzere Spielzeit', value: 'kürzerSpiel'),
-                TextChoice(text: 'nicht beeinflusst', value: 'DauerNichtBeeinflusst'),
+                TextChoice(text: 'längere Spielzeit', value: '0'),
+                TextChoice(text: 'kürzere Spielzeit', value: '1'),
+                TextChoice(text: 'nicht beeinflusst', value: '2'),
               ],
             )),
         QuestionStep(
@@ -367,9 +396,9 @@ class _SurveyPageState extends State<SurveyPage> {
             stepIdentifier: StepIdentifier(id: '5'),
             answerFormat: const SingleChoiceAnswerFormat(
               textChoices: [
-                TextChoice(text: 'häufiger gespielt', value: 'öfterSpiel'),
-                TextChoice(text: 'seltener gespielt', value: 'seltenerSpiel'),
-                TextChoice(text: 'nicht beeinflusst', value: 'HäufigkeitNichtBeeinflusst'),
+                TextChoice(text: 'häufiger gespielt', value: '0'),
+                TextChoice(text: 'seltener gespielt', value: '1'),
+                TextChoice(text: 'nicht beeinflusst', value: '2'),
               ],
             )),
         QuestionStep(
@@ -377,15 +406,13 @@ class _SurveyPageState extends State<SurveyPage> {
             stepIdentifier: StepIdentifier(id: '6'),
             answerFormat: const MultipleChoiceAnswerFormat(
               textChoices: [
-                TextChoice(text: 'Tägliche Belohnung zum Einsammeln', value: 'TäglicheBelohnungen'),
-                TextChoice(text: 'Variable Belohnungen (=Glücksrad)', value: 'VariableBelohnungen'),
-                TextChoice(
-                    text: 'Punktetabelle mit Rangfolge der Spieler*innen', value: 'HighScore'),
-                TextChoice(
-                    text: 'Push-Nachrichten die zum Spielen animieren', value: 'PushNachrichten'),
-                TextChoice(text: 'Level waren in Blöcken angeordnet', value: 'LevelBlöcke'),
-                TextChoice(text: 'alle der genannten', value: 'AlleGenannten'),
-                TextChoice(text: 'keines der genannten ', value: 'KeineGenannten'),
+                TextChoice(text: 'Tägliche Belohnung zum Einsammeln', value: '0'),
+                TextChoice(text: 'Variable Belohnungen (=Glücksrad)', value: '1'),
+                TextChoice(text: 'Punktetabelle mit Rangfolge der Spieler*innen', value: '2'),
+                TextChoice(text: 'Push-Nachrichten die zum Spielen animieren', value: '3'),
+                TextChoice(text: 'Level waren in Blöcken angeordnet', value: '4'),
+                TextChoice(text: 'alle der genannten', value: '5'),
+                TextChoice(text: 'keines der genannten ', value: '6'),
               ],
             )),
         QuestionStep(
@@ -393,22 +420,13 @@ class _SurveyPageState extends State<SurveyPage> {
             stepIdentifier: StepIdentifier(id: '7'),
             answerFormat: const MultipleChoiceAnswerFormat(
               textChoices: [
-                TextChoice(
-                    text: 'Tägliche Belohnung zum Einsammeln',
-                    value: 'TäglicheBelohnungenBeeinflusst'),
-                TextChoice(
-                    text: 'Variable Belohnungen (=Glücksrad)',
-                    value: 'VariableBelohnungenBeeinflusst'),
-                TextChoice(
-                    text: 'Punktetabelle mit Rangfolge der Spieler*innen',
-                    value: 'HighScoreBeeinflusst'),
-                TextChoice(
-                    text: 'Push-Nachrichten die zum Spielen animieren',
-                    value: 'PushNachrichtenBeeinflusst'),
-                TextChoice(
-                    text: 'Level waren in Blöcken angeordnet', value: 'LevelBlöckeBeeinflusst'),
-                TextChoice(text: 'alle der genannten', value: 'AlleGenanntenBeeinflusst'),
-                TextChoice(text: 'keines der genannten ', value: 'KeineGenanntenBeeinflusst'),
+                TextChoice(text: 'Tägliche Belohnung zum Einsammeln', value: '0'),
+                TextChoice(text: 'Variable Belohnungen (=Glücksrad)', value: '1'),
+                TextChoice(text: 'Punktetabelle mit Rangfolge der Spieler*innen', value: '2'),
+                TextChoice(text: 'Push-Nachrichten die zum Spielen animieren', value: '3'),
+                TextChoice(text: 'Level waren in Blöcken angeordnet', value: '4'),
+                TextChoice(text: 'alle der genannten', value: '5'),
+                TextChoice(text: 'keines der genannten ', value: '6'),
               ],
             )),
         CompletionStep(
@@ -423,7 +441,7 @@ class _SurveyPageState extends State<SurveyPage> {
       forTriggerStepIdentifier: task.steps[1].stepIdentifier,
       navigationRule: ConditionalNavigationRule(resultToStepIdentifierMapper: (input) {
         switch (input) {
-          case "ZuletztNein":
+          case "1":
             return task.steps[8].stepIdentifier;
           default:
             return task.steps[2].stepIdentifier;
@@ -431,5 +449,9 @@ class _SurveyPageState extends State<SurveyPage> {
       }),
     );
     return Future.value(task);
+  }
+
+  StepIdentifier getStepIdentifier(NavigableTask task, String stepIdentifier) {
+    return task.steps.where((e) => e.stepIdentifier.id == stepIdentifier).first.stepIdentifier;
   }
 }
