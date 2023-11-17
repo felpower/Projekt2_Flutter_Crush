@@ -1,6 +1,5 @@
 // ignore_for_file: avoid_print
 import 'dart:async';
-import 'dart:js' as js;
 
 import 'package:bachelor_flutter_crush/app_bar_widgets/day_streak_icon.dart';
 import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_bloc.dart';
@@ -21,6 +20,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:universal_html/js.dart' as js;
 
 import '../bloc/bloc_provider.dart';
 import '../bloc/game_bloc.dart';
@@ -62,8 +62,10 @@ class _HomePageState extends State<HomePage>
         reportingBloc.add(ReportCloseAppEvent(DateTime.now()));
         break;
       case AppLifecycleState.paused:
+        reportingBloc.add(ReportCloseAppEvent(DateTime.now()));
         break;
       case AppLifecycleState.hidden:
+        reportingBloc.add(ReportCloseAppEvent(DateTime.now()));
         break;
     }
   }
@@ -91,6 +93,7 @@ class _HomePageState extends State<HomePage>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _controller.forward();
     });
+    checkForNotificationClick();
     loadDailyReward();
     checkForFirstTimeStart();
   }
@@ -468,9 +471,19 @@ class _HomePageState extends State<HomePage>
     if (prefs.getBool("firstTimeStart") == null) {
       FirebaseStore.addInitApp(DateTime.now());
       prefs.setBool("firstTimeStart", false);
-      Navigator.of(context).pushNamed( //ToDo: add this route
+      Navigator.of(context).pushNamed(
+        //ToDo: add this route
         "/startSurvey",
       );
+    }
+  }
+
+  void checkForNotificationClick() {
+    Uri currentUrl = Uri.base;
+    print("currentUrl $currentUrl Query Parameter ${currentUrl.queryParameters['source']}");
+    if (currentUrl.queryParameters['source'] == 'notification') {
+      print("Tapped Notification");
+      FirebaseStore.addNotificationTap(DateTime.now());
     }
   }
 }

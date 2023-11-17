@@ -109,7 +109,7 @@ class FirebaseMessagingWeb {
   }
 
   void addNotificationTapToDB(RemoteMessage message) {
-    FirebaseStore.addNotificationTap(DateTime.now(), "2x");
+    FirebaseStore.addNotificationTap(DateTime.now());
   }
 
   static Future<String> getToken() async {
@@ -121,24 +121,6 @@ class FirebaseMessagingWeb {
       return token;
     } else {
       return "No token found, please reload page";
-    }
-  }
-
-  void showNotification(RemoteNotification? notification) {
-    final android = notification?.android;
-    if (notification != null && android != null) {
-      flutterLocalNotificationsPlugin.show(
-          notification.hashCode,
-          notification.title ?? "No Title",
-          notification.body ?? "No Body",
-          NotificationDetails(
-            android: AndroidNotificationDetails(
-              channel.id,
-              channel.name,
-              channelDescription: channel.description,
-              icon: android.smallIcon,
-            ),
-          ));
     }
   }
 

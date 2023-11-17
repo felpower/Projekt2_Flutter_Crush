@@ -46,7 +46,8 @@ class HighScoreState extends State<HighScorePage> {
       prefs.setString('updateHighScore', updateHighScore);
     });
     bool update = checkIfUpdateNeeded(now, prefs);
-    flutter_bloc.BlocProvider.of<ReportingBloc>(context).add(ReportCheckHighScoreEvent(DateTime.now()));
+    flutter_bloc.BlocProvider.of<ReportingBloc>(context)
+        .add(ReportCheckHighScoreEvent(DateTime.now()));
     users = User.decode(highScore);
     sortList();
     randomizeHighScore(prefs, update);
@@ -68,7 +69,7 @@ class HighScoreState extends State<HighScorePage> {
   }
 
   void updateUserAndHighScore(SharedPreferences prefs) {
-    var patrick = User(place: 1, name: 'Patrick', xp: xp, isUser: true);
+    var patrick = User(place: 1, name: 'You', xp: xp, isUser: true);
     users[users.indexWhere((element) => element.isUser == true)] = patrick;
     prefs.setString("highScore", User.encode(users));
   }
@@ -122,7 +123,7 @@ class HighScoreState extends State<HighScorePage> {
                 Container(
                     decoration: const BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage('assets/images/background/background_new.png'),
+                  image: AssetImage('assets/images/background/background_new.png'),
                   fit: BoxFit.cover,
                 ))),
                 ListView(
@@ -162,28 +163,18 @@ class HighScoreState extends State<HighScorePage> {
     ];
   }
 
-  // }
-
   List<DataRow> createRow() {
     List<DataRow> rows = [];
     for (User user in users) {
-      if (user.name == "Patrick") {
-        rows.add(DataRow(
-            color: MaterialStateColor.resolveWith((states) => Colors.redAccent),
-            cells: [
-              DataCell(Text('#${user.place}')),
-              DataCell(Text(user.name)),
-              DataCell(Text(user.xp.toString()))
-            ]));
-      } else {
-        rows.add(DataRow(
-            color: MaterialStateColor.resolveWith((states) => Colors.yellowAccent),
-            cells: [
-              DataCell(Text('#${user.place}')),
-              DataCell(Text(user.name)),
-              DataCell(Text(user.xp.toString()))
-            ]));
-      }
+      rows.add(DataRow(
+          color: user.name == "You"
+              ? MaterialStateColor.resolveWith((states) => Colors.redAccent)
+              : MaterialStateColor.resolveWith((states) => Colors.yellowAccent),
+          cells: [
+            DataCell(Text('#${user.place}')),
+            DataCell(Text(user.name)),
+            DataCell(Text(user.xp.toString()))
+          ]));
     }
     return rows;
   }

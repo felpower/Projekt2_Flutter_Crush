@@ -31,9 +31,9 @@ class GameLevelButton extends StatelessWidget {
   final double borderRadius;
   final Color color;
   final lvlPrice = 500;
-  final tntPrice = 100;
-  final minePrice = 200;
-  final wrappedPrice = 1000;
+  static const tntPrice = 100;
+  static const  minePrice = 200;
+  static const  wrappedPrice = 1000;
 
   @override
   Widget build(BuildContext context) {
@@ -145,13 +145,13 @@ class GameLevelButton extends StatelessWidget {
                         'assets/images/bombs/fish_1.png',
                         height: 30,
                       ),
-                      Text(' for $tntPrice\$', style: const TextStyle(fontSize: 15)),
+                      const Text(' for $tntPrice\$', style: TextStyle(fontSize: 15)),
                     ],
                   ),
                   Row(
                     children: [
                       Image.asset('assets/images/bombs/rainbow_fish.png', height: 30),
-                      Text(' for $minePrice\$', style: const TextStyle(fontSize: 15)),
+                      const Text(' for $minePrice\$', style: TextStyle(fontSize: 15)),
                     ],
                   ),
                 ],

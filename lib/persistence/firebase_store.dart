@@ -101,7 +101,7 @@ class FirebaseStore {
     await _updateDocument(addScreenClick, 'x: ${x.toStringAsFixed(2)}, y:${y.toStringAsFixed(2)}');
   }
 
-  static Future<void> addNotificationTap(DateTime dateTime, String? multiplier) async {
+  static Future<void> addNotificationTap(DateTime dateTime, [String multiplier = "2x"]) async {
     multiplier ??= '';
     await _updateDocument(notificationTap, 'Multiplier: $multiplier, Time: $dateTime');
   }

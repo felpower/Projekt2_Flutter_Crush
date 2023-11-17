@@ -18,12 +18,20 @@ const messaging = firebase.messaging();
 // Optional:
 messaging.onBackgroundMessage(function(payload) {
     console.log('Received background message ', payload);
-//    const notificationTitle = payload.notification.title;
-//    const notificationOptions = {
-//      body: payload.notification.body,
-//    };
-//
-//    self.registration.showNotification(notificationTitle,
-//      notificationOptions);
-//  console.log('Title: ', notificationTitle, 'Options: ', notificationOptions);
-  });
+    const notificationTitle = payload.notification.title;
+    const notificationOptions = {
+        body: payload.notification.body,
+      };
+
+    return self.registration.showNotification(notificationTitle, notificationOptions);
+});
+
+self.addEventListener('notificationclick', function(event) {
+    console.log('Notification clicked ', event);
+    event.notification.close();
+
+   // Example: navigate to a specific URL on notification click
+    event.waitUntil(
+        clients.openWindow('/?source=notification')
+    );
+ });
