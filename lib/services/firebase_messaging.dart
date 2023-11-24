@@ -11,11 +11,10 @@ import 'package:universal_html/html.dart' as html;
 
 class FirebaseMessagingWeb {
   Future<void> init() async {
-    print("INIT NOTIFICATION Firebase Web");
     initMobileNotifications();
     await initializeFirebase();
-    getToken();
     setupInteractedMessage();
+    getToken();
   }
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -94,15 +93,16 @@ class FirebaseMessagingWeb {
             messagingSenderId: "552263184384",
             appId: "1:552263184384:web:87e17944dc571dc4e028e5"));
     FirebaseMessaging messaging = FirebaseMessaging.instance;
-    var settings = await messaging.requestPermission(
+    messaging.requestPermission(
       alert: true,
       announcement: false,
       badge: true,
       carPlay: false,
       criticalAlert: false,
-      provisional: false,
+      provisional: true,
       sound: true,
     );
+    NotificationSettings settings = await messaging.getNotificationSettings();
     prefs.setString("notificationSettings", settings.authorizationStatus.toString());
     FirebaseStore.grantPushPermission(
         settings.authorizationStatus == AuthorizationStatus.authorized ? true : false);

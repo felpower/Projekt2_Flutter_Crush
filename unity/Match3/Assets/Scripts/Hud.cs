@@ -61,20 +61,20 @@ namespace Match3 {
 		public void SetLevelType(LevelType type, string colorType = "Any") {
 			switch (type) {
 				case LevelType.Moves:
-					remainingSubText.text = "moves remaining";
-					targetSubtext.text = "target score";
+					remainingSubText.text = "Verbleibende Züge";
+					targetSubtext.text = "Zielpunktzahl";
 					break;
 				case LevelType.Obstacle:
-					remainingSubText.text = "moves remaining";
-					targetSubtext.text = "bubbles remaining";
+					remainingSubText.text = "Verbleibende Züge";
+					targetSubtext.text = "Verbleibende Blasen";
 					break;
 				case LevelType.Timer:
-					remainingSubText.text = "time remaining";
-					targetSubtext.text = "target score";
+					remainingSubText.text = "Verbleibende Zeit";
+					targetSubtext.text = "Zielpunktzahl";
 					break;
 				case LevelType.Colors:
-					remainingSubText.text = "moves remaining";
-					targetSubtext.text = colorType + " remaining";
+					remainingSubText.text = "Verbleibende Züge";
+					targetSubtext.text = colorType + " verbleibend";
 					break;
 			}
 		}

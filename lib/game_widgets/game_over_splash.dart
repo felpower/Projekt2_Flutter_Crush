@@ -76,7 +76,7 @@ class _GameOverSplashState extends State<GameOverSplash> with SingleTickerProvid
     Size screenSize = MediaQuery.of(context).size;
     Color darkColor = widget.success ? Colors.green[700]! : Colors.red[700]!;
     Color lightColor = widget.success ? Colors.green : Colors.red;
-    String message = widget.success ? "You Win" : "Game Over";
+    String message = widget.success ? "Gewonnen" : "Verloren";
 
     return AnimatedBuilder(
       animation: _animationAppear,
@@ -113,14 +113,14 @@ class _GameOverSplashState extends State<GameOverSplash> with SingleTickerProvid
                             BlocBuilder<XpBloc, XpState>(builder: (context, state) {
                               String xpText =
                                   state is MultipliedXpState ? ' x ${state.multiplier}' : '';
-                              return Text('Gained XP: ${state.addedAmount}$xpText',
+                              return Text('Erhaltene XP: ${state.addedAmount}$xpText',
                                   style: const TextStyle(
                                     fontSize: 15.0,
                                     color: Colors.white,
                                   ));
                             }),
                             BlocBuilder<CoinBloc, CoinState>(builder: (context, state) {
-                              return Text('Gained Coins: ${state.addedAmount}',
+                              return Text('Erhaltene Münzen: ${state.addedAmount}',
                                   style: const TextStyle(
                                     fontSize: 15.0,
                                     color: Colors.white,

@@ -1,4 +1,4 @@
-import 'package:bachelor_flutter_crush/pages/information_page.dart';
+import 'package:bachelor_flutter_crush/pages/under_18_page.dart';
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -42,19 +42,19 @@ class _SurveyPageState extends State<SurveyPage> {
                     }
                     FirebaseStore.sendSurvey(resultString);
                     Navigator.pop(context);
-                    if (int.parse(resultString[0])>= 18) {
+                    if (int.parse(resultString[0]) >= 18) {
                       Navigator.push(
                           context, MaterialPageRoute(builder: (context) => const DeviceToken()));
                     } else {
-                      Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => const InformationPage()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => const Under18Page()));
                     }
                   },
                   task: task,
                   showProgress: true,
                   localizations: const {
-                    'cancel': 'Cancel',
-                    'next': 'Next',
+                    'cancel': '',
+                    'next': 'Weiter',
                   },
                   themeData: Theme.of(context).copyWith(
                     primaryColor: Colors.cyan,
@@ -172,21 +172,23 @@ class _SurveyPageState extends State<SurveyPage> {
       id: TaskIdentifier(),
       steps: [
         InstructionStep(
-          title: 'Sehr geehrte StudienteilnehmerInnen,',
+          title: 'Sehr geehrte Studienteilnehmer:innen,',
           text: 'vielen Dank für die Teilnahme an unserer Studie. \n'
               'Im Rahmen der Studie möchten wir das Spielverhalten auf Handy oder Tablet von '
-              'Erwachsenen (über 18 Jahre) möglichst realistisch erheben, daher bitten wie Sie, auch wenn das Spiel Teil einer Studie ist, genauso zu behandeln, wie jedes andere Spiel, das sie auf ihrem Gerät installiert haben.',
+              'Erwachsenen (über 18 Jahre) möglichst realistisch erheben. Daher bitten wir Sie, '
+              'auch wenn das Spiel Teil einer Studie ist, dieses genauso zu behandeln, wie jedes '
+              'andere Spiel, das Sie auf Ihrem Gerät installiert haben.',
           buttonText: 'weiter',
         ),
         InstructionStep(
           title: 'Homescreen/Startbildschirm',
           text: 'Bitte fügen Sie dazu diese Seite auf Ihren Homescreen/Startbildschirm hinzu, '
-              'danach können Sie dies wie jede andere App handhaben. Die Installation '
+              'danach können Sie das Spiel wie jede andere App handhaben. Die Installation '
               'funktioniert wie folgt: \n'
               'für Android (alle Handys außer iPhone): Drücken Sie '
-              'auf die drei kleinen Punkte rechts oben auf dem Bildschirm -> App Installieren'
+              'auf die drei kleinen Punkte rechts oben auf dem Bildschirm -> App installieren'
               '\n'
-              'für Apple (iPhone): Drücken Sie auf den „Teilen“-Button (kleine Viereck mit '
+              'für Apple (iPhone): Drücken Sie auf den „Teilen“-Button (kleines Viereck mit '
               'dem Pfeil nach oben) -> Option -> zum Home-Bildschirm',
           buttonText: 'weiter',
         ),
@@ -194,9 +196,9 @@ class _SurveyPageState extends State<SurveyPage> {
           title: 'Vor dem Spielstart',
           text: 'Vor dem Spielstart werden Ihnen noch ein paar Fragen zu Ihrer Person und Ihrem '
               'üblichen Spielverhalten gestellt. \n'
-              'Bitte beantworten Sie diese ehrlich.Ihre Daten'
-              ' werden auf einem Server der Universität Wien anonymisiert (d.h. ohne einen '
-              'möglichen Rückschluss auf Ihre Person; es werden keine personenbezogenen Daten '
+              'Bitte beantworten Sie diese ehrlich. Alle Ihre Daten'
+              ' werden auf einem Server, der in der EU (entsprechend DSGVO) gehostet wird, '
+              'anonymisiert (d.h. ohne einen möglichen Rückschluss auf Ihre Person; es werden keine personenbezogenen Daten '
               'erfasst) gespeichert und anschließend für wissenschaftliche Zwecke ausgewertet.\n'
               'Sie können jederzeit die Studienteilnahme beenden.',
           buttonText: 'weiter',
@@ -263,7 +265,7 @@ class _SurveyPageState extends State<SurveyPage> {
             )),
         InstructionStep(
           stepIdentifier: StepIdentifier(id: '6'),
-          title: 'Handyspezifische Fragen',
+          title: 'Angaben zum Spielverhalten',
           text: 'Als nächstes werden wir Ihnen einige Fragen zu Handyspielen stellen!',
           buttonText: 'Los geht\'s!',
         ),
@@ -286,7 +288,7 @@ class _SurveyPageState extends State<SurveyPage> {
                 "An Tagen an denen Sie am Handy/Tablet spielen: Wie viele Stunden spielen Sie durchschnittlich?",
             stepIdentifier: StepIdentifier(id: '8'),
             answerFormat: const DoubleAnswerFormat(
-              hint: 'Gerundet auf ganze Stunden',
+              hint: 'Kommastellen mit . trennen',
             )),
         QuestionStep(
             title:

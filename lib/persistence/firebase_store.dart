@@ -27,10 +27,11 @@ class FirebaseStore {
   static const String checkHighScoreTime = 'checkHighScoreTime';
 
   static const String collectDailyRewardsTime = 'collectDailyRewardsTime';
-  static const String bootAppStartTime = 'bootAppStartTime';
+  static const String appStartDate = 'appStartDate';
   static const String initAppStartTime = 'initAppStartTime';
-  static const String closeAppTime = 'closeAppTime';
-  static const String notificationTap = 'notificationTap';
+  static const String initAppStartDate = 'initAppStartDate';
+  static const String appCloseTime = 'appCloseTime';
+  static const String pushClick = 'pushClick';
   static const String survey = 'survey';
   static const String completeUserData = 'completeUserData';
   static const String ratingApp = 'rating';
@@ -52,8 +53,8 @@ class FirebaseStore {
     addUser();
   }
 
-  static Future<void> addInitApp(DateTime dateTime) async {
-    await _updateDocument(initAppStartTime, dateTime.toString());
+  static Future<void> addInitApp(DateTime date) async {
+    await _updateDocument(initAppStartTime, date.toString());
   }
 
   static Future<void> checkHighScore(DateTime dateTime) async {
@@ -69,16 +70,15 @@ class FirebaseStore {
   }
 
   static Future<void> addFinishOfLevel(int levelNumber, bool won) async {
-    print("addFinishOfLevel");
     await _updateDocument(finishOfLevel, 'Level: $levelNumber, Won: $won Time: ${DateTime.now()}');
   }
 
   static Future<void> addStartApp(DateTime dateTime) async {
-    await _updateDocument(bootAppStartTime, dateTime.toString());
+    await _updateDocument(appStartDate, dateTime.toString());
   }
 
   static Future<void> addCloseApp(DateTime dateTime) async {
-    await _updateDocument(closeAppTime, dateTime.toString());
+    await _updateDocument(appCloseTime, dateTime.toString());
   }
 
   static Future<void> addRating(double rating) async {
@@ -102,8 +102,7 @@ class FirebaseStore {
   }
 
   static Future<void> addNotificationTap(DateTime dateTime, [String multiplier = "2x"]) async {
-    multiplier ??= '';
-    await _updateDocument(notificationTap, 'Multiplier: $multiplier, Time: $dateTime');
+    await _updateDocument(pushClick, 'Multiplier: $multiplier, Time: $dateTime');
   }
 
   static void sendSurvey(List<String> jsonResult) async {
@@ -195,8 +194,7 @@ class FirebaseStore {
   }
 
   static String _getRandomString(int length) {
-    return DateFormat('yy-MM-dd–kk:mm').format(DateTime.now()) +
-        String.fromCharCodes(
-            Iterable.generate(length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
+    return "V0-${DateFormat('yy-MM-dd–kk:mm').format(DateTime.now())}-${String.fromCharCodes
+      (Iterable.generate(length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))))}";
   }
 }

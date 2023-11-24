@@ -20,7 +20,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:universal_html/js.dart' as js;
 
 import '../bloc/bloc_provider.dart';
 import '../bloc/game_bloc.dart';
@@ -32,7 +31,7 @@ import '../gamification_widgets/credit_panel.dart';
 import '../helpers/app_colors.dart';
 import 'feedback_page.dart';
 import 'high_score_page.dart';
-import 'information_page.dart';
+import 'under_18_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -288,73 +287,11 @@ class _HomePageState extends State<HomePage>
             decoration: BoxDecoration(
               color: Colors.blue,
             ),
-            child: Text('Menu'),
-          ),
-          ListTile(
-            leading: const Icon(Icons.info_outlined),
-            title: const Text('Info Page'),
-            onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const InformationPage()));
-            },
-            tileColor: Colors.grey[200],
-            // Background color to make it feel like a button
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
-          ),
-          ListTile(
-            leading: const Icon(Icons.insert_drive_file_outlined),
-            title: const Text('Start Page'),
-            onTap: () {
-              Navigator.of(context).pushNamed(
-                "/start",
-              );
-            },
-            tileColor: Colors.grey[200],
-            // Background color to make it feel like a button
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
-          ),
-          ListTile(
-            leading: const Icon(Icons.install_mobile),
-            title: const Text('PWA install'),
-            onTap: () {
-              js.context.callMethod('showInstallPrompt');
-            },
-            tileColor: Colors.grey[200],
-            // Background color to make it feel like a button
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
-          ),
-          ListTile(
-            leading: const Icon(Icons.question_mark),
-            title: const Text('Start Survey'),
-            onTap: () {
-              Navigator.of(context).pushNamed(
-                "/startSurvey",
-              );
-            },
-            tileColor: Colors.grey[200],
-            // Background color to make it feel like a button
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
-          ),
-          ListTile(
-            leading: const Icon(Icons.question_mark),
-            title: const Text('End Survey'),
-            onTap: () {
-              Navigator.of(context).pushNamed(
-                "/endSurvey",
-              );
-            },
-            tileColor: Colors.grey[200],
-            // Background color to make it feel like a button
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
+            child: Text('Menü'),
           ),
           ListTile(
             leading: const Icon(Icons.feedback),
-            title: const Text('Send Feedback'),
+            title: const Text('Feedback senden'),
             onTap: () {
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => const FeedbackPage()));
@@ -364,17 +301,20 @@ class _HomePageState extends State<HomePage>
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
           ),
-          ListTile(
-            leading: const Icon(Icons.token),
-            title: const Text('Device Token'),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => DeviceToken()));
-            },
-            tileColor: Colors.grey[200],
-            // Background color to make it feel like a button
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
-          ),
+          Visibility(
+              visible: true,
+              child: ListTile(
+                leading: const Icon(Icons.token),
+                title: const Text('Info Page'),
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => const DeviceToken()));
+                },
+                tileColor: Colors.grey[200],
+                // Background color to make it feel like a button
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)), // Rounded corners
+              )),
           GestureDetector(
               onTap: () {
                 if (dailyRewardCollected) {
@@ -382,9 +322,10 @@ class _HomePageState extends State<HomePage>
                 }
               },
               child: ListTile(
-                enabled: !dailyRewardCollected,
+                enabled: true,
+                //!dailyRewardCollected,
                 leading: const Icon(Icons.card_giftcard),
-                title: const Text('Daily Reward'),
+                title: const Text('Tägliche Belohnung'),
                 onTap: () {
                   List<int> itemList = [
                     10,
@@ -443,8 +384,9 @@ class _HomePageState extends State<HomePage>
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Daily rewards already collected'),
-          content: Text('Daily rewards will be ready in $actualDifference hours'),
+          title: const Text('Tägliche Belohnung bereits abgeholt'),
+          content: Text('Tägliche Belohnung können wieder in $actualDifference Stunden abgeholt '
+              'werden'),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
@@ -460,7 +402,7 @@ class _HomePageState extends State<HomePage>
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.getBool("isUnder18");
     if (prefs.getBool("isUnder18") == true) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const InformationPage()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const Under18Page()));
     }
     FutureBuilder<String>(
         future: FirebaseMessagingWeb.getToken(),

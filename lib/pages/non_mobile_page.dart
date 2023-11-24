@@ -11,7 +11,7 @@ class NonMobilePage extends StatelessWidget {
         home: Container(
             alignment: Alignment.center,
             child: const Text(
-              'This Application is for Mobile Devices only!',
+              'Diese Applikation ist ausschließlich für Mobile Endgeräte!',
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(

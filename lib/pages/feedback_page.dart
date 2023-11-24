@@ -34,7 +34,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Feedback Page')),
+      appBar: AppBar(title: const Text('Feedback Seite')),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -45,23 +45,23 @@ class _FeedbackPageState extends State<FeedbackPage> {
               maxLines: 5,
               decoration: const InputDecoration(
                 labelText: "Feedback",
-                hintText: "Enter your feedback...",
+                hintText: "Feedback eingeben...",
                 border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _pickFile,
-              child: const Text('Select File/Image'),
+              child: const Text('Date/Bild auswählen'),
             ),
             const SizedBox(height: 10),
-            Text('Selected File: $_fileName'),
+            Text('Ausgewählte Datei: $_fileName'),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 FirebaseStore.sendFeedback(_feedbackController.text, _selectedFile);
               },
-              child: const Text('Submit Feedback'),
+              child: const Text('Feedback senden'),
             ),
           ],
         ),

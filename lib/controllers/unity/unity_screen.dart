@@ -103,16 +103,17 @@ class _UnityScreenState extends State<UnityScreen> {
                     context: context,
                     builder: (BuildContext context) => PointerInterceptor(
                             child: AlertDialog(
-                          title: const Text('Abort level'),
-                          content: const Text('Are you sure you want to abort the level?'),
+                          title: const Text('Level abbrechen'),
+                          content: const Text('Sind Sie sicher, dass sie das Level abbrechen '
+                              'wollen?'),
                           elevation: 24,
                           shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(Radius.circular(16))),
                           actions: <Widget>[
                             TextButton(
                                 onPressed: () => {Navigator.pop(context, 'Cancel')},
-                                child: const Text('No')),
-                            TextButton(onPressed: () => {popUntil()}, child: const Text('Yes')),
+                                child: const Text('Nein')),
+                            TextButton(onPressed: () => {popUntil()}, child: const Text('Ja')),
                           ],
                         )));
               },
@@ -149,11 +150,10 @@ class _UnityScreenState extends State<UnityScreen> {
             builder: (BuildContext context) => PointerInterceptor(
                 child: coins > shufflePrice
                     ? AlertDialog(
-                        title: const Text('No More moves possible'),
+                        title: const Text('Keine Züge mehr möglich'),
                         content: Text(
-                            'Do you want to spend $shufflePrice coins for a shuffle? You currently have '
-                            '$coins '
-                            'coins.'),
+                            'Wollen Sie $shufflePrice Münzen ausgeben für einen Shuffle? '
+                                'Aktuell haben Sie $coins Münzen'),
                         elevation: 24,
                         shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(16))),
@@ -166,20 +166,21 @@ class _UnityScreenState extends State<UnityScreen> {
                                     coinBloc.add(RemoveCoinsEvent(shufflePrice)),
                                     loadCoins()
                                   },
-                              child: const Text('Yes')),
+                              child: const Text('Ja')),
                           TextButton(
                               onPressed: () => {
                                     star > 0 ? gameWon(star) : gameLost(),
                                     Navigator.of(context).pop()
                                   },
-                              child: const Text('Game Over')),
+                              child: const Text('Spiel vorbei')),
                         ],
                       )
                     : AlertDialog(
-                        title: const Text('No More moves possible'),
+                        title: const Text('Keine Züge mehr möglich'),
                         content: Text(
-                            'You have insufficient coins ($shufflePrice) for a shuffle? You currently have '
-                            '$coins coins. You just lost the game'),
+                            'Sie haben nicht genügend Münzen ($shufflePrice) für einen Shuffle? '
+                                'Sie haben aktuell '
+                            '$coins Münzen. Das Spiel ist vorbei'),
                         elevation: 24,
                         shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(16))),

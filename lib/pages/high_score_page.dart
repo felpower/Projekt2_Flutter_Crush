@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 import 'dart:math';
 
+import 'package:bachelor_flutter_crush/helpers/app_colors.dart';
 import 'package:bachelor_flutter_crush/persistence/high_score_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
@@ -69,8 +70,8 @@ class HighScoreState extends State<HighScorePage> {
   }
 
   void updateUserAndHighScore(SharedPreferences prefs) {
-    var patrick = User(place: 1, name: 'You', xp: xp, isUser: true);
-    users[users.indexWhere((element) => element.isUser == true)] = patrick;
+    var player = User(place: 1, name: 'Du', xp: xp, isUser: true);
+    users[users.indexWhere((element) => element.isUser == true)] = player;
     prefs.setString("highScore", User.encode(users));
   }
 
@@ -144,7 +145,7 @@ class HighScoreState extends State<HighScorePage> {
 
   List<DataColumn> _createColumns() {
     return [
-      const DataColumn(label: Text('Place')),
+      const DataColumn(label: Text('Rang')),
       const DataColumn(label: Text('Name')),
       DataColumn(
         label: const Text('XP'),
@@ -167,9 +168,9 @@ class HighScoreState extends State<HighScorePage> {
     List<DataRow> rows = [];
     for (User user in users) {
       rows.add(DataRow(
-          color: user.name == "You"
-              ? MaterialStateColor.resolveWith((states) => Colors.redAccent)
-              : MaterialStateColor.resolveWith((states) => Colors.yellowAccent),
+          color: user.name == "Du"
+              ? MaterialStateColor.resolveWith((states) => AppColors.getColorFromHex("#e52012"))
+              : MaterialStateColor.resolveWith((states) => AppColors.getColorFromHex(("#80c9e2"))),
           cells: [
             DataCell(Text('#${user.place}')),
             DataCell(Text(user.name)),

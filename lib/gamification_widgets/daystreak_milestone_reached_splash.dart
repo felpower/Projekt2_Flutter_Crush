@@ -64,7 +64,7 @@ class _GameStreakMilestoneReachedSplashState extends State<DayStreakMilestoneRea
     Size screenSize = MediaQuery.of(context).size;
     Color darkColor = Colors.purple[700]!;
     Color lightColor = Colors.purple;
-    String message = 'You reached a daystreak milestone!';
+    String message = 'Sie haben einen täglichen Meilenstein erreicht!';
     return AnimatedBuilder(
       animation: _animationAppear,
       child: Material(
@@ -95,12 +95,12 @@ class _GameStreakMilestoneReachedSplashState extends State<DayStreakMilestoneRea
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text('Reached DayStreak: ${widget.daystreak}',
+                        Text('Täglicher Meilenstein: ${widget.daystreak}',
                             style: const TextStyle(
                               fontSize: 15.0,
                               color: Colors.white,
                             )),
-                        Text('Gained Coins: ${widget.coins}',
+                        Text('Erhaltene Münzen: ${widget.coins}',
                             style: const TextStyle(
                               fontSize: 15.0,
                               color: Colors.white,

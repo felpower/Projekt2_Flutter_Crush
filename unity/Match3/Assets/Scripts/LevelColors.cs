@@ -24,7 +24,31 @@ namespace Match3 {
 
 			type = LevelType.Colors;
 			_numObstaclesLeft = numOfObstacles;
-			var obstacles = string.Join(", ", obstacleTypes);
+			var obstacles = "";
+			foreach (var obstacle in obstacleTypes) {
+				switch (obstacle) {
+					case ColorType.Red:
+						obstacles += "Rot, ";
+						break;
+					case ColorType.Blue:
+						obstacles += "Blau, ";
+						break;
+					case ColorType.Green:
+						obstacles += "Grün, ";
+						break;
+					case ColorType.Yellow:
+						obstacles += "Gelb, ";
+						break;
+					case ColorType.Purple:
+						obstacles += "Lila, ";
+						break;
+					case ColorType.Pink:
+						obstacles += "Pink, ";
+						break;
+				}
+			}
+			obstacles = obstacles.Substring(0, obstacles.Length - 2);
+
 			hud.SetLevelType(type, obstacles);
 			hud.SetScore(currentScore);
 			hud.SetTarget(_numObstaclesLeft);

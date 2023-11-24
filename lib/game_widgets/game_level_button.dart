@@ -32,8 +32,8 @@ class GameLevelButton extends StatelessWidget {
   final Color color;
   final lvlPrice = 500;
   static const tntPrice = 100;
-  static const  minePrice = 200;
-  static const  wrappedPrice = 1000;
+  static const minePrice = 200;
+  static const wrappedPrice = 1000;
 
   @override
   Widget build(BuildContext context) {
@@ -133,44 +133,38 @@ class GameLevelButton extends StatelessWidget {
     showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-              // title: const Text('Buy power up?'),
-              title: const Text('Start the game'),
-              content: Wrap(
+              title: const Text('Boosterauswahl'),
+              content: const Wrap(
                 //ToDo: Remove Const, and enable power ups
                 children: [
-                  const Text('Do you want to buy'),
-                  Row(
-                    children: [
-                      Image.asset(
-                        'assets/images/bombs/fish_1.png',
-                        height: 30,
-                      ),
-                      const Text(' for $tntPrice\$', style: TextStyle(fontSize: 15)),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Image.asset('assets/images/bombs/rainbow_fish.png', height: 30),
-                      const Text(' for $minePrice\$', style: TextStyle(fontSize: 15)),
-                    ],
-                  ),
+                  Text('Um einen Booster auszuwählen, klicken Sie auf den entsprechenden Button,\n'
+                      'oder starten Sie das Spiel ohne einen Booster indem Sie auf "Spiel starten" klicken'),
                 ],
               ),
               elevation: 24,
               shape:
                   const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
               actions: <Widget>[
-                IconButton(
-                    icon: Image.asset('assets/images/bombs/fish_1.png'),
-                    onPressed: () =>
-                        buyPowerUp("Clear", tntPrice, coinBloc, reportingBloc, gameBloc, context)),
-                IconButton(
-                    icon: Image.asset('assets/images/bombs/rainbow_fish.png'),
-                    onPressed: () => buyPowerUp(
-                        "Rainbow", minePrice, coinBloc, reportingBloc, gameBloc, context)),
+                ElevatedButton.icon(
+                  onPressed: () {
+                    buyPowerUp("Clear", tntPrice, coinBloc, reportingBloc, gameBloc, context);
+                  },
+                  icon: Image.asset(
+                    'assets/images/bombs/fish_1.png',
+                    height: 50,
+                  ),
+                  label: const Text('$tntPrice\$', style: TextStyle(color: Colors.black)),
+                ),
+                ElevatedButton.icon(
+                  onPressed: () {
+                    buyPowerUp("Rainbow", minePrice, coinBloc, reportingBloc, gameBloc, context);
+                  },
+                  icon: Image.asset('assets/images/bombs/rainbow_fish.png', height: 50),
+                  label: const Text('$minePrice\$', style: TextStyle(color: Colors.black)),
+                ),
                 TextButton(
                   onPressed: () => buyPowerUp("", 0, coinBloc, reportingBloc, gameBloc, context),
-                  child: const Text('Start Game'),
+                  child: const Text('Spiel starten'),
                 )
               ],
             ));
@@ -188,9 +182,8 @@ class GameLevelButton extends StatelessWidget {
       showDialog(
           context: context,
           builder: (BuildContext context) => AlertDialog(
-                title: const Text('Not enough money to buy power up'),
-                content:
-                    const Text('You can get coins by playing levels or watching advertisements'),
+                title: const Text('Nicht genug Münzen um dieses PowerUp zu kaufen'),
+                content: const Text('Sie können Münzen durch Spielen der Levels erhalten'),
                 elevation: 24,
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(16))),
@@ -209,7 +202,7 @@ class GameLevelButton extends StatelessWidget {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text('Need to unlock level ${levelNumber - 1} first'),
+          title: Text('Sie müssen zuerst Level ${levelNumber - 1} freischalten'),
           actions: <Widget>[
             TextButton(onPressed: () => {Navigator.pop(context, 'Ok')}, child: const Text('Ok')),
           ],
@@ -220,15 +213,15 @@ class GameLevelButton extends StatelessWidget {
           context: context,
           builder: (BuildContext context) => coinBloc.state.amount >= 500
               ? AlertDialog(
-                  title: Text('Unlock level $levelNumber'),
-                  content: Text('Do you want to buy level $levelNumber for $lvlPrice\$?'),
+                  title: Text('Level $levelNumber freischalten?'),
+                  content: Text('Wollen Sie level $levelNumber für $lvlPrice\$ freischalten?'),
                   elevation: 24,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(16))),
                   actions: <Widget>[
                     TextButton(
                         onPressed: () => {Navigator.pop(context, 'Cancel')},
-                        child: const Text('Cancel')),
+                        child: const Text('Abbrechen')),
                     TextButton(
                       onPressed: () => buyLevel(coinBloc, levelBloc, 'Ok', context),
                       child: const Text('OK'),
@@ -236,9 +229,8 @@ class GameLevelButton extends StatelessWidget {
                   ],
                 )
               : AlertDialog(
-                  title: const Text('Not enough money to buy level'),
-                  content:
-                      const Text('You can get coins by playing levels or watching advertisements'),
+                  title: const Text('Sie haben nicht genug Münzen um dieses Level freizuschalten'),
+                  content: const Text('Sie können Münzen durch Spielen der Levels erhalten'),
                   elevation: 24,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(16))),

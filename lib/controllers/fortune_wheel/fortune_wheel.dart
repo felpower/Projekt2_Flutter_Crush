@@ -97,8 +97,8 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
 
   _buildResultOverlay() {
     String x = _selectedItem != 0
-        ? 'You won $_selectedItem XP. Congratulations!'
-        : 'Better luck next time!';
+        ? 'Sie haben $_selectedItem XP gewonnen. Glückwunsch!'
+        : 'Mehr Glück beim nächsten Mal!';
     return showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialog(
@@ -114,7 +114,7 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
                     gameIsOverController.sink.add(true);
                     showGameOver(true);
                   },
-                  child: const Text('Go Back'),
+                  child: const Text('Weiter'),
                 ),
               ],
             ));

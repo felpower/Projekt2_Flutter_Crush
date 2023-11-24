@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
-
 class AppColors {
   AppColors._();
-
-  static const Color cardBgColor = Color(0xff363636);
-  static const Color colorB58D67 = Color(0xffB58D67);
-  static const Color colorE5D1B2 = Color(0xffE5D1B2);
-  static const Color colorF9EED2 = Color(0xffF9EED2);
-  static const Color colorFFFFFD = Color(0xffFFFFFD);
 
   static getColorLevel(int level) {
     if (level > 30) {
@@ -26,19 +19,40 @@ class AppColors {
 
   static getColor(number) {
     if (number == 0) {
-      return Colors.red;
+      return getColorFromHex("#fdc300");
     } else if (number == 1) {
-      return Colors.blue;
+      return getColorFromHex("#b14895");
     } else if (number == 2) {
-      return Colors.green;
+      return getColorFromHex("#e52012");
     } else if (number == 3) {
-      return Colors.yellow;
+      return getColorFromHex("#86ae1d");
     } else if (number == 4) {
-      return Colors.purple;
+      return getColorFromHex("#1787ba");
     } else if (number == 5) {
-      return Colors.tealAccent;
+      return getColorFromHex("#ef82a9");
     } else {
-      return Colors.orangeAccent;
+      return getColorFromHex("#b14895");
     }
   }
+
+  static int getColorCodeFromHex(String hexColor) {
+    hexColor = hexColor.toUpperCase().replaceAll("#", "");
+    if (hexColor.length == 6) {
+      hexColor = "FF" + hexColor;
+    }
+
+    final hexNum = int.parse(hexColor, radix: 16);
+
+    if (hexNum == 0) {
+      return 0xff000000;
+    }
+
+    return hexNum;
+  }
+
+  static Color getColorFromHex(String hexColor){
+    return Color(getColorCodeFromHex(hexColor));
+  }
+
+
 }
