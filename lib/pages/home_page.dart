@@ -24,6 +24,8 @@ import '../bloc/game_bloc.dart';
 import '../bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
 import '../bloc/user_state_bloc/coins_bloc/coin_state.dart';
 import '../bloc/user_state_bloc/day_streak_bloc/day_streak_state.dart';
+import '../bloc/user_state_bloc/level_bloc/level_bloc.dart';
+import '../bloc/user_state_bloc/level_bloc/level_state.dart';
 import 'info_page.dart';
 import '../gamification_widgets/credit_panel.dart';
 import '../helpers/app_colors.dart';
@@ -47,7 +49,8 @@ class _HomePageState extends State<HomePage>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    final ReportingBloc reportingBloc = flutter_bloc.BlocProvider.of<ReportingBloc>(context);
+    final ReportingBloc reportingBloc =
+        flutter_bloc.BlocProvider.of<ReportingBloc>(context);
     switch (state) {
       case AppLifecycleState.resumed:
         reportingBloc.add(ReportStartAppEvent(DateTime.now()));
@@ -98,15 +101,19 @@ class _HomePageState extends State<HomePage>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    DarkPatternsBloc darkPatternsBloc = flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context);
+    DarkPatternsBloc darkPatternsBloc =
+        flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context);
     _daystreakMilestoneSubscription =
-        flutter_bloc.BlocProvider.of<DayStreakBloc>(context).stream.listen((state) {
+        flutter_bloc.BlocProvider.of<DayStreakBloc>(context)
+            .stream
+            .listen((state) {
       if (state is DayStreakMilestoneState &&
           darkPatternsBloc.state is DarkPatternsActivatedState) {
         OverlayEntry? dayStreakMileStoneSplash;
         dayStreakMileStoneSplash = OverlayEntry(
           builder: (context) {
-            return DayStreakMilestoneReachedSplash(state.dayStreak, state.addedCoins, () {
+            return DayStreakMilestoneReachedSplash(
+                state.dayStreak, state.addedCoins, () {
               dayStreakMileStoneSplash?.remove();
             });
           },
@@ -144,7 +151,9 @@ class _HomePageState extends State<HomePage>
                 icon: const Icon(Icons.scoreboard),
                 onPressed: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => const HighScorePage()));
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HighScorePage()));
                 },
               );
             },
@@ -170,7 +179,8 @@ class _HomePageState extends State<HomePage>
             Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/background/background_new2.png'),
+                  image: AssetImage(
+                      'assets/images/background/background_new2.png'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -185,7 +195,8 @@ class _HomePageState extends State<HomePage>
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
+                      flutter_bloc.BlocBuilder<DarkPatternsBloc,
+                          DarkPatternsState>(
                         builder: (context, state) {
                           if (state is DarkPatternsActivatedState) {
                             return Row(
@@ -193,11 +204,13 @@ class _HomePageState extends State<HomePage>
                               children: [
                                 flutter_bloc.BlocBuilder<XpBloc, XpState>(
                                     builder: (context, state) {
-                                  return CreditPanel('XP: ${state.amount}', 30, creditPanelWidth);
+                                  return CreditPanel('XP: ${state.amount}', 30,
+                                      creditPanelWidth);
                                 }),
                                 flutter_bloc.BlocBuilder<CoinBloc, CoinState>(
                                     builder: (context, state) {
-                                  return CreditPanel('\$: ${state.amount}', 30, creditPanelWidth);
+                                  return CreditPanel('\$: ${state.amount}', 30,
+                                      creditPanelWidth);
                                 })
                               ],
                             );
@@ -216,13 +229,15 @@ class _HomePageState extends State<HomePage>
                               // Calculate the total number of dividers we will have
                               int totalDividers = (levelCount / 6).ceil();
                               // Calculate total item count: level rows + divider rows
-                              int itemCount = (levelCount / 3).ceil() + totalDividers;
+                              int itemCount =
+                                  (levelCount / 3).ceil() + totalDividers;
 
                               return ListView.builder(
                                 itemCount: itemCount,
                                 itemBuilder: (BuildContext context, int index) {
                                   // Check if the current index is a divider row
-                                  bool isDividerRow = (index + 1) % 3 == 0 && index != 0;
+                                  bool isDividerRow =
+                                      (index + 1) % 3 == 0 && index != 0;
 
                                   if (isDividerRow) {
                                     // Return a divider for the designated rows
@@ -233,30 +248,39 @@ class _HomePageState extends State<HomePage>
                                     );
                                   } else {
                                     // Calculate how many dividers come before the current index
-                                    int dividersBefore = ((index + 1) / 3).floor();
+                                    int dividersBefore =
+                                        ((index + 1) / 3).floor();
                                     // Calculate the first level number for this row, adjusting for dividers
                                     int levelIndex = index - dividersBefore;
                                     int firstLevelNumber = levelIndex * 3;
 
                                     // Generate a row with up to 3 level buttons
                                     return Row(
-                                      children: List<Widget>.generate(3, (buttonIndex) {
+                                      children: List<Widget>.generate(3,
+                                          (buttonIndex) {
                                         // Calculate the level number for this button
-                                        int levelNumber = firstLevelNumber + buttonIndex;
+                                        int levelNumber =
+                                            firstLevelNumber + buttonIndex;
                                         if (levelNumber < levelCount) {
                                           // If within range, return a GameLevelButton
                                           return Expanded(
-                                            child: GameLevelButton(
-                                              width: 80.0,
-                                              height: 60.0,
-                                              borderRadius: 50.0,
-                                              levelNumber: levelNumber + 1,
-                                              color: AppColors.getColorLevel(levelNumber + 1),
-                                            ),
+                                            child: flutter_bloc.BlocBuilder<
+                                                    LevelBloc, LevelState>(
+                                                builder: (context, state) {
+                                              return GameLevelButton(
+                                                  width: 80.0,
+                                                  height: 60.0,
+                                                  borderRadius: 50.0,
+                                                  levelNumber: levelNumber + 1,
+                                                  color:
+                                                      AppColors.getColorLevel(
+                                                          levelNumber + 1));
+                                            }),
                                           );
                                         } else {
                                           // If the levelNumber exceeds levelCount, return an empty widget
-                                          return const Expanded(child: SizedBox.shrink());
+                                          return const Expanded(
+                                              child: SizedBox.shrink());
                                         }
                                       }),
                                     );
@@ -269,13 +293,6 @@ class _HomePageState extends State<HomePage>
                             }
                           },
                         ),
-
-
-
-
-
-
-
                       ),
                     ],
                   ),
@@ -303,12 +320,14 @@ class _HomePageState extends State<HomePage>
             title: const Text('Feedback senden'),
             onTap: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const FeedbackPage()));
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const FeedbackPage()));
             },
             tileColor: Colors.grey[200],
             // Background color to make it feel like a button
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12)), // Rounded corners
           ),
           Visibility(
               visible: true,
@@ -317,7 +336,9 @@ class _HomePageState extends State<HomePage>
                 title: const Text('Info Page'),
                 onTap: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => const DeviceToken()));
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const DeviceToken()));
                 },
                 tileColor: Colors.grey[200],
                 // Background color to make it feel like a button
@@ -349,8 +370,8 @@ class _HomePageState extends State<HomePage>
                     setDailyRewards();
                     FirebaseStore.collectedDailyRewards(DateTime.now());
                   });
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => FortuneWheel(items: itemList)));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => FortuneWheel(items: itemList)));
                 },
                 tileColor: Colors.grey[200],
                 // Background color to make it feel like a button
@@ -373,7 +394,8 @@ class _HomePageState extends State<HomePage>
     }
     if (dailyReward != null) {
       setState(() {
-        difference = DateTime.now().difference(DateTime.parse(dailyReward)).inHours;
+        difference =
+            DateTime.now().difference(DateTime.parse(dailyReward)).inHours;
       });
       if (difference >= 24) {
         dailyRewardCollected = false;
@@ -394,7 +416,8 @@ class _HomePageState extends State<HomePage>
       builder: (context) {
         return AlertDialog(
           title: const Text('Tägliche Belohnung bereits abgeholt'),
-          content: Text('Tägliche Belohnung können wieder in $actualDifference Stunden abgeholt '
+          content: Text(
+              'Tägliche Belohnung können wieder in $actualDifference Stunden abgeholt '
               'werden'),
           actions: [
             TextButton(
@@ -411,12 +434,14 @@ class _HomePageState extends State<HomePage>
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.getBool("isUnder18");
     if (prefs.getBool("isUnder18") == true) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const Under18Page()));
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const Under18Page()));
     }
     FutureBuilder<String>(
         future: FirebaseMessagingWeb.getToken(),
         builder: (context, snapshot) {
-          if (snapshot.hasData && snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasData &&
+              snapshot.connectionState == ConnectionState.done) {
             print(snapshot.data!);
             return Text(snapshot.data!);
           }
@@ -434,7 +459,8 @@ class _HomePageState extends State<HomePage>
 
   void checkForNotificationClick() {
     Uri currentUrl = Uri.base;
-    print("currentUrl $currentUrl Query Parameter ${currentUrl.queryParameters['source']}");
+    print(
+        "currentUrl $currentUrl Query Parameter ${currentUrl.queryParameters['source']}");
     if (currentUrl.queryParameters['source'] == 'notification') {
       print("Tapped Notification");
       FirebaseStore.addNotificationTap(DateTime.now());
