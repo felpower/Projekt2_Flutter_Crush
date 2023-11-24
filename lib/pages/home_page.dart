@@ -7,8 +7,6 @@ import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_event.dart'
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/day_streak_bloc/day_streak_bloc.dart';
-import 'package:bachelor_flutter_crush/bloc/user_state_bloc/level_bloc/level_bloc.dart';
-import 'package:bachelor_flutter_crush/bloc/user_state_bloc/level_bloc/level_state.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_state.dart';
 import 'package:bachelor_flutter_crush/controllers/fortune_wheel/fortune_wheel.dart';
@@ -26,7 +24,7 @@ import '../bloc/game_bloc.dart';
 import '../bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
 import '../bloc/user_state_bloc/coins_bloc/coin_state.dart';
 import '../bloc/user_state_bloc/day_streak_bloc/day_streak_state.dart';
-import '../controllers/device_token/device_token.dart';
+import 'info_page.dart';
 import '../gamification_widgets/credit_panel.dart';
 import '../helpers/app_colors.dart';
 import 'feedback_page.dart';

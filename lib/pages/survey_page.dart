@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_kit/survey_kit.dart';
 
-import '../controllers/device_token/device_token.dart';
+import 'info_page.dart';
 
 class SurveyPage extends StatefulWidget {
   final String title;
@@ -46,8 +46,8 @@ class _SurveyPageState extends State<SurveyPage> {
                       Navigator.push(
                           context, MaterialPageRoute(builder: (context) => const DeviceToken()));
                     } else {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => const Under18Page()));
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (context) => const Under18Page()));
                     }
                   },
                   task: task,
@@ -171,6 +171,12 @@ class _SurveyPageState extends State<SurveyPage> {
     var task = NavigableTask(
       id: TaskIdentifier(),
       steps: [
+        InstructionStep(
+          title: 'Willkommen!',
+          text:
+              'Wenn Sie über 18 Jahre alt sind und an der Studie teilnehmen möchten, klicken Sie bitte auf „Ich bin mit der Studienteilnahme einverstanden.“ und bestätigen so Ihr Einverständnis für die Studienteilnahme. ',
+          buttonText: 'Ich bin mit der Studienteilnahme einverstanden.',
+        ),
         InstructionStep(
           title: 'Sehr geehrte Studienteilnehmer:innen,',
           text: 'vielen Dank für die Teilnahme an unserer Studie. \n'
@@ -298,11 +304,10 @@ class _SurveyPageState extends State<SurveyPage> {
               hint: 'Gerundet auf ganze Euros',
             )),
         CompletionStep(
-          stepIdentifier: StepIdentifier(id: '10'),
-          text: 'Danke für die Teilnahme an der Umfrage',
-          title: 'Fertig!',
-          buttonText: 'Umfrage beenden',
-        ),
+            stepIdentifier: StepIdentifier(id: '10'),
+            text: 'Danke für die Teilnahme an der Umfrage',
+            title: 'Fertig!',
+            buttonText: 'Umfrage beenden'),
       ],
     );
     task.addNavigationRule(
