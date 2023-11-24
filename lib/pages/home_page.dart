@@ -211,62 +211,73 @@ class _HomePageState extends State<HomePage>
                       Expanded(
                         // Added Expanded to ensure GridView takes up all available space
                         child: StreamBuilder<int>(
-                            stream: gameBloc.maxLevelNumber,
-                            builder: (context, snapshot) {
-                              var itemCount = 0;
-                              if (snapshot.data != null) {
-                                itemCount = (snapshot.data! / 6).ceil() + snapshot.data!;
-                              }
+                          stream: gameBloc.maxLevelNumber,
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              int levelCount = snapshot.data!;
+                              // Calculate the total number of dividers we will have
+                              int totalDividers = (levelCount / 6).ceil();
+                              // Calculate total item count: level rows + divider rows
+                              int itemCount = (levelCount / 3).ceil() + totalDividers;
+
                               return ListView.builder(
                                 itemCount: itemCount,
                                 itemBuilder: (BuildContext context, int index) {
-                                  // If it's the 7th, 14th, etc. item, return a divider
-                                  if ((index + 1) % 3 == 0 && index < itemCount / 3) {
-                                    return const SizedBox(
-                                      height: 50.0,
-                                      child: Align(
-                                        alignment: Alignment.bottomCenter,
-                                        child: Divider(
-                                          color: Colors.black,
-                                          thickness: 5.0,
-                                        ),
-                                      ),
+                                  // Check if the current index is a divider row
+                                  bool isDividerRow = (index + 1) % 3 == 0 && index != 0;
+
+                                  if (isDividerRow) {
+                                    // Return a divider for the designated rows
+                                    return const Divider(
+                                      color: Colors.black,
+                                      thickness: 5.0,
+                                      height: 20.0,
                                     );
                                   } else {
-                                    // Calculate which row of game buttons we're on
-                                    int rowIndex = (index / 3).floor();
-                                    int levelStart =
-                                        index - rowIndex; // Adjust due to added dividers
+                                    // Calculate how many dividers come before the current index
+                                    int dividersBefore = ((index + 1) / 3).floor();
+                                    // Calculate the first level number for this row, adjusting for dividers
+                                    int levelIndex = index - dividersBefore;
+                                    int firstLevelNumber = levelIndex * 3;
 
-                                    // Return a row of 3 game buttons
+                                    // Generate a row with up to 3 level buttons
                                     return Row(
-                                      children: [
-                                        for (int i = 0; i < 3; i++)
-                                          Expanded(
-                                            child: flutter_bloc.BlocBuilder<LevelBloc, LevelState>(
-                                              builder: (context, state) {
-                                                int levelNumber = levelStart * 3 + i + 1;
-                                                if (levelNumber <= snapshot.data!) {
-                                                  return GameLevelButton(
-                                                    width: 80.0,
-                                                    height: 60.0,
-                                                    borderRadius: 50.0,
-                                                    levelNumber: levelNumber,
-                                                    color: AppColors.getColorLevel(levelNumber),
-                                                  );
-                                                } else {
-                                                  return const SizedBox
-                                                      .shrink(); // Return an empty widget if there's no level for this button
-                                                }
-                                              },
+                                      children: List<Widget>.generate(3, (buttonIndex) {
+                                        // Calculate the level number for this button
+                                        int levelNumber = firstLevelNumber + buttonIndex;
+                                        if (levelNumber < levelCount) {
+                                          // If within range, return a GameLevelButton
+                                          return Expanded(
+                                            child: GameLevelButton(
+                                              width: 80.0,
+                                              height: 60.0,
+                                              borderRadius: 50.0,
+                                              levelNumber: levelNumber + 1,
+                                              color: AppColors.getColorLevel(levelNumber + 1),
                                             ),
-                                          ),
-                                      ],
+                                          );
+                                        } else {
+                                          // If the levelNumber exceeds levelCount, return an empty widget
+                                          return const Expanded(child: SizedBox.shrink());
+                                        }
+                                      }),
                                     );
                                   }
                                 },
                               );
-                            }),
+                            } else {
+                              // Handle the case when snapshot doesn't have data
+                              return Center(child: CircularProgressIndicator());
+                            }
+                          },
+                        ),
+
+
+
+
+
+
+
                       ),
                     ],
                   ),
@@ -322,8 +333,8 @@ class _HomePageState extends State<HomePage>
                 }
               },
               child: ListTile(
-                enabled: true,
-                //!dailyRewardCollected,
+                // enabled: true,
+                enabled: !dailyRewardCollected,
                 leading: const Icon(Icons.card_giftcard),
                 title: const Text('Tägliche Belohnung'),
                 onTap: () {
