@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:bachelor_flutter_crush/bloc/user_state_bloc/level_bloc/level_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
@@ -16,6 +17,7 @@ import '../../bloc/reporting_bloc/reporting_bloc.dart';
 import '../../bloc/reporting_bloc/reporting_event.dart';
 import '../../bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
 import '../../bloc/user_state_bloc/coins_bloc/coin_event.dart';
+import '../../bloc/user_state_bloc/level_bloc/level_bloc.dart';
 import '../../game_widgets/game_over_splash.dart';
 import '../../game_widgets/game_splash.dart';
 import '../fortune_wheel/fortune_wheel.dart';
@@ -35,6 +37,7 @@ class _UnityScreenState extends State<UnityScreen> {
   static final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   late GameBloc gameBloc;
+  late LevelBloc levelBloc;
   UnityWidgetController? unityWidgetController;
   late OverlayEntry _gameSplash;
   final PublishSubject<bool> _gameIsOverController = PublishSubject<bool>();
@@ -60,6 +63,7 @@ class _UnityScreenState extends State<UnityScreen> {
     _gameOverReceived = false;
     WidgetsBinding.instance.addPostFrameCallback(_showGameStartSplash);
     loadCoins();
+    levelBloc = flutter_bloc.BlocProvider.of<LevelBloc>(context);
   }
 
   void loadCoins() async {
@@ -76,6 +80,7 @@ class _UnityScreenState extends State<UnityScreen> {
 
     // Now that the context is available, retrieve the gameBloc
     gameBloc = BlocProvider.of<GameBloc>(context);
+
 
     // Listen to "game over" notification
     _gameOverSubscription = gameIsOver.listen(showGameOver);
@@ -151,9 +156,8 @@ class _UnityScreenState extends State<UnityScreen> {
                 child: coins > shufflePrice
                     ? AlertDialog(
                         title: const Text('Keine Züge mehr möglich'),
-                        content: Text(
-                            'Wollen Sie $shufflePrice Münzen ausgeben für einen Shuffle? '
-                                'Aktuell haben Sie $coins Münzen'),
+                        content: Text('Wollen Sie $shufflePrice Münzen ausgeben für einen Shuffle? '
+                            'Aktuell haben Sie $coins Münzen'),
                         elevation: 24,
                         shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(16))),
@@ -179,7 +183,7 @@ class _UnityScreenState extends State<UnityScreen> {
                         title: const Text('Keine Züge mehr möglich'),
                         content: Text(
                             'Sie haben nicht genügend Münzen ($shufflePrice) für einen Shuffle? '
-                                'Sie haben aktuell '
+                            'Sie haben aktuell '
                             '$coins Münzen. Das Spiel ist vorbei'),
                         elevation: 24,
                         shape: const RoundedRectangleBorder(
@@ -216,6 +220,7 @@ class _UnityScreenState extends State<UnityScreen> {
       xpCoins * 3,
       0
     ];
+    levelBloc.add(AddLevelEvent(lvl + 1));
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => FortuneWheel(items: itemList),

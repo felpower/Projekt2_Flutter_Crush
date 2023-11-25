@@ -42,13 +42,12 @@ class GameLevelButton extends StatelessWidget {
     final CoinBloc coinBloc = flutter_bloc.BlocProvider.of<CoinBloc>(context);
     final ReportingBloc reportingBloc = flutter_bloc.BlocProvider.of<ReportingBloc>(context);
     final darkPatternsState = flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context).state;
-    bool disabled = !levelBloc.state.levels.contains(levelNumber) &&
-        darkPatternsState is DarkPatternsActivatedState;
+    bool disabled = !levelBloc.state.levels.contains(levelNumber);
 
     return InkWell(
       onTap: () async {
         disabled
-            ? showBuyLevelDialog(levelBloc, coinBloc, context)
+            ? showBuyLevelDialog(levelBloc, coinBloc,darkPatternsState, context)
             : showBuyPowerUpDialog(
                 reportingBloc, gameBloc, levelBloc, coinBloc, darkPatternsState, context);
       },
@@ -218,8 +217,9 @@ class GameLevelButton extends StatelessWidget {
     }
   }
 
-  void showBuyLevelDialog(LevelBloc levelBloc, CoinBloc coinBloc, BuildContext context) {
-    if (!levelBloc.state.levels.contains(levelNumber - 1)) {
+  void showBuyLevelDialog(LevelBloc levelBloc, CoinBloc coinBloc,DarkPatternsState darkPatternsState, BuildContext
+  context) {
+    if (!levelBloc.state.levels.contains(levelNumber - 1) || darkPatternsState is DarkPatternsDeactivatedState) {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(

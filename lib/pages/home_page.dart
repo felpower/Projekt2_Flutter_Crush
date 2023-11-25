@@ -258,11 +258,10 @@ class _HomePageState extends State<HomePage>
                                                   height: 60.0,
                                                   borderRadius: 50.0,
                                                   levelNumber: levelNumber + 1,
-                                                  color: darkPatternsState is
-                                                  DarkPatternsDeactivatedState ? Colors.white :
-                                                  AppColors
-                                                  .getColorLevel(levelNumber +
-                                                      1));
+                                                  color: darkPatternsState
+                                                          is DarkPatternsDeactivatedState
+                                                      ? Colors.white
+                                                      : AppColors.getColorLevel(levelNumber + 1));
                                             }),
                                           );
                                         } else {
