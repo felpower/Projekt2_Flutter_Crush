@@ -41,16 +41,16 @@ class GameLevelButton extends StatelessWidget {
     final LevelBloc levelBloc = flutter_bloc.BlocProvider.of<LevelBloc>(context);
     final CoinBloc coinBloc = flutter_bloc.BlocProvider.of<CoinBloc>(context);
     final ReportingBloc reportingBloc = flutter_bloc.BlocProvider.of<ReportingBloc>(context);
-    final DarkPatternsBloc darkPatternsBloc =
-        flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context);
+    final darkPatternsState = flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context).state;
     bool disabled = !levelBloc.state.levels.contains(levelNumber) &&
-        darkPatternsBloc.state is DarkPatternsActivatedState;
+        darkPatternsState is DarkPatternsActivatedState;
 
     return InkWell(
       onTap: () async {
         disabled
             ? showBuyLevelDialog(levelBloc, coinBloc, context)
-            : showBuyPowerUpDialog(reportingBloc, gameBloc, levelBloc, coinBloc, context);
+            : showBuyPowerUpDialog(
+                reportingBloc, gameBloc, levelBloc, coinBloc, darkPatternsState, context);
       },
       child: Center(
         child: Padding(
@@ -129,45 +129,66 @@ class GameLevelButton extends StatelessWidget {
   }
 
   void showBuyPowerUpDialog(ReportingBloc reportingBloc, GameBloc gameBloc, LevelBloc levelBloc,
-      CoinBloc coinBloc, BuildContext context) {
+      CoinBloc coinBloc, DarkPatternsState darkPatternsState, BuildContext context) {
     showDialog(
         context: context,
-        builder: (BuildContext context) => AlertDialog(
-              title: const Text('Boosterauswahl'),
-              content: const Wrap(
-                //ToDo: Remove Const, and enable power ups
-                children: [
-                  Text('Um einen Booster auszuwählen, klicken Sie auf den entsprechenden Button,\n'
-                      'oder starten Sie das Spiel ohne einen Booster indem Sie auf "Spiel starten" klicken'),
+        builder: (BuildContext context) => darkPatternsState is DarkPatternsDeactivatedState
+            ? AlertDialog(
+                title: const Text('Level starten'),
+                content: const Wrap(
+                  //ToDo: Remove Const, and enable power ups
+                  children: [
+                    Text(
+                        'Wollen Sie das aktuelle Level starten?'),
+                  ],
+                ),
+                elevation: 24,
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8))),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => buyPowerUp("", 0, coinBloc, reportingBloc, gameBloc, context),
+                    child: const Text('Level starten'),
+                  )
                 ],
-              ),
-              elevation: 24,
-              shape:
-                  const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
-              actions: <Widget>[
-                ElevatedButton.icon(
-                  onPressed: () {
-                    buyPowerUp("Clear", tntPrice, coinBloc, reportingBloc, gameBloc, context);
-                  },
-                  icon: Image.asset(
-                    'assets/images/bombs/fish_1.png',
-                    height: 50,
+              )
+            : AlertDialog(
+                title: const Text('Boosterauswahl'),
+                content: const Wrap(
+                  //ToDo: Remove Const, and enable power ups
+                  children: [
+                    Text(
+                        'Um einen Booster auszuwählen, klicken Sie auf den entsprechenden Button,\n'
+                        'oder starten Sie das Spiel ohne einen Booster indem Sie auf "Spiel starten" klicken'),
+                  ],
+                ),
+                elevation: 24,
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8))),
+                actions: <Widget>[
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      buyPowerUp("Clear", tntPrice, coinBloc, reportingBloc, gameBloc, context);
+                    },
+                    icon: Image.asset(
+                      'assets/images/bombs/fish_1.png',
+                      height: 50,
+                    ),
+                    label: const Text('$tntPrice\$', style: TextStyle(color: Colors.black)),
                   ),
-                  label: const Text('$tntPrice\$', style: TextStyle(color: Colors.black)),
-                ),
-                ElevatedButton.icon(
-                  onPressed: () {
-                    buyPowerUp("Rainbow", minePrice, coinBloc, reportingBloc, gameBloc, context);
-                  },
-                  icon: Image.asset('assets/images/bombs/rainbow_fish.png', height: 50),
-                  label: const Text('$minePrice\$', style: TextStyle(color: Colors.black)),
-                ),
-                TextButton(
-                  onPressed: () => buyPowerUp("", 0, coinBloc, reportingBloc, gameBloc, context),
-                  child: const Text('Spiel starten'),
-                )
-              ],
-            ));
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      buyPowerUp("Rainbow", minePrice, coinBloc, reportingBloc, gameBloc, context);
+                    },
+                    icon: Image.asset('assets/images/bombs/rainbow_fish.png', height: 50),
+                    label: const Text('$minePrice\$', style: TextStyle(color: Colors.black)),
+                  ),
+                  TextButton(
+                    onPressed: () => buyPowerUp("", 0, coinBloc, reportingBloc, gameBloc, context),
+                    child: const Text('Level starten'),
+                  )
+                ],
+              ));
   }
 
   Future<void> buyPowerUp(item, powerUpPrice, CoinBloc coinBloc, ReportingBloc reportingBloc,

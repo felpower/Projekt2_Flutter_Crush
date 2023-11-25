@@ -171,7 +171,6 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Center(
-
                   child: Material(
                     type: MaterialType.transparency, // Avoids additional visual effects
                     child: Text(
@@ -185,7 +184,6 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
                   ),
                 ),
               ),
-
           ],
         ),
       ),

@@ -127,10 +127,10 @@ class FirebaseStore {
 
   static addUser() async {
     var userId = await _getUuid();
-    bool shouldDarkPatternsBeVisible = await DarkPatternsService.shouldDarkPatternsBeVisible();
+    int darkPatternsState = await DarkPatternsService.shouldDarkPatternsBeVisible();
     final data = {
       uuid: userId,
-      darkPatterns: shouldDarkPatternsBeVisible,
+      darkPatterns: darkPatternsState,
     };
     DatabaseReference ref = database.ref("users/$userId");
     ref.update(data);

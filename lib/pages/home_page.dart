@@ -134,21 +134,27 @@ class _HomePageState extends State<HomePage>
     double webWidth = 500;
     double webHeight = 1000;
     double creditPanelWidth = kIsWeb ? webWidth / 4 : screenSize.width / 4;
+    final DarkPatternsState darkPatternsState =
+        flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context).state;
 
     return Scaffold(
       appBar: AppBar(
         leading: const DayStreakIcon(1),
         title: const Text('Flutter Crush'),
         actions: [
-          Builder(
-            builder: (BuildContext context) {
-              return IconButton(
-                icon: const Icon(Icons.scoreboard),
-                onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => const HighScorePage()));
-                },
-              );
+          flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
+            builder: (context, state) {
+              if (state is DarkPatternsActivatedState) {
+                return IconButton(
+                  icon: const Icon(Icons.scoreboard),
+                  onPressed: () {
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (context) => const HighScorePage()));
+                  },
+                );
+              } else {
+                return Container();
+              }
             },
           ),
           Builder(
@@ -165,7 +171,7 @@ class _HomePageState extends State<HomePage>
           ),
         ],
       ),
-      endDrawer: buildBurgerMenu(context),
+      endDrawer: buildBurgerMenu(context, darkPatternsState),
       body: PopScope(
         child: Stack(
           children: <Widget>[
@@ -252,7 +258,11 @@ class _HomePageState extends State<HomePage>
                                                   height: 60.0,
                                                   borderRadius: 50.0,
                                                   levelNumber: levelNumber + 1,
-                                                  color: AppColors.getColorLevel(levelNumber + 1));
+                                                  color: darkPatternsState is
+                                                  DarkPatternsDeactivatedState ? Colors.white :
+                                                  AppColors
+                                                  .getColorLevel(levelNumber +
+                                                      1));
                                             }),
                                           );
                                         } else {
@@ -282,7 +292,7 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  Drawer buildBurgerMenu(BuildContext context) {
+  Drawer buildBurgerMenu(BuildContext context, DarkPatternsState darkPatternsState) {
     return Drawer(
       child: ListView(
         children: <Widget>[
@@ -318,39 +328,40 @@ class _HomePageState extends State<HomePage>
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)), // Rounded corners
               )),
-          GestureDetector(
-              onTap: () {
-                if (dailyRewardCollected) {
-                  _showDailyRewardsCollectedDialog();
-                }
-              },
-              child: ListTile(
-                enabled: true,
-                // enabled: !dailyRewardCollected,
-                leading: const Icon(Icons.card_giftcard),
-                title: const Text('Tägliche Belohnung'),
+          if (darkPatternsState is DarkPatternsActivatedState)
+            GestureDetector(
                 onTap: () {
-                  List<int> itemList = [
-                    10,
-                    (10 * 0.5).toInt(),
-                    (10 * 0.75).toInt(),
-                    10 * 2,
-                    10 * 3,
-                    0
-                  ];
-                  setState(() {
-                    dailyRewardCollected = true;
-                    setDailyRewards();
-                    FirebaseStore.collectedDailyRewards(DateTime.now());
-                  });
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => FortuneWheel(items: itemList)));
+                  if (dailyRewardCollected) {
+                    _showDailyRewardsCollectedDialog();
+                  }
                 },
-                tileColor: Colors.grey[200],
-                // Background color to make it feel like a button
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)), // Rounded corners
-              )),
+                child: ListTile(
+                  enabled: true,
+                  // enabled: !dailyRewardCollected,
+                  leading: const Icon(Icons.card_giftcard),
+                  title: const Text('Tägliche Belohnung'),
+                  onTap: () {
+                    List<int> itemList = [
+                      10,
+                      (10 * 0.5).toInt(),
+                      (10 * 0.75).toInt(),
+                      10 * 2,
+                      10 * 3,
+                      0
+                    ];
+                    setState(() {
+                      dailyRewardCollected = true;
+                      setDailyRewards();
+                      FirebaseStore.collectedDailyRewards(DateTime.now());
+                    });
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => FortuneWheel(items: itemList)));
+                  },
+                  tileColor: Colors.grey[200],
+                  // Background color to make it feel like a button
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12)), // Rounded corners
+                )),
         ],
       ),
     );

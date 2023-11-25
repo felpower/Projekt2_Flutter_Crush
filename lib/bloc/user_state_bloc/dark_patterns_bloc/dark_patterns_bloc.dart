@@ -10,11 +10,11 @@ class DarkPatternsBloc extends Bloc<DarkPatternsEvent, DarkPatternsState> {
   }
 
   void _loadDarkPatterns(LoadDarkPatternsEvent event, Emitter<DarkPatternsState> emit) async {
-    bool shouldDarkPatternsBeDisplayed = await DarkPatternsService.shouldDarkPatternsBeVisible();
-    if (!shouldDarkPatternsBeDisplayed) {
+    int shouldDarkPatternsBeDisplayed = await DarkPatternsService.shouldDarkPatternsBeVisible();
+    if (shouldDarkPatternsBeDisplayed == 0) {
       // LocalNotificationService().disableNotification();
     }
-    if (shouldDarkPatternsBeDisplayed) {
+    if (shouldDarkPatternsBeDisplayed > 0) {
       emit(DarkPatternsActivatedState());
     } else {
       emit(DarkPatternsDeactivatedState());
