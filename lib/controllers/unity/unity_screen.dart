@@ -104,7 +104,7 @@ class _UnityScreenState extends State<UnityScreen> {
                     builder: (BuildContext context) => PointerInterceptor(
                             child: AlertDialog(
                           title: const Text('Level abbrechen'),
-                          content: const Text('Sind Sie sicher, dass sie das Level abbrechen '
+                          content: const Text('Sind Sie sicher, dass Sie das Level abbrechen '
                               'wollen?'),
                           elevation: 24,
                           shape: const RoundedRectangleBorder(
