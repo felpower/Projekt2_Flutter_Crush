@@ -1,6 +1,5 @@
 // ignore_for_file: avoid_print
 
-
 import 'dart:math';
 import 'dart:ui' as ui_web;
 
@@ -33,6 +32,7 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
 
   @override
   void initState() {
+    _showPressButton = true;
     super.initState();
 
     gameBloc = BlocProvider.of<GameBloc>(context);
@@ -58,7 +58,9 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
   void spin() {
     if (isSpun) return;
     isSpun = true;
-
+    setState(() {
+      _showPressButton = false; // Hide the 'Press' button after spinning
+    });
     Random random = Random();
     int fullRotations = 5 + random.nextInt(6);
     double randomEndAngle = 2 * pi * random.nextDouble();
@@ -80,19 +82,6 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
     // Since the wheel rotates clockwise but items are painted counter-clockwise,
     // we need to invert the index.
     return widget.items.length - 1 - index;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/images/background/background_new.png'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: _buildFortuneWheel(),
-    );
   }
 
   _buildResultOverlay() {
@@ -135,6 +124,19 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
     Overlay.of(context).insert(_gameSplash);
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/background/background_new.png'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: _buildFortuneWheel(),
+    );
+  }
+
   Widget _buildFortuneWheel() {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
@@ -158,6 +160,32 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
               child: Icon(Icons.arrow_downward,
                   size: 50, color: Colors.black), // Adjust size/color as needed
             ),
+            // Adding a 'Press' box in the middle of the wheel
+            if (_showPressButton)
+              Container(
+                alignment: Alignment.center,
+                width: 80, // Adjust size as needed
+                height: 70, // Adjust size as needed
+                decoration: BoxDecoration(
+                  color: Colors.white, // Adjust color as needed
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Center(
+
+                  child: Material(
+                    type: MaterialType.transparency, // Avoids additional visual effects
+                    child: Text(
+                      'Tippe Hier!',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.black, // Adjust text color as needed
+                        fontSize: 24, // Adjust font size as needed
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
           ],
         ),
       ),
@@ -226,4 +254,5 @@ class _WheelPainter extends CustomPainter {
   }
 }
 
+bool _showPressButton = true; // New variable to track visibility of the 'Press' button
 double _accumulatedRotation = 0.0; // New variable to store the accumulated rotation over time
