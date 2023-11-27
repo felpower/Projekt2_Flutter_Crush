@@ -963,9 +963,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameGrid: {fileID: 581336197}
   hud: {fileID: 329527601}
-  score1Star: 10000
-  score2Star: 20000
-  score3Star: 30000
+  score1Star: 1000
+  score2Star: 2000
+  score3Star: 3000
   isFlutter: 0
   numMoves: 15
   obstacleTypes: 00000000

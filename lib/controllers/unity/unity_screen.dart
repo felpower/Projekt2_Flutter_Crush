@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/level_bloc/level_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,6 +18,7 @@ import '../../bloc/reporting_bloc/reporting_bloc.dart';
 import '../../bloc/reporting_bloc/reporting_event.dart';
 import '../../bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
 import '../../bloc/user_state_bloc/coins_bloc/coin_event.dart';
+import '../../bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_bloc.dart';
 import '../../bloc/user_state_bloc/level_bloc/level_bloc.dart';
 import '../../game_widgets/game_over_splash.dart';
 import '../../game_widgets/game_splash.dart';
@@ -38,11 +40,12 @@ class _UnityScreenState extends State<UnityScreen> {
 
   late GameBloc gameBloc;
   late LevelBloc levelBloc;
+  late DarkPatternsBloc darkPatternsBloc;
   UnityWidgetController? unityWidgetController;
   late OverlayEntry _gameSplash;
   final PublishSubject<bool> _gameIsOverController = PublishSubject<bool>();
   late CoinBloc coinBloc;
-  int shufflePrice = 20;
+  int shufflePrice = 50;
   bool unityReady = false;
   String powerUp = "";
 
@@ -64,6 +67,7 @@ class _UnityScreenState extends State<UnityScreen> {
     WidgetsBinding.instance.addPostFrameCallback(_showGameStartSplash);
     loadCoins();
     levelBloc = flutter_bloc.BlocProvider.of<LevelBloc>(context);
+    darkPatternsBloc = flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context);
   }
 
   void loadCoins() async {
@@ -80,7 +84,6 @@ class _UnityScreenState extends State<UnityScreen> {
 
     // Now that the context is available, retrieve the gameBloc
     gameBloc = BlocProvider.of<GameBloc>(context);
-
 
     // Listen to "game over" notification
     _gameOverSubscription = gameIsOver.listen(showGameOver);
@@ -198,16 +201,24 @@ class _UnityScreenState extends State<UnityScreen> {
   }
 
   void gameWon(message) {
+    levelBloc.add(AddLevelEvent(lvl + 1));
+
     setState(() {
       fabVisible = false;
     });
-    var xpCoins = 0;
-    if (message is int) {
-      xpCoins = lvl * message;
+    if (darkPatternsBloc.state is DarkPatternsActivatedState) {
+      var xpCoins = 0;
+      if (message is int) {
+        xpCoins = lvl * message;
+      } else {
+        xpCoins = lvl * int.parse(message.replaceAll(RegExp(r'[^0-9]'), ''));
+      }
+      showFortuneWheel(xpCoins);
     } else {
-      xpCoins = lvl * int.parse(message.replaceAll(RegExp(r'[^0-9]'), ''));
+      Future.delayed(const Duration(seconds: 3), () {
+        Navigator.of(context).pop();
+      });
     }
-    showFortuneWheel(xpCoins);
     gameOver = true;
   }
 
@@ -218,9 +229,9 @@ class _UnityScreenState extends State<UnityScreen> {
       (xpCoins * 0.75).toInt(),
       xpCoins * 2,
       xpCoins * 3,
-      0
+      1
     ];
-    levelBloc.add(AddLevelEvent(lvl + 1));
+
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => FortuneWheel(items: itemList),

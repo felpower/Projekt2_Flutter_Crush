@@ -1,894 +1,895 @@
 {
-  "levels": [
-    {
-      "level": 1,
-      "type": "Moves",
-      "xDim": 7,
-      "yDim": 7,
-      "numMoves": 20,
-      "score1": 15000,
-      "score2": 18000,
-      "score3": 21000,
-      "targetScore": 15000,
-      "timeInSeconds": 60,
-      "numOfObstacles": 10,
-      "obstacleTypes": [
-        "Blue"
-      ]
-    },
-    {
-      "level": 2,
-      "type": "Obstacle",
-      "xDim": 7,
-      "yDim": 7,
-      "numMoves": 20,
-      "score1": 15000,
-      "score2": 18000,
-      "score3": 21000,
-      "targetScore": 15000,
-      "timeInSeconds": 60,
-      "numOfObstacles": 10,
-      "obstacleTypes": [
-        "Blue",
-        "Purple"
-      ]
-    },
-    {
-      "level": 3,
-      "type": "Timer",
-      "xDim": 7,
-      "yDim": 7,
-      "numMoves": 20,
-      "score1": 15000,
-      "score2": 18000,
-      "score3": 21000,
-      "targetScore": 15000,
-      "timeInSeconds": 60,
-      "numOfObstacles": 10,
-      "obstacleTypes": [
-        "Blue",
-        "Purple",
-        "Pink"
-      ]
-    },
-    {
-      "level": 4,
-      "type": "Colors",
-      "xDim": 7,
-      "yDim": 7,
-      "numMoves": 20,
-      "score1": 15000,
-      "score2": 18000,
-      "score3": 21000,
-      "targetScore": 15000,
-      "timeInSeconds": 60,
-      "numOfObstacles": 10,
-      "obstacleTypes": [
-        "Blue",
-        "Purple",
-        "Pink",
-        "Green"
-      ]
-    },
-    {
-      "level": 5,
-      "type": "Moves",
-      "xDim": 8,
-      "yDim": 7,
-      "numMoves": 25,
-      "score1": 18000,
-      "score2": 21000,
-      "score3": 24000,
-      "targetScore": 18000,
-      "timeInSeconds": 70,
-      "numOfObstacles": 15,
-      "obstacleTypes": [
-        "Blue"
-      ]
-    },
-    {
-      "level": 6,
-      "type": "Obstacle",
-      "xDim": 8,
-      "yDim": 7,
-      "numMoves": 25,
-      "score1": 18000,
-      "score2": 21000,
-      "score3": 24000,
-      "targetScore": 18000,
-      "timeInSeconds": 70,
-      "numOfObstacles": 15,
-      "obstacleTypes": [
-        "Blue",
-        "Purple"
-      ]
-    },
-    {
-      "level": 7,
-      "type": "Timer",
-      "xDim": 8,
-      "yDim": 7,
-      "numMoves": 25,
-      "score1": 18000,
-      "score2": 21000,
-      "score3": 24000,
-      "targetScore": 18000,
-      "timeInSeconds": 70,
-      "numOfObstacles": 15,
-      "obstacleTypes": [
-        "Blue",
-        "Purple",
-        "Pink"
-      ]
-    },
-    {
-      "level": 8,
-      "type": "Colors",
-      "xDim": 8,
-      "yDim": 7,
-      "numMoves": 25,
-      "score1": 18000,
-      "score2": 21000,
-      "score3": 24000,
-      "targetScore": 18000,
-      "timeInSeconds": 70,
-      "numOfObstacles": 15,
-      "obstacleTypes": [
-        "Blue",
-        "Purple",
-        "Pink",
-        "Green"
-      ]
-    },
-    {
-      "level": 9,
-      "type": "Moves",
-      "xDim": 9,
-      "yDim": 7,
-      "numMoves": 30,
-      "score1": 21000,
-      "score2": 24000,
-      "score3": 27000,
-      "targetScore": 21000,
-      "timeInSeconds": 80,
-      "numOfObstacles": 20,
-      "obstacleTypes": [
-        "Blue"
-      ]
-    },
-    {
-      "level": 10,
-      "type": "Obstacle",
-      "xDim": 9,
-      "yDim": 7,
-      "numMoves": 30,
-      "score1": 21000,
-      "score2": 24000,
-      "score3": 27000,
-      "targetScore": 21000,
-      "timeInSeconds": 80,
-      "numOfObstacles": 20,
-      "obstacleTypes": [
-        "Blue",
-        "Purple"
-      ]
-    },
-    {
-      "level": 11,
-      "type": "Timer",
-      "xDim": 9,
-      "yDim": 7,
-      "numMoves": 30,
-      "score1": 21000,
-      "score2": 24000,
-      "score3": 27000,
-      "targetScore": 21000,
-      "timeInSeconds": 80,
-      "numOfObstacles": 20,
-      "obstacleTypes": [
-        "Blue",
-        "Purple",
-        "Pink"
-      ]
-    },
-    {
-      "level": 12,
-      "type": "Colors",
-      "xDim": 9,
-      "yDim": 7,
-      "numMoves": 30,
-      "score1": 21000,
-      "score2": 24000,
-      "score3": 27000,
-      "targetScore": 21000,
-      "timeInSeconds": 80,
-      "numOfObstacles": 20,
-      "obstacleTypes": [
-        "Blue",
-        "Purple",
-        "Pink",
-        "Green"
-      ]
-    },
-    {
-      "level": 13,
-      "type": "Moves",
-      "xDim": 10,
-      "yDim": 8,
-      "numMoves": 35,
-      "score1": 24000,
-      "score2": 27000,
-      "score3": 30000,
-      "targetScore": 24000,
-      "timeInSeconds": 90,
-      "numOfObstacles": 25,
-      "obstacleTypes": [
-        "Blue"
-      ]
-    },
-    {
-      "level": 14,
-      "type": "Obstacle",
-      "xDim": 10,
-      "yDim": 8,
-      "numMoves": 35,
-      "score1": 24000,
-      "score2": 27000,
-      "score3": 30000,
-      "targetScore": 24000,
-      "timeInSeconds": 90,
-      "numOfObstacles": 25,
-      "obstacleTypes": [
-        "Blue",
-        "Purple"
-      ]
-    },
-    {
-      "level": 15,
-      "type": "Timer",
-      "xDim": 10,
-      "yDim": 8,
-      "numMoves": 35,
-      "score1": 24000,
-      "score2": 27000,
-      "score3": 30000,
-      "targetScore": 24000,
-      "timeInSeconds": 90,
-      "numOfObstacles": 25,
-      "obstacleTypes": [
-        "Blue",
-        "Purple",
-        "Pink"
-      ]
-    },
-    {
-      "level": 16,
-      "type": "Colors",
-      "xDim": 10,
-      "yDim": 8,
-      "numMoves": 35,
-      "score1": 24000,
-      "score2": 27000,
-      "score3": 30000,
-      "targetScore": 24000,
-      "timeInSeconds": 90,
-      "numOfObstacles": 25,
-      "obstacleTypes": [
-        "Blue",
-        "Purple",
-        "Pink",
-        "Green"
-      ]
-    },
-    {
-      "level": 17,
-      "type": "Moves",
-      "xDim": 11,
-      "yDim": 9,
-      "numMoves": 40,
-      "score1": 27000,
-      "score2": 30000,
-      "score3": 33000,
-      "targetScore": 27000,
-      "timeInSeconds": 100,
-      "numOfObstacles": 30,
-      "obstacleTypes": [
-        "Blue"
-      ]
-    },
-    {
-      "level": 18,
-      "type": "Obstacle",
-      "xDim": 11,
-      "yDim": 9,
-      "numMoves": 40,
-      "score1": 27000,
-      "score2": 30000,
-      "score3": 33000,
-      "targetScore": 27000,
-      "timeInSeconds": 100,
-      "numOfObstacles": 30,
-      "obstacleTypes": [
-        "Blue",
-        "Purple"
-      ]
-    },
-    {
-      "level": 19,
-      "type": "Timer",
-      "xDim": 11,
-      "yDim": 9,
-      "numMoves": 40,
-      "score1": 27000,
-      "score2": 30000,
-      "score3": 33000,
-      "targetScore": 27000,
-      "timeInSeconds": 100,
-      "numOfObstacles": 30,
-      "obstacleTypes": [
-        "Blue",
-        "Purple",
-        "Pink"
-      ]
-    },
-    {
-      "level": 20,
-      "type": "Colors",
-      "xDim": 11,
-      "yDim": 9,
-      "numMoves": 40,
-      "score1": 27000,
-      "score2": 30000,
-      "score3": 33000,
-      "targetScore": 27000,
-      "timeInSeconds": 100,
-      "numOfObstacles": 30,
-      "obstacleTypes": [
-        "Blue",
-        "Purple",
-        "Pink",
-        "Green"
-      ]
-    },
-    {
-      "level": 21,
-      "type": "Moves",
-      "xDim": 12,
-      "yDim": 10,
-      "numMoves": 45,
-      "score1": 30000,
-      "score2": 33000,
-      "score3": 36000,
-      "targetScore": 30000,
-      "timeInSeconds": 110,
-      "numOfObstacles": 35,
-      "obstacleTypes": [
-        "Blue"
-      ]
-    },
-    {
-      "level": 22,
-      "type": "Obstacle",
-      "xDim": 12,
-      "yDim": 10,
-      "numMoves": 45,
-      "score1": 30000,
-      "score2": 33000,
-      "score3": 36000,
-      "targetScore": 30000,
-      "timeInSeconds": 110,
-      "numOfObstacles": 35,
-      "obstacleTypes": [
-        "Blue",
-        "Purple"
-      ]
-    },
-    {
-      "level": 23,
-      "type": "Timer",
-      "xDim": 12,
-      "yDim": 10,
-      "numMoves": 45,
-      "score1": 30000,
-      "score2": 33000,
-      "score3": 36000,
-      "targetScore": 30000,
-      "timeInSeconds": 110,
-      "numOfObstacles": 35,
-      "obstacleTypes": [
-        "Blue",
-        "Purple",
-        "Pink"
-      ]
-    },
-    {
-      "level": 24,
-      "type": "Colors",
-      "xDim": 12,
-      "yDim": 10,
-      "numMoves": 45,
-      "score1": 30000,
-      "score2": 33000,
-      "score3": 36000,
-      "targetScore": 30000,
-      "timeInSeconds": 110,
-      "numOfObstacles": 35,
-      "obstacleTypes": [
-        "Blue",
-        "Purple",
-        "Pink",
-        "Green"
-      ]
-    },
-    {
-      "level": 25,
-      "type": "Moves",
-      "xDim": 13,
-      "yDim": 11,
-      "numMoves": 50,
-      "score1": 33000,
-      "score2": 36000,
-      "score3": 39000,
-      "targetScore": 33000,
-      "timeInSeconds": 120,
-      "numOfObstacles": 40,
-      "obstacleTypes": [
-        "Blue"
-      ]
-    },
-    {
-      "level": 26,
-      "type": "Obstacle",
-      "xDim": 13,
-      "yDim": 11,
-      "numMoves": 50,
-      "score1": 33000,
-      "score2": 36000,
-      "score3": 39000,
-      "targetScore": 33000,
-      "timeInSeconds": 120,
-      "numOfObstacles": 40,
-      "obstacleTypes": [
-        "Blue",
-        "Purple"
-      ]
-    },
-    {
-      "level": 27,
-      "type": "Timer",
-      "xDim": 13,
-      "yDim": 11,
-      "numMoves": 50,
-      "score1": 33000,
-      "score2": 36000,
-      "score3": 39000,
-      "targetScore": 33000,
-      "timeInSeconds": 120,
-      "numOfObstacles": 40,
-      "obstacleTypes": [
-        "Blue",
-        "Purple",
-        "Pink"
-      ]
-    },
-    {
-      "level": 28,
-      "type": "Colors",
-      "xDim": 13,
-      "yDim": 11,
-      "numMoves": 50,
-      "score1": 33000,
-      "score2": 36000,
-      "score3": 39000,
-      "targetScore": 33000,
-      "timeInSeconds": 120,
-      "numOfObstacles": 40,
-      "obstacleTypes": [
-        "Blue",
-        "Purple",
-        "Pink",
-        "Green"
-      ]
-    },
-    {
-      "level": 29,
-      "type": "Moves",
-      "xDim": 14,
-      "yDim": 12,
-      "numMoves": 55,
-      "score1": 36000,
-      "score2": 39000,
-      "score3": 42000,
-      "targetScore": 36000,
-      "timeInSeconds": 130,
-      "numOfObstacles": 45,
-      "obstacleTypes": [
-        "Blue"
-      ]
-    },
-    {
-      "level": 30,
-      "type": "Obstacle",
-      "xDim": 14,
-      "yDim": 12,
-      "numMoves": 55,
-      "score1": 36000,
-      "score2": 39000,
-      "score3": 42000,
-      "targetScore": 36000,
-      "timeInSeconds": 130,
-      "numOfObstacles": 45,
-      "obstacleTypes": [
-        "Blue",
-        "Purple"
-      ]
-    },
-    {
-      "level": 31,
-      "type": "Timer",
-      "xDim": 14,
-      "yDim": 12,
-      "numMoves": 55,
-      "score1": 36000,
-      "score2": 39000,
-      "score3": 42000,
-      "targetScore": 36000,
-      "timeInSeconds": 130,
-      "numOfObstacles": 45,
-      "obstacleTypes": [
-        "Blue",
-        "Purple",
-        "Pink"
-      ]
-    },
-    {
-      "level": 32,
-      "type": "Colors",
-      "xDim": 14,
-      "yDim": 12,
-      "numMoves": 55,
-      "score1": 36000,
-      "score2": 39000,
-      "score3": 42000,
-      "targetScore": 36000,
-      "timeInSeconds": 130,
-      "numOfObstacles": 45,
-      "obstacleTypes": [
-        "Blue",
-        "Purple",
-        "Pink",
-        "Green"
-      ]
-    },
-    {
-      "level": 33,
-      "type": "Moves",
-      "xDim": 15,
-      "yDim": 13,
-      "numMoves": 60,
-      "score1": 39000,
-      "score2": 42000,
-      "score3": 45000,
-      "targetScore": 39000,
-      "timeInSeconds": 140,
-      "numOfObstacles": 50,
-      "obstacleTypes": [
-        "Blue"
-      ]
-    },
-    {
-      "level": 34,
-      "type": "Obstacle",
-      "xDim": 15,
-      "yDim": 13,
-      "numMoves": 60,
-      "score1": 39000,
-      "score2": 42000,
-      "score3": 45000,
-      "targetScore": 39000,
-      "timeInSeconds": 140,
-      "numOfObstacles": 50,
-      "obstacleTypes": [
-        "Blue",
-        "Purple"
-      ]
-    },
-    {
-      "level": 35,
-      "type": "Timer",
-      "xDim": 15,
-      "yDim": 13,
-      "numMoves": 60,
-      "score1": 39000,
-      "score2": 42000,
-      "score3": 45000,
-      "targetScore": 39000,
-      "timeInSeconds": 140,
-      "numOfObstacles": 50,
-      "obstacleTypes": [
-        "Blue",
-        "Purple",
-        "Pink"
-      ]
-    },
-    {
-      "level": 36,
-      "type": "Colors",
-      "xDim": 15,
-      "yDim": 13,
-      "numMoves": 60,
-      "score1": 39000,
-      "score2": 42000,
-      "score3": 45000,
-      "targetScore": 39000,
-      "timeInSeconds": 140,
-      "numOfObstacles": 50,
-      "obstacleTypes": [
-        "Blue",
-        "Purple",
-        "Pink",
-        "Green"
-      ]
-    },
-    {
-      "level": 37,
-      "type": "Moves",
-      "xDim": 16,
-      "yDim": 14,
-      "numMoves": 65,
-      "score1": 42000,
-      "score2": 45000,
-      "score3": 48000,
-      "targetScore": 42000,
-      "timeInSeconds": 150,
-      "numOfObstacles": 55,
-      "obstacleTypes": [
-        "Blue"
-      ]
-    },
-    {
-      "level": 38,
-      "type": "Obstacle",
-      "xDim": 16,
-      "yDim": 14,
-      "numMoves": 65,
-      "score1": 42000,
-      "score2": 45000,
-      "score3": 48000,
-      "targetScore": 42000,
-      "timeInSeconds": 150,
-      "numOfObstacles": 55,
-      "obstacleTypes": [
-        "Blue",
-        "Purple"
-      ]
-    },
-    {
-      "level": 39,
-      "type": "Timer",
-      "xDim": 16,
-      "yDim": 14,
-      "numMoves": 65,
-      "score1": 42000,
-      "score2": 45000,
-      "score3": 48000,
-      "targetScore": 42000,
-      "timeInSeconds": 150,
-      "numOfObstacles": 55,
-      "obstacleTypes": [
-        "Blue",
-        "Purple",
-        "Pink"
-      ]
-    },
-    {
-      "level": 40,
-      "type": "Colors",
-      "xDim": 16,
-      "yDim": 14,
-      "numMoves": 65,
-      "score1": 42000,
-      "score2": 45000,
-      "score3": 48000,
-      "targetScore": 42000,
-      "timeInSeconds": 150,
-      "numOfObstacles": 55,
-      "obstacleTypes": [
-        "Blue",
-        "Purple",
-        "Pink",
-        "Green"
-      ]
-    },
-    {
-      "level": 41,
-      "type": "Moves",
-      "xDim": 16,
-      "yDim": 14,
-      "numMoves": 70,
-      "score1": 45000,
-      "score2": 48000,
-      "score3": 51000,
-      "targetScore": 45000,
-      "timeInSeconds": 160,
-      "numOfObstacles": 60,
-      "obstacleTypes": [
-        "Blue"
-      ]
-    },
-    {
-      "level": 42,
-      "type": "Obstacle",
-      "xDim": 16,
-      "yDim": 14,
-      "numMoves": 70,
-      "score1": 45000,
-      "score2": 48000,
-      "score3": 51000,
-      "targetScore": 45000,
-      "timeInSeconds": 160,
-      "numOfObstacles": 60,
-      "obstacleTypes": [
-        "Blue",
-        "Purple"
-      ]
-    },
-    {
-      "level": 43,
-      "type": "Timer",
-      "xDim": 16,
-      "yDim": 14,
-      "numMoves": 70,
-      "score1": 45000,
-      "score2": 48000,
-      "score3": 51000,
-      "targetScore": 45000,
-      "timeInSeconds": 160,
-      "numOfObstacles": 60,
-      "obstacleTypes": [
-        "Blue",
-        "Purple",
-        "Pink"
-      ]
-    },
-    {
-      "level": 44,
-      "type": "Colors",
-      "xDim": 16,
-      "yDim": 14,
-      "numMoves": 70,
-      "score1": 45000,
-      "score2": 48000,
-      "score3": 51000,
-      "targetScore": 45000,
-      "timeInSeconds": 160,
-      "numOfObstacles": 60,
-      "obstacleTypes": [
-        "Blue",
-        "Purple",
-        "Pink",
-        "Green"
-      ]
-    },
-    {
-      "level": 45,
-      "type": "Moves",
-      "xDim": 16,
-      "yDim": 14,
-      "numMoves": 75,
-      "score1": 48000,
-      "score2": 51000,
-      "score3": 54000,
-      "targetScore": 48000,
-      "timeInSeconds": 170,
-      "numOfObstacles": 65,
-      "obstacleTypes": [
-        "Blue"
-      ]
-    },
-    {
-      "level": 46,
-      "type": "Obstacle",
-      "xDim": 16,
-      "yDim": 14,
-      "numMoves": 75,
-      "score1": 48000,
-      "score2": 51000,
-      "score3": 54000,
-      "targetScore": 48000,
-      "timeInSeconds": 170,
-      "numOfObstacles": 65,
-      "obstacleTypes": [
-        "Blue",
-        "Purple"
-      ]
-    },
-    {
-      "level": 47,
-      "type": "Timer",
-      "xDim": 16,
-      "yDim": 14,
-      "numMoves": 75,
-      "score1": 48000,
-      "score2": 51000,
-      "score3": 54000,
-      "targetScore": 48000,
-      "timeInSeconds": 170,
-      "numOfObstacles": 65,
-      "obstacleTypes": [
-        "Blue",
-        "Purple",
-        "Pink"
-      ]
-    },
-    {
-      "level": 48,
-      "type": "Colors",
-      "xDim": 16,
-      "yDim": 14,
-      "numMoves": 75,
-      "score1": 48000,
-      "score2": 51000,
-      "score3": 54000,
-      "targetScore": 48000,
-      "timeInSeconds": 170,
-      "numOfObstacles": 65,
-      "obstacleTypes": [
-        "Blue",
-        "Purple",
-        "Pink",
-        "Green"
-      ]
-    },
-    {
-      "level": 49,
-      "type": "Moves",
-      "xDim": 16,
-      "yDim": 14,
-      "numMoves": 80,
-      "score1": 51000,
-      "score2": 54000,
-      "score3": 57000,
-      "targetScore": 51000,
-      "timeInSeconds": 180,
-      "numOfObstacles": 70,
-      "obstacleTypes": [
-        "Blue"
-      ]
-    },
-    {
-      "level": 50,
-      "type": "Obstacle",
-      "xDim": 16,
-      "yDim": 14,
-      "numMoves": 80,
-      "score1": 51000,
-      "score2": 54000,
-      "score3": 57000,
-      "targetScore": 51000,
-      "timeInSeconds": 180,
-      "numOfObstacles": 70,
-      "obstacleTypes": [
-        "Blue",
-        "Purple"
-      ]
-    },  {
-      "level": 51,
-      "type": "Timer",
-      "xDim": 16,
-      "yDim": 14,
-      "numMoves": 75,
-      "score1": 48000,
-      "score2": 51000,
-      "score3": 54000,
-      "targetScore": 48000,
-      "timeInSeconds": 170,
-      "numOfObstacles": 65,
-      "obstacleTypes": [
-        "Blue",
-        "Purple",
-        "Pink"
-      ]
-    }
-  ]
+    "levels": [
+        {
+            "level": 1,
+            "type": "Timer",
+            "xDim": 6,
+            "yDim": 6,
+            "numMoves": 20,
+            "score1": 1500,
+            "score2": 1800,
+            "score3": 2100,
+            "targetScore": 2100,
+            "timeInSeconds": 60,
+            "numOfObstacles": 10,
+            "obstacleTypes": [
+                "Blue"
+            ]
+        },
+        {
+            "level": 2,
+            "type": "Colors",
+            "xDim": 6,
+            "yDim": 6,
+            "numMoves": 20,
+            "score1": 1500,
+            "score2": 1800,
+            "score3": 2100,
+            "targetScore": 2100,
+            "timeInSeconds": 60,
+            "numOfObstacles": 10,
+            "obstacleTypes": [
+                "Blue",
+                "Purple"
+            ]
+        },
+        {
+            "level": 3,
+            "type": "Moves",
+            "xDim": 6,
+            "yDim": 6,
+            "numMoves": 20,
+            "score1": 1500,
+            "score2": 1800,
+            "score3": 2100,
+            "targetScore": 2100,
+            "timeInSeconds": 60,
+            "numOfObstacles": 10,
+            "obstacleTypes": [
+                "Blue",
+                "Purple",
+                "Pink"
+            ]
+        },
+        {
+            "level": 4,
+            "type": "Obstacle",
+            "xDim": 6,
+            "yDim": 6,
+            "numMoves": 20,
+            "score1": 1500,
+            "score2": 1800,
+            "score3": 2100,
+            "targetScore": 2100,
+            "timeInSeconds": 60,
+            "numOfObstacles": 10,
+            "obstacleTypes": [
+                "Blue",
+                "Purple",
+                "Pink",
+                "Green"
+            ]
+        },
+        {
+            "level": 5,
+            "type": "Timer",
+            "xDim": 7,
+            "yDim": 6,
+            "numMoves": 25,
+            "score1": 4500,
+            "score2": 4800,
+            "score3": 5100,
+            "targetScore": 5100,
+            "timeInSeconds": 70,
+            "numOfObstacles": 15,
+            "obstacleTypes": [
+                "Blue"
+            ]
+        },
+        {
+            "level": 6,
+            "type": "Colors",
+            "xDim": 7,
+            "yDim": 6,
+            "numMoves": 25,
+            "score1": 4500,
+            "score2": 4800,
+            "score3": 5100,
+            "targetScore": 5100,
+            "timeInSeconds": 70,
+            "numOfObstacles": 15,
+            "obstacleTypes": [
+                "Blue",
+                "Purple"
+            ]
+        },
+        {
+            "level": 7,
+            "type": "Moves",
+            "xDim": 7,
+            "yDim": 6,
+            "numMoves": 25,
+            "score1": 4500,
+            "score2": 4800,
+            "score3": 5100,
+            "targetScore": 5100,
+            "timeInSeconds": 70,
+            "numOfObstacles": 15,
+            "obstacleTypes": [
+                "Blue",
+                "Purple",
+                "Pink"
+            ]
+        },
+        {
+            "level": 8,
+            "type": "Obstacle",
+            "xDim": 7,
+            "yDim": 6,
+            "numMoves": 25,
+            "score1": 4500,
+            "score2": 4800,
+            "score3": 5100,
+            "targetScore": 5100,
+            "timeInSeconds": 70,
+            "numOfObstacles": 15,
+            "obstacleTypes": [
+                "Blue",
+                "Purple",
+                "Pink",
+                "Green"
+            ]
+        },
+        {
+            "level": 9,
+            "type": "Timer",
+            "xDim": 8,
+            "yDim": 6,
+            "numMoves": 30,
+            "score1": 7500,
+            "score2": 7800,
+            "score3": 8100,
+            "targetScore": 8100,
+            "timeInSeconds": 80,
+            "numOfObstacles": 20,
+            "obstacleTypes": [
+                "Blue"
+            ]
+        },
+        {
+            "level": 10,
+            "type": "Colors",
+            "xDim": 8,
+            "yDim": 6,
+            "numMoves": 30,
+            "score1": 7500,
+            "score2": 7800,
+            "score3": 8100,
+            "targetScore": 8100,
+            "timeInSeconds": 80,
+            "numOfObstacles": 20,
+            "obstacleTypes": [
+                "Blue",
+                "Purple"
+            ]
+        },
+        {
+            "level": 11,
+            "type": "Moves",
+            "xDim": 8,
+            "yDim": 6,
+            "numMoves": 30,
+            "score1": 7500,
+            "score2": 7800,
+            "score3": 8100,
+            "targetScore": 8100,
+            "timeInSeconds": 80,
+            "numOfObstacles": 20,
+            "obstacleTypes": [
+                "Blue",
+                "Purple",
+                "Pink"
+            ]
+        },
+        {
+            "level": 12,
+            "type": "Obstacle",
+            "xDim": 8,
+            "yDim": 6,
+            "numMoves": 30,
+            "score1": 7500,
+            "score2": 7800,
+            "score3": 8100,
+            "targetScore": 8100,
+            "timeInSeconds": 80,
+            "numOfObstacles": 20,
+            "obstacleTypes": [
+                "Blue",
+                "Purple",
+                "Pink",
+                "Green"
+            ]
+        },
+        {
+            "level": 13,
+            "type": "Timer",
+            "xDim": 9,
+            "yDim": 7,
+            "numMoves": 35,
+            "score1": 10500,
+            "score2": 10800,
+            "score3": 11100,
+            "targetScore": 11100,
+            "timeInSeconds": 90,
+            "numOfObstacles": 25,
+            "obstacleTypes": [
+                "Blue"
+            ]
+        },
+        {
+            "level": 14,
+            "type": "Colors",
+            "xDim": 9,
+            "yDim": 7,
+            "numMoves": 35,
+            "score1": 10500,
+            "score2": 10800,
+            "score3": 11100,
+            "targetScore": 11100,
+            "timeInSeconds": 90,
+            "numOfObstacles": 25,
+            "obstacleTypes": [
+                "Blue",
+                "Purple"
+            ]
+        },
+        {
+            "level": 15,
+            "type": "Moves",
+            "xDim": 9,
+            "yDim": 7,
+            "numMoves": 35,
+            "score1": 10500,
+            "score2": 10800,
+            "score3": 11100,
+            "targetScore": 11100,
+            "timeInSeconds": 90,
+            "numOfObstacles": 25,
+            "obstacleTypes": [
+                "Blue",
+                "Purple",
+                "Pink"
+            ]
+        },
+        {
+            "level": 16,
+            "type": "Obstacle",
+            "xDim": 9,
+            "yDim": 7,
+            "numMoves": 35,
+            "score1": 10500,
+            "score2": 10800,
+            "score3": 11100,
+            "targetScore": 11100,
+            "timeInSeconds": 90,
+            "numOfObstacles": 25,
+            "obstacleTypes": [
+                "Blue",
+                "Purple",
+                "Pink",
+                "Green"
+            ]
+        },
+        {
+            "level": 17,
+            "type": "Timer",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 40,
+            "score1": 13500,
+            "score2": 13800,
+            "score3": 14100,
+            "targetScore": 14100,
+            "timeInSeconds": 100,
+            "numOfObstacles": 30,
+            "obstacleTypes": [
+                "Blue"
+            ]
+        },
+        {
+            "level": 18,
+            "type": "Colors",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 40,
+            "score1": 13500,
+            "score2": 13800,
+            "score3": 14100,
+            "targetScore": 14100,
+            "timeInSeconds": 100,
+            "numOfObstacles": 30,
+            "obstacleTypes": [
+                "Blue",
+                "Purple"
+            ]
+        },
+        {
+            "level": 19,
+            "type": "Moves",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 40,
+            "score1": 13500,
+            "score2": 13800,
+            "score3": 14100,
+            "targetScore": 14100,
+            "timeInSeconds": 100,
+            "numOfObstacles": 30,
+            "obstacleTypes": [
+                "Blue",
+                "Purple",
+                "Pink"
+            ]
+        },
+        {
+            "level": 20,
+            "type": "Obstacle",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 40,
+            "score1": 13500,
+            "score2": 13800,
+            "score3": 14100,
+            "targetScore": 14100,
+            "timeInSeconds": 100,
+            "numOfObstacles": 30,
+            "obstacleTypes": [
+                "Blue",
+                "Purple",
+                "Pink",
+                "Green"
+            ]
+        },
+        {
+            "level": 21,
+            "type": "Timer",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 45,
+            "score1": 16500,
+            "score2": 16800,
+            "score3": 17100,
+            "targetScore": 17100,
+            "timeInSeconds": 110,
+            "numOfObstacles": 35,
+            "obstacleTypes": [
+                "Blue"
+            ]
+        },
+        {
+            "level": 22,
+            "type": "Colors",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 45,
+            "score1": 16500,
+            "score2": 16800,
+            "score3": 17100,
+            "targetScore": 17100,
+            "timeInSeconds": 110,
+            "numOfObstacles": 35,
+            "obstacleTypes": [
+                "Blue",
+                "Purple"
+            ]
+        },
+        {
+            "level": 23,
+            "type": "Moves",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 45,
+            "score1": 16500,
+            "score2": 16800,
+            "score3": 17100,
+            "targetScore": 17100,
+            "timeInSeconds": 110,
+            "numOfObstacles": 35,
+            "obstacleTypes": [
+                "Blue",
+                "Purple",
+                "Pink"
+            ]
+        },
+        {
+            "level": 24,
+            "type": "Obstacle",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 45,
+            "score1": 16500,
+            "score2": 16800,
+            "score3": 17100,
+            "targetScore": 17100,
+            "timeInSeconds": 110,
+            "numOfObstacles": 35,
+            "obstacleTypes": [
+                "Blue",
+                "Purple",
+                "Pink",
+                "Green"
+            ]
+        },
+        {
+            "level": 25,
+            "type": "Timer",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 50,
+            "score1": 19500,
+            "score2": 19800,
+            "score3": 20100,
+            "targetScore": 20100,
+            "timeInSeconds": 120,
+            "numOfObstacles": 40,
+            "obstacleTypes": [
+                "Blue"
+            ]
+        },
+        {
+            "level": 26,
+            "type": "Colors",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 50,
+            "score1": 19500,
+            "score2": 19800,
+            "score3": 20100,
+            "targetScore": 20100,
+            "timeInSeconds": 120,
+            "numOfObstacles": 40,
+            "obstacleTypes": [
+                "Blue",
+                "Purple"
+            ]
+        },
+        {
+            "level": 27,
+            "type": "Moves",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 50,
+            "score1": 19500,
+            "score2": 19800,
+            "score3": 20100,
+            "targetScore": 20100,
+            "timeInSeconds": 120,
+            "numOfObstacles": 40,
+            "obstacleTypes": [
+                "Blue",
+                "Purple",
+                "Pink"
+            ]
+        },
+        {
+            "level": 28,
+            "type": "Obstacle",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 50,
+            "score1": 19500,
+            "score2": 19800,
+            "score3": 20100,
+            "targetScore": 20100,
+            "timeInSeconds": 120,
+            "numOfObstacles": 40,
+            "obstacleTypes": [
+                "Blue",
+                "Purple",
+                "Pink",
+                "Green"
+            ]
+        },
+        {
+            "level": 29,
+            "type": "Timer",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 55,
+            "score1": 22500,
+            "score2": 22800,
+            "score3": 23100,
+            "targetScore": 23100,
+            "timeInSeconds": 130,
+            "numOfObstacles": 45,
+            "obstacleTypes": [
+                "Blue"
+            ]
+        },
+        {
+            "level": 30,
+            "type": "Colors",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 55,
+            "score1": 22500,
+            "score2": 22800,
+            "score3": 23100,
+            "targetScore": 23100,
+            "timeInSeconds": 130,
+            "numOfObstacles": 45,
+            "obstacleTypes": [
+                "Blue",
+                "Purple"
+            ]
+        },
+        {
+            "level": 31,
+            "type": "Moves",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 55,
+            "score1": 22500,
+            "score2": 22800,
+            "score3": 23100,
+            "targetScore": 23100,
+            "timeInSeconds": 130,
+            "numOfObstacles": 45,
+            "obstacleTypes": [
+                "Blue",
+                "Purple",
+                "Pink"
+            ]
+        },
+        {
+            "level": 32,
+            "type": "Obstacle",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 55,
+            "score1": 22500,
+            "score2": 22800,
+            "score3": 23100,
+            "targetScore": 23100,
+            "timeInSeconds": 130,
+            "numOfObstacles": 45,
+            "obstacleTypes": [
+                "Blue",
+                "Purple",
+                "Pink",
+                "Green"
+            ]
+        },
+        {
+            "level": 33,
+            "type": "Timer",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 60,
+            "score1": 25500,
+            "score2": 25800,
+            "score3": 26100,
+            "targetScore": 26100,
+            "timeInSeconds": 140,
+            "numOfObstacles": 50,
+            "obstacleTypes": [
+                "Blue"
+            ]
+        },
+        {
+            "level": 34,
+            "type": "Colors",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 60,
+            "score1": 25500,
+            "score2": 25800,
+            "score3": 26100,
+            "targetScore": 26100,
+            "timeInSeconds": 140,
+            "numOfObstacles": 50,
+            "obstacleTypes": [
+                "Blue",
+                "Purple"
+            ]
+        },
+        {
+            "level": 35,
+            "type": "Moves",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 60,
+            "score1": 25500,
+            "score2": 25800,
+            "score3": 26100,
+            "targetScore": 26100,
+            "timeInSeconds": 140,
+            "numOfObstacles": 50,
+            "obstacleTypes": [
+                "Blue",
+                "Purple",
+                "Pink"
+            ]
+        },
+        {
+            "level": 36,
+            "type": "Obstacle",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 60,
+            "score1": 25500,
+            "score2": 25800,
+            "score3": 26100,
+            "targetScore": 26100,
+            "timeInSeconds": 140,
+            "numOfObstacles": 50,
+            "obstacleTypes": [
+                "Blue",
+                "Purple",
+                "Pink",
+                "Green"
+            ]
+        },
+        {
+            "level": 37,
+            "type": "Timer",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 65,
+            "score1": 28500,
+            "score2": 28800,
+            "score3": 29100,
+            "targetScore": 29100,
+            "timeInSeconds": 150,
+            "numOfObstacles": 55,
+            "obstacleTypes": [
+                "Blue"
+            ]
+        },
+        {
+            "level": 38,
+            "type": "Colors",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 65,
+            "score1": 28500,
+            "score2": 28800,
+            "score3": 29100,
+            "targetScore": 29100,
+            "timeInSeconds": 150,
+            "numOfObstacles": 55,
+            "obstacleTypes": [
+                "Blue",
+                "Purple"
+            ]
+        },
+        {
+            "level": 39,
+            "type": "Moves",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 65,
+            "score1": 28500,
+            "score2": 28800,
+            "score3": 29100,
+            "targetScore": 29100,
+            "timeInSeconds": 150,
+            "numOfObstacles": 55,
+            "obstacleTypes": [
+                "Blue",
+                "Purple",
+                "Pink"
+            ]
+        },
+        {
+            "level": 40,
+            "type": "Obstacle",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 65,
+            "score1": 28500,
+            "score2": 28800,
+            "score3": 29100,
+            "targetScore": 29100,
+            "timeInSeconds": 150,
+            "numOfObstacles": 55,
+            "obstacleTypes": [
+                "Blue",
+                "Purple",
+                "Pink",
+                "Green"
+            ]
+        },
+        {
+            "level": 41,
+            "type": "Timer",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 70,
+            "score1": 31500,
+            "score2": 31800,
+            "score3": 32100,
+            "targetScore": 32100,
+            "timeInSeconds": 160,
+            "numOfObstacles": 60,
+            "obstacleTypes": [
+                "Blue"
+            ]
+        },
+        {
+            "level": 42,
+            "type": "Colors",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 70,
+            "score1": 31500,
+            "score2": 31800,
+            "score3": 32100,
+            "targetScore": 32100,
+            "timeInSeconds": 160,
+            "numOfObstacles": 60,
+            "obstacleTypes": [
+                "Blue",
+                "Purple"
+            ]
+        },
+        {
+            "level": 43,
+            "type": "Moves",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 70,
+            "score1": 31500,
+            "score2": 31800,
+            "score3": 32100,
+            "targetScore": 32100,
+            "timeInSeconds": 160,
+            "numOfObstacles": 60,
+            "obstacleTypes": [
+                "Blue",
+                "Purple",
+                "Pink"
+            ]
+        },
+        {
+            "level": 44,
+            "type": "Obstacle",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 70,
+            "score1": 31500,
+            "score2": 31800,
+            "score3": 32100,
+            "targetScore": 32100,
+            "timeInSeconds": 160,
+            "numOfObstacles": 60,
+            "obstacleTypes": [
+                "Blue",
+                "Purple",
+                "Pink",
+                "Green"
+            ]
+        },
+        {
+            "level": 45,
+            "type": "Timer",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 75,
+            "score1": 34500,
+            "score2": 34800,
+            "score3": 35100,
+            "targetScore": 35100,
+            "timeInSeconds": 170,
+            "numOfObstacles": 65,
+            "obstacleTypes": [
+                "Blue"
+            ]
+        },
+        {
+            "level": 46,
+            "type": "Colors",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 75,
+            "score1": 34500,
+            "score2": 34800,
+            "score3": 35100,
+            "targetScore": 35100,
+            "timeInSeconds": 170,
+            "numOfObstacles": 65,
+            "obstacleTypes": [
+                "Blue",
+                "Purple"
+            ]
+        },
+        {
+            "level": 47,
+            "type": "Moves",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 75,
+            "score1": 34500,
+            "score2": 34800,
+            "score3": 35100,
+            "targetScore": 35100,
+            "timeInSeconds": 170,
+            "numOfObstacles": 65,
+            "obstacleTypes": [
+                "Blue",
+                "Purple",
+                "Pink"
+            ]
+        },
+        {
+            "level": 48,
+            "type": "Obstacle",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 75,
+            "score1": 34500,
+            "score2": 34800,
+            "score3": 35100,
+            "targetScore": 35100,
+            "timeInSeconds": 170,
+            "numOfObstacles": 65,
+            "obstacleTypes": [
+                "Blue",
+                "Purple",
+                "Pink",
+                "Green"
+            ]
+        },
+        {
+            "level": 49,
+            "type": "Timer",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 80,
+            "score1": 37500,
+            "score2": 37800,
+            "score3": 38100,
+            "targetScore": 38100,
+            "timeInSeconds": 180,
+            "numOfObstacles": 70,
+            "obstacleTypes": [
+                "Blue"
+            ]
+        },
+        {
+            "level": 50,
+            "type": "Colors",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 80,
+            "score1": 37500,
+            "score2": 37800,
+            "score3": 38100,
+            "targetScore": 38100,
+            "timeInSeconds": 180,
+            "numOfObstacles": 70,
+            "obstacleTypes": [
+                "Blue",
+                "Purple"
+            ]
+        },
+        {
+            "level": 51,
+            "type": "Moves",
+            "xDim": 10,
+            "yDim": 8,
+            "numMoves": 80,
+            "score1": 37500,
+            "score2": 37800,
+            "score3": 38100,
+            "targetScore": 38100,
+            "timeInSeconds": 180,
+            "numOfObstacles": 70,
+            "obstacleTypes": [
+                "Blue",
+                "Purple",
+                "Pink"
+            ]
+        }
+    ]
 }

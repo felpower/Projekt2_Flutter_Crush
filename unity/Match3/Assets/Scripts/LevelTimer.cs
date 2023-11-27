@@ -28,8 +28,8 @@ namespace Match3 {
 			hud.SetRemaining(
 				$"{(int)Mathf.Max((timeInSeconds - _timer) / 60, 0)}:{(int)Mathf.Max((timeInSeconds - _timer) % 60, 0):00}");
 
-			if (timeInSeconds - _timer <= 0) {
-				if (currentScore >= targetScore)
+			if (timeInSeconds - _timer <= 0 || currentScore >= targetScore) {
+				if (currentScore >= score1Star)
 					GameWin();
 				else
 					GameLose();

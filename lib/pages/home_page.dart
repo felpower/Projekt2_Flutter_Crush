@@ -232,11 +232,19 @@ class _HomePageState extends State<HomePage>
                                   bool isDividerRow = (index + 1) % 3 == 0 && index != 0;
                                   if (isDividerRow) {
                                     // Return a divider for the designated rows
-                                    return const Divider(
-                                      color: Colors.black,
-                                      thickness: 5.0,
-                                      height: 20.0,
-                                    );
+                                    if (darkPatternsState is DarkPatternsActivatedState) {
+                                      return const Divider(
+                                        color: Colors.black,
+                                        thickness: 5.0,
+                                        height: 20.0,
+                                      );
+                                    } else {
+                                      return const Divider(
+                                        color: Colors.transparent,
+                                        thickness: 0.0,
+                                        height: 20.0,
+                                      );
+                                    }
                                   } else {
                                     // Calculate how many dividers come before the current index
                                     int dividersBefore = ((index + 1) / 3).floor();
@@ -260,7 +268,7 @@ class _HomePageState extends State<HomePage>
                                                   levelNumber: levelNumber + 1,
                                                   color: darkPatternsState
                                                           is DarkPatternsDeactivatedState
-                                                      ? Colors.white
+                                                      ? AppColors.getColorLevel(1)
                                                       : AppColors.getColorLevel(levelNumber + 1));
                                             }),
                                           );
@@ -346,7 +354,7 @@ class _HomePageState extends State<HomePage>
                       (10 * 0.75).toInt(),
                       10 * 2,
                       10 * 3,
-                      0
+                      10 * 4,
                     ];
                     setState(() {
                       dailyRewardCollected = true;
