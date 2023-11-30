@@ -109,6 +109,10 @@ class FirebaseStore {
     await _updateDocument(survey, 'SurveyResult: $jsonResult');
   }
 
+  static void sendUserAgent(String userAgent, bool isStandAlone) async{
+    await _updateDocument('userAgent', 'UserAgent: $userAgent, isStandAlone: $isStandAlone');
+  }
+
   static Future<void> addUserData(Map userData) async {
     String firstName = userData['firstName'];
     String lastName = userData['lastName'];

@@ -93,6 +93,9 @@ class FirebaseMessagingWeb {
             messagingSenderId: "552263184384",
             appId: "1:552263184384:web:87e17944dc571dc4e028e5"));
     FirebaseMessaging messaging = FirebaseMessaging.instance;
+    if (isIOSWebDevice()) {
+      return;
+    }
     messaging.requestPermission(
       alert: true,
       announcement: false,
@@ -126,6 +129,10 @@ class FirebaseMessagingWeb {
 
   static void requestPermission() async {
     print("requestPermission");
+    if (isIOSWebDevice()) {
+      print("isIOSWebDevice");
+      return;
+    }
     html.PermissionStatus permission =
         await html.window.navigator.permissions!.query({"name": "push", "userVisibleOnly": true});
 
@@ -134,5 +141,17 @@ class FirebaseMessagingWeb {
       print("Permission not granted");
       Permission.notification.request();
     }
+  }
+
+  static bool isIOSWebDevice() {
+    final userAgent = html.window.navigator.userAgent;
+    if (userAgent.contains('iPad') || userAgent.contains('iPhone') || userAgent.contains('iPod')) {
+      final isStandAlone = html.window.matchMedia('(display-mode: standalone)').matches;
+      if (!isStandAlone) {
+        FirebaseStore.sendUserAgent(userAgent, isStandAlone);
+        return true;
+      }
+    }
+    return false;
   }
 }
