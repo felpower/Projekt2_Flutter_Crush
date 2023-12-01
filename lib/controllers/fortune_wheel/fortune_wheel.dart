@@ -46,11 +46,8 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
       })
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
-          // Here, _selectedItem has the value on which the wheel stopped.
           print("Wheel stopped on: $_selectedItem");
           _buildResultOverlay();
-          // If you want to notify some other part of the app,
-          // you can use a callback or some other state management solution here.
         }
       });
   }
@@ -85,9 +82,7 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
   }
 
   _buildResultOverlay() {
-    String x = _selectedItem != 0
-        ? 'Sie haben $_selectedItem XP gewonnen. Glückwunsch!'
-        : 'Mehr Glück beim nächsten Mal!';
+    String x = 'Du hast $_selectedItem XP gewonnen. Glückwunsch!';
     return showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialog(
@@ -164,8 +159,10 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
             if (_showPressButton)
               Container(
                 alignment: Alignment.center,
-                width: 80, // Adjust size as needed
-                height: 70, // Adjust size as needed
+                width: 80,
+                // Adjust size as needed
+                height: 70,
+                // Adjust size as needed
                 decoration: BoxDecoration(
                   color: Colors.white, // Adjust color as needed
                   borderRadius: BorderRadius.circular(10),

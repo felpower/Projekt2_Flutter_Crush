@@ -46,13 +46,14 @@ dependencies:
   survey_kit: ^0.1.2
   intl: ^0.18.1
   hexcolor: ^3.0.1
-  device_info_plus: ^9.1.0
-  flutter_local_notifications: ^16.1.0
+  url_launcher: ^6.2.1
+  device_info_plus: ^9.1.1
+  flutter_local_notifications: ^16.2.0
   permission_handler: ^11.0.1
-  firebase_core: ^2.22.0
-  firebase_messaging: ^14.7.4
-  firebase_database: ^10.3.4
-  firebase_storage: ^11.5.1
+  firebase_core: ^2.24.0
+  firebase_messaging: ^14.7.6
+  firebase_database: ^10.3.6
+  firebase_storage: ^11.5.3
 
   flutter_web_plugins:
     sdk: flutter
@@ -100,6 +101,7 @@ flutter:
     - assets/instructions/ins_3.png
     - assets/instructions/ins_4.png
     - assets/instructions/ins_5.png
+    - assets/images/others/close.png
     # audio
     - assets/audio/swap.wav
     - assets/audio/move_down.wav

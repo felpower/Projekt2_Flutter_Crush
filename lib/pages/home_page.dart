@@ -12,6 +12,7 @@ import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_state.dar
 import 'package:bachelor_flutter_crush/controllers/fortune_wheel/fortune_wheel.dart';
 import 'package:bachelor_flutter_crush/game_widgets/game_level_button.dart';
 import 'package:bachelor_flutter_crush/gamification_widgets/daystreak_milestone_reached_splash.dart';
+import 'package:bachelor_flutter_crush/helpers/url_helper.dart';
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:bachelor_flutter_crush/services/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -369,6 +370,19 @@ class _HomePageState extends State<HomePage>
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12)), // Rounded corners
                 )),
+          Visibility(
+              visible: true,
+              child: ListTile(
+                leading: const Icon(Icons.token),
+                title: const Text('Imprint'),
+                onTap: () {
+                  UrlHelper.launchURL('https://www.sba-research.org/imprint/');
+                },
+                tileColor: Colors.grey[200],
+                // Background color to make it feel like a button
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)), // Rounded corners
+              )),
         ],
       ),
     );

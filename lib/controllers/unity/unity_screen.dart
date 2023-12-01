@@ -105,7 +105,10 @@ class _UnityScreenState extends State<UnityScreen> {
         child: Visibility(
             visible: !gameOver,
             child: FloatingActionButton(
-              child: const Icon(Icons.close),
+              backgroundColor: Colors.transparent,
+              child: Image.asset(
+                'assets/images/others/close.png',
+              ),
               onPressed: () {
                 showDialog(
                     context: context,
