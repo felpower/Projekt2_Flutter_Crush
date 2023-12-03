@@ -6,7 +6,7 @@ class NonStandalonePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-        title: "Error",
+        title: "Jelly Crush",
         debugShowCheckedModeBanner: false,
         home: Scaffold( body: Center(child:
             Text('Bitte fügen Sie dazu diese Seite auf Ihren Homescreen/Startbildschirm hinzu, '
