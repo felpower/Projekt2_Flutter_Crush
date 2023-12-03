@@ -130,9 +130,7 @@ class FirebaseMessagingWeb {
   }
 
   static void requestPermission() async {
-    print("requestPermission");
     if (DeviceHelper.isIOSWebDevice()) {
-      print("isIOSWebDevice");
       return;
     }
     html.PermissionStatus permission =

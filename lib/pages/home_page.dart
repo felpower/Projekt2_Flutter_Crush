@@ -460,7 +460,6 @@ class _HomePageState extends State<HomePage>
 
   void checkForNotificationClick() {
     Uri currentUrl = Uri.base;
-    print("currentUrl $currentUrl Query Parameter ${currentUrl.queryParameters['source']}");
     if (currentUrl.queryParameters['source'] == 'notification') {
       print("Tapped Notification");
       FirebaseStore.addNotificationTap(DateTime.now());

@@ -23,8 +23,8 @@ void main() async {
       return;
     }
     if (!DeviceHelper.isStandalone()) {
-      runApp(const NonStandalonePage());
-      return;
+      // runApp(const NonStandalonePage());
+      // return;
     }
     await FirebaseMessagingWeb().init();
     FirebaseStore.init();
@@ -39,7 +39,7 @@ void main() async {
 }
 
 Future<bool> checkForMobile() async {
-  //return true; //ToDo: remove return true
+  return true; //ToDo: remove return true
   DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
   var platform = (await deviceInfoPlugin.webBrowserInfo).platform!;
   print(platform);
