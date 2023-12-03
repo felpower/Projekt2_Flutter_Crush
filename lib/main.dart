@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:bachelor_flutter_crush/application.dart';
+import 'package:bachelor_flutter_crush/helpers/device_helper.dart';
 import 'package:bachelor_flutter_crush/pages/non_mobile_page.dart';
+import 'package:bachelor_flutter_crush/pages/non_standalone_page.dart';
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
@@ -16,25 +18,33 @@ void main() async {
     WidgetsFlutterBinding.ensureInitialized();
     usePathUrlStrategy();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+    if (!await checkForMobile()) {
+      runApp(const NonMobilePage());
+      return;
+    }
+    if (!DeviceHelper.isStandalone()) {
+      runApp(const NonStandalonePage());
+      return;
+    }
     await FirebaseMessagingWeb().init();
     FirebaseStore.init();
     window.onBeforeUnload.listen((event) {
       FirebaseStore.addCloseApp(DateTime.now());
     });
-    if (await checkForMobile()) {
-      runApp(const Application());
-    }
+    runApp(const Application());
   }, (error, stackTrace) {
-    FirebaseStore.sendError(error.toString(), stacktrace: stackTrace.toString());
+    FirebaseStore.sendError(error.toString(),
+        stacktrace: stackTrace.toString());
   });
 }
 
 Future<bool> checkForMobile() async {
-  return true; //ToDo: remove return true
+  //return true; //ToDo: remove return true
   DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
   var platform = (await deviceInfoPlugin.webBrowserInfo).platform!;
-  if (equalsIgnoreCase(platform, "macOS") || equalsIgnoreCase(platform, "Win32")) {
-    runApp(const NonMobilePage());
+  print(platform);
+  if (equalsIgnoreCase(platform, "macOS") ||
+      equalsIgnoreCase(platform, "Win32")) {
     return false;
   }
   return true;

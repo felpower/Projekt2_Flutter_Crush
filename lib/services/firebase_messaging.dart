@@ -9,6 +9,8 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:universal_html/html.dart' as html;
 
+import '../helpers/device_helper.dart';
+
 class FirebaseMessagingWeb {
   Future<void> init() async {
     initMobileNotifications();
@@ -93,7 +95,7 @@ class FirebaseMessagingWeb {
             messagingSenderId: "552263184384",
             appId: "1:552263184384:web:87e17944dc571dc4e028e5"));
     FirebaseMessaging messaging = FirebaseMessaging.instance;
-    if (isIOSWebDevice()) {
+    if (DeviceHelper.isIOSWebDevice()) {
       return;
     }
     messaging.requestPermission(
@@ -129,7 +131,7 @@ class FirebaseMessagingWeb {
 
   static void requestPermission() async {
     print("requestPermission");
-    if (isIOSWebDevice()) {
+    if (DeviceHelper.isIOSWebDevice()) {
       print("isIOSWebDevice");
       return;
     }
@@ -143,15 +145,5 @@ class FirebaseMessagingWeb {
     }
   }
 
-  static bool isIOSWebDevice() {
-    final userAgent = html.window.navigator.userAgent;
-    if (userAgent.contains('iPad') || userAgent.contains('iPhone') || userAgent.contains('iPod')) {
-      final isStandAlone = html.window.matchMedia('(display-mode: standalone)').matches;
-      if (!isStandAlone) {
-        FirebaseStore.sendUserAgent(userAgent, isStandAlone);
-        return true;
-      }
-    }
-    return false;
-  }
+
 }
