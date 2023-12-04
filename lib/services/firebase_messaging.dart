@@ -133,15 +133,11 @@ class FirebaseMessagingWeb {
     if (DeviceHelper.isIOSWebDevice()) {
       return;
     }
-    html.PermissionStatus permission =
-        await html.window.navigator.permissions!.query({"name": "push", "userVisibleOnly": true});
-
-    print(permission.state);
-    if (permission.state != "granted") {
+    var request = Permission.notification.request();
+    await html.window.navigator.permissions!.query({"name": "push", "userVisibleOnly": true});
+    if (!await request.isGranted) {
       print("Permission not granted");
       Permission.notification.request();
     }
   }
-
-
 }

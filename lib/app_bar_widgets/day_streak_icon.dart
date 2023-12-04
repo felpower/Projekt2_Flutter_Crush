@@ -12,12 +12,15 @@ class DayStreakIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DarkPatternsBloc, DarkPatternsState>(builder: (context, state) {
-      if (state is DarkPatternsActivatedState) {
+      if (state is! DarkPatternsDeactivatedState) {
         return Padding(
             padding: const EdgeInsets.only(left: 7.5, right: 7.5),
             child: Row(
               children: [
-                const Icon(Icons.local_fire_department),
+                const Tooltip(
+                  message: 'Akutelle Tagesstreak',
+                  child: Icon(Icons.local_fire_department),
+                ),
                 BlocBuilder<DayStreakBloc, DayStreakState>(
                   builder: (context, state) {
                     return Text(state.dayStreak.toString(),

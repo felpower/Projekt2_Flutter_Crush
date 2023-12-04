@@ -106,7 +106,7 @@ class _GameOverSplashState extends State<GameOverSplash> with SingleTickerProvid
                           )),
                     ),
                     BlocBuilder<DarkPatternsBloc, DarkPatternsState>(builder: (context, state) {
-                      if (state is DarkPatternsActivatedState) {
+                      if (state is! DarkPatternsDeactivatedState) {
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [

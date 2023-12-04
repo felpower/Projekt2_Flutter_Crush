@@ -2,6 +2,7 @@ import 'package:bachelor_flutter_crush/pages/under_18_page.dart';
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:survey_kit/survey_kit.dart';
 
 import 'info_page.dart';
@@ -40,7 +41,7 @@ class _SurveyPageState extends State<SurveyPage> {
                         }
                       }
                     }
-                    FirebaseStore.sendSurvey(resultString);
+                    sendSurvey(resultString);
                     Navigator.pop(context);
                     if (int.parse(resultString[0]) >= 18) {
                       Navigator.push(
@@ -167,7 +168,7 @@ class _SurveyPageState extends State<SurveyPage> {
     );
   }
 
-  Future<Task> buildStartSurvey() {
+  Future<Task> buildStartSurvey() async {
     var task = NavigableTask(
       id: TaskIdentifier(),
       steps: [
@@ -460,5 +461,11 @@ class _SurveyPageState extends State<SurveyPage> {
 
   StepIdentifier getStepIdentifier(NavigableTask task, String stepIdentifier) {
     return task.steps.where((e) => e.stepIdentifier.id == stepIdentifier).first.stepIdentifier;
+  }
+
+  void sendSurvey(List<String> resultString)async {
+    FirebaseStore.sendSurvey(resultString);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool("firstTimeStart", false);
   }
 }

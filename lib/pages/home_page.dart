@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage>
     _daystreakMilestoneSubscription =
         flutter_bloc.BlocProvider.of<DayStreakBloc>(context).stream.listen((state) {
       if (state is DayStreakMilestoneState &&
-          darkPatternsBloc.state is DarkPatternsActivatedState) {
+          darkPatternsBloc.state is! DarkPatternsDeactivatedState) {
         OverlayEntry? dayStreakMileStoneSplash;
         dayStreakMileStoneSplash = OverlayEntry(
           builder: (context) {
@@ -145,14 +145,16 @@ class _HomePageState extends State<HomePage>
         actions: [
           flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
             builder: (context, state) {
-              if (state is DarkPatternsActivatedState) {
-                return IconButton(
-                  icon: const Icon(Icons.scoreboard),
-                  onPressed: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (context) => const HighScorePage()));
-                  },
-                );
+              if (state is DarkPatternsActivatedState || state is DarkPatternsCompetitionState) {
+                return Tooltip(
+                    message: 'Highscore',
+                    child: IconButton(
+                      icon: const Icon(Icons.scoreboard),
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => const HighScorePage()));
+                      },
+                    ));
               } else {
                 return Container();
               }
@@ -196,7 +198,7 @@ class _HomePageState extends State<HomePage>
                     children: [
                       flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
                         builder: (context, state) {
-                          if (state is DarkPatternsActivatedState) {
+                          if (state is! DarkPatternsDeactivatedState) {
                             return Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -233,7 +235,8 @@ class _HomePageState extends State<HomePage>
                                   bool isDividerRow = (index + 1) % 3 == 0 && index != 0;
                                   if (isDividerRow) {
                                     // Return a divider for the designated rows
-                                    if (darkPatternsState is DarkPatternsActivatedState) {
+                                    if (darkPatternsState is DarkPatternsActivatedState ||
+                                        darkPatternsState is DarkPatternsCollectionState) {
                                       return const Divider(
                                         color: Colors.black,
                                         thickness: 5.0,
@@ -326,7 +329,7 @@ class _HomePageState extends State<HomePage>
               visible: true,
               child: ListTile(
                 leading: const Icon(Icons.token),
-                title: const Text('Info Page'),
+                title: const Text('Info Seite'),
                 onTap: () {
                   Navigator.push(
                       context, MaterialPageRoute(builder: (context) => const DeviceToken()));
@@ -336,7 +339,8 @@ class _HomePageState extends State<HomePage>
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)), // Rounded corners
               )),
-          if (darkPatternsState is DarkPatternsActivatedState)
+          if (darkPatternsState is DarkPatternsActivatedState ||
+              darkPatternsState is DarkPatternsFoMoState)
             GestureDetector(
                 onTap: () {
                   if (dailyRewardCollected) {
@@ -344,8 +348,8 @@ class _HomePageState extends State<HomePage>
                   }
                 },
                 child: ListTile(
-                  enabled: true,
-                  // enabled: !dailyRewardCollected,
+                  // enabled: true,
+                  enabled: !dailyRewardCollected,
                   leading: const Icon(Icons.card_giftcard),
                   title: const Text('Tägliche Belohnung'),
                   onTap: () {
@@ -449,9 +453,8 @@ class _HomePageState extends State<HomePage>
           return const CircularProgressIndicator();
         });
     FirebaseMessagingWeb.requestPermission();
-    if (prefs.getBool("firstTimeStart") == null) {
+    if (prefs.getBool("firstTimeStart") == null || prefs.getBool("firstTimeStart") == true) {
       FirebaseStore.addInitApp(DateTime.now());
-      prefs.setBool("firstTimeStart", false);
       Navigator.of(context).pushNamed(
         "/startSurvey",
       );

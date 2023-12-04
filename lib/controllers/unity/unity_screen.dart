@@ -209,7 +209,8 @@ class _UnityScreenState extends State<UnityScreen> {
     setState(() {
       fabVisible = false;
     });
-    if (darkPatternsBloc.state is DarkPatternsActivatedState) {
+    if (darkPatternsBloc.state is DarkPatternsActivatedState ||
+        darkPatternsBloc.state is DarkPatternsRewardsState) {
       var xpCoins = 0;
       if (message is int) {
         xpCoins = lvl * message;

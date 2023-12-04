@@ -49,7 +49,7 @@ dependencies:
   url_launcher: ^6.2.1
   device_info_plus: ^9.1.1
   flutter_local_notifications: ^16.2.0
-  permission_handler: ^11.0.1
+  permission_handler: ^11.1.0
   firebase_core: ^2.24.0
   firebase_messaging: ^14.7.6
   firebase_database: ^10.3.6
@@ -92,24 +92,18 @@ flutter:
     # images
     - assets/images/background/background_new.png
     - assets/images/background/background_new2.png
-    - assets/unityLevels.json
     - assets/images/bombs/fish_1.png
     - assets/images/bombs/rainbow_fish.png
     - assets/images/login/login-page.png
+    - assets/images/others/close.png
+    # Instructions
     - assets/instructions/ins_1.png
     - assets/instructions/ins_2.png
     - assets/instructions/ins_3.png
     - assets/instructions/ins_4.png
     - assets/instructions/ins_5.png
-    - assets/images/others/close.png
-    # audio
-    - assets/audio/swap.wav
-    - assets/audio/move_down.wav
-    - assets/audio/bomb.wav
-    - assets/audio/game_start.wav
-    - assets/audio/win.wav
-    - assets/audio/lost.wav
-    # videos
-    - assets/videos/spinning_earth.mp4
+    - assets/instructions/InstallAppAndroid.jpg
+    # levels
+    - assets/unityLevels.json
     # icons
     - assets/icons/tile.png
