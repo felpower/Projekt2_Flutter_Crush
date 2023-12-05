@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pwa_install/pwa_install.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../services/firebase_messaging.dart';
@@ -71,8 +72,8 @@ class _DeviceTokenState extends State<DeviceToken> {
             child: TextField(
                 controller: autohrizationStatus, textAlign: TextAlign.center, readOnly: true),
           ),
-          const Text(
-              '''1.	Spielbrett und Jellies: Das Spielbrett ist ein Gitter mit verschiedenen farbigen Jellies. Jede Jelly hat eine einzigartige Farbe und Form. (siehe Bild)
+          const Text('''1.	Spielbrett und Jellies: Das Spielbrett ist ein Gitter mit verschiedenen 
+              farbigen Jellies. Jedes Jelly hat eine einzigartige Farbe und Form. (siehe Bild)
           '''),
           const Image(image: AssetImage('assets/instructions/ins_1.png'), fit: BoxFit.cover),
           const SizedBox(height: 20),
@@ -99,7 +100,8 @@ class _DeviceTokenState extends State<DeviceToken> {
           const SizedBox(width: 10, height: 20),
           const Text("5.	Bewegungsbegrenzung und Zeitlimit: ",
               style: TextStyle(fontWeight: FontWeight.bold)),
-          const Text('''Einige Level haben eine begrenzte Anzahl von Zügen oder ein Zeitlimit, um die Ziele zu erreichen. Dies wird in dem Kasten links oben auf dem Bildschirm angezeigt.
+          const Text(
+              '''Einige Level haben eine begrenzte Anzahl von Zügen oder ein Zeitlimit, um die Ziele zu erreichen. Dies wird in dem Kasten links oben auf dem Bildschirm angezeigt.
           '''),
           const Image(image: AssetImage('assets/instructions/ins_4.png'), fit: BoxFit.cover),
           const SizedBox(width: 10, height: 20),
@@ -108,7 +110,8 @@ class _DeviceTokenState extends State<DeviceToken> {
 Nutze Booster bzw. Sonderjellies, um schwierige Level zu meistern. Diese können durch Spielverlauf oder Käufe (direkt vor dem Levelstart) erworben werden.'''),
           const Text("7.	Fortschritt und Herausforderungen: ",
               style: TextStyle(fontWeight: FontWeight.bold)),
-          const Text('''Schalte neue Level und Herausforderungen frei, indem du im Spiel fortschreitest.'''),
+          const Text(
+              '''Schalte neue Level und Herausforderungen frei, indem du im Spiel fortschreitest.'''),
           const Text("8.	Startbildschirm: ", style: TextStyle(fontWeight: FontWeight.bold)),
           const Text(
               '''Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)), wie viele XP du hast (2)– diese bestimmten auch den Rang in der Highscore-Tafel (3), sowie die Anzahl an Münzen (4) (diese kannst du nutzen um Booster zu kaufen). Im Menü (5) kannst du diese Instruktionen jederzeit erneut durchlesen, solltest du etwas vergessen haben. 
@@ -118,8 +121,7 @@ Nutze Booster bzw. Sonderjellies, um schwierige Level zu meistern. Diese können
           const Text("Tipps und Tricks: ", style: TextStyle(fontWeight: FontWeight.bold)),
           const Padding(
               padding: EdgeInsets.only(left: 20.0), // Adjust the value for the desired indent
-              child: Text(
-                  '''
+              child: Text('''
 •	Plane deine Züge voraus, um die effektivsten Kombinationen zu erstellen.
 •	Nutze die speziellen Jellies strategisch, um schwierige Bereiche zu meistern.
 •	Halte Ausschau nach unerwarteten Kettenreaktionen.
@@ -129,6 +131,9 @@ Nutze Booster bzw. Sonderjellies, um schwierige Level zu meistern. Diese können
           ElevatedButton(
               child: const Text('Spiel jetzt starten', textAlign: TextAlign.center),
               onPressed: () {
+                PWAInstall().setup(installCallback: () {
+                  debugPrint('APP INSTALLED!');
+                });
                 Navigator.pop(context);
               }),
         ]));

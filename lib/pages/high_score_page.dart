@@ -54,7 +54,6 @@ class HighScoreState extends State<HighScorePage> {
     randomizeHighScore(prefs, update);
     updateUserAndHighScore(prefs);
     sortList();
-    scheduleNotification();
   }
 
   bool checkIfUpdateNeeded(DateTime now, SharedPreferences prefs) {
@@ -94,15 +93,6 @@ class HighScoreState extends State<HighScorePage> {
         users[i].xp = users[i].xp + random.nextInt(xp - users[i].xp); //Make user not loose points
       }
       prefs.setString("highScore", User.encode(users));
-    }
-  }
-
-  void scheduleNotification() {
-    if (users[0].isUser) {
-      print("Notification scheduled for: ${DateTime.now().add(const Duration(minutes: 1))}");
-      //ToDo: Change Notification
-      // ServiceWorkerNotification().sendNotification(
-      //     "Flutter Crush", "You just got passed on the HighScore, play now to pass him again!", 60);
     }
   }
 

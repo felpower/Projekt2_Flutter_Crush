@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bachelor_flutter_crush/application.dart';
 import 'package:bachelor_flutter_crush/helpers/device_helper.dart';
+import 'package:bachelor_flutter_crush/pages/non_standalone_page.dart';
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,8 +21,8 @@ void main() async {
       // return;
     }
     if (!DeviceHelper.isStandalone()) {
-      // runApp(const NonStandalonePage());
-      // return;
+      runApp(const NonStandalonePage());
+      return;
     }
     await FirebaseMessagingWeb().init();
     FirebaseStore.init();

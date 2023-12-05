@@ -18,6 +18,7 @@ import 'package:bachelor_flutter_crush/services/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
+import 'package:pwa_install/pwa_install.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../bloc/bloc_provider.dart';
@@ -141,7 +142,7 @@ class _HomePageState extends State<HomePage>
     return Scaffold(
       appBar: AppBar(
         leading: const DayStreakIcon(1),
-        title: const Text('Flutter Crush'),
+        title: const Text('JellyFun'),
         actions: [
           flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
             builder: (context, state) {
@@ -338,6 +339,15 @@ class _HomePageState extends State<HomePage>
                 // Background color to make it feel like a button
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)), // Rounded corners
+              )),
+          Visibility(
+              visible: true,
+              child: ListTile(
+                leading: const Icon(Icons.token),
+                title: const Text('Installieren'),
+                onTap: () {
+                  PWAInstall().promptInstall_();
+                },
               )),
           if (darkPatternsState is DarkPatternsActivatedState ||
               darkPatternsState is DarkPatternsFoMoState)

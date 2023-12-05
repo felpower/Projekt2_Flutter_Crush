@@ -14,7 +14,7 @@ class HighScoreService {
     User(place: 0, name: 'flutter_pro', xp: 7, isUser: false),
     User(place: 0, name: 'lilly_92', xp: 5, isUser: false),
     User(place: 0, name: 'LisaZ', xp: 4, isUser: false),
-    User(place: 0, name: 'Sabi_3', xp: 3, isUser: false),
+    User(place: 0, name: 'Steffi_3', xp: 3, isUser: false),
     User(place: 0, name: 'Nin4_j', xp: 2, isUser: false),
   ]);
 

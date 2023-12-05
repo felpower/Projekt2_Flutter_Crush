@@ -27,7 +27,7 @@ class Application extends StatelessWidget {
         child: flutter_bloc.MultiBlocProvider(
           providers: _getBlocs(context),
           child: MaterialApp(
-            title: 'Flutter Crush',
+            title: 'JellyFun',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               primarySwatch: Colors.blue,

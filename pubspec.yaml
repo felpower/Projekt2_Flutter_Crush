@@ -54,6 +54,7 @@ dependencies:
   firebase_messaging: ^14.7.6
   firebase_database: ^10.3.6
   firebase_storage: ^11.5.3
+  pwa_install: ^0.0.5
 
   flutter_web_plugins:
     sdk: flutter

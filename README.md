@@ -1,4 +1,4 @@
-# Bachelor Flutter Crush
+# Master JellyFun
 
 A flutter project which includes the implementation of several dark patterns.
 
@@ -76,3 +76,7 @@ Step 3: Send Post requests
 https://forum.unity.com/threads/async-await-and-webgl-builds.472994/page-2#post-6218307
 https://github.com/VolodymyrBS/WebGLThreadingPatcher
 https://github.com/Cysharp/UniTask
+
+###
+Dart Data Class
+Flutter Snippets

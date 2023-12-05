@@ -9,13 +9,13 @@
     <!-- iOS meta tags & icons -->
     <meta content="yes" name="apple-mobile-web-app-capable">
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
-    <meta content="Master Thesis Flutter Crush" name="apple-mobile-web-app-title">
+    <meta content="JellyFun" name="apple-mobile-web-app-title">
     <link href="icons/Icon-192.png" rel="apple-touch-icon">
 
     <!-- Favicon -->
     <link href="favicon.png" rel="icon" type="image/png"/>
 
-    <title>Flutter Crush</title>
+    <title>JellyFun</title>
     <link href="manifest.json" rel="manifest">
     <script>
     // The value below is injected by flutter build, do not touch.
@@ -56,39 +56,6 @@
           });
       }
 
-
-</script>
-<script>
-    let deferredPrompt;
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  // Prevent the mini-infobar from appearing on mobile
-  e.preventDefault();
-  // Save the event so it can be triggered later.
-  deferredPrompt = e;
-  // Update UI notify the user they can install the PWA
-  showInstallPromotion();
-});
-
-buttonInstall.addEventListener('click', (e) => {
-  // Hide the app provided install promotion
-  hideInstallPromotion();
-  // Show the install prompt
-  deferredPrompt.prompt();
-  // Wait for the user to respond to the prompt
-  deferredPrompt.userChoice.then((choiceResult) => {
-    if (choiceResult.outcome === 'accepted') {
-      console.log('User accepted the install prompt');
-    } else {
-      console.log('User dismissed the install prompt');
-    }
-    deferredPrompt = null;
-  });
-});
-
-window.addEventListener('appinstalled', (evt) => {
-  console.log('a2hs installed');
-});
 
 </script>
 </body>
