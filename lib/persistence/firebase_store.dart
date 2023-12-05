@@ -198,7 +198,7 @@ class FirebaseStore {
   }
 
   static String _getRandomString(int length) {
-    return "V0-${DateFormat('yy-MM-dd–kk:mm').format(DateTime.now())}-${String.fromCharCodes
+    return "V00-${DateFormat('yy-MM-dd–kk:mm').format(DateTime.now())}-${String.fromCharCodes
       (Iterable.generate(length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))))}";
   }
 }

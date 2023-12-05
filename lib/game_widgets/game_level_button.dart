@@ -13,7 +13,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../bloc/bloc_provider.dart';
 import '../bloc/game_bloc.dart';
 import '../bloc/reporting_bloc/reporting_bloc.dart';
-import '../gamification_widgets/advertisement_video_player.dart';
 
 class GameLevelButton extends StatelessWidget {
   const GameLevelButton(
@@ -115,16 +114,6 @@ class GameLevelButton extends StatelessWidget {
             levelNumber: levelNumber,
           ),
         ));
-    //ToDo: Put adds before Navigator Push
-    var addState = prefs.getBool("addsActive");
-    if (addState == true) {
-      _showAdvertisement(context);
-    }
-  }
-
-  void _showAdvertisement(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const AdvertisementVideoPlayer()));
   }
 
   void showBuyPowerUpDialog(ReportingBloc reportingBloc, GameBloc gameBloc, LevelBloc levelBloc,

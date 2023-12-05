@@ -1,6 +1,4 @@
 // ignore_for_file: avoid_print
-import 'dart:async';
-
 import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_event.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_bloc.dart';
@@ -40,8 +38,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   late AnimationController _controller;
-  late StreamSubscription _daystreakMilestoneSubscription;
-
   bool dailyRewardCollected = true;
 
   @override
@@ -102,7 +98,6 @@ class _HomePageState extends State<HomePage>
   @override
   void dispose() {
     _controller.dispose();
-    _daystreakMilestoneSubscription.cancel();
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }

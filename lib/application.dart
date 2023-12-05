@@ -3,11 +3,9 @@
 import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_bloc.dart';
-import 'package:bachelor_flutter_crush/bloc/user_state_bloc/day_streak_bloc/day_streak_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/level_bloc/level_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_bloc.dart';
 import 'package:bachelor_flutter_crush/pages/home_page.dart';
-import 'package:bachelor_flutter_crush/pages/start_page.dart';
 import 'package:bachelor_flutter_crush/pages/survey_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
@@ -34,7 +32,6 @@ class Application extends StatelessWidget {
             ),
             home: const HomePage(),
             routes: {
-              '/start': (context) => const StartPage(),
               '/startSurvey': (context) => const SurveyPage(title: "Start"),
               '/endSurvey': (context) => const SurveyPage(title: "End"),
             },
@@ -47,10 +44,6 @@ class Application extends StatelessWidget {
     return [
       flutter_bloc.BlocProvider<CoinBloc>(
           create: (context) => CoinBloc(custom_bloc.BlocProvider.of<GameBloc>(context))),
-      flutter_bloc.BlocProvider<DayStreakBloc>(
-        create: (context) => DayStreakBloc(custom_bloc.BlocProvider.of<GameBloc>(context),
-            flutter_bloc.BlocProvider.of<CoinBloc>(context)),
-      ),
       flutter_bloc.BlocProvider<XpBloc>(
           create: (context) => XpBloc(custom_bloc.BlocProvider.of<GameBloc>(context))),
       flutter_bloc.BlocProvider<HighScoreBloc>(create: (context) => HighScoreBloc()),

@@ -5,9 +5,9 @@ class LevelService {
   static const String powerUp = 'nothing';
   static const int numberOfLevels = 16;
 
-  static addLevel(int levelnumber) async {
+  static addLevel(int levelNumber) async {
     List<int> levels = await getLevels();
-    levels.add(levelnumber);
+    levels.add(levelNumber);
     setLevels(levels);
   }
 

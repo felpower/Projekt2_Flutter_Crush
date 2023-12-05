@@ -1,4 +1,4 @@
-abstract class DailyRewardsState { //ToDo: Daily Rewards Löschen
+abstract class DailyRewardsState {
   final String dailyRewards;
 
   DailyRewardsState(this.dailyRewards);
