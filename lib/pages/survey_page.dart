@@ -173,30 +173,12 @@ class _SurveyPageState extends State<SurveyPage> {
       id: TaskIdentifier(),
       steps: [
         InstructionStep(
-          title: 'Willkommen!',
-          text:
-              'Wenn Sie über 18 Jahre alt sind und an der Studie teilnehmen möchten, klicken Sie bitte auf „Ich bin mit der Studienteilnahme einverstanden.“ und bestätigen so Ihr Einverständnis für die Studienteilnahme. ',
-          buttonText: 'Ich bin mit der Studienteilnahme einverstanden.',
-        ),
-        InstructionStep(
           title: 'Sehr geehrte Studienteilnehmer:innen,',
           text: 'vielen Dank für die Teilnahme an unserer Studie. \n'
               'Im Rahmen der Studie möchten wir das Spielverhalten auf Handy oder Tablet von '
               'Erwachsenen (über 18 Jahre) möglichst realistisch erheben. Daher bitten wir Sie, '
               'auch wenn das Spiel Teil einer Studie ist, dieses genauso zu behandeln, wie jedes '
               'andere Spiel, das Sie auf Ihrem Gerät installiert haben.',
-          buttonText: 'weiter',
-        ),
-        InstructionStep(
-          title: 'Homescreen/Startbildschirm',
-          text: 'Bitte fügen Sie dazu diese Seite auf Ihren Homescreen/Startbildschirm hinzu, '
-              'danach können Sie das Spiel wie jede andere App handhaben. Die Installation '
-              'funktioniert wie folgt: \n'
-              'für Android (alle Handys außer iPhone): Drücken Sie '
-              'auf die drei kleinen Punkte rechts oben auf dem Bildschirm -> App installieren'
-              '\n'
-              'für Apple (iPhone): Drücken Sie auf den „Teilen“-Button (kleines Viereck mit '
-              'dem Pfeil nach oben) -> Option -> zum Home-Bildschirm',
           buttonText: 'weiter',
         ),
         InstructionStep(
@@ -210,6 +192,12 @@ class _SurveyPageState extends State<SurveyPage> {
               'Sie können jederzeit die Studienteilnahme beenden.',
           buttonText: 'weiter',
         ),
+        InstructionStep(
+          title: 'Willkommen!',
+          text:
+          'Wenn Sie über 18 Jahre alt sind und an der Studie teilnehmen möchten, klicken Sie bitte auf „Ich bin mit der Studienteilnahme einverstanden.“ und bestätigen so Ihr Einverständnis für die Studienteilnahme. ',
+          buttonText: 'Ich bin mit der Studienteilnahme einverstanden.',
+        ),
         QuestionStep(
           title: 'Wie alt sind Sie?',
           stepIdentifier: StepIdentifier(id: '1'),
@@ -220,7 +208,7 @@ class _SurveyPageState extends State<SurveyPage> {
           isOptional: false,
         ),
         QuestionStep(
-            title: "Welches Geschlcht haben Sie",
+            title: "Welches Geschlecht haben Sie",
             stepIdentifier: StepIdentifier(id: '2'),
             answerFormat: const SingleChoiceAnswerFormat(
               textChoices: [

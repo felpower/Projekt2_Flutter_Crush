@@ -1,31 +1,26 @@
 // ignore_for_file: avoid_print
 import 'dart:async';
 
-import 'package:bachelor_flutter_crush/app_bar_widgets/day_streak_icon.dart';
 import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_event.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
-import 'package:bachelor_flutter_crush/bloc/user_state_bloc/day_streak_bloc/day_streak_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_state.dart';
 import 'package:bachelor_flutter_crush/controllers/fortune_wheel/fortune_wheel.dart';
 import 'package:bachelor_flutter_crush/game_widgets/game_level_button.dart';
-import 'package:bachelor_flutter_crush/gamification_widgets/daystreak_milestone_reached_splash.dart';
 import 'package:bachelor_flutter_crush/helpers/url_helper.dart';
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:bachelor_flutter_crush/services/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
-import 'package:pwa_install/pwa_install.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../bloc/bloc_provider.dart';
 import '../bloc/game_bloc.dart';
 import '../bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
 import '../bloc/user_state_bloc/coins_bloc/coin_state.dart';
-import '../bloc/user_state_bloc/day_streak_bloc/day_streak_state.dart';
 import '../bloc/user_state_bloc/level_bloc/level_bloc.dart';
 import '../bloc/user_state_bloc/level_bloc/level_state.dart';
 import '../gamification_widgets/credit_panel.dart';
@@ -102,22 +97,6 @@ class _HomePageState extends State<HomePage>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    DarkPatternsBloc darkPatternsBloc = flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context);
-    _daystreakMilestoneSubscription =
-        flutter_bloc.BlocProvider.of<DayStreakBloc>(context).stream.listen((state) {
-      if (state is DayStreakMilestoneState &&
-          darkPatternsBloc.state is! DarkPatternsDeactivatedState) {
-        OverlayEntry? dayStreakMileStoneSplash;
-        dayStreakMileStoneSplash = OverlayEntry(
-          builder: (context) {
-            return DayStreakMilestoneReachedSplash(state.dayStreak, state.addedCoins, () {
-              dayStreakMileStoneSplash?.remove();
-            });
-          },
-        );
-        Overlay.of(context).insert(dayStreakMileStoneSplash);
-      }
-    });
   }
 
   @override
@@ -141,7 +120,6 @@ class _HomePageState extends State<HomePage>
 
     return Scaffold(
       appBar: AppBar(
-        leading: const DayStreakIcon(1),
         title: const Text('JellyFun'),
         actions: [
           flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
@@ -315,7 +293,7 @@ class _HomePageState extends State<HomePage>
             child: Text('Menü'),
           ),
           ListTile(
-            leading: const Icon(Icons.feedback),
+            leading: const Icon(Icons.feedback_outlined),
             title: const Text('Feedback senden'),
             onTap: () {
               Navigator.push(
@@ -329,7 +307,7 @@ class _HomePageState extends State<HomePage>
           Visibility(
               visible: true,
               child: ListTile(
-                leading: const Icon(Icons.token),
+                leading: const Icon(Icons.info),
                 title: const Text('Info Seite'),
                 onTap: () {
                   Navigator.push(
@@ -339,15 +317,6 @@ class _HomePageState extends State<HomePage>
                 // Background color to make it feel like a button
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)), // Rounded corners
-              )),
-          Visibility(
-              visible: true,
-              child: ListTile(
-                leading: const Icon(Icons.token),
-                title: const Text('Installieren'),
-                onTap: () {
-                  PWAInstall().promptInstall_();
-                },
               )),
           if (darkPatternsState is DarkPatternsActivatedState ||
               darkPatternsState is DarkPatternsFoMoState)

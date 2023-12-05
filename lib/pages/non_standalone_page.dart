@@ -1,4 +1,4 @@
-import 'dart:html';
+import 'package:universal_html/html.dart';
 
 import 'package:flutter/material.dart';
 import 'package:pwa_install/pwa_install.dart';
@@ -58,7 +58,7 @@ class _BeforeInstallPrompt extends State<NonStandalonePage> {
                 decoration: TextDecoration.none),
           ),
           Visibility(
-              visible: true,
+              visible: false,
               child: ListTile(
                 leading: const Icon(Icons.token),
                 title: const Text('Installieren'),
@@ -66,12 +66,14 @@ class _BeforeInstallPrompt extends State<NonStandalonePage> {
                   PWAInstall().promptInstall_();
                 },
               )),
-          ElevatedButton(
-            onPressed: () async {
-              await _showPrompt();
-            },
-            child: const Text('Install'),
-          ),
+          Visibility(
+              visible: false,
+              child: ElevatedButton(
+                onPressed: () async {
+                  await _showPrompt();
+                },
+                child: const Text('Install'),
+              )),
         ]))));
   }
 

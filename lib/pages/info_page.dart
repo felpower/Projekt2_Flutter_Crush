@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pwa_install/pwa_install.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../services/firebase_messaging.dart';
@@ -14,7 +13,7 @@ class DeviceToken extends StatefulWidget {
 
 class _DeviceTokenState extends State<DeviceToken> {
   String text = "";
-  TextEditingController autohrizationStatus = TextEditingController();
+  TextEditingController authorizationStatus = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +69,7 @@ class _DeviceTokenState extends State<DeviceToken> {
           Visibility(
             visible: false,
             child: TextField(
-                controller: autohrizationStatus, textAlign: TextAlign.center, readOnly: true),
+                controller: authorizationStatus, textAlign: TextAlign.center, readOnly: true),
           ),
           const Text('''1.	Spielbrett und Jellies: Das Spielbrett ist ein Gitter mit verschiedenen 
               farbigen Jellies. Jedes Jelly hat eine einzigartige Farbe und Form. (siehe Bild)
@@ -129,11 +128,8 @@ Nutze Booster bzw. Sonderjellies, um schwierige Level zu meistern. Diese können
           const Text('''Viel Spaß beim Spielen!
           ''', style: TextStyle(fontWeight: FontWeight.bold)),
           ElevatedButton(
-              child: const Text('Spiel jetzt starten', textAlign: TextAlign.center),
+              child: const Text('Spiel jetzt starten', textAlign: TextAlign.center), //
               onPressed: () {
-                PWAInstall().setup(installCallback: () {
-                  debugPrint('APP INSTALLED!');
-                });
                 Navigator.pop(context);
               }),
         ]));
@@ -141,6 +137,6 @@ Nutze Booster bzw. Sonderjellies, um schwierige Level zu meistern. Diese können
 
   Future<void> getNotification() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    autohrizationStatus.text = (prefs.getString('notificationSettings') ?? 'notSet');
+    authorizationStatus.text = (prefs.getString('notificationSettings') ?? 'notSet');
   }
 }
