@@ -32,7 +32,9 @@ class FirebaseStore {
   static const String initAppStartDate = 'initAppStartDate';
   static const String appCloseTime = 'appCloseTime';
   static const String pushClick = 'pushClick';
-  static const String survey = 'survey';
+  static const String startSurvey = 'startSurvey';
+
+  static const String endSurvey = 'endSurvey';
   static const String completeUserData = 'completeUserData';
   static const String ratingApp = 'rating';
   static const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
@@ -105,22 +107,16 @@ class FirebaseStore {
     await _updateDocument(pushClick, 'Multiplier: $multiplier, Time: $dateTime');
   }
 
-  static void sendSurvey(List<String> jsonResult) async {
-    await _updateDocument(survey, 'SurveyResult: $jsonResult');
+  static void sendStartSurvey(List<String> jsonResult) async {
+    await _updateDocument(startSurvey, 'SurveyResult: $jsonResult');
   }
 
-  static void sendUserAgent(String userAgent, bool isStandAlone) async{
+  static void sendEndSurvey(List<String> jsonResult) async {
+    await _updateDocument(endSurvey, 'SurveyResult: $jsonResult');
+  }
+
+  static void sendUserAgent(String userAgent, bool isStandAlone) async {
     await _updateDocument('userAgent', 'UserAgent: $userAgent, isStandAlone: $isStandAlone');
-  }
-
-  static Future<void> addUserData(Map userData) async {
-    String firstName = userData['firstName'];
-    String lastName = userData['lastName'];
-    String email = userData['email'];
-    String mobile = userData['mobile'];
-    String dob = userData['dob'];
-    await _updateDocument(
-        completeUserData, 'Name: $firstName $lastName, Email: $email, Mobile: $mobile, DOB: $dob');
   }
 
   static Future<void> _updateDocument(String documentPropertyName, String information) async {
@@ -198,7 +194,6 @@ class FirebaseStore {
   }
 
   static String _getRandomString(int length) {
-    return "V00-${DateFormat('yy-MM-dd–kk:mm').format(DateTime.now())}-${String.fromCharCodes
-      (Iterable.generate(length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))))}";
+    return "V00-${DateFormat('yy-MM-dd–kk:mm').format(DateTime.now())}-${String.fromCharCodes(Iterable.generate(length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))))}";
   }
 }

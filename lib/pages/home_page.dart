@@ -7,6 +7,7 @@ import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_bloc.dart
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_state.dart';
 import 'package:bachelor_flutter_crush/game_widgets/game_level_button.dart';
 import 'package:bachelor_flutter_crush/helpers/url_helper.dart';
+import 'package:bachelor_flutter_crush/pages/finished_surevy_page.dart';
 import 'package:bachelor_flutter_crush/persistence/daily_rewards_service.dart';
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:bachelor_flutter_crush/services/firebase_messaging.dart';
@@ -363,6 +364,19 @@ class _HomePageState extends State<HomePage>
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)), // Rounded corners
               )),
+          ListTile(
+            leading: const Icon(Icons.question_mark),
+            title: const Text('End Survey'),
+            onTap: () {
+              Navigator.of(context).pushNamed(
+                "/endSurvey",
+              );
+            },
+            tileColor: Colors.grey[200],
+            // Background color to make it feel like a button
+            shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
+          ),
         ],
       ),
     );
@@ -470,9 +484,12 @@ class _HomePageState extends State<HomePage>
 
   void checkForFirstTimeStart() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.getBool("isUnder18");
     if (prefs.getBool("isUnder18") == true) {
       Navigator.push(context, MaterialPageRoute(builder: (context) => const Under18Page()));
+    }
+    if(prefs.getString("endSurvey") != null){
+      // Navigator.push(context, MaterialPageRoute(builder: (context) => const FinishedSurveyPage()));
+    //ToDo: Change before Release!!!!!!!!!!
     }
     FutureBuilder<String>(
         future: FirebaseMessagingWeb.getToken(),
