@@ -195,7 +195,7 @@ class _SurveyPageState extends State<SurveyPage> {
         InstructionStep(
           title: 'Willkommen!',
           text:
-          'Wenn Sie über 18 Jahre alt sind und an der Studie teilnehmen möchten, klicken Sie bitte auf „Ich bin mit der Studienteilnahme einverstanden.“ und bestätigen so Ihr Einverständnis für die Studienteilnahme. ',
+              'Wenn Sie über 18 Jahre alt sind und an der Studie teilnehmen möchten, klicken Sie bitte auf „Ich bin mit der Studienteilnahme einverstanden.“ und bestätigen so Ihr Einverständnis für die Studienteilnahme. ',
           buttonText: 'Ich bin mit der Studienteilnahme einverstanden.',
         ),
         QuestionStep(
@@ -451,9 +451,12 @@ class _SurveyPageState extends State<SurveyPage> {
     return task.steps.where((e) => e.stepIdentifier.id == stepIdentifier).first.stepIdentifier;
   }
 
-  void sendSurvey(List<String> resultString)async {
-    FirebaseStore.sendSurvey(resultString);
+  void sendSurvey(List<String> resultString) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool("firstTimeStart", false);
+    var now = DateTime.now();
+    FirebaseStore.addInitApp(now);
+    FirebaseStore.sendSurvey(resultString);
+    prefs.setBool("firstStart", false);
+    prefs.setString("firstStartTime", now.toString());
   }
 }

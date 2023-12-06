@@ -21,7 +21,9 @@ class GameLevelButton extends StatelessWidget {
       this.width = 60.0,
       this.height = 60.0,
       this.borderRadius = 50.0,
-      required this.color})
+      required this.color,
+      required this.buntJelly,
+      required this.stripeJelly})
       : super(key: key);
 
   final int levelNumber;
@@ -29,6 +31,8 @@ class GameLevelButton extends StatelessWidget {
   final double height;
   final double borderRadius;
   final Color color;
+  final int buntJelly;
+  final int stripeJelly;
   final lvlPrice = 500;
   static const tntPrice = 100;
   static const minePrice = 200;
@@ -42,9 +46,8 @@ class GameLevelButton extends StatelessWidget {
     final ReportingBloc reportingBloc = flutter_bloc.BlocProvider.of<ReportingBloc>(context);
     final darkPatternsState = flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context).state;
     bool disabled = !levelBloc.state.levels.contains(levelNumber);
-
     return InkWell(
-      onTap: () async {
+      onTap: () {
         disabled
             ? showBuyLevelDialog(levelBloc, coinBloc, darkPatternsState, context)
             : showBuyPowerUpDialog(
@@ -172,7 +175,8 @@ class GameLevelButton extends StatelessWidget {
                             'assets/images/bombs/fish_1.png',
                             height: 30,
                           ),
-                          label: const Text('$tntPrice\$', style: TextStyle(color: Colors.black)),
+                          label: Text(stripeJelly == 0 ? '$tntPrice\$' : 'kostenlos',
+                              style: const TextStyle(color: Colors.black)),
                         ),
                         const SizedBox(height: 10),
                         ElevatedButton.icon(
@@ -181,7 +185,8 @@ class GameLevelButton extends StatelessWidget {
                                 "Rainbow", minePrice, coinBloc, reportingBloc, gameBloc, context);
                           },
                           icon: Image.asset('assets/images/bombs/rainbow_fish.png', height: 30),
-                          label: const Text('$minePrice\$', style: TextStyle(color: Colors.black)),
+                          label: Text(buntJelly == 0 ? '$minePrice\$' : 'kostenlos',
+                              style: const TextStyle(color: Colors.black)),
                         ),
                         const SizedBox(height: 10),
                         ElevatedButton(
@@ -201,6 +206,11 @@ class GameLevelButton extends StatelessWidget {
     if (coinBloc.state.amount >= powerUpPrice) {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString("powerUp", item);
+      if (item.contains("Clear")) {
+        prefs.setInt("stripeJelly", stripeJelly - 1);
+      } else if (item.contains("Rainbow")) {
+        prefs.setInt("buntJelly", buntJelly - 1);
+      }
       coinBloc.add(RemoveCoinsEvent(powerUpPrice));
       Navigator.pop(context, 'OK');
       await openGame(reportingBloc, gameBloc, prefs, context);

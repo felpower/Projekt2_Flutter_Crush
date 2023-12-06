@@ -5,9 +5,9 @@ import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/d
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_state.dart';
-import 'package:bachelor_flutter_crush/controllers/fortune_wheel/fortune_wheel.dart';
 import 'package:bachelor_flutter_crush/game_widgets/game_level_button.dart';
 import 'package:bachelor_flutter_crush/helpers/url_helper.dart';
+import 'package:bachelor_flutter_crush/persistence/daily_rewards_service.dart';
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:bachelor_flutter_crush/services/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -39,6 +39,9 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   late AnimationController _controller;
   bool dailyRewardCollected = true;
+
+  int todaysAmount = 0;
+  String todaysType = 'x';
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -240,14 +243,17 @@ class _HomePageState extends State<HomePage>
                                             child: flutter_bloc.BlocBuilder<LevelBloc, LevelState>(
                                                 builder: (context, state) {
                                               return GameLevelButton(
-                                                  width: 80.0,
-                                                  height: 60.0,
-                                                  borderRadius: 50.0,
-                                                  levelNumber: levelNumber + 1,
-                                                  color: darkPatternsState
-                                                          is DarkPatternsDeactivatedState
-                                                      ? AppColors.getColorLevel(1)
-                                                      : AppColors.getColorLevel(levelNumber + 1));
+                                                width: 80.0,
+                                                height: 60.0,
+                                                borderRadius: 50.0,
+                                                levelNumber: levelNumber + 1,
+                                                color: darkPatternsState
+                                                        is DarkPatternsDeactivatedState
+                                                    ? AppColors.getColorLevel(1)
+                                                    : AppColors.getColorLevel(levelNumber + 1),
+                                                buntJelly: buntJelly,
+                                                stripeJelly: stripeJelly,
+                                              );
                                             }),
                                           );
                                         } else {
@@ -318,30 +324,21 @@ class _HomePageState extends State<HomePage>
             GestureDetector(
                 onTap: () {
                   if (dailyRewardCollected) {
-                    _showDailyRewardsCollectedDialog();
+                    _showDailyRewardsCollectedDialog(dailyRewardCollected);
                   }
                 },
                 child: ListTile(
-                  // enabled: true,
-                  enabled: !dailyRewardCollected,
+                  enabled: true,
+                  // enabled: !dailyRewardCollected,
                   leading: const Icon(Icons.card_giftcard),
                   title: const Text('Tägliche Belohnung'),
                   onTap: () {
-                    List<int> itemList = [
-                      10,
-                      (10 * 0.5).toInt(),
-                      (10 * 0.75).toInt(),
-                      10 * 2,
-                      10 * 3,
-                      10 * 4,
-                    ];
                     setState(() {
                       dailyRewardCollected = true;
                       setDailyRewards();
                       FirebaseStore.collectedDailyRewards(DateTime.now());
                     });
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => FortuneWheel(items: itemList)));
+                    _showDailyRewardsCollectedDialog(!dailyRewardCollected);
                   },
                   tileColor: Colors.grey[200],
                   // Background color to make it feel like a button
@@ -367,13 +364,16 @@ class _HomePageState extends State<HomePage>
   }
 
   late int difference;
+  late int buntJelly;
+  late int stripeJelly;
 
   void loadDailyReward() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     var dailyReward = sp.getString("dailyRewards");
+    var firstTimeStart = sp.getString("firstStartTime");
+
     if (dailyReward == null) {
       dailyRewardCollected = false;
-      setDailyRewards();
     }
     if (dailyReward != null) {
       setState(() {
@@ -381,34 +381,84 @@ class _HomePageState extends State<HomePage>
       });
       if (difference >= 24) {
         dailyRewardCollected = false;
-        setDailyRewards();
       }
+    }
+    setState(() {
+      buntJelly = sp.getInt("buntJelly") ?? 0;
+      stripeJelly = sp.getInt("stripeJelly") ?? 0;
+    });
+    if (firstTimeStart == null) {
+      var todaysReward = DailyRewardsService.getTodaysReward(1);
+      todaysAmount = todaysReward['amount'];
+      todaysType = todaysReward['type'];
+    } else {
+      var daysSinceStart = DateTime.now().difference(DateTime.parse(firstTimeStart)).inDays;
+      var todaysReward = DailyRewardsService.getTodaysReward(daysSinceStart + 1);
+      todaysAmount = todaysReward['amount'];
+      todaysType = todaysReward['type'];
     }
   }
 
   void setDailyRewards() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     sp.setString("dailyRewards", DateTime.now().toString());
+    if (todaysType.contains('bunt')) {
+      sp.setInt("buntJelly", buntJelly += todaysAmount);
+    } else if (todaysType.contains('gestreift')) {
+      sp.setInt("stripeJelly", stripeJelly += todaysAmount);
+    }
   }
 
-  void _showDailyRewardsCollectedDialog() {
+  void _showDailyRewardsCollectedDialog(bool dailyRewardCollected) {
     var actualDifference = 24 - difference;
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Tägliche Belohnung bereits abgeholt'),
-          content: Text('Tägliche Belohnung können wieder in $actualDifference Stunden abgeholt '
-              'werden'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
+    if (dailyRewardCollected) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Tägliche Belohnung bereits abgeholt'),
+            content: Text('Tägliche Belohnung können wieder in $actualDifference Stunden abgeholt '
+                'werden'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Deine tägliche Belohnung'),
+            content: todaysType.contains('Sonderjelly')
+                ? Wrap(children: [
+                    Text('Heute hast du $todaysAmount $todaysType'),
+                    todaysType.contains('bunt')
+                        ? Image.asset(
+                            'assets/images/bombs/rainbow_fish.png',
+                            height: 30,
+                          )
+                        : Image.asset(
+                            'assets/images/bombs/fish_1.png',
+                            height: 30,
+                          ),
+                    const Text(' erhalten. Komm morgen wieder!'),
+                  ])
+                : Text('Heute hast du $todaysAmount $todaysType erhalten. Komm morgen wieder!'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   void checkForFirstTimeStart() async {
@@ -427,8 +477,7 @@ class _HomePageState extends State<HomePage>
           return const CircularProgressIndicator();
         });
     FirebaseMessagingWeb.requestPermission();
-    if (prefs.getBool("firstTimeStart") == null || prefs.getBool("firstTimeStart") == true) {
-      FirebaseStore.addInitApp(DateTime.now());
+    if (prefs.getBool("firstStart") == null || prefs.getBool("firstStart") == true) {
       Navigator.of(context).pushNamed(
         "/startSurvey",
       );
