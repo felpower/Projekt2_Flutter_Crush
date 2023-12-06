@@ -412,7 +412,7 @@ class _SurveyPageState extends State<SurveyPage> {
               ],
             )),
         QuestionStep(
-            title: "Was ist ihnen aufgefallen?",
+            title: "Ist Ihnen etwas aufgefallen?",
             stepIdentifier: StepIdentifier(id: '7'),
             answerFormat: const MultipleChoiceAnswerFormat(
               textChoices: [
@@ -477,6 +477,7 @@ class _SurveyPageState extends State<SurveyPage> {
             title:
                 "Möchten Sie zu dieser Studie oder zum besseren Verständnis Ihrer Antworten noch etwas anmerken?",
             stepIdentifier: StepIdentifier(id: '13'),
+            isOptional: true,
             answerFormat: const TextAnswerFormat()),
         CompletionStep(
           stepIdentifier: StepIdentifier(id: '14'),
