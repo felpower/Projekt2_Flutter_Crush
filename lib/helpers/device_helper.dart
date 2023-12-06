@@ -31,7 +31,6 @@ class DeviceHelper {
   static Future<bool> isMobile() async {
     DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
     var platform = (await deviceInfoPlugin.webBrowserInfo).platform!;
-    print(platform);
     if (equalsIgnoreCase(platform, "macOS") ||
         equalsIgnoreCase(platform, "Win32") ||
         equalsIgnoreCase(platform, "Win32") ||

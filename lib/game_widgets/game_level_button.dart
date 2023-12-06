@@ -36,7 +36,6 @@ class GameLevelButton extends StatelessWidget {
   final lvlPrice = 500;
   static const tntPrice = 100;
   static const minePrice = 200;
-  static const wrappedPrice = 1000;
 
   @override
   Widget build(BuildContext context) {
@@ -127,7 +126,6 @@ class GameLevelButton extends StatelessWidget {
             ? AlertDialog(
                 title: const Text('Level starten'),
                 content: const Wrap(
-                  //ToDo: Remove Const, and enable power ups
                   children: [
                     Text('Wollen Sie das aktuelle Level starten?'),
                   ],
@@ -149,8 +147,7 @@ class GameLevelButton extends StatelessWidget {
                     Align(
                       alignment: Alignment.center,
                       child: Text(
-                        'Um einen Booster auszuwählen, klicken Sie auf den entsprechenden Button, '
-                        'oder starten Sie das Spiel ohne einen Booster indem Sie auf "Spiel starten" klicken',
+                        'Um einen Booster auszuwählen klicke bitte auf den entsprechenden Button oder starte das Spiel ohne Booster indem du auf "Spiel starten" klickst.',
                         textAlign: TextAlign.center, // Center align the text
                       ),
                     )
@@ -203,34 +200,34 @@ class GameLevelButton extends StatelessWidget {
 
   Future<void> buyPowerUp(item, powerUpPrice, CoinBloc coinBloc, ReportingBloc reportingBloc,
       GameBloc gameBloc, BuildContext context) async {
-    if (coinBloc.state.amount >= powerUpPrice) {
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString("powerUp", item);
-      if (item.contains("Clear")) {
-        prefs.setInt("stripeJelly", stripeJelly - 1);
-      } else if (item.contains("Rainbow")) {
-        prefs.setInt("buntJelly", buntJelly - 1);
-      }
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("powerUp", item);
+    if (item.contains("Clear") && stripeJelly > 0) {
+      prefs.setInt("stripeJelly", stripeJelly - 1);
+    } else if (item.contains("Rainbow") && buntJelly > 0) {
+      prefs.setInt("buntJelly", buntJelly - 1);
+    } else if (coinBloc.state.amount >= powerUpPrice) {
       coinBloc.add(RemoveCoinsEvent(powerUpPrice));
-      Navigator.pop(context, 'OK');
-      await openGame(reportingBloc, gameBloc, prefs, context);
     } else {
       showDialog(
           context: context,
           builder: (BuildContext context) => AlertDialog(
-                title: const Text('Nicht genug Münzen um dieses PowerUp zu kaufen'),
-                content: const Text('Sie können Münzen durch Spielen der Levels erhalten'),
-                elevation: 24,
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(16))),
-                actions: <Widget>[
-                  TextButton(
-                    onPressed: () => {Navigator.pop(context, 'Ok')},
-                    child: const Text('OK'),
-                  )
-                ],
-              ));
+            title: const Text('Nicht genug Münzen um dieses PowerUp zu kaufen'),
+            content: const Text('Sie können Münzen durch Spielen der Levels erhalten'),
+            elevation: 24,
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(16))),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => {Navigator.pop(context, 'Ok')},
+                child: const Text('OK'),
+              )
+            ],
+          ));
+      return;
     }
+    Navigator.pop(context, 'OK');
+    await openGame(reportingBloc, gameBloc, prefs, context);
   }
 
   void showBuyLevelDialog(LevelBloc levelBloc, CoinBloc coinBloc,

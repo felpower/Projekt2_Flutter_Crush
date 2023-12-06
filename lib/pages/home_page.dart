@@ -250,7 +250,9 @@ class _HomePageState extends State<HomePage>
                                                 borderRadius: 50.0,
                                                 levelNumber: levelNumber + 1,
                                                 color: darkPatternsState
-                                                        is DarkPatternsDeactivatedState
+                                                            is! DarkPatternsActivatedState &&
+                                                        darkPatternsState
+                                                            is! DarkPatternsCollectionState
                                                     ? AppColors.getColorLevel(1)
                                                     : AppColors.getColorLevel(levelNumber + 1),
                                                 buntJelly: buntJelly,
@@ -331,6 +333,7 @@ class _HomePageState extends State<HomePage>
                 },
                 child: ListTile(
                   enabled: true,
+                  //ToDo: change to dailyRewardsCollected
                   // enabled: !dailyRewardCollected,
                   leading: const Icon(Icons.card_giftcard),
                   title: const Text('Tägliche Belohnung'),
@@ -408,9 +411,9 @@ class _HomePageState extends State<HomePage>
       sp.setInt("buntJelly", buntJelly += todaysAmount);
     } else if (todaysType.contains('gestreift')) {
       sp.setInt("stripeJelly", stripeJelly += todaysAmount);
-    } else if (todaysType.contains("XP")){
+    } else if (todaysType.contains("XP")) {
       flutter_bloc.BlocProvider.of<XpBloc>(context).add(AddXpEvent(todaysAmount));
-    } else if (todaysType.contains("\$")){
+    } else if (todaysType.contains("\$")) {
       flutter_bloc.BlocProvider.of<CoinBloc>(context).add(AddCoinsEvent(todaysAmount));
     }
   }
@@ -442,17 +445,15 @@ class _HomePageState extends State<HomePage>
             title: const Text('Deine tägliche Belohnung'),
             content: todaysType.contains('Sonderjelly')
                 ? Wrap(children: [
-                    Text('Heute hast du $todaysAmount $todaysType'),
-                    todaysType.contains('bunt')
-                        ? Image.asset(
-                            'assets/images/bombs/rainbow_fish.png',
-                            height: 30,
-                          )
-                        : Image.asset(
-                            'assets/images/bombs/fish_1.png',
-                            height: 30,
-                          ),
-                    const Text(' erhalten. Komm morgen wieder!'),
+                    Text('Heute hast du $todaysAmount $todaysType erhalten. Komm morgen wieder!'),
+                    Center(
+                      child: Image.asset(
+                        todaysType.contains('bunt')
+                            ? 'assets/images/bombs/rainbow_fish.png'
+                            : 'assets/images/bombs/fish_1.png',
+                        height: 30,
+                      ),
+                    ),
                   ])
                 : Text('Heute hast du $todaysAmount $todaysType erhalten. Komm morgen wieder!'),
             actions: [

@@ -136,7 +136,6 @@ class FirebaseMessagingWeb {
     var request = Permission.notification.request();
     await html.window.navigator.permissions!.query({"name": "push", "userVisibleOnly": true});
     if (!await request.isGranted) {
-      print("Permission not granted");
       Permission.notification.request();
     }
   }

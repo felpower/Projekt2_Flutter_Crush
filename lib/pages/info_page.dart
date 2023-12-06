@@ -113,7 +113,7 @@ Nutze Booster bzw. Sonderjellies, um schwierige Level zu meistern. Diese können
               '''Schalte neue Level und Herausforderungen frei, indem du im Spiel fortschreitest.'''),
           const Text("8.	Startbildschirm: ", style: TextStyle(fontWeight: FontWeight.bold)),
           const Text(
-              '''Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)), wie viele XP du hast (2)– diese bestimmten auch den Rang in der Highscore-Tafel (3), sowie die Anzahl an Münzen (4) (diese kannst du nutzen um Booster zu kaufen). Im Menü (5) kannst du diese Instruktionen jederzeit erneut durchlesen, solltest du etwas vergessen haben. 
+              '''Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)), wie viele XP du hast (2), sowie die Anzahl an Münzen (3) (diese kannst du nutzen um Booster zu kaufen). Im Menü (4) kannst du diese Instruktionen jederzeit erneut durchlesen, solltest du etwas vergessen haben. 
           '''),
           const Image(image: AssetImage('assets/instructions/ins_5.png'), fit: BoxFit.cover),
           const SizedBox(width: 10, height: 20),

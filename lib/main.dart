@@ -17,7 +17,7 @@ void main() async {
     WidgetsFlutterBinding.ensureInitialized();
     usePathUrlStrategy();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
-    if (!await DeviceHelper.isMobile()) {
+    if (!await DeviceHelper.isMobile()) {//ToDo: activate for release!!!!!!!
       // runApp(const NonMobilePage());
       // return;
     }

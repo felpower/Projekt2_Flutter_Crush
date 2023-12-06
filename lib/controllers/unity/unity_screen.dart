@@ -54,7 +54,6 @@ class _UnityScreenState extends State<UnityScreen> {
   bool gameOver = false;
   late bool _gameOverReceived;
   bool fabVisible = true;
-  late StreamSubscription _gameOverSubscription;
 
   @override
   void initState() {
@@ -84,14 +83,10 @@ class _UnityScreenState extends State<UnityScreen> {
 
     // Now that the context is available, retrieve the gameBloc
     gameBloc = BlocProvider.of<GameBloc>(context);
-
-    // Listen to "game over" notification
-    _gameOverSubscription = gameIsOver.listen(showGameOver);
   }
 
   @override
   dispose() {
-    _gameOverSubscription.cancel();
     unityWidgetController?.dispose();
     super.dispose();
   }
@@ -209,23 +204,22 @@ class _UnityScreenState extends State<UnityScreen> {
     setState(() {
       fabVisible = false;
     });
+    var xpCoins = 0;
+    if (message is int) {
+      xpCoins = lvl * message;
+    } else {
+      xpCoins = lvl * int.parse(message.replaceAll(RegExp(r'[^0-9]'), ''));
+    }
     if (darkPatternsBloc.state is DarkPatternsActivatedState ||
         darkPatternsBloc.state is DarkPatternsRewardsState) {
-      var xpCoins = 0;
-      if (message is int) {
-        xpCoins = lvl * message;
-      } else {
-        xpCoins = lvl * int.parse(message.replaceAll(RegExp(r'[^0-9]'), ''));
-      }
       showFortuneWheel(xpCoins);
     } else if (darkPatternsBloc.state is DarkPatternsDeactivatedState) {
       Future.delayed(const Duration(seconds: 3), () {
         Navigator.of(context).pop();
       });
     } else {
-      Future.delayed(const Duration(seconds: 3), () {
-        Navigator.of(context).pop();
-      });
+      gameBloc.gameOver(xpCoins);
+      showGameOver(true);
     }
     gameOver = true;
   }
@@ -336,6 +330,7 @@ class _UnityScreenState extends State<UnityScreen> {
     if (_gameOverReceived) {
       return;
     }
+    await Future.delayed(const Duration(seconds: 4));
     _gameOverReceived = true;
     _gameSplash = OverlayEntry(
         opaque: false,
