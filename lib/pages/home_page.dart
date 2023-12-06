@@ -18,9 +18,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../bloc/bloc_provider.dart';
 import '../bloc/game_bloc.dart';
 import '../bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
+import '../bloc/user_state_bloc/coins_bloc/coin_event.dart';
 import '../bloc/user_state_bloc/coins_bloc/coin_state.dart';
 import '../bloc/user_state_bloc/level_bloc/level_bloc.dart';
 import '../bloc/user_state_bloc/level_bloc/level_state.dart';
+import '../bloc/user_state_bloc/xp_bloc/xp_event.dart';
 import '../gamification_widgets/credit_panel.dart';
 import '../helpers/app_colors.dart';
 import 'feedback_page.dart';
@@ -41,7 +43,7 @@ class _HomePageState extends State<HomePage>
   bool dailyRewardCollected = true;
 
   int todaysAmount = 0;
-  String todaysType = 'x';
+  String todaysType = '';
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -406,12 +408,16 @@ class _HomePageState extends State<HomePage>
       sp.setInt("buntJelly", buntJelly += todaysAmount);
     } else if (todaysType.contains('gestreift')) {
       sp.setInt("stripeJelly", stripeJelly += todaysAmount);
+    } else if (todaysType.contains("XP")){
+      flutter_bloc.BlocProvider.of<XpBloc>(context).add(AddXpEvent(todaysAmount));
+    } else if (todaysType.contains("\$")){
+      flutter_bloc.BlocProvider.of<CoinBloc>(context).add(AddCoinsEvent(todaysAmount));
     }
   }
 
   void _showDailyRewardsCollectedDialog(bool dailyRewardCollected) {
-    var actualDifference = 24 - difference;
     if (dailyRewardCollected) {
+      var actualDifference = 24 - difference;
       showDialog(
         context: context,
         builder: (context) {

@@ -1,5 +1,3 @@
-import 'package:shared_preferences/shared_preferences.dart';
-
 class DailyRewardsService {
   static List<Map<String, dynamic>> rewards = [
     {'tag': 1, 'amount': 15, 'type': 'XP'},

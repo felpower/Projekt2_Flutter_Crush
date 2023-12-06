@@ -19,41 +19,11 @@ class GameBloc implements BlocBase {
 
   GameBloc._internal();
 
-  // Max number of tiles per row (and per column)
-  static double kMaxTilesPerRowAndColumn = 12.0;
-  static double kMaxTilesSize = 28.0;
-
-  //
-  // Controller that emits a boolean value to trigger the display of the tiles
-  // at game load is ready.  This is done as soon as this BLoC receives the
-  // dimensions/position of the board as well as the dimensions of a tile
-  //
-  final BehaviorSubject<bool> _readyToDisplayTilesController = BehaviorSubject<bool>();
-
-  Function get setReadyToDisplayTiles => _readyToDisplayTilesController.sink.add;
-
-  Stream<bool> get outReadyToDisplayTiles => _readyToDisplayTilesController.stream;
-
-  //
-  // Controller aimed at processing the Objective events
-  //
-
-  //
-  // Controller that emits a boolean value to notify that a game is over
-  // the boolean value indicates whether the game is won (=true) or lost (=false)
-  //
   final PublishSubject<int> _gameIsOverController = PublishSubject<int>();
 
   Stream<int> get gameIsOver => _gameIsOverController.stream;
 
-  //
-  // Controller that emits the number of moves left for the game
-  //
-  final PublishSubject<int> _movesLeftController = PublishSubject<int>();
-
-  Stream<int> get movesLeftCount => _movesLeftController.stream;
-
-  final PublishSubject<int> _maxLevelNumber = PublishSubject<int>();
+    final PublishSubject<int> _maxLevelNumber = PublishSubject<int>();
 
   Stream<int> get maxLevelNumber => _maxLevelNumber.stream;
 
@@ -95,8 +65,6 @@ class GameBloc implements BlocBase {
 
   @override
   void dispose() {
-    _readyToDisplayTilesController.close();
     _gameIsOverController.close();
-    _movesLeftController.close();
   }
 }

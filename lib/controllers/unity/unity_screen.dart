@@ -218,6 +218,10 @@ class _UnityScreenState extends State<UnityScreen> {
         xpCoins = lvl * int.parse(message.replaceAll(RegExp(r'[^0-9]'), ''));
       }
       showFortuneWheel(xpCoins);
+    } else if (darkPatternsBloc.state is DarkPatternsDeactivatedState) {
+      Future.delayed(const Duration(seconds: 3), () {
+        Navigator.of(context).pop();
+      });
     } else {
       Future.delayed(const Duration(seconds: 3), () {
         Navigator.of(context).pop();
@@ -329,7 +333,6 @@ class _UnityScreenState extends State<UnityScreen> {
   }
 
   void showGameOver(bool success) async {
-    // Prevent from bubbling
     if (_gameOverReceived) {
       return;
     }
