@@ -103,7 +103,8 @@ flutter:
     - assets/instructions/ins_3.png
     - assets/instructions/ins_4.png
     - assets/instructions/ins_5.png
-    - assets/instructions/InstallAppAndroid.jpg
+    - assets/instructions/InstallAndroid.png
+    - assets/instructions/InstallIOS.png
     # levels
     - assets/unityLevels.json
     # icons
