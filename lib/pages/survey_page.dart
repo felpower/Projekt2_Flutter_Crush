@@ -38,7 +38,9 @@ class _SurveyPageState extends State<SurveyPage> {
                     for (var stepResult in result.results) {
                       for (var questionResult in stepResult.results) {
                         if (questionResult.result != null && questionResult.result != "") {
-                          resultString.add(questionResult.valueIdentifier.toString());
+                          resultString.add(
+                              "[${questionResult.id?.id.toString()}]-${questionResult
+                                  .valueIdentifier}");
                         }
                       }
                     }

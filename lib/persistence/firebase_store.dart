@@ -42,16 +42,6 @@ class FirebaseStore {
 
   static Future<void> init() async {
     await _getUuid();
-    await Firebase.initializeApp(
-        options: const FirebaseOptions(
-            apiKey: "AIzaSyCcBYFUJbTyRWUjy6dhLbLLEj_lwhqnsh4",
-            authDomain: "darkpatterns-ac762.firebaseapp.com",
-            databaseURL:
-                "https://darkpatterns-ac762-default-rtdb.europe-west1.firebasedatabase.app",
-            projectId: "darkpatterns-ac762",
-            storageBucket: "darkpatterns-ac762.appspot.com",
-            messagingSenderId: "552263184384",
-            appId: "1:552263184384:web:87e17944dc571dc4e028e5"));
     addUser();
   }
 

@@ -9,7 +9,6 @@ import 'package:bachelor_flutter_crush/pages/home_page.dart';
 import 'package:bachelor_flutter_crush/pages/survey_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'bloc/bloc_provider.dart' as custom_bloc;
 import 'bloc/game_bloc.dart';
@@ -40,7 +39,6 @@ class Application extends StatelessWidget {
   }
 
   List<flutter_bloc.BlocProvider> _getBlocs(BuildContext context) {
-    setRatingAndAdds();
     return [
       flutter_bloc.BlocProvider<CoinBloc>(
           create: (context) => CoinBloc(custom_bloc.BlocProvider.of<GameBloc>(context))),
@@ -52,17 +50,5 @@ class Application extends StatelessWidget {
       flutter_bloc.BlocProvider<ReportingBloc>(create: (context) => ReportingBloc()),
       flutter_bloc.BlocProvider<DarkPatternsBloc>(create: (context) => DarkPatternsBloc())
     ];
-  }
-
-  void setRatingAndAdds() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (prefs.getBool("addsActive") == null) {
-      print("Setting adds to active");
-      prefs.setBool("addsActive", false);
-    }
-    if (prefs.getBool("hasRated") == null) {
-      print("Setting Rated to false");
-      prefs.setBool("hasRated", false); //FixMe: adds and rating are still null
-    }
   }
 }

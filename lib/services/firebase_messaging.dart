@@ -13,8 +13,8 @@ import '../helpers/device_helper.dart';
 
 class FirebaseMessagingWeb {
   Future<void> init() async {
-    initMobileNotifications();
     await initializeFirebase();
+    initMobileNotifications();
     setupInteractedMessage();
     getToken();
   }
@@ -84,16 +84,6 @@ class FirebaseMessagingWeb {
 
   static Future<void> initializeFirebase() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await Firebase.initializeApp(
-        options: const FirebaseOptions(
-            apiKey: "AIzaSyCcBYFUJbTyRWUjy6dhLbLLEj_lwhqnsh4",
-            authDomain: "darkpatterns-ac762.firebaseapp.com",
-            databaseURL:
-                "https://darkpatterns-ac762-default-rtdb.europe-west1.firebasedatabase.app",
-            projectId: "darkpatterns-ac762",
-            storageBucket: "darkpatterns-ac762.appspot.com",
-            messagingSenderId: "552263184384",
-            appId: "1:552263184384:web:87e17944dc571dc4e028e5"));
     FirebaseMessaging messaging = FirebaseMessaging.instance;
     if (DeviceHelper.isIOSWebDevice()) {
       return;
@@ -118,13 +108,16 @@ class FirebaseMessagingWeb {
   }
 
   static Future<String> getToken() async {
-    String? token = await FirebaseMessaging.instance.getToken(
+    try {String? token = await FirebaseMessaging.instance.getToken(
         vapidKey:
             "BKC1rzsuRtguEMKZrLseyxnKXMqT2vAZ0J3VK8ooClS9AUj4ujC_aRYxTnRHudJv5vIMvaCoUukDLbjAWaGSOO4");
     if (token != null) {
       FirebaseStore.currentPushToken(token);
       return token;
     } else {
+      return "No token found, please reload page";
+    }} catch(e) {
+      print(e);
       return "No token found, please reload page";
     }
   }

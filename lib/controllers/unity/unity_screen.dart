@@ -234,7 +234,7 @@ class _UnityScreenState extends State<UnityScreen> {
       1
     ];
 
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 5), () {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => FortuneWheel(items: itemList),
       ));
