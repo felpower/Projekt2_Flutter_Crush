@@ -7,7 +7,6 @@ import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_bloc.dart
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_state.dart';
 import 'package:bachelor_flutter_crush/game_widgets/game_level_button.dart';
 import 'package:bachelor_flutter_crush/helpers/url_helper.dart';
-import 'package:bachelor_flutter_crush/pages/finished_surevy_page.dart';
 import 'package:bachelor_flutter_crush/persistence/daily_rewards_service.dart';
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:bachelor_flutter_crush/services/firebase_messaging.dart';
@@ -27,6 +26,7 @@ import '../bloc/user_state_bloc/xp_bloc/xp_event.dart';
 import '../gamification_widgets/credit_panel.dart';
 import '../helpers/app_colors.dart';
 import 'feedback_page.dart';
+import 'finished_surevy_page.dart';
 import 'high_score_page.dart';
 import 'info_page.dart';
 import 'under_18_page.dart';
@@ -333,9 +333,9 @@ class _HomePageState extends State<HomePage>
                   }
                 },
                 child: ListTile(
-                  enabled: true,
+                  // enabled: true,
                   //ToDo: change to dailyRewardsCollected
-                  // enabled: !dailyRewardCollected,
+                  enabled: !dailyRewardCollected,
                   leading: const Icon(Icons.card_giftcard),
                   title: const Text('Tägliche Belohnung'),
                   onTap: () {
@@ -375,7 +375,7 @@ class _HomePageState extends State<HomePage>
             tileColor: Colors.grey[200],
             // Background color to make it feel like a button
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
           ),
         ],
       ),
@@ -487,9 +487,14 @@ class _HomePageState extends State<HomePage>
     if (prefs.getBool("isUnder18") == true) {
       Navigator.push(context, MaterialPageRoute(builder: (context) => const Under18Page()));
     }
-    if(prefs.getString("endSurvey") != null){
+    if (prefs.getString("endSurvey") != null) {
       // Navigator.push(context, MaterialPageRoute(builder: (context) => const FinishedSurveyPage()));
-    //ToDo: Change before Release!!!!!!!!!!
+      //ToDo: Change before Release!!!!!!!!!!
+    }
+    if (DateTime.now().isAfter(DateTime(2023, 12, 23))) {
+      Navigator.of(context).pushNamed(
+        "/endSurvey",
+      );
     }
     FutureBuilder<String>(
         future: FirebaseMessagingWeb.getToken(),
