@@ -39,7 +39,7 @@ class _SurveyPageState extends State<SurveyPage> {
                       for (var questionResult in stepResult.results) {
                         if (questionResult.result != null && questionResult.result != "") {
                           resultString.add(
-                              "[${questionResult.id?.id.toString()}]-${questionResult
+                              "ID: ${questionResult.id?.id.toString()}-${questionResult
                                   .valueIdentifier}");
                         }
                       }
@@ -47,7 +47,7 @@ class _SurveyPageState extends State<SurveyPage> {
                     if (widget.title.contains("Start")) {
                       sendStartSurvey(resultString);
                       Navigator.pop(context);
-                      if (int.parse(resultString[0]) >= 18) {
+                      if (int.parse(resultString[0].split("-").last) >= 18) {
                         Navigator.push(
                             context, MaterialPageRoute(builder: (context) => const DeviceToken()));
                       } else {
