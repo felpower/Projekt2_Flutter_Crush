@@ -6,11 +6,11 @@
             "xDim": 6,
             "yDim": 6,
             "numMoves": 20,
-            "score1": 1500,
+            "score1": 100,
             "score2": 1800,
             "score3": 2100,
             "targetScore": 2100,
-            "timeInSeconds": 60,
+            "timeInSeconds": 10,
             "numOfObstacles": 10,
             "obstacleTypes": [
                 "Blue"

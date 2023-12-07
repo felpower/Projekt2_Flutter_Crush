@@ -55,6 +55,8 @@ class _UnityScreenState extends State<UnityScreen> {
   late bool _gameOverReceived;
   bool fabVisible = true;
 
+  late StreamSubscription _gameOverSubscription;
+
   @override
   void initState() {
     super.initState();
@@ -83,10 +85,14 @@ class _UnityScreenState extends State<UnityScreen> {
 
     // Now that the context is available, retrieve the gameBloc
     gameBloc = BlocProvider.of<GameBloc>(context);
+
+    // Listen to "game over" notification
+    _gameOverSubscription = gameIsOver.listen(showGameOver);
   }
 
   @override
   dispose() {
+    _gameOverSubscription.cancel();
     unityWidgetController?.dispose();
     super.dispose();
   }
@@ -220,6 +226,9 @@ class _UnityScreenState extends State<UnityScreen> {
     } else {
       gameBloc.gameOver(xpCoins);
       showGameOver(true);
+      Future.delayed(const Duration(seconds: 3), () {
+        Navigator.of(context).pop();
+      });
     }
     gameOver = true;
   }
@@ -248,10 +257,13 @@ class _UnityScreenState extends State<UnityScreen> {
     gameOver = true;
     gameBloc.gameOver(0);
     _gameIsOverController.sink.add(false);
+    showGameOver(false);
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.of(context).pop();
+    });
   }
 
   void onUnityMessage(message) {
-    print('Received message from unity: ${message.toString()}');
     if (message.startsWith("checkReady")) {
       unityReady = true;
     }
@@ -330,8 +342,9 @@ class _UnityScreenState extends State<UnityScreen> {
     if (_gameOverReceived) {
       return;
     }
-    await Future.delayed(const Duration(seconds: 4));
     _gameOverReceived = true;
+    await Future.delayed(const Duration(seconds: 3));
+    print("Showing GameOver $success");
     _gameSplash = OverlayEntry(
         opaque: false,
         builder: (BuildContext context) {
@@ -339,13 +352,9 @@ class _UnityScreenState extends State<UnityScreen> {
             success: success,
             onComplete: () {
               _gameSplash.remove();
-              Navigator.of(context).pop();
             },
           );
         });
-    setState(() {
-      fabVisible = false;
-    });
     Overlay.of(context).insert(_gameSplash);
   }
 

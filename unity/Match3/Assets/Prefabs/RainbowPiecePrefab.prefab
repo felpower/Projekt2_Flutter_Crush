@@ -77,7 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorSprites:
   - color: 6
-    sprite: {fileID: 21300000, guid: 1821a6662eede764c9e9e39ad5fb798a, type: 3}
+    sprite: {fileID: 21300000, guid: e4942e29b15bbc64893e35b937a39656, type: 3}
 --- !u!61 &61295522026893800
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -104,7 +104,7 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
             ));
   }
 
-  void showGameOver(bool success) async {
+  void showGameOver(bool success) {
     // Prevent from bubbling
     _gameSplash = OverlayEntry(
         opaque: false,
