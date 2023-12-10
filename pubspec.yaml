@@ -108,4 +108,4 @@ flutter:
     # levels
     - assets/unityLevels.json
     # icons
-    - assets/icons/tile.png
+    - assets/icons/android-chrome-512x512.png
