@@ -333,8 +333,6 @@ class _HomePageState extends State<HomePage>
                   }
                 },
                 child: ListTile(
-                  // enabled: true,
-                  //ToDo: change to dailyRewardsCollected
                   enabled: !dailyRewardCollected,
                   leading: const Icon(Icons.card_giftcard),
                   title: const Text('Tägliche Belohnung'),
@@ -488,8 +486,7 @@ class _HomePageState extends State<HomePage>
       Navigator.push(context, MaterialPageRoute(builder: (context) => const Under18Page()));
     }
     if (prefs.getString("endSurvey") != null) {
-      // Navigator.push(context, MaterialPageRoute(builder: (context) => const FinishedSurveyPage()));
-      //ToDo: Change before Release!!!!!!!!!!
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const FinishedSurveyPage()));
     }
     if (DateTime.now().isAfter(DateTime(2023, 12, 23))) {
       Navigator.of(context).pushNamed(

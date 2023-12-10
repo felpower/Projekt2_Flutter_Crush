@@ -62,12 +62,4 @@ class _BeforeInstallPrompt extends State<NonStandalonePage> {
                   image: AssetImage('assets/instructions/InstallAndroid.png'), fit: BoxFit.cover)
         ]))));
   }
-
-  _showPrompt() async {
-    await deferredPrompt?.prompt();
-    await deferredPrompt?.userChoice;
-    setState(() {
-      deferredPrompt = null;
-    });
-  }
 }

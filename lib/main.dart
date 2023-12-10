@@ -27,13 +27,13 @@ void main() async {
             storageBucket: "darkpatterns-ac762.appspot.com",
             messagingSenderId: "552263184384",
             appId: "1:552263184384:web:87e17944dc571dc4e028e5"));
-    if (!await DeviceHelper.isMobile()) {//ToDo: activate for release!!!!!!!
-      // runApp(const NonMobilePage());
-      // return;
+    if (!await DeviceHelper.isMobile()) {
+      runApp(const NonMobilePage());
+      return;
     }
     if (!DeviceHelper.isStandalone()) {
-      // runApp(const NonStandalonePage());
-      // return;
+      runApp(const NonStandalonePage());
+      return;
     }
     await FirebaseMessagingWeb().init();
     await FirebaseStore.init();
