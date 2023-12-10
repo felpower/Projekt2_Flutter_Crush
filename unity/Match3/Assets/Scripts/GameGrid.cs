@@ -110,14 +110,20 @@ namespace Match3 {
 			InstantiatePieces();
 		}
 
-		private float Remap(float value, float from1, float to1, float from2, float to2) {
+		private static float Remap(float value, float from1, float to1, float from2, float to2) {
 			return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
 		}
 
-		private void InstantiatePieces() {
+		private void InstantiatePieces(bool firstTime = true) {
 			_pieces = new GamePiece[xDim, yDim];
+			print("Spawn Bubbles");
 			var sceneInfo = SceneInfoExtensions.GetAsSceneInfo();
-			if (sceneInfo.type == LevelType.Obstacle.ToString()) {
+			if (!level.isFlutter && firstTime) {
+				SpawnBubbles(10);
+				level.SetNumOfObstacles();
+			}
+
+			if (sceneInfo.type == LevelType.Obstacle.ToString() && firstTime) {
 				SpawnBubbles(sceneInfo.numOfObstacles);
 				level.SetNumOfObstacles();
 			}
@@ -311,8 +317,7 @@ namespace Match3 {
 									print("Found Move at Row: " + row + ", Col: " + col + ", Color " +
 									      piece1.ColorComponent.Color +
 									      ". With Row: " + row + " Col: " + (col + 1) + ", Color: " +
-									      piece2.ColorComponent.Color +
-									      ".");
+									      piece2.ColorComponent.Color + ".");
 									return true;
 								}
 
@@ -337,8 +342,7 @@ namespace Match3 {
 									print("Found Move at Row: " + row + ", Col: " + col + ", Color " +
 									      piece1.ColorComponent.Color +
 									      ". With Row: " + (row + 1) + " Col: " + col + ", Color: " +
-									      piece2.ColorComponent.Color +
-									      ".");
+									      piece2.ColorComponent.Color + ".");
 									return true;
 								}
 
@@ -662,12 +666,17 @@ namespace Match3 {
 		}
 
 		private bool ClearPiece(int x, int y, bool includePoints = true, bool clearBubble = true) {
-			if (!_pieces[x, y].IsClearable() || _pieces[x, y].ClearableComponent.IsBeingCleared) return false;
+			if (_pieces[x, y] == null) {
+				return false;
+			}
 
+			if (!_pieces[x, y].IsClearable() || _pieces[x, y].ClearableComponent.IsBeingCleared) return false;
 			_pieces[x, y].ClearableComponent.Clear(includePoints);
 			SpawnNewPiece(x, y, PieceType.Empty);
-			if (clearBubble)
+
+			if (clearBubble) {
 				ClearObstacles(x, y);
+			}
 
 			return true;
 		}
@@ -695,8 +704,9 @@ namespace Match3 {
 		public void ClearAll() {
 			for (var x = 0; x < xDim; x++)
 				for (var y = 0; y < yDim; y++)
-					ClearPiece(x, y, false);
-			InstantiatePieces();
+					if (_pieces[x, y].Type != PieceType.Bubble) // Check if the piece is not a bubble before clearing
+						ClearPiece(x, y, false, false);
+			StartCoroutine(Fill());
 			_checkedMoves = false;
 			StopCoroutine(_checkMovesCoroutine);
 			_timeWhenWeNextDoSomething = Time.time + TimeBetweenDoingSomething;

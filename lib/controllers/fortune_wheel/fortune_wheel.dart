@@ -82,7 +82,7 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
   }
 
   _buildResultOverlay() {
-    String x = 'Du hast $_selectedItem XP gewonnen. Glückwunsch!';
+    String x = 'Du hast $_selectedItem XP und \$ gewonnen. Glückwunsch!';
     return showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialog(
@@ -121,14 +121,20 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/images/background/background_new.png'),
-          fit: BoxFit.cover,
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Drehe um XP und \$ zu erhalten'),
+        automaticallyImplyLeading: false,
       ),
-      child: _buildFortuneWheel(),
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/background/background_new.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: _buildFortuneWheel(),
+      ),
     );
   }
 

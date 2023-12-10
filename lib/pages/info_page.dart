@@ -71,7 +71,8 @@ class _DeviceTokenState extends State<DeviceToken> {
             child: TextField(
                 controller: authorizationStatus, textAlign: TextAlign.center, readOnly: true),
           ),
-          const Text('''1.	Spielbrett und Jellies: Das Spielbrett ist ein Gitter mit verschiedenen 
+          const Text('''1.	Spielbrett und Jellies: ''', style: TextStyle(fontWeight: FontWeight.bold)),
+          const Text('''Das Spielbrett ist ein Gitter mit verschiedenen 
               farbigen Jellies. Jedes Jelly hat eine einzigartige Farbe und Form. (siehe Bild)
           '''),
           const Image(image: AssetImage('assets/instructions/ins_1.png'), fit: BoxFit.cover),
@@ -86,11 +87,14 @@ class _DeviceTokenState extends State<DeviceToken> {
           const Padding(
               padding: EdgeInsets.only(left: 20.0), // Adjust the value for the desired indent
               child: Text(
-                  '''•	Kombiniere 4 Jellies, um ein spezielles Jelly zu erhalten, das eine ganze Reihe oder Spalte löschen kann. 
-  Bild Sonderjelly einfügen!
-  •	Kombiniere 5 Jellies in einem T- oder L-Form, um ein Regenbogen-Jelly zu bekommen, das alle Jellies einer bestimmten Farbe vom Brett entfernt.
-  Bild Sonderjelly einfügen!
-''')),
+                  '''•	Kombiniere 4 Jellies, um ein spezielles Jelly zu erhalten, das eine ganze Reihe oder Spalte löschen kann. ''')),
+          const Image(image: AssetImage('assets/images/bombs/jelly_gelb.png'), height: 30),
+          const Padding(
+              padding: EdgeInsets.only(left: 20.0), // Adjust the value for the desired indent
+              child: Text(
+                  '''
+  •	Kombiniere 5 Jellies in einer T- oder L-Form, um ein Regenbogen-Jelly zu bekommen, das alle   Jellies einer bestimmten Farbe vom Brett entfernt.''')),
+          const Image(image: AssetImage('assets/images/bombs/jelly_bunt.png'), height: 30),
           const Text("4.	Levelziele:", style: TextStyle(fontWeight: FontWeight.bold)),
           const Text(
               '''Jedes Level hat spezifische Ziele, wie das Erreichen einer bestimmten Punktzahl, das Sammeln einer Anzahl von bestimmten Jellies oder das Entfernen von Hindernissen. Das jeweilige Ziel wird in dem Kasten rechts oben auf dem Bildschirm angezeigt
@@ -107,10 +111,12 @@ class _DeviceTokenState extends State<DeviceToken> {
           const Text("6.	Booster: ", style: TextStyle(fontWeight: FontWeight.bold)),
           const Text('''
 Nutze Booster bzw. Sonderjellies, um schwierige Level zu meistern. Diese können durch Spielverlauf oder Käufe (direkt vor dem Levelstart) erworben werden.'''),
+          const SizedBox(width: 10, height: 20),
           const Text("7.	Fortschritt und Herausforderungen: ",
               style: TextStyle(fontWeight: FontWeight.bold)),
           const Text(
               '''Schalte neue Level und Herausforderungen frei, indem du im Spiel fortschreitest.'''),
+          const SizedBox(width: 10, height: 20),
           const Text("8.	Startbildschirm: ", style: TextStyle(fontWeight: FontWeight.bold)),
           const Text(
               '''Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)), wie viele XP du hast (2), sowie die Anzahl an Münzen (3) (diese kannst du nutzen um Booster zu kaufen). Im Menü (4) kannst du diese Instruktionen jederzeit erneut durchlesen, solltest du etwas vergessen haben. 

@@ -389,7 +389,7 @@ class _SurveyPageState extends State<SurveyPage> {
               ],
             )),
         InstructionStep(
-            title: "Spieldauer",
+            title: "",
             stepIdentifier: StepIdentifier(id: '4'),
             text:
                 "Inwiefern hatten Sie das Gefühl, Ihr Spielverhalten sei möglicherweise beeinflusst worden?"),
@@ -414,7 +414,8 @@ class _SurveyPageState extends State<SurveyPage> {
               ],
             )),
         QuestionStep(
-            title: "Ist Ihnen etwas aufgefallen?",
+            title:
+                "Bei welchen dieser Features hatten Sie den Eindruck, dass davon Ihr Spielverhalten beeinflusst wurde?",
             stepIdentifier: StepIdentifier(id: '7'),
             answerFormat: const MultipleChoiceAnswerFormat(
               textChoices: [
@@ -428,23 +429,8 @@ class _SurveyPageState extends State<SurveyPage> {
               ],
             )),
         QuestionStep(
-            title:
-                "Bei welchen dieser Features hatten Sie den Eindruck, dass davon Ihr Spielverhalten beeinflusst wurde?",
-            stepIdentifier: StepIdentifier(id: '8'),
-            answerFormat: const MultipleChoiceAnswerFormat(
-              textChoices: [
-                TextChoice(text: 'Tägliche Belohnung zum Einsammeln', value: '1'),
-                TextChoice(text: 'Variable Belohnungen (=Glücksrad)', value: '2'),
-                TextChoice(text: 'Punktetabelle mit Rangfolge der Spieler*innen', value: '3'),
-                TextChoice(text: 'Push-Nachrichten die zum Spielen animieren', value: '4'),
-                TextChoice(text: 'Level waren in Blöcken angeordnet', value: '5'),
-                TextChoice(text: 'alle der genannten', value: '6'),
-                TextChoice(text: 'keines der genannten ', value: '0'),
-              ],
-            )),
-        QuestionStep(
             title: "Haben Sie Push-Nachrichten erhalten?",
-            stepIdentifier: StepIdentifier(id: '9'),
+            stepIdentifier: StepIdentifier(id: '8'),
             answerFormat: const SingleChoiceAnswerFormat(
               textChoices: [
                 TextChoice(text: 'Ja', value: '1'),
@@ -453,7 +439,7 @@ class _SurveyPageState extends State<SurveyPage> {
             )),
         QuestionStep(
             title: "Wie empfanden Sie die Häufigkeit der Push-Nachrichten?",
-            stepIdentifier: StepIdentifier(id: '10'),
+            stepIdentifier: StepIdentifier(id: '9'),
             answerFormat: const SingleChoiceAnswerFormat(
               textChoices: [
                 TextChoice(text: 'Zu selten', value: '0'),
@@ -463,7 +449,7 @@ class _SurveyPageState extends State<SurveyPage> {
             )),
         QuestionStep(
             title: "Wie passend war(en) die Uhrzeit(en) der Push-Nachricht(en) für Sie?",
-            stepIdentifier: StepIdentifier(id: '11'),
+            stepIdentifier: StepIdentifier(id: '10'),
             answerFormat: const SingleChoiceAnswerFormat(
               textChoices: [
                 TextChoice(text: 'Sehr passend', value: '0'),
@@ -473,19 +459,19 @@ class _SurveyPageState extends State<SurveyPage> {
             )),
         QuestionStep(
             title: "Welche Uhrzeit(en) wäre(n) besser gewesen?",
-            stepIdentifier: StepIdentifier(id: '12'),
+            stepIdentifier: StepIdentifier(id: '11'),
             answerFormat: const TextAnswerFormat()),
         QuestionStep(
             title:
                 "Möchten Sie zu dieser Studie oder zum besseren Verständnis Ihrer Antworten noch etwas anmerken?",
-            stepIdentifier: StepIdentifier(id: '13'),
+            stepIdentifier: StepIdentifier(id: '12'),
             isOptional: true,
             answerFormat: const TextAnswerFormat()),
         CompletionStep(
-          stepIdentifier: StepIdentifier(id: '14'),
+          stepIdentifier: StepIdentifier(id: '13'),
           text:
-              'Vielen Dank für Ihre Teilnahme! Diese Studie diente dem Erfassen von natürlichem Spielverhalten bei Handy/Tabletspielen und dem Einfluss sogenannter Dark Patterns. Unter Dark Patterns versteht man Features/Eigenschaften des Spiels, die dazu dienen sollen, den Spieler zu häufigerem oder längerem Spielen zu animieren oder Geld für oder im Spiel auszugeben. Mit Ihrer Teilnahme leisten Sie einen wichtigen Beitrag dazu, den Einfluss solcher Dark Patterns noch genauer zu verstehen. Damit können Spieler in Zukunft besser über deren Auswirkungen aufgeklärt und das Spielen solcher Spiele sicherer gestaltet werden.',
-          title: 'Fertig!',
+              '',
+          title: '',
           buttonText: 'Studie beenden',
         ),
       ],
@@ -506,31 +492,31 @@ class _SurveyPageState extends State<SurveyPage> {
       navigationRule: ConditionalNavigationRule(resultToStepIdentifierMapper: (input) {
         switch (input) {
           case "0":
-            return task.steps[14].stepIdentifier;
+            return task.steps[13].stepIdentifier;
           default:
             return task.steps[4].stepIdentifier;
         }
       }),
     );
     task.addNavigationRule(
-      forTriggerStepIdentifier: task.steps[9].stepIdentifier,
+      forTriggerStepIdentifier: task.steps[10].stepIdentifier,
       navigationRule: ConditionalNavigationRule(resultToStepIdentifierMapper: (input) {
         switch (input) {
           case "0":
-            return task.steps[13].stepIdentifier;
+            return task.steps[12].stepIdentifier;
           default:
-            return task.steps[10].stepIdentifier;
+            return task.steps[9].stepIdentifier;
         }
       }),
     );
     task.addNavigationRule(
-      forTriggerStepIdentifier: task.steps[11].stepIdentifier,
+      forTriggerStepIdentifier: task.steps[10].stepIdentifier,
       navigationRule: ConditionalNavigationRule(resultToStepIdentifierMapper: (input) {
         switch (input) {
           case "0":
-            return task.steps[13].stepIdentifier;
-          default:
             return task.steps[12].stepIdentifier;
+          default:
+            return task.steps[11].stepIdentifier;
         }
       }),
     );

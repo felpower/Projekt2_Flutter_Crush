@@ -65,7 +65,7 @@ namespace Match3 {
 			StartCoroutine(WaitForGridFill());
 		}
 
-		public void ShufflePieces() { gameGrid.ClearAll(); }
+		public virtual void ShufflePieces() { gameGrid.ClearAll(); }
 
 		public void NoMoreMoves() { UnityMessageManager.Instance.SendMessageToFlutter("Shuffle No more moves"); }
 

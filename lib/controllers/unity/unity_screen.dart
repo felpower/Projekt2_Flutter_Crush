@@ -236,8 +236,8 @@ class _UnityScreenState extends State<UnityScreen> {
   void showFortuneWheel(int xpCoins) async {
     List<int> itemList = [
       xpCoins,
-      (xpCoins * 0.5).toInt(),
-      (xpCoins * 0.75).toInt(),
+      (xpCoins * 0.5).ceil(),
+      (xpCoins * 0.75).ceil(),
       xpCoins * 2,
       xpCoins * 3,
       1

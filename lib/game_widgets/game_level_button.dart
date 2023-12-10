@@ -169,7 +169,7 @@ class GameLevelButton extends StatelessWidget {
                                 "Clear", tntPrice, coinBloc, reportingBloc, gameBloc, context);
                           },
                           icon: Image.asset(
-                            'assets/images/bombs/fish_1.png',
+                            'assets/images/bombs/jelly_gelb.png',
                             height: 30,
                           ),
                           label: Text(stripeJelly == 0 ? '$tntPrice\$' : 'kostenlos',
@@ -181,7 +181,7 @@ class GameLevelButton extends StatelessWidget {
                             buyPowerUp(
                                 "Rainbow", minePrice, coinBloc, reportingBloc, gameBloc, context);
                           },
-                          icon: Image.asset('assets/images/bombs/rainbow_fish.png', height: 30),
+                          icon: Image.asset('assets/images/bombs/jelly_bunt.png', height: 30),
                           label: Text(buntJelly == 0 ? '$minePrice\$' : 'kostenlos',
                               style: const TextStyle(color: Colors.black)),
                         ),
