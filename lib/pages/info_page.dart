@@ -81,8 +81,8 @@ class _DeviceTokenState extends State<DeviceToken> {
           ),
           const Text('''1.	Spielbrett und Jellies: ''',
               style: TextStyle(fontWeight: FontWeight.bold)),
-          const Text('''Das Spielbrett ist ein Gitter mit verschiedenen 
-              farbigen Jellies. Jedes Jelly hat eine einzigartige Farbe und Form. (siehe Bild)
+          const Text(
+              '''Das Spielbrett ist ein Gitter mit verschiedenen farbigen Jellies. Jedes Jelly hat eine einzigartige Farbe und Form. (siehe Bild)
           '''),
           const Image(image: AssetImage('assets/instructions/ins_1.png'), fit: BoxFit.cover),
           const SizedBox(height: 20),
@@ -128,17 +128,17 @@ Nutze Booster bzw. Sonderjellies, um schwierige Level zu meistern. Diese können
           const Text("8.	Startbildschirm: ", style: TextStyle(fontWeight: FontWeight.bold)),
           darkPatternsState is DarkPatternsActivatedState
               ? const Text(
-                  ''': Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)), wie viele XP du hast (2)– diese bestimmten auch den Rang in der Highscore-Tafel (3), sowie die Anzahl an Münzen (4) (diese kannst du nutzen um Booster zu kaufen). Im Menü (5) kannst du diese Instruktionen jederzeit erneut durchlesen, solltest du etwas vergessen haben. ''')
+                  '''Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)), wie viele XP du hast (2)– diese bestimmten auch den Rang in der Highscore-Tafel (3), sowie die Anzahl an Münzen (4) (diese kannst du nutzen um Booster zu kaufen). Im Menü (5) kannst du diese Instruktionen jederzeit erneut durchlesen, solltest du etwas vergessen haben. ''')
               : const Text(
-                  ''': Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)), wie viele Münzen du hast (2) (diese kannst du nutzen um Booster zu kaufen). Im Menü (3) kannst du diese Instruktionen jederzeit erneut durchlesen, solltest du etwas vergessen haben. '''),
+                  '''Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)), wie viele Münzen du hast (2) (diese kannst du nutzen um Booster zu kaufen). Im Menü (3) kannst du diese Instruktionen jederzeit erneut durchlesen, solltest du etwas vergessen haben. '''),
           const SizedBox(width: 10, height: 20),
           darkPatternsState is DarkPatternsActivatedState
               ? const Image(image: AssetImage('assets/instructions/ins_5.png'), fit: BoxFit.cover)
               : const Image(
                   image: AssetImage('assets/instructions/ins_5_alt.png'), fit: BoxFit.cover),
           const SizedBox(width: 10, height: 20),
-          const Text('''Im Rahmen der Pilotstudie hast du außerdem auf dem Startbildschirm im Menü 
-              rechts oben einen Punkt „Feedback“. Nutze diesen bitte, sollte dir im Rahmen der Pilotstudie eine Störung oder irgendetwas anderes auffallen, dass dein Spielerlebnis behindert oder beeinflusst. Danke!'''),
+          const Text(
+              '''Im Rahmen der Pilotstudie hast du außerdem auf dem Startbildschirm im Menü rechts oben einen Punkt „Feedback“. Nutze diesen bitte, sollte dir im Rahmen der Pilotstudie eine Störung oder irgendetwas anderes auffallen, dass dein Spielerlebnis behindert oder beeinflusst. Danke!'''),
           const SizedBox(width: 10, height: 20),
           const Text("Tipps und Tricks: ", style: TextStyle(fontWeight: FontWeight.bold)),
           const Padding(

@@ -341,7 +341,6 @@ class _UnityScreenState extends State<UnityScreen> {
     }
     _gameOverReceived = true;
     await Future.delayed(const Duration(seconds: 3));
-    print("Showing GameOver $success");
     _gameSplash = OverlayEntry(
         opaque: false,
         builder: (BuildContext context) {

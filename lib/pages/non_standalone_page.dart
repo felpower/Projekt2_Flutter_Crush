@@ -34,24 +34,43 @@ class _BeforeInstallPrompt extends State<NonStandalonePage> {
         home: Scaffold(
             body: Center(
                 child: ListView(padding: const EdgeInsets.all(20), children: [
+          const Text('Um an der Studie teilnehmen zu können',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: Colors.black,
+                  backgroundColor: Colors.white,
+                  decoration: TextDecoration.none)),
+          const Text(
+              ' fügen Sie bitte jetzt diese Seite auf Ihrem Smartphone ODER Tablet (nicht'
+              ' beides!) auf Ihren Homescreen/Startbildschirm hinzu.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  backgroundColor: Colors.white,
+                  decoration: TextDecoration.none)),
+          const Text(
+              'Im Anschluss können Sie die Seite bzw. das Spiel wie jede gewöhnliche '
+              'App handhaben. Die Installation funktioniert wie folgt (siehe auch Bild):',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: Colors.black,
+                  backgroundColor: Colors.white,
+                  decoration: TextDecoration.none)),
           isIosDevice
               ? const Text(
-                  'Um mit der Studie teilnehmen zu können fügen Sie bitte jetzt diese Seite auf Ihren Homescreen/Startbildschirm hinzu. '
-                  'Im Anschluss können Sie die Seite bzw. das Spiel wie jede gewöhnliche App handhaben. Die Installation funktionier wie folgt (siehe auch Bild):'
-                  'Drücken Sie auf den „Teilen“-Button (kleine Viereck mit dem Pfeil nach '
-                  'oben)   Option  zum Home-Bildschirm',
+                  'Drücken Sie auf den „Teilen“-Button (kleine Viereck mit dem Pfeil nach oben) ->'
+                  ' Option -> zum Home-Bildschirm',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontWeight: FontWeight.bold,
                       color: Colors.black,
                       backgroundColor: Colors.white,
                       decoration: TextDecoration.none))
               : const Text(
-                  'Um mit der Studie teilnehmen zu können fügen Sie bitte jetzt diese Seite auf Ihren Homescreen/Startbildschirm hinzu. Im Anschluss können Sie die Seite bzw. das Spiel wie jede gewöhnliche App handhaben. Die Installation funktionier wie folgt (siehe auch Bild):'
-                  ' Drücken Sie auf die drei kleinen Punkte rechts oben auf dem Bildschirm  App Installieren',
+                  ' Drücken Sie auf die drei kleinen Punkte rechts oben auf dem Bildschirm -> App'
+                  ' Installieren',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontWeight: FontWeight.bold,
                       color: Colors.black,
                       backgroundColor: Colors.white,
                       decoration: TextDecoration.none)),

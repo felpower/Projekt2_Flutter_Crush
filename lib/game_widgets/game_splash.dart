@@ -57,10 +57,6 @@ class _GameSplashState extends State<GameSplash> with SingleTickerProviderStateM
       ),
     );
 
-    // Play the intro
-    // Audio.playAsset(AudioType.game_start);
-
-    // Launch the animation
     _controller.forward();
   }
 
@@ -109,7 +105,7 @@ class _GameSplashState extends State<GameSplash> with SingleTickerProviderStateM
       builder: (BuildContext context, Widget? child) {
         return Positioned(
           left: 0.0,
-          top: 150.0 + 100.0 * _animationAppear.value,
+          top: 1+100.0 * _animationAppear.value,
           child: child!,
         );
       },
