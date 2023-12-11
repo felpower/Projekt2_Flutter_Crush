@@ -10,7 +10,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:universal_html/html.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'services/firebase_messaging.dart';
 
 void main() async {
   runZonedGuarded(() async {
@@ -28,14 +27,13 @@ void main() async {
             messagingSenderId: "552263184384",
             appId: "1:552263184384:web:87e17944dc571dc4e028e5"));
     if (!await DeviceHelper.isMobile()) {
-      runApp(const NonMobilePage());
-      return;
+      // runApp(const NonMobilePage());
+      // return;
     }
     if (!DeviceHelper.isStandalone()) {
-      runApp(const NonStandalonePage());
-      return;
+      // runApp(const NonStandalonePage());
+      // return;
     }
-    await FirebaseMessagingWeb().init();
     await FirebaseStore.init();
     window.onBeforeUnload.listen((event) {
       FirebaseStore.addCloseApp(DateTime.now());

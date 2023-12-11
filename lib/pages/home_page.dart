@@ -78,7 +78,6 @@ class _HomePageState extends State<HomePage>
     )..addListener(() {
         setState(() {});
       });
-
     CurvedAnimation(
       parent: _controller,
       curve: const Interval(
@@ -108,6 +107,9 @@ class _HomePageState extends State<HomePage>
     super.dispose();
   }
 
+  late final DarkPatternsState darkPatternsState =
+      flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context).state;
+
   @override
   Widget build(BuildContext context) {
     GameBloc gameBloc = BlocProvider.of<GameBloc>(context);
@@ -116,8 +118,6 @@ class _HomePageState extends State<HomePage>
     double webWidth = 500;
     double webHeight = 1000;
     double creditPanelWidth = kIsWeb ? webWidth / 4 : screenSize.width / 4;
-    final DarkPatternsState darkPatternsState =
-        flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context).state;
 
     return Scaffold(
       appBar: AppBar(
@@ -178,7 +178,8 @@ class _HomePageState extends State<HomePage>
                     children: [
                       flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
                         builder: (context, state) {
-                          if (state is! DarkPatternsDeactivatedState) {
+                          if (state is DarkPatternsActivatedState ||
+                              state is DarkPatternsCompetitionState) {
                             return Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -193,7 +194,15 @@ class _HomePageState extends State<HomePage>
                               ],
                             );
                           } else {
-                            return Container();
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                flutter_bloc.BlocBuilder<CoinBloc, CoinState>(
+                                    builder: (context, state) {
+                                  return CreditPanel('\$: ${state.amount}', 30, creditPanelWidth);
+                                })
+                              ],
+                            );
                           }
                         },
                       ),
@@ -362,19 +371,6 @@ class _HomePageState extends State<HomePage>
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)), // Rounded corners
               )),
-          ListTile(
-            leading: const Icon(Icons.question_mark),
-            title: const Text('End Survey'),
-            onTap: () {
-              Navigator.of(context).pushNamed(
-                "/endSurvey",
-              );
-            },
-            tileColor: Colors.grey[200],
-            // Background color to make it feel like a button
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
-          ),
         ],
       ),
     );
@@ -502,7 +498,9 @@ class _HomePageState extends State<HomePage>
           }
           return const CircularProgressIndicator();
         });
-    FirebaseMessagingWeb.requestPermission();
+    if (darkPatternsState is DarkPatternsActivatedState || darkPatternsState is DarkPatternsAppointmentState){
+      FirebaseMessagingWeb.requestPermission();
+    }
     if (prefs.getBool("firstStart") == null || prefs.getBool("firstStart") == true) {
       Navigator.of(context).pushNamed(
         "/startSurvey",

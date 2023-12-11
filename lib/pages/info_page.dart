@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_bloc.dart';
+import '../bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
 import '../services/firebase_messaging.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 class DeviceToken extends StatefulWidget {
   const DeviceToken({Key? key}) : super(key: key);
 
@@ -17,6 +19,8 @@ class _DeviceTokenState extends State<DeviceToken> {
 
   @override
   Widget build(BuildContext context) {
+    final DarkPatternsState darkPatternsState =
+        flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context).state;
     return Scaffold(
         appBar: AppBar(
           title: const Center(child: Text('Instruktionen zum Spiel')),
@@ -63,7 +67,9 @@ class _DeviceTokenState extends State<DeviceToken> {
                 child: const Text('Check Push Permission'),
                 onPressed: () {
                   getNotification();
-                  FirebaseMessagingWeb.requestPermission();
+                  if (darkPatternsState is DarkPatternsActivatedState || darkPatternsState is DarkPatternsAppointmentState){
+                    FirebaseMessagingWeb.requestPermission();
+                  }
                 }),
           ),
           Visibility(
@@ -71,7 +77,8 @@ class _DeviceTokenState extends State<DeviceToken> {
             child: TextField(
                 controller: authorizationStatus, textAlign: TextAlign.center, readOnly: true),
           ),
-          const Text('''1.	Spielbrett und Jellies: ''', style: TextStyle(fontWeight: FontWeight.bold)),
+          const Text('''1.	Spielbrett und Jellies: ''',
+              style: TextStyle(fontWeight: FontWeight.bold)),
           const Text('''Das Spielbrett ist ein Gitter mit verschiedenen 
               farbigen Jellies. Jedes Jelly hat eine einzigartige Farbe und Form. (siehe Bild)
           '''),
@@ -91,8 +98,7 @@ class _DeviceTokenState extends State<DeviceToken> {
           const Image(image: AssetImage('assets/images/bombs/jelly_gelb.png'), height: 30),
           const Padding(
               padding: EdgeInsets.only(left: 20.0), // Adjust the value for the desired indent
-              child: Text(
-                  '''
+              child: Text('''
   •	Kombiniere 5 Jellies in einer T- oder L-Form, um ein Regenbogen-Jelly zu bekommen, das alle   Jellies einer bestimmten Farbe vom Brett entfernt.''')),
           const Image(image: AssetImage('assets/images/bombs/jelly_bunt.png'), height: 30),
           const Text("4.	Levelziele:", style: TextStyle(fontWeight: FontWeight.bold)),
@@ -119,9 +125,12 @@ Nutze Booster bzw. Sonderjellies, um schwierige Level zu meistern. Diese können
           const SizedBox(width: 10, height: 20),
           const Text("8.	Startbildschirm: ", style: TextStyle(fontWeight: FontWeight.bold)),
           const Text(
-              '''Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)), wie viele XP du hast (2), sowie die Anzahl an Münzen (3) (diese kannst du nutzen um Booster zu kaufen). Im Menü (4) kannst du diese Instruktionen jederzeit erneut durchlesen, solltest du etwas vergessen haben. 
-          '''),
+              '''8.	Startbildschirm: Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)), wie viele XP du hast (2)– diese bestimmten auch den Rang in der Highscore-Tafel (3), sowie die Anzahl an Münzen (4) (diese kannst du nutzen um Booster zu kaufen). Im Menü (5) kannst du diese Instruktionen jederzeit erneut durchlesen, solltest du etwas vergessen haben.           '''),
+          const SizedBox(width: 10, height: 20),
           const Image(image: AssetImage('assets/instructions/ins_5.png'), fit: BoxFit.cover),
+          const SizedBox(width: 10, height: 20),
+          const Text(
+              '''Im Rahmen der Pilotstudie haben Sie außerdem auf dem Startbildschirm im Menü rechts oben einen Punkt „Feedback“. Nutze diesen bitte, sollte dir im Rahmen der  Pilotstudie eine Störung oder irgendetwas anderes auffallen, dass dein Spielerlebnis behindert oder beeinflusst. Danke!'''),
           const SizedBox(width: 10, height: 20),
           const Text("Tipps und Tricks: ", style: TextStyle(fontWeight: FontWeight.bold)),
           const Padding(

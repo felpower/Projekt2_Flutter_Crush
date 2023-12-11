@@ -218,19 +218,16 @@ class _UnityScreenState extends State<UnityScreen> {
     }
     if (darkPatternsBloc.state is DarkPatternsActivatedState ||
         darkPatternsBloc.state is DarkPatternsRewardsState) {
+      gameOver = true;
       showFortuneWheel(xpCoins);
-    } else if (darkPatternsBloc.state is DarkPatternsDeactivatedState) {
-      Future.delayed(const Duration(seconds: 3), () {
-        Navigator.of(context).pop();
-      });
     } else {
       gameBloc.gameOver(xpCoins);
       showGameOver(true);
+      gameOver = true;
       Future.delayed(const Duration(seconds: 3), () {
         Navigator.of(context).pop();
       });
     }
-    gameOver = true;
   }
 
   void showFortuneWheel(int xpCoins) async {

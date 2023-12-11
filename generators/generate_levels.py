@@ -31,7 +31,7 @@ def generate_levels(num_new_levels, max_dim, min_dim, types, colors):
 
 
 # Generating 50 new levels with the corrected specifications#
-num_levels_to_generate = 51
+num_levels_to_generate = 501
 max_dimension = 10
 min_dimension = 6
 level_types = ["Timer", "Colors", "Moves", "Obstacle"]

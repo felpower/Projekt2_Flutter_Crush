@@ -58,10 +58,6 @@ class _GameOverSplashState extends State<GameOverSplash> with SingleTickerProvid
       ),
     );
 
-    // Play the intro
-    // Audio.playAsset(AudioType.game_start);
-
-    // Launch the animation
     _controller.forward();
   }
 
@@ -106,7 +102,7 @@ class _GameOverSplashState extends State<GameOverSplash> with SingleTickerProvid
                           )),
                     ),
                     BlocBuilder<DarkPatternsBloc, DarkPatternsState>(builder: (context, state) {
-                      if (state is! DarkPatternsDeactivatedState) {
+                      if (state is DarkPatternsActivatedState || state is DarkPatternsCompetitionState) {
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -129,7 +125,18 @@ class _GameOverSplashState extends State<GameOverSplash> with SingleTickerProvid
                           ],
                         );
                       } else {
-                        return Container();
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            BlocBuilder<CoinBloc, CoinState>(builder: (context, state) {
+                              return Text('Erhaltene Münzen: ${state.addedAmount}',
+                                  style: const TextStyle(
+                                    fontSize: 15.0,
+                                    color: Colors.white,
+                                  ));
+                            })
+                          ],
+                        );
                       }
                     }),
                   ],

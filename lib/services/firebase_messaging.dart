@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 import 'dart:async';
 
+import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -122,9 +123,7 @@ class FirebaseMessagingWeb {
   }
 
   static void requestPermission() async {
-    if (DeviceHelper.isIOSWebDevice()) {
-      return;
-    }
+    await FirebaseMessagingWeb().init();
     var request = Permission.notification.request();
     await html.window.navigator.permissions!.query({"name": "push", "userVisibleOnly": true});
     if (!await request.isGranted) {

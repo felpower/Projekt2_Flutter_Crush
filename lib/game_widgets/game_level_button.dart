@@ -122,25 +122,7 @@ class GameLevelButton extends StatelessWidget {
       CoinBloc coinBloc, DarkPatternsState darkPatternsState, BuildContext context) {
     showDialog(
         context: context,
-        builder: (BuildContext context) => darkPatternsState is DarkPatternsDeactivatedState
-            ? AlertDialog(
-                title: const Text('Level starten'),
-                content: const Wrap(
-                  children: [
-                    Text('Wollen Sie das aktuelle Level starten?'),
-                  ],
-                ),
-                elevation: 24,
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(8))),
-                actions: <Widget>[
-                  TextButton(
-                    onPressed: () => buyPowerUp("", 0, coinBloc, reportingBloc, gameBloc, context),
-                    child: const Text('Level starten'),
-                  )
-                ],
-              )
-            : AlertDialog(
+        builder: (BuildContext context) =>  AlertDialog(
                 title: const Text('Boosterauswahl'),
                 content: const Wrap(
                   children: [
