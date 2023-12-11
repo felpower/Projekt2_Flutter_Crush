@@ -58,5 +58,17 @@
 
 
 </script>
+<script>
+  function setupBeforeUnloadListener() {
+    window.addEventListener("beforeunload", (event) => {
+      event.preventDefault();
+      handleBeforeUnload(); // This will call the Dart function
+      return null;
+    });
+  }
+</script>
+
+
+
 </body>
 </html>

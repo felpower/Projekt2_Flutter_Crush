@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_bloc.dart';
 import '../bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
 import '../services/firebase_messaging.dart';
-import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
+
 class DeviceToken extends StatefulWidget {
   const DeviceToken({Key? key}) : super(key: key);
 
@@ -67,7 +68,8 @@ class _DeviceTokenState extends State<DeviceToken> {
                 child: const Text('Check Push Permission'),
                 onPressed: () {
                   getNotification();
-                  if (darkPatternsState is DarkPatternsActivatedState || darkPatternsState is DarkPatternsAppointmentState){
+                  if (darkPatternsState is DarkPatternsActivatedState ||
+                      darkPatternsState is DarkPatternsAppointmentState) {
                     FirebaseMessagingWeb.requestPermission();
                   }
                 }),
@@ -124,13 +126,19 @@ Nutze Booster bzw. Sonderjellies, um schwierige Level zu meistern. Diese können
               '''Schalte neue Level und Herausforderungen frei, indem du im Spiel fortschreitest.'''),
           const SizedBox(width: 10, height: 20),
           const Text("8.	Startbildschirm: ", style: TextStyle(fontWeight: FontWeight.bold)),
-          const Text(
-              '''8.	Startbildschirm: Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)), wie viele XP du hast (2)– diese bestimmten auch den Rang in der Highscore-Tafel (3), sowie die Anzahl an Münzen (4) (diese kannst du nutzen um Booster zu kaufen). Im Menü (5) kannst du diese Instruktionen jederzeit erneut durchlesen, solltest du etwas vergessen haben.           '''),
+          darkPatternsState is DarkPatternsActivatedState
+              ? const Text(
+                  ''': Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)), wie viele XP du hast (2)– diese bestimmten auch den Rang in der Highscore-Tafel (3), sowie die Anzahl an Münzen (4) (diese kannst du nutzen um Booster zu kaufen). Im Menü (5) kannst du diese Instruktionen jederzeit erneut durchlesen, solltest du etwas vergessen haben. ''')
+              : const Text(
+                  ''': Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)), wie viele Münzen du hast (2) (diese kannst du nutzen um Booster zu kaufen). Im Menü (3) kannst du diese Instruktionen jederzeit erneut durchlesen, solltest du etwas vergessen haben. '''),
           const SizedBox(width: 10, height: 20),
-          const Image(image: AssetImage('assets/instructions/ins_5.png'), fit: BoxFit.cover),
+          darkPatternsState is DarkPatternsActivatedState
+              ? const Image(image: AssetImage('assets/instructions/ins_5.png'), fit: BoxFit.cover)
+              : const Image(
+                  image: AssetImage('assets/instructions/ins_5_alt.png'), fit: BoxFit.cover),
           const SizedBox(width: 10, height: 20),
-          const Text(
-              '''Im Rahmen der Pilotstudie haben Sie außerdem auf dem Startbildschirm im Menü rechts oben einen Punkt „Feedback“. Nutze diesen bitte, sollte dir im Rahmen der  Pilotstudie eine Störung oder irgendetwas anderes auffallen, dass dein Spielerlebnis behindert oder beeinflusst. Danke!'''),
+          const Text('''Im Rahmen der Pilotstudie hast du außerdem auf dem Startbildschirm im Menü 
+              rechts oben einen Punkt „Feedback“. Nutze diesen bitte, sollte dir im Rahmen der Pilotstudie eine Störung oder irgendetwas anderes auffallen, dass dein Spielerlebnis behindert oder beeinflusst. Danke!'''),
           const SizedBox(width: 10, height: 20),
           const Text("Tipps und Tricks: ", style: TextStyle(fontWeight: FontWeight.bold)),
           const Padding(

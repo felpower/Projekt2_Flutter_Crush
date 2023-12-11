@@ -72,6 +72,7 @@ class _HomePageState extends State<HomePage>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    darkPatternsState = flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context).state;
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 3500),
@@ -107,11 +108,12 @@ class _HomePageState extends State<HomePage>
     super.dispose();
   }
 
-  late final DarkPatternsState darkPatternsState =
-      flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context).state;
+  late DarkPatternsState darkPatternsState;
 
   @override
   Widget build(BuildContext context) {
+    final DarkPatternsState darkPatternsState =
+        flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context).state;
     GameBloc gameBloc = BlocProvider.of<GameBloc>(context);
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     Size screenSize = mediaQueryData.size;
@@ -498,7 +500,8 @@ class _HomePageState extends State<HomePage>
           }
           return const CircularProgressIndicator();
         });
-    if (darkPatternsState is DarkPatternsActivatedState || darkPatternsState is DarkPatternsAppointmentState){
+    if (darkPatternsState is DarkPatternsActivatedState ||
+        darkPatternsState is DarkPatternsAppointmentState) {
       FirebaseMessagingWeb.requestPermission();
     }
     if (prefs.getBool("firstStart") == null || prefs.getBool("firstStart") == true) {
