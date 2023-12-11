@@ -1,6 +1,4 @@
 // ignore_for_file: avoid_print
-import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_bloc.dart';
-import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_event.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_bloc.dart';
@@ -48,22 +46,21 @@ class _HomePageState extends State<HomePage>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    final ReportingBloc reportingBloc = flutter_bloc.BlocProvider.of<ReportingBloc>(context);
     switch (state) {
       case AppLifecycleState.resumed:
-        reportingBloc.add(ReportStartAppEvent(DateTime.now()));
+        FirebaseStore.addStartApp(DateTime.now());
         break;
       case AppLifecycleState.inactive:
-        reportingBloc.add(ReportCloseAppEvent(DateTime.now()));
+        FirebaseStore.addCloseApp(DateTime.now());
         break;
       case AppLifecycleState.detached:
-        reportingBloc.add(ReportCloseAppEvent(DateTime.now()));
+        FirebaseStore.addCloseApp(DateTime.now());
         break;
       case AppLifecycleState.paused:
-        reportingBloc.add(ReportCloseAppEvent(DateTime.now()));
+        FirebaseStore.addCloseApp(DateTime.now());
         break;
       case AppLifecycleState.hidden:
-        reportingBloc.add(ReportCloseAppEvent(DateTime.now()));
+        FirebaseStore.addCloseApp(DateTime.now());
         break;
     }
   }

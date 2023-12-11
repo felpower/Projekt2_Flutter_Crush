@@ -1,4 +1,3 @@
-import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:universal_html/html.dart' as html;
 
@@ -22,7 +21,6 @@ class DeviceHelper {
   static bool isStandalone() {
     final isStandAlone = html.window.matchMedia('(display-mode: standalone)').matches;
     if (!isStandAlone) {
-      FirebaseStore.sendUserAgent(userAgent, isStandAlone);
       return false;
     }
     return true;
