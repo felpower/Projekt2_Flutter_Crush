@@ -17,10 +17,21 @@ const messaging = firebase.messaging();
 
 let lastNotificationId = null;
 
+let darkPatternsRandomValue = 0;
+
+self.addEventListener('message', function(event){
+  if (event.data && event.data.type === 'SET_DARK_PATTERNS_VALUE') {
+    darkPatternsRandomValue = event.data.value;
+    console.log('receiveDarkPatternsValue Dark Patterns Value: ', darkPatternsRandomValue);
+  }
+});
+
 messaging.onBackgroundMessage(function(payload) {
     console.log('Received background message ', payload);
-
-    const currentNotificationId = payload.data['google.c.a.c_id']; // Assuming each payload has a unique ID
+    if(darkPatternsRandomValue != 1){
+      return;
+    }
+    const currentNotificationId = payload.data['google.c.a.c_id'];
 
     if (lastNotificationId === currentNotificationId) {
         console.log('Duplicate notification, not displaying.');

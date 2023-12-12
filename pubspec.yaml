@@ -106,6 +106,8 @@ flutter:
     - assets/instructions/ins_5_alt.png
     - assets/instructions/InstallAndroid.png
     - assets/instructions/InstallIOS.png
+    - assets/instructions/InstallAndroid_alt1.png
+    - assets/instructions/InstallAndroid_alt2.png
     # levels
     - assets/unityLevels.json
     # icons

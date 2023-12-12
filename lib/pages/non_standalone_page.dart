@@ -54,7 +54,7 @@ class _BeforeInstallPrompt extends State<NonStandalonePage> {
                   decoration: TextDecoration.none)),
           const Text(
               'Im Anschluss können Sie die Seite bzw. das Spiel wie jede gewöhnliche '
-              'App handhaben. Die Installation funktioniert wie folgt (siehe auch Bild):',
+              'App handhaben.',
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: Colors.black,
@@ -70,18 +70,54 @@ class _BeforeInstallPrompt extends State<NonStandalonePage> {
                       backgroundColor: Colors.white,
                       decoration: TextDecoration.none))
               : const Text(
-                  ' Drücken Sie auf die drei kleinen Punkte rechts oben auf dem Bildschirm -> App'
-                  ' Installieren',
+                  'Die Installation funktioniert je nach Smartphone wie in Option 1 oder Option 2 beschrieben (siehe unten).',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Colors.black,
                       backgroundColor: Colors.white,
                       decoration: TextDecoration.none)),
+          !isIosDevice
+              ? const Text('Option 1',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      backgroundColor: Colors.white,
+                      decoration: TextDecoration.none))
+              : Container(),
+          !isIosDevice
+              ? const Text(
+                  'Drücken Sie auf die drei kleinen Punkte rechts oben auf dem Bildschirm   anschließend im Menü auf „App installieren“ (siehe Bilder)',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.black,
+                      backgroundColor: Colors.white,
+                      decoration: TextDecoration.none))
+              : Container(),
           isIosDevice
               ? const Image(
                   image: AssetImage('assets/instructions/InstallIos.png'), fit: BoxFit.cover)
               : const Image(
-                  image: AssetImage('assets/instructions/InstallAndroid.png'), fit: BoxFit.cover)
+                  image: AssetImage('assets/instructions/InstallAndroid.png'), fit: BoxFit.cover),
+          !isIosDevice
+              ? const Text(
+                  'Drücken Sie auf die drei Linien rechts unten auf dem Bildschirm  anschließend im Menü auf "Seite Hinzufügen" / "Add page to" --> "Homescreen"/"Startbildschirm" (siehe Bilder)',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.black,
+                      backgroundColor: Colors.white,
+                      decoration: TextDecoration.none))
+              : Container(),
+                  !isIosDevice
+                      ? const Image(
+                      image: AssetImage('assets/instructions/InstallAndroid_alt1.png'), fit: BoxFit
+                      .cover)
+                      : Container(),
+                  !isIosDevice
+                      ? const Image(
+                      image: AssetImage('assets/instructions/InstallAndroid_alt2.png'), fit: BoxFit
+                      .cover)
+                      : Container(),
         ]))));
   }
 }

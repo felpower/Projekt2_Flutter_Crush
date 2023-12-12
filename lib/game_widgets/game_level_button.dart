@@ -9,6 +9,7 @@ import 'package:bachelor_flutter_crush/controllers/unity/unity_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:universal_html/html.dart' as html;
 
 import '../bloc/bloc_provider.dart';
 import '../bloc/game_bloc.dart';
@@ -45,6 +46,7 @@ class GameLevelButton extends StatelessWidget {
     final ReportingBloc reportingBloc = flutter_bloc.BlocProvider.of<ReportingBloc>(context);
     final darkPatternsState = flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context).state;
     bool disabled = !levelBloc.state.levels.contains(levelNumber);
+
     return InkWell(
       onTap: () {
         disabled
@@ -120,64 +122,70 @@ class GameLevelButton extends StatelessWidget {
 
   void showBuyPowerUpDialog(ReportingBloc reportingBloc, GameBloc gameBloc, LevelBloc levelBloc,
       CoinBloc coinBloc, DarkPatternsState darkPatternsState, BuildContext context) {
+    var darkModeActivated = html.window.matchMedia('(prefers-color-scheme: dark)').matches;
     showDialog(
         context: context,
-        builder: (BuildContext context) =>  AlertDialog(
-                title: const Text('Boosterauswahl'),
-                content: const Wrap(
-                  children: [
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Um einen Booster auszuwählen klicke bitte auf den entsprechenden Button oder starte das Spiel ohne Booster indem du auf "Spiel starten" klickst.',
-                        textAlign: TextAlign.center, // Center align the text
-                      ),
-                    )
-                  ],
-                ),
-                elevation: 24,
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(8))),
-                actions: <Widget>[
-                  Center(
-                    // Center the buttons
-                    child: Column(
-                      // Use Column to align buttons vertically
-                      mainAxisSize: MainAxisSize.min, // Fit the content
-                      children: [
-                        ElevatedButton.icon(
-                          onPressed: () {
-                            buyPowerUp(
-                                "Clear", tntPrice, coinBloc, reportingBloc, gameBloc, context);
-                          },
-                          icon: Image.asset(
-                            'assets/images/bombs/jelly_gelb.png',
-                            height: 30,
-                          ),
-                          label: Text(stripeJelly == 0 ? '$tntPrice\$' : 'kostenlos',
-                              style: const TextStyle(color: Colors.black)),
-                        ),
-                        const SizedBox(height: 10),
-                        ElevatedButton.icon(
-                          onPressed: () {
-                            buyPowerUp(
-                                "Rainbow", minePrice, coinBloc, reportingBloc, gameBloc, context);
-                          },
-                          icon: Image.asset('assets/images/bombs/jelly_bunt.png', height: 30),
-                          label: Text(buntJelly == 0 ? '$minePrice\$' : 'kostenlos',
-                              style: const TextStyle(color: Colors.black)),
-                        ),
-                        const SizedBox(height: 10),
-                        ElevatedButton(
-                          onPressed: () =>
-                              buyPowerUp("", 0, coinBloc, reportingBloc, gameBloc, context),
-                          child: const Text('Spiel starten'),
-                        ),
-                      ],
+        builder: (BuildContext context) => AlertDialog(
+              title: const Text('Boosterauswahl'),
+              content: Wrap(
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Um einen Booster auszuwählen klicke bitte auf den entsprechenden Button oder starte das Spiel ohne Booster indem du auf "Spiel starten" klickst.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: darkModeActivated ? Colors.black : Colors.white), //
+                      // Center
+                      // align the
+                      // text
                     ),
-                  ),
+                  )
                 ],
-              ));
+              ),
+              elevation: 24,
+              shape:
+                  const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
+              actions: <Widget>[
+                Center(
+                  // Center the buttons
+                  child: Column(
+                    // Use Column to align buttons vertically
+                    mainAxisSize: MainAxisSize.min, // Fit the content
+                    children: [
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          buyPowerUp("Clear", tntPrice, coinBloc, reportingBloc, gameBloc, context);
+                        },
+                        icon: Image.asset(
+                          'assets/images/bombs/jelly_gelb.png',
+                          height: 30,
+                        ),
+                        label: Text(stripeJelly == 0 ? '$tntPrice\$' : 'kostenlos',
+                            style:
+                                TextStyle(color: darkModeActivated ? Colors.black : Colors.white)),
+                      ),
+                      const SizedBox(height: 10),
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          buyPowerUp(
+                              "Rainbow", minePrice, coinBloc, reportingBloc, gameBloc, context);
+                        },
+                        icon: Image.asset('assets/images/bombs/jelly_bunt.png', height: 30),
+                        label: Text(buntJelly == 0 ? '$minePrice\$' : 'kostenlos',
+                            style:
+                                TextStyle(color: darkModeActivated ? Colors.black : Colors.white)),
+                      ),
+                      const SizedBox(height: 10),
+                      ElevatedButton(
+                        onPressed: () =>
+                            buyPowerUp("", 0, coinBloc, reportingBloc, gameBloc, context),
+                        child: const Text('Spiel starten'),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ));
   }
 
   Future<void> buyPowerUp(item, powerUpPrice, CoinBloc coinBloc, ReportingBloc reportingBloc,
@@ -194,18 +202,18 @@ class GameLevelButton extends StatelessWidget {
       showDialog(
           context: context,
           builder: (BuildContext context) => AlertDialog(
-            title: const Text('Nicht genug Münzen um dieses PowerUp zu kaufen'),
-            content: const Text('Sie können Münzen durch Spielen der Levels erhalten'),
-            elevation: 24,
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(16))),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => {Navigator.pop(context, 'Ok')},
-                child: const Text('OK'),
-              )
-            ],
-          ));
+                title: const Text('Nicht genug Münzen um dieses PowerUp zu kaufen'),
+                content: const Text('Sie können Münzen durch Spielen der Levels erhalten'),
+                elevation: 24,
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(16))),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => {Navigator.pop(context, 'Ok')},
+                    child: const Text('OK'),
+                  )
+                ],
+              ));
       return;
     }
     Navigator.pop(context, 'OK');

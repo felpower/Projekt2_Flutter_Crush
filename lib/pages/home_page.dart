@@ -1,4 +1,7 @@
 // ignore_for_file: avoid_print
+import 'dart:async';
+import 'dart:html' as html;
+
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_bloc.dart';
@@ -88,7 +91,7 @@ class _HomePageState extends State<HomePage>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _controller.forward();
     });
-    checkForNotificationClick();
+    checkNotification();
     loadDailyReward();
     checkForFirstTimeStart();
   }
@@ -508,11 +511,28 @@ class _HomePageState extends State<HomePage>
     }
   }
 
-  void checkForNotificationClick() {
+  void checkNotification() {
+    if (darkPatternsState is DarkPatternsActivatedState ||
+        darkPatternsState is DarkPatternsAppointmentState) {
+      sendDarkPatternsValue();
+    } else {
+      return;
+    }
     Uri currentUrl = Uri.base;
     if (currentUrl.queryParameters['source'] == 'notification') {
       print("Tapped Notification");
       FirebaseStore.addNotificationTap(DateTime.now());
     }
+  }
+
+  void sendDarkPatternsValue() async {
+    html.window.navigator.serviceWorker?.ready.then((html.ServiceWorkerRegistration registration) {
+      html.window.navigator.serviceWorker!.ready.then((html.ServiceWorkerRegistration registration) {
+        registration.active!.postMessage({'type': 'SET_DARK_PATTERNS_VALUE', 'value': 1});
+      });
+    }).catchError((error) {
+      // Handle any errors here
+      print("Error loading service worker: $error");
+    });
   }
 }
