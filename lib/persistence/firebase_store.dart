@@ -110,7 +110,12 @@ class FirebaseStore {
 
   static Future<void> _updateDocument(String documentPropertyName, String information) async {
     var userId = await _getUuid();
-    DatabaseReference ref = database.ref("users/$userId");
+    DatabaseReference ref;
+    if (kDebugMode) {
+      ref = database.ref("debug/$userId");
+    } else {
+      ref = database.ref("users/$userId");
+    }
     ref.child(documentPropertyName).push().set(information);
   }
 
@@ -121,7 +126,12 @@ class FirebaseStore {
       uuid: userId,
       darkPatterns: darkPatternsState,
     };
-    DatabaseReference ref = database.ref("users/$userId");
+    DatabaseReference ref;
+    if (kDebugMode) {
+      ref = database.ref("debug/$userId");
+    } else {
+      ref = database.ref("users/$userId");
+    }
     ref.update(data);
 
     FlutterError.onError = (FlutterErrorDetails details) {
