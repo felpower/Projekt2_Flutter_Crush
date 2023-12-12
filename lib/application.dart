@@ -26,9 +26,9 @@ class Application extends StatelessWidget {
           child: MaterialApp(
             title: 'JellyFun',
             debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
-            ),
+            theme: ThemeData.light(),
+            darkTheme: ThemeData.light(),
+            themeMode: ThemeMode.light,
             home: const HomePage(),
             routes: {
               '/startSurvey': (context) => const SurveyPage(title: "Start"),

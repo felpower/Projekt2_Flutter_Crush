@@ -11,7 +11,13 @@
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <meta content="JellyFun" name="apple-mobile-web-app-title">
     <link href="icons/Icon-192.png" rel="apple-touch-icon">
+    <style>
+  body {
+    background-color: #FFFFFF; /* White background */
+    color: #000000; /* Black text color */
+  }
 
+    </style>
     <!-- Favicon -->
     <link href="favicon.png" rel="icon" type="image/png"/>
 
@@ -20,6 +26,7 @@
     <script>
     // The value below is injected by flutter build, do not touch.
     var serviceWorkerVersion = null;
+
 
 
 
@@ -48,6 +55,7 @@
 
 
 
+
 </script>
 <script>
        if ('serviceWorker' in navigator) {
@@ -55,6 +63,7 @@
             navigator.serviceWorker.register('/firebase-messaging-sw.js');
           });
       }
+
 
 
 </script>
@@ -66,8 +75,8 @@
       return null;
     });
   }
-</script>
 
+</script>
 
 
 </body>

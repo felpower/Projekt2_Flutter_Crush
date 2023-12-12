@@ -31,6 +31,9 @@ class _BeforeInstallPrompt extends State<NonStandalonePage> {
     return MaterialApp(
         title: "Herzlich Willkommen zur Studie",
         debugShowCheckedModeBanner: false,
+        theme: ThemeData.light(),
+        darkTheme: ThemeData.light(),
+        themeMode: ThemeMode.light,
         home: Scaffold(
             body: Center(
                 child: ListView(padding: const EdgeInsets.all(20), children: [

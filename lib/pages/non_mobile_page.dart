@@ -7,6 +7,9 @@ class NonMobilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: "Error",
+        theme: ThemeData.light(),
+        darkTheme: ThemeData.light(),
+        themeMode: ThemeMode.light,
         debugShowCheckedModeBanner: false,
         home: Container(
             alignment: Alignment.center,
