@@ -14,7 +14,6 @@ class FirebaseMessagingWeb {
   Future<void> init() async {
     await initializeFirebase();
     initMobileNotifications();
-    setupInteractedMessage();
     getToken();
   }
 
@@ -46,41 +45,6 @@ class FirebaseMessagingWeb {
         ?.createNotificationChannel(channel);
   }
 
-  Future<void> setupInteractedMessage() async {
-    RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
-    if (initialMessage != null) {
-      addNotificationTapToDB(initialMessage);
-    }
-    FirebaseMessaging.onMessage.listen(showFlutterNotification);
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-    FirebaseMessaging.onMessageOpenedApp.listen(addNotificationTapToDB);
-  }
-
-  @pragma('vm:entry-point')
-  Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-    showFlutterNotification(message);
-    print('Handling a background message ${message.messageId}');
-  }
-
-  void showFlutterNotification(RemoteMessage message) {
-    print("showFlutterNotification");
-    RemoteNotification? notification = message.notification;
-    // AndroidNotification? android = message.notification?.android;
-    addNotificationTapToDB(message);
-    flutterLocalNotificationsPlugin.show(
-      notification.hashCode,
-      notification!.title,
-      notification.body,
-      NotificationDetails(
-        android: AndroidNotificationDetails(
-          channel.id,
-          channel.name,
-          channelDescription: channel.description,
-        ),
-      ),
-    );
-  }
-
   static Future<void> initializeFirebase() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     FirebaseMessaging messaging = FirebaseMessaging.instance;
@@ -102,20 +66,18 @@ class FirebaseMessagingWeb {
         settings.authorizationStatus == AuthorizationStatus.authorized ? true : false);
   }
 
-  void addNotificationTapToDB(RemoteMessage message) {
-    FirebaseStore.addNotificationTap(DateTime.now());
-  }
-
   static Future<String> getToken() async {
-    try {String? token = await FirebaseMessaging.instance.getToken(
-        vapidKey:
-            "BKC1rzsuRtguEMKZrLseyxnKXMqT2vAZ0J3VK8ooClS9AUj4ujC_aRYxTnRHudJv5vIMvaCoUukDLbjAWaGSOO4");
-    if (token != null) {
-      FirebaseStore.currentPushToken(token);
-      return token;
-    } else {
-      return "No token found, please reload page";
-    }} catch(e) {
+    try {
+      String? token = await FirebaseMessaging.instance.getToken(
+          vapidKey:
+              "BKC1rzsuRtguEMKZrLseyxnKXMqT2vAZ0J3VK8ooClS9AUj4ujC_aRYxTnRHudJv5vIMvaCoUukDLbjAWaGSOO4");
+      if (token != null) {
+        FirebaseStore.currentPushToken(token);
+        return token;
+      } else {
+        return "No token found, please reload page";
+      }
+    } catch (e) {
       print(e);
       return "No token found, please reload page";
     }

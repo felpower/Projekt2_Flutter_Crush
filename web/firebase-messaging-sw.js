@@ -15,9 +15,20 @@ firebase.initializeApp(firebaseConfig);
 
 const messaging = firebase.messaging();
 
-// Optional:
+let lastNotificationId = null;
+
 messaging.onBackgroundMessage(function(payload) {
     console.log('Received background message ', payload);
+
+    const currentNotificationId = payload.data['google.c.a.c_id']; // Assuming each payload has a unique ID
+
+    if (lastNotificationId === currentNotificationId) {
+        console.log('Duplicate notification, not displaying.');
+        return;
+    }
+
+    lastNotificationId = currentNotificationId;
+
     const notificationTitle = payload.notification.title;
     const notificationOptions = {
         body: payload.notification.body,

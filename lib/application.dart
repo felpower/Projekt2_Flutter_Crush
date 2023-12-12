@@ -31,6 +31,7 @@ class Application extends StatelessWidget {
             themeMode: ThemeMode.light,
             home: const HomePage(),
             routes: {
+              '/?source=notification': (context) => const HomePage(),
               '/startSurvey': (context) => const SurveyPage(title: "Start"),
               '/endSurvey': (context) => const SurveyPage(title: "End"),
             },
