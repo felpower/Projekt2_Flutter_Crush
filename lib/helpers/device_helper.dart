@@ -1,3 +1,4 @@
+import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:universal_html/html.dart' as html;
 
@@ -43,4 +44,11 @@ class DeviceHelper {
   static bool equalsIgnoreCase(String? string1, String? string2) {
     return string1?.toLowerCase() == string2?.toLowerCase();
   }
+
+  static Future<bool> isCurrentVersion() async => FirebaseStore.getUuid().then((value) {
+      if (value.startsWith(FirebaseStore.getCurrentVersion()) ) {
+        return true;
+      }
+      return false;
+    });
 }

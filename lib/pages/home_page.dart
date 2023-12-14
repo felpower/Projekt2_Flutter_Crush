@@ -1,6 +1,5 @@
 // ignore_for_file: avoid_print
-import 'dart:async';
-import 'dart:html' as html;
+import 'package:universal_html/html.dart' as html;
 
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
@@ -72,7 +71,6 @@ class _HomePageState extends State<HomePage>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    darkPatternsState = flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context).state;
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 3500),
@@ -91,9 +89,10 @@ class _HomePageState extends State<HomePage>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _controller.forward();
     });
-    checkNotification();
+
     loadDailyReward();
     checkForFirstTimeStart();
+    checkNotification();
   }
 
   @override
@@ -108,11 +107,10 @@ class _HomePageState extends State<HomePage>
     super.dispose();
   }
 
-  late DarkPatternsState darkPatternsState;
-
   @override
   Widget build(BuildContext context) {
-    final DarkPatternsState darkPatternsState =
+    checkDarkPatterns();
+    DarkPatternsState darkPatternsState =
         flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context).state;
     GameBloc gameBloc = BlocProvider.of<GameBloc>(context);
     MediaQueryData mediaQueryData = MediaQuery.of(context);
@@ -120,7 +118,6 @@ class _HomePageState extends State<HomePage>
     double webWidth = 500;
     double webHeight = 1000;
     double creditPanelWidth = kIsWeb ? webWidth / 4 : screenSize.width / 4;
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('JellyFun'),
@@ -500,39 +497,37 @@ class _HomePageState extends State<HomePage>
           }
           return const CircularProgressIndicator();
         });
-    if (darkPatternsState is DarkPatternsActivatedState ||
-        darkPatternsState is DarkPatternsAppointmentState) {
-      FirebaseMessagingWeb.requestPermission();
-    }
     if (prefs.getBool("firstStart") == null || prefs.getBool("firstStart") == true) {
-      Navigator.of(context).pushNamed(
-        "/startSurvey",
-      );
+      if (!kDebugMode) {
+        Navigator.of(context).pushNamed(
+          "/startSurvey",
+        );
+      }
     }
   }
 
-  void checkNotification() {
-    if (darkPatternsState is DarkPatternsActivatedState ||
-        darkPatternsState is DarkPatternsAppointmentState) {
+  void checkDarkPatterns() {
+    var state = flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context).state;
+    if (state is DarkPatternsActivatedState || state is DarkPatternsAppointmentState) {
       sendDarkPatternsValue();
     } else {
       return;
     }
-    Uri currentUrl = Uri.base;
+  }
+
+  void sendDarkPatternsValue() async {
+    html.window.navigator.serviceWorker?.getRegistrations().then((registrations) {
+      for (final registration in registrations) {
+        registration.active?.postMessage({'type': 'SET_DARK_PATTERNS_VALUE', 'value': 1});
+      }
+    });
+  }
+
+  void checkNotification() {
+    Uri currentUrl = Uri.parse(html.window.location.href);
     if (currentUrl.queryParameters['source'] == 'notification') {
       print("Tapped Notification");
       FirebaseStore.addNotificationTap(DateTime.now());
     }
-  }
-
-  void sendDarkPatternsValue() async {
-    html.window.navigator.serviceWorker?.ready.then((html.ServiceWorkerRegistration registration) {
-      html.window.navigator.serviceWorker!.ready.then((html.ServiceWorkerRegistration registration) {
-        registration.active!.postMessage({'type': 'SET_DARK_PATTERNS_VALUE', 'value': 1});
-      });
-    }).catchError((error) {
-      // Handle any errors here
-      print("Error loading service worker: $error");
-    });
   }
 }

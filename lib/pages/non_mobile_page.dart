@@ -6,7 +6,7 @@ class NonMobilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: "Error",
+        title: "Kein Mobiles Endgerät",
         theme: ThemeData.light(),
         darkTheme: ThemeData.light(),
         themeMode: ThemeMode.light,

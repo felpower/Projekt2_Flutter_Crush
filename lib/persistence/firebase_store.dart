@@ -40,7 +40,7 @@ class FirebaseStore {
   static final Random _rnd = Random();
 
   static Future<void> init() async {
-    await _getUuid();
+    await getUuid();
     addUser();
   }
 
@@ -109,7 +109,7 @@ class FirebaseStore {
   }
 
   static Future<void> _updateDocument(String documentPropertyName, String information) async {
-    var userId = await _getUuid();
+    var userId = await getUuid();
     DatabaseReference ref;
     if (kDebugMode) {
       ref = database.ref("debug/$userId");
@@ -120,7 +120,7 @@ class FirebaseStore {
   }
 
   static addUser() async {
-    var userId = await _getUuid();
+    var userId = await getUuid();
     int darkPatternsState = await DarkPatternsService.shouldDarkPatternsBeVisible();
     final data = {
       uuid: userId,
@@ -142,7 +142,7 @@ class FirebaseStore {
   static void sendError(String error, {stacktrace = "", isFlutterError = false}) async {
     print(error);
     try {
-      var userId = await _getUuid();
+      var userId = await getUuid();
       final data = {
         'error': error,
         'stacktrace': stacktrace,
@@ -159,7 +159,7 @@ class FirebaseStore {
 
   static Future<void> sendFeedback(String info, html.File? file) async {
     try {
-      var userId = await _getUuid();
+      var userId = await getUuid();
       final String userAgent = html.window.navigator.userAgent;
       String uploadedFileId = _getRandomString(15);
       var taskSnapshot = await storage.ref('feedback/$uploadedFileId').putBlob(file);
@@ -181,7 +181,7 @@ class FirebaseStore {
     }
   }
 
-  static Future<String> _getUuid() async {
+  static Future<String> getUuid() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String? response = prefs.getString(uuid);
     if (response != null) {
@@ -193,6 +193,13 @@ class FirebaseStore {
   }
 
   static String _getRandomString(int length) {
-    return "V01-${DateFormat('yy-MM-dd–kk:mm').format(DateTime.now())}-${String.fromCharCodes(Iterable.generate(length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))))}";
+    var currentVersion = getCurrentVersion();
+    return "$currentVersion${DateFormat('yy-MM-dd–kk:mm').format(DateTime.now())}-${String
+        .fromCharCodes
+      (Iterable.generate(length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))))}";
+  }
+
+  static String getCurrentVersion(){
+    return "V01-";
   }
 }
