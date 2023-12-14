@@ -34,6 +34,7 @@ class FirebaseStore {
   static const String startSurvey = 'startSurvey';
 
   static const String endSurvey = 'endSurvey';
+  static const String userDeleted = 'userDeleted';
   static const String completeUserData = 'completeUserData';
   static const String ratingApp = 'rating';
   static const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
@@ -106,6 +107,10 @@ class FirebaseStore {
 
   static void sendUserAgent(String userAgent, bool isStandAlone) async {
     await _updateDocument('userAgent', 'UserAgent: $userAgent, isStandAlone: $isStandAlone');
+  }
+
+  static void sendUserDeleted() async {
+    await _updateDocument(userDeleted, 'User deleted');
   }
 
   static Future<void> _updateDocument(String documentPropertyName, String information) async {
@@ -194,12 +199,10 @@ class FirebaseStore {
 
   static String _getRandomString(int length) {
     var currentVersion = getCurrentVersion();
-    return "$currentVersion${DateFormat('yy-MM-dd–kk:mm').format(DateTime.now())}-${String
-        .fromCharCodes
-      (Iterable.generate(length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))))}";
+    return "$currentVersion${DateFormat('yy-MM-dd–kk:mm').format(DateTime.now())}-${String.fromCharCodes(Iterable.generate(length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))))}";
   }
 
-  static String getCurrentVersion(){
+  static String getCurrentVersion() {
     return "V01-";
   }
 }

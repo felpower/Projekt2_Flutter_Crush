@@ -45,10 +45,13 @@ class DeviceHelper {
     return string1?.toLowerCase() == string2?.toLowerCase();
   }
 
-  static Future<bool> isCurrentVersion() async => FirebaseStore.getUuid().then((value) {
+  static Future<String> isCurrentVersion() {
+    var uuid = FirebaseStore.getUuid();
+    return uuid.then((value) {
       if (value.startsWith(FirebaseStore.getCurrentVersion()) ) {
-        return true;
+        return "isCurrentVersion";
       }
-      return false;
+      return uuid;
     });
+  }
 }

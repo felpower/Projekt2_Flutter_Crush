@@ -38,8 +38,9 @@ void main() async {
         return;
       }
     }
-    if (!await DeviceHelper.isCurrentVersion()) {
-      runApp(const OldVersionPage());
+    String currentVersion = await DeviceHelper.isCurrentVersion();
+    if (currentVersion != "isCurrentVersion") {
+      runApp(OldVersionPage(currentVersion: currentVersion));
       return;
     }
     await FirebaseStore.init();
