@@ -26,7 +26,7 @@ import '../bloc/user_state_bloc/xp_bloc/xp_event.dart';
 import '../gamification_widgets/credit_panel.dart';
 import '../helpers/app_colors.dart';
 import 'feedback_page.dart';
-import 'finished_surevy_page.dart';
+import 'finished_survey_page.dart';
 import 'high_score_page.dart';
 import 'info_page.dart';
 import 'under_18_page.dart';

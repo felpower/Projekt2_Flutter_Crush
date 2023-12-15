@@ -13,7 +13,9 @@
             "timeInSeconds": 60,
             "numOfObstacles": 10,
             "obstacleTypes": [
-                "Blue"
+                "Blue",
+                "Yellow",
+                "Purple"
             ]
         },
         {
@@ -29,8 +31,9 @@
             "timeInSeconds": 60,
             "numOfObstacles": 10,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Green",
+                "Yellow",
+                "Pink"
             ]
         },
         {
@@ -46,9 +49,8 @@
             "timeInSeconds": 60,
             "numOfObstacles": 10,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
-                "Pink"
+                "Blue"
             ]
         },
         {
@@ -64,8 +66,8 @@
             "timeInSeconds": 60,
             "numOfObstacles": 10,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
+                "Red",
                 "Pink",
                 "Green"
             ]
@@ -83,7 +85,8 @@
             "timeInSeconds": 70,
             "numOfObstacles": 15,
             "obstacleTypes": [
-                "Blue"
+                "Pink",
+                "Yellow"
             ]
         },
         {
@@ -99,8 +102,8 @@
             "timeInSeconds": 70,
             "numOfObstacles": 15,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Purple",
+                "Yellow"
             ]
         },
         {
@@ -116,9 +119,7 @@
             "timeInSeconds": 70,
             "numOfObstacles": 15,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Blue"
             ]
         },
         {
@@ -134,10 +135,10 @@
             "timeInSeconds": 70,
             "numOfObstacles": 15,
             "obstacleTypes": [
-                "Blue",
+                "Yellow",
+                "Green",
                 "Purple",
-                "Pink",
-                "Green"
+                "Blue"
             ]
         },
         {
@@ -153,7 +154,7 @@
             "timeInSeconds": 80,
             "numOfObstacles": 20,
             "obstacleTypes": [
-                "Blue"
+                "Red"
             ]
         },
         {
@@ -169,8 +170,8 @@
             "timeInSeconds": 80,
             "numOfObstacles": 20,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Purple",
+                "Pink"
             ]
         },
         {
@@ -186,8 +187,6 @@
             "timeInSeconds": 80,
             "numOfObstacles": 20,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink"
             ]
         },
@@ -204,10 +203,8 @@
             "timeInSeconds": 80,
             "numOfObstacles": 20,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Red",
+                "Pink"
             ]
         },
         {
@@ -223,7 +220,10 @@
             "timeInSeconds": 90,
             "numOfObstacles": 25,
             "obstacleTypes": [
-                "Blue"
+                "Blue",
+                "Purple",
+                "Red",
+                "Green"
             ]
         },
         {
@@ -239,7 +239,7 @@
             "timeInSeconds": 90,
             "numOfObstacles": 25,
             "obstacleTypes": [
-                "Blue",
+                "Green",
                 "Purple"
             ]
         },
@@ -257,8 +257,7 @@
             "numOfObstacles": 25,
             "obstacleTypes": [
                 "Blue",
-                "Purple",
-                "Pink"
+                "Yellow"
             ]
         },
         {
@@ -274,10 +273,10 @@
             "timeInSeconds": 90,
             "numOfObstacles": 25,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
                 "Pink",
-                "Green"
+                "Yellow",
+                "Red"
             ]
         },
         {
@@ -293,7 +292,7 @@
             "timeInSeconds": 100,
             "numOfObstacles": 30,
             "obstacleTypes": [
-                "Blue"
+                "Green"
             ]
         },
         {
@@ -310,7 +309,9 @@
             "numOfObstacles": 30,
             "obstacleTypes": [
                 "Blue",
-                "Purple"
+                "Green",
+                "Pink",
+                "Yellow"
             ]
         },
         {
@@ -326,9 +327,8 @@
             "timeInSeconds": 100,
             "numOfObstacles": 30,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Green",
+                "Blue"
             ]
         },
         {
@@ -344,10 +344,9 @@
             "timeInSeconds": 100,
             "numOfObstacles": 30,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink",
-                "Green"
+                "Green",
+                "Yellow"
             ]
         },
         {
@@ -363,7 +362,8 @@
             "timeInSeconds": 110,
             "numOfObstacles": 35,
             "obstacleTypes": [
-                "Blue"
+                "Red",
+                "Yellow"
             ]
         },
         {
@@ -379,8 +379,7 @@
             "timeInSeconds": 110,
             "numOfObstacles": 35,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Yellow"
             ]
         },
         {
@@ -396,9 +395,7 @@
             "timeInSeconds": 110,
             "numOfObstacles": 35,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Red"
             ]
         },
         {
@@ -414,8 +411,6 @@
             "timeInSeconds": 110,
             "numOfObstacles": 35,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink",
                 "Green"
             ]
@@ -433,7 +428,10 @@
             "timeInSeconds": 120,
             "numOfObstacles": 40,
             "obstacleTypes": [
-                "Blue"
+                "Purple",
+                "Red",
+                "Blue",
+                "Green"
             ]
         },
         {
@@ -449,8 +447,8 @@
             "timeInSeconds": 120,
             "numOfObstacles": 40,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Red",
+                "Blue"
             ]
         },
         {
@@ -466,9 +464,7 @@
             "timeInSeconds": 120,
             "numOfObstacles": 40,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Red"
             ]
         },
         {
@@ -484,10 +480,8 @@
             "timeInSeconds": 120,
             "numOfObstacles": 40,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
-                "Pink",
-                "Green"
+                "Red"
             ]
         },
         {
@@ -503,7 +497,7 @@
             "timeInSeconds": 130,
             "numOfObstacles": 45,
             "obstacleTypes": [
-                "Blue"
+                "Yellow"
             ]
         },
         {
@@ -519,8 +513,10 @@
             "timeInSeconds": 130,
             "numOfObstacles": 45,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Red",
+                "Yellow",
+                "Green",
+                "Blue"
             ]
         },
         {
@@ -536,9 +532,9 @@
             "timeInSeconds": 130,
             "numOfObstacles": 45,
             "obstacleTypes": [
+                "Yellow",
                 "Blue",
-                "Purple",
-                "Pink"
+                "Red"
             ]
         },
         {
@@ -555,9 +551,7 @@
             "numOfObstacles": 45,
             "obstacleTypes": [
                 "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Purple"
             ]
         },
         {
@@ -589,8 +583,8 @@
             "timeInSeconds": 140,
             "numOfObstacles": 50,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Pink",
+                "Green"
             ]
         },
         {
@@ -606,9 +600,7 @@
             "timeInSeconds": 140,
             "numOfObstacles": 50,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Red"
             ]
         },
         {
@@ -624,10 +616,10 @@
             "timeInSeconds": 140,
             "numOfObstacles": 50,
             "obstacleTypes": [
-                "Blue",
+                "Red",
+                "Green",
                 "Purple",
-                "Pink",
-                "Green"
+                "Yellow"
             ]
         },
         {
@@ -643,7 +635,9 @@
             "timeInSeconds": 150,
             "numOfObstacles": 55,
             "obstacleTypes": [
-                "Blue"
+                "Red",
+                "Pink",
+                "Purple"
             ]
         },
         {
@@ -660,6 +654,7 @@
             "numOfObstacles": 55,
             "obstacleTypes": [
                 "Blue",
+                "Pink",
                 "Purple"
             ]
         },
@@ -676,9 +671,10 @@
             "timeInSeconds": 150,
             "numOfObstacles": 55,
             "obstacleTypes": [
+                "Pink",
+                "Yellow",
                 "Blue",
-                "Purple",
-                "Pink"
+                "Purple"
             ]
         },
         {
@@ -694,10 +690,9 @@
             "timeInSeconds": 150,
             "numOfObstacles": 55,
             "obstacleTypes": [
+                "Red",
                 "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Purple"
             ]
         },
         {
@@ -713,7 +708,10 @@
             "timeInSeconds": 160,
             "numOfObstacles": 60,
             "obstacleTypes": [
-                "Blue"
+                "Red",
+                "Purple",
+                "Green",
+                "Yellow"
             ]
         },
         {
@@ -729,8 +727,7 @@
             "timeInSeconds": 160,
             "numOfObstacles": 60,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Red"
             ]
         },
         {
@@ -746,9 +743,7 @@
             "timeInSeconds": 160,
             "numOfObstacles": 60,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Red"
             ]
         },
         {
@@ -764,10 +759,10 @@
             "timeInSeconds": 160,
             "numOfObstacles": 60,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
-                "Pink",
-                "Green"
+                "Red",
+                "Green",
+                "Blue"
             ]
         },
         {
@@ -783,7 +778,9 @@
             "timeInSeconds": 170,
             "numOfObstacles": 65,
             "obstacleTypes": [
-                "Blue"
+                "Blue",
+                "Purple",
+                "Red"
             ]
         },
         {
@@ -799,8 +796,8 @@
             "timeInSeconds": 170,
             "numOfObstacles": 65,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Pink",
+                "Red"
             ]
         },
         {
@@ -816,9 +813,8 @@
             "timeInSeconds": 170,
             "numOfObstacles": 65,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Red",
+                "Purple"
             ]
         },
         {
@@ -834,10 +830,7 @@
             "timeInSeconds": 170,
             "numOfObstacles": 65,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Pink"
             ]
         },
         {
@@ -853,7 +846,10 @@
             "timeInSeconds": 180,
             "numOfObstacles": 70,
             "obstacleTypes": [
-                "Blue"
+                "Yellow",
+                "Purple",
+                "Green",
+                "Pink"
             ]
         },
         {
@@ -869,7 +865,9 @@
             "timeInSeconds": 180,
             "numOfObstacles": 70,
             "obstacleTypes": [
-                "Blue",
+                "Pink",
+                "Red",
+                "Green",
                 "Purple"
             ]
         },
@@ -886,9 +884,8 @@
             "timeInSeconds": 180,
             "numOfObstacles": 70,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Pink",
+                "Green"
             ]
         },
         {
@@ -904,10 +901,7 @@
             "timeInSeconds": 180,
             "numOfObstacles": 70,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Yellow"
             ]
         },
         {
@@ -923,7 +917,10 @@
             "timeInSeconds": 190,
             "numOfObstacles": 75,
             "obstacleTypes": [
-                "Blue"
+                "Red",
+                "Purple",
+                "Green",
+                "Yellow"
             ]
         },
         {
@@ -940,6 +937,8 @@
             "numOfObstacles": 75,
             "obstacleTypes": [
                 "Blue",
+                "Yellow",
+                "Red",
                 "Purple"
             ]
         },
@@ -956,9 +955,9 @@
             "timeInSeconds": 190,
             "numOfObstacles": 75,
             "obstacleTypes": [
+                "Yellow",
                 "Blue",
-                "Purple",
-                "Pink"
+                "Purple"
             ]
         },
         {
@@ -974,10 +973,9 @@
             "timeInSeconds": 190,
             "numOfObstacles": 75,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
-                "Pink",
-                "Green"
+                "Blue",
+                "Pink"
             ]
         },
         {
@@ -993,7 +991,8 @@
             "timeInSeconds": 200,
             "numOfObstacles": 80,
             "obstacleTypes": [
-                "Blue"
+                "Blue",
+                "Red"
             ]
         },
         {
@@ -1010,7 +1009,9 @@
             "numOfObstacles": 80,
             "obstacleTypes": [
                 "Blue",
-                "Purple"
+                "Pink",
+                "Red",
+                "Green"
             ]
         },
         {
@@ -1026,9 +1027,10 @@
             "timeInSeconds": 200,
             "numOfObstacles": 80,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
-                "Pink"
+                "Red",
+                "Green",
+                "Blue"
             ]
         },
         {
@@ -1044,10 +1046,8 @@
             "timeInSeconds": 200,
             "numOfObstacles": 80,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Red",
+                "Yellow"
             ]
         },
         {
@@ -1063,7 +1063,8 @@
             "timeInSeconds": 210,
             "numOfObstacles": 85,
             "obstacleTypes": [
-                "Blue"
+                "Blue",
+                "Yellow"
             ]
         },
         {
@@ -1079,8 +1080,10 @@
             "timeInSeconds": 210,
             "numOfObstacles": 85,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Pink",
+                "Green",
+                "Red",
+                "Blue"
             ]
         },
         {
@@ -1096,9 +1099,8 @@
             "timeInSeconds": 210,
             "numOfObstacles": 85,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Pink",
+                "Yellow"
             ]
         },
         {
@@ -1114,10 +1116,9 @@
             "timeInSeconds": 210,
             "numOfObstacles": 85,
             "obstacleTypes": [
+                "Yellow",
                 "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Pink"
             ]
         },
         {
@@ -1133,7 +1134,8 @@
             "timeInSeconds": 220,
             "numOfObstacles": 90,
             "obstacleTypes": [
-                "Blue"
+                "Red",
+                "Yellow"
             ]
         },
         {
@@ -1149,8 +1151,9 @@
             "timeInSeconds": 220,
             "numOfObstacles": 90,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Purple",
+                "Green",
+                "Pink"
             ]
         },
         {
@@ -1166,9 +1169,7 @@
             "timeInSeconds": 220,
             "numOfObstacles": 90,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Purple"
             ]
         },
         {
@@ -1184,10 +1185,7 @@
             "timeInSeconds": 220,
             "numOfObstacles": 90,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Blue"
             ]
         },
         {
@@ -1203,7 +1201,9 @@
             "timeInSeconds": 230,
             "numOfObstacles": 95,
             "obstacleTypes": [
-                "Blue"
+                "Purple",
+                "Pink",
+                "Red"
             ]
         },
         {
@@ -1220,7 +1220,7 @@
             "numOfObstacles": 95,
             "obstacleTypes": [
                 "Blue",
-                "Purple"
+                "Green"
             ]
         },
         {
@@ -1236,9 +1236,7 @@
             "timeInSeconds": 230,
             "numOfObstacles": 95,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Blue"
             ]
         },
         {
@@ -1254,10 +1252,8 @@
             "timeInSeconds": 230,
             "numOfObstacles": 95,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Yellow",
+                "Pink"
             ]
         },
         {
@@ -1273,7 +1269,7 @@
             "timeInSeconds": 240,
             "numOfObstacles": 100,
             "obstacleTypes": [
-                "Blue"
+                "Purple"
             ]
         },
         {
@@ -1289,8 +1285,8 @@
             "timeInSeconds": 240,
             "numOfObstacles": 100,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Purple",
+                "Green"
             ]
         },
         {
@@ -1306,9 +1302,7 @@
             "timeInSeconds": 240,
             "numOfObstacles": 100,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Blue"
             ]
         },
         {
@@ -1325,9 +1319,7 @@
             "numOfObstacles": 100,
             "obstacleTypes": [
                 "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Yellow"
             ]
         },
         {
@@ -1343,6 +1335,9 @@
             "timeInSeconds": 250,
             "numOfObstacles": 105,
             "obstacleTypes": [
+                "Purple",
+                "Red",
+                "Yellow",
                 "Blue"
             ]
         },
@@ -1359,8 +1354,10 @@
             "timeInSeconds": 250,
             "numOfObstacles": 105,
             "obstacleTypes": [
+                "Pink",
                 "Blue",
-                "Purple"
+                "Red",
+                "Yellow"
             ]
         },
         {
@@ -1376,8 +1373,6 @@
             "timeInSeconds": 250,
             "numOfObstacles": 105,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink"
             ]
         },
@@ -1394,10 +1389,10 @@
             "timeInSeconds": 250,
             "numOfObstacles": 105,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
+                "Yellow",
                 "Pink",
-                "Green"
+                "Purple",
+                "Red"
             ]
         },
         {
@@ -1413,6 +1408,7 @@
             "timeInSeconds": 260,
             "numOfObstacles": 110,
             "obstacleTypes": [
+                "Green",
                 "Blue"
             ]
         },
@@ -1429,7 +1425,6 @@
             "timeInSeconds": 260,
             "numOfObstacles": 110,
             "obstacleTypes": [
-                "Blue",
                 "Purple"
             ]
         },
@@ -1446,8 +1441,6 @@
             "timeInSeconds": 260,
             "numOfObstacles": 110,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink"
             ]
         },
@@ -1464,10 +1457,9 @@
             "timeInSeconds": 260,
             "numOfObstacles": 110,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Green",
+                "Red",
+                "Blue"
             ]
         },
         {
@@ -1483,7 +1475,9 @@
             "timeInSeconds": 270,
             "numOfObstacles": 115,
             "obstacleTypes": [
-                "Blue"
+                "Purple",
+                "Pink",
+                "Green"
             ]
         },
         {
@@ -1499,6 +1493,8 @@
             "timeInSeconds": 270,
             "numOfObstacles": 115,
             "obstacleTypes": [
+                "Pink",
+                "Green",
                 "Blue",
                 "Purple"
             ]
@@ -1516,8 +1512,9 @@
             "timeInSeconds": 270,
             "numOfObstacles": 115,
             "obstacleTypes": [
-                "Blue",
+                "Red",
                 "Purple",
+                "Blue",
                 "Pink"
             ]
         },
@@ -1534,10 +1531,8 @@
             "timeInSeconds": 270,
             "numOfObstacles": 115,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
-                "Pink",
-                "Green"
+                "Pink"
             ]
         },
         {
@@ -1553,7 +1548,9 @@
             "timeInSeconds": 280,
             "numOfObstacles": 120,
             "obstacleTypes": [
-                "Blue"
+                "Red",
+                "Green",
+                "Yellow"
             ]
         },
         {
@@ -1569,8 +1566,7 @@
             "timeInSeconds": 280,
             "numOfObstacles": 120,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Blue"
             ]
         },
         {
@@ -1586,9 +1582,8 @@
             "timeInSeconds": 280,
             "numOfObstacles": 120,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Yellow",
+                "Blue"
             ]
         },
         {
@@ -1604,10 +1599,10 @@
             "timeInSeconds": 280,
             "numOfObstacles": 120,
             "obstacleTypes": [
-                "Blue",
+                "Yellow",
                 "Purple",
-                "Pink",
-                "Green"
+                "Red",
+                "Blue"
             ]
         },
         {
@@ -1623,6 +1618,7 @@
             "timeInSeconds": 290,
             "numOfObstacles": 125,
             "obstacleTypes": [
+                "Pink",
                 "Blue"
             ]
         },
@@ -1639,8 +1635,7 @@
             "timeInSeconds": 290,
             "numOfObstacles": 125,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Blue"
             ]
         },
         {
@@ -1656,8 +1651,9 @@
             "timeInSeconds": 290,
             "numOfObstacles": 125,
             "obstacleTypes": [
+                "Red",
                 "Blue",
-                "Purple",
+                "Yellow",
                 "Pink"
             ]
         },
@@ -1674,10 +1670,10 @@
             "timeInSeconds": 290,
             "numOfObstacles": 125,
             "obstacleTypes": [
-                "Blue",
+                "Yellow",
+                "Green",
                 "Purple",
-                "Pink",
-                "Green"
+                "Blue"
             ]
         },
         {
@@ -1709,8 +1705,8 @@
             "timeInSeconds": 300,
             "numOfObstacles": 130,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Pink",
+                "Yellow"
             ]
         },
         {
@@ -1726,9 +1722,7 @@
             "timeInSeconds": 300,
             "numOfObstacles": 130,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Blue"
             ]
         },
         {
@@ -1744,10 +1738,7 @@
             "timeInSeconds": 300,
             "numOfObstacles": 130,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Yellow"
             ]
         },
         {
@@ -1763,7 +1754,7 @@
             "timeInSeconds": 310,
             "numOfObstacles": 135,
             "obstacleTypes": [
-                "Blue"
+                "Green"
             ]
         },
         {
@@ -1779,8 +1770,10 @@
             "timeInSeconds": 310,
             "numOfObstacles": 135,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Red",
+                "Purple",
+                "Yellow",
+                "Pink"
             ]
         },
         {
@@ -1796,9 +1789,8 @@
             "timeInSeconds": 310,
             "numOfObstacles": 135,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
-                "Pink"
+                "Red"
             ]
         },
         {
@@ -1816,8 +1808,8 @@
             "obstacleTypes": [
                 "Blue",
                 "Purple",
-                "Pink",
-                "Green"
+                "Yellow",
+                "Pink"
             ]
         },
         {
@@ -1833,7 +1825,7 @@
             "timeInSeconds": 320,
             "numOfObstacles": 140,
             "obstacleTypes": [
-                "Blue"
+                "Green"
             ]
         },
         {
@@ -1849,8 +1841,10 @@
             "timeInSeconds": 320,
             "numOfObstacles": 140,
             "obstacleTypes": [
+                "Pink",
+                "Yellow",
                 "Blue",
-                "Purple"
+                "Green"
             ]
         },
         {
@@ -1866,7 +1860,8 @@
             "timeInSeconds": 320,
             "numOfObstacles": 140,
             "obstacleTypes": [
-                "Blue",
+                "Yellow",
+                "Green",
                 "Purple",
                 "Pink"
             ]
@@ -1884,10 +1879,8 @@
             "timeInSeconds": 320,
             "numOfObstacles": 140,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Green",
+                "Blue"
             ]
         },
         {
@@ -1903,7 +1896,10 @@
             "timeInSeconds": 330,
             "numOfObstacles": 145,
             "obstacleTypes": [
-                "Blue"
+                "Pink",
+                "Blue",
+                "Purple",
+                "Red"
             ]
         },
         {
@@ -1919,8 +1915,8 @@
             "timeInSeconds": 330,
             "numOfObstacles": 145,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Purple",
+                "Red"
             ]
         },
         {
@@ -1936,8 +1932,6 @@
             "timeInSeconds": 330,
             "numOfObstacles": 145,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink"
             ]
         },
@@ -1954,10 +1948,7 @@
             "timeInSeconds": 330,
             "numOfObstacles": 145,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Blue"
             ]
         },
         {
@@ -1973,6 +1964,9 @@
             "timeInSeconds": 340,
             "numOfObstacles": 150,
             "obstacleTypes": [
+                "Purple",
+                "Yellow",
+                "Pink",
                 "Blue"
             ]
         },
@@ -1989,8 +1983,10 @@
             "timeInSeconds": 340,
             "numOfObstacles": 150,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Yellow",
+                "Pink",
+                "Red",
+                "Blue"
             ]
         },
         {
@@ -2007,7 +2003,8 @@
             "numOfObstacles": 150,
             "obstacleTypes": [
                 "Blue",
-                "Purple",
+                "Green",
+                "Red",
                 "Pink"
             ]
         },
@@ -2024,10 +2021,7 @@
             "timeInSeconds": 340,
             "numOfObstacles": 150,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Red"
             ]
         },
         {
@@ -2043,7 +2037,7 @@
             "timeInSeconds": 350,
             "numOfObstacles": 155,
             "obstacleTypes": [
-                "Blue"
+                "Green"
             ]
         },
         {
@@ -2059,8 +2053,8 @@
             "timeInSeconds": 350,
             "numOfObstacles": 155,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Purple",
+                "Yellow"
             ]
         },
         {
@@ -2076,9 +2070,8 @@
             "timeInSeconds": 350,
             "numOfObstacles": 155,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Pink",
+                "Green"
             ]
         },
         {
@@ -2094,10 +2087,10 @@
             "timeInSeconds": 350,
             "numOfObstacles": 155,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink",
-                "Green"
+                "Red",
+                "Purple",
+                "Yellow"
             ]
         },
         {
@@ -2113,7 +2106,9 @@
             "timeInSeconds": 360,
             "numOfObstacles": 160,
             "obstacleTypes": [
-                "Blue"
+                "Blue",
+                "Green",
+                "Red"
             ]
         },
         {
@@ -2129,8 +2124,7 @@
             "timeInSeconds": 360,
             "numOfObstacles": 160,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Red"
             ]
         },
         {
@@ -2146,9 +2140,10 @@
             "timeInSeconds": 360,
             "numOfObstacles": 160,
             "obstacleTypes": [
+                "Green",
+                "Yellow",
                 "Blue",
-                "Purple",
-                "Pink"
+                "Red"
             ]
         },
         {
@@ -2165,9 +2160,7 @@
             "numOfObstacles": 160,
             "obstacleTypes": [
                 "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Yellow"
             ]
         },
         {
@@ -2183,7 +2176,10 @@
             "timeInSeconds": 370,
             "numOfObstacles": 165,
             "obstacleTypes": [
-                "Blue"
+                "Green",
+                "Red",
+                "Blue",
+                "Pink"
             ]
         },
         {
@@ -2199,8 +2195,8 @@
             "timeInSeconds": 370,
             "numOfObstacles": 165,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Purple",
+                "Blue"
             ]
         },
         {
@@ -2218,7 +2214,8 @@
             "obstacleTypes": [
                 "Blue",
                 "Purple",
-                "Pink"
+                "Pink",
+                "Red"
             ]
         },
         {
@@ -2234,9 +2231,6 @@
             "timeInSeconds": 370,
             "numOfObstacles": 165,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
                 "Green"
             ]
         },
@@ -2253,7 +2247,9 @@
             "timeInSeconds": 380,
             "numOfObstacles": 170,
             "obstacleTypes": [
-                "Blue"
+                "Blue",
+                "Yellow",
+                "Purple"
             ]
         },
         {
@@ -2269,8 +2265,10 @@
             "timeInSeconds": 380,
             "numOfObstacles": 170,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Yellow",
+                "Purple",
+                "Red",
+                "Pink"
             ]
         },
         {
@@ -2286,9 +2284,8 @@
             "timeInSeconds": 380,
             "numOfObstacles": 170,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Pink",
+                "Blue"
             ]
         },
         {
@@ -2304,8 +2301,6 @@
             "timeInSeconds": 380,
             "numOfObstacles": 170,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink",
                 "Green"
             ]
@@ -2323,7 +2318,7 @@
             "timeInSeconds": 390,
             "numOfObstacles": 175,
             "obstacleTypes": [
-                "Blue"
+                "Red"
             ]
         },
         {
@@ -2339,8 +2334,9 @@
             "timeInSeconds": 390,
             "numOfObstacles": 175,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Purple",
+                "Red",
+                "Pink"
             ]
         },
         {
@@ -2356,9 +2352,7 @@
             "timeInSeconds": 390,
             "numOfObstacles": 175,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Yellow"
             ]
         },
         {
@@ -2374,9 +2368,9 @@
             "timeInSeconds": 390,
             "numOfObstacles": 175,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
-                "Pink",
+                "Red",
+                "Blue",
                 "Green"
             ]
         },
@@ -2393,7 +2387,8 @@
             "timeInSeconds": 400,
             "numOfObstacles": 180,
             "obstacleTypes": [
-                "Blue"
+                "Purple",
+                "Yellow"
             ]
         },
         {
@@ -2409,7 +2404,9 @@
             "timeInSeconds": 400,
             "numOfObstacles": 180,
             "obstacleTypes": [
+                "Green",
                 "Blue",
+                "Red",
                 "Purple"
             ]
         },
@@ -2427,8 +2424,9 @@
             "numOfObstacles": 180,
             "obstacleTypes": [
                 "Blue",
-                "Purple",
-                "Pink"
+                "Red",
+                "Pink",
+                "Green"
             ]
         },
         {
@@ -2444,10 +2442,10 @@
             "timeInSeconds": 400,
             "numOfObstacles": 180,
             "obstacleTypes": [
+                "Green",
                 "Blue",
-                "Purple",
                 "Pink",
-                "Green"
+                "Red"
             ]
         },
         {
@@ -2463,7 +2461,9 @@
             "timeInSeconds": 410,
             "numOfObstacles": 185,
             "obstacleTypes": [
-                "Blue"
+                "Red",
+                "Blue",
+                "Pink"
             ]
         },
         {
@@ -2479,8 +2479,10 @@
             "timeInSeconds": 410,
             "numOfObstacles": 185,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Purple",
+                "Pink",
+                "Yellow",
+                "Green"
             ]
         },
         {
@@ -2496,9 +2498,8 @@
             "timeInSeconds": 410,
             "numOfObstacles": 185,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Red",
+                "Blue"
             ]
         },
         {
@@ -2514,10 +2515,8 @@
             "timeInSeconds": 410,
             "numOfObstacles": 185,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
-                "Pink",
-                "Green"
+                "Red"
             ]
         },
         {
@@ -2533,6 +2532,9 @@
             "timeInSeconds": 420,
             "numOfObstacles": 190,
             "obstacleTypes": [
+                "Green",
+                "Purple",
+                "Red",
                 "Blue"
             ]
         },
@@ -2549,8 +2551,9 @@
             "timeInSeconds": 420,
             "numOfObstacles": 190,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Yellow",
+                "Red",
+                "Green"
             ]
         },
         {
@@ -2566,9 +2569,9 @@
             "timeInSeconds": 420,
             "numOfObstacles": 190,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Red",
+                "Pink",
+                "Purple"
             ]
         },
         {
@@ -2586,8 +2589,7 @@
             "obstacleTypes": [
                 "Blue",
                 "Purple",
-                "Pink",
-                "Green"
+                "Yellow"
             ]
         },
         {
@@ -2603,6 +2605,8 @@
             "timeInSeconds": 430,
             "numOfObstacles": 195,
             "obstacleTypes": [
+                "Pink",
+                "Red",
                 "Blue"
             ]
         },
@@ -2619,7 +2623,6 @@
             "timeInSeconds": 430,
             "numOfObstacles": 195,
             "obstacleTypes": [
-                "Blue",
                 "Purple"
             ]
         },
@@ -2636,9 +2639,10 @@
             "timeInSeconds": 430,
             "numOfObstacles": 195,
             "obstacleTypes": [
-                "Blue",
+                "Yellow",
                 "Purple",
-                "Pink"
+                "Pink",
+                "Red"
             ]
         },
         {
@@ -2654,9 +2658,7 @@
             "timeInSeconds": 430,
             "numOfObstacles": 195,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
-                "Pink",
                 "Green"
             ]
         },
@@ -2673,6 +2675,9 @@
             "timeInSeconds": 440,
             "numOfObstacles": 200,
             "obstacleTypes": [
+                "Green",
+                "Yellow",
+                "Pink",
                 "Blue"
             ]
         },
@@ -2690,7 +2695,9 @@
             "numOfObstacles": 200,
             "obstacleTypes": [
                 "Blue",
-                "Purple"
+                "Green",
+                "Red",
+                "Yellow"
             ]
         },
         {
@@ -2706,9 +2713,7 @@
             "timeInSeconds": 440,
             "numOfObstacles": 200,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Red"
             ]
         },
         {
@@ -2724,10 +2729,10 @@
             "timeInSeconds": 440,
             "numOfObstacles": 200,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink",
-                "Green"
+                "Green",
+                "Purple",
+                "Red"
             ]
         },
         {
@@ -2743,7 +2748,10 @@
             "timeInSeconds": 450,
             "numOfObstacles": 205,
             "obstacleTypes": [
-                "Blue"
+                "Green",
+                "Pink",
+                "Blue",
+                "Red"
             ]
         },
         {
@@ -2759,8 +2767,9 @@
             "timeInSeconds": 450,
             "numOfObstacles": 205,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Pink",
+                "Green",
+                "Blue"
             ]
         },
         {
@@ -2776,7 +2785,7 @@
             "timeInSeconds": 450,
             "numOfObstacles": 205,
             "obstacleTypes": [
-                "Blue",
+                "Green",
                 "Purple",
                 "Pink"
             ]
@@ -2794,10 +2803,10 @@
             "timeInSeconds": 450,
             "numOfObstacles": 205,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
+                "Green",
                 "Pink",
-                "Green"
+                "Red",
+                "Blue"
             ]
         },
         {
@@ -2813,6 +2822,9 @@
             "timeInSeconds": 460,
             "numOfObstacles": 210,
             "obstacleTypes": [
+                "Red",
+                "Green",
+                "Pink",
                 "Blue"
             ]
         },
@@ -2829,8 +2841,9 @@
             "timeInSeconds": 460,
             "numOfObstacles": 210,
             "obstacleTypes": [
+                "Purple",
                 "Blue",
-                "Purple"
+                "Red"
             ]
         },
         {
@@ -2846,9 +2859,9 @@
             "timeInSeconds": 460,
             "numOfObstacles": 210,
             "obstacleTypes": [
+                "Red",
                 "Blue",
-                "Purple",
-                "Pink"
+                "Green"
             ]
         },
         {
@@ -2864,10 +2877,10 @@
             "timeInSeconds": 460,
             "numOfObstacles": 210,
             "obstacleTypes": [
+                "Yellow",
                 "Blue",
                 "Purple",
-                "Pink",
-                "Green"
+                "Pink"
             ]
         },
         {
@@ -2883,7 +2896,9 @@
             "timeInSeconds": 470,
             "numOfObstacles": 215,
             "obstacleTypes": [
-                "Blue"
+                "Green",
+                "Pink",
+                "Purple"
             ]
         },
         {
@@ -2899,8 +2914,7 @@
             "timeInSeconds": 470,
             "numOfObstacles": 215,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Red"
             ]
         },
         {
@@ -2916,9 +2930,7 @@
             "timeInSeconds": 470,
             "numOfObstacles": 215,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Blue"
             ]
         },
         {
@@ -2934,10 +2946,9 @@
             "timeInSeconds": 470,
             "numOfObstacles": 215,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink",
-                "Green"
+                "Red",
+                "Purple"
             ]
         },
         {
@@ -2953,6 +2964,8 @@
             "timeInSeconds": 480,
             "numOfObstacles": 220,
             "obstacleTypes": [
+                "Yellow",
+                "Pink",
                 "Blue"
             ]
         },
@@ -2969,7 +2982,8 @@
             "timeInSeconds": 480,
             "numOfObstacles": 220,
             "obstacleTypes": [
-                "Blue",
+                "Yellow",
+                "Pink",
                 "Purple"
             ]
         },
@@ -2986,8 +3000,8 @@
             "timeInSeconds": 480,
             "numOfObstacles": 220,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
+                "Red",
+                "Green",
                 "Pink"
             ]
         },
@@ -3004,9 +3018,9 @@
             "timeInSeconds": 480,
             "numOfObstacles": 220,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
-                "Pink",
+                "Blue",
+                "Yellow",
                 "Green"
             ]
         },
@@ -3023,7 +3037,8 @@
             "timeInSeconds": 490,
             "numOfObstacles": 225,
             "obstacleTypes": [
-                "Blue"
+                "Pink",
+                "Yellow"
             ]
         },
         {
@@ -3039,8 +3054,7 @@
             "timeInSeconds": 490,
             "numOfObstacles": 225,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Green"
             ]
         },
         {
@@ -3056,8 +3070,6 @@
             "timeInSeconds": 490,
             "numOfObstacles": 225,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink"
             ]
         },
@@ -3074,10 +3086,8 @@
             "timeInSeconds": 490,
             "numOfObstacles": 225,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Green",
+                "Blue"
             ]
         },
         {
@@ -3093,7 +3103,7 @@
             "timeInSeconds": 500,
             "numOfObstacles": 230,
             "obstacleTypes": [
-                "Blue"
+                "Red"
             ]
         },
         {
@@ -3110,6 +3120,8 @@
             "numOfObstacles": 230,
             "obstacleTypes": [
                 "Blue",
+                "Pink",
+                "Red",
                 "Purple"
             ]
         },
@@ -3126,8 +3138,8 @@
             "timeInSeconds": 500,
             "numOfObstacles": 230,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
+                "Red",
+                "Green",
                 "Pink"
             ]
         },
@@ -3144,10 +3156,10 @@
             "timeInSeconds": 500,
             "numOfObstacles": 230,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
+                "Yellow",
                 "Pink",
-                "Green"
+                "Green",
+                "Red"
             ]
         },
         {
@@ -3163,7 +3175,8 @@
             "timeInSeconds": 510,
             "numOfObstacles": 235,
             "obstacleTypes": [
-                "Blue"
+                "Blue",
+                "Red"
             ]
         },
         {
@@ -3179,8 +3192,10 @@
             "timeInSeconds": 510,
             "numOfObstacles": 235,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Green",
+                "Purple",
+                "Red",
+                "Blue"
             ]
         },
         {
@@ -3196,9 +3211,9 @@
             "timeInSeconds": 510,
             "numOfObstacles": 235,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Red",
+                "Yellow",
+                "Purple"
             ]
         },
         {
@@ -3215,9 +3230,7 @@
             "numOfObstacles": 235,
             "obstacleTypes": [
                 "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Purple"
             ]
         },
         {
@@ -3233,7 +3246,9 @@
             "timeInSeconds": 520,
             "numOfObstacles": 240,
             "obstacleTypes": [
-                "Blue"
+                "Yellow",
+                "Red",
+                "Purple"
             ]
         },
         {
@@ -3249,8 +3264,7 @@
             "timeInSeconds": 520,
             "numOfObstacles": 240,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Pink"
             ]
         },
         {
@@ -3266,9 +3280,8 @@
             "timeInSeconds": 520,
             "numOfObstacles": 240,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Yellow",
+                "Red"
             ]
         },
         {
@@ -3285,9 +3298,9 @@
             "numOfObstacles": 240,
             "obstacleTypes": [
                 "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Green",
+                "Red",
+                "Pink"
             ]
         },
         {
@@ -3303,6 +3316,9 @@
             "timeInSeconds": 530,
             "numOfObstacles": 245,
             "obstacleTypes": [
+                "Red",
+                "Yellow",
+                "Green",
                 "Blue"
             ]
         },
@@ -3319,7 +3335,6 @@
             "timeInSeconds": 530,
             "numOfObstacles": 245,
             "obstacleTypes": [
-                "Blue",
                 "Purple"
             ]
         },
@@ -3336,8 +3351,9 @@
             "timeInSeconds": 530,
             "numOfObstacles": 245,
             "obstacleTypes": [
+                "Green",
                 "Blue",
-                "Purple",
+                "Yellow",
                 "Pink"
             ]
         },
@@ -3354,10 +3370,9 @@
             "timeInSeconds": 530,
             "numOfObstacles": 245,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink",
-                "Green"
+                "Purple",
+                "Blue"
             ]
         },
         {
@@ -3373,6 +3388,9 @@
             "timeInSeconds": 540,
             "numOfObstacles": 250,
             "obstacleTypes": [
+                "Pink",
+                "Purple",
+                "Yellow",
                 "Blue"
             ]
         },
@@ -3389,8 +3407,9 @@
             "timeInSeconds": 540,
             "numOfObstacles": 250,
             "obstacleTypes": [
+                "Purple",
                 "Blue",
-                "Purple"
+                "Red"
             ]
         },
         {
@@ -3406,9 +3425,7 @@
             "timeInSeconds": 540,
             "numOfObstacles": 250,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Blue"
             ]
         },
         {
@@ -3424,10 +3441,9 @@
             "timeInSeconds": 540,
             "numOfObstacles": 250,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Green",
+                "Yellow",
+                "Red"
             ]
         },
         {
@@ -3443,7 +3459,10 @@
             "timeInSeconds": 550,
             "numOfObstacles": 255,
             "obstacleTypes": [
-                "Blue"
+                "Blue",
+                "Purple",
+                "Green",
+                "Red"
             ]
         },
         {
@@ -3459,8 +3478,8 @@
             "timeInSeconds": 550,
             "numOfObstacles": 255,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Red",
+                "Green"
             ]
         },
         {
@@ -3476,9 +3495,9 @@
             "timeInSeconds": 550,
             "numOfObstacles": 255,
             "obstacleTypes": [
-                "Blue",
+                "Green",
                 "Purple",
-                "Pink"
+                "Yellow"
             ]
         },
         {
@@ -3494,10 +3513,7 @@
             "timeInSeconds": 550,
             "numOfObstacles": 255,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Pink"
             ]
         },
         {
@@ -3513,6 +3529,8 @@
             "timeInSeconds": 560,
             "numOfObstacles": 260,
             "obstacleTypes": [
+                "Green",
+                "Yellow",
                 "Blue"
             ]
         },
@@ -3529,8 +3547,8 @@
             "timeInSeconds": 560,
             "numOfObstacles": 260,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Yellow",
+                "Blue"
             ]
         },
         {
@@ -3546,8 +3564,7 @@
             "timeInSeconds": 560,
             "numOfObstacles": 260,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
+                "Green",
                 "Pink"
             ]
         },
@@ -3564,10 +3581,8 @@
             "timeInSeconds": 560,
             "numOfObstacles": 260,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
-                "Pink",
-                "Green"
+                "Blue"
             ]
         },
         {
@@ -3583,7 +3598,7 @@
             "timeInSeconds": 570,
             "numOfObstacles": 265,
             "obstacleTypes": [
-                "Blue"
+                "Pink"
             ]
         },
         {
@@ -3599,8 +3614,8 @@
             "timeInSeconds": 570,
             "numOfObstacles": 265,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Purple",
+                "Green"
             ]
         },
         {
@@ -3616,9 +3631,10 @@
             "timeInSeconds": 570,
             "numOfObstacles": 265,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
-                "Pink"
+                "Red",
+                "Green",
+                "Blue"
             ]
         },
         {
@@ -3634,10 +3650,7 @@
             "timeInSeconds": 570,
             "numOfObstacles": 265,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Red"
             ]
         },
         {
@@ -3653,7 +3666,9 @@
             "timeInSeconds": 580,
             "numOfObstacles": 270,
             "obstacleTypes": [
-                "Blue"
+                "Yellow",
+                "Green",
+                "Pink"
             ]
         },
         {
@@ -3669,8 +3684,7 @@
             "timeInSeconds": 580,
             "numOfObstacles": 270,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Yellow"
             ]
         },
         {
@@ -3686,9 +3700,10 @@
             "timeInSeconds": 580,
             "numOfObstacles": 270,
             "obstacleTypes": [
-                "Blue",
+                "Pink",
                 "Purple",
-                "Pink"
+                "Red",
+                "Yellow"
             ]
         },
         {
@@ -3704,10 +3719,9 @@
             "timeInSeconds": 580,
             "numOfObstacles": 270,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
+                "Red",
                 "Pink",
-                "Green"
+                "Blue"
             ]
         },
         {
@@ -3723,7 +3737,10 @@
             "timeInSeconds": 590,
             "numOfObstacles": 275,
             "obstacleTypes": [
-                "Blue"
+                "Yellow",
+                "Purple",
+                "Green",
+                "Pink"
             ]
         },
         {
@@ -3739,8 +3756,8 @@
             "timeInSeconds": 590,
             "numOfObstacles": 275,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Red",
+                "Blue"
             ]
         },
         {
@@ -3756,9 +3773,10 @@
             "timeInSeconds": 590,
             "numOfObstacles": 275,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Pink",
+                "Red",
+                "Green",
+                "Blue"
             ]
         },
         {
@@ -3774,10 +3792,8 @@
             "timeInSeconds": 590,
             "numOfObstacles": 275,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Red",
+                "Yellow"
             ]
         },
         {
@@ -3793,7 +3809,10 @@
             "timeInSeconds": 600,
             "numOfObstacles": 280,
             "obstacleTypes": [
-                "Blue"
+                "Pink",
+                "Purple",
+                "Green",
+                "Yellow"
             ]
         },
         {
@@ -3809,8 +3828,9 @@
             "timeInSeconds": 600,
             "numOfObstacles": 280,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Yellow",
+                "Purple",
+                "Pink"
             ]
         },
         {
@@ -3826,8 +3846,7 @@
             "timeInSeconds": 600,
             "numOfObstacles": 280,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
+                "Yellow",
                 "Pink"
             ]
         },
@@ -3844,9 +3863,8 @@
             "timeInSeconds": 600,
             "numOfObstacles": 280,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink",
+                "Purple",
                 "Green"
             ]
         },
@@ -3863,6 +3881,9 @@
             "timeInSeconds": 610,
             "numOfObstacles": 285,
             "obstacleTypes": [
+                "Green",
+                "Red",
+                "Pink",
                 "Blue"
             ]
         },
@@ -3879,8 +3900,9 @@
             "timeInSeconds": 610,
             "numOfObstacles": 285,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Pink",
+                "Yellow",
+                "Blue"
             ]
         },
         {
@@ -3896,9 +3918,7 @@
             "timeInSeconds": 610,
             "numOfObstacles": 285,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Blue"
             ]
         },
         {
@@ -3914,9 +3934,6 @@
             "timeInSeconds": 610,
             "numOfObstacles": 285,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
                 "Green"
             ]
         },
@@ -3933,7 +3950,10 @@
             "timeInSeconds": 620,
             "numOfObstacles": 290,
             "obstacleTypes": [
-                "Blue"
+                "Blue",
+                "Green",
+                "Red",
+                "Yellow"
             ]
         },
         {
@@ -3949,8 +3969,10 @@
             "timeInSeconds": 620,
             "numOfObstacles": 290,
             "obstacleTypes": [
+                "Green",
                 "Blue",
-                "Purple"
+                "Pink",
+                "Yellow"
             ]
         },
         {
@@ -3966,9 +3988,10 @@
             "timeInSeconds": 620,
             "numOfObstacles": 290,
             "obstacleTypes": [
-                "Blue",
+                "Red",
                 "Purple",
-                "Pink"
+                "Blue",
+                "Yellow"
             ]
         },
         {
@@ -3984,10 +4007,9 @@
             "timeInSeconds": 620,
             "numOfObstacles": 290,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink",
-                "Green"
+                "Green",
+                "Purple"
             ]
         },
         {
@@ -4003,7 +4025,10 @@
             "timeInSeconds": 630,
             "numOfObstacles": 295,
             "obstacleTypes": [
-                "Blue"
+                "Blue",
+                "Green",
+                "Yellow",
+                "Purple"
             ]
         },
         {
@@ -4019,8 +4044,7 @@
             "timeInSeconds": 630,
             "numOfObstacles": 295,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Green"
             ]
         },
         {
@@ -4036,9 +4060,7 @@
             "timeInSeconds": 630,
             "numOfObstacles": 295,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Yellow"
             ]
         },
         {
@@ -4054,10 +4076,9 @@
             "timeInSeconds": 630,
             "numOfObstacles": 295,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Yellow",
+                "Green",
+                "Purple"
             ]
         },
         {
@@ -4073,7 +4094,9 @@
             "timeInSeconds": 640,
             "numOfObstacles": 300,
             "obstacleTypes": [
-                "Blue"
+                "Purple",
+                "Green",
+                "Red"
             ]
         },
         {
@@ -4089,8 +4112,9 @@
             "timeInSeconds": 640,
             "numOfObstacles": 300,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Yellow",
+                "Purple",
+                "Blue"
             ]
         },
         {
@@ -4106,9 +4130,8 @@
             "timeInSeconds": 640,
             "numOfObstacles": 300,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Yellow",
+                "Red"
             ]
         },
         {
@@ -4124,10 +4147,8 @@
             "timeInSeconds": 640,
             "numOfObstacles": 300,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Red",
+                "Purple"
             ]
         },
         {
@@ -4143,7 +4164,9 @@
             "timeInSeconds": 650,
             "numOfObstacles": 305,
             "obstacleTypes": [
-                "Blue"
+                "Blue",
+                "Pink",
+                "Yellow"
             ]
         },
         {
@@ -4160,7 +4183,9 @@
             "numOfObstacles": 305,
             "obstacleTypes": [
                 "Blue",
-                "Purple"
+                "Red",
+                "Purple",
+                "Pink"
             ]
         },
         {
@@ -4178,6 +4203,7 @@
             "obstacleTypes": [
                 "Blue",
                 "Purple",
+                "Yellow",
                 "Pink"
             ]
         },
@@ -4194,10 +4220,8 @@
             "timeInSeconds": 650,
             "numOfObstacles": 305,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Yellow",
+                "Pink"
             ]
         },
         {
@@ -4213,7 +4237,9 @@
             "timeInSeconds": 660,
             "numOfObstacles": 310,
             "obstacleTypes": [
-                "Blue"
+                "Purple",
+                "Red",
+                "Green"
             ]
         },
         {
@@ -4229,8 +4255,8 @@
             "timeInSeconds": 660,
             "numOfObstacles": 310,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Red",
+                "Yellow"
             ]
         },
         {
@@ -4247,8 +4273,8 @@
             "numOfObstacles": 310,
             "obstacleTypes": [
                 "Blue",
-                "Purple",
-                "Pink"
+                "Green",
+                "Yellow"
             ]
         },
         {
@@ -4265,9 +4291,9 @@
             "numOfObstacles": 310,
             "obstacleTypes": [
                 "Blue",
-                "Purple",
+                "Yellow",
                 "Pink",
-                "Green"
+                "Red"
             ]
         },
         {
@@ -4283,7 +4309,10 @@
             "timeInSeconds": 670,
             "numOfObstacles": 315,
             "obstacleTypes": [
-                "Blue"
+                "Yellow",
+                "Red",
+                "Purple",
+                "Green"
             ]
         },
         {
@@ -4299,8 +4328,8 @@
             "timeInSeconds": 670,
             "numOfObstacles": 315,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Green",
+                "Pink"
             ]
         },
         {
@@ -4316,9 +4345,10 @@
             "timeInSeconds": 670,
             "numOfObstacles": 315,
             "obstacleTypes": [
-                "Blue",
+                "Pink",
+                "Green",
                 "Purple",
-                "Pink"
+                "Yellow"
             ]
         },
         {
@@ -4334,10 +4364,8 @@
             "timeInSeconds": 670,
             "numOfObstacles": 315,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
-                "Pink",
-                "Green"
+                "Red"
             ]
         },
         {
@@ -4353,6 +4381,8 @@
             "timeInSeconds": 680,
             "numOfObstacles": 320,
             "obstacleTypes": [
+                "Yellow",
+                "Pink",
                 "Blue"
             ]
         },
@@ -4369,8 +4399,7 @@
             "timeInSeconds": 680,
             "numOfObstacles": 320,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Blue"
             ]
         },
         {
@@ -4386,9 +4415,9 @@
             "timeInSeconds": 680,
             "numOfObstacles": 320,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Pink",
+                "Red",
+                "Blue"
             ]
         },
         {
@@ -4405,9 +4434,9 @@
             "numOfObstacles": 320,
             "obstacleTypes": [
                 "Blue",
+                "Green",
                 "Purple",
-                "Pink",
-                "Green"
+                "Yellow"
             ]
         },
         {
@@ -4423,7 +4452,7 @@
             "timeInSeconds": 690,
             "numOfObstacles": 325,
             "obstacleTypes": [
-                "Blue"
+                "Yellow"
             ]
         },
         {
@@ -4439,8 +4468,10 @@
             "timeInSeconds": 690,
             "numOfObstacles": 325,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Pink",
+                "Yellow",
+                "Red",
+                "Green"
             ]
         },
         {
@@ -4456,9 +4487,8 @@
             "timeInSeconds": 690,
             "numOfObstacles": 325,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Green",
+                "Blue"
             ]
         },
         {
@@ -4474,10 +4504,7 @@
             "timeInSeconds": 690,
             "numOfObstacles": 325,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Purple"
             ]
         },
         {
@@ -4493,6 +4520,8 @@
             "timeInSeconds": 700,
             "numOfObstacles": 330,
             "obstacleTypes": [
+                "Green",
+                "Pink",
                 "Blue"
             ]
         },
@@ -4509,8 +4538,10 @@
             "timeInSeconds": 700,
             "numOfObstacles": 330,
             "obstacleTypes": [
+                "Pink",
+                "Red",
                 "Blue",
-                "Purple"
+                "Yellow"
             ]
         },
         {
@@ -4526,9 +4557,7 @@
             "timeInSeconds": 700,
             "numOfObstacles": 330,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Purple"
             ]
         },
         {
@@ -4544,10 +4573,7 @@
             "timeInSeconds": 700,
             "numOfObstacles": 330,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Blue"
             ]
         },
         {
@@ -4563,7 +4589,10 @@
             "timeInSeconds": 710,
             "numOfObstacles": 335,
             "obstacleTypes": [
-                "Blue"
+                "Purple",
+                "Yellow",
+                "Green",
+                "Pink"
             ]
         },
         {
@@ -4579,8 +4608,8 @@
             "timeInSeconds": 710,
             "numOfObstacles": 335,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Pink",
+                "Red"
             ]
         },
         {
@@ -4596,9 +4625,8 @@
             "timeInSeconds": 710,
             "numOfObstacles": 335,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Green",
+                "Blue"
             ]
         },
         {
@@ -4614,10 +4642,7 @@
             "timeInSeconds": 710,
             "numOfObstacles": 335,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Blue"
             ]
         },
         {
@@ -4633,7 +4658,7 @@
             "timeInSeconds": 720,
             "numOfObstacles": 340,
             "obstacleTypes": [
-                "Blue"
+                "Red"
             ]
         },
         {
@@ -4649,8 +4674,9 @@
             "timeInSeconds": 720,
             "numOfObstacles": 340,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Red",
+                "Pink",
+                "Yellow"
             ]
         },
         {
@@ -4666,9 +4692,8 @@
             "timeInSeconds": 720,
             "numOfObstacles": 340,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
-                "Pink"
+                "Green"
             ]
         },
         {
@@ -4684,10 +4709,9 @@
             "timeInSeconds": 720,
             "numOfObstacles": 340,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Yellow",
+                "Red",
+                "Pink"
             ]
         },
         {
@@ -4703,7 +4727,7 @@
             "timeInSeconds": 730,
             "numOfObstacles": 345,
             "obstacleTypes": [
-                "Blue"
+                "Yellow"
             ]
         },
         {
@@ -4719,7 +4743,6 @@
             "timeInSeconds": 730,
             "numOfObstacles": 345,
             "obstacleTypes": [
-                "Blue",
                 "Purple"
             ]
         },
@@ -4736,9 +4759,9 @@
             "timeInSeconds": 730,
             "numOfObstacles": 345,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Red",
+                "Pink",
+                "Green"
             ]
         },
         {
@@ -4754,10 +4777,8 @@
             "timeInSeconds": 730,
             "numOfObstacles": 345,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Yellow",
+                "Blue"
             ]
         },
         {
@@ -4773,7 +4794,7 @@
             "timeInSeconds": 740,
             "numOfObstacles": 350,
             "obstacleTypes": [
-                "Blue"
+                "Pink"
             ]
         },
         {
@@ -4789,8 +4810,10 @@
             "timeInSeconds": 740,
             "numOfObstacles": 350,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Green",
+                "Red",
+                "Purple",
+                "Blue"
             ]
         },
         {
@@ -4807,8 +4830,8 @@
             "numOfObstacles": 350,
             "obstacleTypes": [
                 "Blue",
-                "Purple",
-                "Pink"
+                "Pink",
+                "Red"
             ]
         },
         {
@@ -4824,10 +4847,8 @@
             "timeInSeconds": 740,
             "numOfObstacles": 350,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink",
-                "Green"
+                "Blue"
             ]
         },
         {
@@ -4843,6 +4864,7 @@
             "timeInSeconds": 750,
             "numOfObstacles": 355,
             "obstacleTypes": [
+                "Purple",
                 "Blue"
             ]
         },
@@ -4859,8 +4881,10 @@
             "timeInSeconds": 750,
             "numOfObstacles": 355,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Purple",
+                "Yellow",
+                "Green",
+                "Pink"
             ]
         },
         {
@@ -4876,7 +4900,7 @@
             "timeInSeconds": 750,
             "numOfObstacles": 355,
             "obstacleTypes": [
-                "Blue",
+                "Red",
                 "Purple",
                 "Pink"
             ]
@@ -4894,10 +4918,9 @@
             "timeInSeconds": 750,
             "numOfObstacles": 355,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
-                "Pink",
-                "Green"
+                "Green",
+                "Red"
             ]
         },
         {
@@ -4913,6 +4936,7 @@
             "timeInSeconds": 760,
             "numOfObstacles": 360,
             "obstacleTypes": [
+                "Purple",
                 "Blue"
             ]
         },
@@ -4929,8 +4953,8 @@
             "timeInSeconds": 760,
             "numOfObstacles": 360,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Yellow",
+                "Red"
             ]
         },
         {
@@ -4946,9 +4970,9 @@
             "timeInSeconds": 760,
             "numOfObstacles": 360,
             "obstacleTypes": [
-                "Blue",
+                "Green",
                 "Purple",
-                "Pink"
+                "Red"
             ]
         },
         {
@@ -4965,9 +4989,9 @@
             "numOfObstacles": 360,
             "obstacleTypes": [
                 "Blue",
-                "Purple",
+                "Yellow",
                 "Pink",
-                "Green"
+                "Red"
             ]
         },
         {
@@ -4983,7 +5007,9 @@
             "timeInSeconds": 770,
             "numOfObstacles": 365,
             "obstacleTypes": [
-                "Blue"
+                "Blue",
+                "Yellow",
+                "Pink"
             ]
         },
         {
@@ -4999,8 +5025,10 @@
             "timeInSeconds": 770,
             "numOfObstacles": 365,
             "obstacleTypes": [
+                "Yellow",
                 "Blue",
-                "Purple"
+                "Pink",
+                "Red"
             ]
         },
         {
@@ -5016,8 +5044,6 @@
             "timeInSeconds": 770,
             "numOfObstacles": 365,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink"
             ]
         },
@@ -5035,9 +5061,7 @@
             "numOfObstacles": 365,
             "obstacleTypes": [
                 "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Purple"
             ]
         },
         {
@@ -5053,7 +5077,7 @@
             "timeInSeconds": 780,
             "numOfObstacles": 370,
             "obstacleTypes": [
-                "Blue"
+                "Green"
             ]
         },
         {
@@ -5070,7 +5094,9 @@
             "numOfObstacles": 370,
             "obstacleTypes": [
                 "Blue",
-                "Purple"
+                "Pink",
+                "Red",
+                "Yellow"
             ]
         },
         {
@@ -5086,9 +5112,7 @@
             "timeInSeconds": 780,
             "numOfObstacles": 370,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Purple"
             ]
         },
         {
@@ -5104,10 +5128,9 @@
             "timeInSeconds": 780,
             "numOfObstacles": 370,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink",
-                "Green"
+                "Red",
+                "Yellow"
             ]
         },
         {
@@ -5123,7 +5146,9 @@
             "timeInSeconds": 790,
             "numOfObstacles": 375,
             "obstacleTypes": [
-                "Blue"
+                "Red",
+                "Green",
+                "Yellow"
             ]
         },
         {
@@ -5139,8 +5164,8 @@
             "timeInSeconds": 790,
             "numOfObstacles": 375,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Green",
+                "Pink"
             ]
         },
         {
@@ -5156,9 +5181,8 @@
             "timeInSeconds": 790,
             "numOfObstacles": 375,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Pink",
+                "Green"
             ]
         },
         {
@@ -5174,8 +5198,6 @@
             "timeInSeconds": 790,
             "numOfObstacles": 375,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink",
                 "Green"
             ]
@@ -5193,7 +5215,8 @@
             "timeInSeconds": 800,
             "numOfObstacles": 380,
             "obstacleTypes": [
-                "Blue"
+                "Green",
+                "Pink"
             ]
         },
         {
@@ -5209,7 +5232,7 @@
             "timeInSeconds": 800,
             "numOfObstacles": 380,
             "obstacleTypes": [
-                "Blue",
+                "Red",
                 "Purple"
             ]
         },
@@ -5227,8 +5250,8 @@
             "numOfObstacles": 380,
             "obstacleTypes": [
                 "Blue",
-                "Purple",
-                "Pink"
+                "Red",
+                "Green"
             ]
         },
         {
@@ -5244,10 +5267,9 @@
             "timeInSeconds": 800,
             "numOfObstacles": 380,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Yellow",
+                "Green",
+                "Red"
             ]
         },
         {
@@ -5263,7 +5285,7 @@
             "timeInSeconds": 810,
             "numOfObstacles": 385,
             "obstacleTypes": [
-                "Blue"
+                "Red"
             ]
         },
         {
@@ -5279,8 +5301,7 @@
             "timeInSeconds": 810,
             "numOfObstacles": 385,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Yellow"
             ]
         },
         {
@@ -5296,9 +5317,9 @@
             "timeInSeconds": 810,
             "numOfObstacles": 385,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Red",
+                "Pink",
+                "Purple"
             ]
         },
         {
@@ -5315,9 +5336,7 @@
             "numOfObstacles": 385,
             "obstacleTypes": [
                 "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Red"
             ]
         },
         {
@@ -5350,7 +5369,8 @@
             "numOfObstacles": 390,
             "obstacleTypes": [
                 "Blue",
-                "Purple"
+                "Purple",
+                "Pink"
             ]
         },
         {
@@ -5366,9 +5386,7 @@
             "timeInSeconds": 820,
             "numOfObstacles": 390,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Purple"
             ]
         },
         {
@@ -5384,10 +5402,8 @@
             "timeInSeconds": 820,
             "numOfObstacles": 390,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Yellow",
+                "Purple"
             ]
         },
         {
@@ -5403,7 +5419,7 @@
             "timeInSeconds": 830,
             "numOfObstacles": 395,
             "obstacleTypes": [
-                "Blue"
+                "Pink"
             ]
         },
         {
@@ -5419,8 +5435,8 @@
             "timeInSeconds": 830,
             "numOfObstacles": 395,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Pink",
+                "Green"
             ]
         },
         {
@@ -5436,9 +5452,7 @@
             "timeInSeconds": 830,
             "numOfObstacles": 395,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Red"
             ]
         },
         {
@@ -5454,10 +5468,10 @@
             "timeInSeconds": 830,
             "numOfObstacles": 395,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
+                "Yellow",
+                "Green",
                 "Pink",
-                "Green"
+                "Blue"
             ]
         },
         {
@@ -5473,7 +5487,7 @@
             "timeInSeconds": 840,
             "numOfObstacles": 400,
             "obstacleTypes": [
-                "Blue"
+                "Purple"
             ]
         },
         {
@@ -5489,8 +5503,9 @@
             "timeInSeconds": 840,
             "numOfObstacles": 400,
             "obstacleTypes": [
+                "Green",
                 "Blue",
-                "Purple"
+                "Yellow"
             ]
         },
         {
@@ -5506,9 +5521,8 @@
             "timeInSeconds": 840,
             "numOfObstacles": 400,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Yellow",
+                "Green"
             ]
         },
         {
@@ -5524,10 +5538,9 @@
             "timeInSeconds": 840,
             "numOfObstacles": 400,
             "obstacleTypes": [
+                "Green",
                 "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Purple"
             ]
         },
         {
@@ -5543,7 +5556,8 @@
             "timeInSeconds": 850,
             "numOfObstacles": 405,
             "obstacleTypes": [
-                "Blue"
+                "Yellow",
+                "Red"
             ]
         },
         {
@@ -5559,8 +5573,9 @@
             "timeInSeconds": 850,
             "numOfObstacles": 405,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Purple",
+                "Pink",
+                "Red"
             ]
         },
         {
@@ -5576,9 +5591,10 @@
             "timeInSeconds": 850,
             "numOfObstacles": 405,
             "obstacleTypes": [
-                "Blue",
+                "Pink",
                 "Purple",
-                "Pink"
+                "Red",
+                "Yellow"
             ]
         },
         {
@@ -5594,10 +5610,10 @@
             "timeInSeconds": 850,
             "numOfObstacles": 405,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink",
-                "Green"
+                "Yellow",
+                "Blue",
+                "Purple"
             ]
         },
         {
@@ -5613,7 +5629,10 @@
             "timeInSeconds": 860,
             "numOfObstacles": 410,
             "obstacleTypes": [
-                "Blue"
+                "Yellow",
+                "Blue",
+                "Green",
+                "Pink"
             ]
         },
         {
@@ -5629,8 +5648,9 @@
             "timeInSeconds": 860,
             "numOfObstacles": 410,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Yellow",
+                "Red",
+                "Pink"
             ]
         },
         {
@@ -5646,9 +5666,9 @@
             "timeInSeconds": 860,
             "numOfObstacles": 410,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Pink",
+                "Green",
+                "Purple"
             ]
         },
         {
@@ -5664,10 +5684,8 @@
             "timeInSeconds": 860,
             "numOfObstacles": 410,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Yellow",
+                "Red"
             ]
         },
         {
@@ -5683,7 +5701,8 @@
             "timeInSeconds": 870,
             "numOfObstacles": 415,
             "obstacleTypes": [
-                "Blue"
+                "Red",
+                "Green"
             ]
         },
         {
@@ -5699,8 +5718,8 @@
             "timeInSeconds": 870,
             "numOfObstacles": 415,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Purple",
+                "Red"
             ]
         },
         {
@@ -5716,9 +5735,8 @@
             "timeInSeconds": 870,
             "numOfObstacles": 415,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Red",
+                "Purple"
             ]
         },
         {
@@ -5735,9 +5753,9 @@
             "numOfObstacles": 415,
             "obstacleTypes": [
                 "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Red",
+                "Green",
+                "Pink"
             ]
         },
         {
@@ -5753,7 +5771,10 @@
             "timeInSeconds": 880,
             "numOfObstacles": 420,
             "obstacleTypes": [
-                "Blue"
+                "Purple",
+                "Yellow",
+                "Red",
+                "Green"
             ]
         },
         {
@@ -5769,8 +5790,9 @@
             "timeInSeconds": 880,
             "numOfObstacles": 420,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Green",
+                "Yellow",
+                "Pink"
             ]
         },
         {
@@ -5786,9 +5808,8 @@
             "timeInSeconds": 880,
             "numOfObstacles": 420,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Pink",
+                "Red"
             ]
         },
         {
@@ -5804,10 +5825,9 @@
             "timeInSeconds": 880,
             "numOfObstacles": 420,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
-                "Pink",
-                "Green"
+                "Green",
+                "Red"
             ]
         },
         {
@@ -5823,7 +5843,7 @@
             "timeInSeconds": 890,
             "numOfObstacles": 425,
             "obstacleTypes": [
-                "Blue"
+                "Purple"
             ]
         },
         {
@@ -5839,8 +5859,8 @@
             "timeInSeconds": 890,
             "numOfObstacles": 425,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Purple",
+                "Pink"
             ]
         },
         {
@@ -5856,9 +5876,7 @@
             "timeInSeconds": 890,
             "numOfObstacles": 425,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Blue"
             ]
         },
         {
@@ -5874,10 +5892,7 @@
             "timeInSeconds": 890,
             "numOfObstacles": 425,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Pink"
             ]
         },
         {
@@ -5893,7 +5908,9 @@
             "timeInSeconds": 900,
             "numOfObstacles": 430,
             "obstacleTypes": [
-                "Blue"
+                "Blue",
+                "Red",
+                "Pink"
             ]
         },
         {
@@ -5909,6 +5926,8 @@
             "timeInSeconds": 900,
             "numOfObstacles": 430,
             "obstacleTypes": [
+                "Pink",
+                "Yellow",
                 "Blue",
                 "Purple"
             ]
@@ -5926,9 +5945,7 @@
             "timeInSeconds": 900,
             "numOfObstacles": 430,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Yellow"
             ]
         },
         {
@@ -5944,10 +5961,10 @@
             "timeInSeconds": 900,
             "numOfObstacles": 430,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
-                "Pink",
-                "Green"
+                "Yellow",
+                "Green",
+                "Red"
             ]
         },
         {
@@ -5963,7 +5980,8 @@
             "timeInSeconds": 910,
             "numOfObstacles": 435,
             "obstacleTypes": [
-                "Blue"
+                "Blue",
+                "Green"
             ]
         },
         {
@@ -5979,8 +5997,8 @@
             "timeInSeconds": 910,
             "numOfObstacles": 435,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Purple",
+                "Pink"
             ]
         },
         {
@@ -5996,9 +6014,7 @@
             "timeInSeconds": 910,
             "numOfObstacles": 435,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Yellow"
             ]
         },
         {
@@ -6014,10 +6030,10 @@
             "timeInSeconds": 910,
             "numOfObstacles": 435,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
                 "Pink",
-                "Green"
+                "Green",
+                "Blue"
             ]
         },
         {
@@ -6033,7 +6049,10 @@
             "timeInSeconds": 920,
             "numOfObstacles": 440,
             "obstacleTypes": [
-                "Blue"
+                "Pink",
+                "Red",
+                "Purple",
+                "Green"
             ]
         },
         {
@@ -6049,8 +6068,10 @@
             "timeInSeconds": 920,
             "numOfObstacles": 440,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Purple",
+                "Yellow",
+                "Green",
+                "Pink"
             ]
         },
         {
@@ -6066,9 +6087,7 @@
             "timeInSeconds": 920,
             "numOfObstacles": 440,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Purple"
             ]
         },
         {
@@ -6084,10 +6103,7 @@
             "timeInSeconds": 920,
             "numOfObstacles": 440,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Red"
             ]
         },
         {
@@ -6103,6 +6119,8 @@
             "timeInSeconds": 930,
             "numOfObstacles": 445,
             "obstacleTypes": [
+                "Pink",
+                "Green",
                 "Blue"
             ]
         },
@@ -6119,7 +6137,6 @@
             "timeInSeconds": 930,
             "numOfObstacles": 445,
             "obstacleTypes": [
-                "Blue",
                 "Purple"
             ]
         },
@@ -6136,9 +6153,8 @@
             "timeInSeconds": 930,
             "numOfObstacles": 445,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Pink",
+                "Yellow"
             ]
         },
         {
@@ -6154,9 +6170,6 @@
             "timeInSeconds": 930,
             "numOfObstacles": 445,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
                 "Green"
             ]
         },
@@ -6173,7 +6186,7 @@
             "timeInSeconds": 940,
             "numOfObstacles": 450,
             "obstacleTypes": [
-                "Blue"
+                "Red"
             ]
         },
         {
@@ -6189,8 +6202,10 @@
             "timeInSeconds": 940,
             "numOfObstacles": 450,
             "obstacleTypes": [
+                "Yellow",
                 "Blue",
-                "Purple"
+                "Green",
+                "Red"
             ]
         },
         {
@@ -6206,9 +6221,10 @@
             "timeInSeconds": 940,
             "numOfObstacles": 450,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Red",
+                "Pink",
+                "Green",
+                "Blue"
             ]
         },
         {
@@ -6224,10 +6240,8 @@
             "timeInSeconds": 940,
             "numOfObstacles": 450,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Yellow",
+                "Red"
             ]
         },
         {
@@ -6243,6 +6257,9 @@
             "timeInSeconds": 950,
             "numOfObstacles": 455,
             "obstacleTypes": [
+                "Pink",
+                "Green",
+                "Purple",
                 "Blue"
             ]
         },
@@ -6259,8 +6276,10 @@
             "timeInSeconds": 950,
             "numOfObstacles": 455,
             "obstacleTypes": [
+                "Red",
+                "Pink",
                 "Blue",
-                "Purple"
+                "Green"
             ]
         },
         {
@@ -6276,9 +6295,8 @@
             "timeInSeconds": 950,
             "numOfObstacles": 455,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Pink",
+                "Blue"
             ]
         },
         {
@@ -6294,10 +6312,10 @@
             "timeInSeconds": 950,
             "numOfObstacles": 455,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
+                "Green",
                 "Pink",
-                "Green"
+                "Blue"
             ]
         },
         {
@@ -6313,7 +6331,8 @@
             "timeInSeconds": 960,
             "numOfObstacles": 460,
             "obstacleTypes": [
-                "Blue"
+                "Green",
+                "Red"
             ]
         },
         {
@@ -6329,8 +6348,9 @@
             "timeInSeconds": 960,
             "numOfObstacles": 460,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Purple",
+                "Red",
+                "Pink"
             ]
         },
         {
@@ -6346,9 +6366,8 @@
             "timeInSeconds": 960,
             "numOfObstacles": 460,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Yellow",
+                "Red"
             ]
         },
         {
@@ -6364,10 +6383,7 @@
             "timeInSeconds": 960,
             "numOfObstacles": 460,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Yellow"
             ]
         },
         {
@@ -6383,7 +6399,10 @@
             "timeInSeconds": 970,
             "numOfObstacles": 465,
             "obstacleTypes": [
-                "Blue"
+                "Purple",
+                "Green",
+                "Red",
+                "Pink"
             ]
         },
         {
@@ -6399,8 +6418,8 @@
             "timeInSeconds": 970,
             "numOfObstacles": 465,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Pink",
+                "Yellow"
             ]
         },
         {
@@ -6416,9 +6435,7 @@
             "timeInSeconds": 970,
             "numOfObstacles": 465,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Purple"
             ]
         },
         {
@@ -6434,10 +6451,8 @@
             "timeInSeconds": 970,
             "numOfObstacles": 465,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
-                "Pink",
-                "Green"
+                "Blue"
             ]
         },
         {
@@ -6453,7 +6468,9 @@
             "timeInSeconds": 980,
             "numOfObstacles": 470,
             "obstacleTypes": [
-                "Blue"
+                "Green",
+                "Blue",
+                "Pink"
             ]
         },
         {
@@ -6469,8 +6486,9 @@
             "timeInSeconds": 980,
             "numOfObstacles": 470,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Yellow",
+                "Pink",
+                "Green"
             ]
         },
         {
@@ -6486,9 +6504,8 @@
             "timeInSeconds": 980,
             "numOfObstacles": 470,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Pink",
+                "Purple"
             ]
         },
         {
@@ -6505,9 +6522,8 @@
             "numOfObstacles": 470,
             "obstacleTypes": [
                 "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Green",
+                "Pink"
             ]
         },
         {
@@ -6523,7 +6539,10 @@
             "timeInSeconds": 990,
             "numOfObstacles": 475,
             "obstacleTypes": [
-                "Blue"
+                "Blue",
+                "Pink",
+                "Red",
+                "Yellow"
             ]
         },
         {
@@ -6539,8 +6558,9 @@
             "timeInSeconds": 990,
             "numOfObstacles": 475,
             "obstacleTypes": [
+                "Pink",
                 "Blue",
-                "Purple"
+                "Green"
             ]
         },
         {
@@ -6557,8 +6577,9 @@
             "numOfObstacles": 475,
             "obstacleTypes": [
                 "Blue",
+                "Yellow",
                 "Purple",
-                "Pink"
+                "Green"
             ]
         },
         {
@@ -6574,10 +6595,9 @@
             "timeInSeconds": 990,
             "numOfObstacles": 475,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink",
-                "Green"
+                "Yellow",
+                "Red"
             ]
         },
         {
@@ -6593,7 +6613,8 @@
             "timeInSeconds": 1000,
             "numOfObstacles": 480,
             "obstacleTypes": [
-                "Blue"
+                "Purple",
+                "Pink"
             ]
         },
         {
@@ -6609,8 +6630,9 @@
             "timeInSeconds": 1000,
             "numOfObstacles": 480,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Green",
+                "Purple",
+                "Red"
             ]
         },
         {
@@ -6626,9 +6648,7 @@
             "timeInSeconds": 1000,
             "numOfObstacles": 480,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Purple"
             ]
         },
         {
@@ -6644,10 +6664,8 @@
             "timeInSeconds": 1000,
             "numOfObstacles": 480,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
-                "Pink",
-                "Green"
+                "Pink"
             ]
         },
         {
@@ -6663,7 +6681,10 @@
             "timeInSeconds": 1010,
             "numOfObstacles": 485,
             "obstacleTypes": [
-                "Blue"
+                "Purple",
+                "Pink",
+                "Red",
+                "Green"
             ]
         },
         {
@@ -6679,8 +6700,10 @@
             "timeInSeconds": 1010,
             "numOfObstacles": 485,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Pink",
+                "Purple",
+                "Red",
+                "Green"
             ]
         },
         {
@@ -6696,9 +6719,9 @@
             "timeInSeconds": 1010,
             "numOfObstacles": 485,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Pink",
+                "Green",
+                "Blue"
             ]
         },
         {
@@ -6714,10 +6737,9 @@
             "timeInSeconds": 1010,
             "numOfObstacles": 485,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Yellow",
+                "Green",
+                "Pink"
             ]
         },
         {
@@ -6750,7 +6772,8 @@
             "numOfObstacles": 490,
             "obstacleTypes": [
                 "Blue",
-                "Purple"
+                "Yellow",
+                "Red"
             ]
         },
         {
@@ -6766,9 +6789,8 @@
             "timeInSeconds": 1020,
             "numOfObstacles": 490,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Green",
+                "Blue"
             ]
         },
         {
@@ -6784,10 +6806,7 @@
             "timeInSeconds": 1020,
             "numOfObstacles": 490,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Pink"
             ]
         },
         {
@@ -6803,7 +6822,10 @@
             "timeInSeconds": 1030,
             "numOfObstacles": 495,
             "obstacleTypes": [
-                "Blue"
+                "Purple",
+                "Yellow",
+                "Green",
+                "Red"
             ]
         },
         {
@@ -6819,8 +6841,8 @@
             "timeInSeconds": 1030,
             "numOfObstacles": 495,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Purple",
+                "Blue"
             ]
         },
         {
@@ -6836,9 +6858,9 @@
             "timeInSeconds": 1030,
             "numOfObstacles": 495,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Green",
+                "Yellow",
+                "Blue"
             ]
         },
         {
@@ -6854,10 +6876,9 @@
             "timeInSeconds": 1030,
             "numOfObstacles": 495,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
-                "Pink",
-                "Green"
+                "Red",
+                "Pink"
             ]
         },
         {
@@ -6873,7 +6894,7 @@
             "timeInSeconds": 1040,
             "numOfObstacles": 500,
             "obstacleTypes": [
-                "Blue"
+                "Red"
             ]
         },
         {
@@ -6889,8 +6910,7 @@
             "timeInSeconds": 1040,
             "numOfObstacles": 500,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Yellow"
             ]
         },
         {
@@ -6906,9 +6926,8 @@
             "timeInSeconds": 1040,
             "numOfObstacles": 500,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Red",
+                "Blue"
             ]
         },
         {
@@ -6924,7 +6943,6 @@
             "timeInSeconds": 1040,
             "numOfObstacles": 500,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
                 "Pink",
                 "Green"
@@ -6943,7 +6961,8 @@
             "timeInSeconds": 1050,
             "numOfObstacles": 505,
             "obstacleTypes": [
-                "Blue"
+                "Pink",
+                "Red"
             ]
         },
         {
@@ -6959,8 +6978,8 @@
             "timeInSeconds": 1050,
             "numOfObstacles": 505,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Green",
+                "Blue"
             ]
         },
         {
@@ -6977,8 +6996,9 @@
             "numOfObstacles": 505,
             "obstacleTypes": [
                 "Blue",
-                "Purple",
-                "Pink"
+                "Pink",
+                "Red",
+                "Green"
             ]
         },
         {
@@ -6994,9 +7014,8 @@
             "timeInSeconds": 1050,
             "numOfObstacles": 505,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink",
+                "Red",
                 "Green"
             ]
         },
@@ -7013,7 +7032,7 @@
             "timeInSeconds": 1060,
             "numOfObstacles": 510,
             "obstacleTypes": [
-                "Blue"
+                "Purple"
             ]
         },
         {
@@ -7029,8 +7048,7 @@
             "timeInSeconds": 1060,
             "numOfObstacles": 510,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Yellow"
             ]
         },
         {
@@ -7048,7 +7066,8 @@
             "obstacleTypes": [
                 "Blue",
                 "Purple",
-                "Pink"
+                "Pink",
+                "Green"
             ]
         },
         {
@@ -7064,10 +7083,10 @@
             "timeInSeconds": 1060,
             "numOfObstacles": 510,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink",
-                "Green"
+                "Blue",
+                "Green",
+                "Red"
             ]
         },
         {
@@ -7083,7 +7102,10 @@
             "timeInSeconds": 1070,
             "numOfObstacles": 515,
             "obstacleTypes": [
-                "Blue"
+                "Green",
+                "Yellow",
+                "Blue",
+                "Purple"
             ]
         },
         {
@@ -7099,8 +7121,7 @@
             "timeInSeconds": 1070,
             "numOfObstacles": 515,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Pink"
             ]
         },
         {
@@ -7116,9 +7137,9 @@
             "timeInSeconds": 1070,
             "numOfObstacles": 515,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Pink",
+                "Red",
+                "Purple"
             ]
         },
         {
@@ -7134,10 +7155,8 @@
             "timeInSeconds": 1070,
             "numOfObstacles": 515,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Red",
+                "Blue"
             ]
         },
         {
@@ -7153,6 +7172,8 @@
             "timeInSeconds": 1080,
             "numOfObstacles": 520,
             "obstacleTypes": [
+                "Yellow",
+                "Pink",
                 "Blue"
             ]
         },
@@ -7169,8 +7190,9 @@
             "timeInSeconds": 1080,
             "numOfObstacles": 520,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Pink",
+                "Purple",
+                "Blue"
             ]
         },
         {
@@ -7187,8 +7209,9 @@
             "numOfObstacles": 520,
             "obstacleTypes": [
                 "Blue",
-                "Purple",
-                "Pink"
+                "Yellow",
+                "Pink",
+                "Red"
             ]
         },
         {
@@ -7204,10 +7227,7 @@
             "timeInSeconds": 1080,
             "numOfObstacles": 520,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Blue"
             ]
         },
         {
@@ -7223,7 +7243,8 @@
             "timeInSeconds": 1090,
             "numOfObstacles": 525,
             "obstacleTypes": [
-                "Blue"
+                "Yellow",
+                "Pink"
             ]
         },
         {
@@ -7240,7 +7261,9 @@
             "numOfObstacles": 525,
             "obstacleTypes": [
                 "Blue",
-                "Purple"
+                "Yellow",
+                "Purple",
+                "Red"
             ]
         },
         {
@@ -7256,9 +7279,8 @@
             "timeInSeconds": 1090,
             "numOfObstacles": 525,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Pink",
+                "Blue"
             ]
         },
         {
@@ -7274,10 +7296,8 @@
             "timeInSeconds": 1090,
             "numOfObstacles": 525,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Green",
+                "Red"
             ]
         },
         {
@@ -7293,7 +7313,8 @@
             "timeInSeconds": 1100,
             "numOfObstacles": 530,
             "obstacleTypes": [
-                "Blue"
+                "Pink",
+                "Green"
             ]
         },
         {
@@ -7309,8 +7330,10 @@
             "timeInSeconds": 1100,
             "numOfObstacles": 530,
             "obstacleTypes": [
+                "Green",
+                "Purple",
                 "Blue",
-                "Purple"
+                "Yellow"
             ]
         },
         {
@@ -7326,9 +7349,7 @@
             "timeInSeconds": 1100,
             "numOfObstacles": 530,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Red"
             ]
         },
         {
@@ -7344,8 +7365,6 @@
             "timeInSeconds": 1100,
             "numOfObstacles": 530,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink",
                 "Green"
             ]
@@ -7363,7 +7382,10 @@
             "timeInSeconds": 1110,
             "numOfObstacles": 535,
             "obstacleTypes": [
-                "Blue"
+                "Yellow",
+                "Blue",
+                "Purple",
+                "Green"
             ]
         },
         {
@@ -7379,8 +7401,10 @@
             "timeInSeconds": 1110,
             "numOfObstacles": 535,
             "obstacleTypes": [
+                "Pink",
                 "Blue",
-                "Purple"
+                "Red",
+                "Green"
             ]
         },
         {
@@ -7396,9 +7420,8 @@
             "timeInSeconds": 1110,
             "numOfObstacles": 535,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
-                "Pink"
+                "Red"
             ]
         },
         {
@@ -7414,10 +7437,10 @@
             "timeInSeconds": 1110,
             "numOfObstacles": 535,
             "obstacleTypes": [
-                "Blue",
+                "Yellow",
                 "Purple",
                 "Pink",
-                "Green"
+                "Blue"
             ]
         },
         {
@@ -7433,7 +7456,7 @@
             "timeInSeconds": 1120,
             "numOfObstacles": 540,
             "obstacleTypes": [
-                "Blue"
+                "Purple"
             ]
         },
         {
@@ -7449,8 +7472,7 @@
             "timeInSeconds": 1120,
             "numOfObstacles": 540,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Blue"
             ]
         },
         {
@@ -7466,9 +7488,8 @@
             "timeInSeconds": 1120,
             "numOfObstacles": 540,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Red",
+                "Green"
             ]
         },
         {
@@ -7485,9 +7506,9 @@
             "numOfObstacles": 540,
             "obstacleTypes": [
                 "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Yellow",
+                "Green",
+                "Red"
             ]
         },
         {
@@ -7503,6 +7524,9 @@
             "timeInSeconds": 1130,
             "numOfObstacles": 545,
             "obstacleTypes": [
+                "Yellow",
+                "Pink",
+                "Green",
                 "Blue"
             ]
         },
@@ -7519,7 +7543,6 @@
             "timeInSeconds": 1130,
             "numOfObstacles": 545,
             "obstacleTypes": [
-                "Blue",
                 "Purple"
             ]
         },
@@ -7536,9 +7559,7 @@
             "timeInSeconds": 1130,
             "numOfObstacles": 545,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Green"
             ]
         },
         {
@@ -7554,10 +7575,9 @@
             "timeInSeconds": 1130,
             "numOfObstacles": 545,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Yellow",
+                "Red",
+                "Purple"
             ]
         },
         {
@@ -7573,7 +7593,10 @@
             "timeInSeconds": 1140,
             "numOfObstacles": 550,
             "obstacleTypes": [
-                "Blue"
+                "Pink",
+                "Yellow",
+                "Red",
+                "Green"
             ]
         },
         {
@@ -7589,8 +7612,7 @@
             "timeInSeconds": 1140,
             "numOfObstacles": 550,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Blue"
             ]
         },
         {
@@ -7606,9 +7628,8 @@
             "timeInSeconds": 1140,
             "numOfObstacles": 550,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Red",
+                "Green"
             ]
         },
         {
@@ -7624,9 +7645,8 @@
             "timeInSeconds": 1140,
             "numOfObstacles": 550,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink",
+                "Purple",
                 "Green"
             ]
         },
@@ -7643,7 +7663,10 @@
             "timeInSeconds": 1150,
             "numOfObstacles": 555,
             "obstacleTypes": [
-                "Blue"
+                "Pink",
+                "Yellow",
+                "Red",
+                "Green"
             ]
         },
         {
@@ -7659,8 +7682,7 @@
             "timeInSeconds": 1150,
             "numOfObstacles": 555,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Red"
             ]
         },
         {
@@ -7676,9 +7698,9 @@
             "timeInSeconds": 1150,
             "numOfObstacles": 555,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Red",
+                "Pink",
+                "Purple"
             ]
         },
         {
@@ -7695,9 +7717,9 @@
             "numOfObstacles": 555,
             "obstacleTypes": [
                 "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Green",
+                "Yellow",
+                "Pink"
             ]
         },
         {
@@ -7713,7 +7735,8 @@
             "timeInSeconds": 1160,
             "numOfObstacles": 560,
             "obstacleTypes": [
-                "Blue"
+                "Pink",
+                "Green"
             ]
         },
         {
@@ -7729,8 +7752,10 @@
             "timeInSeconds": 1160,
             "numOfObstacles": 560,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Pink",
+                "Purple",
+                "Green",
+                "Red"
             ]
         },
         {
@@ -7747,8 +7772,9 @@
             "numOfObstacles": 560,
             "obstacleTypes": [
                 "Blue",
-                "Purple",
-                "Pink"
+                "Pink",
+                "Red",
+                "Purple"
             ]
         },
         {
@@ -7764,8 +7790,8 @@
             "timeInSeconds": 1160,
             "numOfObstacles": 560,
             "obstacleTypes": [
+                "Yellow",
                 "Blue",
-                "Purple",
                 "Pink",
                 "Green"
             ]
@@ -7783,6 +7809,7 @@
             "timeInSeconds": 1170,
             "numOfObstacles": 565,
             "obstacleTypes": [
+                "Green",
                 "Blue"
             ]
         },
@@ -7799,8 +7826,9 @@
             "timeInSeconds": 1170,
             "numOfObstacles": 565,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Red",
+                "Yellow",
+                "Pink"
             ]
         },
         {
@@ -7816,9 +7844,8 @@
             "timeInSeconds": 1170,
             "numOfObstacles": 565,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
-                "Pink"
+                "Blue"
             ]
         },
         {
@@ -7834,10 +7861,9 @@
             "timeInSeconds": 1170,
             "numOfObstacles": 565,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink",
-                "Green"
+                "Green",
+                "Purple"
             ]
         },
         {
@@ -7853,7 +7879,10 @@
             "timeInSeconds": 1180,
             "numOfObstacles": 570,
             "obstacleTypes": [
-                "Blue"
+                "Green",
+                "Red",
+                "Purple",
+                "Pink"
             ]
         },
         {
@@ -7869,8 +7898,10 @@
             "timeInSeconds": 1180,
             "numOfObstacles": 570,
             "obstacleTypes": [
+                "Green",
+                "Pink",
                 "Blue",
-                "Purple"
+                "Red"
             ]
         },
         {
@@ -7886,9 +7917,7 @@
             "timeInSeconds": 1180,
             "numOfObstacles": 570,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Green"
             ]
         },
         {
@@ -7904,10 +7933,8 @@
             "timeInSeconds": 1180,
             "numOfObstacles": 570,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
-                "Pink",
-                "Green"
+                "Pink"
             ]
         },
         {
@@ -7923,7 +7950,9 @@
             "timeInSeconds": 1190,
             "numOfObstacles": 575,
             "obstacleTypes": [
-                "Blue"
+                "Pink",
+                "Blue",
+                "Purple"
             ]
         },
         {
@@ -7939,8 +7968,10 @@
             "timeInSeconds": 1190,
             "numOfObstacles": 575,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Purple",
+                "Pink",
+                "Green",
+                "Blue"
             ]
         },
         {
@@ -7956,9 +7987,7 @@
             "timeInSeconds": 1190,
             "numOfObstacles": 575,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Yellow"
             ]
         },
         {
@@ -7974,10 +8003,10 @@
             "timeInSeconds": 1190,
             "numOfObstacles": 575,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
+                "Yellow",
                 "Pink",
-                "Green"
+                "Green",
+                "Purple"
             ]
         },
         {
@@ -7993,7 +8022,8 @@
             "timeInSeconds": 1200,
             "numOfObstacles": 580,
             "obstacleTypes": [
-                "Blue"
+                "Blue",
+                "Green"
             ]
         },
         {
@@ -8009,8 +8039,8 @@
             "timeInSeconds": 1200,
             "numOfObstacles": 580,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Purple",
+                "Red"
             ]
         },
         {
@@ -8026,9 +8056,10 @@
             "timeInSeconds": 1200,
             "numOfObstacles": 580,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
-                "Pink"
+                "Red",
+                "Pink",
+                "Yellow"
             ]
         },
         {
@@ -8044,10 +8075,10 @@
             "timeInSeconds": 1200,
             "numOfObstacles": 580,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
+                "Yellow",
                 "Pink",
-                "Green"
+                "Green",
+                "Red"
             ]
         },
         {
@@ -8063,6 +8094,8 @@
             "timeInSeconds": 1210,
             "numOfObstacles": 585,
             "obstacleTypes": [
+                "Red",
+                "Green",
                 "Blue"
             ]
         },
@@ -8079,8 +8112,7 @@
             "timeInSeconds": 1210,
             "numOfObstacles": 585,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Pink"
             ]
         },
         {
@@ -8096,9 +8128,8 @@
             "timeInSeconds": 1210,
             "numOfObstacles": 585,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Yellow",
+                "Green"
             ]
         },
         {
@@ -8114,8 +8145,6 @@
             "timeInSeconds": 1210,
             "numOfObstacles": 585,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink",
                 "Green"
             ]
@@ -8133,7 +8162,9 @@
             "timeInSeconds": 1220,
             "numOfObstacles": 590,
             "obstacleTypes": [
-                "Blue"
+                "Yellow",
+                "Red",
+                "Pink"
             ]
         },
         {
@@ -8149,8 +8180,9 @@
             "timeInSeconds": 1220,
             "numOfObstacles": 590,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Pink",
+                "Green",
+                "Blue"
             ]
         },
         {
@@ -8166,9 +8198,8 @@
             "timeInSeconds": 1220,
             "numOfObstacles": 590,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Yellow",
+                "Blue"
             ]
         },
         {
@@ -8184,10 +8215,9 @@
             "timeInSeconds": 1220,
             "numOfObstacles": 590,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Red",
+                "Green",
+                "Purple"
             ]
         },
         {
@@ -8203,7 +8233,10 @@
             "timeInSeconds": 1230,
             "numOfObstacles": 595,
             "obstacleTypes": [
-                "Blue"
+                "Blue",
+                "Pink",
+                "Yellow",
+                "Red"
             ]
         },
         {
@@ -8219,8 +8252,9 @@
             "timeInSeconds": 1230,
             "numOfObstacles": 595,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Purple",
+                "Yellow",
+                "Green"
             ]
         },
         {
@@ -8236,9 +8270,7 @@
             "timeInSeconds": 1230,
             "numOfObstacles": 595,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Purple"
             ]
         },
         {
@@ -8254,8 +8286,8 @@
             "timeInSeconds": 1230,
             "numOfObstacles": 595,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
+                "Yellow",
                 "Pink",
                 "Green"
             ]
@@ -8273,7 +8305,8 @@
             "timeInSeconds": 1240,
             "numOfObstacles": 600,
             "obstacleTypes": [
-                "Blue"
+                "Purple",
+                "Red"
             ]
         },
         {
@@ -8290,6 +8323,8 @@
             "numOfObstacles": 600,
             "obstacleTypes": [
                 "Blue",
+                "Pink",
+                "Yellow",
                 "Purple"
             ]
         },
@@ -8306,9 +8341,8 @@
             "timeInSeconds": 1240,
             "numOfObstacles": 600,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Red",
+                "Green"
             ]
         },
         {
@@ -8324,10 +8358,7 @@
             "timeInSeconds": 1240,
             "numOfObstacles": 600,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Blue"
             ]
         },
         {
@@ -8343,7 +8374,8 @@
             "timeInSeconds": 1250,
             "numOfObstacles": 605,
             "obstacleTypes": [
-                "Blue"
+                "Red",
+                "Green"
             ]
         },
         {
@@ -8359,8 +8391,9 @@
             "timeInSeconds": 1250,
             "numOfObstacles": 605,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Red",
+                "Purple",
+                "Blue"
             ]
         },
         {
@@ -8377,8 +8410,8 @@
             "numOfObstacles": 605,
             "obstacleTypes": [
                 "Blue",
-                "Purple",
-                "Pink"
+                "Green",
+                "Purple"
             ]
         },
         {
@@ -8394,9 +8427,7 @@
             "timeInSeconds": 1250,
             "numOfObstacles": 605,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
+                "Yellow",
                 "Green"
             ]
         },
@@ -8413,7 +8444,7 @@
             "timeInSeconds": 1260,
             "numOfObstacles": 610,
             "obstacleTypes": [
-                "Blue"
+                "Purple"
             ]
         },
         {
@@ -8430,7 +8461,9 @@
             "numOfObstacles": 610,
             "obstacleTypes": [
                 "Blue",
-                "Purple"
+                "Purple",
+                "Pink",
+                "Red"
             ]
         },
         {
@@ -8446,9 +8479,10 @@
             "timeInSeconds": 1260,
             "numOfObstacles": 610,
             "obstacleTypes": [
+                "Pink",
                 "Blue",
-                "Purple",
-                "Pink"
+                "Red",
+                "Green"
             ]
         },
         {
@@ -8464,10 +8498,9 @@
             "timeInSeconds": 1260,
             "numOfObstacles": 610,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
                 "Pink",
-                "Green"
+                "Red",
+                "Blue"
             ]
         },
         {
@@ -8483,7 +8516,7 @@
             "timeInSeconds": 1270,
             "numOfObstacles": 615,
             "obstacleTypes": [
-                "Blue"
+                "Green"
             ]
         },
         {
@@ -8499,8 +8532,9 @@
             "timeInSeconds": 1270,
             "numOfObstacles": 615,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Green",
+                "Yellow",
+                "Pink"
             ]
         },
         {
@@ -8516,9 +8550,7 @@
             "timeInSeconds": 1270,
             "numOfObstacles": 615,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Purple"
             ]
         },
         {
@@ -8534,10 +8566,8 @@
             "timeInSeconds": 1270,
             "numOfObstacles": 615,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Green",
+                "Blue"
             ]
         },
         {
@@ -8553,7 +8583,7 @@
             "timeInSeconds": 1280,
             "numOfObstacles": 620,
             "obstacleTypes": [
-                "Blue"
+                "Red"
             ]
         },
         {
@@ -8570,7 +8600,8 @@
             "numOfObstacles": 620,
             "obstacleTypes": [
                 "Blue",
-                "Purple"
+                "Pink",
+                "Green"
             ]
         },
         {
@@ -8586,9 +8617,9 @@
             "timeInSeconds": 1280,
             "numOfObstacles": 620,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Pink",
+                "Yellow",
+                "Green"
             ]
         },
         {
@@ -8604,10 +8635,10 @@
             "timeInSeconds": 1280,
             "numOfObstacles": 620,
             "obstacleTypes": [
-                "Blue",
                 "Purple",
-                "Pink",
-                "Green"
+                "Yellow",
+                "Red",
+                "Blue"
             ]
         },
         {
@@ -8623,7 +8654,10 @@
             "timeInSeconds": 1290,
             "numOfObstacles": 625,
             "obstacleTypes": [
-                "Blue"
+                "Red",
+                "Purple",
+                "Blue",
+                "Green"
             ]
         },
         {
@@ -8639,8 +8673,8 @@
             "timeInSeconds": 1290,
             "numOfObstacles": 625,
             "obstacleTypes": [
-                "Blue",
-                "Purple"
+                "Purple",
+                "Yellow"
             ]
         },
         {
@@ -8656,9 +8690,10 @@
             "timeInSeconds": 1290,
             "numOfObstacles": 625,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink"
+                "Yellow",
+                "Pink",
+                "Green",
+                "Red"
             ]
         },
         {
@@ -8674,9 +8709,6 @@
             "timeInSeconds": 1290,
             "numOfObstacles": 625,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
                 "Green"
             ]
         },
@@ -8693,7 +8725,10 @@
             "timeInSeconds": 1300,
             "numOfObstacles": 630,
             "obstacleTypes": [
-                "Blue"
+                "Red",
+                "Pink",
+                "Blue",
+                "Green"
             ]
         },
         {
@@ -8709,8 +8744,9 @@
             "timeInSeconds": 1300,
             "numOfObstacles": 630,
             "obstacleTypes": [
+                "Red",
                 "Blue",
-                "Purple"
+                "Green"
             ]
         },
         {
@@ -8727,8 +8763,7 @@
             "numOfObstacles": 630,
             "obstacleTypes": [
                 "Blue",
-                "Purple",
-                "Pink"
+                "Red"
             ]
         },
         {
@@ -8744,10 +8779,7 @@
             "timeInSeconds": 1300,
             "numOfObstacles": 630,
             "obstacleTypes": [
-                "Blue",
-                "Purple",
-                "Pink",
-                "Green"
+                "Blue"
             ]
         },
         {
@@ -8763,7 +8795,10 @@
             "timeInSeconds": 1310,
             "numOfObstacles": 635,
             "obstacleTypes": [
-                "Blue"
+                "Purple",
+                "Blue",
+                "Red",
+                "Yellow"
             ]
         }
     ]

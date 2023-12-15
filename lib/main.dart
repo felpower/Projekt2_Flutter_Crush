@@ -38,12 +38,12 @@ void main() async {
         return;
       }
     }
+    await FirebaseStore.init();
     String currentVersion = await DeviceHelper.isCurrentVersion();
     if (currentVersion != "isCurrentVersion") {
       runApp(OldVersionPage(currentVersion: currentVersion));
       return;
     }
-    await FirebaseStore.init();
     js.context['handleBeforeUnload'] = js.allowInterop(handleBeforeUnload);
     js.context.callMethod('setupBeforeUnloadListener');
     runApp(const Application());

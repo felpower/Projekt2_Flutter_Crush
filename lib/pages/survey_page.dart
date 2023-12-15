@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:survey_kit/survey_kit.dart';
 
-import 'finished_surevy_page.dart';
+import 'finished_survey_page.dart';
 import 'info_page.dart';
 
 class SurveyPage extends StatefulWidget {

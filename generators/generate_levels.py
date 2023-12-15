@@ -1,5 +1,6 @@
 # Adjusting the level generation to ensure xDim and yDim are between 7 and 16, and their difference is no more than 2
 import json
+import random
 
 
 def generate_levels(num_new_levels, max_dim, min_dim, types, colors):
@@ -10,6 +11,10 @@ def generate_levels(num_new_levels, max_dim, min_dim, types, colors):
         # Calculate dimensions, ensuring they are within the specified range and difference
         x_dim = min(max(min_dim + ((i - 1) // len(types)), min_dim), max_dim)
         y_dim = min(max(x_dim - 2, min_dim), max_dim)  # Ensure yDim is within 2 of xDim, but also within bounds
+
+        # Choose between 1-4 colors randomly for the obstacleTypes
+        num_colors = random.randint(1, 4)
+        obstacle_types = random.sample(colors, num_colors)
 
         new_level = {
             "level": i,
@@ -23,9 +28,8 @@ def generate_levels(num_new_levels, max_dim, min_dim, types, colors):
             "targetScore": 1800 + 1000 * ((i - 1) // len(types)),
             "timeInSeconds": 60 + 10 * ((i - 1) // len(types)),
             "numOfObstacles": 10 + 5 * ((i - 1) // len(types)),
-            "obstacleTypes": [colors[j % len(colors)] for j in range((i - 1) % 4 + 1)]
+            "obstacleTypes": obstacle_types
         }
-
         new_levels.append(new_level)
     return new_levels
 
