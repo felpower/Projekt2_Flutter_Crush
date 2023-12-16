@@ -1,0 +1,844 @@
+{
+  "errors": {
+    "V01-23-12-11–17:51-JAGk9gyXqpsRFMK": {
+      "error": "Unable to load asset: \"assets/images/bombs/fish_1.png\".",
+      "isFlutterError": true,
+      "stacktrace": "",
+      "timestamp": "2023-12-15T18:19:33.470",
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36"
+    }
+  },
+  "feedback": {
+    "V01-23-12-15–14:56-Pye6hKXnAGS6JBg": {
+      "fileId": "V01-23-12-15–14:56-Pye6hKXnAGS6JBg",
+      "fileUrl": "https://firebasestorage.googleapis.com/v0/b/darkpatterns-ac762.appspot.com/o/feedback%2FV01-23-12-15%E2%80%9314%3A56-Pye6hKXnAGS6JBg?alt=media&token=816f3c38-311b-4b11-b352-ae500ae3c281",
+      "info": "Steckt hin und wieder",
+      "timestamp": "2023-12-15T14:56:56.597",
+      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1",
+      "uuid": "V01-23-12-14–19:26-niX3SZKeGiKP4vw"
+    }
+  },
+  "users": {
+    "V01-23-12-11–17:51-JAGk9gyXqpsRFMK": {
+      "appStartDate": {
+        "-NlOmfxYRksySQUp5Axo": "2023-12-11 17:51:48.645",
+        "-NlOt2AX-ua4K897iTlu": "2023-12-11 18:19:36.516",
+        "-NlOt5nnhTk786OHamKw": "2023-12-11 18:19:51.452",
+        "-NlPCRSk2_WXihQXqrN2": "2023-12-11 19:48:43.046",
+        "-NlSKgpoWLnevgYK4LmY": "2023-12-12 10:23:38.898",
+        "-NlSte1sJif616JqeOmm": "2023-12-12 13:00:44.621",
+        "-NlStw-G8MxIqEPM_kv4": "2023-12-12 13:01:58.213",
+        "-NlYikf7IJW1N50osDXS": "2023-12-13 16:10:51.516",
+        "-NlZ6ysiK-URKwYPv7Qn": "2023-12-13 18:01:03.297",
+        "-Nlc5VpP02gmwd8ZH81h": "2023-12-14 12:33:06.943",
+        "-NlcR5rNktlHQLkJpt_p": "2023-12-14 14:07:27.657",
+        "-NldeELfquGgTrGygbFD": "2023-12-14 19:48:49.713",
+        "-NliUNeizzinWOOx9LDR": "2023-12-15 18:19:30.389",
+        "-Nlm5XGbuF1XOcBcORpG": "2023-12-16 11:09:24.989"
+      },
+      "checkHighScoreTime": {
+        "-NlOmvcTW3kLH2bjnmQ3": "2023-12-11 17:52:52.398",
+        "-NlOnG1wmhPzT_6jo2b7": "2023-12-11 17:54:20.107",
+        "-NlYivPjjY406iOzCEVE": "2023-12-13 16:11:35.131",
+        "-NldeUamsWDt5hi9QNhM": "2023-12-14 19:49:55.964",
+        "-Nlm5dHohBs4VqwClstZ": "2023-12-16 11:09:53.362"
+      },
+      "collectDailyRewardsTime": {
+        "-NlYixNEvbnRVI87MTgX": "2023-12-13 16:11:43.156",
+        "-NliUOR6lKSnTfozVQo_": "2023-12-15 18:19:33.275"
+      },
+      "darkPatterns": 1,
+      "finishOfLevel": {
+        "-NlOnBZY0EI4DwBQcOBN": "Level: 1, Won: true, Time: 2023-12-11 17:54:01.780",
+        "-NlPCW3Zt_4q7DgtAOgd": "Level: 2, Won: true, Time: 2023-12-11 19:49:01.486",
+        "-NlYirAMtGyZZUnoNMiI": "Level: 3, Won: true, Time: 2023-12-13 16:11:17.763",
+        "-NliUfYhzDXQI7TybsQ1": "Level: 5, Won: true, Time: 2023-12-15 18:20:47.488"
+      },
+      "initAppStartTime": {
+        "-NlOmqAuER9oy1RNV3e-": "2023-12-11 17:52:30.088"
+      },
+      "pushClick": {
+        "-NlOt5h2DUXGuYQajK0k": "2023-12-11 18:19:51.042"
+      },
+      "pushToken": {
+        "-NlOmiJGCGV232DpEVkW": "Token: cs2QAWmYyfXc2kI0OJhhg6:APA91bHoDMlytVEyjnqjATnZMc89ElzqGPkJ5PDkbRfPJm3lFp8nsHrru2rH87kOykOAKqy2pl-pTNY2mZjFr-vqfbIIUOv68vYwUB1m_oPAvP8Q1Lsx9Ps8msYCbshHKQ-E6YwJ4qz0, Time: 2023-12-11 17:51:57.860",
+        "-NlOmqGSm5ggZEN7ue6t": "Token: cs2QAWmYyfXc2kI0OJhhg6:APA91bHoDMlytVEyjnqjATnZMc89ElzqGPkJ5PDkbRfPJm3lFp8nsHrru2rH87kOykOAKqy2pl-pTNY2mZjFr-vqfbIIUOv68vYwUB1m_oPAvP8Q1Lsx9Ps8msYCbshHKQ-E6YwJ4qz0, Time: 2023-12-11 17:52:30.449",
+        "-NlOt2HTMPgBHWUwf8vw": "Token: cs2QAWmYyfXc2kI0OJhhg6:APA91bHoDMlytVEyjnqjATnZMc89ElzqGPkJ5PDkbRfPJm3lFp8nsHrru2rH87kOykOAKqy2pl-pTNY2mZjFr-vqfbIIUOv68vYwUB1m_oPAvP8Q1Lsx9Ps8msYCbshHKQ-E6YwJ4qz0, Time: 2023-12-11 18:19:36.900",
+        "-NlOt5vS46LSSJ4kQyEb": "Token: cs2QAWmYyfXc2kI0OJhhg6:APA91bHoDMlytVEyjnqjATnZMc89ElzqGPkJ5PDkbRfPJm3lFp8nsHrru2rH87kOykOAKqy2pl-pTNY2mZjFr-vqfbIIUOv68vYwUB1m_oPAvP8Q1Lsx9Ps8msYCbshHKQ-E6YwJ4qz0, Time: 2023-12-11 18:19:51.725",
+        "-NlPCRbPwej5_dnSHAlp": "Token: cs2QAWmYyfXc2kI0OJhhg6:APA91bHoDMlytVEyjnqjATnZMc89ElzqGPkJ5PDkbRfPJm3lFp8nsHrru2rH87kOykOAKqy2pl-pTNY2mZjFr-vqfbIIUOv68vYwUB1m_oPAvP8Q1Lsx9Ps8msYCbshHKQ-E6YwJ4qz0, Time: 2023-12-11 19:48:43.239",
+        "-NlSKgwzlvX-zhz9vOeJ": "Token: cs2QAWmYyfXc2kI0OJhhg6:APA91bHoDMlytVEyjnqjATnZMc89ElzqGPkJ5PDkbRfPJm3lFp8nsHrru2rH87kOykOAKqy2pl-pTNY2mZjFr-vqfbIIUOv68vYwUB1m_oPAvP8Q1Lsx9Ps8msYCbshHKQ-E6YwJ4qz0, Time: 2023-12-12 10:23:39.102",
+        "-NlSteAzHjpQ_8LxtslM": "Token: cs2QAWmYyfXc2kI0OJhhg6:APA91bHoDMlytVEyjnqjATnZMc89ElzqGPkJ5PDkbRfPJm3lFp8nsHrru2rH87kOykOAKqy2pl-pTNY2mZjFr-vqfbIIUOv68vYwUB1m_oPAvP8Q1Lsx9Ps8msYCbshHKQ-E6YwJ4qz0, Time: 2023-12-12 13:00:44.923",
+        "-NlStw7Yn7gG4h68Iabz": "Token: cs2QAWmYyfXc2kI0OJhhg6:APA91bHoDMlytVEyjnqjATnZMc89ElzqGPkJ5PDkbRfPJm3lFp8nsHrru2rH87kOykOAKqy2pl-pTNY2mZjFr-vqfbIIUOv68vYwUB1m_oPAvP8Q1Lsx9Ps8msYCbshHKQ-E6YwJ4qz0, Time: 2023-12-12 13:01:58.516",
+        "-NlStw7_PkGsyCJv68fc": "Token: cs2QAWmYyfXc2kI0OJhhg6:APA91bHoDMlytVEyjnqjATnZMc89ElzqGPkJ5PDkbRfPJm3lFp8nsHrru2rH87kOykOAKqy2pl-pTNY2mZjFr-vqfbIIUOv68vYwUB1m_oPAvP8Q1Lsx9Ps8msYCbshHKQ-E6YwJ4qz0, Time: 2023-12-12 13:01:58.519",
+        "-NlYikgKRmhPfmco9GJN": "Token: cs2QAWmYyfXc2kI0OJhhg6:APA91bHoDMlytVEyjnqjATnZMc89ElzqGPkJ5PDkbRfPJm3lFp8nsHrru2rH87kOykOAKqy2pl-pTNY2mZjFr-vqfbIIUOv68vYwUB1m_oPAvP8Q1Lsx9Ps8msYCbshHKQ-E6YwJ4qz0, Time: 2023-12-13 16:10:51.669",
+        "-NlZ6z-LpLtGipgNlGfZ": "Token: cs2QAWmYyfXc2kI0OJhhg6:APA91bHoDMlytVEyjnqjATnZMc89ElzqGPkJ5PDkbRfPJm3lFp8nsHrru2rH87kOykOAKqy2pl-pTNY2mZjFr-vqfbIIUOv68vYwUB1m_oPAvP8Q1Lsx9Ps8msYCbshHKQ-E6YwJ4qz0, Time: 2023-12-13 18:01:03.544",
+        "-Nlc5Vn0q9cQM99l25_U": "Token: cs2QAWmYyfXc2kI0OJhhg6:APA91bHoDMlytVEyjnqjATnZMc89ElzqGPkJ5PDkbRfPJm3lFp8nsHrru2rH87kOykOAKqy2pl-pTNY2mZjFr-vqfbIIUOv68vYwUB1m_oPAvP8Q1Lsx9Ps8msYCbshHKQ-E6YwJ4qz0, Time: 2023-12-14 12:33:06.880",
+        "-NlcR5zvZCezci8JCGY6": "Token: cs2QAWmYyfXc2kI0OJhhg6:APA91bHoDMlytVEyjnqjATnZMc89ElzqGPkJ5PDkbRfPJm3lFp8nsHrru2rH87kOykOAKqy2pl-pTNY2mZjFr-vqfbIIUOv68vYwUB1m_oPAvP8Q1Lsx9Ps8msYCbshHKQ-E6YwJ4qz0, Time: 2023-12-14 14:07:28.073",
+        "-NldeEJM5Hvm9pKwF8Mw": "Token: cs2QAWmYyfXc2kI0OJhhg6:APA91bHoDMlytVEyjnqjATnZMc89ElzqGPkJ5PDkbRfPJm3lFp8nsHrru2rH87kOykOAKqy2pl-pTNY2mZjFr-vqfbIIUOv68vYwUB1m_oPAvP8Q1Lsx9Ps8msYCbshHKQ-E6YwJ4qz0, Time: 2023-12-14 19:48:49.686",
+        "-NliUNaYPgSanmlUvucP": "Token: cs2QAWmYyfXc2kI0OJhhg6:APA91bHoDMlytVEyjnqjATnZMc89ElzqGPkJ5PDkbRfPJm3lFp8nsHrru2rH87kOykOAKqy2pl-pTNY2mZjFr-vqfbIIUOv68vYwUB1m_oPAvP8Q1Lsx9Ps8msYCbshHKQ-E6YwJ4qz0, Time: 2023-12-15 18:19:30.210",
+        "-Nlm5XEGoK7LIGx-MSN4": "Token: cs2QAWmYyfXc2kI0OJhhg6:APA91bHoDMlytVEyjnqjATnZMc89ElzqGPkJ5PDkbRfPJm3lFp8nsHrru2rH87kOykOAKqy2pl-pTNY2mZjFr-vqfbIIUOv68vYwUB1m_oPAvP8Q1Lsx9Ps8msYCbshHKQ-E6YwJ4qz0, Time: 2023-12-16 11:09:24.942"
+      },
+      "startOfLevel": {
+        "-NlOn0aRrIfv34lm8rSX": "Level: 1, Time: 2023-12-11 17:53:16.845",
+        "-NlPCSBemiJtepoBeu9F": "Level: 2, Time: 2023-12-11 19:48:45.623",
+        "-NlYilMlPOGW0oMDlRg-": "Level: 3, Time: 2023-12-13 16:10:53.975",
+        "-NldeF91J7J-Vxa_yNeK": "Level: 4, Time: 2023-12-14 19:48:52.690",
+        "-NliUQs0YCklvU5tDxAY": "Level: 5, Time: 2023-12-15 18:19:43.254",
+        "-NliUl86UXSvT0Ym6fOW": "Level: 6, Time: 2023-12-15 18:21:10.366",
+        "-NliUmZ4BaLMRVc7MaX7": "Level: 6, Time: 2023-12-15 18:21:16.185"
+      },
+      "startSurvey": {
+        "-NlOmqAxygoX29dFZZv4": "SurveyResult: [ID: 1-28, ID: 2-0, ID: 3-4, ID: 4-3, ID: 5-0, ID: 7-1, ID: 8-.5, ID: 9-1]"
+      },
+      "uuid": "V01-23-12-11–17:51-JAGk9gyXqpsRFMK"
+    },
+    "V01-23-12-11–18:55-fISzQVlhdN1kyS7": {
+      "appStartDate": {
+        "-NlP0Dm_se2AncPLahGZ": "2023-12-11 18:55:21.362",
+        "-NlP3STlh9Cgrcah2l3u": "2023-12-11 19:09:27.936",
+        "-NlRgwjxJuzjSglctTIg": "2023-12-12 07:25:36.261",
+        "-NlWlhQy6MNKpo0pTn_L": "2023-12-13 07:04:30.250"
+      },
+      "checkHighScoreTime": {
+        "-NlP3rZYUmDvh1bRe8jf": "2023-12-11 19:11:14.761",
+        "-NlWln6jmqvszK97Bn6O": "2023-12-13 07:04:53.617"
+      },
+      "darkPatterns": 1,
+      "finishOfLevel": {
+        "-NlP2IdobFPkeiFr35cf": "Level: 1, Won: true, Time: 2023-12-11 19:04:25.610",
+        "-NlP2wWc98Tw3Smql5jG": "Level: 2, Won: true, Time: 2023-12-11 19:07:13.023",
+        "-NlP3itifm0VOHZrFAhd": "Level: 3, Won: true, Time: 2023-12-11 19:10:39.252",
+        "-NlP4esbb3h46ERyc-Es": "Level: 4, Won: true, Time: 2023-12-11 19:14:44.941",
+        "-NlP5emSda5NVjGtfVq6": "Level: 5, Won: false, Time: 2023-12-11 19:19:06.669",
+        "-NlRgpnzquUfjTvF-EX5": "Level: 5, Won: false, Time: 2023-12-12 07:25:07.871",
+        "-NlRhEeUijDDnvXMcypS": "Level: 5, Won: false, Time: 2023-12-12 07:26:53.759"
+      },
+      "initAppStartTime": {
+        "-NlP1BdhahzJEXW-Qv3g": "2023-12-11 18:59:34.784"
+      },
+      "pushToken": {
+        "-NlP1GagrLFu4eSX8s_P": "Token: c8m6WADPiNS4wJFijBL8pU:APA91bHNDv7UwVqX1rmXOj_3hRAfLaW9RYQR7BzQqOyVTbcyR2qsGKFNESHUTp7PxgmMrzAyn6zI4rJCbrQZI8PWwz8pKhaFH3uEvN9fjyjO6mUOxGYFW02EiVvwDeG3WrdsPW-Ydh7G, Time: 2023-12-11 18:59:55.075",
+        "-NlWlhScnewcz8XnAMPo": "Token: c8m6WADPiNS4wJFijBL8pU:APA91bHNDv7UwVqX1rmXOj_3hRAfLaW9RYQR7BzQqOyVTbcyR2qsGKFNESHUTp7PxgmMrzAyn6zI4rJCbrQZI8PWwz8pKhaFH3uEvN9fjyjO6mUOxGYFW02EiVvwDeG3WrdsPW-Ydh7G, Time: 2023-12-13 07:04:30.439",
+        "-NlWlhTQFY5Sk_Gt6aaY": "Token: c8m6WADPiNS4wJFijBL8pU:APA91bHNDv7UwVqX1rmXOj_3hRAfLaW9RYQR7BzQqOyVTbcyR2qsGKFNESHUTp7PxgmMrzAyn6zI4rJCbrQZI8PWwz8pKhaFH3uEvN9fjyjO6mUOxGYFW02EiVvwDeG3WrdsPW-Ydh7G, Time: 2023-12-13 07:04:30.496"
+      },
+      "startOfLevel": {
+        "-NlP2213tdVkDaVo-Zwh": "Level: 1, Time: 2023-12-11 19:03:17.531",
+        "-NlP2QUUMLXPdSnDKAw_": "Level: 2, Time: 2023-12-11 19:04:57.719",
+        "-NlP32oDvyKISGHRiWz_": "Level: 3, Time: 2023-12-11 19:07:42.886",
+        "-NlP3Reb085MFcrp8zt3": "Level: 3, Time: 2023-12-11 19:09:24.669",
+        "-NlP3TE1kC4JF70Y_1XA": "Level: 3, Time: 2023-12-11 19:09:30.984",
+        "-NlP3tidTdn6zquNDFwq": "Level: 4, Time: 2023-12-11 19:11:23.600",
+        "-NlP4kbIPhKq2UoDL-Wb": "Level: 5, Time: 2023-12-11 19:15:08.409",
+        "-NlP5hn4D3uVu42cYa5E": "Level: 5, Time: 2023-12-11 19:19:19.000",
+        "-NlRgtkdH5Grbh1WOJtC": "Level: 5, Time: 2023-12-12 07:25:24.044",
+        "-NlRgxJxyI2whsy1q1p7": "Level: 5, Time: 2023-12-12 07:25:38.655",
+        "-NlWlqjaVVFvPw9wRX8w": "Level: 5, Time: 2023-12-13 07:05:08.458"
+      },
+      "startSurvey": {
+        "-NlP1BdlDIlDvZOhtAn3": "SurveyResult: [ID: 1-18, ID: 2-0, ID: 3-0, ID: 4-2, ID: 5-0, ID: 7-0, ID: 8-2, ID: 9-20]"
+      },
+      "uuid": "V01-23-12-11–18:55-fISzQVlhdN1kyS7"
+    },
+    "V01-23-12-12–09:13-4sXx32vrXMvv4Ki": {
+      "appStartDate": {
+        "-NlS4eXVuZLAHS6_bSK2": "2023-12-12 09:13:36.677",
+        "-NlSTugg6tvmOULwA6lM": "2023-12-12 11:03:55.013",
+        "-NlSU6dlhOdaJfx3JJla": "2023-12-12 11:04:48.073",
+        "-NlSdR5sry7AVwWtvm0o": "2023-12-12 11:49:53.298",
+        "-NlTIXKOuZz56Xfqw1Ca": "2023-12-12 14:53:48.848",
+        "-NlTKIg_lU67rlP3J-Lc": "2023-12-12 15:01:33.183",
+        "-NlTKP4XJTjmEmayKa8W": "2023-12-12 15:01:59.356",
+        "-NlTUVdBn834K2oEgVbl": "2023-12-12 15:46:07.654",
+        "-NlTyuC5EHhqZGvZ4yts": "2023-12-12 18:03:18.816",
+        "-NlTyxB9PC61IOVKfaCW": "2023-12-12 18:03:31.045",
+        "-NlYci60Jzz4dPOFUDze": "2023-12-13 15:44:28.175",
+        "-Nlc1ZlJG_xC20h5IWmE": "2023-12-14 12:15:54.541"
+      },
+      "darkPatterns": 1,
+      "finishOfLevel": {
+        "-NlS75QREZnFjY8PhddL": "Level: 1, Won: false Time: 2023-12-12 09:24:15.225",
+        "-NlS7Ns_EYPpTMuF_mkv": "Level: 1, Won: true Time: 2023-12-12 09:25:30.815",
+        "-NlS8KmHXINMEWludwE4": "Level: 2, Won: true, Time: 2023-12-12 09:29:40.269",
+        "-NlTUgIuDTYoBjgF7ChG": "Level: 1, Won: true, Time: 2023-12-12 15:46:55.539",
+        "-NlYdGpV7Qw9nsWkdiZs": "Level: 3, Won: true, Time: 2023-12-13 15:46:54.801",
+        "-NlYfHcD3WE1nMesbrlK": "Level: 4, Won: true, Time: 2023-12-13 15:55:42.314",
+        "-Nlc1rtuefE_9H35N52K": "Level: 5, Won: false, Time: 2023-12-14 12:17:13.298",
+        "-Nlc2D-DyO1Ljr5NL_2D": "Level: 5, Won: true, Time: 2023-12-14 12:18:43.814",
+        "-Nlc2QAZpV4ipx7ThjNw": "Level: 6, Won: true, Time: 2023-12-14 12:19:37.782",
+        "-Nlc2dcpdUGr569CRVVx": "Level: 7, Won: true, Time: 2023-12-14 12:20:37.005"
+      },
+      "initAppStartTime": {
+        "-NlS5U8QcctZ2-x44x0Q": "2023-12-12 09:17:12.182"
+      },
+      "pushToken": {
+        "-NlS57yg5T9kpbO3ji4z": "Token: fcivH_CzFZLkfIk-nM29gs:APA91bEF-8yqwL9quZslPOYo8_en7eEPCTFYniGUuHvJnzb3CkHiwTc4w9NXELGY95aYoF-_DkGNH148lWsfUn7irOsBxUsNfR6wQmYElCKZ7km9-JNlmKFPEAhzebTmH_L-bfISpPec, Time: 2023-12-12 09:15:41.383",
+        "-NlS5UDetsH97ZpAwAur": "Token: fcivH_CzFZLkfIk-nM29gs:APA91bEF-8yqwL9quZslPOYo8_en7eEPCTFYniGUuHvJnzb3CkHiwTc4w9NXELGY95aYoF-_DkGNH148lWsfUn7irOsBxUsNfR6wQmYElCKZ7km9-JNlmKFPEAhzebTmH_L-bfISpPec, Time: 2023-12-12 09:17:12.520",
+        "-NlSTuiBQQiW-Sk-Hdhd": "Token: fcivH_CzFZLkfIk-nM29gs:APA91bEF-8yqwL9quZslPOYo8_en7eEPCTFYniGUuHvJnzb3CkHiwTc4w9NXELGY95aYoF-_DkGNH148lWsfUn7irOsBxUsNfR6wQmYElCKZ7km9-JNlmKFPEAhzebTmH_L-bfISpPec, Time: 2023-12-12 11:03:55.147",
+        "-NlSU6fINWlH0I_pp-0j": "Token: fcivH_CzFZLkfIk-nM29gs:APA91bEF-8yqwL9quZslPOYo8_en7eEPCTFYniGUuHvJnzb3CkHiwTc4w9NXELGY95aYoF-_DkGNH148lWsfUn7irOsBxUsNfR6wQmYElCKZ7km9-JNlmKFPEAhzebTmH_L-bfISpPec, Time: 2023-12-12 11:04:48.211",
+        "-NlSdR6ZUWu3ePSMP2RQ": "Token: fcivH_CzFZLkfIk-nM29gs:APA91bEF-8yqwL9quZslPOYo8_en7eEPCTFYniGUuHvJnzb3CkHiwTc4w9NXELGY95aYoF-_DkGNH148lWsfUn7irOsBxUsNfR6wQmYElCKZ7km9-JNlmKFPEAhzebTmH_L-bfISpPec, Time: 2023-12-12 11:49:53.380",
+        "-NlTIXLuPzw3Scx0B10F": "Token: fcivH_CzFZLkfIk-nM29gs:APA91bEF-8yqwL9quZslPOYo8_en7eEPCTFYniGUuHvJnzb3CkHiwTc4w9NXELGY95aYoF-_DkGNH148lWsfUn7irOsBxUsNfR6wQmYElCKZ7km9-JNlmKFPEAhzebTmH_L-bfISpPec, Time: 2023-12-12 14:53:48.986",
+        "-NlTKIi6AYD2-IHC0aI0": "Token: fcivH_CzFZLkfIk-nM29gs:APA91bEF-8yqwL9quZslPOYo8_en7eEPCTFYniGUuHvJnzb3CkHiwTc4w9NXELGY95aYoF-_DkGNH148lWsfUn7irOsBxUsNfR6wQmYElCKZ7km9-JNlmKFPEAhzebTmH_L-bfISpPec, Time: 2023-12-12 15:01:33.318",
+        "-NlTKP649-SWenEqdkRD": "Token: fcivH_CzFZLkfIk-nM29gs:APA91bEF-8yqwL9quZslPOYo8_en7eEPCTFYniGUuHvJnzb3CkHiwTc4w9NXELGY95aYoF-_DkGNH148lWsfUn7irOsBxUsNfR6wQmYElCKZ7km9-JNlmKFPEAhzebTmH_L-bfISpPec, Time: 2023-12-12 15:01:59.493",
+        "-NlTUVeeov1yQG6EFf5L": "Token: fcivH_CzFZLkfIk-nM29gs:APA91bEF-8yqwL9quZslPOYo8_en7eEPCTFYniGUuHvJnzb3CkHiwTc4w9NXELGY95aYoF-_DkGNH148lWsfUn7irOsBxUsNfR6wQmYElCKZ7km9-JNlmKFPEAhzebTmH_L-bfISpPec, Time: 2023-12-12 15:46:07.786",
+        "-NlTyuBGLvxT9t4o8xkX": "Token: fcivH_CzFZLkfIk-nM29gs:APA91bEF-8yqwL9quZslPOYo8_en7eEPCTFYniGUuHvJnzb3CkHiwTc4w9NXELGY95aYoF-_DkGNH148lWsfUn7irOsBxUsNfR6wQmYElCKZ7km9-JNlmKFPEAhzebTmH_L-bfISpPec, Time: 2023-12-12 18:03:18.801",
+        "-NlTyxCc_hnPc8WkybCs": "Token: fcivH_CzFZLkfIk-nM29gs:APA91bEF-8yqwL9quZslPOYo8_en7eEPCTFYniGUuHvJnzb3CkHiwTc4w9NXELGY95aYoF-_DkGNH148lWsfUn7irOsBxUsNfR6wQmYElCKZ7km9-JNlmKFPEAhzebTmH_L-bfISpPec, Time: 2023-12-12 18:03:31.175",
+        "-NlYci4Sd54l-glj6_jG": "Token: fcivH_CzFZLkfIk-nM29gs:APA91bEF-8yqwL9quZslPOYo8_en7eEPCTFYniGUuHvJnzb3CkHiwTc4w9NXELGY95aYoF-_DkGNH148lWsfUn7irOsBxUsNfR6wQmYElCKZ7km9-JNlmKFPEAhzebTmH_L-bfISpPec, Time: 2023-12-13 15:44:28.125",
+        "-Nlc1ZnZ56YOCAigpfUT": "Token: fcivH_CzFZLkfIk-nM29gs:APA91bEF-8yqwL9quZslPOYo8_en7eEPCTFYniGUuHvJnzb3CkHiwTc4w9NXELGY95aYoF-_DkGNH148lWsfUn7irOsBxUsNfR6wQmYElCKZ7km9-JNlmKFPEAhzebTmH_L-bfISpPec, Time: 2023-12-14 12:15:54.723"
+      },
+      "startOfLevel": {
+        "-NlS6oTaxOiKVN9AgfoR": "Level: 1, Time: 2023-12-12 09:23:01.698",
+        "-NlS77zymD2WU7Sk9ofg": "Level: 1, Time: 2023-12-12 09:24:25.757",
+        "-NlS7oKGKDj1quAHoHRH": "Level: 2, Time: 2023-12-12 09:27:23.243",
+        "-NlTUZeOJaVUT7SwVz0P": "Level: 1, Time: 2023-12-12 15:46:24.211",
+        "-NlYcpkznkyNcJtTXe5F": "Level: 3, Time: 2023-12-13 15:44:59.824",
+        "-NlYdVNcy1KUb-SIa_kt": "Level: 4, Time: 2023-12-13 15:47:54.391",
+        "-NlYeCQOzR0HvWSrSVvK": "Level: 4, Time: 2023-12-13 15:50:58.890",
+        "-NlYeF9WsiA8F2Cq_T2r": "Level: 4, Time: 2023-12-13 15:51:10.099",
+        "-NlYfWUQOm_Bm3I2_OSl": "Level: 5, Time: 2023-12-13 15:56:43.193",
+        "-Nlc1_ZmsBS-S37-8bKH": "Level: 5, Time: 2023-12-14 12:15:58.221",
+        "-Nlc1vzLTaMukMpAaHZ3": "Level: 5, Time: 2023-12-14 12:17:30.031",
+        "-Nlc2IDpQ_daMPJfv1v5": "Level: 6, Time: 2023-12-14 12:19:05.227",
+        "-Nlc2VKd245CmIesTumR": "Level: 7, Time: 2023-12-14 12:19:58.914"
+      },
+      "startSurvey": {
+        "-NlS5U8SRFmRFXC5jdiJ": "SurveyResult: [ID: 1-42, ID: 2-0, ID: 3-4, ID: 4-0, ID: 5-0, ID: 7-5, ID: 8-.5, ID: 9-0]"
+      },
+      "uuid": "V01-23-12-12–09:13-4sXx32vrXMvv4Ki"
+    },
+    "V01-23-12-12–20:44-1iCPUx06yRIOGyc": {
+      "appStartDate": {
+        "-NlYCX1YSECIDC4VyAGr": "2023-12-13 13:45:40.665",
+        "-NlZK-7vCCgicApIkyxc": "2023-12-13 18:57:55.749",
+        "-NlZwtM6lnoLGwW-HylG": "2023-12-13 21:52:13.723",
+        "-Nl_0u5PcMKjsRJdIh-f": "2023-12-13 22:14:07.821",
+        "-Nlc9-3qPs_ZAaxJDSPp": "2023-12-14 12:48:21.123",
+        "-Nle6fW99qcuPTMaszOL": "2023-12-14 21:57:27.064",
+        "-Nle7RoLxxUlUJZdYLZz": "2023-12-14 22:00:49.041"
+      },
+      "darkPatterns": 0,
+      "finishOfLevel": {
+        "-NlZx3Ujj4Dv0QQMj6Xo": "Level: 1, Won: true, Time: 2023-12-13 21:52:59.654",
+        "-NlZx9G11D2knVrFH740": "Level: 2, Won: true, Time: 2023-12-13 21:53:23.288",
+        "-NlZxMhIzavISV_4HcGc": "Level: 3, Won: true, Time: 2023-12-13 21:54:18.345",
+        "-NlZxUs8F00UPZ-oybbk": "Level: 4, Won: true, Time: 2023-12-13 21:54:51.804",
+        "-NlZxpjVGkFsBFTvB4hi": "Level: 5, Won: true, Time: 2023-12-13 21:56:21.366",
+        "-NlZy4PaGLAzlCrzQW4g": "Level: 6, Won: true, Time: 2023-12-13 21:57:25.564",
+        "-NlZySEiJK4RvAvFSlA9": "Level: 7, Won: true, Time: 2023-12-13 21:59:03.173",
+        "-NlZyf-9iZJ58VbAR_pb": "Level: 8, Won: true, Time: 2023-12-13 21:59:59.520",
+        "-NlZz-gF7RKDam6fKEim": "Level: 9, Won: true, Time: 2023-12-13 22:01:28.358",
+        "-NlZzC377SlelVN7zpc8": "Level: 10, Won: true, Time: 2023-12-13 22:02:19.043",
+        "-Nl_18Rr1IEpNag_hQmu": "Level: 11, Won: true, Time: 2023-12-13 22:15:11.077",
+        "-Nl_23W-aPabw3F5_rhG": "Level: 12, Won: true, Time: 2023-12-13 22:19:13.005",
+        "-Nl_2FzTg_YY8-3R9IzW": "Level: 13, Won: true, Time: 2023-12-13 22:20:04.107",
+        "-Nl_2PVniGI2Xj0ZZknP": "Level: 14, Won: true, Time: 2023-12-13 22:20:43.103",
+        "-Nl_2iLv5mBsQxgmFRG_": "Level: 15, Won: true, Time: 2023-12-13 22:22:04.392",
+        "-Nl_37-Lj0sunu9W5a6m": "Level: 16, Won: true, Time: 2023-12-13 22:23:49.076",
+        "-Nl_3Lh8ZN2sqgA89n_p": "Level: 17, Won: true, Time: 2023-12-13 22:24:49.290",
+        "-Nlc9C_u8TKGe9DUh1LA": "Level: 1, Won: true, Time: 2023-12-14 12:49:17.300",
+        "-Nle6p784b2qyoDLMWh8": "Level: 18, Won: true, Time: 2023-12-14 21:58:07.654",
+        "-Nle6zlidArRJITst6QI": "Level: 19, Won: true, Time: 2023-12-14 21:58:51.271",
+        "-Nle7z5VxLOu4HfOXC9I": "Level: 20, Won: true, Time: 2023-12-14 22:03:10.563",
+        "-Nle8MpszQBAgC7xR36d": "Level: 21, Won: true, Time: 2023-12-14 22:04:51.896",
+        "-Nle8U09L3EtB5zR0m5N": "Level: 22, Won: true, Time: 2023-12-14 22:05:21.301",
+        "-Nle8kJsxGE32_klsrN2": "Level: 23, Won: true, Time: 2023-12-14 22:06:32.180",
+        "-Nle9JpllVJkq9GHFhTW": "Level: 24, Won: true, Time: 2023-12-14 22:09:01.740",
+        "-Nle9aaFQdh8jb1F9Lzv": "Level: 25, Won: true, Time: 2023-12-14 22:10:14.492",
+        "-NleA8Xxd_r6Wi3CmWIW": "Level: 26, Won: true, Time: 2023-12-14 22:12:37.636",
+        "-NleAU6Fv1DXuYPEYG29": "Level: 27, Won: true, Time: 2023-12-14 22:14:05.980"
+      },
+      "initAppStartTime": {
+        "-NlYCblHH8vBs--1l8WH": "2023-12-13 13:46:04.344"
+      },
+      "pushToken": {
+        "-NlYCXp7KWiTPRseTzpf": "Token: dUxQBsbrGBed-T721DdC0S:APA91bG4WkTA85s-OxuZY9-7B-LITGZ44wqC_ouXQQKzVri7t0vp4IKCv1OM04idiiRHkt1WPju-cANtW6wWNIBIEuIcov7mzTJ6TBKufdZt5jFmLzqmFsN0bRFYq6zROfzO4GAGvdtM, Time: 2023-12-13 13:45:44.116",
+        "-NlYCbvpqjbWWBYsxzpA": "Token: dUxQBsbrGBed-T721DdC0S:APA91bG4WkTA85s-OxuZY9-7B-LITGZ44wqC_ouXQQKzVri7t0vp4IKCv1OM04idiiRHkt1WPju-cANtW6wWNIBIEuIcov7mzTJ6TBKufdZt5jFmLzqmFsN0bRFYq6zROfzO4GAGvdtM, Time: 2023-12-13 13:46:05.025",
+        "-NlZJzdDFsXMChCKhbKo": "Token: dUxQBsbrGBed-T721DdC0S:APA91bG4WkTA85s-OxuZY9-7B-LITGZ44wqC_ouXQQKzVri7t0vp4IKCv1OM04idiiRHkt1WPju-cANtW6wWNIBIEuIcov7mzTJ6TBKufdZt5jFmLzqmFsN0bRFYq6zROfzO4GAGvdtM, Time: 2023-12-13 18:57:54.325",
+        "-NlZwtR5JKjDiMeQ95zO": "Token: dUxQBsbrGBed-T721DdC0S:APA91bG4WkTA85s-OxuZY9-7B-LITGZ44wqC_ouXQQKzVri7t0vp4IKCv1OM04idiiRHkt1WPju-cANtW6wWNIBIEuIcov7mzTJ6TBKufdZt5jFmLzqmFsN0bRFYq6zROfzO4GAGvdtM, Time: 2023-12-13 21:52:14.371",
+        "-Nl_0uEXqzADfBEYYzOp": "Token: dUxQBsbrGBed-T721DdC0S:APA91bG4WkTA85s-OxuZY9-7B-LITGZ44wqC_ouXQQKzVri7t0vp4IKCv1OM04idiiRHkt1WPju-cANtW6wWNIBIEuIcov7mzTJ6TBKufdZt5jFmLzqmFsN0bRFYq6zROfzO4GAGvdtM, Time: 2023-12-13 22:14:08.789",
+        "-Nlc9-16bNX_aO5jscW4": "Token: dUxQBsbrGBed-T721DdC0S:APA91bG4WkTA85s-OxuZY9-7B-LITGZ44wqC_ouXQQKzVri7t0vp4IKCv1OM04idiiRHkt1WPju-cANtW6wWNIBIEuIcov7mzTJ6TBKufdZt5jFmLzqmFsN0bRFYq6zROfzO4GAGvdtM, Time: 2023-12-14 12:48:21.767",
+        "-Nle6fMTefm7FWviZxNP": "Token: dUxQBsbrGBed-T721DdC0S:APA91bG4WkTA85s-OxuZY9-7B-LITGZ44wqC_ouXQQKzVri7t0vp4IKCv1OM04idiiRHkt1WPju-cANtW6wWNIBIEuIcov7mzTJ6TBKufdZt5jFmLzqmFsN0bRFYq6zROfzO4GAGvdtM, Time: 2023-12-14 21:57:27.684",
+        "-Nle7RgA7dLf7pEnFtiW": "Token: dUxQBsbrGBed-T721DdC0S:APA91bG4WkTA85s-OxuZY9-7B-LITGZ44wqC_ouXQQKzVri7t0vp4IKCv1OM04idiiRHkt1WPju-cANtW6wWNIBIEuIcov7mzTJ6TBKufdZt5jFmLzqmFsN0bRFYq6zROfzO4GAGvdtM, Time: 2023-12-14 22:00:49.629",
+        "-Nlh5ifq6uFlJ5kmlyI-": "Token: dUxQBsbrGBed-T721DdC0S:APA91bG4WkTA85s-OxuZY9-7B-LITGZ44wqC_ouXQQKzVri7t0vp4IKCv1OM04idiiRHkt1WPju-cANtW6wWNIBIEuIcov7mzTJ6TBKufdZt5jFmLzqmFsN0bRFYq6zROfzO4GAGvdtM, Time: 2023-12-15 11:52:10.506"
+      },
+      "startOfLevel": {
+        "-NlZwuRLB1v43284LMl6": "Level: 1, Time: 2023-12-13 21:52:18.482",
+        "-NlZx5HEvY2l86wR7GDj": "Level: 2, Time: 2023-12-13 21:53:06.988",
+        "-NlZxBelQRvsmn2wRmRv": "Level: 3, Time: 2023-12-13 21:53:33.134",
+        "-NlZxPajriAebc2mdDAV": "Level: 4, Time: 2023-12-13 21:54:30.220",
+        "-NlZxYEJsx_k-naAB8yO": "Level: 5, Time: 2023-12-13 21:55:05.585",
+        "-NlZxrg_W6GOh2QwKlHl": "Level: 6, Time: 2023-12-13 21:56:29.377",
+        "-NlZy6GmVqLaFPzdqMBr": "Level: 7, Time: 2023-12-13 21:57:33.199",
+        "-NlZyTu-9C3tf-tlO5H4": "Level: 8, Time: 2023-12-13 21:59:09.980",
+        "-NlZyh2FY8AO1Hg_eaNQ": "Level: 9, Time: 2023-12-13 22:00:07.917",
+        "-NlZz1gr8dpavE1lL3hn": "Level: 10, Time: 2023-12-13 22:01:36.596",
+        "-NlZzEdxWzpRpQ01xxe0": "Level: 11, Time: 2023-12-13 22:02:29.658",
+        "-Nl_0v1tpmYX5H55ww-C": "Level: 11, Time: 2023-12-13 22:14:12.076",
+        "-Nl_1pCPJqLKfku7UyVD": "Level: 12, Time: 2023-12-13 22:18:10.311",
+        "-Nl_25GNdsFJI-vOBs5p": "Level: 13, Time: 2023-12-13 22:19:20.203",
+        "-Nl_2HoVFrXNjfrSLuzC": "Level: 14, Time: 2023-12-13 22:20:11.603",
+        "-Nl_2RNeIu0_nkrjL0U9": "Level: 15, Time: 2023-12-13 22:20:50.781",
+        "-Nl_2kS3gGimfJ7KmUd6": "Level: 16, Time: 2023-12-13 22:22:12.983",
+        "-Nl_38ml6vUoADvTxoMP": "Level: 17, Time: 2023-12-13 22:23:56.408",
+        "-Nlc903C_h4n8OwIvhCz": "Level: 1, Time: 2023-12-14 12:48:25.997",
+        "-Nle6gnzJ0QwBN_tF0cq": "Level: 18, Time: 2023-12-14 21:57:33.605",
+        "-Nle6r8OevZ1Qn9WV10y": "Level: 19, Time: 2023-12-14 21:58:15.935",
+        "-Nle70YhHqIAzE8hLbOn": "Level: 20, Time: 2023-12-14 21:58:58.579",
+        "-Nle7Sn1LjljhXGD2ZjH": "Level: 20, Time: 2023-12-14 22:00:54.163",
+        "-Nle899OsJJEYmLjC9bM": "Level: 21, Time: 2023-12-14 22:03:55.875",
+        "-Nle8Ov6mLfWsUoCHdT9": "Level: 22, Time: 2023-12-14 22:05:00.441",
+        "-Nle8VvvaT9sFd7lxI7f": "Level: 23, Time: 2023-12-14 22:05:29.164",
+        "-Nle8nNUMNhoeoMBeClM": "Level: 24, Time: 2023-12-14 22:06:44.721",
+        "-Nle9Lk9z7mRJFj2KRRY": "Level: 25, Time: 2023-12-14 22:09:09.595",
+        "-Nle9cQ2PofK9E9z05qX": "Level: 26, Time: 2023-12-14 22:10:21.973",
+        "-NleAG1VVODy6pRbfk5i": "Level: 27, Time: 2023-12-14 22:13:08.331"
+      },
+      "startSurvey": {
+        "-NlYCblLcfsfy1EFD5Zg": "SurveyResult: [ID: 1-31, ID: 2-1, ID: 3-4, ID: 4-0, ID: 5-0, ID: 7-0, ID: 8-1, ID: 9-0]"
+      },
+      "uuid": "V01-23-12-12–20:44-1iCPUx06yRIOGyc"
+    },
+    "V01-23-12-13–15:19-fJesIzEqPQVqDUW": {
+      "appStartDate": {
+        "-NlYXvtZRTGjschzxIJ9": "2023-12-13 15:19:11.800",
+        "-NlYZ2UpVunFB_zWm-lX": "2023-12-13 15:24:05.046",
+        "-NlYbqoQyuG18FcOBCVV": "2023-12-13 15:40:41.709",
+        "-Nl_S6aKv8OTHf3maTbG": "2023-12-14 00:13:01.266",
+        "-NlbETjAJ-aNOZO3CDFC": "2023-12-14 08:32:40.470",
+        "-Nlc8J2u-AL9YUSntbW5": "2023-12-14 12:45:21.092",
+        "-NldgKYzEXnBNNsn6heY": "2023-12-14 19:57:59.492",
+        "-Nlj9PyX6BqHAMMGgGan": "2023-12-15 21:27:32.071",
+        "-NljAEptZNph9UIBsZ6g": "2023-12-15 21:31:08.616",
+        "-NljGIPOpGDp040W99aB": "2023-12-15 21:57:36.108",
+        "-NljMtW8WIsvlCKZ3gJw": "2023-12-15 22:26:25.044",
+        "-NljNh3vk2q-UI8I2LGl": "2023-12-15 22:29:56.213",
+        "-NljOWZHmXegRJKmpj8k": "2023-12-15 22:33:31.216",
+        "-NljQfNbCM9Gj8UacqXO": "2023-12-15 22:42:55.738",
+        "-NljmJ0lJrAONUjxjOlW": "2023-12-16 00:21:49.358",
+        "-NljnbFQRfVRsB4y2Stx": "2023-12-16 00:27:30.229",
+        "-Nljp_0x2kowKb7kyJJ9": "2023-12-16 00:36:05.433",
+        "-NljrayvidFnI0S2DVlU": "2023-12-16 00:44:57.740",
+        "-NljtD3Fp5Ka84Q5MNSq": "2023-12-16 00:51:59.956"
+      },
+      "darkPatterns": 0,
+      "finishOfLevel": {
+        "-NlYYdR-FqC0ReN_dx7b": "Level: 1, Won: false, Time: 2023-12-13 15:22:18.346",
+        "-NlYYvcqd-QJ1QzpM9Uv": "Level: 1, Won: false, Time: 2023-12-13 15:23:32.894",
+        "-NlYa79gEA7frGe3HnQv": "Level: 1, Won: false, Time: 2023-12-13 15:33:08.482",
+        "-NlYc6DYhHsUeutHAsLh": "Level: 1, Won: false, Time: 2023-12-13 15:41:48.910",
+        "-Nl_SN20BXgkAKFJOZ9-": "Level: 1, Won: true, Time: 2023-12-14 00:14:08.717",
+        "-NlbQD25MAgfuf1-2fIO": "Level: 2, Won: true, Time: 2023-12-14 09:23:57.878",
+        "-NlbtHDgpRqfygo4vpbV": "Level: 3, Won: true, Time: 2023-12-14 11:35:19.261",
+        "-Nlbwu1LZYEE9k3zpoy9": "Level: 4, Won: true, Time: 2023-12-14 11:51:08.717",
+        "-Nlc9J2f8dOZr3lghQkP": "Level: 5, Won: false, Time: 2023-12-14 12:49:43.117",
+        "-Nldgb4MsT5i3jn0kcWU": "Level: 5, Won: true, Time: 2023-12-14 19:59:11.279",
+        "-Nlj9cUkAFDBsQ7vHQGn": "Level: 6, Won: true, Time: 2023-12-15 21:28:27.454",
+        "-NljAAVduK3Fh5Ni2Fx2": "Level: 7, Won: true, Time: 2023-12-15 21:30:50.869",
+        "-NljAvNpNZx0mc8TnvrS": "Level: 8, Won: true, Time: 2023-12-15 21:34:06.893",
+        "-NljBGXibhg2Xy_M7KCM": "Level: 9, Won: true, Time: 2023-12-15 21:35:37.638",
+        "-NljLVAJBw2xn46yC5Q5": "Level: 11, Won: true, Time: 2023-12-15 22:20:19.062",
+        "-NljMKICny0eOa0IAL9a": "Level: 12, Won: false, Time: 2023-12-15 22:23:56.658",
+        "-NljMqTnLtjAvIIOcqbY": "Level: 12, Won: true, Time: 2023-12-15 22:26:12.568",
+        "-NljNGgjlAFC40Y6r8eg": "Level: 13, Won: false, Time: 2023-12-15 22:28:04.051",
+        "-NljNf2HMBWqzPgQG-eI": "Level: 13, Won: false, Time: 2023-12-15 22:29:47.893",
+        "-NljO3r4vk7JF3WuhURR": "Level: 13, Won: false, Time: 2023-12-15 22:31:33.602",
+        "-NljOUN70TqYbnAknfFF": "Level: 13, Won: true, Time: 2023-12-15 22:33:22.213",
+        "-NljPEMY90c_0uX6yd0r": "Level: 14, Won: true, Time: 2023-12-15 22:36:38.796",
+        "-NljPiRfiiG5H-_Dou-_": "Level: 15, Won: true, Time: 2023-12-15 22:38:46.100",
+        "-NljQcHp1vsFHoXtl_Hh": "Level: 16, Won: true, Time: 2023-12-15 22:42:43.032",
+        "-NljR4zkLmzItXw7dCrm": "Level: 17, Won: false, Time: 2023-12-15 22:44:44.783",
+        "-NljRXG0LIyt-ixVlAgL": "Level: 17, Won: false, Time: 2023-12-15 22:46:40.575",
+        "-Nljmj0vpJovNyudni8m": "Level: 17, Won: false, Time: 2023-12-16 00:23:39.978",
+        "-Nljn9dzvMv7qdScxQbY": "Level: 17, Won: false, Time: 2023-12-16 00:25:33.135",
+        "-Nljna2MCpuO5s9qjnf9": "Level: 17, Won: false, Time: 2023-12-16 00:27:25.348",
+        "-Nljo11yiYunaaivtzYK": "Level: 17, Won: false, Time: 2023-12-16 00:29:20.006",
+        "-NljobQmh8FKgHipEmL1": "Level: 17, Won: false, Time: 2023-12-16 00:31:53.146",
+        "-Nljp0_Y0DjyfpXrgF1N": "Level: 17, Won: true, Time: 2023-12-16 00:33:40.262",
+        "-Nljpi0UejncLfWlfSPE": "Level: 18, Won: true, Time: 2023-12-16 00:36:42.318",
+        "-NljqA14vtVXrZ4lGDax": "Level: 19, Won: true, Time: 2023-12-16 00:38:41.140",
+        "-NljrWynsVl1s19C5DTr": "Level: 20, Won: false, Time: 2023-12-16 00:44:37.279",
+        "-NljsiSYp6nPlqWbhi2N": "Level: 20, Won: true, Time: 2023-12-16 00:49:50.612",
+        "-Nljt9hkKOW_66lNTg3U": "Level: 21, Won: true, Time: 2023-12-16 00:51:46.337",
+        "-NljuawXrf20qphnAGdQ": "Level: 22, Won: false, Time: 2023-12-16 00:58:04.067",
+        "-Nljvg-4CF_esZpnClKu": "Level: 22, Won: true, Time: 2023-12-16 01:02:46.916",
+        "-NljwDavCLDpvZ1Qdb76": "Level: 23, Won: true, Time: 2023-12-16 01:05:08.669"
+      },
+      "initAppStartTime": {
+        "-NlYY8C-TC3p-HAfZvQt": "2023-12-13 15:20:06.312"
+      },
+      "startOfLevel": {
+        "-NlYYNC0gVlP_gKm4jvY": "Level: 1, Time: 2023-12-13 15:21:07.755",
+        "-NlYYfjJgE0tzhmQ0InB": "Level: 1, Time: 2023-12-13 15:22:27.774",
+        "-NlYZ1XsxyCFSIbuDXWm": "Level: 1, Time: 2023-12-13 15:24:01.187",
+        "-NlYZ373u649VTyjQtGP": "Level: 1, Time: 2023-12-13 15:24:07.649",
+        "-NlY_sFC5isZPf5Lckcy": "Level: 1, Time: 2023-12-13 15:32:03.300",
+        "-NlYbrKN942wTdReGQW4": "Level: 1, Time: 2023-12-13 15:40:43.812",
+        "-Nl_S785aJuCUdPrdLmn": "Level: 1, Time: 2023-12-14 00:13:03.573",
+        "-Nl_SRD_KV8HsTrsEe5w": "Level: 2, Time: 2023-12-14 00:14:25.844",
+        "-NlbPxvsSMW94Q7JreTv": "Level: 2, Time: 2023-12-14 09:22:51.882",
+        "-Nlbrv5wC_kNLcBmA17W": "Level: 3, Time: 2023-12-14 11:29:22.397",
+        "-NlbvZ94BYtKopTCUzZC": "Level: 4, Time: 2023-12-14 11:45:16.959",
+        "-Nlc90hnfOKtlPDDHJzj": "Level: 5, Time: 2023-12-14 12:48:27.988",
+        "-Nlc9LasbcevKq3JGT2_": "Level: 5, Time: 2023-12-14 12:49:53.563",
+        "-NldgNS0zCGp6uBXJZF_": "Level: 5, Time: 2023-12-14 19:58:11.355",
+        "-Nlj9RZ2xNdERZ9KG9Um": "Level: 6, Time: 2023-12-15 21:27:38.577",
+        "-Nlj9e50UmEvSE1R2Lar": "Level: 7, Time: 2023-12-15 21:28:34.000",
+        "-NljAC30eAw0TPTxtXp9": "Level: 8, Time: 2023-12-15 21:30:57.231",
+        "-NljAp2i3TsYEZhluE7m": "Level: 8, Time: 2023-12-15 21:33:40.966",
+        "-NljAwlUHmuOKXE7UobV": "Level: 9, Time: 2023-12-15 21:34:12.570",
+        "-NljGIr7E8DNbcGMbKVW": "Level: 11, Time: 2023-12-15 21:57:37.977",
+        "-NljLX9mXvpKbg_Bexgc": "Level: 12, Time: 2023-12-15 22:20:27.224",
+        "-NljMLhiUFMFwf2lv9fI": "Level: 12, Time: 2023-12-15 22:24:02.452",
+        "-NljMt4PZjtnN57FEgtZ": "Level: 13, Time: 2023-12-15 22:26:23.231",
+        "-NljMuU7cu80hq7dKq_x": "Level: 13, Time: 2023-12-15 22:26:28.972",
+        "-NljNIpkXKkbVa8CrFOD": "Level: 13, Time: 2023-12-15 22:28:12.820",
+        "-NljNgLgAbJvqhFzeDYL": "Level: 13, Time: 2023-12-15 22:29:53.232",
+        "-NljNhczCKXhm4SFB9Dd": "Level: 13, Time: 2023-12-15 22:29:58.493",
+        "-NljO73BhBM9HqVTmkuT": "Level: 13, Time: 2023-12-15 22:31:46.730",
+        "-NljOVrHy34o_0ikKajF": "Level: 14, Time: 2023-12-15 22:33:28.304",
+        "-NljOX9kxWrR9xSxce-Z": "Level: 14, Time: 2023-12-15 22:33:33.658",
+        "-NljPHrG8m3acUGXi7s9": "Level: 15, Time: 2023-12-15 22:36:53.115",
+        "-NljPkM6kX4Dp8JDSb8S": "Level: 16, Time: 2023-12-15 22:38:53.937",
+        "-NljQec95XFpbfz_Ajt-": "Level: 17, Time: 2023-12-15 22:42:52.595",
+        "-NljQgKrKWxLePCUXcXX": "Level: 17, Time: 2023-12-15 22:42:59.703",
+        "-NljR7b3pxNq6MaZUuWR": "Level: 17, Time: 2023-12-15 22:44:55.491",
+        "-NljmKMWLT64zT1qeYdu": "Level: 17, Time: 2023-12-16 00:21:54.866",
+        "-NljmkzSmvVhjDClE1XX": "Level: 17, Time: 2023-12-16 00:23:48.014",
+        "-NljnBOZghmTwwNrRcwc": "Level: 17, Time: 2023-12-16 00:25:40.277",
+        "-NljncMmYa0GREM7V0nQ": "Level: 17, Time: 2023-12-16 00:27:34.843",
+        "-NljoCla59yUA-yzQaVV": "Level: 17, Time: 2023-12-16 00:30:08.047",
+        "-NljodPgpXi65vRoT3X7": "Level: 17, Time: 2023-12-16 00:32:01.269",
+        "-NljpaWJOSs9iJAAhije": "Level: 18, Time: 2023-12-16 00:36:11.587",
+        "-NljpjRf_j9ucnnNhHFI": "Level: 19, Time: 2023-12-16 00:36:48.155",
+        "-NljqC3sJQRq-Af7s15L": "Level: 20, Time: 2023-12-16 00:38:49.512",
+        "-NljrZAyObfo-yJt8ar8": "Level: 20, Time: 2023-12-16 00:44:46.317",
+        "-Nljrc-04R6Zz1YaQFOQ": "Level: 20, Time: 2023-12-16 00:45:02.004",
+        "-NljskmVg6pgZt09d3sd": "Level: 21, Time: 2023-12-16 00:50:00.146",
+        "-NljtCNuWx1iYlmGXGJd": "Level: 22, Time: 2023-12-16 00:51:57.293",
+        "-NljtEJk7JSlaBXnd18f": "Level: 22, Time: 2023-12-16 00:52:05.171",
+        "-Nljue5alXvs6lGYErJu": "Level: 22, Time: 2023-12-16 00:58:17.000",
+        "-Nljvht-FQZbxL_f8VCO": "Level: 23, Time: 2023-12-16 01:02:54.659"
+      },
+      "startSurvey": {
+        "-NlYY8C0i6PoCBUhYFWC": "SurveyResult: [ID: 1-25, ID: 2-0, ID: 3-4, ID: 4-0, ID: 5-0, ID: 7-6, ID: 9-0]"
+      },
+      "uuid": "V01-23-12-13–15:19-fJesIzEqPQVqDUW"
+    },
+    "V01-23-12-13–15:45-UaWJDJMY3E5iOiO": {
+      "appStartDate": {
+        "-NlYczuuijHlSDoxP3wp": "2023-12-13 15:45:41.155",
+        "-NlYf0jJ6REXRwXsesoO": "2023-12-13 15:54:32.890",
+        "-NldGbOC2KenuOtPvhQp": "2023-12-14 18:01:14.675",
+        "-NldH3q3-LjGxOS1z4MX": "2023-12-14 18:03:15.282",
+        "-NldJ3jHG1upstxc99nn": "2023-12-14 18:11:59.144"
+      },
+      "darkPatterns": 0,
+      "finishOfLevel": {
+        "-NlYeWTpMoVIvDGYpl1Z": "Level: 1, Won: true, Time: 2023-12-13 15:52:20.785",
+        "-NlYeyVQy5nOESb6dfNr": "Level: 2, Won: true, Time: 2023-12-13 15:54:19.673",
+        "-NlYfL64U339Zxvm0XJA": "Level: 3, Won: true, Time: 2023-12-13 15:55:56.323",
+        "-NlYfijX79sHPREX89Lt": "Level: 4, Won: true, Time: 2023-12-13 15:57:37.217",
+        "-NldHMfu-lnasq84-5D7": "Level: 5, Won: false, Time: 2023-12-14 18:04:32.526",
+        "-NldHgBLc1lqKwmDOGbI": "Level: 5, Won: false, Time: 2023-12-14 18:05:56.522",
+        "-NldI-hmGwRJ4ht6jnQD": "Level: 5, Won: true, Time: 2023-12-14 18:07:20.582",
+        "-NldInRtb9zX1YUIn-0W": "Level: 6, Won: true, Time: 2023-12-14 18:10:48.395"
+      },
+      "initAppStartTime": {
+        "-NlYdrYanwsV6wsZZKaM": "2023-12-13 15:49:29.059"
+      },
+      "pushToken": {
+        "-NlYdsnrpsIuiYc54vwN": "Token: cPTMaHioO1scj6ROdekSWs:APA91bE391y8UfTNWwuuwh6oVVWf-zla4cFIMcnvAa56DxAAiQJ6hGf0e1dGvdfUH73Nyi5ihENcdGCQ4ecwMSO2VFv6KnmHY9XJy_LEXDdgdRTBq4n21HDOPPT5Xa_kzc0AyjF7T_Ug, Time: 2023-12-13 15:49:34.197",
+        "-NldGbMNVnTxnjB9v7nA": "Token: cPTMaHioO1scj6ROdekSWs:APA91bE391y8UfTNWwuuwh6oVVWf-zla4cFIMcnvAa56DxAAiQJ6hGf0e1dGvdfUH73Nyi5ihENcdGCQ4ecwMSO2VFv6KnmHY9XJy_LEXDdgdRTBq4n21HDOPPT5Xa_kzc0AyjF7T_Ug, Time: 2023-12-14 18:01:14.584",
+        "-NldH3p4PhMj2I4ilz6s": "Token: cPTMaHioO1scj6ROdekSWs:APA91bE391y8UfTNWwuuwh6oVVWf-zla4cFIMcnvAa56DxAAiQJ6hGf0e1dGvdfUH73Nyi5ihENcdGCQ4ecwMSO2VFv6KnmHY9XJy_LEXDdgdRTBq4n21HDOPPT5Xa_kzc0AyjF7T_Ug, Time: 2023-12-14 18:03:15.268"
+      },
+      "startOfLevel": {
+        "-NlYeG_rRHmbYNXcIlbP": "Level: 1, Time: 2023-12-13 15:51:15.700",
+        "-NlYeZOcUDVG3DpPp9hK": "Level: 2, Time: 2023-12-13 15:52:32.743",
+        "-NlYf05Dim2c231pxChc": "Level: 3, Time: 2023-12-13 15:54:30.285",
+        "-NlYf1mLx8EXmWACdqef": "Level: 3, Time: 2023-12-13 15:54:37.173",
+        "-NlYfN8RUO_hzICKVW7E": "Level: 4, Time: 2023-12-13 15:56:04.668",
+        "-NldGcOP9sRMMTsxo9-n": "Level: 5, Time: 2023-12-14 18:01:18.832",
+        "-NldGuIMhx4Mo4a-lyV-": "Level: 5, Time: 2023-12-14 18:02:32.175",
+        "-NldH4MAuz5_tzkQkuqu": "Level: 5, Time: 2023-12-14 18:03:17.471",
+        "-NldHOroSsrJqR9Ax-9n": "Level: 5, Time: 2023-12-14 18:04:41.481",
+        "-NldHiO32JpBz8PzM28a": "Level: 5, Time: 2023-12-14 18:06:05.528",
+        "-NldI1imQuEGm0uzpcO8": "Level: 6, Time: 2023-12-14 18:07:28.837",
+        "-NldIblSOp2u1hrrd9Pw": "Level: 6, Time: 2023-12-14 18:10:00.561",
+        "-NldIp4lHlcDKYDUTLW4": "Level: 7, Time: 2023-12-14 18:10:55.109"
+      },
+      "startSurvey": {
+        "-NlYdrYcfiuLummRHY3X": "SurveyResult: [ID: 1-48, ID: 2-1, ID: 3-4, ID: 4-0, ID: 5-0, ID: 7-1, ID: 8-1, ID: 9-0]"
+      },
+      "uuid": "V01-23-12-13–15:45-UaWJDJMY3E5iOiO"
+    },
+    "V01-23-12-13–16:00-IR9Ncrq1ALXXwCb": {
+      "appStartDate": {
+        "-NlYgRYlhq7ucFr6Q9su": "2023-12-13 16:00:44.743"
+      },
+      "darkPatterns": 0,
+      "initAppStartTime": {
+        "-NlYghays7d3UZZ7mfna": "2023-12-13 16:01:55.038"
+      },
+      "pushToken": {
+        "-NlYgkcgPR1MfTinoUL8": "Token: fCq1iUHNjjE7HpO1uaywTU:APA91bFOoZBpVQwIeMvaVC8bG0BZM97jbaB6HDz6cl6qrsyMF8HSAfs7Z2kYHUo-asBk3fhRUnfDy60YMSCb5-Hk2ARMHJ_LoPRcNrdNXz9DmHwZiV-1f3DgWJh0dQaifViiIeIqbFcL, Time: 2023-12-13 16:02:07.457"
+      },
+      "startOfLevel": {
+        "-NlYh2InGddf0x_LCzfM": "Level: 1, Time: 2023-12-13 16:03:23.945"
+      },
+      "startSurvey": {
+        "-NlYghb-hj120oD129aY": "SurveyResult: [ID: 1-18, ID: 2-1, ID: 3-1, ID: 4-2, ID: 5-0, ID: 7-0, ID: 8-1, ID: 9-0]"
+      },
+      "uuid": "V01-23-12-13–16:00-IR9Ncrq1ALXXwCb"
+    },
+    "V01-23-12-14–11:59-cMIVEN6XFOcpgHV": {
+      "appStartDate": {
+        "-NlbyrTCqZ2pI_XMaWrE": "2023-12-14 11:59:42.575",
+        "-NlcFffB15Cf42MfAOTO": "2023-12-14 13:17:32.847"
+      },
+      "darkPatterns": 1,
+      "initAppStartTime": {
+        "-NlcFryFXO00X7-FJyYV": "2023-12-14 13:18:23.194"
+      },
+      "pushToken": {
+        "-NlcFsv67FxhhLKxUW5Q": "Token: eAKQynj_xQRUEGb_7w9cES:APA91bFhpSIuo7LfqoZpUmM_G9yGQBvbwIdx0D0NdAqXVheqF1cwSrzxG64VXL_pseGbqfOhzUIVW4iJyx1aajkxjcDY1VaHlzGwbLGvnAwGtuHxf8vnn039vi9ylGJ7sPHFpfWDAiIG, Time: 2023-12-14 13:18:27.092"
+      },
+      "startOfLevel": {
+        "-NlcFx_M9COpCjt1pmGT": "Level: 1, Time: 2023-12-14 13:18:46.179"
+      },
+      "startSurvey": {
+        "-NlcFryGwcEpOvTUxzq0": "SurveyResult: [ID: 1-30, ID: 2-1, ID: 3-4, ID: 4-0, ID: 5-0, ID: 7-0, ID: 8-1, ID: 9-0]"
+      },
+      "uuid": "V01-23-12-14–11:59-cMIVEN6XFOcpgHV"
+    },
+    "V01-23-12-14–17:05-D91nAUtgYNuX4Fi": {
+      "appStartDate": {
+        "-Nld3mX7Qa5oebfehYye": "2023-12-14 17:05:12.394"
+      },
+      "checkHighScoreTime": {
+        "-Nld3rx77CyIdeM7uae3": "2023-12-14 17:05:34.155"
+      },
+      "darkPatterns": 1,
+      "initAppStartTime": {
+        "-Nld3nt_21bkV_2gqgRC": "2023-12-14 17:05:17.544"
+      },
+      "pushToken": {
+        "-Nld3mVSyKexw9Zogr-V": "Token: fpA1Li3jM9pT6Q4e-Mf-dn:APA91bG3Qq0PRkgjGmBpodY7uoQVbOEX7TzR4jA_S-rRONZkEr0FBbT0E2kU1K20VorSQ0OQkZllOF1dlXMAOZnhWBb4kx933rvgqoXZujz97Cx-G4vIhvnuMdQpoKuq_itWxkzg9T_s, Time: 2023-12-14 17:05:12.347",
+        "-Nld3o-FIaUB7VQvbdVj": "Token: fpA1Li3jM9pT6Q4e-Mf-dn:APA91bG3Qq0PRkgjGmBpodY7uoQVbOEX7TzR4jA_S-rRONZkEr0FBbT0E2kU1K20VorSQ0OQkZllOF1dlXMAOZnhWBb4kx933rvgqoXZujz97Cx-G4vIhvnuMdQpoKuq_itWxkzg9T_s, Time: 2023-12-14 17:05:17.974"
+      },
+      "startSurvey": {
+        "-Nld3nta-iIoYmN2Z3nm": "SurveyResult: [ID: 1-3333]"
+      },
+      "uuid": "V01-23-12-14–17:05-D91nAUtgYNuX4Fi"
+    },
+    "V01-23-12-14–17:28-OxMgf5F0rNSeoTi": {
+      "appStartDate": {
+        "-Nld9DDw3S8qzTdFjVoB": "2023-12-14 17:28:56.440",
+        "-NlddedRahRC-0sDYg-J": "2023-12-14 19:46:19.246"
+      },
+      "darkPatterns": 0,
+      "initAppStartTime": {
+        "-Nldduy5iGzJmhx8u4uA": "2023-12-14 19:47:25.999"
+      },
+      "pushToken": {
+        "-Nld9Da-IAxZwvwDyWJh": "Token: erDVzbvh7AZoNSpWVhDkgz:APA91bGT2t3ZB0Hbioqp1uM5oewfH7sVIcBNDTEAAUHCVrGQ1h0npsXO7zOAprBOGqXqdEibKiN07w1hwEdikm7oNimIr77n9l2us_dapehZy-0sB-avE7R-GtsbmN1M9lwm4GOO7ljb, Time: 2023-12-14 17:28:56.753",
+        "-NlddeklkTBiNDddN5Pk": "Token: erDVzbvh7AZoNSpWVhDkgz:APA91bGT2t3ZB0Hbioqp1uM5oewfH7sVIcBNDTEAAUHCVrGQ1h0npsXO7zOAprBOGqXqdEibKiN07w1hwEdikm7oNimIr77n9l2us_dapehZy-0sB-avE7R-GtsbmN1M9lwm4GOO7ljb, Time: 2023-12-14 19:46:19.618",
+        "-NlddvHwFWHS6j558yJS": "Token: erDVzbvh7AZoNSpWVhDkgz:APA91bGT2t3ZB0Hbioqp1uM5oewfH7sVIcBNDTEAAUHCVrGQ1h0npsXO7zOAprBOGqXqdEibKiN07w1hwEdikm7oNimIr77n9l2us_dapehZy-0sB-avE7R-GtsbmN1M9lwm4GOO7ljb, Time: 2023-12-14 19:47:27.341"
+      },
+      "startSurvey": {
+        "-NldduyARx-SXPfQH1il": "SurveyResult: [ID: 1-32, ID: 2-1, ID: 3-4, ID: 4-0, ID: 5-2, ID: 7-4, ID: 8-1, ID: 9-0]"
+      },
+      "uuid": "V01-23-12-14–17:28-OxMgf5F0rNSeoTi"
+    },
+    "V01-23-12-14–19:26-niX3SZKeGiKP4vw": {
+      "appStartDate": {
+        "-Nld_22rluXdQi2ihzZj": "2023-12-14 19:26:08.717",
+        "-NldcWreSsodxvs1VLpY": "2023-12-14 19:41:21.346",
+        "-NldcwDp9PoB2ctyOk77": "2023-12-14 19:43:09.315",
+        "-NlddTYI6x2ta7Vz0Bii": "2023-12-14 19:45:29.878",
+        "-NlddzLwq78c17L68knx": "2023-12-14 19:47:44.253",
+        "-Nldef-vWNA8PUFlRI_p": "2023-12-14 19:50:43.072",
+        "-NldfKsay9Py0IVjytvD": "2023-12-14 19:53:38.668",
+        "-Nldfl0uS82ZXCcdVEvH": "2023-12-14 19:55:29.856",
+        "-NldgD18aVjnVXr_krY4": "2023-12-14 19:57:28.649",
+        "-NldgoyjqJsmWnRPuBcv": "2023-12-14 20:00:08.172",
+        "-NlhjehPebelib9Uy3jc": "2023-12-15 14:51:01.372",
+        "-NlhkoL32416XvB9K-k_": "2023-12-15 14:56:03.050",
+        "-Nlhl282goVafli77DER": "2023-12-15 14:57:03.561",
+        "-Nlhlh4PUeVbwBuvdHT_": "2023-12-15 14:59:55.280",
+        "-NlhlvCTH9Cq4vHWBY_0": "2023-12-15 15:00:53.260",
+        "-NlhmpC7NbPXo77hf9V5": "2023-12-15 15:04:50.762",
+        "-NlhnpbY05vsAWej72Sp": "2023-12-15 15:09:14.608",
+        "-NlhoRbKDaP5H8aJloSE": "2023-12-15 15:11:54.316",
+        "-NlhpJ7ChJPMziAIRNlT": "2023-12-15 15:15:41.794",
+        "-Nlhq-2r5vAXTelbCUQA": "2023-12-15 15:18:41.672",
+        "-Nlhq_ggworDEyzGtUYk": "2023-12-15 15:21:15.836",
+        "-NlhricNmBIaYLQXmYlB": "2023-12-15 15:26:14.494",
+        "-NlhsMioP2vghhhws3my": "2023-12-15 15:29:02.884",
+        "-NlhsuM-abZZb7KJI8JP": "2023-12-15 15:31:24.736",
+        "-NlhtePepiwrA-5I_R5I": "2023-12-15 15:34:41.636",
+        "-NlhuEYi7Xqp7JMtv47V": "2023-12-15 15:37:13.697",
+        "-NlhuRqNY2qQLGJqL2oH": "2023-12-15 15:38:08.214",
+        "-NljFJP9NX9D1kDxGk7m": "2023-12-15 21:53:18.033",
+        "-NljGuaW_3okLrGSgL18": "2023-12-15 22:00:16.637",
+        "-NljH7bCBzcjcZ7sw5G8": "2023-12-15 22:01:13.999",
+        "-NljRL0edB_tvfwl1LOZ": "2023-12-15 22:45:50.400",
+        "-NljRW8iNBwb65p_B08f": "2023-12-15 22:46:35.973",
+        "-NljRiJNUzbg8ooRFovP": "2023-12-15 22:47:29.886",
+        "-NljRwc0_x_9OtthxWXj": "2023-12-15 22:48:28.483",
+        "-NljTOiJZnUQlL8jCdJw": "2023-12-15 22:54:49.834",
+        "-NljULsuC244V12SPGW9": "2023-12-15 22:59:00.356",
+        "-NljV9Jw4HnVN56n4iaE": "2023-12-15 23:02:31.034",
+        "-NljWO5C9R0FDqv1p54J": "2023-12-15 23:07:53.687",
+        "-NljZ7AArjKk6Bx6xhYQ": "2023-12-15 23:19:50.748",
+        "-Nlj_2-zwv6p05_QbDWw": "2023-12-15 23:23:51.793",
+        "-NljaBmMvvK_oqr4kqvt": "2023-12-15 23:28:53.954",
+        "-NljbLYKZKX2XNEwDZUY": "2023-12-15 23:33:56.123",
+        "-Nljc_0cK1Y41R8UOp8C": "2023-12-15 23:39:17.393",
+        "-NljwPQXAPi7NWNkbVAC": "2023-12-16 01:05:56.854",
+        "-NljxCrczpLXFkWNjaon": "2023-12-16 01:09:27.624"
+      },
+      "checkHighScoreTime": {
+        "-NlhkoL4dNKxCqwxic_J": "2023-12-15 14:56:03.050",
+        "-NlhmPRXWEo5G_KP11Eg": "2023-12-15 15:03:01.328",
+        "-NlhmmTDL3S1q9ZR-VJB": "2023-12-15 15:04:39.746",
+        "-NlhpJWLfOnDggYxJbP2": "2023-12-15 15:15:43.616",
+        "-NlhprvKJy3SahjlbUpM": "2023-12-15 15:18:08.640",
+        "-Nlhqaas-J86QaCuh-sg": "2023-12-15 15:21:19.607",
+        "-NlhruBZ-d3vDr6fPV3P": "2023-12-15 15:27:01.976",
+        "-NljFiFFoSLZo5cfDMTL": "2023-12-15 21:55:03.900",
+        "-NljaDL2c73uf3frsuBI": "2023-12-15 23:29:00.430",
+        "-NljaSNTtEk73ZRGP6uw": "2023-12-15 23:30:02.025"
+      },
+      "collectDailyRewardsTime": {
+        "-Nldg6K3QnLH6TDYmXDw": "2023-12-14 19:57:01.274"
+      },
+      "darkPatterns": 1,
+      "finishOfLevel": {
+        "-NldcEM_DIveLke6N0o-": "Level: 1, Won: true, Time: 2023-12-14 19:40:05.664",
+        "-NldcRJKa49hgPJwD0vR": "Level: 2, Won: true, Time: 2023-12-14 19:40:58.705",
+        "-Nldcfu_cezPor7LalSv": "Level: 3, Won: true, Time: 2023-12-14 19:42:02.545",
+        "-Nldd2c61XMMYMXarnsL": "Level: 4, Won: true, Time: 2023-12-14 19:43:39.667",
+        "-NlddP03iZ2R5DMUmh5-": "Level: 5, Won: true, Time: 2023-12-14 19:45:11.376",
+        "-Nlddb1R4TVjCxDhct9o": "Level: 6, Won: true, Time: 2023-12-14 19:46:04.707",
+        "-NlddvCEtiLnXe0LKHQ2": "Level: 7, Won: true, Time: 2023-12-14 19:47:27.317",
+        "-NldeEut7Ld4FfK7CD-H": "Level: 8, Won: true, Time: 2023-12-14 19:48:52.170",
+        "-NldecaDUwcrhZ0uHHSz": "Level: 9, Won: false, Time: 2023-12-14 19:50:33.247",
+        "-Nldf3NhsDCWy8muoEGC": "Level: 9, Won: true, Time: 2023-12-14 19:52:27.044",
+        "-NldfDmLdEYzUvRPMDFB": "Level: 10, Won: true, Time: 2023-12-14 19:53:09.645",
+        "-NldfaofhxmH3Z6b5cG2": "Level: 11, Won: true, Time: 2023-12-14 19:54:48.109",
+        "-Nldg1Jkx8YiKIXWMr2w": "Level: 12, Won: true, Time: 2023-12-14 19:56:40.775",
+        "-NldgZUQGp2qa4iAoxYY": "Level: 13, Won: true, Time: 2023-12-14 19:59:00.690",
+        "-NldgkRyJzxjoYO8X-CX": "Level: 14, Won: true, Time: 2023-12-14 19:59:49.683",
+        "-NldhERJngeeZ9TJTcuk": "Level: 15, Won: true, Time: 2023-12-14 20:01:56.634",
+        "-Nldi1sXazjp8f9BwHuz": "Level: 16, Won: false, Time: 2023-12-14 20:05:27.335",
+        "-Nlhk-4RZNQD9_E8bstg": "Level: 16, Won: true, Time: 2023-12-15 14:52:29.083",
+        "-NlhkZiq4_BO5C2z3m2O": "Level: 17, Won: true, Time: 2023-12-15 14:54:59.190",
+        "-NlhlBft9yD6XX5gjaFz": "Level: 18, Won: true, Time: 2023-12-15 14:57:42.833",
+        "-NlhlbTDwhPzAGc-7LTV": "Level: 19, Won: true, Time: 2023-12-15 14:59:32.458",
+        "-NlhmLPjV8CQcQS_Mqyo": "Level: 20, Won: true, Time: 2023-12-15 15:02:44.825",
+        "-Nlhmj2fCWN5TISDq4Kg": "Level: 21, Won: true, Time: 2023-12-15 15:04:25.757",
+        "-NlhnImbZa2dZrDhXFUL": "Level: 22, Won: true, Time: 2023-12-15 15:06:56.367",
+        "-Nlhnk-XSrLx8KxYiQBY": "Level: 23, Won: true, Time: 2023-12-15 15:08:51.945",
+        "-NlhoMVIs1Of8gKUWp_T": "Level: 24, Won: true, Time: 2023-12-15 15:11:33.540",
+        "-NlhorLecKme_oJvK66P": "Level: 25, Won: true, Time: 2023-12-15 15:13:44.020",
+        "-NlhpArqZruElQQyV-B5": "Level: 26, Won: true, Time: 2023-12-15 15:15:08.064",
+        "-Nlhpoq1epYQyM2rDWnK": "Level: 27, Won: true, Time: 2023-12-15 15:17:56.012",
+        "-NlhqVUpyTouFeOFPtmF": "Level: 28, Won: true, Time: 2023-12-15 15:20:54.580",
+        "-Nlhr8n-ONBckwAQ8ysR": "Level: 29, Won: false, Time: 2023-12-15 15:23:43.744",
+        "-NlhrclTIA9WXL8yjqZe": "Level: 29, Won: true, Time: 2023-12-15 15:25:50.616",
+        "-NlhrqtgyhGEsHnv1SKQ": "Level: 30, Won: true, Time: 2023-12-15 15:26:48.483",
+        "-NlhsHnMX9vJXCUryN6y": "Level: 31, Won: true, Time: 2023-12-15 15:28:42.763",
+        "-NlhsoAWqhfOrAUxxJad": "Level: 32, Won: true, Time: 2023-12-15 15:30:59.588",
+        "-NlhtG30BUCh1ntA26_Y": "Level: 33, Won: true, Time: 2023-12-15 15:32:57.819",
+        "-Nlht_r5LN-HN-RtMZ8v": "Level: 34, Won: true, Time: 2023-12-15 15:34:23.000",
+        "-Nlhu6YOxc84fMn8zzTG": "Level: 35, Won: true, Time: 2023-12-15 15:36:40.976",
+        "-NlhvAONmCrcJFAOjIfj": "Level: 36, Won: true, Time: 2023-12-15 15:41:18.853",
+        "-Nlhvg_bzjScfUE4a13v": "Level: 37, Won: true, Time: 2023-12-15 15:43:34.805",
+        "-NljFb3jXdTU04zHtGEs": "Level: 38, Won: true, Time: 2023-12-15 21:54:34.489",
+        "-NljGh3T53vyaVpS-viq": "Level: 39, Won: true, Time: 2023-12-15 21:59:21.193",
+        "-NljSZ026fSBsyntFFHL": "Level: 41, Won: true, Time: 2023-12-15 22:51:09.866",
+        "-NljTHrxWywiomCHiivw": "Level: 42, Won: true, Time: 2023-12-15 22:54:21.795",
+        "-NljUBvOdl4VxdjQoh3S": "Level: 43, Won: true, Time: 2023-12-15 22:58:19.616",
+        "-NljV6xCEL0ft32tdySD": "Level: 45, Won: false, Time: 2023-12-15 23:02:21.351",
+        "-NljVqqN5NY0d7TcWQXY": "Level: 45, Won: true, Time: 2023-12-15 23:05:33.419",
+        "-NljWHAdJ-wurmMl6vL4": "Level: 46, Won: true, Time: 2023-12-15 23:07:25.373",
+        "-NljYyYhyyatuzpGom1B": "Level: 47, Won: true, Time: 2023-12-15 23:19:11.396",
+        "-NljZrcSDbj5D4Wrc-7g": "Level: 49, Won: true, Time: 2023-12-15 23:23:05.285",
+        "-Nlj_J6PnRl9dJIsd6oJ": "Level: 50, Won: true, Time: 2023-12-15 23:25:01.969",
+        "-Nlja6z-2_sAXRhdDX_i": "Level: 51, Won: true, Time: 2023-12-15 23:28:34.423",
+        "-NljbIORCn1mqQjIf0da": "Level: 53, Won: false, Time: 2023-12-15 23:33:43.273",
+        "-Nljc93uYLhlmcM1P4Ym": "Level: 53, Won: true, Time: 2023-12-15 23:37:27.225",
+        "-NljcTYOAQJAjfrY9G-h": "Level: 54, Won: true, Time: 2023-12-15 23:38:51.096",
+        "-NljdNDuVB2uK66l6GfP": "Level: 55, Won: true, Time: 2023-12-15 23:42:47.620",
+        "-Nljx70yeYXgTfr5ip8G": "Level: 57, Won: true, Time: 2023-12-16 01:09:03.803",
+        "-NljxSyJien2LXXl0Uou": "Level: 58, Won: true, Time: 2023-12-16 01:10:33.667",
+        "-NljyL8mD1dmYv6h_-MU": "Level: 59, Won: true, Time: 2023-12-16 01:14:23.772"
+      },
+      "initAppStartTime": {
+        "-Nld_SUpSXJ5dDuwwRXq": "2023-12-14 19:27:57.131"
+      },
+      "pushToken": {
+        "-Nld_TYkd7a5krc96pJ3": "Token: fQ_aYJG5YE7I97lOykm_NA:APA91bHQQGEd3FHvPaC_aGpIrYk9Euvyi1HikGqn1KVMUiA2jH9tJvnoHnqyWnM9Cr3hLCYhs24dMw0GdIhairiltYD68QXN3pj0y_SJpS8D7eletQwM9eTEP4qNaRG_gncdeGgrExB7, Time: 2023-12-14 19:28:01.481",
+        "-Nldg7bi2tLLTxEGdvN3": "Token: fQ_aYJG5YE7I97lOykm_NA:APA91bHQQGEd3FHvPaC_aGpIrYk9Euvyi1HikGqn1KVMUiA2jH9tJvnoHnqyWnM9Cr3hLCYhs24dMw0GdIhairiltYD68QXN3pj0y_SJpS8D7eletQwM9eTEP4qNaRG_gncdeGgrExB7, Time: 2023-12-14 19:57:06.566",
+        "-NlhjeeHTMQsjX52nN2a": "Token: fQ_aYJG5YE7I97lOykm_NA:APA91bHQQGEd3FHvPaC_aGpIrYk9Euvyi1HikGqn1KVMUiA2jH9tJvnoHnqyWnM9Cr3hLCYhs24dMw0GdIhairiltYD68QXN3pj0y_SJpS8D7eletQwM9eTEP4qNaRG_gncdeGgrExB7, Time: 2023-12-15 14:51:01.265",
+        "-Nlhkg2Oad-LytIUpmRs": "Token: fQ_aYJG5YE7I97lOykm_NA:APA91bHQQGEd3FHvPaC_aGpIrYk9Euvyi1HikGqn1KVMUiA2jH9tJvnoHnqyWnM9Cr3hLCYhs24dMw0GdIhairiltYD68QXN3pj0y_SJpS8D7eletQwM9eTEP4qNaRG_gncdeGgrExB7, Time: 2023-12-15 14:55:29.112",
+        "-Nlhl25mEfCsQ04Y4E_e": "Token: fQ_aYJG5YE7I97lOykm_NA:APA91bHQQGEd3FHvPaC_aGpIrYk9Euvyi1HikGqn1KVMUiA2jH9tJvnoHnqyWnM9Cr3hLCYhs24dMw0GdIhairiltYD68QXN3pj0y_SJpS8D7eletQwM9eTEP4qNaRG_gncdeGgrExB7, Time: 2023-12-15 14:57:03.538",
+        "-Nlhlh35W0g_ON70QZpG": "Token: fQ_aYJG5YE7I97lOykm_NA:APA91bHQQGEd3FHvPaC_aGpIrYk9Euvyi1HikGqn1KVMUiA2jH9tJvnoHnqyWnM9Cr3hLCYhs24dMw0GdIhairiltYD68QXN3pj0y_SJpS8D7eletQwM9eTEP4qNaRG_gncdeGgrExB7, Time: 2023-12-15 14:59:55.603",
+        "-NlhlvAmvZo9GSjX8HRG": "Token: fQ_aYJG5YE7I97lOykm_NA:APA91bHQQGEd3FHvPaC_aGpIrYk9Euvyi1HikGqn1KVMUiA2jH9tJvnoHnqyWnM9Cr3hLCYhs24dMw0GdIhairiltYD68QXN3pj0y_SJpS8D7eletQwM9eTEP4qNaRG_gncdeGgrExB7, Time: 2023-12-15 15:00:53.233",
+        "-NljFJSGPaeGfwzstky5": "Token: fQ_aYJG5YE7I97lOykm_NA:APA91bHQQGEd3FHvPaC_aGpIrYk9Euvyi1HikGqn1KVMUiA2jH9tJvnoHnqyWnM9Cr3hLCYhs24dMw0GdIhairiltYD68QXN3pj0y_SJpS8D7eletQwM9eTEP4qNaRG_gncdeGgrExB7, Time: 2023-12-15 21:53:18.232",
+        "-NljRL19sZYZHvvJN3nd": "Token: fQ_aYJG5YE7I97lOykm_NA:APA91bHQQGEd3FHvPaC_aGpIrYk9Euvyi1HikGqn1KVMUiA2jH9tJvnoHnqyWnM9Cr3hLCYhs24dMw0GdIhairiltYD68QXN3pj0y_SJpS8D7eletQwM9eTEP4qNaRG_gncdeGgrExB7, Time: 2023-12-15 22:45:50.473",
+        "-NljRiL2gMwr3jnsvQrM": "Token: fQ_aYJG5YE7I97lOykm_NA:APA91bHQQGEd3FHvPaC_aGpIrYk9Euvyi1HikGqn1KVMUiA2jH9tJvnoHnqyWnM9Cr3hLCYhs24dMw0GdIhairiltYD68QXN3pj0y_SJpS8D7eletQwM9eTEP4qNaRG_gncdeGgrExB7, Time: 2023-12-15 22:47:30.044",
+        "-Nljc_2FA8uetW2Gm5Ae": "Token: fQ_aYJG5YE7I97lOykm_NA:APA91bHQQGEd3FHvPaC_aGpIrYk9Euvyi1HikGqn1KVMUiA2jH9tJvnoHnqyWnM9Cr3hLCYhs24dMw0GdIhairiltYD68QXN3pj0y_SJpS8D7eletQwM9eTEP4qNaRG_gncdeGgrExB7, Time: 2023-12-15 23:39:17.711",
+        "-NljwPUBTTvG8xX7yrU4": "Token: fQ_aYJG5YE7I97lOykm_NA:APA91bHQQGEd3FHvPaC_aGpIrYk9Euvyi1HikGqn1KVMUiA2jH9tJvnoHnqyWnM9Cr3hLCYhs24dMw0GdIhairiltYD68QXN3pj0y_SJpS8D7eletQwM9eTEP4qNaRG_gncdeGgrExB7, Time: 2023-12-16 01:05:57.257"
+      },
+      "startOfLevel": {
+        "-Nldbz6SEIs5FGcvlUHD": "Level: 1, Time: 2023-12-14 19:38:59.097",
+        "-NldcIjXRsufZoiH6k6q": "Level: 2, Time: 2023-12-14 19:40:23.583",
+        "-NldcVPuoRqWnV0w7RVj": "Level: 3, Time: 2023-12-14 19:41:15.512",
+        "-NldcXgkSiC-QGyfTYgX": "Level: 3, Time: 2023-12-14 19:41:24.797",
+        "-Nldck5g9bqfnN9SqJrB": "Level: 4, Time: 2023-12-14 19:42:19.705",
+        "-NldcvE-KYE31RCHCslf": "Level: 4, Time: 2023-12-14 19:43:05.292",
+        "-NldcwoWmtfcrWJUUGkw": "Level: 4, Time: 2023-12-14 19:43:11.789",
+        "-Nldd6f6TE2rvcrSIDDX": "Level: 5, Time: 2023-12-14 19:43:56.244",
+        "-NlddT0eu1FhcjCpHo8i": "Level: 6, Time: 2023-12-14 19:45:27.799",
+        "-NlddU4mhwnsy_iCKz3Q": "Level: 6, Time: 2023-12-14 19:45:32.153",
+        "-NlddekMbzrukQt7M0Ua": "Level: 7, Time: 2023-12-14 19:46:19.935",
+        "-NlddykED4m6D99AFy4j": "Level: 8, Time: 2023-12-14 19:47:41.846",
+        "-NlddzwVTS7EMOz_uQyf": "Level: 8, Time: 2023-12-14 19:47:46.737",
+        "-NldeIoCr6uaLgymxqcC": "Level: 9, Time: 2023-12-14 19:49:08.126",
+        "-NldeeMOuEBLXKvrtTM7": "Level: 8, Time: 2023-12-14 19:50:40.491",
+        "-Nldeja1cQvZdvow6naK": "Level: 9, Time: 2023-12-14 19:51:01.899",
+        "-Nldf74RA24h3lQ5BPG6": "Level: 10, Time: 2023-12-14 19:52:42.195",
+        "-NldfK1jhnSXvEgOJ8rg": "Level: 11, Time: 2023-12-14 19:53:35.270",
+        "-NldfLdcuMMUfNjJzPuJ": "Level: 11, Time: 2023-12-14 19:53:41.867",
+        "-Nldffd0J0Qsb8W-C8vh": "Level: 12, Time: 2023-12-14 19:55:07.844",
+        "-NldfkEo9LVON8u7N5KR": "Level: 12, Time: 2023-12-14 19:55:26.710",
+        "-NldfltBih4WUSOlDeKk": "Level: 12, Time: 2023-12-14 19:55:33.475",
+        "-NldfqHayonK_XptO-ax": "Level: 12, Time: 2023-12-14 19:55:51.486",
+        "-NldgCYlvZ4M-XEiU0GD": "Level: 13, Time: 2023-12-14 19:57:26.793",
+        "-NldgDiI3obIvPwnsvFB": "Level: 13, Time: 2023-12-14 19:57:31.531",
+        "-NldgbzKgAl04WGF9uYf": "Level: 14, Time: 2023-12-14 19:59:15.021",
+        "-NldgoRv8Xi5iJ34Yuc5": "Level: 12, Time: 2023-12-14 20:00:06.066",
+        "-Nldgpvk82WsjfkeI4VE": "Level: 15, Time: 2023-12-14 20:00:12.150",
+        "-NldhI0AEE9jxw2BiRs5": "Level: 16, Time: 2023-12-14 20:02:11.281",
+        "-Nlhjg7wMcwH3y_TFEOo": "Level: 16, Time: 2023-12-15 14:51:07.391",
+        "-NlhkBv1xVdO8EYFRRY_": "Level: 17, Time: 2023-12-15 14:53:21.665",
+        "-NlhkeXZUpG9r8amXM0t": "Level: 18, Time: 2023-12-15 14:55:22.982",
+        "-Nlhl33YhZz_CwoI_bYS": "Level: 18, Time: 2023-12-15 14:57:07.548",
+        "-NlhlFipXZQR3TdJWiXS": "Level: 19, Time: 2023-12-15 14:57:59.406",
+        "-NlhlfKcHi0SMQ3W2UVI": "Level: 20, Time: 2023-12-15 14:59:48.293",
+        "-NlhlhomSdixEkZUn1lm": "Level: 20, Time: 2023-12-15 14:59:58.719",
+        "-NlhlqDf7RY3DCFGo4SQ": "Level: 20, Time: 2023-12-15 15:00:33.143",
+        "-NlhltiBaz1ZOHqAI0f9": "Level: 20, Time: 2023-12-15 15:00:47.449",
+        "-Nlhlw1x2Farp-25x_tH": "Level: 20, Time: 2023-12-15 15:00:56.818",
+        "-NlhmShl4Ea1Chc1jjiH": "Level: 21, Time: 2023-12-15 15:03:14.724",
+        "-NlhmnM7aykdEoGylZPL": "Level: 22, Time: 2023-12-15 15:04:43.388",
+        "-NlhmvV3hjLv4tUZgSwg": "Level: 22, Time: 2023-12-15 15:05:16.876",
+        "-NlhnMbauZpXvBZfnd_h": "Level: 23, Time: 2023-12-15 15:07:12.046",
+        "-NlhnnwOAmara2P7SBMu": "Level: 20, Time: 2023-12-15 15:09:08.065",
+        "-NlhnqaL_uwEibPPIeje": "Level: 24, Time: 2023-12-15 15:09:18.762",
+        "-Nlhnvyv7p85jFgET6z4": "Level: 24, Time: 2023-12-15 15:09:40.814",
+        "-NlhoPyuFd7-ddegx7Wb": "Level: 25, Time: 2023-12-15 15:11:47.789",
+        "-NlhoSW5C0MJWpHQ4uTK": "Level: 25, Time: 2023-12-15 15:11:58.194",
+        "-Nlhour8aq1WGe4Zpjqq": "Level: 26, Time: 2023-12-15 15:13:58.389",
+        "-NlhpHgm2k-yMTpXpQ7O": "Level: 27, Time: 2023-12-15 15:15:36.030",
+        "-NlhpMPDrCK7ANDBtC0S": "Level: 27, Time: 2023-12-15 15:15:55.451",
+        "-NlhpskSzd-7qOVD1W2F": "Level: 28, Time: 2023-12-15 15:18:12.040",
+        "-NlhpyTQrEGX8xW1IGOP": "Level: 28, Time: 2023-12-15 15:18:35.463",
+        "-Nlhq-v3urQxAW5tdkVB": "Level: 28, Time: 2023-12-15 15:18:45.253",
+        "-Nlhq3mkfm6XLl_sMqTs": "Level: 28, Time: 2023-12-15 15:19:01.104",
+        "-NlhqZZFvbye6fV4fedw": "Level: 29, Time: 2023-12-15 15:21:11.248",
+        "-NlhqbrkKAq6ivVT0gMB": "Level: 29, Time: 2023-12-15 15:21:24.784",
+        "-NlhrAOuWWDF-5b-GOqU": "Level: 29, Time: 2023-12-15 15:23:50.331",
+        "-Nlhrgq3rWmYDCA0UcD9": "Level: 30, Time: 2023-12-15 15:26:07.300",
+        "-NlhrjcpbAt7YWygSDzE": "Level: 30, Time: 2023-12-15 15:26:18.732",
+        "-NlhrvCA-IbDaRW55ljm": "Level: 31, Time: 2023-12-15 15:27:06.115",
+        "-NlhsLTNiCDPTOzfuTpw": "Level: 32, Time: 2023-12-15 15:28:57.807",
+        "-NlhsNn3AGkrRm_Yf5HP": "Level: 32, Time: 2023-12-15 15:29:07.432",
+        "-NlhsSCNrpgEnUPWZoBl": "Level: 32, Time: 2023-12-15 15:29:25.501",
+        "-Nlhst7VlUm465u5FWy3": "Level: 33, Time: 2023-12-15 15:31:19.876",
+        "-NlhsvKj9jvwYqDkQ_JO": "Level: 33, Time: 2023-12-15 15:31:28.841",
+        "-NlhtKAwgiGaZgvxBBus": "Level: 34, Time: 2023-12-15 15:33:14.710",
+        "-NlhtdOCNybP13gL2pZM": "Level: 35, Time: 2023-12-15 15:34:37.480",
+        "-NlhtfiQ5UA1DrXn_HbT": "Level: 35, Time: 2023-12-15 15:34:46.996",
+        "-NlhuA7l7mefx_BX6ZAI": "Level: 36, Time: 2023-12-15 15:36:55.657",
+        "-NlhuDl14zq9aDKxfe5E": "Level: 36, Time: 2023-12-15 15:37:10.522",
+        "-NlhuFZTGQgZNe7uBiey": "Level: 36, Time: 2023-12-15 15:37:17.887",
+        "-NlhuMMa09hWULg6f-gR": "Level: 36, Time: 2023-12-15 15:37:45.736",
+        "-NlhuQrYtVRSRyuDroie": "Level: 36, Time: 2023-12-15 15:38:04.164",
+        "-NlhuSvaZpUdQh4N2h-G": "Level: 36, Time: 2023-12-15 15:38:12.628",
+        "-NlhvE_QtZxEfYPzcUI-": "Level: 37, Time: 2023-12-15 15:41:36.010",
+        "-NljFMYEXeoXRNkte51q": "Level: 38, Time: 2023-12-15 21:53:30.907",
+        "-NljFjlEg-PsmvPvTeut": "Level: 39, Time: 2023-12-15 21:55:10.107",
+        "-NljGs47n-FrCPrzr9S3": "Level: 40, Time: 2023-12-15 22:00:06.293",
+        "-NljGvfhBfClPCjsHpmj": "Level: 40, Time: 2023-12-15 22:00:21.064",
+        "-NljH0o_GdFaBQU5btkB": "Level: 40, Time: 2023-12-15 22:00:46.208",
+        "-NljH6xk0-6gkQU3NNzY": "Level: 40, Time: 2023-12-15 22:01:11.370",
+        "-NljH8tB3aiExLFNTTMb": "Level: 40, Time: 2023-12-15 22:01:19.238",
+        "-NljRMKz5oNvuE4_Stol": "Level: 40, Time: 2023-12-15 22:45:55.816",
+        "-NljRQ8Sd-ZsXC5JvivE": "Level: 40, Time: 2023-12-15 22:46:11.398",
+        "-NljRV1OE19Hq_zi6L38": "Level: 40, Time: 2023-12-15 22:46:31.427",
+        "-NljRXWpkNBUu77vyUgm": "Level: 40, Time: 2023-12-15 22:46:41.658",
+        "-NljRdcCsghJuOKsiftW": "Level: 40, Time: 2023-12-15 22:47:10.737",
+        "-NljRhVTpEAayi2PtGA1": "Level: 40, Time: 2023-12-15 22:47:26.626",
+        "-NljRlyZRqxQGZNplEyK": "Level: 40, Time: 2023-12-15 22:47:44.925",
+        "-NljRqPEwEUprZ4FSNHW": "Level: 40, Time: 2023-12-15 22:48:03.080",
+        "-NljRvxuTfh9MSvY6ite": "Level: 41, Time: 2023-12-15 22:48:25.844",
+        "-NljRxncxD-4a0hofAbF": "Level: 41, Time: 2023-12-15 22:48:33.360",
+        "-NljScbQ-BTaxFYZT464": "Level: 42, Time: 2023-12-15 22:51:28.707",
+        "-NljTPmNJzMxEs62A_cG": "Level: 43, Time: 2023-12-15 22:54:54.240",
+        "-NljUGVyd2WpEej5Eoxw": "Level: 44, Time: 2023-12-15 22:58:38.406",
+        "-NljUKi0pJ0GLqHxQIf3": "Level: 44, Time: 2023-12-15 22:58:55.625",
+        "-NljUNOTPT_wpppwTX16": "Level: 44, Time: 2023-12-15 22:59:06.552",
+        "-NljUSB_YVd0kOMZf1RU": "Level: 45, Time: 2023-12-15 22:59:26.207",
+        "-NljV8dQnS-jCH8FCeZr": "Level: 45, Time: 2023-12-15 23:02:28.277",
+        "-NljVB55NOKRps_wzFG2": "Level: 45, Time: 2023-12-15 23:02:38.298",
+        "-NljVxK8dvuYPsJYgeKw": "Level: 46, Time: 2023-12-15 23:05:59.966",
+        "-NljWLDzAEJ6Hie0dQCa": "Level: 47, Time: 2023-12-15 23:07:41.971",
+        "-NljWP4923va3xqma4hD": "Level: 47, Time: 2023-12-15 23:07:57.717",
+        "-NljZ0wPuRieV0JQBYYl": "Level: 48, Time: 2023-12-15 23:19:25.267",
+        "-NljZ5vYwEk8nDg0hC3B": "Level: 48, Time: 2023-12-15 23:19:45.692",
+        "-NljZ8KTKibtX3U-Q22H": "Level: 48, Time: 2023-12-15 23:19:55.656",
+        "-NljZDjXMSuM6aNEFLqg": "Level: 49, Time: 2023-12-15 23:20:17.803",
+        "-Nlj_0okUN3nvgkZIb_a": "Level: 50, Time: 2023-12-15 23:23:47.033",
+        "-Nlj_6ruAbrcfzFV3QHE": "Level: 50, Time: 2023-12-15 23:24:11.826",
+        "-Nlj_ND_xbhhsu7OMaQc": "Level: 51, Time: 2023-12-15 23:25:18.812",
+        "-NljaAbVte5oJPjEdTkv": "Level: 52, Time: 2023-12-15 23:28:49.303",
+        "-NljaG45ANDjOWYGPVAp": "Level: 52, Time: 2023-12-15 23:29:11.634",
+        "-NljaYiQGR43X490QEQt": "Level: 53, Time: 2023-12-15 23:30:28.007",
+        "-NljbKNSkU1wKquumE-j": "Level: 53, Time: 2023-12-15 23:33:51.402",
+        "-NljbPOY7ajlezj5zMfZ": "Level: 53, Time: 2023-12-15 23:34:11.938",
+        "-NljcDDeSwIUc7TEhPF1": "Level: 54, Time: 2023-12-15 23:37:44.233",
+        "-NljcXoxfHsV5gYin-tD": "Level: 55, Time: 2023-12-15 23:39:08.604",
+        "-NljcaLrozlBiO9YTti6": "Level: 55, Time: 2023-12-15 23:39:23.330",
+        "-NljdRecozhwDqU_Hinn": "Level: 56, Time: 2023-12-15 23:43:05.779",
+        "-NljwRezEYfl-VF3I2XI": "Level: 56, Time: 2023-12-16 01:06:06.204",
+        "-NljwZprQPheHCAr1rWt": "Level: 57, Time: 2023-12-16 01:06:39.668",
+        "-NljxBSGRZcoNGB_cHuf": "Level: 58, Time: 2023-12-16 01:09:21.934",
+        "-NljxEAZ5AXW6_s-yv_X": "Level: 58, Time: 2023-12-16 01:09:33.075",
+        "-NljxXFEdpP1aYsFYtEC": "Level: 59, Time: 2023-12-16 01:10:51.199"
+      },
+      "startSurvey": {
+        "-Nld_SUs99lHTijbAbQy": "SurveyResult: [ID: 1-26, ID: 2-1, ID: 3-4, ID: 4-0, ID: 5-0, ID: 7-6, ID: 9-0]"
+      },
+      "uuid": "V01-23-12-14–19:26-niX3SZKeGiKP4vw"
+    },
+    "V01-23-12-15–07:56-8efDunUHMoQpmh7": {
+      "appStartDate": {
+        "-NlgFsV_A12PStfsxjyV": "2023-12-15 07:56:54.228",
+        "-NlgHwImG1su6gIxhQ1v": "2023-12-15 08:05:54.077"
+      },
+      "darkPatterns": 0,
+      "initAppStartTime": {
+        "-NlgHI-5O7DgR0QQTVm9": "2023-12-15 08:03:04.980"
+      },
+      "pushToken": {
+        "-NlgHLMPro1xAVJr3ck1": "Token: fcA0eXN_qkSDHQ9kolVkZ8:APA91bHYoldA-i6t3o8FdloVf03eCm1O1qzWW64hwO5VOM2i8VINqjEJfj3KDgMGQnGGj4nggwr3XkWQGmCASp3XimDMHMAD1UOk2URhBPzgqsEPihJJMxNW6jflJFbu2bx_qejZV-pj, Time: 2023-12-15 08:03:18.767",
+        "-NlgHwGw4lnehLZJ2uMF": "Token: fcA0eXN_qkSDHQ9kolVkZ8:APA91bHYoldA-i6t3o8FdloVf03eCm1O1qzWW64hwO5VOM2i8VINqjEJfj3KDgMGQnGGj4nggwr3XkWQGmCASp3XimDMHMAD1UOk2URhBPzgqsEPihJJMxNW6jflJFbu2bx_qejZV-pj, Time: 2023-12-15 08:05:54.042"
+      },
+      "startSurvey": {
+        "-NlgHI-93xQDb2oMOM7A": "SurveyResult: [ID: 1-18, ID: 2-0, ID: 3-3, ID: 4-0, ID: 5-0, ID: 7-1, ID: 8-1, ID: 9-0]"
+      },
+      "uuid": "V01-23-12-15–07:56-8efDunUHMoQpmh7"
+    }
+  }
+}

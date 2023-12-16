@@ -18,7 +18,6 @@ class FirebaseStore {
   static const String uuid = 'uuid';
   static const String darkPatterns = 'darkPatterns';
   static const String addScreenClick = 'addScreenClick';
-  static const String paidForRemovingAdds = 'paidForRemovingAdds';
   static const String pushToken = 'pushToken';
   static const String grantedPushPermission = 'grantedPushPermission';
   static const String startOfLevel = 'startOfLevel';
@@ -36,7 +35,6 @@ class FirebaseStore {
   static const String endSurvey = 'endSurvey';
   static const String userDeleted = 'userDeleted';
   static const String completeUserData = 'completeUserData';
-  static const String ratingApp = 'rating';
   static const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
   static final Random _rnd = Random();
 
@@ -62,7 +60,7 @@ class FirebaseStore {
   }
 
   static Future<void> addFinishOfLevel(int levelNumber, bool won) async {
-    await _updateDocument(finishOfLevel, 'Level: $levelNumber, Won: $won Time: ${DateTime.now()}');
+    await _updateDocument(finishOfLevel, 'Level: $levelNumber, Won: $won, Time: ${DateTime.now()}');
   }
 
   static Future<void> addStartApp(DateTime dateTime) async {
@@ -73,14 +71,6 @@ class FirebaseStore {
     await _updateDocument(appCloseTime, dateTime.toString());
   }
 
-  static Future<void> addRating(double rating) async {
-    await _updateDocument(ratingApp, rating.toString());
-  }
-
-  static Future<void> removeAdds(bool removed) async {
-    await _updateDocument(paidForRemovingAdds, 'Removed: $removed, Time: ${DateTime.now()}');
-  }
-
   static Future<void> grantPushPermission(bool granted) async {
     await _updateDocument(grantedPushPermission, 'Granted: $granted, Time: ${DateTime.now()}');
   }
@@ -89,12 +79,8 @@ class FirebaseStore {
     await _updateDocument(pushToken, 'Token: $token, Time: ${DateTime.now()}');
   }
 
-  static Future<void> addAdvertisementTap(double x, double y) async {
-    await _updateDocument(addScreenClick, 'x: ${x.toStringAsFixed(2)}, y:${y.toStringAsFixed(2)}');
-  }
-
-  static Future<void> addNotificationTap(DateTime dateTime, [String multiplier = "2x"]) async {
-    await _updateDocument(pushClick, 'Multiplier: $multiplier, Time: $dateTime');
+  static Future<void> addNotificationTap(DateTime dateTime) async {
+    await _updateDocument(pushClick, dateTime.toString());
   }
 
   static void sendStartSurvey(List<String> jsonResult) async {

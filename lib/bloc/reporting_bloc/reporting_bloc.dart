@@ -5,20 +5,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReportingBloc extends Bloc<ReportingEvent, ReportingState> {
   ReportingBloc() : super(WaitingForReportingEvents()) {
-    on<ReportAdvertisementTapEvent>(_onReportAdvertisementTapEvent);
     on<ReportStartLevelEvent>(_onReportStartLevelEvent);
     on<ReportFinishLevelEvent>(_onReportFinishLevelEvent);
     on<ReportStartAppEvent>(_onStartAppEvent);
     on<ReportCheckHighScoreEvent>(_onCheckHighScoreEvent);
-    on<ReportPaidForRemovingAddsEvent>(_onPaidForRemovingAddsEvent);
     on<ReportCloseAppEvent>(_onCloseAppEvent);
 
     add(ReportStartAppEvent(DateTime.now()));
-  }
-
-  void _onReportAdvertisementTapEvent(
-      ReportAdvertisementTapEvent event, Emitter<ReportingState> emit) {
-    FirebaseStore.addAdvertisementTap(event.x, event.y);
   }
 
   void _onReportStartLevelEvent(ReportStartLevelEvent event, Emitter<ReportingState> emit) {
@@ -31,11 +24,6 @@ class ReportingBloc extends Bloc<ReportingEvent, ReportingState> {
 
   void _onCheckHighScoreEvent(ReportCheckHighScoreEvent event, Emitter<ReportingState> emit) {
     FirebaseStore.checkHighScore(event.time);
-  }
-
-  void _onPaidForRemovingAddsEvent(
-      ReportPaidForRemovingAddsEvent event, Emitter<ReportingState> emit) {
-    FirebaseStore.removeAdds(event.removed);
   }
 
   void _onStartAppEvent(ReportStartAppEvent event, Emitter<ReportingState> emit) {
