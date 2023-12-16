@@ -1,9 +1,13 @@
-import pandas as pd
-from datetime import datetime
 import json
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import db
+import re
+from datetime import datetime
+
+import pandas as pd
+
+
+# import firebase_admin
+# from firebase_admin import credentials
+# from firebase_admin import db
 
 
 def extract_date_time(timestamp_str):
@@ -17,47 +21,62 @@ def extract_date_time(timestamp_str):
 
 
 def load_database():
-    cred = credentials.Certificate('credentials.json')
-    firebase_admin.initialize_app(cred, {
-        'databaseURL': 'https://darkpatterns-ac762-default-rtdb.europe-west1.firebasedatabase.app'
-    })
-    ref = db.reference('/')
-    data = ref.get()
-    return data
+    return
+    # cred = credentials.Certificate('credentials.json')
+    # firebase_admin.initialize_app(cred, {
+    #     'databaseURL': 'https://darkpatterns-ac762-default-rtdb.europe-west1.firebasedatabase.app'
+    # })
+    # ref = db.reference('/')
+    # data = ref.get()
+    # return data
 
 
 # Re-processing the 'users' data with the corrected function
 processed_data = []
 
-# Path to your JSON file
-json_file_path = 'darkpatterns-ac762-default-rtdb-export.json'
 
-# Load the JSON file into a Python dictionary with the correct encoding
-with open(json_file_path, 'r', encoding='utf-8') as file:  # or use 'latin-1', 'iso-8859-1', or 'cp1252'
-    json_data = json.load(file)
+def load_json_file():
+    # Path to your JSON file
+    json_file_path = 'darkpatterns-ac762-default-rtdb-export.json'
+    # Load the JSON file into a Python dictionary with the correct encoding
+    with open(json_file_path, 'r', encoding='utf-8') as file:  # or use 'latin-1', 'iso-8859-1', or 'cp1252'
+        json_data = json.load(file)
+        return json_data
 
+
+use_database = False
 # Access the 'users' data
-users_data = json_data['users']
-
+user_data = {}
+if use_database:
+    users_data = load_database()['users']
+else:
+    users_data = load_json_file()['users']
 for user_id, user_info in users_data.items():
     row = {'userId': user_id,
            'initAppStartDate': "",
-           'initAppStartTime':  "",
-           'appStartDate':  "",
-           'appStartTime':  "",
-           'levelStart':  "",
-           'startOfLevelTime':  "",
+           'initAppStartTime': "",
+           'appStartDate': "",
+           'appStartTime': "",
+           'levelStart': "",
+           'startOfLevelTime': "",
            'levelFinish': "",
-           'finishOfLevelTime':  "",
-           'levelWon':  "",
-           'collectDailyRewardsTime':  "",
-           'checkHighscoreTime':  "",
-           'pushClick':  "",
-           'appCloseTime':  "",
-           'appCloseDate':  "",
+           'finishOfLevelTime': "",
+           'levelWon': "",
+           'collectDailyRewardsTime': "",
+           'checkHighscoreTime': "",
+           'pushClick': "",
+           'appCloseTime': "",
+           'appCloseDate': "",
            'darkPatterns': int(user_info.get('darkPatterns', 0)) if user_info.get('darkPatterns') is not None else '',
-           'startSurvey':  "",
-           'endSurvey':  "",
+           'age': "",
+           'gender': "",
+           'education': "",
+           'occupation': "",
+           'residence': "",
+           'frequencyPlaying': "",
+           'hoursPlaying': "",
+           'moneySpent': "",
+           'endSurvey': "",
            }
 
     # Extracting date and time from 'bootAppStartTime' if it exists
@@ -98,15 +117,11 @@ for user_id, user_info in users_data.items():
 
     # Processing 'startOfLevel'
     start_of_level = user_info.get('startOfLevel', None)
+    start_times = {}
     if start_of_level:
         for levels in start_of_level.values():
             level, time = levels.split(', ')
-            row['levelStart'] = ([int(i) for i in level.split() if i.isdigit()])
-            row['startOfLevelTime'] = (str(extract_date_time(time)[1]))
-            processed_data.append(row.copy())
-
-    row['levelStart'] = ""
-    row['startOfLevelTime'] = ""
+            start_times[level] = (str(extract_date_time(time)[1]))
 
     # Processing 'finishOfLevel'
     finish_of_level = user_info.get('finishOfLevel', None)
@@ -116,10 +131,26 @@ for user_id, user_info in users_data.items():
                 comma_index = levels.find(' Time:')
                 levels = levels[:comma_index] + "," + levels[comma_index:]
             level, won, time = levels.split(', ')
-            row['levelFinish'] = ([int(i) for i in level.split() if i.isdigit()])
-            row['levelWon'] = won.split(': ')[1]
-            row['finishOfLevelTime'] = str(extract_date_time(time)[1])
-            processed_data.append(row.copy())
+            if level in start_times:
+                row['levelStart'] = ([int(i) for i in level.split() if i.isdigit()])
+                row['startOfLevelTime'] = start_times[level]
+                row['levelFinish'] = ([int(i) for i in level.split() if i.isdigit()])
+                row['levelWon'] = won.split(': ')[1]
+                row['finishOfLevelTime'] = str(extract_date_time(time)[1])
+                processed_data.append(row.copy())
+                del start_times[level]
+
+    # Append remaining 'startOfLevel' times that did not have a corresponding 'finishOfLevel'
+    for level, start_time in start_times.items():
+        row['levelStart'] = ([int(i) for i in level.split() if i.isdigit()])
+        row['startOfLevelTime'] = start_time
+        row['levelFinish'] = ([int(i) for i in level.split() if i.isdigit()])
+        row['levelWon'] = "false"
+        row['finishOfLevelTime'] = ""
+        processed_data.append(row.copy())
+
+    row['levelStart'] = ""
+    row['startOfLevelTime'] = ""
     row['levelFinish'] = ""
     row['levelWon'] = ""
     row['finishOfLevelTime'] = ""
@@ -152,6 +183,26 @@ for user_id, user_info in users_data.items():
     start_survey = user_info.get('startSurvey', None)
     if start_survey:
         for start_survey_result in start_survey.values():
+            for question in start_survey_result.split('[')[1].split(']')[0].split(', '):
+                x, answer = question.split('-')
+                identifier = int(re.findall(r'\b\d{1,2}\b', x)[0])
+                if identifier == 1:
+                    row['age'] = answer
+                elif identifier == 2:
+                    row['gender'] = answer
+                elif identifier == 3:
+                    row['education'] = answer
+                elif identifier == 4:
+                    row['occupation'] = answer
+                elif identifier == 5:
+                    row['residence'] = answer
+                elif identifier == 6:
+                    row['frequencyPlaying'] = answer
+                elif identifier == 7:
+                    row['hoursPlaying'] = answer
+                elif identifier == 8:
+                    row['moneySpent'] = answer
+
             row['startSurvey'] = str(start_survey_result.split('[')[1].split(']')[0].split(', '))
             processed_data.append(row.copy())
 
