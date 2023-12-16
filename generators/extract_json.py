@@ -203,7 +203,6 @@ for user_id, user_info in users_data.items():
                 elif identifier == 8:
                     row['moneySpent'] = answer
 
-            row['startSurvey'] = str(start_survey_result.split('[')[1].split(']')[0].split(', '))
             processed_data.append(row.copy())
 
     end_survey = user_info.get('endSurvey', None)
