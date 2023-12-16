@@ -1,24 +1,9 @@
 import pandas as pd
 from datetime import datetime
 import json
-import re
-
-
-# Revised function to safely extract the last timestamp value from a nested dictionary
-def extract_last_timestamp_value_safe(nested_dict):
-    if not isinstance(nested_dict, dict) or not nested_dict:
-        return ''
-    # Get the last key in the dictionary which should correspond to the last timestamp entry
-    last_key = sorted(nested_dict.keys())[-1]
-    return nested_dict[last_key]
-
-
-def extract_levels(nested_dict):
-    if not isinstance(nested_dict, dict) or not nested_dict:
-        return ''
-    # Get the last key in the dictionary which should correspond to the last timestamp entry
-    last_key = sorted(nested_dict.keys())[-1]
-    return nested_dict[last_key]
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import db
 
 
 def extract_date_time(timestamp_str):
@@ -32,6 +17,16 @@ def extract_date_time(timestamp_str):
     except ValueError:
         # If there is a ValueError, it means the string was not properly ISO formatted
         return None, None
+
+
+def load_database():
+    cred = credentials.Certificate('credentials.json')
+    firebase_admin.initialize_app(cred, {
+        'databaseURL': 'https://darkpatterns-ac762-default-rtdb.europe-west1.firebasedatabase.app'
+    })
+    ref = db.reference('/')
+    data = ref.get()
+    return data
 
 
 # Re-processing the 'users' data with the corrected function
