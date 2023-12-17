@@ -1,13 +1,10 @@
 import json
 import re
 from datetime import datetime
-
 import pandas as pd
-
-
-# import firebase_admin
-# from firebase_admin import credentials
-# from firebase_admin import db
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import db
 
 
 def extract_date_time(timestamp_str):
@@ -21,17 +18,15 @@ def extract_date_time(timestamp_str):
 
 
 def load_database():
-    return
-    # cred = credentials.Certificate('credentials.json')
-    # firebase_admin.initialize_app(cred, {
-    #     'databaseURL': 'https://darkpatterns-ac762-default-rtdb.europe-west1.firebasedatabase.app'
-    # })
-    # ref = db.reference('/')
-    # data = ref.get()
-    # return data
+    cred = credentials.Certificate('credentials.json')
+    firebase_admin.initialize_app(cred, {
+        'databaseURL': 'https://darkpatterns-ac762-default-rtdb.europe-west1.firebasedatabase.app'
+    })
+    ref = db.reference('/')
+    data = ref.get()
+    return data
 
 
-# Re-processing the 'users' data with the corrected function
 processed_data = []
 
 
