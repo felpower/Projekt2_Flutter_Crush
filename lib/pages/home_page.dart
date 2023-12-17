@@ -90,8 +90,6 @@ class _HomePageState extends State<HomePage>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _controller.forward();
     });
-
-    loadDailyReward();
     checkForFirstTimeStart();
     checkNotification();
   }
@@ -111,6 +109,7 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     checkDarkPatterns();
+    loadDailyReward();
     DarkPatternsState darkPatternsState =
         flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context).state;
     GameBloc gameBloc = BlocProvider.of<GameBloc>(context);
