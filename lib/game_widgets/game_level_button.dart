@@ -203,7 +203,7 @@ class GameLevelButton extends StatelessWidget {
           context: context,
           builder: (BuildContext context) => AlertDialog(
                 title: const Text('Nicht genug Münzen um dieses PowerUp zu kaufen'),
-                content: const Text('Sie können Münzen durch Spielen der Levels erhalten'),
+                content: const Text('Du kannst Münzen durch Spielen der Levels erhalten'),
                 elevation: 24,
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(16))),
@@ -227,7 +227,7 @@ class GameLevelButton extends StatelessWidget {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text('Sie müssen zuerst Level ${levelNumber - 1} freischalten'),
+          title: Text('Du musst zuerst Level ${levelNumber - 1} freischalten'),
           actions: <Widget>[
             TextButton(onPressed: () => {Navigator.pop(context, 'Ok')}, child: const Text('Ok')),
           ],
@@ -239,7 +239,7 @@ class GameLevelButton extends StatelessWidget {
           builder: (BuildContext context) => coinBloc.state.amount >= 500
               ? AlertDialog(
                   title: Text('Level $levelNumber freischalten?'),
-                  content: Text('Wollen Sie level $levelNumber für $lvlPrice\$ freischalten?'),
+                  content: Text('Willst du level $levelNumber für $lvlPrice\$ freischalten?'),
                   elevation: 24,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(16))),
@@ -254,8 +254,8 @@ class GameLevelButton extends StatelessWidget {
                   ],
                 )
               : AlertDialog(
-                  title: const Text('Sie haben nicht genug Münzen um dieses Level freizuschalten'),
-                  content: const Text('Sie können Münzen durch Spielen der Levels erhalten'),
+                  title: const Text('Du hast nicht genug Münzen um dieses Level freizuschalten'),
+                  content: const Text('Du kannst Münzen durch Spielen der Levels erhalten'),
                   elevation: 24,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(16))),

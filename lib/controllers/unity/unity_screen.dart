@@ -116,7 +116,7 @@ class _UnityScreenState extends State<UnityScreen> {
                     builder: (BuildContext context) => PointerInterceptor(
                             child: AlertDialog(
                           title: const Text('Level abbrechen'),
-                          content: const Text('Sind Sie sicher, dass Sie das Level abbrechen '
+                          content: const Text('Bist du sicher, dass du das Level abbrechen '
                               'wollen?'),
                           elevation: 24,
                           shape: const RoundedRectangleBorder(
@@ -163,8 +163,8 @@ class _UnityScreenState extends State<UnityScreen> {
                 child: coins > shufflePrice
                     ? AlertDialog(
                         title: const Text('Keine Züge mehr möglich'),
-                        content: Text('Wollen Sie $shufflePrice Münzen ausgeben für einen Shuffle? '
-                            'Aktuell haben Sie $coins Münzen'),
+                        content: Text('Willst du $shufflePrice Münzen ausgeben für einen Shuffle? '
+                            'Aktuell hast du $coins Münzen'),
                         elevation: 24,
                         shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(16))),
@@ -189,8 +189,8 @@ class _UnityScreenState extends State<UnityScreen> {
                     : AlertDialog(
                         title: const Text('Keine Züge mehr möglich'),
                         content: Text(
-                            'Sie haben nicht genügend Münzen ($shufflePrice) für einen Shuffle? '
-                            'Sie haben aktuell '
+                            'Du hast nicht genügend Münzen ($shufflePrice) für einen Shuffle? '
+                            'Du hast aktuell '
                             '$coins Münzen. Das Spiel ist vorbei'),
                         elevation: 24,
                         shape: const RoundedRectangleBorder(

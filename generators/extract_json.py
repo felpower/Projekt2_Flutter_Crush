@@ -72,6 +72,16 @@ for user_id, user_info in users_data.items():
            'hoursPlaying': "",
            'moneySpent': "",
            'endSurvey': "",
+           "endsurveydate": "",
+           "endsurveytime": "",
+           "playedtilend": "",
+           "reasoncancel": "",
+           "influenced": "",
+           "influencedtime": "",
+           "influencedfrequency": "",
+           "patternrecgonition": "",
+           "patterninfluence": "",
+           "comments": "",
            }
 
     # Extracting date and time from 'bootAppStartTime' if it exists
