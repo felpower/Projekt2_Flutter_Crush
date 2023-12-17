@@ -23,6 +23,7 @@ import '../bloc/user_state_bloc/coins_bloc/coin_state.dart';
 import '../bloc/user_state_bloc/level_bloc/level_bloc.dart';
 import '../bloc/user_state_bloc/level_bloc/level_state.dart';
 import '../bloc/user_state_bloc/xp_bloc/xp_event.dart';
+import '../controllers/fortune_wheel/fortune_wheel.dart';
 import '../gamification_widgets/credit_panel.dart';
 import '../helpers/app_colors.dart';
 import 'feedback_page.dart';
@@ -364,6 +365,29 @@ class _HomePageState extends State<HomePage>
                 title: const Text('Imprint'),
                 onTap: () {
                   UrlHelper.launchURL('https://www.sba-research.org/imprint/');
+                },
+                tileColor: Colors.grey[200],
+                // Background color to make it feel like a button
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)), // Rounded corners
+              )),
+          Visibility(
+              visible: false,
+              child: ListTile(
+                leading: const Icon(Icons.token),
+                title: const Text('Fortune Wheel'),
+                onTap: () {
+                  List<int> itemList = [
+                    5,
+                    (5 * 0.5).ceil(),
+                    (5 * 0.75).ceil(),
+                    5 * 2,
+                    5 * 3,
+                    1
+                  ];
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => FortuneWheel(items: itemList),
+                    ));
                 },
                 tileColor: Colors.grey[200],
                 // Background color to make it feel like a button

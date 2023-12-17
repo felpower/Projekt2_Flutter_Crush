@@ -80,7 +80,7 @@ class _GameOverSplashState extends State<GameOverSplash> with SingleTickerProvid
         color: Colors.transparent,
         child: DoubleCurvedContainer(
           width: screenSize.width,
-          height: 150.0,
+          height: 200.0,
           outerColor: darkColor,
           innerColor: lightColor,
           child: Container(
@@ -94,6 +94,7 @@ class _GameOverSplashState extends State<GameOverSplash> with SingleTickerProvid
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    const SizedBox(height: 20),
                     Center(
                       child: Text(message,
                           style: const TextStyle(
@@ -102,7 +103,8 @@ class _GameOverSplashState extends State<GameOverSplash> with SingleTickerProvid
                           )),
                     ),
                     BlocBuilder<DarkPatternsBloc, DarkPatternsState>(builder: (context, state) {
-                      if (state is DarkPatternsActivatedState || state is DarkPatternsCompetitionState) {
+                      if (state is DarkPatternsActivatedState ||
+                          state is DarkPatternsCompetitionState) {
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -139,6 +141,7 @@ class _GameOverSplashState extends State<GameOverSplash> with SingleTickerProvid
                         );
                       }
                     }),
+                    const SizedBox(height: 20),
                   ],
                 )),
           ),
