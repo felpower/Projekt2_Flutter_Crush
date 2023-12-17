@@ -13,21 +13,20 @@ def generate_levels(num_new_levels, max_dim, min_dim, types, colors):
         y_dim = min(max(x_dim - 2, min_dim), max_dim)  # Ensure yDim is within 2 of xDim, but also within bounds
 
         # Choose between 1-4 colors randomly for the obstacleTypes
-        num_colors = random.randint(1, 4)
-        obstacle_types = random.sample(colors, num_colors)
-
+        obstacle_types = random.sample(colors, random.randint(1, 4))
+        num_obstacles = random.randint(5, 30)
         new_level = {
             "level": i,
             "type": level_type,
             "xDim": x_dim,
             "yDim": y_dim,
             "numMoves": 20 + 5 * ((i - 1) // len(types)),
-            "score1": 1200 + 1000 * ((i - 1) // len(types)),
+            "score1": 1000 + 1000 * ((i - 1) // len(types)),
             "score2": 1500 + 1000 * ((i - 1) // len(types)),
-            "score3": 1800 + 1000 * ((i - 1) // len(types)),
-            "targetScore": 1800 + 1000 * ((i - 1) // len(types)),
+            "score3": 2000 + 1000 * ((i - 1) // len(types)),
+            "targetScore": 2000 + 1000 * ((i - 1) // len(types)),
             "timeInSeconds": 60 + 10 * ((i - 1) // len(types)),
-            "numOfObstacles": 10 + 5 * ((i - 1) // len(types)),
+            "numOfObstacles": num_obstacles,
             "obstacleTypes": obstacle_types
         }
         new_levels.append(new_level)
@@ -48,5 +47,3 @@ adjusted_json_data = json.dumps({"levels": adjusted_levels}, indent=4)
 adjusted_file_path = "unityLevels_generated.json"
 with open(adjusted_file_path, "w") as file:
     file.write(adjusted_json_data)
-
-adjusted_file_path

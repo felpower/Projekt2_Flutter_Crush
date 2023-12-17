@@ -456,8 +456,8 @@ class _HomePageState extends State<HomePage>
                     Center(
                       child: Image.asset(
                         todaysType.contains('bunt')
-                            ? 'assets/images/bombs/rainbow_fish.png'
-                            : 'assets/images/bombs/fish_1.png',
+                            ? 'assets/images/bombs/jelly_bunt.png'
+                            : 'assets/images/bombs/jelly_gelb.png',
                         height: 30,
                       ),
                     ),
