@@ -465,7 +465,12 @@ class _HomePageState extends State<HomePage>
                 : Text('Heute hast du $todaysAmount $todaysType erhalten. Komm morgen wieder!'),
             actions: [
               TextButton(
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  setState(() {
+                    difference = 0;
+                  });
+                },
                 child: const Text('OK'),
               ),
             ],
