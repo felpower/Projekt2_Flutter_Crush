@@ -1,6 +1,4 @@
 // ignore_for_file: avoid_print
-import 'package:universal_html/html.dart' as html;
-
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_bloc.dart';
@@ -14,6 +12,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:universal_html/html.dart' as html;
 
 import '../bloc/bloc_provider.dart';
 import '../bloc/game_bloc.dart';
@@ -108,7 +107,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    checkDarkPatterns();
+    // checkDarkPatterns();
     loadDailyReward();
     DarkPatternsState darkPatternsState =
         flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context).state;
@@ -376,17 +375,10 @@ class _HomePageState extends State<HomePage>
                 leading: const Icon(Icons.token),
                 title: const Text('Fortune Wheel'),
                 onTap: () {
-                  List<int> itemList = [
-                    5,
-                    (5 * 0.5).ceil(),
-                    (5 * 0.75).ceil(),
-                    5 * 2,
-                    5 * 3,
-                    1
-                  ];
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => FortuneWheel(items: itemList),
-                    ));
+                  List<int> itemList = [5, (5 * 0.5).ceil(), (5 * 0.75).ceil(), 5 * 2, 5 * 3, 1];
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => FortuneWheel(items: itemList),
+                  ));
                 },
                 tileColor: Colors.grey[200],
                 // Background color to make it feel like a button
@@ -505,16 +497,21 @@ class _HomePageState extends State<HomePage>
 
   void checkForFirstTimeStart() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (prefs.getBool("isUnder18") == true) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const Under18Page()));
-    }
-    if (prefs.getString("endSurvey") != null) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const FinishedSurveyPage()));
-    }
-    if (DateTime.now().isAfter(DateTime(2023, 12, 23))) {
-      Navigator.of(context).pushNamed(
-        "/endSurvey",
-      );
+    if (!kDebugMode) {
+      if (prefs.getBool("isUnder18") == true) {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const Under18Page()));
+      }
+      var endSurvey = prefs.getString("endSurvey");
+      if (endSurvey != null) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const FinishedSurveyPage()));
+      } else if (endSurvey == null) {
+        if (DateTime.now().isAfter(DateTime(2023, 12, 23))) {
+          Navigator.of(context).pushNamed(
+            "/endSurvey",
+          );
+        }
+      }
     }
     FutureBuilder<String>(
         future: FirebaseMessagingWeb.getToken(),

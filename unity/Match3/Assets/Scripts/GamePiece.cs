@@ -37,17 +37,13 @@ namespace Match3 {
 			ClearableComponent = GetComponent<ClearablePiece>();
 		}
 
-		private void OnMouseDown() { GameGridRef.PressPiece(this); }
-
-		private void OnMouseEnter() { GameGridRef.EnterPiece(this); }
-
-		private void OnMouseUp() { GameGridRef.ReleasePiece(); }
-
 		public void Init(int x, int y, GameGrid gameGrid, PieceType type) {
 			_x = x;
 			_y = y;
 			GameGridRef = gameGrid;
 			Type = type;
+			// Attach the PieceInputHandler script
+			gameObject.AddComponent<PieceInputHandler>();
 		}
 
 

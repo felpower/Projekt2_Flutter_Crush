@@ -193,3 +193,7 @@ app.*.map.json
 /android/app/release
 
 generators/credentials.json
+
+generators/Extract Song List.py
+
+generators/folder_names.txt

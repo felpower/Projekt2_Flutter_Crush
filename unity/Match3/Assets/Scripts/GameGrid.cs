@@ -741,6 +741,10 @@ namespace Match3 {
 
 			return piecesOfType;
 		}
+		
+		public GamePiece GetPieceAt(int x, int y) {
+			return _pieces[x, y];
+		}
 
 		public List<GamePiece> GetPiecesOfColor(ColorType colorType) {
 			var piecesOfColor = new List<GamePiece>();
