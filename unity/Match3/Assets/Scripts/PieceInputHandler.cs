@@ -16,14 +16,12 @@
 
 		private void OnMouseDown()
 		{
-			print("Mouse down");
 			_startDragPosition = Input.mousePosition;
 			_gameGrid.PressPiece(_thisPiece);
 		}
 
 		private void OnMouseDrag()
 		{
-			print("Dragging");
 			_currentDragPosition = Input.mousePosition;
 			var dragVector = _currentDragPosition - _startDragPosition;
 
@@ -50,7 +48,6 @@
 
 		private void OnMouseUp()
 		{
-			print("Mouse up");
 			_gameGrid.ReleasePiece();
 		}
 	}
