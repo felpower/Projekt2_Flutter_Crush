@@ -38,6 +38,9 @@ namespace Match3 {
 
 		private GamePiece _pressedPiece;
 
+		public AudioClip swapSound; // The sound to play when pieces are swapped
+		private AudioSource _audioSource; // The AudioSource component
+
 		private float _scale;
 
 		private float _timeWhenWeNextDoSomething; //The next time we do something
@@ -52,6 +55,7 @@ namespace Match3 {
 				_piecePrefabDict.TryAdd(piecePrefabs[i].type, piecePrefabs[i].prefab);
 
 			_timeWhenWeNextDoSomething = Time.time + TimeBetweenDoingSomething;
+			_audioSource = GetComponent<AudioSource>();
 		}
 
 		private void Update() {
@@ -409,7 +413,7 @@ namespace Match3 {
 		private void SwapPieces(GamePiece piece1, GamePiece piece2) {
 			if (_gameOver) return;
 			if (!piece1.IsMovable() || !piece2.IsMovable()) return;
-
+			_audioSource.PlayOneShot(swapSound);
 			_pieces[piece1.X, piece1.Y] = piece2;
 			_pieces[piece2.X, piece2.Y] = piece1;
 

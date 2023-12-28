@@ -88,7 +88,8 @@ class HighScoreState extends State<HighScorePage> {
                 child: const Text('OK'),
                 onPressed: () {
                   setState(() {
-                    users[users.indexWhere((element) => element.isUser == true)].name = usernameController.text;
+                    users[users.indexWhere((element) => element.isUser == true)].name =
+                        usernameController.text;
                     prefs.setString('username', usernameController.text);
                   });
                   Navigator.of(context).pop();
@@ -207,6 +208,5 @@ class HighScoreState extends State<HighScorePage> {
   Future<void> setUsername(String text) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("username", text);
-
   }
 }
