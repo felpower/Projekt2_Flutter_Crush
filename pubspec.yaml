@@ -32,6 +32,7 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
+  audioplayers: ^5.2.1
   rxdart: ^0.27.7
   shared_preferences: ^2.2.2
   flutter_bloc: ^8.1.3
@@ -48,7 +49,7 @@ dependencies:
   hexcolor: ^3.0.1
   url_launcher: ^6.2.2
   device_info_plus: ^9.1.1
-  flutter_local_notifications: ^16.2.0
+  flutter_local_notifications: ^16.3.0
   permission_handler: ^11.1.0
   firebase_core: ^2.24.2
   firebase_messaging: ^14.7.9
@@ -90,6 +91,10 @@ flutter:
   uses-material-design: true
 
   assets:
+    # audio
+    - assets/audio/Background_Music.mp3
+    - assets/audio/winning_music.mp3
+    - assets/audio/losing_music.mp3
     # images
     - assets/images/background/background_new.png
     - assets/images/background/background_new2.png
