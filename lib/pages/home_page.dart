@@ -91,6 +91,7 @@ class _HomePageState extends State<HomePage>
     });
     checkForFirstTimeStart();
     checkNotification();
+    loadMusic();
   }
 
   @override
@@ -295,6 +296,8 @@ class _HomePageState extends State<HomePage>
     );
   }
 
+  bool isMusicPlaying = true;
+
   Drawer buildBurgerMenu(BuildContext context, DarkPatternsState darkPatternsState) {
     return Drawer(
       child: ListView(
@@ -384,6 +387,20 @@ class _HomePageState extends State<HomePage>
                 // Background color to make it feel like a button
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)), // Rounded corners
+              )),
+          Visibility(
+              visible: true,
+              child: SwitchListTile(
+                title: const Text('Musik'),
+                secondary:
+                    isMusicPlaying ? const Icon(Icons.music_note) : const Icon(Icons.music_off),
+                value: isMusicPlaying,
+                onChanged: (bool value) {
+                  setState(() {
+                    setMusic();
+                    isMusicPlaying = value;
+                  });
+                },
               )),
         ],
       ),
@@ -554,5 +571,15 @@ class _HomePageState extends State<HomePage>
       print("Tapped Notification");
       FirebaseStore.addNotificationTap(DateTime.now());
     }
+  }
+
+  void setMusic() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool("music", isMusicPlaying);
+  }
+
+  void loadMusic() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    isMusicPlaying = prefs.getBool("music") ?? true;
   }
 }

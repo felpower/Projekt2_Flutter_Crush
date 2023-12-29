@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/level_bloc/level_event.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,7 @@ class UnityScreen extends StatefulWidget {
 }
 
 class _UnityScreenState extends State<UnityScreen> {
-  static final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  AudioPlayer audioPlayer = AudioPlayer();
 
   late GameBloc gameBloc;
   late LevelBloc levelBloc;
@@ -55,11 +56,15 @@ class _UnityScreenState extends State<UnityScreen> {
   late bool _gameOverReceived;
   bool fabVisible = true;
 
+  bool isMusicOn = false;
+
   late StreamSubscription _gameOverSubscription;
 
   @override
   void initState() {
     super.initState();
+    audioPlayer.setSourceDeviceFile('assets/audio/background_music.mp3');
+
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
@@ -92,6 +97,7 @@ class _UnityScreenState extends State<UnityScreen> {
 
   @override
   dispose() {
+    audioPlayer.stop();
     _gameOverSubscription.cancel();
     unityWidgetController?.dispose();
     super.dispose();
@@ -131,20 +137,43 @@ class _UnityScreenState extends State<UnityScreen> {
               },
             )),
       ),
-      key: _scaffoldKey,
-      body: Card(
-          margin: const EdgeInsets.all(0),
-          clipBehavior: Clip.antiAlias,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),
+      body: Stack(
+        children: [
+          Card(
+              margin: const EdgeInsets.all(0),
+              clipBehavior: Clip.antiAlias,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              child: UnityWidget(
+                onUnityCreated: onUnityCreated,
+                onUnityMessage: onUnityMessage,
+                onUnitySceneLoaded: onUnitySceneLoaded,
+                useAndroidViewSurface: false,
+                borderRadius: const BorderRadius.all(Radius.circular(70)),
+              )),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: PointerInterceptor(
+                  child: FloatingActionButton(
+                backgroundColor: Colors.transparent,
+                elevation: 0.0,
+                onPressed: () async {
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  setState(() {
+                    isMusicOn = !isMusicOn;
+                    prefs.setBool('music', isMusicOn);
+                  });
+                  changeMusic();
+                },
+                child: isMusicOn ? const Icon(Icons.music_note) : const Icon(Icons.music_off),
+              )),
+            ),
           ),
-          child: UnityWidget(
-            onUnityCreated: onUnityCreated,
-            onUnityMessage: onUnityMessage,
-            onUnitySceneLoaded: onUnitySceneLoaded,
-            useAndroidViewSurface: false,
-            borderRadius: const BorderRadius.all(Radius.circular(70)),
-          )),
+        ],
+      ),
     );
   }
 
@@ -188,10 +217,10 @@ class _UnityScreenState extends State<UnityScreen> {
                       )
                     : AlertDialog(
                         title: const Text('Keine Züge mehr möglich'),
-                        content: Text(
-                            'Du hast nicht genügend Münzen ($shufflePrice) für einen Shuffle? '
-                            'Du hast aktuell '
-                            '$coins Münzen. Das Spiel ist vorbei'),
+                        content:
+                            Text('Du hast nicht genügend Münzen ($shufflePrice) für einen Shuffle? '
+                                'Du hast aktuell '
+                                '$coins Münzen. Das Spiel ist vorbei'),
                         elevation: 24,
                         shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(16))),
@@ -206,6 +235,7 @@ class _UnityScreenState extends State<UnityScreen> {
 
   void gameWon(message) {
     levelBloc.add(AddLevelEvent(lvl + 1));
+    playSound(true);
 
     setState(() {
       fabVisible = false;
@@ -251,6 +281,7 @@ class _UnityScreenState extends State<UnityScreen> {
     setState(() {
       fabVisible = false;
     });
+    playSound(false);
     gameOver = true;
     gameBloc.gameOver(0);
     _gameIsOverController.sink.add(false);
@@ -333,6 +364,7 @@ class _UnityScreenState extends State<UnityScreen> {
       await Future.delayed(const Duration(seconds: 1));
     }
     unityWidgetController!.postJsonMessage('GameManager', 'LoadScene', jsonString);
+    changeMusic();
   }
 
   void showGameOver(bool success) async {
@@ -368,5 +400,35 @@ class _UnityScreenState extends State<UnityScreen> {
           );
         });
     Overlay.of(context).insert(_gameSplash);
+  }
+
+  void changeMusic() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isMusicOn = prefs.getBool('music') ?? false;
+    });
+    print("Music: $isMusicOn");
+    unityWidgetController!.postMessage('GameManager', 'Music', isMusicOn.toString());
+
+    if (isMusicOn) {
+      audioPlayer.setReleaseMode(ReleaseMode.loop);
+      audioPlayer.setVolume(0.5);
+      audioPlayer.resume();
+    } else {
+      audioPlayer.pause();
+    }
+  }
+
+  void playSound(bool won) {
+    audioPlayer.stop();
+    if (isMusicOn) {
+      if (won) {
+        audioPlayer.setSourceDeviceFile('assets/audio/winning_music.mp3');
+      } else {
+        audioPlayer.setSourceDeviceFile('assets/audio/losing_music.mp3');
+      }
+      audioPlayer.setReleaseMode(ReleaseMode.stop);
+      audioPlayer.resume();
+    }
   }
 }

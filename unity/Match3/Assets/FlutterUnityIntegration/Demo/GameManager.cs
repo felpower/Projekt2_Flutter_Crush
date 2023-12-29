@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace Match3.FlutterUnityIntegration.Demo {
 	public class GameManager : MonoBehaviour {
+		public static bool isMusicOn;
 		private void Start() { gameObject.AddComponent<UnityMessageManager>(); }
 
 		public void LoadScene(string json) {
@@ -17,6 +18,12 @@ namespace Match3.FlutterUnityIntegration.Demo {
 		}
 
 		public void CheckReady(string checkReady) { UnityMessageManager.Instance.SendMessageToFlutter("checkReady"); }
+
+
+		public void Music(string music) {
+			print("Music: " + music);
+			isMusicOn = music.ToLower() == "true";
+		}
 
 		private void HandleWebFnCall(string action) {
 			switch (action) {
