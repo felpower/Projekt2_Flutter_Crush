@@ -10,7 +10,7 @@
             "score2": 1500,
             "score3": 2000,
             "targetScore": 2000,
-            "timeInSeconds": 60,
+            "timeInSeconds": 5,
             "numOfObstacles": 26,
             "obstacleTypes": [
                 "Red",
