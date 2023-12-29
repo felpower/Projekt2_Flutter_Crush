@@ -2,7 +2,6 @@
 
 import 'dart:async';
 
-import 'package:audioplayers/audioplayers.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/level_bloc/level_event.dart';
 import 'package:flutter/material.dart';
@@ -37,8 +36,6 @@ class UnityScreen extends StatefulWidget {
 }
 
 class _UnityScreenState extends State<UnityScreen> {
-  AudioPlayer audioPlayer = AudioPlayer();
-
   late GameBloc gameBloc;
   late LevelBloc levelBloc;
   late DarkPatternsBloc darkPatternsBloc;
@@ -63,8 +60,6 @@ class _UnityScreenState extends State<UnityScreen> {
   @override
   void initState() {
     super.initState();
-    audioPlayer.setSourceDeviceFile('assets/audio/background_music.mp3');
-
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
@@ -97,7 +92,6 @@ class _UnityScreenState extends State<UnityScreen> {
 
   @override
   dispose() {
-    audioPlayer.stop();
     _gameOverSubscription.cancel();
     unityWidgetController?.dispose();
     super.dispose();
@@ -235,7 +229,6 @@ class _UnityScreenState extends State<UnityScreen> {
 
   void gameWon(message) {
     levelBloc.add(AddLevelEvent(lvl + 1));
-    playSound(true);
 
     setState(() {
       fabVisible = false;
@@ -281,7 +274,6 @@ class _UnityScreenState extends State<UnityScreen> {
     setState(() {
       fabVisible = false;
     });
-    playSound(false);
     gameOver = true;
     gameBloc.gameOver(0);
     _gameIsOverController.sink.add(false);
@@ -409,26 +401,5 @@ class _UnityScreenState extends State<UnityScreen> {
     });
     print("Music: $isMusicOn");
     unityWidgetController!.postMessage('GameManager', 'Music', isMusicOn.toString());
-
-    if (isMusicOn) {
-      audioPlayer.setReleaseMode(ReleaseMode.loop);
-      audioPlayer.setVolume(0.5);
-      audioPlayer.resume();
-    } else {
-      audioPlayer.pause();
-    }
-  }
-
-  void playSound(bool won) {
-    audioPlayer.stop();
-    if (isMusicOn) {
-      if (won) {
-        audioPlayer.setSourceDeviceFile('assets/audio/winning_music.mp3');
-      } else {
-        audioPlayer.setSourceDeviceFile('assets/audio/losing_music.mp3');
-      }
-      audioPlayer.setReleaseMode(ReleaseMode.stop);
-      audioPlayer.resume();
-    }
   }
 }

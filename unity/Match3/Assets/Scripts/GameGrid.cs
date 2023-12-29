@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Match3.FlutterUnityIntegration.Demo;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Match3 {
@@ -38,8 +40,11 @@ namespace Match3 {
 
 		private GamePiece _pressedPiece;
 
+		public AudioClip winningSound; // The sound to play when the player won the game
+		public AudioClip losingSound; // The sound to play when the player lost the game
+		public AudioClip loopingSound; // The sound to play while the game is playing
 		public AudioClip swapSound; // The sound to play when pieces are swapped
-		private AudioSource _audioSource; // The AudioSource component
+		public AudioSource audioSource; // The AudioSource component
 
 		private float _scale;
 
@@ -55,7 +60,14 @@ namespace Match3 {
 				_piecePrefabDict.TryAdd(piecePrefabs[i].type, piecePrefabs[i].prefab);
 
 			_timeWhenWeNextDoSomething = Time.time + TimeBetweenDoingSomething;
-			_audioSource = GetComponent<AudioSource>();
+			audioSource = GetComponent<AudioSource>();
+
+			audioSource.clip = loopingSound;
+			audioSource.loop = true;
+			if (GameManager.isMusicOn) {
+				audioSource.volume = 0.5f;
+				audioSource.Play();
+			}
 		}
 
 		private void Update() {
@@ -413,7 +425,10 @@ namespace Match3 {
 		private void SwapPieces(GamePiece piece1, GamePiece piece2) {
 			if (_gameOver) return;
 			if (!piece1.IsMovable() || !piece2.IsMovable()) return;
-			_audioSource.PlayOneShot(swapSound);
+			if (GameManager.isMusicOn) {
+				audioSource.PlayOneShot(swapSound);
+			}
+
 			_pieces[piece1.X, piece1.Y] = piece2;
 			_pieces[piece2.X, piece2.Y] = piece1;
 
@@ -732,7 +747,14 @@ namespace Match3 {
 						ClearPiece(x, y);
 		}
 
-		public void GameOver() { _gameOver = true; }
+		public void GameOver(bool gameWon) {
+			if (GameManager.isMusicOn) {
+				audioSource.Stop();
+				audioSource.PlayOneShot(gameWon ? winningSound : losingSound);
+			}
+
+			_gameOver = true;
+		}
 
 
 		public List<GamePiece> GetPiecesOfType(PieceType type) {
@@ -745,10 +767,8 @@ namespace Match3 {
 
 			return piecesOfType;
 		}
-		
-		public GamePiece GetPieceAt(int x, int y) {
-			return _pieces[x, y];
-		}
+
+		public GamePiece GetPieceAt(int x, int y) { return _pieces[x, y]; }
 
 		public List<GamePiece> GetPiecesOfColor(ColorType colorType) {
 			var piecesOfColor = new List<GamePiece>();

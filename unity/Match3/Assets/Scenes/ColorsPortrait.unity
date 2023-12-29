@@ -1293,7 +1293,11 @@ MonoBehaviour:
   - type: 5
     prefab: {fileID: 1052986968358228, guid: 76cf5fcb1fcbe0f4a8673d6ce36da32c, type: 3}
   backgroundPrefab: {fileID: 126596, guid: 86f7705ed2388c64294da188eff4bc1b, type: 3}
+  winningSound: {fileID: 8300000, guid: bd3a9f89ee914dc44b383210524bcef6, type: 3}
+  losingSound: {fileID: 8300000, guid: 68f23143c9893f943a80c09be21beaaa, type: 3}
+  loopingSound: {fileID: 8300000, guid: ebebbd50f4cc1d2458cd2165a1aa9e81, type: 3}
   swapSound: {fileID: 8300000, guid: 22f04b358b576204fba33e0db525d908, type: 3}
+  audioSource: {fileID: 1597584113}
 --- !u!4 &1597584112
 Transform:
   m_ObjectHideFlags: 0
@@ -1434,6 +1438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25e2e19e6317942ae86eed73cec6b312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameGrid: {fileID: 1597584111}
 --- !u!4 &1786333021
 Transform:
   m_ObjectHideFlags: 0

@@ -4,8 +4,11 @@ using UnityEngine.SceneManagement;
 
 namespace Match3.FlutterUnityIntegration.Demo {
 	public class GameManager : MonoBehaviour {
-		public static bool isMusicOn;
-		private void Start() { gameObject.AddComponent<UnityMessageManager>(); }
+		public static bool isMusicOn = true;
+		public GameGrid gameGrid; // Reference to the GameGrid script
+
+		private void Start() { gameObject.AddComponent<UnityMessageManager>(); gameGrid = FindObjectOfType<GameGrid>();
+		}
 
 		public void LoadScene(string json) {
 			var sceneInfo = SceneInfo.CreateFromJson(json);
@@ -23,6 +26,11 @@ namespace Match3.FlutterUnityIntegration.Demo {
 		public void Music(string music) {
 			print("Music: " + music);
 			isMusicOn = music.ToLower() == "true";
+			if (isMusicOn) {
+				gameGrid.audioSource.Play(); // Access the AudioSource from the GameGrid script
+			} else {
+				gameGrid.audioSource.Stop(); // Access the AudioSource from the GameGrid script
+			}
 		}
 
 		private void HandleWebFnCall(string action) {

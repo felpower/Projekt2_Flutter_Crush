@@ -54,13 +54,13 @@ namespace Match3 {
 		}
 
 		protected void GameWin() {
-			gameGrid.GameOver();
+			gameGrid.GameOver(true);
 			_didWin = true;
 			StartCoroutine(WaitForGridFill());
 		}
 
 		protected void GameLose() {
-			gameGrid.GameOver();
+			gameGrid.GameOver(false);
 			_didWin = false;
 			StartCoroutine(WaitForGridFill());
 		}
