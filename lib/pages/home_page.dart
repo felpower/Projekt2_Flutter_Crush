@@ -1,4 +1,5 @@
 // ignore_for_file: avoid_print
+import 'package:audioplayers/audioplayers.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_bloc.dart';
@@ -92,15 +93,18 @@ class _HomePageState extends State<HomePage>
     checkForFirstTimeStart();
     checkNotification();
     loadMusic();
+    playMusic();
   }
 
   @override
   void didChangeDependencies() {
+    print("didChangeDependencies");
     super.didChangeDependencies();
   }
 
   @override
   void dispose() {
+    audioPlayer.stop();
     _controller.dispose();
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
@@ -266,6 +270,7 @@ class _HomePageState extends State<HomePage>
                                                     : AppColors.getColorLevel(levelNumber + 1),
                                                 buntJelly: buntJelly,
                                                 stripeJelly: stripeJelly,
+                                                audioPlayer: audioPlayer,
                                               );
                                             }),
                                           );
@@ -296,7 +301,7 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  bool isMusicPlaying = true;
+  bool isMusicOn = true;
 
   Drawer buildBurgerMenu(BuildContext context, DarkPatternsState darkPatternsState) {
     return Drawer(
@@ -392,13 +397,12 @@ class _HomePageState extends State<HomePage>
               visible: true,
               child: SwitchListTile(
                 title: const Text('Musik'),
-                secondary:
-                    isMusicPlaying ? const Icon(Icons.music_note) : const Icon(Icons.music_off),
-                value: isMusicPlaying,
+                secondary: isMusicOn ? const Icon(Icons.music_note) : const Icon(Icons.music_off),
+                value: isMusicOn,
                 onChanged: (bool value) {
                   setState(() {
+                    isMusicOn = value;
                     setMusic();
-                    isMusicPlaying = value;
                   });
                 },
               )),
@@ -575,11 +579,31 @@ class _HomePageState extends State<HomePage>
 
   void setMusic() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool("music", isMusicPlaying);
+    prefs.setBool("music", isMusicOn);
+    playMusic();
   }
+
+  AudioPlayer audioPlayer = AudioPlayer();
 
   void loadMusic() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    isMusicPlaying = prefs.getBool("music") ?? true;
+    isMusicOn = prefs.getBool("music") ?? true;
+  }
+
+  void playMusic() {
+    print("playMusic $isMusicOn");
+    // if (isMusicOn) {
+    //   audioPlayer.setReleaseMode(ReleaseMode.loop);
+    //   audioPlayer.setVolume(0.5);
+    //   Source source = AssetSource('audio/Background_Music.mp3');
+    //   audioPlayer.setSource(source);
+    //   try {
+    //     audioPlayer.resume();
+    //   } catch (e) {
+    //     print(e);
+    //   }
+    // } else {
+    //   audioPlayer.stop();
+    // }
   }
 }
