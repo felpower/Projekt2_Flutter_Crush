@@ -1,3 +1,4 @@
+import 'package:audioplayers/src/audioplayer.dart';
 import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_event.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/coins_bloc/coin_event.dart';
@@ -24,7 +25,8 @@ class GameLevelButton extends StatelessWidget {
       this.borderRadius = 50.0,
       required this.color,
       required this.buntJelly,
-      required this.stripeJelly})
+      required this.stripeJelly,
+      required this.audioPlayer})
       : super(key: key);
 
   final int levelNumber;
@@ -34,6 +36,8 @@ class GameLevelButton extends StatelessWidget {
   final Color color;
   final int buntJelly;
   final int stripeJelly;
+
+  final AudioPlayer audioPlayer;
   final lvlPrice = 500;
   static const tntPrice = 100;
   static const minePrice = 200;
@@ -110,7 +114,7 @@ class GameLevelButton extends StatelessWidget {
   Future<void> openGame(ReportingBloc reportingBloc, GameBloc gameBloc, SharedPreferences prefs,
       BuildContext context) async {
     reportingBloc.add(ReportStartLevelEvent(levelNumber));
-
+    audioPlayer.stop();
     Navigator.push(
         context,
         MaterialPageRoute(
