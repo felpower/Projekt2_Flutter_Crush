@@ -39,50 +39,54 @@ def load_json_file():
         return json_data
 
 
-use_database = False
+use_database = True
 # Access the 'users' data
 user_data = {}
 if use_database:
     users_data = load_database()['users']
 else:
     users_data = load_json_file()['users']
+
+userCounter = 1
 for user_id, user_info in users_data.items():
-    row = {'userId': user_id,
-           'initAppStartDate': "",
-           'initAppStartTime': "",
-           'appStartDate': "",
-           'appStartTime': "",
-           'levelStart': "",
-           'startOfLevelTime': "",
-           'levelFinish': "",
-           'finishOfLevelTime': "",
-           'levelWon': "",
-           'collectDailyRewardsTime': "",
-           'checkHighscoreTime': "",
-           'pushClick': "",
-           'appCloseTime': "",
-           'appCloseDate': "",
-           'darkPatterns': int(user_info.get('darkPatterns', 0)) if user_info.get('darkPatterns') is not None else '',
-           'age': "",
-           'gender': "",
-           'education': "",
-           'occupation': "",
-           'residence': "",
-           'frequencyPlaying': "",
-           'hoursPlaying': "",
-           'moneySpent': "",
-           'endSurvey': "",
-           "endsurveydate": "",
-           "endsurveytime": "",
-           "playedtilend": "",
-           "reasoncancel": "",
-           "influenced": "",
-           "influencedtime": "",
-           "influencedfrequency": "",
-           "patternrecgonition": "",
-           "patterninfluence": "",
-           "comments": "",
-           }
+    row = {
+        'counter': userCounter,
+        'userId': user_id,
+        'initAppStartDate': "",
+        'initAppStartTime': "",
+        'appStartDate': "",
+        'appStartTime': "",
+        'levelStart': "",
+        'startOfLevelTime': "",
+        'levelFinish': "",
+        'finishOfLevelTime': "",
+        'levelWon': "",
+        'collectDailyRewardsTime': "",
+        'checkHighscoreTime': "",
+        'pushClick': "",
+        'appCloseTime': "",
+        'appCloseDate': "",
+        'darkPatterns': int(user_info.get('darkPatterns', 0)) if user_info.get('darkPatterns') is not None else '',
+        'age': "",
+        'gender': "",
+        'education': "",
+        'occupation': "",
+        'residence': "",
+        'frequencyPlaying': "",
+        'hoursPlaying': "",
+        'moneySpent': "",
+        'endSurvey': "",
+        "endsurveydate": "",
+        "endsurveytime": "",
+        "playedtilend": "",
+        "reasoncancel": "",
+        "influenced": "",
+        "influencedtime": "",
+        "influencedfrequency": "",
+        "patternrecgonition": "",
+        "patterninfluence": "",
+        "comments": "",
+    }
 
     # Extracting date and time from 'bootAppStartTime' if it exists
     init_start_time = user_info.get('initAppStartTime', None)
@@ -137,9 +141,9 @@ for user_id, user_info in users_data.items():
                 levels = levels[:comma_index] + "," + levels[comma_index:]
             level, won, time = levels.split(', ')
             if level in start_times:
-                row['levelStart'] = ([int(i) for i in level.split() if i.isdigit()])
+                row['levelStart'] = int(''.join(filter(str.isdigit, level)))
                 row['startOfLevelTime'] = start_times[level]
-                row['levelFinish'] = ([int(i) for i in level.split() if i.isdigit()])
+                row['levelFinish'] = int(''.join(filter(str.isdigit, level)))
                 row['levelWon'] = won.split(': ')[1]
                 row['finishOfLevelTime'] = str(extract_date_time(time)[1])
                 processed_data.append(row.copy())
@@ -147,9 +151,9 @@ for user_id, user_info in users_data.items():
 
     # Append remaining 'startOfLevel' times that did not have a corresponding 'finishOfLevel'
     for level, start_time in start_times.items():
-        row['levelStart'] = ([int(i) for i in level.split() if i.isdigit()])
+        row['levelStart'] = int(''.join(filter(str.isdigit, level)))
         row['startOfLevelTime'] = start_time
-        row['levelFinish'] = ([int(i) for i in level.split() if i.isdigit()])
+        row['levelFinish'] = int(''.join(filter(str.isdigit, level)))
         row['levelWon'] = "false"
         row['finishOfLevelTime'] = ""
         processed_data.append(row.copy())
@@ -216,6 +220,7 @@ for user_id, user_info in users_data.items():
         for end_survey_result in end_survey.values():
             row['endSurvey'] = str(end_survey_result.split('[')[1].split(']')[0].split(', '))
             processed_data.append(row.copy())
+    userCounter += 1
     processed_data.append({})
 
 # Converting the processed data into a DataFrame
@@ -224,4 +229,4 @@ processed_df.head()
 excel_file_path = 'dark_patterns_data.xlsx'
 
 # Save the DataFrame as an Excel file
-processed_df.to_excel(excel_file_path, index=False)
+processed_df.to_excel(excel_file_path, index=False, freeze_panes=(1, 1))
