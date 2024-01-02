@@ -1,0 +1,22 @@
+name: Scheduled Job
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Run script
+      run: |
+        cd generators
+        python notification_cron.py
+        echo "Running scheduled task"
+        # Add commands to run your script here
+        # For example, if you have a Python script:
+        # python your-script.py
