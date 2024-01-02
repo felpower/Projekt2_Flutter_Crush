@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    // checkDarkPatterns();
+    checkDarkPatterns();
     loadDailyReward();
     DarkPatternsState darkPatternsState =
         flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context).state;
