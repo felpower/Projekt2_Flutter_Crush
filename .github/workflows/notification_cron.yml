@@ -1,6 +1,8 @@
 name: Scheduled Job
 
 on:
+  schedule:
+    - cron: '0 0 18 ? * * *'  # Run every minute
   workflow_dispatch:  # Manual trigger
 
 jobs:
