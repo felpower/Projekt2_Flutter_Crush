@@ -1,9 +1,5 @@
-# The Cloud Functions for Firebase SDK to set up triggers and logging.
-from firebase_functions import scheduler_fn
-
-# The Firebase Admin SDK to delete users.
 import firebase_admin
-from firebase_admin import auth, messaging, credentials
+from firebase_admin import messaging, credentials
 
 cred = credentials.Certificate('credentials.json')
 firebase_admin.initialize_app(cred)
