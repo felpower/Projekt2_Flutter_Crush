@@ -144,7 +144,7 @@ for user_id, user_info in users_data.items():
                 row['levelStart'] = int(''.join(filter(str.isdigit, level)))
                 row['startOfLevelTime'] = start_times[level]
                 row['levelFinish'] = int(''.join(filter(str.isdigit, level)))
-                row['levelWon'] = won.split(': ')[1]
+                row['levelWon'] = 1 if won.split(': ')[1].lower() == 'true' else 0
                 row['finishOfLevelTime'] = str(extract_date_time(time)[1])
                 processed_data.append(row.copy())
                 del start_times[level]
@@ -154,7 +154,7 @@ for user_id, user_info in users_data.items():
         row['levelStart'] = int(''.join(filter(str.isdigit, level)))
         row['startOfLevelTime'] = start_time
         row['levelFinish'] = int(''.join(filter(str.isdigit, level)))
-        row['levelWon'] = "false"
+        row['levelWon'] = 0
         row['finishOfLevelTime'] = ""
         processed_data.append(row.copy())
 
