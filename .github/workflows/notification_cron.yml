@@ -2,21 +2,22 @@ name: Scheduled Job
 
 on:
   schedule:
-    - cron: '*/1 * * * *'
+    - cron: '* * * * *'  # Run every minute
 
 jobs:
   run-script:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Run script
-      run: |
-        cd generators
-        python notification_cron.py
-        echo "Running scheduled task"
-        # Add commands to run your script here
-        # For example, if you have a Python script:
-        # python your-script.py
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Run script
+        run: |
+          cd generators
+          python notification_cron.py
