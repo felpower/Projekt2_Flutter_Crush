@@ -328,22 +328,15 @@ class _UnityScreenState extends State<UnityScreen> {
       }
     }
 
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     String type = jsonString['type'];
     jsonString['powerUp'] = powerUp;
     while (unityWidgetController == null) {
       print("Waiting for unityWidgetController");
     }
-    if (width > height) {
-      print("Changing level to: $type Landscape");
-      jsonString['orientation'] = "Landscape";
-      postMessage(jsonString);
-    } else {
-      print("Changing level to: $type Portrait");
-      jsonString['orientation'] = "Portrait";
-      postMessage(jsonString);
-    }
+
+    print("Changing level to: $type Portrait");
+    jsonString['orientation'] = "Portrait";
+    postMessage(jsonString);
   }
 
   void postMessage(Map<String, dynamic> jsonString) async {
