@@ -1,8 +1,9 @@
 import json
 import re
 from datetime import datetime
-import pandas as pd
+
 import firebase_admin
+import pandas as pd
 from firebase_admin import credentials
 from firebase_admin import db
 
@@ -83,8 +84,11 @@ for user_id, user_info in users_data.items():
         "influenced": "",
         "influencedtime": "",
         "influencedfrequency": "",
-        "patternrecgonition": "",
         "patterninfluence": "",
+        "pushreceived": "",
+        "pushfrequency": "",
+        "pushtimes": "",
+        "pushbettertimes": "",
         "comments": "",
     }
 
@@ -205,20 +209,43 @@ for user_id, user_info in users_data.items():
                     row['occupation'] = answer
                 elif identifier == 5:
                     row['residence'] = answer
-                elif identifier == 6:
-                    row['frequencyPlaying'] = answer
                 elif identifier == 7:
-                    row['hoursPlaying'] = answer
+                    row['frequencyPlaying'] = answer
                 elif identifier == 8:
+                    row['hoursPlaying'] = answer
+                elif identifier == 9:
                     row['moneySpent'] = answer
 
             processed_data.append(row.copy())
 
     end_survey = user_info.get('endSurvey', None)
-
     if end_survey:
         for end_survey_result in end_survey.values():
-            row['endSurvey'] = str(end_survey_result.split('[')[1].split(']')[0].split(', '))
+            for question in end_survey_result.split('[')[1].split(']')[0].split(', '):
+                x, answer = question.split('-')
+                identifier = int(re.findall(r'\b\d{1,2}\b', x)[0])
+                if identifier == 1:
+                    row['playedtilend'] = answer
+                elif identifier == 2:
+                    row['reasoncancel'] = answer
+                elif identifier == 3:
+                    row['influenced'] = answer
+                elif identifier == 5:
+                    row['influencedtime'] = answer
+                elif identifier == 6:
+                    row['influencedfrequency'] = answer
+                elif identifier == 7:
+                    row['patterninfluence'] = answer
+                elif identifier == 8:
+                    row['pushreceived'] = answer
+                elif identifier == 9:
+                    row['pushfrequency'] = answer
+                elif identifier == 10:
+                    row['pushtimes'] = answer
+                elif identifier == 11:
+                    row['pushbettertimes'] = answer
+                elif identifier == 12:
+                    row['comments'] = answer
             processed_data.append(row.copy())
     userCounter += 1
     processed_data.append({})
