@@ -45,7 +45,7 @@ ipconfig check for IP4 address
 
 On mobile go to: 192.168.0.80:8080
 
-On PC go to 
+On PC go to
 chrome://inspect/#devices
 
 ## Test Notifications
@@ -56,6 +56,7 @@ Step 1: https://www.googleapis.com/auth/firebase.messaging
 Step 2: https://fcm.googleapis.com/v1/projects/flutter-crush-4ece9/messages:send
 Step 3: Send Post requests
 
+```json
 {
     "message":{
         "token":"czm7cFL9Fr8taHBHNYVzIb:APA91bHYq5YxDbrvxvdX-E-uPHxGcLCMEXFn6b6jHzey4Tv2C1azb0FiDNOeOH2qC6Yfjz1MNQKLpXoHNelaVC5IALS-5yXfk68OV3b23BufYIyarrAvXzRZeeqC2BzJ03fK51tZiDGs",
@@ -71,12 +72,31 @@ Step 3: Send Post requests
         }
     }
 }
+```
+
+```json
+{
+  "message": {
+    "token": "eygV6UarhggjAacnuAkilW:APA91bF6e7AR2DJ4c8CEj7cDc6cB-PIDCSbqdvDxQk9riJ3jC_IbxmUCryPG1DTy0wmoBxvktXCXmJNoG5TBmHEYzOWi45G8eoOwQV5u-z_AKxNzCixhBs5yjJ0Im2_lWQxtsPdp8v5b",
+    "data": {
+      "title": "Test",
+      "body": "Test",
+      "site": "https://flutter-crush-4ece9.web.app/",
+      "click_action": "FLUTTER_NOTIFICATION_CLICK",
+      "id": "1",
+      "status": "done"
+    }
+  }
+}
+```
 
 ## Fixes for threading issues in WebGL
+
 https://forum.unity.com/threads/async-await-and-webgl-builds.472994/page-2#post-6218307
 https://github.com/VolodymyrBS/WebGLThreadingPatcher
 https://github.com/Cysharp/UniTask
 
 ###
+
 Dart Data Class
 Flutter Snippets

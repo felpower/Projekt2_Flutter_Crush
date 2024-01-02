@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_bloc.dart';
 import '../bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
-import '../services/firebase_messaging.dart';
 
 class DeviceToken extends StatefulWidget {
   const DeviceToken({Key? key}) : super(key: key);
@@ -27,58 +24,6 @@ class _DeviceTokenState extends State<DeviceToken> {
           title: const Center(child: Text('Instruktionen zum Spiel')),
         ),
         body: ListView(padding: const EdgeInsets.all(20), children: [
-          Visibility(
-            visible: false,
-            child: FutureBuilder<String>(
-                future: FirebaseMessagingWeb.getToken(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData && snapshot.connectionState == ConnectionState.done) {
-                    text = snapshot.data!;
-                    return SelectableText(snapshot.data!);
-                  }
-                  return const CircularProgressIndicator();
-                }),
-          ),
-          Visibility(
-            visible: false,
-            child: ElevatedButton(
-              child: const Text('Copy'),
-              onPressed: () {
-                Clipboard.setData(ClipboardData(text: text)).then((result) {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text('Device Token copied to ClipBoard successfully'),
-                    duration: Duration(seconds: 1),
-                  ));
-                });
-              },
-            ),
-          ),
-          Visibility(
-            visible: false,
-            child: ElevatedButton(
-              child: const Text('Token not showing, reload page'),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
-          Visibility(
-            visible: false,
-            child: ElevatedButton(
-                child: const Text('Check Push Permission'),
-                onPressed: () {
-                  getNotification();
-                  if (darkPatternsState is DarkPatternsActivatedState ||
-                      darkPatternsState is DarkPatternsAppointmentState) {
-                    FirebaseMessagingWeb.requestPermission();
-                  }
-                }),
-          ),
-          Visibility(
-            visible: false,
-            child: TextField(
-                controller: authorizationStatus, textAlign: TextAlign.center, readOnly: true),
-          ),
           const Text('''1.	Spielbrett und Jellies: ''',
               style: TextStyle(fontWeight: FontWeight.bold)),
           const Text(
@@ -156,10 +101,5 @@ Nutze Booster bzw. Sonderjellies, um schwierige Level zu meistern. Diese können
                 Navigator.pop(context);
               }),
         ]));
-  }
-
-  Future<void> getNotification() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    authorizationStatus.text = (prefs.getString('notificationSettings') ?? 'notSet');
   }
 }
