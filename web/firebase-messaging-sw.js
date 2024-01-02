@@ -26,6 +26,7 @@ self.addEventListener('message', function(event) {
 messaging.onBackgroundMessage(function(payload) {
     console.log('Received background message ', payload);
     if (darkPatternsValue != 1) {
+        console.log('Dark patterns disabled');
         return;
     }
 
