@@ -15,30 +15,19 @@ firebase.initializeApp(firebaseConfig);
 
 const messaging = firebase.messaging();
 
-let lastNotificationId = null;
-
-let darkPatternsRandomValue = 0;
+let darkPatternsValue = 0;
 
 self.addEventListener('message', function(event){
   if (event.data && event.data.type === 'SET_DARK_PATTERNS_VALUE') {
-    darkPatternsRandomValue = event.data.value;
-    console.log('receiveDarkPatternsValue Dark Patterns Value: ', darkPatternsRandomValue);
+    darkPatternsValue = event.data.value;
   }
 });
 
 messaging.onBackgroundMessage(function(payload) {
     console.log('Received background message ', payload);
-    if(darkPatternsRandomValue != 1){
+    if(darkPatternsValue != 1){
       return;
     }
-    const currentNotificationId = payload.data['google.c.a.c_id'];
-
-    if (lastNotificationId === currentNotificationId) {
-        console.log('Duplicate notification, not displaying.');
-        return;
-    }
-
-    lastNotificationId = currentNotificationId;
 
     const notificationTitle = payload.notification.title;
     const notificationOptions = {
@@ -51,8 +40,6 @@ messaging.onBackgroundMessage(function(payload) {
 self.addEventListener('notificationclick', function(event) {
     console.log('Notification clicked ', event);
     event.notification.close();
-
-   // Example: navigate to a specific URL on notification click
     event.waitUntil(
         clients.openWindow('/?source=notification')
     );
