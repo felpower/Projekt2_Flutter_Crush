@@ -1,37 +1,29 @@
 <html>
 <head>
     <base href="/">
-
     <meta charset="UTF-8">
     <meta content="IE=Edge" http-equiv="X-UA-Compatible">
     <meta content="A new Flutter project." name="description">
-
     <!-- iOS meta tags & icons -->
     <meta content="yes" name="apple-mobile-web-app-capable">
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <meta content="JellyFun" name="apple-mobile-web-app-title">
     <link href="icons/Icon-192.png" rel="apple-touch-icon">
     <style>
-  body {
-    background-color: #FFFFFF; /* White background */
-    color: #000000; /* Black text color */
-  }
+         body {
+         background-color: #FFFFFF; /* White background */
+         color: #000000; /* Black text color */
+         }
 
 
     </style>
     <!-- Favicon -->
     <link href="favicon.png" rel="icon" type="image/png"/>
-
     <title>JellyFun</title>
     <link href="manifest.json" rel="manifest">
     <script>
-    // The value below is injected by flutter build, do not touch.
-    var serviceWorkerVersion = null;
-
-
-
-
-
+         // The value below is injected by flutter build, do not touch.
+         var serviceWorkerVersion = null;
 
     </script>
     <!-- This script adds the flutter initialization JS code -->
@@ -39,19 +31,44 @@
 </head>
 <body>
 <script>
-    window.addEventListener('load', function(ev) {
-      // Download main.dart.js
-      _flutter.loader.loadEntrypoint({
-        serviceWorker: {
-          serviceWorkerVersion: serviceWorkerVersion,
-        },
-        onEntrypointLoaded: function(engineInitializer) {
-          engineInitializer.initializeEngine().then(function(appRunner) {
-            appRunner.runApp();
-          });
-        }
-      });
-    });
+         window.addEventListener('load', function(ev) {
+           // Download main.dart.js
+           _flutter.loader.loadEntrypoint({
+             serviceWorker: {
+               serviceWorkerVersion: serviceWorkerVersion,
+             },
+             onEntrypointLoaded: function(engineInitializer) {
+               engineInitializer.initializeEngine().then(function(appRunner) {
+                 appRunner.runApp();
+               });
+             }
+           });
+         });
+
+
+
+</script>
+<script>
+         if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+              navigator.serviceWorker.register('/firebase-messaging-sw.js');
+              var serviceWorkerUrl = 'flutter_service_worker.js?v=' + serviceWorkerVersion;
+            });
+         }
+
+
+
+</script>
+<script>
+         function clearCookies() {
+         var cookies = document.cookie.split(";");
+         for (var i = 0; i < cookies.length; i++) {
+             var cookie = cookies[i];
+             var eqPos = cookie.indexOf("=");
+             var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+             document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+         }
+         }
 
 
 
@@ -59,41 +76,18 @@
 
 </script>
 <script>
-       if ('serviceWorker' in navigator) {
-          window.addEventListener('load', function () {
-            navigator.serviceWorker.register('/firebase-messaging-sw.js');
-          });
-      }
+         function setupBeforeUnloadListener() {
+           window.addEventListener("beforeunload", (event) => {
+             event.preventDefault();
+             handleBeforeUnload(); // This will call the Dart function
+             return null;
+           });
+         }
 
 
 
-
-</script>
-<script>
-    function clearCookies() {
-    var cookies = document.cookie.split(";");
-    for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i];
-        var eqPos = cookie.indexOf("=");
-        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-    }
-}
 
 
 </script>
-<script>
-  function setupBeforeUnloadListener() {
-    window.addEventListener("beforeunload", (event) => {
-      event.preventDefault();
-      handleBeforeUnload(); // This will call the Dart function
-      return null;
-    });
-  }
-
-
-</script>
-
-
 </body>
 </html>
