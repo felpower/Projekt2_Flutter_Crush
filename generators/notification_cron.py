@@ -34,52 +34,37 @@ for user_id, user_info in users_data.items():
 			tokens.append({last_token: dark_patterns})
 
 
+def send_message(key):
+	message = messaging.Message(
+		token=key,
+		data={
+			"title": "JellyFun",
+			"body": "Hallo! Hast du heute schon gespielt?",
+			"site": "https://felpower.github.io/",
+			"click_action": "FLUTTER_NOTIFICATION_CLICK",
+			"id": "1",
+			"status": "done"
+		}
+	)
+	response = messaging.send(message)
+	print(key)
+	print('Successfully sent message:', response)
+
+
 def send_notification():
 	for token in tokens:
 		try:
 			key, value = list(token.items())[0]
 			if value > 0:
-				message = messaging.Message(
-					token=key,
-					data={
-						"title": "JellyFun",
-						"body": "Hallo! Hast du heute schon gespielt?",
-						"site": "https://felpower.github.io/",
-						"click_action": "FLUTTER_NOTIFICATION_CLICK",
-						"id": "1",
-						"status": "done"
-					}
-				)
-
-				# Send a message to the devices subscribed to the provided topic.
-
-				response = messaging.send(message)
-				print(token)
-
-				print('Successfully sent message:', response)
+				send_message(key)
 		except Exception as e:
 			print('Failed to send message:', e)
 
 
 def send_single_notification():
-	token = "cs2QAWmYyfXc2kI0OJhhg6:APA91bHoDMlytVEyjnqjATnZMc89ElzqGPkJ5PDkbRfPJm3lFp8nsHrru2rH87kOykOAKqy2pl-pTNY2mZjFr-vqfbIIUOv68vYwUB1m_oPAvP8Q1Lsx9Ps8msYCbshHKQ-E6YwJ4qz0"
+	token = "fws4tl0irl1dKMnaQtxrDO:APA91bGHQrnml-7baJiYf6yV85STGnyiaHFok_1xM7RtCnsgPKu_6c9FWQddyvRivcpppUEbrscYDCoJD7qEMcxaF-xl_CEGMr3FOqxWvKLB1xR-_HN5qmGMqDtMwzrnW9reJ4m_JWrj"
 	try:
-		message = messaging.Message(
-			token=token,
-			data={
-				"title": "JellyFun",
-				"body": "Hallo! Hast du heute schon gespielt?",
-				"site": "https://felpower.github.io/",
-				"click_action": "FLUTTER_NOTIFICATION_CLICK",
-				"id": "1",
-				"status": "done"
-			}
-		)
-
-		# Send a message to the devices subscribed to the provided topic.
-		response = messaging.send(message)
-		print(token)
-		print('Successfully sent message:', response)
+		send_message(token)
 	except Exception as e:
 		print('Failed to send message:', e)
 

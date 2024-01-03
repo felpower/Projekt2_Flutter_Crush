@@ -625,6 +625,7 @@ class _HomePageState extends State<HomePage>
     if (currentUrl.queryParameters['source'] == 'notification') {
       print("Tapped Notification");
       FirebaseStore.addNotificationTap(DateTime.now());
+      Navigator.of(context).pushReplacementNamed('/');
     }
   }
 
