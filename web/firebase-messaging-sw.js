@@ -17,18 +17,8 @@ const messaging = firebase.messaging();
 
 let darkPatternsValue = 0;
 
-self.addEventListener('message', function(event) {
-    if (event.data && event.data.type === 'SET_DARK_PATTERNS_VALUE') {
-        darkPatternsValue = event.data.value;
-    }
-});
-
 messaging.onBackgroundMessage(function(payload) {
     console.log('Received background message ', payload);
-    if (darkPatternsValue != 1) {
-        console.log('Dark patterns disabled');
-        return;
-    }
 
     const notificationTitle = payload.data.title;
     const notificationOptions = {
