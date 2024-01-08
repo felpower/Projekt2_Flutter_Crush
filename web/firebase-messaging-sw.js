@@ -1,5 +1,5 @@
 importScripts('https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js');
-importScripts('https://www.gstatic.com/firebasejs/10.7.1/firebase-messaging-compat.js');
+importScripts('/firebase-messaging-custom.js');
 
 const firebaseConfig = {
     apiKey: "AIzaSyCcBYFUJbTyRWUjy6dhLbLLEj_lwhqnsh4",
@@ -14,8 +14,6 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const messaging = firebase.messaging();
-
-let darkPatternsValue = 0;
 
 messaging.onBackgroundMessage(function(payload) {
     console.log('Received background message ', payload);

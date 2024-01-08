@@ -47,10 +47,7 @@ dependencies:
   device_info_plus: ^9.1.1
   permission_handler: ^11.1.0
   firebase_core: ^2.24.2
-  firebase_messaging:
-    git:
-      url: https://github.com/felpower/flutterfire.git
-      path: packages/firebase_messaging/firebase_messaging
+  firebase_messaging: ^14.7.10
   firebase_database: ^10.4.0
   firebase_storage: ^11.6.0
 
