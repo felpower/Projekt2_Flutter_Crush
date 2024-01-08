@@ -61,9 +61,9 @@ class _DeviceTokenState extends State<DeviceToken> {
           '''),
           const Image(image: AssetImage('assets/instructions/ins_4.png'), fit: BoxFit.cover),
           const SizedBox(width: 10, height: 20),
-          const Text("6.	Booster: ", style: TextStyle(fontWeight: FontWeight.bold)),
+          const Text("6.	Sonderjellies: ", style: TextStyle(fontWeight: FontWeight.bold)),
           const Text('''
-Nutze Booster bzw. Sonderjellies, um schwierige Level zu meistern. Diese können durch Spielverlauf oder Käufe (direkt vor dem Levelstart) erworben werden.'''),
+Nutze Sonderjellies, um schwierige Level zu meistern. Diese können durch Spielverlauf oder Käufe (direkt vor dem Levelstart) erworben werden.'''),
           const SizedBox(width: 10, height: 20),
           const Text("7.	Fortschritt und Herausforderungen: ",
               style: TextStyle(fontWeight: FontWeight.bold)),
@@ -73,9 +73,15 @@ Nutze Booster bzw. Sonderjellies, um schwierige Level zu meistern. Diese können
           const Text("8.	Startbildschirm: ", style: TextStyle(fontWeight: FontWeight.bold)),
           darkPatternsState is DarkPatternsActivatedState
               ? const Text(
-                  '''Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)), wie viele XP du hast (2)– diese bestimmten auch den Rang in der Highscore-Tafel (3), sowie die Anzahl an Münzen (4) (diese kannst du nutzen um Booster zu kaufen). Im Menü (5) kannst du diese Instruktionen jederzeit erneut durchlesen, solltest du etwas vergessen haben. ''')
+                  '''Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)), wie viele XP du hast 
+                  (2)– diese bestimmten auch den Rang in der Highscore-Tafel (3), sowie die Anzahl an Münzen (4) (diese kannst du nutzen um 
+                  Sonderjellies zu kaufen). Im Menü (5) kannst du diese Instruktionen jederzeit erneut durchlesen, solltest du etwas vergessen 
+                  haben. ''')
               : const Text(
-                  '''Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)), wie viele Münzen du hast (2) (diese kannst du nutzen um Booster zu kaufen). Im Menü (3) kannst du diese Instruktionen jederzeit erneut durchlesen, solltest du etwas vergessen haben. '''),
+                  '''Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)), wie viele Münzen du 
+                  hast (2) (diese kannst du nutzen um Sonderjellies zu kaufen). Im Menü (3) kannst du diese Instruktionen jederzeit erneut 
+                  durchlesen, 
+                  solltest du etwas vergessen haben. '''),
           const SizedBox(width: 10, height: 20),
           darkPatternsState is DarkPatternsActivatedState
               ? const Image(image: AssetImage('assets/instructions/ins_5.png'), fit: BoxFit.cover)
