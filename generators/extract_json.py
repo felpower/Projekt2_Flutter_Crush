@@ -53,18 +53,23 @@ for user_id, user_info in users_data.items():
 	row = {
 		'counter': userCounter,
 		'userId': user_id,
-		'initAppStartDate': "",
 		'initAppStartTime': "",
-		'appStartDate': "",
+		'initAppStartDate': "",
 		'appStartTime': "",
+		'appStartDate': "",
 		'levelStart': "",
 		'startOfLevelTime': "",
+		'startOfLevelDate': "",
 		'levelFinish': "",
 		'finishOfLevelTime': "",
+		'finishOfLevelDate': "",
 		'levelWon': "",
 		'collectDailyRewardsTime': "",
+		'collectDailyRewardsDate': "",
 		'checkHighscoreTime': "",
-		'pushClick': "",
+		'checkHighscoreDate': "",
+		'pushClickTime': "",
+		'pushClickDate': "",
 		'appCloseTime': "",
 		'appCloseDate': "",
 		'darkPatterns': int(user_info.get('darkPatterns', 0)) if user_info.get('darkPatterns') is not None else '',
@@ -134,7 +139,7 @@ for user_id, user_info in users_data.items():
 	if start_of_level:
 		for levels in start_of_level.values():
 			level, time = levels.split(', ')
-			start_times[level] = (str(extract_date_time(time)[1]))
+			start_times[level] = extract_date_time(time)
 
 	# Processing 'finishOfLevel'
 	finish_of_level = user_info.get('finishOfLevel', None)
@@ -146,52 +151,67 @@ for user_id, user_info in users_data.items():
 			level, won, time = levels.split(', ')
 			if level in start_times:
 				row['levelStart'] = int(''.join(filter(str.isdigit, level)))
-				row['startOfLevelTime'] = start_times[level]
+				row['startOfLevelTime'] = str(start_times[level][1])
+				row['startOfLevelDate'] = str(start_times[level][0])
 				row['levelFinish'] = int(''.join(filter(str.isdigit, level)))
 				row['levelWon'] = 1 if won.split(': ')[1].lower() == 'true' else 0
 				row['finishOfLevelTime'] = str(extract_date_time(time)[1])
+				row['finishOfLevelDate'] = str(extract_date_time(time)[0])
 				processed_data.append(row.copy())
 				del start_times[level]
 
 	# Append remaining 'startOfLevel' times that did not have a corresponding 'finishOfLevel'
 	for level, start_time in start_times.items():
 		row['levelStart'] = int(''.join(filter(str.isdigit, level)))
-		row['startOfLevelTime'] = start_time
+		row['startOfLevelTime'] = str(start_time[1])
+		row['startOfLevelTime'] = str(start_time[0])
 		row['levelFinish'] = int(''.join(filter(str.isdigit, level)))
 		row['levelWon'] = 0
 		row['finishOfLevelTime'] = ""
+		row['finishOfLevelDate'] = ""
 		processed_data.append(row.copy())
 
 	row['levelStart'] = ""
 	row['startOfLevelTime'] = ""
+	row['startOfLevelDate'] = ""
 	row['levelFinish'] = ""
 	row['levelWon'] = ""
 	row['finishOfLevelTime'] = ""
+	row['finishOfLevelDate'] = ""
 
 	# Processing 'collectDailyReward'
 	daily_rewards = user_info.get('collectDailyRewardsTime', None)
 	if daily_rewards:
 		for rewards_time in daily_rewards.values():
-			row['collectDailyRewardsTime'] = str(extract_date_time(rewards_time)[1])
+			extracted_date_time = extract_date_time(rewards_time)
+			row['collectDailyRewardsTime'] = str(extracted_date_time[1])
+			row['collectDailyRewardsDate'] = str(extracted_date_time[0])
 			processed_data.append(row.copy())
 
 	row['collectDailyRewardsTime'] = ""
+	row['collectDailyRewardsDate'] = ""
 
 	check_high_score = user_info.get('checkHighScoreTime', None)
 	if check_high_score:
 		for high_score_time in check_high_score.values():
-			row['checkHighscoreTime'] = str(extract_date_time(high_score_time)[1])
+			extracted_date_time = extract_date_time(high_score_time)
+			row['checkHighscoreTime'] = str(extracted_date_time[1])
+			row['checkHighscoreDate'] = str(extracted_date_time[0])
 			processed_data.append(row.copy())
 
 	row['checkHighscoreTime'] = ""
+	row['checkHighscoreDate'] = ""
 
 	push_click = user_info.get('pushClick', None)
 	if push_click:
 		for push_click_time in push_click.values():
-			row['pushClick'] = str(extract_date_time(push_click_time)[1])
+			extracted_date_time = extract_date_time(push_click_time)
+			row['pushClickTime'] = str(extracted_date_time[1])
+			row['pushClickDate'] = str(extracted_date_time[0])
 			processed_data.append(row.copy())
 
-	row['pushClick'] = ""
+	row['pushClickTime'] = ""
+	row['pushClickDate'] = ""
 
 	start_survey = user_info.get('startSurvey', None)
 	if start_survey:
