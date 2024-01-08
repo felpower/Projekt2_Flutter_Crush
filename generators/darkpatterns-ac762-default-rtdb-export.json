@@ -2,883 +2,415 @@
   "debug": {
     "V01-23-12-12–10:19-e51BBIBubOguDHu": {
       "appCloseTime": {
-        "-NmjsfnU0QpNCSY-QCRz": "2023-12-28 11:05:20.979",
-        "-Nmk-92cQ2YHzWcWJ3Gg": "2023-12-28 11:37:59.758",
-        "-NmuH3OpWBs7VFWmJXua": "2023-12-30 11:32:27.464",
-        "-NmuHGRo0wUrl-0S0KRO": "2023-12-30 11:33:20.902",
-        "-NmuHMFk1HpjnHBhGLiU": "2023-12-30 11:33:45.215",
-        "-NmuHledBWtz0I13Fd5w": "2023-12-30 11:35:33.482",
-        "-NmuI1Q5Ekuvw7pC1H0m": "2023-12-30 11:36:41.742",
-        "-NmuIwv9GjBJBbfJ-3fo": "2023-12-30 11:40:42.241",
-        "-NmuJ7GSVYWle0Q9C2Du": "2023-12-30 11:41:27.882",
-        "-NmuLN_I3ekNH9FgQ0jU": "2023-12-30 11:51:18.640",
-        "-NmuLP-_JLvEEJFW-B8I": "2023-12-30 11:51:24.483",
-        "-NmuLQGu45o_Ivy2E3zI": "2023-12-30 11:51:29.687",
-        "-NmuLUYq-ja3BMeoavln": "2023-12-30 11:51:47.220",
-        "-NmuMGRMAlXl5L3ZUfD6": "2023-12-30 11:55:11.909",
-        "-NmuMX-ESbfzaQhbZOGG": "2023-12-30 11:56:19.542",
-        "-NmuMjwNaD4ZssKtgeb4": "2023-12-30 11:57:16.677",
-        "-NmuT23JD7pVFB029G26": "2023-12-30 12:24:48.008"
+        "-Nn9XfpKpn-_YCx0ZxBj": "2024-01-02 15:18:58.721",
+        "-Nn9XjIeY2TU59P4IM9o": "2024-01-02 15:19:13.641"
       },
       "appStartDate": {
-        "-Nmjo_CB83fQZlSYUyfO": "2023-12-28 10:47:25.632",
-        "-NmjsjFO5d0pAH_D-WIG": "2023-12-28 11:05:35.432",
-        "-NmuGHxIW_qHbDtFdLIe": "2023-12-30 11:29:04.909",
-        "-NmuHLrkvPkBhCb_RAwF": "2023-12-30 11:33:43.473",
-        "-NmuHOL6tBW8D-jprUe-": "2023-12-30 11:33:53.392",
-        "-NmuHo0ePZr1fTCmQjk4": "2023-12-30 11:35:42.831",
-        "-NmuI3UIxzW5fwI56-iU": "2023-12-30 11:36:50.161",
-        "-NmuIz-Reo_7m6m9iP__": "2023-12-30 11:40:49.897",
-        "-NmuJ91mdWvdapgxr5yA": "2023-12-30 11:41:35.123",
-        "-NmuKZn4e_JaYk8zedyk": "2023-12-30 11:47:46.854",
-        "-NmuLgAowCTJWlTH_PsU": "2023-12-30 11:52:39.245",
-        "-NmuMIZPVBoNE0-7ebkc": "2023-12-30 11:55:20.608",
-        "-NmuMZSv8eGq9rLCUCtV": "2023-12-30 11:56:29.744",
-        "-NmuMlf9BVdaWS5KbrHM": "2023-12-30 11:57:23.879"
+        "-Nn9XL13UvbVrbVU1-jf": "2024-01-02 15:17:29.733",
+        "-Nn9Xhlgbtq-IHQAvEOV": "2024-01-02 15:19:06.849"
       },
       "darkPatterns": 0,
-      "finishOfLevel": {
-        "-NmuHYuhWMUsyUMqyWk4": "Level: 1, Won: false, Time: 2023-12-30 11:34:37.165",
-        "-NmuT0CBRTpssXp1SAlC": "Level: 1, Won: false, Time: 2023-12-30 12:24:40.384"
-      },
-      "startOfLevel": {
-        "-Nmjo_uF8dd2miG83BEc": "Level: 1, Time: 2023-12-28 10:47:28.264",
-        "-NmjskDsybYtrBZbMT5_": "Level: 1, Time: 2023-12-28 11:05:39.074",
-        "-NmuHUm6Nsa3VLaVC2jU": "Level: 1, Time: 2023-12-30 11:34:20.232",
-        "-NmuHsgiU665kBDG1vzs": "Level: 1, Time: 2023-12-30 11:36:01.910",
-        "-NmuJAKvNVvwRtLMl80N": "Level: 1, Time: 2023-12-30 11:41:40.680",
-        "-NmuSy5EALa5vcQsud_m": "Level: 1, Time: 2023-12-30 12:24:27.650"
-      },
       "uuid": "V01-23-12-12–10:19-e51BBIBubOguDHu"
     },
-    "V01-23-12-16–12:55-ChqP180udEDLRlU": {
+    "V01-24-01-02–13:17-6ckfujnkAAFwLLi": {
       "appCloseTime": {
-        "-NlmU5ybBafb9TFyOwDN": "2023-12-16 12:56:47.153"
+        "-Nn95qk63B74bLNfae8X": "2024-01-02 13:17:24.226"
       },
       "appStartDate": {
-        "-NlmTjRj4W3AeSuEjn0n": "2023-12-16 12:55:10.157"
+        "-Nn95npEygocroVARdPU": "2024-01-02 13:17:11.762",
+        "-Nn95seIU-9m2SjNRE-D": "2024-01-02 13:17:31.628"
+      },
+      "darkPatterns": 1,
+      "pushToken": {
+        "-Nn95tKbKxh71IftknUr": "Token: cb2TsXfwhyyU0ZglxdmL7z:APA91bGGT1wQdE0_sit8b-tRKu7JwOwXxxt9mdmzq1OYcaMaggGxZaxaHyWvQAYyOmkBX4ISuJZElq52kG8hKH_uFmL3brdnVf74FT9iNPlz7MUzMouUur3KuQDuAPQH2AHNc1bwWG-Z, Time: 2024-01-02 13:17:34.660"
+      },
+      "uuid": "V01-24-01-02–13:17-6ckfujnkAAFwLLi"
+    },
+    "V01-24-01-02–14:54-s5mQKyScmn9gwYS": {
+      "appCloseTime": {
+        "-Nn9SmEUZzSlC6-5puLX": "2024-01-02 14:57:34.343",
+        "-Nn9T5MsHkXCp8kEREcC": "2024-01-02 14:58:57.037",
+        "-Nn9T5MtwGpRkoqhcT4F": "2024-01-02 14:58:57.039"
+      },
+      "appStartDate": {
+        "-Nn9SkpcoFYo_XZ_KqYg": "2024-01-02 14:57:28.242",
+        "-Nn9SnmOhZPkhE6oMbLl": "2024-01-02 14:57:40.947",
+        "-Nn9T37y0YbRKefxsPra": "2024-01-02 14:58:47.717"
+      },
+      "darkPatterns": 1,
+      "pushToken": {
+        "-Nn9SoWqCljwUTCXO8yG": "Token: egqVNJcQuc3QefFg8RxruL:APA91bERTz9fHo4-MZJ2qgc3JzKSXzX1nvNlNpgCLZTn_USZdaJv0los6mWPC15kNmTP-GlQ1_0rEjotOKaGJSjH88SFGWLheGQmN0dj9K4bJjivLw9KyLmrBL0ZVDZA1uTZvsf9KKx5, Time: 2024-01-02 14:57:43.948",
+        "-Nn9T30hYDrSjThhZ3MN": "Token: egqVNJcQuc3QefFg8RxruL:APA91bERTz9fHo4-MZJ2qgc3JzKSXzX1nvNlNpgCLZTn_USZdaJv0los6mWPC15kNmTP-GlQ1_0rEjotOKaGJSjH88SFGWLheGQmN0dj9K4bJjivLw9KyLmrBL0ZVDZA1uTZvsf9KKx5, Time: 2024-01-02 14:58:47.426"
+      },
+      "uuid": "V01-24-01-02–14:54-s5mQKyScmn9gwYS"
+    },
+    "V01-24-01-02–14:59-d8SGIVVv8fy81sq": {
+      "appCloseTime": {
+        "-Nn9TCzs_UnFa12zb4da": "2024-01-02 14:59:28.382",
+        "-Nn9UY_ScPvscX58eswm": "2024-01-02 15:05:16.181",
+        "-Nn9UY_T2vt2issmLlw9": "2024-01-02 15:05:16.181"
+      },
+      "appStartDate": {
+        "-Nn9TCsE11qqnknGoym-": "2024-01-02 14:59:27.715",
+        "-Nn9TEi6tKNznknpHzCx": "2024-01-02 14:59:35.314",
+        "-Nn9TJqEXQfd2_avoT0-": "2024-01-02 14:59:56.380",
+        "-Nn9UMGuqERt8Os9yyQF": "2024-01-02 15:04:28.304"
+      },
+      "darkPatterns": 1,
+      "pushClick": {
+        "-Nn9TJfvZ7qe_uVcMa5H": "2024-01-02 14:59:55.753",
+        "-Nn9TJfy4OQ4gtxPLFHM": "2024-01-02 14:59:55.856"
+      },
+      "pushToken": {
+        "-Nn9TFSAUi-aexyzqajV": "Token: cMsicRf0VCMmieZKicVltU:APA91bFj4u0yU-gZGQVWf00sPVyRFqm6x4fib_CQOAPUfmNsez5A_ILYngtw8uGd9FHuIJjq17naEOqQ-eKHiRO8VYg0ucRGTyWmuzkEwZhhp6mlEYD5NT0f2UX8pIZC5dmlTMrKCYbU, Time: 2024-01-02 14:59:38.390",
+        "-Nn9TJvED3XqEah8hquQ": "Token: cMsicRf0VCMmieZKicVltU:APA91bFj4u0yU-gZGQVWf00sPVyRFqm6x4fib_CQOAPUfmNsez5A_ILYngtw8uGd9FHuIJjq17naEOqQ-eKHiRO8VYg0ucRGTyWmuzkEwZhhp6mlEYD5NT0f2UX8pIZC5dmlTMrKCYbU, Time: 2024-01-02 14:59:56.579",
+        "-Nn9TJvED3XqEah8hquR": "Token: cMsicRf0VCMmieZKicVltU:APA91bFj4u0yU-gZGQVWf00sPVyRFqm6x4fib_CQOAPUfmNsez5A_ILYngtw8uGd9FHuIJjq17naEOqQ-eKHiRO8VYg0ucRGTyWmuzkEwZhhp6mlEYD5NT0f2UX8pIZC5dmlTMrKCYbU, Time: 2024-01-02 14:59:56.579",
+        "-Nn9U1ZA0Rd03ACefxQG": "Token: cMsicRf0VCMmieZKicVltU:APA91bFj4u0yU-gZGQVWf00sPVyRFqm6x4fib_CQOAPUfmNsez5A_ILYngtw8uGd9FHuIJjq17naEOqQ-eKHiRO8VYg0ucRGTyWmuzkEwZhhp6mlEYD5NT0f2UX8pIZC5dmlTMrKCYbU, Time: 2024-01-02 15:03:03.637"
+      },
+      "uuid": "V01-24-01-02–14:59-d8SGIVVv8fy81sq"
+    },
+    "V01-24-01-02–15:05-gisl8eS6BlvfjI0": {
+      "appCloseTime": {
+        "-Nn9Uhizcz7TR2CZ5FtW": "2024-01-02 15:06:00.299",
+        "-Nn9VXUsB2MqOra39g1e": "2024-01-02 15:09:36.519",
+        "-Nn9WPfKuQ1erOWWD17K": "2024-01-02 15:13:26.722",
+        "-Nn9WPfLtQomCG4K4ndR": "2024-01-02 15:13:26.724"
+      },
+      "appStartDate": {
+        "-Nn9UgR-6YsPwhtup5Su": "2024-01-02 15:05:54.986",
+        "-Nn9UjHqTO4Ibu-9H88M": "2024-01-02 15:06:06.831",
+        "-Nn9VZhAB8iML2SmhB4_": "2024-01-02 15:09:45.553",
+        "-Nn9Vx78WhQ88eWG5_xx": "2024-01-02 15:11:25.391"
+      },
+      "darkPatterns": 1,
+      "finishOfLevel": {
+        "-Nn9W4bSdrqMZJWxqFH8": "Level: 1, Won: true, Time: 2024-01-02 15:12:00.459"
+      },
+      "pushToken": {
+        "-Nn9Uk5VZLqSXoJYB_Zp": "Token: duCVSlziAlZcTmSOHaiO8S:APA91bFlP5n8EVCAOSFLWUyWvB6lJIiu_IkC6hWURwINYXyGt9_bDdOLpWQvdDKjoklqrt5KEfb5vOQH2DxTgm85MJkfZdh-GQFNyVS8OgMHPfITLoabRbWu8ebxOpu_Fx0EK0SfEbg4, Time: 2024-01-02 15:06:10.096",
+        "-Nn9VZnVoDm1-pV7aIix": "Token: duCVSlziAlZcTmSOHaiO8S:APA91bFlP5n8EVCAOSFLWUyWvB6lJIiu_IkC6hWURwINYXyGt9_bDdOLpWQvdDKjoklqrt5KEfb5vOQH2DxTgm85MJkfZdh-GQFNyVS8OgMHPfITLoabRbWu8ebxOpu_Fx0EK0SfEbg4, Time: 2024-01-02 15:09:46.062",
+        "-Nn9Vx1KTFDxHDEdfTQr": "Token: duCVSlziAlZcTmSOHaiO8S:APA91bFlP5n8EVCAOSFLWUyWvB6lJIiu_IkC6hWURwINYXyGt9_bDdOLpWQvdDKjoklqrt5KEfb5vOQH2DxTgm85MJkfZdh-GQFNyVS8OgMHPfITLoabRbWu8ebxOpu_Fx0EK0SfEbg4, Time: 2024-01-02 15:11:25.314"
+      },
+      "startOfLevel": {
+        "-Nn9V_kqVHkaCqpM_1Pr": "Level: 1, Time: 2024-01-02 15:09:49.987",
+        "-Nn9Vxub1KXmJpCcRS_c": "Level: 1, Time: 2024-01-02 15:11:28.916"
+      },
+      "uuid": "V01-24-01-02–15:05-gisl8eS6BlvfjI0"
+    },
+    "V01-24-01-02–15:15-uxLPbGcyydyzq7I": {
+      "appCloseTime": {
+        "-Nn9X5t0X8DvRaP03wn0": "2024-01-02 15:16:27.475"
+      },
+      "appStartDate": {
+        "-Nn9WrvFU7J7aPiyOvMF": "2024-01-02 15:15:25.838"
+      },
+      "darkPatterns": 1,
+      "startOfLevel": {
+        "-Nn9WssWrNVzdlPCQH4D": "Level: 1, Time: 2024-01-02 15:15:30.098"
+      },
+      "uuid": "V01-24-01-02–15:15-uxLPbGcyydyzq7I"
+    },
+    "V01-24-01-02–15:19-IfMCXorvxoDMVG1": {
+      "appCloseTime": {
+        "-NnA11MvtKdZtdZhVWfT": "2024-01-02 17:35:57.375"
+      },
+      "appStartDate": {
+        "-Nn9XktfP9ElsXMN336r": "2024-01-02 15:19:19.783"
+      },
+      "darkPatterns": 1,
+      "finishOfLevel": {
+        "-Nn9Y4TRyX4bRwzFCQC9": "Level: 1, Won: false, Time: 2024-01-02 15:20:44.066"
+      },
+      "startOfLevel": {
+        "-Nn9XnrGNA5ZSv87onI_": "Level: 1, Time: 2024-01-02 15:19:31.927"
+      },
+      "uuid": "V01-24-01-02–15:19-IfMCXorvxoDMVG1"
+    },
+    "V01-24-01-02–15:45-VOKimKHKEjNU00A": {
+      "appCloseTime": {
+        "-Nn9eZOZylyhBgnntg-H": "2024-01-02 15:53:25.692",
+        "-Nn9iV9WihZKkEXC9l22": "2024-01-02 16:10:36.887"
+      },
+      "appStartDate": {
+        "-Nn9ciyjnvcQRf8ETCW-": "2024-01-02 15:45:24.809",
+        "-Nn9e_x6daFGPA6ZMuia": "2024-01-02 15:53:32.170"
       },
       "checkHighScoreTime": {
-        "-NlmU5ZvkkpQFzeCR7Hi": "2023-12-16 12:56:45.508"
+        "-Nn9gDoT-TL6w_zj01v-": "2024-01-02 16:00:41.549"
       },
       "darkPatterns": 1,
       "pushToken": {
-        "-NlmU2Az8WTgjTwJ-IY7": "Token: cFEC1jQua5MXoVBms05H5V:APA91bFb5QX2l15KlfSaheERCznuCARlQrzRT86XZWapsRpAZ1FdDyDdCfRwAnW373tgOL5o03-QA7cYVm2tNvEeAd-kp7TsOAve_J0VsELiwe904BJZV0-X3Os1cu6_i-q0IOGiD8BF, Time: 2023-12-16 12:56:31.622"
+        "-Nn9eakzU8ZFoxj-5OW3": "Token: cezz8FidGzM0sxa_fJRtUh:APA91bFoLU2sExtODEbp3fJ0J7Daaa-5i_jU0ofS0IS-ySDxGLX7PPhiHdRuDjJlc_GVvR1owdjjWo-oE32m1zRhNvjbhTv47eAOYXwlrego_yojx_mPIdJOohCrbhraG5dLbDZ8fahc, Time: 2024-01-02 15:53:35.350"
       },
-      "startOfLevel": {
-        "-NlmU3QJsX8c2-zNZ7B1": "Level: 1, Time: 2023-12-16 12:56:36.702"
-      },
-      "uuid": "V01-23-12-16–12:55-ChqP180udEDLRlU"
+      "uuid": "V01-24-01-02–15:45-VOKimKHKEjNU00A"
     },
-    "V01-23-12-16–15:20-0TpboQ6g1M1mCgk": {
+    "V01-24-01-02–16:12-Ii8m282uTrelQ06": {
       "appCloseTime": {
-        "-NlsHNmPe_DFEuZFqSfc": "2023-12-16 15:23:50.721"
+        "-Nn9irx2naylUhKnjqbu": "2024-01-02 16:12:14.102",
+        "-Nn9jFgV48_DgZe_Tgfr": "2024-01-02 16:13:55.892",
+        "-Nn9jbToxpRCzcFtqEwM": "2024-01-02 16:15:28.775",
+        "-Nn9jbbiPWhGW40ZQcFh": "2024-01-02 16:15:29.587"
       },
       "appStartDate": {
-        "-Nlmzw1_ctJRLOHXmZBq": "2023-12-16 15:20:12.584"
+        "-Nn9irrL-inL6I4jeazQ": "2024-01-02 16:12:13.461",
+        "-Nn9iuX4xeVkJW1u3qFW": "2024-01-02 16:12:24.904",
+        "-Nn9jH6WwHanzsWN0G2O": "2024-01-02 16:14:01.562",
+        "-Nn9j_B9KtYIu5EoOwaq": "2024-01-02 16:15:19.103",
+        "-Nn9j_Kpx7dwYeeqfzCK": "2024-01-02 16:15:20.394"
       },
-      "darkPatterns": 0,
-      "finishOfLevel": {
-        "-NlsHM5BrZ9vLf9nrPdo": "Level: 1, Won: true, Time: 2023-12-16 15:23:43.794"
+      "darkPatterns": 1,
+      "pushClick": {
+        "-Nn9jSje_hOU0tg9XY2l": "2024-01-02 16:14:49.257",
+        "-Nn9jSjiOaneqf7UQasY": "2024-01-02 16:14:49.393",
+        "-Nn9j_CaUWoCwfOiQDVy": "2024-01-02 16:15:19.925",
+        "-Nn9j_Cd3HA1BaBjORRX": "2024-01-02 16:15:20.000"
       },
       "pushToken": {
-        "-NlsG_gc5kciIpschJd8": "Token: c2UddMxhU_us2mhaagFd62:APA91bEf1j6_j5kEFHIwr__oG6Yl7WpcQNIpIJw2uQPBKjIFM6ETZE08QltAWgXQUdbp1Jhben1LdL4zzOWDgQQgvtAiNnucOMLxAa7_bUd8oC5zsyAwCvD8Lreil9HTcwo1hI1lqILR, Time: 2023-12-16 15:20:21.455"
+        "-Nn9ivhYsJGP9zHkNvgk": "Token: chyIRx75SsRFVbm2bHewJl:APA91bG4dQ_pSccXrRYtVQYfnvbyk2icNuSc8obW1iiKozdeNj_S4imPjaZ7LuElQ1mEt4huO_qbQgYRHAPDiOSAHEKqdQWRIOFSppgQHmmRZblCle5RNyyTp9TAdPnpsQzNVAxbhzM6, Time: 2024-01-02 16:12:29.944",
+        "-Nn9jHGicq8KLrdy-lun": "Token: chyIRx75SsRFVbm2bHewJl:APA91bG4dQ_pSccXrRYtVQYfnvbyk2icNuSc8obW1iiKozdeNj_S4imPjaZ7LuElQ1mEt4huO_qbQgYRHAPDiOSAHEKqdQWRIOFSppgQHmmRZblCle5RNyyTp9TAdPnpsQzNVAxbhzM6, Time: 2024-01-02 16:14:02.295",
+        "-Nn9jSptHRTcqcbsVp0G": "Token: chyIRx75SsRFVbm2bHewJl:APA91bG4dQ_pSccXrRYtVQYfnvbyk2icNuSc8obW1iiKozdeNj_S4imPjaZ7LuElQ1mEt4huO_qbQgYRHAPDiOSAHEKqdQWRIOFSppgQHmmRZblCle5RNyyTp9TAdPnpsQzNVAxbhzM6, Time: 2024-01-02 16:14:49.848",
+        "-Nn9jSptHRTcqcbsVp0H": "Token: chyIRx75SsRFVbm2bHewJl:APA91bG4dQ_pSccXrRYtVQYfnvbyk2icNuSc8obW1iiKozdeNj_S4imPjaZ7LuElQ1mEt4huO_qbQgYRHAPDiOSAHEKqdQWRIOFSppgQHmmRZblCle5RNyyTp9TAdPnpsQzNVAxbhzM6, Time: 2024-01-02 16:14:49.849",
+        "-Nn9j_TKZQAY7i1ZAEgh": "Token: chyIRx75SsRFVbm2bHewJl:APA91bG4dQ_pSccXrRYtVQYfnvbyk2icNuSc8obW1iiKozdeNj_S4imPjaZ7LuElQ1mEt4huO_qbQgYRHAPDiOSAHEKqdQWRIOFSppgQHmmRZblCle5RNyyTp9TAdPnpsQzNVAxbhzM6, Time: 2024-01-02 16:15:20.794",
+        "-Nn9j_TLOW0U38Qeoecr": "Token: chyIRx75SsRFVbm2bHewJl:APA91bG4dQ_pSccXrRYtVQYfnvbyk2icNuSc8obW1iiKozdeNj_S4imPjaZ7LuElQ1mEt4huO_qbQgYRHAPDiOSAHEKqdQWRIOFSppgQHmmRZblCle5RNyyTp9TAdPnpsQzNVAxbhzM6, Time: 2024-01-02 16:15:20.794"
       },
-      "startOfLevel": {
-        "-NlsHDO624M5v-r4alTD": "Level: 1, Time: 2023-12-16 15:23:08.141",
-        "-NlsHFkC97Dn1Y83sfmW": "Level: 1, Time: 2023-12-16 15:23:17.811"
-      },
-      "uuid": "V01-23-12-16–15:20-0TpboQ6g1M1mCgk"
+      "uuid": "V01-24-01-02–16:12-Ii8m282uTrelQ06"
     },
-    "V01-23-12-16–15:25-EuMRtkp8Yzrg0lw": {
+    "V01-24-01-02–16:17-ER2tdyXf7Jfvm7k": {
+      "appStartDate": {
+        "-Nn9k5RNX16LPmXZRvmU": "2024-01-02 16:17:35.770"
+      },
+      "darkPatterns": 1,
+      "pushToken": {
+        "-Nn9k6gh5GJ1NK8V_g5r": "Token: ffj1-nZiGRdIXWLwsi39xr:APA91bHrnY0PmR5-5aPYn6qgRE_jFH_tlMQXPVWWPzPUNrkyv-M_bfAuaPx9VlakUZyV_0GEA6NMroxO7SOcnUjSeTqIEsniSgNSkonj0R5jznFk2IBRZamc8I372qTOAOcV47Q1NhhX, Time: 2024-01-02 16:17:40.972"
+      },
+      "uuid": "V01-24-01-02–16:17-ER2tdyXf7Jfvm7k"
+    },
+    "V01-24-01-02–16:19-IeuNU51MK1dMIDP": {
       "appCloseTime": {
-        "-NlsHjOrp4W9oRfLrwmN": "2023-12-16 15:25:23.313",
-        "-NlsHlbXT536xc0bZJ5q": "2023-12-16 15:25:32.348",
-        "-NlsKU8zCgHbO8d16-CS": "2023-12-17 16:11:58.794",
-        "-NlsL2wteahtpOpo_WC3": "2023-12-17 16:14:56.677",
-        "-NlsL2wteahtpOpo_WC4": "2023-12-17 16:14:56.677",
-        "-NlsLkj_pvfRd5wWk9dB": "2023-12-17 16:18:01.501",
-        "-NlsLkjada2nVSzBqX_6": "2023-12-17 16:18:01.503",
-        "-NlsLkjada2nVSzBqX_7": "2023-12-17 16:18:01.503",
-        "-NlsLkjbxUksLeIWz8dw": "2023-12-17 16:18:01.504",
-        "-NlsLkjbxUksLeIWz8dx": "2023-12-17 16:18:01.504",
-        "-NlsLkjcSqYGhG02TBkr": "2023-12-17 16:18:01.504",
-        "-NlxaJJu3wlmU3pQHNKd": "2023-12-17 16:08:59.952",
-        "-NlxaJJu3wlmU3pQHNKe": "2023-12-17 16:08:59.952",
-        "-NlxaJJvOdY5BIE49Qsj": "2023-12-17 16:08:59.952",
-        "-NlxaJJvOdY5BIE49Qsk": "2023-12-17 16:08:59.952"
+        "-Nn9kW1xZWrEEG6Z_U3e": "2024-01-02 16:19:24.552",
+        "-Nn9kYCTwDHGfPoUKAs0": "2024-01-02 16:19:33.966",
+        "-Nn9kc2C-MG4NlTFCMDV": "2024-01-02 16:19:53.648"
       },
       "appStartDate": {
-        "-Nln050WmMVPJJs0kf9o": "2023-12-16 15:25:15.635",
-        "-Nln08iGUMUtew-ZApaE": "2023-12-16 15:25:30.864",
-        "-Nln0AlIefMAPzSp97qk": "2023-12-16 15:25:39.277",
-        "-NlsHzaK4YyPiw2hBcd0": "2023-12-16 15:26:29.421",
-        "-NlsIbV0CYUrqzCEs-g0": "2023-12-16 15:29:12.852",
-        "-NlsJiaUBIzXovLG8fUb": "2023-12-17 16:09:08.749",
-        "-NlsKXQXY8E_FkKAHp44": "2023-12-17 16:12:40.295",
-        "-NlsKxAIcfOYDwykD7KS": "2023-12-17 16:14:29.827",
-        "-NlsL54L8HXFyr59aloh": "2023-12-17 16:15:07.049",
-        "-NlsLAWsvFiqUeolM-c9": "2023-12-17 16:15:28.943",
-        "-NlsLU7oUwaOdxWQds98": "2023-12-17 16:16:49.254",
-        "-NlsLYn4MARUdVks4F1K": "2023-12-17 16:17:08.321",
-        "-NlsLccQlrUANmbNg8Ms": "2023-12-17 16:17:28.062",
-        "-NlsLh739mYolWHiPKne": "2023-12-17 16:17:46.490",
-        "-Nlx_VlUjHhW30MQrxJj": "2023-12-17 16:05:29.918"
+        "-Nn9kTmSyFH1retE2dgk": "2024-01-02 16:19:15.026",
+        "-Nn9kWgvnc7gkyIeOu9A": "2024-01-02 16:19:27.552",
+        "-Nn9k_9VlBK1nB6a40tr": "2024-01-02 16:19:41.716",
+        "-Nn9kdhm9bL3FekdI1dz": "2024-01-02 16:20:00.410"
+      },
+      "darkPatterns": 1,
+      "uuid": "V01-24-01-02–16:19-IeuNU51MK1dMIDP"
+    },
+    "V01-24-01-02–16:20-hZ2jv0YTrxl7K3a": {
+      "appCloseTime": {
+        "-Nn9ku7zZHBwgeUSz6d5": "2024-01-02 16:21:07.787"
+      },
+      "appStartDate": {
+        "-Nn9knwXN-zX0sDQHqoY": "2024-01-02 16:20:42.172",
+        "-Nn9kvjDOTH--J7geRR2": "2024-01-02 16:21:14.200"
+      },
+      "darkPatterns": 1,
+      "uuid": "V01-24-01-02–16:20-hZ2jv0YTrxl7K3a"
+    },
+    "V01-24-01-02–16:24-RMUqiyiZ3xDIVd9": {
+      "appCloseTime": {
+        "-Nn9lc_14FtRUBwBj0TZ": "2024-01-02 16:24:17.543"
+      },
+      "appStartDate": {
+        "-Nn9lcVOdmcNd80zN7or": "2024-01-02 16:24:16.949",
+        "-Nn9lenkxJRnzcHsOAHY": "2024-01-02 16:24:27.011",
+        "-Nn9lpiI5c8XoJOEWVvE": "2024-01-02 16:25:11.691"
+      },
+      "darkPatterns": 1,
+      "pushClick": {
+        "-Nn9lpWszsSBoKMlTTEf": "2024-01-02 16:25:10.981",
+        "-Nn9lpWxyimQAC8_03Gy": "2024-01-02 16:25:11.101"
+      },
+      "pushToken": {
+        "-Nn9lfWB2F5OfCjBGY2_": "Token: fH5N9gI1cjhGRWlWeV8SvM:APA91bHwkIwhtpA6AiI7mKlqTDqGfcKw2LbzXWgdaw_7mdgAKjPyxGEjs9-KFGIyFbJzBuBBRkTajrSQoutTLqfjEPCo78epPPAkKMcFSYMeyfTucpQvC0lrg51nnrkSggnEpSu2DPs6, Time: 2024-01-02 16:24:29.894",
+        "-Nn9lpqZSFKFohN-zD5T": "Token: fH5N9gI1cjhGRWlWeV8SvM:APA91bHwkIwhtpA6AiI7mKlqTDqGfcKw2LbzXWgdaw_7mdgAKjPyxGEjs9-KFGIyFbJzBuBBRkTajrSQoutTLqfjEPCo78epPPAkKMcFSYMeyfTucpQvC0lrg51nnrkSggnEpSu2DPs6, Time: 2024-01-02 16:25:12.333",
+        "-Nn9lpq_CgXuMOCq5yna": "Token: fH5N9gI1cjhGRWlWeV8SvM:APA91bHwkIwhtpA6AiI7mKlqTDqGfcKw2LbzXWgdaw_7mdgAKjPyxGEjs9-KFGIyFbJzBuBBRkTajrSQoutTLqfjEPCo78epPPAkKMcFSYMeyfTucpQvC0lrg51nnrkSggnEpSu2DPs6, Time: 2024-01-02 16:25:12.334"
+      },
+      "uuid": "V01-24-01-02–16:24-RMUqiyiZ3xDIVd9"
+    },
+    "V01-24-01-02–16:35-5br56s1nIf4g4Bk": {
+      "darkPatterns": 1,
+      "uuid": "V01-24-01-02–16:35-5br56s1nIf4g4Bk"
+    },
+    "V01-24-01-02–16:38-wHEPsfB7UPKWDsV": {
+      "appStartDate": {
+        "-Nn9ot2v9oT5p5ywJ4S2": "2024-01-02 16:38:31.808",
+        "-Nn9pDjIP-_fcUB964MH": "2024-01-02 16:39:59.969"
+      },
+      "darkPatterns": 1,
+      "pushClick": {
+        "-Nn9p3KQWI0AiMqyfdcG": "2024-01-02 16:39:18.049",
+        "-Nn9p3KURebAGTMJqo-j": "2024-01-02 16:39:18.180"
+      },
+      "pushToken": {
+        "-Nn9ou3hpad1RNCufOF9": "Token: ebmTwjlRXqDHcZTwwm7M_e:APA91bFjcExCK2Jby--O7jsVd-rBO05ZSAW1f9jMmQVGIC1JrEqf8bhqtRH48MNnONz8oKMjD960uhQz3Z0XnREMtOESzQYEGs4QTlSoVq6em6O5_MWXOZ2BQK1HhXq_I4uFnTo9yuC7, Time: 2024-01-02 16:38:35.848",
+        "-Nn9p3Qnc2WI9NbQWjCg": "Token: ebmTwjlRXqDHcZTwwm7M_e:APA91bFjcExCK2Jby--O7jsVd-rBO05ZSAW1f9jMmQVGIC1JrEqf8bhqtRH48MNnONz8oKMjD960uhQz3Z0XnREMtOESzQYEGs4QTlSoVq6em6O5_MWXOZ2BQK1HhXq_I4uFnTo9yuC7, Time: 2024-01-02 16:39:18.643",
+        "-Nn9p3QopNoJL5J9--Lc": "Token: ebmTwjlRXqDHcZTwwm7M_e:APA91bFjcExCK2Jby--O7jsVd-rBO05ZSAW1f9jMmQVGIC1JrEqf8bhqtRH48MNnONz8oKMjD960uhQz3Z0XnREMtOESzQYEGs4QTlSoVq6em6O5_MWXOZ2BQK1HhXq_I4uFnTo9yuC7, Time: 2024-01-02 16:39:18.643"
+      },
+      "uuid": "V01-24-01-02–16:38-wHEPsfB7UPKWDsV"
+    },
+    "V01-24-01-02–16:40-UxxTztJx1EEO94e": {
+      "appCloseTime": {
+        "-Nn9pRkrZ8IfdJoto2Qj": "2024-01-02 16:40:57.709"
+      },
+      "appStartDate": {
+        "-Nn9pQUwohlKu3_NyjEo": "2024-01-02 16:40:52.252",
+        "-Nn9pTIxsxJXMYgbMhT0": "2024-01-02 16:41:04.462"
+      },
+      "darkPatterns": 1,
+      "pushClick": {
+        "-Nn9pjWSq1VDFRAkOXWH": "2024-01-02 16:42:14.974",
+        "-Nn9pjWWc2yArLA3WZHW": "2024-01-02 16:42:15.086"
+      },
+      "pushToken": {
+        "-Nn9pU7-R8Cqm33aRtwP": "Token: fLDs94vjeyovcppoRgoIRk:APA91bEfRxFXoayJqmV5rPL1WjNYpB9RL__7i9Uv-7yLMbSVDwYuYS-w-82IYi2NL_rJ4yZTYafOurAMGNMkCx5Ky7UEfSCY7a6Vw_akkyUzE6_U80Oo645RDuRgSzsQ3PwNk1eFhWjR, Time: 2024-01-02 16:41:07.462",
+        "-Nn9pjb5uDenQSVsgYYS": "Token: fLDs94vjeyovcppoRgoIRk:APA91bEfRxFXoayJqmV5rPL1WjNYpB9RL__7i9Uv-7yLMbSVDwYuYS-w-82IYi2NL_rJ4yZTYafOurAMGNMkCx5Ky7UEfSCY7a6Vw_akkyUzE6_U80Oo645RDuRgSzsQ3PwNk1eFhWjR, Time: 2024-01-02 16:42:15.494",
+        "-Nn9pjb66OFmD-9PdlOH": "Token: fLDs94vjeyovcppoRgoIRk:APA91bEfRxFXoayJqmV5rPL1WjNYpB9RL__7i9Uv-7yLMbSVDwYuYS-w-82IYi2NL_rJ4yZTYafOurAMGNMkCx5Ky7UEfSCY7a6Vw_akkyUzE6_U80Oo645RDuRgSzsQ3PwNk1eFhWjR, Time: 2024-01-02 16:42:15.495"
+      },
+      "uuid": "V01-24-01-02–16:40-UxxTztJx1EEO94e"
+    },
+    "V01-24-01-02–16:45-6ksXqM0yapOOJr3": {
+      "appCloseTime": {
+        "-Nn9qaO18LZaqPfoNWG4": "2024-01-02 16:45:59.280"
+      },
+      "appStartDate": {
+        "-Nn9qaKxnl4_Ziz3A9Vr": "2024-01-02 16:45:58.779",
+        "-Nn9qbwJCcZ7Uw2fLlI1": "2024-01-02 16:46:06.044",
+        "-Nn9qj9wTrp7kc257HMm": "2024-01-02 16:46:35.023"
+      },
+      "darkPatterns": 1,
+      "pushClick": {
+        "-Nn9qiXTwOBWAeiLc9Qq": "2024-01-02 16:46:33.096",
+        "-Nn9qiXXZEsHp-4CKqMq": "2024-01-02 16:46:33.204",
+        "-Nn9sSqzjEDzohdWSG9i": "2024-01-02 16:54:09.062",
+        "-Nn9sSr1_3XZZSJz-usq": "2024-01-02 16:54:09.171"
+      },
+      "pushToken": {
+        "-Nn9qcjVBo9WsWmH5nyN": "Token: ehgCy3sdiNGQG8KsyVxUCx:APA91bGAVDQ903FHHGJB4h5ln-PHIHBdHAD-6lkS26fwWJAexPDMKQ9JGTc-jibciB64CKKNE3nHxKdrJcvuyeShNg8GZbE497GPQvvgnbwnIqHN8pCqesX9lVrdC5BqqoBtsHCbRz3U, Time: 2024-01-02 16:46:09.181",
+        "-Nn9qic9CRW6TLX3AFW1": "Token: ehgCy3sdiNGQG8KsyVxUCx:APA91bGAVDQ903FHHGJB4h5ln-PHIHBdHAD-6lkS26fwWJAexPDMKQ9JGTc-jibciB64CKKNE3nHxKdrJcvuyeShNg8GZbE497GPQvvgnbwnIqHN8pCqesX9lVrdC5BqqoBtsHCbRz3U, Time: 2024-01-02 16:46:33.609",
+        "-Nn9qicA4F6U6V1-KCZK": "Token: ehgCy3sdiNGQG8KsyVxUCx:APA91bGAVDQ903FHHGJB4h5ln-PHIHBdHAD-6lkS26fwWJAexPDMKQ9JGTc-jibciB64CKKNE3nHxKdrJcvuyeShNg8GZbE497GPQvvgnbwnIqHN8pCqesX9lVrdC5BqqoBtsHCbRz3U, Time: 2024-01-02 16:46:33.611",
+        "-Nn9sSvxxVzha9N8YEdW": "Token: ehgCy3sdiNGQG8KsyVxUCx:APA91bGAVDQ903FHHGJB4h5ln-PHIHBdHAD-6lkS26fwWJAexPDMKQ9JGTc-jibciB64CKKNE3nHxKdrJcvuyeShNg8GZbE497GPQvvgnbwnIqHN8pCqesX9lVrdC5BqqoBtsHCbRz3U, Time: 2024-01-02 16:54:09.533",
+        "-Nn9sSvxxVzha9N8YEdX": "Token: ehgCy3sdiNGQG8KsyVxUCx:APA91bGAVDQ903FHHGJB4h5ln-PHIHBdHAD-6lkS26fwWJAexPDMKQ9JGTc-jibciB64CKKNE3nHxKdrJcvuyeShNg8GZbE497GPQvvgnbwnIqHN8pCqesX9lVrdC5BqqoBtsHCbRz3U, Time: 2024-01-02 16:54:09.533"
+      },
+      "uuid": "V01-24-01-02–16:45-6ksXqM0yapOOJr3"
+    },
+    "V01-24-01-02–16:54-uJ1RFAJWYMy3cti": {
+      "appCloseTime": {
+        "-Nn9sehOu2pf6Jity_UM": "2024-01-02 16:55:01.246",
+        "-Nn9xA76mMum4NeXHpT7": "2024-01-02 17:14:43.088",
+        "-Nn9xAV7dmW8GAWdChgd": "2024-01-02 17:14:44.366",
+        "-Nn9xAmN9D7-_KvdJWJk": "2024-01-02 17:14:45.506"
+      },
+      "appStartDate": {
+        "-Nn9see-mgdyeV9_jpNm": "2024-01-02 16:55:00.744",
+        "-Nn9sgtkzWYE2apR_c3N": "2024-01-02 16:55:10.490",
+        "-Nn9snYogocUhlJjUkrR": "2024-01-02 16:55:37.930",
+        "-Nn9x9N1qD5Ijyi9xLgw": "2024-01-02 17:14:39.956"
       },
       "checkHighScoreTime": {
-        "-Nlx_v-HDnAE7LH6KvaG": "2023-12-17 16:07:17.590",
-        "-Nlx_vw1WZ8pViJjXUwf": "2023-12-17 16:07:21.415",
-        "-NlxaCqGrkVqf6qFuKHZ": "2023-12-17 16:08:34.773"
-      },
-      "collectDailyRewardsTime": {
-        "-Nlx_t_uFOZAw8PVzcZe": "2023-12-17 16:07:11.807"
+        "-Nn9wTtqGHBWmLykVrJf": "2024-01-02 17:11:41.687"
       },
       "darkPatterns": 1,
-      "finishOfLevel": {
-        "-NlsHtDmjKrtEorGQFe3": "Level: 1, Won: true, Time: 2023-12-16 15:26:03.511",
-        "-NlsI5SvE9RkBNknek6v": "Level: 2, Won: true, Time: 2023-12-16 15:26:57.728",
-        "-NlsIgsLzsdHJ_DRBnz_": "Level: 1, Won: true, Time: 2023-12-16 15:29:35.068",
-        "-NlsJplhPElmmsIvdpgK": "Level: 1, Won: true, Time: 2023-12-17 16:09:37.763",
-        "-Nlx_pUv3goLn8Si9_2q": "Level: 1, Won: true, Time: 2023-12-17 16:06:55.040"
+      "pushClick": {
+        "-Nn9snQoa8WyqlC_E5pT": "2024-01-02 16:55:37.480",
+        "-Nn9snQrfxnvILyfxeZH": "2024-01-02 16:55:37.553",
+        "-Nn9x9EawT4Igew_v_Ny": "2024-01-02 17:14:39.464",
+        "-Nn9x9EdVc-Bv6vBa7B8": "2024-01-02 17:14:39.551"
       },
       "pushToken": {
-        "-NlsHiVNHf9sBt3jIsU7": "Token: c-ZaEAfDhjr-r7-CH53S7q:APA91bH-xsYYy3Bti9fxteoMG6E0otIuJMA0SwT8QxjXvwlI2RccMIv44rZhNGJySK1N4klu0WzouJhnctdtwsXj16aiAu2z1pfqK2OypyIgBd7AyNijKFrHXaENJ91RcuyhsPpRGaon, Time: 2023-12-16 15:25:19.634",
-        "-NlsHlPXZUZH7Aux3_vb": "Token: c-ZaEAfDhjr-r7-CH53S7q:APA91bH-xsYYy3Bti9fxteoMG6E0otIuJMA0SwT8QxjXvwlI2RccMIv44rZhNGJySK1N4klu0WzouJhnctdtwsXj16aiAu2z1pfqK2OypyIgBd7AyNijKFrHXaENJ91RcuyhsPpRGaon, Time: 2023-12-16 15:25:31.516",
-        "-NlsHnSAv0w-dPxveAeu": "Token: c-ZaEAfDhjr-r7-CH53S7q:APA91bH-xsYYy3Bti9fxteoMG6E0otIuJMA0SwT8QxjXvwlI2RccMIv44rZhNGJySK1N4klu0WzouJhnctdtwsXj16aiAu2z1pfqK2OypyIgBd7AyNijKFrHXaENJ91RcuyhsPpRGaon, Time: 2023-12-16 15:25:39.856",
-        "-NlsHzaRlUs_ZdhkngJa": "Token: c-ZaEAfDhjr-r7-CH53S7q:APA91bH-xsYYy3Bti9fxteoMG6E0otIuJMA0SwT8QxjXvwlI2RccMIv44rZhNGJySK1N4klu0WzouJhnctdtwsXj16aiAu2z1pfqK2OypyIgBd7AyNijKFrHXaENJ91RcuyhsPpRGaon, Time: 2023-12-16 15:26:29.601",
-        "-NlsIbLt_Ki-NJyitNIe": "Token: c-ZaEAfDhjr-r7-CH53S7q:APA91bH-xsYYy3Bti9fxteoMG6E0otIuJMA0SwT8QxjXvwlI2RccMIv44rZhNGJySK1N4klu0WzouJhnctdtwsXj16aiAu2z1pfqK2OypyIgBd7AyNijKFrHXaENJ91RcuyhsPpRGaon, Time: 2023-12-16 15:29:12.447",
-        "-NlsJihCsSyeZRzz4PKn": "Token: c-ZaEAfDhjr-r7-CH53S7q:APA91bH-xsYYy3Bti9fxteoMG6E0otIuJMA0SwT8QxjXvwlI2RccMIv44rZhNGJySK1N4klu0WzouJhnctdtwsXj16aiAu2z1pfqK2OypyIgBd7AyNijKFrHXaENJ91RcuyhsPpRGaon, Time: 2023-12-17 16:09:09.325",
-        "-NlsKVueH4y76tMtG2AN": "Token: c-ZaEAfDhjr-r7-CH53S7q:APA91bH-xsYYy3Bti9fxteoMG6E0otIuJMA0SwT8QxjXvwlI2RccMIv44rZhNGJySK1N4klu0WzouJhnctdtwsXj16aiAu2z1pfqK2OypyIgBd7AyNijKFrHXaENJ91RcuyhsPpRGaon, Time: 2023-12-17 16:12:34.985",
-        "-NlsKxAWXzAW_i2Kts8d": "Token: c-ZaEAfDhjr-r7-CH53S7q:APA91bH-xsYYy3Bti9fxteoMG6E0otIuJMA0SwT8QxjXvwlI2RccMIv44rZhNGJySK1N4klu0WzouJhnctdtwsXj16aiAu2z1pfqK2OypyIgBd7AyNijKFrHXaENJ91RcuyhsPpRGaon, Time: 2023-12-17 16:14:30.055",
-        "-NlsL5LRXqlu6Jr93LnR": "Token: c-ZaEAfDhjr-r7-CH53S7q:APA91bH-xsYYy3Bti9fxteoMG6E0otIuJMA0SwT8QxjXvwlI2RccMIv44rZhNGJySK1N4klu0WzouJhnctdtwsXj16aiAu2z1pfqK2OypyIgBd7AyNijKFrHXaENJ91RcuyhsPpRGaon, Time: 2023-12-17 16:15:07.860",
-        "-NlsLAXWwjB2pk0Eh9zW": "Token: c-ZaEAfDhjr-r7-CH53S7q:APA91bH-xsYYy3Bti9fxteoMG6E0otIuJMA0SwT8QxjXvwlI2RccMIv44rZhNGJySK1N4klu0WzouJhnctdtwsXj16aiAu2z1pfqK2OypyIgBd7AyNijKFrHXaENJ91RcuyhsPpRGaon, Time: 2023-12-17 16:15:29.114",
-        "-NlsLU8UT3A_gRqZdJPr": "Token: c-ZaEAfDhjr-r7-CH53S7q:APA91bH-xsYYy3Bti9fxteoMG6E0otIuJMA0SwT8QxjXvwlI2RccMIv44rZhNGJySK1N4klu0WzouJhnctdtwsXj16aiAu2z1pfqK2OypyIgBd7AyNijKFrHXaENJ91RcuyhsPpRGaon, Time: 2023-12-17 16:16:49.432",
-        "-NlsLYoByJyd8bCD-HxE": "Token: c-ZaEAfDhjr-r7-CH53S7q:APA91bH-xsYYy3Bti9fxteoMG6E0otIuJMA0SwT8QxjXvwlI2RccMIv44rZhNGJySK1N4klu0WzouJhnctdtwsXj16aiAu2z1pfqK2OypyIgBd7AyNijKFrHXaENJ91RcuyhsPpRGaon, Time: 2023-12-17 16:17:08.549",
-        "-NlsLcceVr7wPKVemVdV": "Token: c-ZaEAfDhjr-r7-CH53S7q:APA91bH-xsYYy3Bti9fxteoMG6E0otIuJMA0SwT8QxjXvwlI2RccMIv44rZhNGJySK1N4klu0WzouJhnctdtwsXj16aiAu2z1pfqK2OypyIgBd7AyNijKFrHXaENJ91RcuyhsPpRGaon, Time: 2023-12-17 16:17:28.291",
-        "-NlsLh7IAMFXkYvBnakf": "Token: c-ZaEAfDhjr-r7-CH53S7q:APA91bH-xsYYy3Bti9fxteoMG6E0otIuJMA0SwT8QxjXvwlI2RccMIv44rZhNGJySK1N4klu0WzouJhnctdtwsXj16aiAu2z1pfqK2OypyIgBd7AyNijKFrHXaENJ91RcuyhsPpRGaon, Time: 2023-12-17 16:17:46.700",
-        "-Nlx_Vn3F7ix2rvsumi3": "Token: c-ZaEAfDhjr-r7-CH53S7q:APA91bH-xsYYy3Bti9fxteoMG6E0otIuJMA0SwT8QxjXvwlI2RccMIv44rZhNGJySK1N4klu0WzouJhnctdtwsXj16aiAu2z1pfqK2OypyIgBd7AyNijKFrHXaENJ91RcuyhsPpRGaon, Time: 2023-12-17 16:05:30.250"
+        "-Nn9shVU8U04JjxtroF2": "Token: eygV6UarhggjAacnuAkilW:APA91bF6e7AR2DJ4c8CEj7cDc6cB-PIDCSbqdvDxQk9riJ3jC_IbxmUCryPG1DTy0wmoBxvktXCXmJNoG5TBmHEYzOWi45G8eoOwQV5u-z_AKxNzCixhBs5yjJ0Im2_lWQxtsPdp8v5b, Time: 2024-01-02 16:55:13.193",
+        "-Nn9sngvefNUsgZL9ywm": "Token: eygV6UarhggjAacnuAkilW:APA91bF6e7AR2DJ4c8CEj7cDc6cB-PIDCSbqdvDxQk9riJ3jC_IbxmUCryPG1DTy0wmoBxvktXCXmJNoG5TBmHEYzOWi45G8eoOwQV5u-z_AKxNzCixhBs5yjJ0Im2_lWQxtsPdp8v5b, Time: 2024-01-02 16:55:38.307",
+        "-Nn9sngvefNUsgZL9ywn": "Token: eygV6UarhggjAacnuAkilW:APA91bF6e7AR2DJ4c8CEj7cDc6cB-PIDCSbqdvDxQk9riJ3jC_IbxmUCryPG1DTy0wmoBxvktXCXmJNoG5TBmHEYzOWi45G8eoOwQV5u-z_AKxNzCixhBs5yjJ0Im2_lWQxtsPdp8v5b, Time: 2024-01-02 16:55:38.307",
+        "-Nn9x9Wl2B85iDAsQ9hD": "Token: eygV6UarhggjAacnuAkilW:APA91bF6e7AR2DJ4c8CEj7cDc6cB-PIDCSbqdvDxQk9riJ3jC_IbxmUCryPG1DTy0wmoBxvktXCXmJNoG5TBmHEYzOWi45G8eoOwQV5u-z_AKxNzCixhBs5yjJ0Im2_lWQxtsPdp8v5b, Time: 2024-01-02 17:14:40.347",
+        "-Nn9x9Wl2B85iDAsQ9hE": "Token: eygV6UarhggjAacnuAkilW:APA91bF6e7AR2DJ4c8CEj7cDc6cB-PIDCSbqdvDxQk9riJ3jC_IbxmUCryPG1DTy0wmoBxvktXCXmJNoG5TBmHEYzOWi45G8eoOwQV5u-z_AKxNzCixhBs5yjJ0Im2_lWQxtsPdp8v5b, Time: 2024-01-02 17:14:40.348"
       },
-      "startOfLevel": {
-        "-NlsHniipo1gXX_faz_y": "Level: 1, Time: 2023-12-16 15:25:40.979",
-        "-NlsI-4cFiZfdO0rjxAf": "Level: 2, Time: 2023-12-16 15:26:31.598",
-        "-NlsIbtbhYP7MkGafHKY": "Level: 1, Time: 2023-12-16 15:29:14.669",
-        "-NlsJj5Nb3KJWP4FwzFZ": "Level: 1, Time: 2023-12-17 16:09:10.415",
-        "-Nlx_WB7G0zrthRYe3tL": "Level: 2, Time: 2023-12-17 16:05:31.854",
-        "-Nlx_eA0xMzDqOmE7TJp": "Level: 1, Time: 2023-12-17 16:06:08.647"
-      },
-      "uuid": "V01-23-12-16–15:25-EuMRtkp8Yzrg0lw"
+      "uuid": "V01-24-01-02–16:54-uJ1RFAJWYMy3cti"
     },
-    "V01-23-12-17–16:18-pnHyimYAQ3VY6QY": {
+    "V01-24-01-02–21:28-5k7LWLpI1twNtzO": {
       "appCloseTime": {
-        "-NlsMGd50CzdWRfTZLre": "2023-12-17 16:20:16.360"
+        "-NnArGoryHVj4PRl-cfs": "2024-01-02 21:28:34.758",
+        "-NnArQ2TO8hSKtW20UpY": "2024-01-02 21:29:12.633"
       },
       "appStartDate": {
-        "-NlsLxfHQY8xuPeAeeYA": "2023-12-17 16:18:54.615"
+        "-NnArFZVMYCiMagw4sic": "2024-01-02 21:28:29.601",
+        "-NnArIbWoCjWZYB_KBGg": "2024-01-02 21:28:42.048"
       },
       "darkPatterns": 1,
-      "finishOfLevel": {
-        "-NlsMD9x2S1lNb2HELa8": "Level: 1, Won: true, Time: 2023-12-17 16:20:02.143"
-      },
       "pushToken": {
-        "-NlsLysVg4P_246IdQ7l": "Token: fjC3eWs_Sx_wuuFfAtcoG7:APA91bHtLwXHgAeMPJebJICswX_BA3H_xGKyIrEXxekwEX2x2edlq6HNVShgm-Ed4wiCU7dn_ESX6wFTsjIq5c_QoIchytTMx8GB7LBKXcL-KzN3dGWrzBF611-KEwHxdOeX85C4hh0m, Time: 2023-12-17 16:18:59.523"
+        "-NnArJcnYmAAW37bVr6H": "Token: fpII6xfKCFrxWa-UUcB_HY:APA91bH3JIhGlFQwNpdrqq8Le6IZHE9LX65vRTJR5Cdkg-ZGszhh1ihXSIApHH88-95RZyjzSyWoKoIrasxYA6hoYXnH1BPxDJmayvEq45WbeJxNaSigVChAe4KPaEOsOoZHyo5jfa_c, Time: 2024-01-02 21:28:46.351"
       },
-      "startOfLevel": {
-        "-NlsLzKlY996AsbsNJBW": "Level: 1, Time: 2023-12-17 16:19:01.397"
-      },
-      "uuid": "V01-23-12-17–16:18-pnHyimYAQ3VY6QY"
+      "uuid": "V01-24-01-02–21:28-5k7LWLpI1twNtzO"
     },
-    "V01-23-12-17–16:47-5FrmXmlH8rIZQ5d": {
+    "V01-24-01-02–21:31-raxCUiuse8diMlT": {
+      "appStartDate": {
+        "-NnArwulZIIZt_35Gctg": "2024-01-02 21:31:31.290"
+      },
+      "darkPatterns": 1,
+      "pushToken": {
+        "-NnAsFgSFtmuDkCShNyM": "Token: ebjYyGNAfjpgGxBOABXXLs:APA91bHM_nnOvp5QHclepbwqkucqkfXYIKwF5cuZJueiKty2TruSa0HE34phf7M6FYG_NysjNWkSNNrOw0DQG0mDXyd2Bd7JOq3bhqS3kKKf6c0fEv_7veeXuAHKqw3N2RMMSWtS6Lvs, Time: 2024-01-02 21:32:52.216"
+      },
+      "uuid": "V01-24-01-02–21:31-raxCUiuse8diMlT"
+    },
+    "V01-24-01-03–11:48-tviGt118sUGEnVF": {
       "appCloseTime": {
-        "-NlsScLO0BfZCdAFF66V": "2023-12-17 16:48:02.272",
-        "-NlsSgr_Fg--m2jjkGAI": "2023-12-17 16:48:20.594",
-        "-NlsTFMKW3ev5Vk1abwO": "2023-12-17 16:50:45.984",
-        "-NlsTFMLXwHKedSZ9e-I": "2023-12-17 16:50:45.985",
-        "-NlsTM0G1MuEltBRzd6T": "2023-12-17 16:51:13.225"
+        "-NnDxBgLziJIv4fgQOVl": "2024-01-03 11:53:28.055"
       },
       "appStartDate": {
-        "-NlsSZ0_qW17kFl09rEl": "2023-12-17 16:47:44.486",
-        "-NlsSeCnZxswfpXu4jqR": "2023-12-17 16:48:10.051",
-        "-NlsSidqklh2325dmsp9": "2023-12-17 16:48:28.232",
-        "-NlsTEfKnXPxJWkdq-UO": "2023-12-17 16:50:42.975",
-        "-NlsTHNDMysGjwom7b20": "2023-12-17 16:50:54.556",
-        "-NlsTNlRRTdrdYlrWLfi": "2023-12-17 16:51:20.750"
-      },
-      "collectDailyRewardsTime": {
-        "-NlsSerZZ4uqVZSLil_Y": "2023-12-17 16:48:12.397"
-      },
-      "darkPatterns": 1,
-      "pushToken": {
-        "-NlsS_YEs9TH66eCLcEE": "Token: f3e6Ik2rYjxoFnz8BgqAcq:APA91bFhKZVXWAxwHauTaFJ8bJXbv_I_r6NgbJCdxVIs2fAFuCPdsg_h-IBEmOF58JxkC9KFRGMFPPNQrHNXFtt1fe-uZjeofE5MsTasH452KPuv7Hdsngi6e6PAjo45LcoSRJAETI8_, Time: 2023-12-17 16:47:50.805",
-        "-NlsSeSNRjkeOl3srqX1": "Token: f3e6Ik2rYjxoFnz8BgqAcq:APA91bFhKZVXWAxwHauTaFJ8bJXbv_I_r6NgbJCdxVIs2fAFuCPdsg_h-IBEmOF58JxkC9KFRGMFPPNQrHNXFtt1fe-uZjeofE5MsTasH452KPuv7Hdsngi6e6PAjo45LcoSRJAETI8_, Time: 2023-12-17 16:48:10.725",
-        "-NlsSitihAbDpx1ocFyz": "Token: f3e6Ik2rYjxoFnz8BgqAcq:APA91bFhKZVXWAxwHauTaFJ8bJXbv_I_r6NgbJCdxVIs2fAFuCPdsg_h-IBEmOF58JxkC9KFRGMFPPNQrHNXFtt1fe-uZjeofE5MsTasH452KPuv7Hdsngi6e6PAjo45LcoSRJAETI8_, Time: 2023-12-17 16:48:28.920",
-        "-NlsTEZ8b553u_Y7PjxL": "Token: f3e6Ik2rYjxoFnz8BgqAcq:APA91bFhKZVXWAxwHauTaFJ8bJXbv_I_r6NgbJCdxVIs2fAFuCPdsg_h-IBEmOF58JxkC9KFRGMFPPNQrHNXFtt1fe-uZjeofE5MsTasH452KPuv7Hdsngi6e6PAjo45LcoSRJAETI8_, Time: 2023-12-17 16:50:42.707",
-        "-NlsTHb52zh_HYXynfmR": "Token: f3e6Ik2rYjxoFnz8BgqAcq:APA91bFhKZVXWAxwHauTaFJ8bJXbv_I_r6NgbJCdxVIs2fAFuCPdsg_h-IBEmOF58JxkC9KFRGMFPPNQrHNXFtt1fe-uZjeofE5MsTasH452KPuv7Hdsngi6e6PAjo45LcoSRJAETI8_, Time: 2023-12-17 16:50:55.167",
-        "-NlsTO-y_3eJWx1eYnZi": "Token: f3e6Ik2rYjxoFnz8BgqAcq:APA91bFhKZVXWAxwHauTaFJ8bJXbv_I_r6NgbJCdxVIs2fAFuCPdsg_h-IBEmOF58JxkC9KFRGMFPPNQrHNXFtt1fe-uZjeofE5MsTasH452KPuv7Hdsngi6e6PAjo45LcoSRJAETI8_, Time: 2023-12-17 16:51:21.420"
-      },
-      "startOfLevel": {
-        "-NlsSjVFn9fNcsjoxBVe": "Level: 1, Time: 2023-12-17 16:48:31.387",
-        "-NlsTI9h-K7CxLYKx-EB": "Level: 1, Time: 2023-12-17 16:50:57.445"
-      },
-      "uuid": "V01-23-12-17–16:47-5FrmXmlH8rIZQ5d"
-    },
-    "V01-23-12-28–10:43-3FU8T3vVayQ1Vbj": {
-      "appStartDate": {
-        "-NmjnhDAJ-FXEJgJP44f": "2023-12-28 10:43:36.487"
-      },
-      "darkPatterns": 0,
-      "pushToken": {
-        "-NmjnjGUY_JzF_eMV-a_": "Token: dFTeXLRyBKNVrSzOmLmnMN:APA91bH7QUycU7HtZ22uSPg_NTdoP-fSPJDgK-f06tLtpKu6JWhwF2n4Fro4oMMbHbYnfnmcK1OShKHl5gZOEkEyVey_PHpKWvZV0gUVYiIvvNFWpkl5y9ysPHGYdHI-iW_cpl0YHUJa, Time: 2023-12-28 10:43:45.063"
-      },
-      "uuid": "V01-23-12-28–10:43-3FU8T3vVayQ1Vbj"
-    },
-    "V01-23-12-28–10:44-ck418670jS5y55g": {
-      "appStartDate": {
-        "-Nmjo-jiAE5XYeCF8ZBv": "2023-12-28 10:44:56.319",
-        "-NmjoCk0ITDlrJ1ncNrD": "2023-12-28 10:45:49.967"
-      },
-      "darkPatterns": 1,
-      "pushToken": {
-        "-Nmjo4dx193nGuJ5-x2t": "Token: c7kFLz97qncc0-0NnwpsnK:APA91bEIoT-CxVRYGnegEeJ5uLBPoxrHUjF_IY3XxEnKktwtH_Z1SXT_qwuXot6_hx6ghqnYWMimpOmn04qh02l3Pnj9AvsTtc8qjaUhw-sL9-l5alwxK2k7wx66-CVCG0_l21oxxnDo, Time: 2023-12-28 10:45:16.913",
-        "-NmjoCi7yyaz0bgmLJQ2": "Token: c7kFLz97qncc0-0NnwpsnK:APA91bEIoT-CxVRYGnegEeJ5uLBPoxrHUjF_IY3XxEnKktwtH_Z1SXT_qwuXot6_hx6ghqnYWMimpOmn04qh02l3Pnj9AvsTtc8qjaUhw-sL9-l5alwxK2k7wx66-CVCG0_l21oxxnDo, Time: 2023-12-28 10:45:49.948"
-      },
-      "startOfLevel": {
-        "-Nmjo0lu3IYD7RNrg1pg": "Level: 1, Time: 2023-12-28 10:45:01.038",
-        "-Nmjo3KXfbVYSm35_Gi6": "Level: 1, Time: 2023-12-28 10:45:11.510",
-        "-NmjoDFD0sOfYAiHSm1f": "Level: 1, Time: 2023-12-28 10:45:52.129"
-      },
-      "uuid": "V01-23-12-28–10:44-ck418670jS5y55g"
-    },
-    "V01-23-12-28–15:57-fBfKyTirdDNDRmx": {
-      "appCloseTime": {
-        "-NmkvXqk99x7FdfNt6aJ": "2023-12-28 15:57:28.374",
-        "-NmkvexBTwu60KCAZAjI": "2023-12-28 15:58:01.367"
-      },
-      "appStartDate": {
-        "-NmkvS4vMnqcn7x4rQHc": "2023-12-28 15:57:04.644",
-        "-NmkvZkBcgVDMw0d7uwu": "2023-12-28 15:57:36.131"
+        "-NnDw2_6GtElicNFC28b": "2024-01-03 11:48:18.451",
+        "-NnDx9Lt3TUfy-8rQTZ2": "2024-01-03 11:53:08.717"
       },
       "checkHighScoreTime": {
-        "-Nmkv_VdUDBBu3UDQol6": "2023-12-28 15:57:39.059",
-        "-NmkvdAxmaEgxLTYwtkF": "2023-12-28 15:57:54.119"
+        "-NnDwv2V7iYkbCHc2Eu1": "2024-01-03 11:52:15.796"
       },
       "darkPatterns": 1,
-      "pushToken": {
-        "-NmkvVwdii2jzmOX8TiM": "Token: fF4DA1gOru32wSOBdNLvO7:APA91bEmC-RkSzzwfSJR6pX9hBREo50QP-GfEnl2gbDbMTYnuGCbo5pr1ppGUhgWuZ-mBvu76_qp4rktNTSlf6gYF48qaGdcAs9PqBnpVewzCFXI4fpGPpBckjpZQjUKCg6ovmWWrveY, Time: 2023-12-28 15:57:20.560",
-        "-NmkvZqOGpRtY0d5XjVR": "Token: fF4DA1gOru32wSOBdNLvO7:APA91bEmC-RkSzzwfSJR6pX9hBREo50QP-GfEnl2gbDbMTYnuGCbo5pr1ppGUhgWuZ-mBvu76_qp4rktNTSlf6gYF48qaGdcAs9PqBnpVewzCFXI4fpGPpBckjpZQjUKCg6ovmWWrveY, Time: 2023-12-28 15:57:36.357"
+      "pushClick": {
+        "-NnDx97KyczReVOhf5SG": "2024-01-03 11:53:07.792",
+        "-NnDx97PlexEgLBARq5a": "2024-01-03 11:53:07.923"
       },
-      "uuid": "V01-23-12-28–15:57-fBfKyTirdDNDRmx"
+      "pushToken": {
+        "-NnDw2GQEE7S6bxq9mLB": "Token: cznaBYqeJsOPeqYKuMRu4m:APA91bHic2AkIDkaA-LJKB4ijGXN293mq9Dh2r297DJDZokrC4lhloyb5VN3rA-yWZxw29TIc2yO3H3Swz_QZn_1ShJ8wggBE8sZx1vxb_v_mmeDIg7XJmbBrd4uWAxNyKkMMQyc5XF1, Time: 2024-01-03 11:48:27.327",
+        "-NnDx9RdX076ezzBXsub": "Token: cznaBYqeJsOPeqYKuMRu4m:APA91bHic2AkIDkaA-LJKB4ijGXN293mq9Dh2r297DJDZokrC4lhloyb5VN3rA-yWZxw29TIc2yO3H3Swz_QZn_1ShJ8wggBE8sZx1vxb_v_mmeDIg7XJmbBrd4uWAxNyKkMMQyc5XF1, Time: 2024-01-03 11:53:09.288",
+        "-NnDx9RefjxXMlEkBKFr": "Token: cznaBYqeJsOPeqYKuMRu4m:APA91bHic2AkIDkaA-LJKB4ijGXN293mq9Dh2r297DJDZokrC4lhloyb5VN3rA-yWZxw29TIc2yO3H3Swz_QZn_1ShJ8wggBE8sZx1vxb_v_mmeDIg7XJmbBrd4uWAxNyKkMMQyc5XF1, Time: 2024-01-03 11:53:09.289"
+      },
+      "uuid": "V01-24-01-03–11:48-tviGt118sUGEnVF"
     },
-    "V01-23-12-28–16:05-E6swskEYrmWglJz": {
+    "V01-24-01-03–13:01-DrI7AZl9rD5Oq9B": {
       "appCloseTime": {
-        "-NmkxJGu9UT_PEuTY5YL": "2023-12-28 16:05:13.104",
-        "-NmkxNho2gyfX27LiCce": "2023-12-28 16:05:31.147",
-        "-Nmkxod4Nhu-5oj_vEUa": "2023-12-28 16:07:25.446"
+        "-NnED5fV33kveQlsYK5H": "2024-01-03 13:07:18.910"
       },
       "appStartDate": {
-        "-NmkxGUZT1l1dsDtMTmL": "2023-12-28 16:05:01.373",
-        "-NmkxLDU84hbq4YE0wGh": "2023-12-28 16:05:20.865",
-        "-NmkxPkkTTJCQf6o7uyT": "2023-12-28 16:05:39.451",
-        "-Nmkxqf71QDB-_n4Kx9b": "2023-12-28 16:07:33.688"
-      },
-      "checkHighScoreTime": {
-        "-NmkxLOtmhV67TSE9UqJ": "2023-12-28 16:05:21.676",
-        "-NmkxMnNsK6Z2LQc4ig1": "2023-12-28 16:05:27.406",
-        "-NmkxQ39rkNcTwrxNCvr": "2023-12-28 16:05:40.681",
-        "-NmkxmcCizSDdWothsbk": "2023-12-28 16:07:17.196",
-        "-Nmkxr3OQspg-bAmxaP_": "2023-12-28 16:07:35.504",
-        "-NmkxtR1dvihSwv4WyvV": "2023-12-28 16:07:45.210",
-        "-Nmkxx288PLdls9VLj2A": "2023-12-28 16:08:00.001",
-        "-Nmky0-y5veKKs8Oq51e": "2023-12-28 16:08:16.246",
-        "-Nmky3cC0tDtz4X1-BiX": "2023-12-28 16:08:31.045"
+        "-NnEBuzpForB4nwn98tG": "2024-01-03 13:01:59.905"
       },
       "darkPatterns": 1,
-      "finishOfLevel": {
-        "-NmkxiV-7Yc7gCO9NTBP": "Level: 1, Won: true, Time: 2023-12-28 16:07:00.287"
+      "pushClick": {
+        "-NnED4KJh0uWlv0eqMkm": "2024-01-03 13:07:04.721",
+        "-NnED4KNeUgRw6a-sYuX": "2024-01-03 13:07:04.773"
       },
       "pushToken": {
-        "-NmkxHhmNhFCrp1-Fjj0": "Token: fYF-OBH2V38pPOpOlo2upG:APA91bG8CtSOvmgiFHi1trRXy0zQ1T5doUMJe-biDGpw2YVSUMC1uEsxGUd3C26gTKrHWMbkCUP7ZTeexJpiwpG_WPFu-ot8VKrAUJFRLIZJ5mo7MLKqOHZpxpCTxcofyp-YkJ5gKTEY, Time: 2023-12-28 16:05:06.697",
-        "-NmkxLU71_xcBwAI53A6": "Token: fYF-OBH2V38pPOpOlo2upG:APA91bG8CtSOvmgiFHi1trRXy0zQ1T5doUMJe-biDGpw2YVSUMC1uEsxGUd3C26gTKrHWMbkCUP7ZTeexJpiwpG_WPFu-ot8VKrAUJFRLIZJ5mo7MLKqOHZpxpCTxcofyp-YkJ5gKTEY, Time: 2023-12-28 16:05:22.015",
-        "-NmkxPuIEwDaR4AYVNgz": "Token: fYF-OBH2V38pPOpOlo2upG:APA91bG8CtSOvmgiFHi1trRXy0zQ1T5doUMJe-biDGpw2YVSUMC1uEsxGUd3C26gTKrHWMbkCUP7ZTeexJpiwpG_WPFu-ot8VKrAUJFRLIZJ5mo7MLKqOHZpxpCTxcofyp-YkJ5gKTEY, Time: 2023-12-28 16:05:40.052",
-        "-NmkxqpV-Ovz2Zw52JFw": "Token: fYF-OBH2V38pPOpOlo2upG:APA91bG8CtSOvmgiFHi1trRXy0zQ1T5doUMJe-biDGpw2YVSUMC1uEsxGUd3C26gTKrHWMbkCUP7ZTeexJpiwpG_WPFu-ot8VKrAUJFRLIZJ5mo7MLKqOHZpxpCTxcofyp-YkJ5gKTEY, Time: 2023-12-28 16:07:34.552"
-      },
-      "startOfLevel": {
-        "-NmkxQm8ZlZLelwyC4jn": "Level: 1, Time: 2023-12-28 16:05:43.626"
-      },
-      "uuid": "V01-23-12-28–16:05-E6swskEYrmWglJz"
-    },
-    "V01-23-12-28–17:00-nh9ezyqt1jyGRIj": {
-      "appCloseTime": {
-        "-Nml94NP5dalO-4kDItN": "2023-12-28 17:00:59.776"
-      },
-      "appStartDate": {
-        "-Nml8wuDaDulK5oLCMnU": "2023-12-28 17:00:24.872"
-      },
-      "darkPatterns": 1,
-      "pushToken": {
-        "-Nml9-09SkJzG5BvoUWK": "Token: fY_AjgXNvrftEpX93PkuOV:APA91bHy3RADzZpNc1TF-rcOiAlDQrp3aW6LS6APqzzIMWbu3gzbUY3EeiL2AAjkhYQ898b-ebbK-s1tHHffGx-_kh2FajplnlL2Om2Ut6vvZL2LH0vLvlx67RBDuHvZvl2mmB4ijsJu, Time: 2023-12-28 17:00:37.809"
-      },
-      "startOfLevel": {
-        "-Nml8ynSFdqhhxf2zm7G": "Level: 1, Time: 2023-12-28 17:00:32.836"
-      },
-      "uuid": "V01-23-12-28–17:00-nh9ezyqt1jyGRIj"
-    },
-    "V01-23-12-29–11:23-MVE6bou8HFpkCbc": {
-      "appStartDate": {
-        "-Nmp5WHk0B0j6Vz_WtG1": "2023-12-29 11:23:54.298",
-        "-Nmp5YlhXzp505faH7Zs": "2023-12-29 11:24:04.658",
-        "-Nmp5iDkcCP7Q3aiGrcr": "2023-12-29 11:24:47.529",
-        "-Nmp6e0Rf5g1u19-u6Ye": "2023-12-29 11:28:52.288"
-      },
-      "darkPatterns": 1,
-      "pushToken": {
-        "-Nmp5j8Vb_Ab8vQpZUjs": "Token: fd9Fb3aCfNVBX6x9J1VQue:APA91bGH2GCWWGkA6XR1AR3q7ZRnKMMyBEZqKwXHvcopYwu-fmfdBCD4QiWqa-U5cLiEFuwm-FyfVsd6ag-E8KERfS45DevHK61BvFZWe3fN5xJlewnsXahcrtswedYyGdR8Shj9fB0L, Time: 2023-12-29 11:24:51.469",
-        "-Nmp5pRhvD__goOXHo6O": "Token: fd9Fb3aCfNVBX6x9J1VQue:APA91bG-jZKJTW5V1puTXdrA8IWy58HT_LPb3rRqkCLhAPuqBXkew5xjyM0h3BGrHGXHJNTMaKi713LWoiEW3tT-BRgeHtDhpJwsHa7vS7kNl4X3FohytGoCW1FLJDFZHMvNpl0wreDt, Time: 2023-12-29 11:25:17.274",
-        "-Nmp5pZdShrLHKif_g4w": "Token: fd9Fb3aCfNVBX6x9J1VQue:APA91bFY-UuXxgaaeMyIclnlUHxTyNNYf2r4UDMtwVhPE0_4qHXuXlU_Gd3ocN4-aIcm3JGmPJMJZyOePINvKkm3ni5xWOl67HP0IFs30V-oIXykTLK6eenSCUmc3s_10dtjukikjDaq, Time: 2023-12-29 11:25:17.782",
-        "-Nmp6dow4OjDFk6KpdXQ": "Token: fd9Fb3aCfNVBX6x9J1VQue:APA91bFY-UuXxgaaeMyIclnlUHxTyNNYf2r4UDMtwVhPE0_4qHXuXlU_Gd3ocN4-aIcm3JGmPJMJZyOePINvKkm3ni5xWOl67HP0IFs30V-oIXykTLK6eenSCUmc3s_10dtjukikjDaq, Time: 2023-12-29 11:28:51.817"
-      },
-      "uuid": "V01-23-12-29–11:23-MVE6bou8HFpkCbc"
-    },
-    "V01-23-12-29–11:38-Bo7ulobiYvViVdj": {
-      "appCloseTime": {
-        "-NmpAMwn49w_M5hHXxND": "2023-12-29 11:45:00.911",
-        "-NmpAMwoF7rS1Rr3-AJh": "2023-12-29 11:45:00.911"
-      },
-      "appStartDate": {
-        "-Nmp8sBSrhItj0NGmEUX": "2023-12-29 11:38:34.491",
-        "-Nmp9JpBlaROwnTCmUM6": "2023-12-29 11:40:32.116",
-        "-NmpAOgUkVew32aGsPQ8": "2023-12-29 11:45:13.996",
-        "-NmpARl4McbKJbQfkGLo": "2023-12-29 11:45:26.627",
-        "-NmpAf5g8s1STHU8cpeM": "2023-12-29 11:46:25.320",
-        "-NmpAmz1Y5OWeeq0qB2y": "2023-12-29 11:46:57.609",
-        "-NmpBMXBVZ0w2TXQooRo": "2023-12-29 11:49:27.300",
-        "-NmpBR9BFMJmOB1cZvT3": "2023-12-29 11:49:46.265"
-      },
-      "darkPatterns": 0,
-      "finishOfLevel": {
-        "-Nmp9CExRzxONWdIcfmk": "Level: 1, Won: false, Time: 2023-12-29 11:40:01.241",
-        "-Nmp9snsW7e19Pv_uUhS": "Level: 1, Won: false, Time: 2023-12-29 11:42:59.668",
-        "-NmpBBeVpZe5M5qR0Xjb": "Level: 1, Won: false, Time: 2023-12-29 11:48:42.954",
-        "-NmpBBeXTiIm6nHIesBe": "Level: 1, Won: false, Time: 2023-12-29 11:48:42.957",
-        "-NmpBBeZe3KRSXtbLK8K": "Level: 1, Won: false, Time: 2023-12-29 11:48:42.959"
-      },
-      "pushToken": {
-        "-Nmp8zuqxl0cmlaj5i0K": "Token: fpxCNQCzczRbj0NLa_aDek:APA91bGbGikey7dJp__mF32MyCtKK4_jXMZtDAyKCSh2-GiK7exqiMUG7opzASdhUI9zpKRBHhUbaqKiMLkbord-IvHK_IN3FsdUtoB8ufuZU7prRWFSNbon_l_pOqndHugpJYin6sIZ, Time: 2023-12-29 11:39:06.643",
-        "-Nmp9JlpGMhGxzxRtMr9": "Token: fpxCNQCzczRbj0NLa_aDek:APA91bGbGikey7dJp__mF32MyCtKK4_jXMZtDAyKCSh2-GiK7exqiMUG7opzASdhUI9zpKRBHhUbaqKiMLkbord-IvHK_IN3FsdUtoB8ufuZU7prRWFSNbon_l_pOqndHugpJYin6sIZ, Time: 2023-12-29 11:40:32.082",
-        "-NmpAOiW-yhHo4ee8sjV": "Token: fpxCNQCzczRbj0NLa_aDek:APA91bGbGikey7dJp__mF32MyCtKK4_jXMZtDAyKCSh2-GiK7exqiMUG7opzASdhUI9zpKRBHhUbaqKiMLkbord-IvHK_IN3FsdUtoB8ufuZU7prRWFSNbon_l_pOqndHugpJYin6sIZ, Time: 2023-12-29 11:45:14.316",
-        "-NmpARiW4bmMJzpTHzuY": "Token: fpxCNQCzczRbj0NLa_aDek:APA91bGbGikey7dJp__mF32MyCtKK4_jXMZtDAyKCSh2-GiK7exqiMUG7opzASdhUI9zpKRBHhUbaqKiMLkbord-IvHK_IN3FsdUtoB8ufuZU7prRWFSNbon_l_pOqndHugpJYin6sIZ, Time: 2023-12-29 11:45:26.604",
-        "-NmpAf2Uq18oBC-6fLqZ": "Token: fpxCNQCzczRbj0NLa_aDek:APA91bGbGikey7dJp__mF32MyCtKK4_jXMZtDAyKCSh2-GiK7exqiMUG7opzASdhUI9zpKRBHhUbaqKiMLkbord-IvHK_IN3FsdUtoB8ufuZU7prRWFSNbon_l_pOqndHugpJYin6sIZ, Time: 2023-12-29 11:46:25.290",
-        "-NmpAmviB37SMblg1odA": "Token: fpxCNQCzczRbj0NLa_aDek:APA91bGbGikey7dJp__mF32MyCtKK4_jXMZtDAyKCSh2-GiK7exqiMUG7opzASdhUI9zpKRBHhUbaqKiMLkbord-IvHK_IN3FsdUtoB8ufuZU7prRWFSNbon_l_pOqndHugpJYin6sIZ, Time: 2023-12-29 11:46:57.560",
-        "-NmpBMTo7SdBAo5S1ndj": "Token: fpxCNQCzczRbj0NLa_aDek:APA91bGbGikey7dJp__mF32MyCtKK4_jXMZtDAyKCSh2-GiK7exqiMUG7opzASdhUI9zpKRBHhUbaqKiMLkbord-IvHK_IN3FsdUtoB8ufuZU7prRWFSNbon_l_pOqndHugpJYin6sIZ, Time: 2023-12-29 11:49:27.262",
-        "-NmpBR6NvX1Ki9TsVy0j": "Token: fpxCNQCzczRbj0NLa_aDek:APA91bGbGikey7dJp__mF32MyCtKK4_jXMZtDAyKCSh2-GiK7exqiMUG7opzASdhUI9zpKRBHhUbaqKiMLkbord-IvHK_IN3FsdUtoB8ufuZU7prRWFSNbon_l_pOqndHugpJYin6sIZ, Time: 2023-12-29 11:49:46.243"
-      },
-      "startOfLevel": {
-        "-Nmp8uhBJIIgpKHcqAjG": "Level: 1, Time: 2023-12-29 11:38:45.289",
-        "-Nmp9KZABs5SgLbbg5ji": "Level: 1, Time: 2023-12-29 11:40:35.304",
-        "-NmpATfM4eBbUUnQ5EQt": "Level: 1, Time: 2023-12-29 11:45:34.593",
-        "-NmpAfSznuyjlp9PjT8U": "Level: 1, Time: 2023-12-29 11:46:26.986",
-        "-NmpAnMFX6Wv4A3yGwSj": "Level: 1, Time: 2023-12-29 11:46:59.323",
-        "-NmpBRYaLQi8zQil8sQv": "Level: 1, Time: 2023-12-29 11:49:48.049"
-      },
-      "uuid": "V01-23-12-29–11:38-Bo7ulobiYvViVdj"
-    },
-    "V01-23-12-29–11:52-dA21fAmo3Tt0lJb": {
-      "appCloseTime": {
-        "-NmpC8Ugee4Fe-QpIKX-": "2023-12-29 11:52:52.245"
-      },
-      "appStartDate": {
-        "-NmpC1CoPLa-DvrwlWCQ": "2023-12-29 11:52:22.007",
-        "-NmpCA_c6VKCoDdPyA6v": "2023-12-29 11:53:00.467"
-      },
-      "darkPatterns": 0,
-      "finishOfLevel": {
-        "-NmpCij83YMtijXYPWrJ": "Level: 1, Won: false, Time: 2023-12-29 11:55:24.753"
-      },
-      "pushToken": {
-        "-NmpC2MZjkn4taaaTIjp": "Token: efysrZlzk-daEVu5eoOheK:APA91bG_snCcPNdvCWXgfjYOLr-UpjK0zAAU1Yjs9M4ny6Fs4qIT2ZC4hgAgG1dkNT5Mbl_tLZ_78ZJmiMVzm4SVfuQkqt9r_XO73hEGYm7PID3AX-e356ENmwNqRbfyeuT18iip4wiv, Time: 2023-12-29 11:52:27.150",
-        "-NmpCAbGSYPbTrnm75-l": "Token: efysrZlzk-daEVu5eoOheK:APA91bG_snCcPNdvCWXgfjYOLr-UpjK0zAAU1Yjs9M4ny6Fs4qIT2ZC4hgAgG1dkNT5Mbl_tLZ_78ZJmiMVzm4SVfuQkqt9r_XO73hEGYm7PID3AX-e356ENmwNqRbfyeuT18iip4wiv, Time: 2023-12-29 11:53:00.889"
-      },
-      "startOfLevel": {
-        "-NmpC2oaVhT1aYtoqk58": "Level: 1, Time: 2023-12-29 11:52:29.007",
-        "-NmpCB1UbYuquZtqpu4f": "Level: 1, Time: 2023-12-29 11:53:02.632"
-      },
-      "uuid": "V01-23-12-29–11:52-dA21fAmo3Tt0lJb"
-    },
-    "V01-23-12-29–12:01-hWqsWmTPueBv624": {
-      "appCloseTime": {
-        "-NmpEfAb0VGNTh-GSR_3": "2023-12-29 12:03:54.535",
-        "-NmpEfAb0VGNTh-GSR_4": "2023-12-29 12:03:54.536",
-        "-NmpEgfmSxYrUur_j8_H": "2023-12-29 12:04:00.691",
-        "-NmpEgfnStBfSuLJBU10": "2023-12-29 12:04:00.692"
-      },
-      "appStartDate": {
-        "-NmpE6gpFm2NLm4hQ4EG": "2023-12-29 12:01:28.749",
-        "-NmpEJpk6sB-t5OFFMhp": "2023-12-29 12:02:22.886",
-        "-NmpEifQQnWw2McHPxgs": "2023-12-29 12:04:08.520",
-        "-NmpEuQ2y2PAI75McQbZ": "2023-12-29 12:04:56.694"
-      },
-      "checkHighScoreTime": {
-        "-NmpEcm2FW0tlvi2-Nlw": "2023-12-29 12:03:44.703"
-      },
-      "darkPatterns": 1,
-      "finishOfLevel": {
-        "-NmpE_9CP8UpNdD40JOA": "Level: 1, Won: true, Time: 2023-12-29 12:03:29.870"
-      },
-      "pushToken": {
-        "-NmpE7wPnbgSgbGKeOfx": "Token: cMu_aZBwBp7320o0JRhD4O:APA91bGH8gVE07Y7AkZ_h0AZchCoEp9QjoTnWfLVAIQWDrO7mPzKd4oQyuOvk6zGKBJ0C8LfVdTPSNpW9D-wpP3y4aAutiX2NVSlmZyeuVGWRoFqlIstcKM8Y3gL3tL_noo5WXOEyU5D, Time: 2023-12-29 12:01:34.298",
-        "-NmpEJn777acVB-229HD": "Token: cMu_aZBwBp7320o0JRhD4O:APA91bGH8gVE07Y7AkZ_h0AZchCoEp9QjoTnWfLVAIQWDrO7mPzKd4oQyuOvk6zGKBJ0C8LfVdTPSNpW9D-wpP3y4aAutiX2NVSlmZyeuVGWRoFqlIstcKM8Y3gL3tL_noo5WXOEyU5D, Time: 2023-12-29 12:02:22.857",
-        "-NmpEiiBMq2jhiQvaPtA": "Token: cMu_aZBwBp7320o0JRhD4O:APA91bGH8gVE07Y7AkZ_h0AZchCoEp9QjoTnWfLVAIQWDrO7mPzKd4oQyuOvk6zGKBJ0C8LfVdTPSNpW9D-wpP3y4aAutiX2NVSlmZyeuVGWRoFqlIstcKM8Y3gL3tL_noo5WXOEyU5D, Time: 2023-12-29 12:04:08.935",
-        "-NmpEuM_YzwYirfUQwZg": "Token: cMu_aZBwBp7320o0JRhD4O:APA91bGH8gVE07Y7AkZ_h0AZchCoEp9QjoTnWfLVAIQWDrO7mPzKd4oQyuOvk6zGKBJ0C8LfVdTPSNpW9D-wpP3y4aAutiX2NVSlmZyeuVGWRoFqlIstcKM8Y3gL3tL_noo5WXOEyU5D, Time: 2023-12-29 12:04:56.640"
-      },
-      "startOfLevel": {
-        "-NmpE78JIGXuwhSvu-pC": "Level: 1, Time: 2023-12-29 12:01:31.028",
-        "-NmpEKEf75A8Tf077Vy1": "Level: 1, Time: 2023-12-29 12:02:24.684",
-        "-NmpEulIArqxPrCC10Lb": "Level: 2, Time: 2023-12-29 12:04:58.285"
-      },
-      "uuid": "V01-23-12-29–12:01-hWqsWmTPueBv624"
-    },
-    "V01-23-12-29–12:19-2ZMeO7FTEbWiTvd": {
-      "appStartDate": {
-        "-NmpI9RqJk_zcrB_GYhI": "2023-12-29 12:19:08.589"
-      },
-      "darkPatterns": 1,
-      "uuid": "V01-23-12-29–12:19-2ZMeO7FTEbWiTvd"
-    },
-    "V01-23-12-29–12:19-uQ9f77hecTYJjGX": {
-      "appCloseTime": {
-        "-NmpIkUeLAUsgx6V6WgQ": "2023-12-29 12:21:44.781"
-      },
-      "appStartDate": {
-        "-NmpIKbZMiRBbp4t9TFx": "2023-12-29 12:19:54.372"
-      },
-      "darkPatterns": 0,
-      "pushToken": {
-        "-NmpIXbz6xy4GdjkWSXC": "Token: frwdFhOkXxb3xVHpTbNkYZ:APA91bHWxHUJsDbs_R8XSLHOgdwKoDOvyaGA42smYo8m8W2iZUNia1zZQ1gJB3Cs9Xv4_wEykAiIELrqnZTMo7O3SBRuAlnddpxdJx4Erfq_YVwNXVVmHFjsMM6a0ZjT3G8gxXK9P3r7, Time: 2023-12-29 12:20:47.969"
-      },
-      "startOfLevel": {
-        "-NmpISf4EQcr3IH-nPlj": "Level: 1, Time: 2023-12-29 12:20:27.687",
-        "-NmpIW_5FSqYdM6wpI5T": "Level: 1, Time: 2023-12-29 12:20:43.688"
-      },
-      "uuid": "V01-23-12-29–12:19-uQ9f77hecTYJjGX"
-    },
-    "V01-23-12-29–12:24-2EcuDAcbVVGkFzt": {
-      "appCloseTime": {
-        "-NmpJV2HHq37_zqY1bSw": "2023-12-29 12:24:59.648",
-        "-NmpJV2HHq37_zqY1bSx": "2023-12-29 12:24:59.649",
-        "-NmpKmBkGMCqbxFf0SPJ": "2023-12-29 12:30:36.020",
-        "-NmpKmBl6PoGErVR2ksn": "2023-12-29 12:30:36.021"
-      },
-      "appStartDate": {
-        "-NmpJIBHmoc7ptBo5CZQ": "2023-12-29 12:24:06.532",
-        "-NmpJP_j6qN5_eIaikk-": "2023-12-29 12:24:37.128",
-        "-NmpJX18lLgz3U6Gcbbe": "2023-12-29 12:25:07.448",
-        "-NmpKlwTaF51is3mooAe": "2023-12-29 12:30:34.836"
-      },
-      "darkPatterns": 1,
-      "finishOfLevel": {
-        "-NmpJmQEQEhp05mulNzd": "Level: 1, Won: false, Time: 2023-12-29 12:26:14.802"
-      },
-      "pushToken": {
-        "-NmpJJHdE0JuIvIJ7XOx": "Token: ehISx1JGyciNzw-vLHWWLn:APA91bG24amCmbEsW1d-YoYArpU2Z-2a5hM7cY_ndGK5x7x-w4bf9AwOYWcJs2np65Ux93eR5Y9xeD8nojUOPo-ZdKMIeo4P5R7l0U0tnsLQDfVk4Xo6TnQ5Ci8fx1KZekRwqsdxO8yS, Time: 2023-12-29 12:24:11.479",
-        "-NmpJPXnh3FPEI-QGddt": "Token: ehISx1JGyciNzw-vLHWWLn:APA91bG24amCmbEsW1d-YoYArpU2Z-2a5hM7cY_ndGK5x7x-w4bf9AwOYWcJs2np65Ux93eR5Y9xeD8nojUOPo-ZdKMIeo4P5R7l0U0tnsLQDfVk4Xo6TnQ5Ci8fx1KZekRwqsdxO8yS, Time: 2023-12-29 12:24:37.090",
-        "-NmpJX3b3Phz3LJsHdQv": "Token: ehISx1JGyciNzw-vLHWWLn:APA91bG24amCmbEsW1d-YoYArpU2Z-2a5hM7cY_ndGK5x7x-w4bf9AwOYWcJs2np65Ux93eR5Y9xeD8nojUOPo-ZdKMIeo4P5R7l0U0tnsLQDfVk4Xo6TnQ5Ci8fx1KZekRwqsdxO8yS, Time: 2023-12-29 12:25:07.819",
-        "-NmpKldIsHeE8UFYpmB_": "Token: ehISx1JGyciNzw-vLHWWLn:APA91bG24amCmbEsW1d-YoYArpU2Z-2a5hM7cY_ndGK5x7x-w4bf9AwOYWcJs2np65Ux93eR5Y9xeD8nojUOPo-ZdKMIeo4P5R7l0U0tnsLQDfVk4Xo6TnQ5Ci8fx1KZekRwqsdxO8yS, Time: 2023-12-29 12:30:33.750"
-      },
-      "startOfLevel": {
-        "-NmpJIYlKvGfYuO2dYfx": "Level: 1, Time: 2023-12-29 12:24:08.479",
-        "-NmpJR50GLJaf0y9h70W": "Level: 1, Time: 2023-12-29 12:24:43.439",
-        "-NmpJXUopwVj-tzxPQ1X": "Level: 1, Time: 2023-12-29 12:25:09.560"
-      },
-      "uuid": "V01-23-12-29–12:24-2EcuDAcbVVGkFzt"
-    },
-    "V01-23-12-29–12:31-T6CdxBgaufcpv54": {
-      "appCloseTime": {
-        "-NmpLQlpY5wpjXM4RM1H": "2023-12-29 12:33:26.352",
-        "-NmpLQlqKx2QNyhefTti": "2023-12-29 12:33:26.353",
-        "-NmpLQlrIJQNWMNlMGzS": "2023-12-29 12:33:26.354",
-        "-NmpM3FayPvrIOzyiT31": "2023-12-29 12:36:12.146",
-        "-NmpM3FayPvrIOzyiT32": "2023-12-29 12:36:12.147"
-      },
-      "appStartDate": {
-        "-NmpKxiEF0j0KcbU2_fZ": "2023-12-29 12:31:22.907",
-        "-NmpL4mNOtUNuVFZeFOE": "2023-12-29 12:31:56.102",
-        "-NmpLQlF_3UIHUey8tAn": "2023-12-29 12:33:26.142",
-        "-NmpLSvEtJtn5tIB0b-7": "2023-12-29 12:33:34.895",
-        "-NmpM-obmAXlxi_LeBjT": "2023-12-29 12:35:57.895",
-        "-NmpM56esN0Mw1PWBcKf": "2023-12-29 12:36:19.536",
-        "-NmpMFKHe_3GXqnmSv6K": "2023-12-29 12:37:01.483",
-        "-NmpMS0iPIptLtzI4AZE": "2023-12-29 12:37:53.456",
-        "-NmpMWCsHPztTI9hRJZw": "2023-12-29 12:38:10.658",
-        "-NmpMvRNPf85117FtIie": "2023-12-29 12:39:58.075",
-        "-NmpN21auGiqZdWxCgDj": "2023-12-29 12:40:29.162"
-      },
-      "darkPatterns": 0,
-      "finishOfLevel": {
-        "-NmpLFbo-rEPT5sZq_ks": "Level: 1, Won: true, Time: 2023-12-29 12:32:40.654",
-        "-NmpLaUbJO0axG6XrzZq": "Level: 2, Won: true, Time: 2023-12-29 12:34:10.227",
-        "-NmpMmLFRqW3Cpyw66Ku": "Level: 1, Won: false, Time: 2023-12-29 12:39:20.923",
-        "-NmpMmLTwJ0OSdlOtwI9": "Level: 1, Won: false, Time: 2023-12-29 12:39:20.938",
-        "-NmpNEwJiJdlY9DQQVgA": "Level: 1, Won: true, Time: 2023-12-29 12:41:22.143"
-      },
-      "pushToken": {
-        "-NmpL73WCG9Xk6G9APaU": "Token: dYTAoGNeioFhEmqrzK32S8:APA91bGicbYSpZxB_l_agsWZlXpbYneiXqVciiHAXCf_e5MPqEwH9KFEQvoAO1GSIQ7XNUXlGjlFTbkjiaOG3jJbVq1_83pkSmaJyTp9FQ9VvI3yyJQB3j89e6QiFYlQbj0irIuV6LFA, Time: 2023-12-29 12:32:05.628",
-        "-NmpLE-uN6cfK1NG4A4r": "Token: dYTAoGNeioFhEmqrzK32S8:APA91bGpeNygG20s-RTUPTL1xzhyjptP5ZIFzWS7Llb4Xs-raWLeOZQgnbJXpNB_ghR_rm-T9YigjscdEnGZyryJGDn2tJpz45t3e8-jWLVDOSkbl5QgY_t0wfv14MNDjipv1-GnWhad, Time: 2023-12-29 12:32:34.069",
-        "-NmpLQi5fRl2zMJ8_tA3": "Token: dYTAoGNeioFhEmqrzK32S8:APA91bGpeNygG20s-RTUPTL1xzhyjptP5ZIFzWS7Llb4Xs-raWLeOZQgnbJXpNB_ghR_rm-T9YigjscdEnGZyryJGDn2tJpz45t3e8-jWLVDOSkbl5QgY_t0wfv14MNDjipv1-GnWhad, Time: 2023-12-29 12:33:26.113",
-        "-NmpLSxRifsvN8Ybz11E": "Token: dYTAoGNeioFhEmqrzK32S8:APA91bGpeNygG20s-RTUPTL1xzhyjptP5ZIFzWS7Llb4Xs-raWLeOZQgnbJXpNB_ghR_rm-T9YigjscdEnGZyryJGDn2tJpz45t3e8-jWLVDOSkbl5QgY_t0wfv14MNDjipv1-GnWhad, Time: 2023-12-29 12:33:35.272",
-        "-NmpM-ldX602HKpYeWwM": "Token: dYTAoGNeioFhEmqrzK32S8:APA91bGpeNygG20s-RTUPTL1xzhyjptP5ZIFzWS7Llb4Xs-raWLeOZQgnbJXpNB_ghR_rm-T9YigjscdEnGZyryJGDn2tJpz45t3e8-jWLVDOSkbl5QgY_t0wfv14MNDjipv1-GnWhad, Time: 2023-12-29 12:35:57.878",
-        "-NmpM58rjXSjYOCUMNIc": "Token: dYTAoGNeioFhEmqrzK32S8:APA91bGpeNygG20s-RTUPTL1xzhyjptP5ZIFzWS7Llb4Xs-raWLeOZQgnbJXpNB_ghR_rm-T9YigjscdEnGZyryJGDn2tJpz45t3e8-jWLVDOSkbl5QgY_t0wfv14MNDjipv1-GnWhad, Time: 2023-12-29 12:36:19.907",
-        "-NmpMFHEzKlLAeMMEO_G": "Token: dYTAoGNeioFhEmqrzK32S8:APA91bGpeNygG20s-RTUPTL1xzhyjptP5ZIFzWS7Llb4Xs-raWLeOZQgnbJXpNB_ghR_rm-T9YigjscdEnGZyryJGDn2tJpz45t3e8-jWLVDOSkbl5QgY_t0wfv14MNDjipv1-GnWhad, Time: 2023-12-29 12:37:01.402",
-        "-NmpMRz7aWDQnzOY6r8E": "Token: dYTAoGNeioFhEmqrzK32S8:APA91bGpeNygG20s-RTUPTL1xzhyjptP5ZIFzWS7Llb4Xs-raWLeOZQgnbJXpNB_ghR_rm-T9YigjscdEnGZyryJGDn2tJpz45t3e8-jWLVDOSkbl5QgY_t0wfv14MNDjipv1-GnWhad, Time: 2023-12-29 12:37:53.428",
-        "-NmpMUvaeC-0zCdMOqyh": "Token: dYTAoGNeioFhEmqrzK32S8:APA91bGpeNygG20s-RTUPTL1xzhyjptP5ZIFzWS7Llb4Xs-raWLeOZQgnbJXpNB_ghR_rm-T9YigjscdEnGZyryJGDn2tJpz45t3e8-jWLVDOSkbl5QgY_t0wfv14MNDjipv1-GnWhad, Time: 2023-12-29 12:38:05.490",
-        "-NmpMWB-iQPy8OJDOQFm": "Token: dYTAoGNeioFhEmqrzK32S8:APA91bGpeNygG20s-RTUPTL1xzhyjptP5ZIFzWS7Llb4Xs-raWLeOZQgnbJXpNB_ghR_rm-T9YigjscdEnGZyryJGDn2tJpz45t3e8-jWLVDOSkbl5QgY_t0wfv14MNDjipv1-GnWhad, Time: 2023-12-29 12:38:10.636",
-        "-NmpMvPT1Au3tdzMO39_": "Token: dYTAoGNeioFhEmqrzK32S8:APA91bGpeNygG20s-RTUPTL1xzhyjptP5ZIFzWS7Llb4Xs-raWLeOZQgnbJXpNB_ghR_rm-T9YigjscdEnGZyryJGDn2tJpz45t3e8-jWLVDOSkbl5QgY_t0wfv14MNDjipv1-GnWhad, Time: 2023-12-29 12:39:58.058",
-        "-NmpN1zC8TKN-qbqNn_l": "Token: dYTAoGNeioFhEmqrzK32S8:APA91bGpeNygG20s-RTUPTL1xzhyjptP5ZIFzWS7Llb4Xs-raWLeOZQgnbJXpNB_ghR_rm-T9YigjscdEnGZyryJGDn2tJpz45t3e8-jWLVDOSkbl5QgY_t0wfv14MNDjipv1-GnWhad, Time: 2023-12-29 12:40:29.081"
-      },
-      "startOfLevel": {
-        "-NmpL5j6KLh0yde5qr3j": "Level: 1, Time: 2023-12-29 12:32:00.162",
-        "-NmpLLz4udjJuGY-BXAI": "Level: 2, Time: 2023-12-29 12:33:06.720",
-        "-NmpLTkzDPLkiCN0guwi": "Level: 2, Time: 2023-12-29 12:33:38.571",
-        "-NmpLe6tc7KXYZjNA6c0": "Level: 2, Time: 2023-12-29 12:34:25.094",
-        "-NmpM0EjoKfu8dg2vhwi": "Level: 3, Time: 2023-12-29 12:35:59.804",
-        "-NmpMGvu18ejMlOnLgkQ": "Level: 1, Time: 2023-12-29 12:37:08.165",
-        "-NmpMJm0WqKiuzxlnQkh": "Level: 1, Time: 2023-12-29 12:37:19.820",
-        "-NmpMNmBmVcgsNVjcv4f": "Level: 1, Time: 2023-12-29 12:37:36.215",
-        "-NmpMXPh34mNYn0tLC1S": "Level: 1, Time: 2023-12-29 12:38:15.673",
-        "-NmpN35LBaKqVyMRX-oF": "Level: 1, Time: 2023-12-29 12:40:33.633",
-        "-NmpN5xrvr1qmxOl2pMZ": "Level: 1, Time: 2023-12-29 12:40:45.379",
-        "-NmpNHcOFAMGaDwxj_Zs": "Level: 3, Time: 2023-12-29 12:41:33.157"
-      },
-      "uuid": "V01-23-12-29–12:31-T6CdxBgaufcpv54"
-    },
-    "V01-23-12-29–13:05-c9kLwPdxr2LS4uP": {
-      "appCloseTime": {
-        "-NmpSvYyyd3Ssx7HPTJv": "2023-12-29 13:06:11.539"
-      },
-      "appStartDate": {
-        "-NmpSprZclaY-XLSI1D-": "2023-12-29 13:05:47.889"
-      },
-      "darkPatterns": 0,
-      "pushToken": {
-        "-NmpSruVO5_pSkrUJKTV": "Token: cji_to6cO-YCRUbBgf0GyF:APA91bGuXFTJ6oWTe7B7ETQq5x79RcRzOrKDV6PspeyplYD6PLIzGmEtWaYXIbMiKqJ-jBO_wwZFu411Vq2fie5Wc59eRKnGHFCPhhsEutuFbJ_zukrE5_kYtljhEs2b0ZVKLOTebQ5F, Time: 2023-12-29 13:05:56.597"
-      },
-      "startOfLevel": {
-        "-NmpSrlUAY2qmReeryCs": "Level: 1, Time: 2023-12-29 13:05:56.019"
-      },
-      "uuid": "V01-23-12-29–13:05-c9kLwPdxr2LS4uP"
-    },
-    "V01-23-12-29–13:16-hV7ClhMpd0oG9hT": {
-      "appCloseTime": {
-        "-NmpW3qi9dIyvnsHkdI3": "2023-12-29 13:19:55.974"
-      },
-      "appStartDate": {
-        "-NmpVCwz1FDTGbxZFU3D": "2023-12-29 13:16:10.850"
-      },
-      "darkPatterns": 1,
-      "finishOfLevel": {
-        "-NmpV_80GyJzCQv40Jzx": "Level: 1, Won: false, Time: 2023-12-29 13:17:46.074"
-      },
-      "pushToken": {
-        "-NmpVEnBxwrsu6NcrH8j": "Token: ej-xtCjd67SEmZoBlKbuSc:APA91bHSOYYPXM5lbnalgmbGbY9Rt0af3BBmvJR_Yi4D1yEJ1cgNjIO8HcXanLCY2LhqCFOb0QXrFMOI3O68gTfP8nI_pnuPaZqD-z5csXhZsmxubbR2ebZpewyQEB6jPcAOfabpPy8R, Time: 2023-12-29 13:16:18.662"
-      },
-      "startOfLevel": {
-        "-NmpVF73RLB_iYNzYI-W": "Level: 1, Time: 2023-12-29 13:16:19.998"
-      },
-      "uuid": "V01-23-12-29–13:16-hV7ClhMpd0oG9hT"
-    },
-    "V01-23-12-29–13:24-dSLXzb8XM87sqo9": {
-      "appCloseTime": {
-        "-NmpXJl-JsVtx54aphfw": "2023-12-29 13:25:23.307",
-        "-NmpXJl0E4ETR1okXla6": "2023-12-29 13:25:23.308"
-      },
-      "appStartDate": {
-        "-NmpX4U6l3-cDcPQB1Eh": "2023-12-29 13:24:20.446",
-        "-NmpXArA1CR0KvzKc1D2": "2023-12-29 13:24:46.574"
-      },
-      "darkPatterns": 1,
-      "finishOfLevel": {
-        "-NmpXDiY1kcCienXLYcY": "Level: 1, Won: false, Time: 2023-12-29 13:24:58.573"
-      },
-      "pushToken": {
-        "-NmpX5Tw2n5gd8opFVvI": "Token: fRrJDBHLWpPH_iXBBzrj4A:APA91bF7WVXvX00QrNtFiHpUTs0RIEie11Av7IG3W2Y2ORkw-62VdhaE7uxsy99Z3-vBAah_l3HQ39F5av2s4IR7EYmkIbEsLfMEorGNmKaPd2QLgHqygVeSf8NF9wB3-toN6BPm6hbZ, Time: 2023-12-29 13:24:24.807",
-        "-NmpXAmdiwSwyXTUOZix": "Token: fRrJDBHLWpPH_iXBBzrj4A:APA91bF7WVXvX00QrNtFiHpUTs0RIEie11Av7IG3W2Y2ORkw-62VdhaE7uxsy99Z3-vBAah_l3HQ39F5av2s4IR7EYmkIbEsLfMEorGNmKaPd2QLgHqygVeSf8NF9wB3-toN6BPm6hbZ, Time: 2023-12-29 13:24:46.547"
-      },
-      "startOfLevel": {
-        "-NmpX5Nu2RlQgqfUoBGw": "Level: 1, Time: 2023-12-29 13:24:24.421",
-        "-NmpXBE3W_0JGEvEniUg": "Level: 1, Time: 2023-12-29 13:24:48.367"
-      },
-      "uuid": "V01-23-12-29–13:24-dSLXzb8XM87sqo9"
-    },
-    "V01-23-12-30–11:24-8TkyAoeZE2bx8Br": {
-      "appCloseTime": {
-        "-NmuFP0jh4j4hMjh-VCk": "2023-12-30 11:25:12.495",
-        "-NmuFYbX0XgQnWTbuRm2": "2023-12-30 11:25:51.725"
-      },
-      "appStartDate": {
-        "-NmuFJy5unLxPcMyld6q": "2023-12-30 11:24:51.340",
-        "-NmuFQspIiags1crjC6B": "2023-12-30 11:25:19.746"
-      },
-      "darkPatterns": 0,
-      "pushToken": {
-        "-NmuFRcCjePf9v18LrCB": "Token: edCjazJTRICgDG62U18XlT:APA91bFm_Jq_fsiAqd1cIOEqlZVUgyXKVbXsETBJKoh9w0nV4V9Iguh1zRph9jAr-VK33KUYQ1jkEMrib_gSC9YLkGN9x4rGHXgfrFPczu6Dz4VBUr6-0m13R23auQlyxopOnJEoPMCT, Time: 2023-12-30 11:25:23.095"
-      },
-      "uuid": "V01-23-12-30–11:24-8TkyAoeZE2bx8Br"
-    },
-    "V01-23-12-30–11:26-4MmIx27SCpDWtQD": {
-      "appCloseTime": {
-        "-NmuFvWBMeSeAOMrtPX4": "2023-12-30 11:27:29.739",
-        "-NmuGpkhG34nWf2l3LYZ": "2023-12-30 11:31:28.136",
-        "-NmuGpki3qLL7sflNk7j": "2023-12-30 11:31:28.136",
-        "-NmuGpki3qLL7sflNk7k": "2023-12-30 11:31:28.137",
-        "-NmuGpki3qLL7sflNk7l": "2023-12-30 11:31:28.137",
-        "-NmuGpki3qLL7sflNk7m": "2023-12-30 11:31:28.137"
-      },
-      "appStartDate": {
-        "-NmuFf26Dycx9Df6S6um": "2023-12-30 11:26:21.776",
-        "-NmuFxTQiWPf2mI03iCb": "2023-12-30 11:27:37.372",
-        "-NmuGYgOL8bxjUOgustm": "2023-12-30 11:30:13.989",
-        "-NmuGfFy9atK2lKV8-I9": "2023-12-30 11:30:45.005",
-        "-NmuGn3-80PMV1UeilCX": "2023-12-30 11:31:16.938",
-        "-NmuGpQgSasIjUef5nKo": "2023-12-30 11:31:26.644"
-      },
-      "checkHighScoreTime": {
-        "-NmuFzipsotrNinBWG7R": "2023-12-30 11:27:46.826"
-      },
-      "darkPatterns": 1,
-      "pushToken": {
-        "-NmuFga8Gi3UUSD7YDDZ": "Token: f_5PU42nHXd8TDGBRjilwz:APA91bExqdslregLZWW9fRh-5t3YEEcJwnVtXZOTQ8QMBl7s9PLKB_2QXFN5FMkwdNhav3ms8c_uYoHKDYvoubObjgIvDHSXNFpsbfBWTTSDXWQuU7QZ1jCvHtWYuWooRkj2yaRjUXvh, Time: 2023-12-30 11:26:28.615",
-        "-NmuFxT9HxNZ3qK7aqLQ": "Token: f_5PU42nHXd8TDGBRjilwz:APA91bExqdslregLZWW9fRh-5t3YEEcJwnVtXZOTQ8QMBl7s9PLKB_2QXFN5FMkwdNhav3ms8c_uYoHKDYvoubObjgIvDHSXNFpsbfBWTTSDXWQuU7QZ1jCvHtWYuWooRkj2yaRjUXvh, Time: 2023-12-30 11:27:37.573",
-        "-NmuGUWxX8fbrALcZuF4": "Token: f_5PU42nHXd8TDGBRjilwz:APA91bExqdslregLZWW9fRh-5t3YEEcJwnVtXZOTQ8QMBl7s9PLKB_2QXFN5FMkwdNhav3ms8c_uYoHKDYvoubObjgIvDHSXNFpsbfBWTTSDXWQuU7QZ1jCvHtWYuWooRkj2yaRjUXvh, Time: 2023-12-30 11:29:57.080",
-        "-NmuGfDQQs7DtT0rbSsw": "Token: f_5PU42nHXd8TDGBRjilwz:APA91bExqdslregLZWW9fRh-5t3YEEcJwnVtXZOTQ8QMBl7s9PLKB_2QXFN5FMkwdNhav3ms8c_uYoHKDYvoubObjgIvDHSXNFpsbfBWTTSDXWQuU7QZ1jCvHtWYuWooRkj2yaRjUXvh, Time: 2023-12-30 11:30:44.981",
-        "-NmuGn0NS7tHdyeut4gS": "Token: f_5PU42nHXd8TDGBRjilwz:APA91bExqdslregLZWW9fRh-5t3YEEcJwnVtXZOTQ8QMBl7s9PLKB_2QXFN5FMkwdNhav3ms8c_uYoHKDYvoubObjgIvDHSXNFpsbfBWTTSDXWQuU7QZ1jCvHtWYuWooRkj2yaRjUXvh, Time: 2023-12-30 11:31:16.915",
-        "-NmuGpO4Xm4zARxH4cVp": "Token: f_5PU42nHXd8TDGBRjilwz:APA91bExqdslregLZWW9fRh-5t3YEEcJwnVtXZOTQ8QMBl7s9PLKB_2QXFN5FMkwdNhav3ms8c_uYoHKDYvoubObjgIvDHSXNFpsbfBWTTSDXWQuU7QZ1jCvHtWYuWooRkj2yaRjUXvh, Time: 2023-12-30 11:31:26.623"
-      },
-      "startOfLevel": {
-        "-NmuFirbqbaRuOav8os_": "Level: 1, Time: 2023-12-30 11:26:37.926",
-        "-NmuFmC_SPMHoz6iWk6K": "Level: 1, Time: 2023-12-30 11:26:51.620"
-      },
-      "uuid": "V01-23-12-30–11:26-4MmIx27SCpDWtQD"
-    },
-    "V01-23-12-30–11:31-GYIisa4cqDUqkY8": {
-      "appCloseTime": {
-        "-NmuH73BTdMCwRQ7lPcZ": "2023-12-30 11:32:43.220"
-      },
-      "appStartDate": {
-        "-NmuGxDRTWKuz0Wm-emM": "2023-12-30 11:31:58.379"
-      },
-      "darkPatterns": 0,
-      "pushToken": {
-        "-NmuGymjV7d1k60SIwzH": "Token: fRVmKQ7xfNE8NgLdDoXSSL:APA91bEffEmSDP9qq5jVfi9P7cxwaY3coD4x61jWAqfIFGa3GN4wtbSksMNPfFZ-MzRzr4gEYh0Aoaotel0LKqk-NZbhAHaT1WmcIRMn8JpwrctTrjSsoCIEn5YtNv_-LZwS9-m7bxnV, Time: 2023-12-30 11:32:05.239"
-      },
-      "uuid": "V01-23-12-30–11:31-GYIisa4cqDUqkY8"
-    },
-    "V01-23-12-30–11:59-VzlMp30U5N6GMSx": {
-      "appCloseTime": {
-        "-NmuNx6C7KuERtHcK_hu": "2023-12-30 12:02:33.293",
-        "-NmuO8NaK4_Qbr5YJdLV": "2023-12-30 12:03:23.321",
-        "-NmuO8Nbp7gh_2NxWiaM": "2023-12-30 12:03:23.323",
-        "-NmuO8Nbp7gh_2NxWiaN": "2023-12-30 12:03:23.323"
-      },
-      "appStartDate": {
-        "-NmuN9gU8-5dhDizZMTM": "2023-12-30 11:59:06.162",
-        "-NmuNFMbQKhJ7ZrVviJV": "2023-12-30 11:59:29.592",
-        "-NmuNgZUvFQbzaA9OxI4": "2023-12-30 12:01:25.128",
-        "-NmuNx034vSW7UzJVGh_": "2023-12-30 12:02:32.585",
-        "-NmuOAcFdPq226p8HXs4": "2023-12-30 12:03:32.360"
-      },
-      "darkPatterns": 0,
-      "pushToken": {
-        "-NmuNBm0GUIkdM1gmG1I": "Token: eIAcCLXHM-B7uSu7F0XfZJ:APA91bGW0OO9WOlWuMB2l2ey0Yv9CwwEz8FY9cDOjXQcl4AkReXhelv8YeeY8xpfqm0gJCZR_PYgk37s6VsQh9uiyd2Autw7frDyTWqRwlLRw81R9RBgK2bTUxEbMrkuykjeleNNGbuH, Time: 2023-12-30 11:59:15.093",
-        "-NmuNFJ3PNIwZ0InJs8n": "Token: eIAcCLXHM-B7uSu7F0XfZJ:APA91bGW0OO9WOlWuMB2l2ey0Yv9CwwEz8FY9cDOjXQcl4AkReXhelv8YeeY8xpfqm0gJCZR_PYgk37s6VsQh9uiyd2Autw7frDyTWqRwlLRw81R9RBgK2bTUxEbMrkuykjeleNNGbuH, Time: 2023-12-30 11:59:29.560",
-        "-NmuNgWQ4xWsjn7wesx5": "Token: eIAcCLXHM-B7uSu7F0XfZJ:APA91bGW0OO9WOlWuMB2l2ey0Yv9CwwEz8FY9cDOjXQcl4AkReXhelv8YeeY8xpfqm0gJCZR_PYgk37s6VsQh9uiyd2Autw7frDyTWqRwlLRw81R9RBgK2bTUxEbMrkuykjeleNNGbuH, Time: 2023-12-30 12:01:25.102",
-        "-NmuNx2P6T4mGHiNE8sw": "Token: eIAcCLXHM-B7uSu7F0XfZJ:APA91bGW0OO9WOlWuMB2l2ey0Yv9CwwEz8FY9cDOjXQcl4AkReXhelv8YeeY8xpfqm0gJCZR_PYgk37s6VsQh9uiyd2Autw7frDyTWqRwlLRw81R9RBgK2bTUxEbMrkuykjeleNNGbuH, Time: 2023-12-30 12:02:33.050",
-        "-NmuOAayrqW8JPdWqvVP": "Token: eIAcCLXHM-B7uSu7F0XfZJ:APA91bGW0OO9WOlWuMB2l2ey0Yv9CwwEz8FY9cDOjXQcl4AkReXhelv8YeeY8xpfqm0gJCZR_PYgk37s6VsQh9uiyd2Autw7frDyTWqRwlLRw81R9RBgK2bTUxEbMrkuykjeleNNGbuH, Time: 2023-12-30 12:03:32.781"
-      },
-      "uuid": "V01-23-12-30–11:59-VzlMp30U5N6GMSx"
-    },
-    "V01-23-12-30–12:05-o4LlLnBPil158yA": {
-      "appCloseTime": {
-        "-NmuOpaxXt62Ohuj87_L": "2023-12-30 12:06:25.072",
-        "-NmuOpayJEmLHTdRqpcf": "2023-12-30 12:06:25.073"
-      },
-      "appStartDate": {
-        "-NmuOcUL5BC-aNzm7gcm": "2023-12-30 12:05:30.572",
-        "-NmuOoqlSpMxfjAvE2W0": "2023-12-30 12:06:21.748"
-      },
-      "darkPatterns": 1,
-      "pushToken": {
-        "-NmuOddli4H2_VVVUUKs": "Token: eXrZGjc-vE1IPmXbK70G9X:APA91bHq7l7G8lqEh4ur7ZSpzSo9LsXRSFFyXfD1buuO33W2bFm-67m2jtO57cS2nLJIMBx9Vsax6H7OwSV8lOyHmJfGx6xE31-O7XiRLHXBc3gazYwSao7XsyPmgjtcP9yTgbWW1svT, Time: 2023-12-30 12:05:36.100",
-        "-NmuOolvR7WElpvE_9AO": "Token: eXrZGjc-vE1IPmXbK70G9X:APA91bHq7l7G8lqEh4ur7ZSpzSo9LsXRSFFyXfD1buuO33W2bFm-67m2jtO57cS2nLJIMBx9Vsax6H7OwSV8lOyHmJfGx6xE31-O7XiRLHXBc3gazYwSao7XsyPmgjtcP9yTgbWW1svT, Time: 2023-12-30 12:06:21.677"
-      },
-      "uuid": "V01-23-12-30–12:05-o4LlLnBPil158yA"
-    },
-    "V01-23-12-30–12:06-ALFqhA1SRPawfYb": {
-      "appCloseTime": {
-        "-NmuPRMM-o3V8HneZqQz": "2023-12-30 12:09:03.497",
-        "-NmuPRMM-o3V8HneZqR-": "2023-12-30 12:09:03.497",
-        "-NmuPRMN6WpkoBvpeCrA": "2023-12-30 12:09:03.497"
-      },
-      "appStartDate": {
-        "-NmuOx6CwUItk1bE72eA": "2023-12-30 12:06:55.076",
-        "-NmuPIfqM9eYG5bDf3gh": "2023-12-30 12:08:27.808",
-        "-NmuPNFRdHBR8zLZ5bl8": "2023-12-30 12:08:46.511"
-      },
-      "darkPatterns": 0,
-      "pushToken": {
-        "-NmuPLMKUiEDuAdXzj_Y": "Token: fM9nLmV1yIPo6jN2L7wVQO:APA91bFLR_zsbm6mPZ0KqapxsSr71psJszQX7Gl6VLQr_6aL_SMAUE0k5wbQBMbVKz9Pz-7R4Rz99WZQVJTT2Ut08kLBCbSwxmwxC30JYqOo82Rgxatd02tS5rxVQwWG571rf4SBhGxQ, Time: 2023-12-30 12:08:38.918",
-        "-NmuPLOjhZaECavJNBks": "Token: fM9nLmV1yIPo6jN2L7wVQO:APA91bEOCv7Q9kQrxNqNv7JLOVMysxbm1udgiXxPjf_pQURBn2V0zcvhPXKWWT_l78O721Pv_7qvwHHgLiYA_s64WCi6MeP2juHQ5ukqOQr66wHlbbD8ekImIesX3vIblsGc9ahJoesa, Time: 2023-12-30 12:08:39.072",
-        "-NmuPNCcJOjyUtpFWDjJ": "Token: fM9nLmV1yIPo6jN2L7wVQO:APA91bEOCv7Q9kQrxNqNv7JLOVMysxbm1udgiXxPjf_pQURBn2V0zcvhPXKWWT_l78O721Pv_7qvwHHgLiYA_s64WCi6MeP2juHQ5ukqOQr66wHlbbD8ekImIesX3vIblsGc9ahJoesa, Time: 2023-12-30 12:08:46.490"
-      },
-      "uuid": "V01-23-12-30–12:06-ALFqhA1SRPawfYb"
-    },
-    "V01-23-12-30–12:09-q2XOzeWxm8cstbX": {
-      "appCloseTime": {
-        "-NmuPbE4pqpDhDHbuRye": "2023-12-30 12:09:48.138",
-        "-NmuQ-7GW_W4IqOv4vXM": "2023-12-30 12:11:29.905",
-        "-NmuQ-7H4ryvzTm5bcyj": "2023-12-30 12:11:29.906",
-        "-NmuQ-7H4ryvzTm5bcyk": "2023-12-30 12:11:29.906",
-        "-NmuQ-7I_mz7VLBr8taI": "2023-12-30 12:11:29.907",
-        "-NmuQ-7I_mz7VLBr8taJ": "2023-12-30 12:11:29.907"
-      },
-      "appStartDate": {
-        "-NmuPZ5kvrBl8mcCX8Vh": "2023-12-30 12:09:34.753",
-        "-NmuPdHDKZG8GDrCR-ND": "2023-12-30 12:09:56.071",
-        "-NmuPge3xl5Y3g2J6eHt": "2023-12-30 12:10:10.009",
-        "-NmuPo7c0ohOKapGlPXG": "2023-12-30 12:10:40.635",
-        "-NmuPswcgY_VC7tY_-id": "2023-12-30 12:11:00.372",
-        "-NmuPzgJB5GXxpqbdyJc": "2023-12-30 12:11:27.983"
-      },
-      "darkPatterns": 0,
-      "pushToken": {
-        "-NmuP_KChLuXjFb0xOqW": "Token: e1dBxM5gfkWigO3NkQMcfA:APA91bE8m-dBIzLDS4S-WAfzwJJ8tckaJ7cRgZdEoTjT8zBGcZfeW6S2g5SnYoqXL9oA1lA5o-O2ODpMG0Ty8DKF1IFzpliHrcofA7Lqkto4_OBGfB8vCkVx6JF9MIK4Sm_0iuvI3RFy, Time: 2023-12-30 12:09:40.338",
-        "-NmuPdHUG1PyICjvWmzb": "Token: e1dBxM5gfkWigO3NkQMcfA:APA91bE8m-dBIzLDS4S-WAfzwJJ8tckaJ7cRgZdEoTjT8zBGcZfeW6S2g5SnYoqXL9oA1lA5o-O2ODpMG0Ty8DKF1IFzpliHrcofA7Lqkto4_OBGfB8vCkVx6JF9MIK4Sm_0iuvI3RFy, Time: 2023-12-30 12:09:56.351",
-        "-NmuPgaxS9h_dxxfx4Hb": "Token: e1dBxM5gfkWigO3NkQMcfA:APA91bE8m-dBIzLDS4S-WAfzwJJ8tckaJ7cRgZdEoTjT8zBGcZfeW6S2g5SnYoqXL9oA1lA5o-O2ODpMG0Ty8DKF1IFzpliHrcofA7Lqkto4_OBGfB8vCkVx6JF9MIK4Sm_0iuvI3RFy, Time: 2023-12-30 12:10:09.949",
-        "-NmuPo5B3jKVPlgA7m7u": "Token: e1dBxM5gfkWigO3NkQMcfA:APA91bE8m-dBIzLDS4S-WAfzwJJ8tckaJ7cRgZdEoTjT8zBGcZfeW6S2g5SnYoqXL9oA1lA5o-O2ODpMG0Ty8DKF1IFzpliHrcofA7Lqkto4_OBGfB8vCkVx6JF9MIK4Sm_0iuvI3RFy, Time: 2023-12-30 12:10:40.619",
-        "-NmuPsxyB_aFIstR_PhM": "Token: e1dBxM5gfkWigO3NkQMcfA:APA91bE8m-dBIzLDS4S-WAfzwJJ8tckaJ7cRgZdEoTjT8zBGcZfeW6S2g5SnYoqXL9oA1lA5o-O2ODpMG0Ty8DKF1IFzpliHrcofA7Lqkto4_OBGfB8vCkVx6JF9MIK4Sm_0iuvI3RFy, Time: 2023-12-30 12:11:00.574",
-        "-NmuPzdcHLDdug9JE21k": "Token: e1dBxM5gfkWigO3NkQMcfA:APA91bE8m-dBIzLDS4S-WAfzwJJ8tckaJ7cRgZdEoTjT8zBGcZfeW6S2g5SnYoqXL9oA1lA5o-O2ODpMG0Ty8DKF1IFzpliHrcofA7Lqkto4_OBGfB8vCkVx6JF9MIK4Sm_0iuvI3RFy, Time: 2023-12-30 12:11:27.944"
-      },
-      "uuid": "V01-23-12-30–12:09-q2XOzeWxm8cstbX"
-    },
-    "V01-23-12-30–12:12-LcrOcG80y7bjw8L": {
-      "appCloseTime": {
-        "-NmuQWorQLtbnwV3Y_ZQ": "2023-12-30 12:13:48.287",
-        "-NmuQWosTulRbCBvSlsh": "2023-12-30 12:13:48.287",
-        "-NmuQWosTulRbCBvSlsi": "2023-12-30 12:13:48.288",
-        "-NmuQWosTulRbCBvSlsj": "2023-12-30 12:13:48.288",
-        "-NmuQWosTulRbCBvSlsk": "2023-12-30 12:13:48.288",
-        "-NmuQWotinAPfIX81CSn": "2023-12-30 12:13:48.289",
-        "-NmuQWotinAPfIX81CSo": "2023-12-30 12:13:48.289",
-        "-NmuQWotinAPfIX81CSp": "2023-12-30 12:13:48.289",
-        "-NmuQ_5j1ar6eqcqmscI": "2023-12-30 12:14:01.359"
-      },
-      "appStartDate": {
-        "-NmuQBXmSfHAiHjov3tN": "2023-12-30 12:12:20.399",
-        "-NmuQGq0jKZgAaT6wR8h": "2023-12-30 12:12:42.620",
-        "-NmuQI3jWUy5gcO-mqXB": "2023-12-30 12:12:47.644",
-        "-NmuQJa-ez46qXMMmrfM": "2023-12-30 12:12:53.860",
-        "-NmuQKyqSrLLfa0mDD7y": "2023-12-30 12:12:59.508",
-        "-NmuQPcqTEKk71lU2K0k": "2023-12-30 12:13:18.686",
-        "-NmuQTDak1fCfeCgm6G0": "2023-12-30 12:13:33.349",
-        "-NmuQWIY_ujS0L1sf5jJ": "2023-12-30 12:13:45.945",
-        "-NmuQYMWuf8heGZZtBL0": "2023-12-30 12:13:53.956",
-        "-NmuQbAnDM-pADm2ZXX6": "2023-12-30 12:14:09.589",
-        "-NmuQeg7jEjyrjTIEX9i": "2023-12-30 12:14:24.200",
-        "-NmuQmUXW-Y24Di3olc3": "2023-12-30 12:14:56.147",
-        "-NmuQpagD8Efq9l4S6AT": "2023-12-30 12:15:08.932",
-        "-NmuQsS1rnjY75PDYzuM": "2023-12-30 12:15:20.508",
-        "-NmuQuB5rnW5b3LgqSLh": "2023-12-30 12:15:27.666"
-      },
-      "darkPatterns": 1,
-      "pushToken": {
-        "-NmuQD7eupZXU4Wl6r0F": "Token: dL8D1lAJ3f39XMAAG9ITjW:APA91bE0Mgr8fj87CWRk5CiKjuB4UCkAqWrQSzNZuAG3tzWtlrqWQjHubDi8AUPHSAvUmJKpZW67nDr35UlNf9ejSXR3h55i1spjdKT5uxUkHDCTuE06DfvEgXG5JV7LPplFHpVlheF_, Time: 2023-12-30 12:12:27.634",
-        "-NmuQGlQH3dxmfJnWv_K": "Token: dL8D1lAJ3f39XMAAG9ITjW:APA91bE0Mgr8fj87CWRk5CiKjuB4UCkAqWrQSzNZuAG3tzWtlrqWQjHubDi8AUPHSAvUmJKpZW67nDr35UlNf9ejSXR3h55i1spjdKT5uxUkHDCTuE06DfvEgXG5JV7LPplFHpVlheF_, Time: 2023-12-30 12:12:42.531",
-        "-NmuQI-lNZE6fALkxf5d": "Token: dL8D1lAJ3f39XMAAG9ITjW:APA91bE0Mgr8fj87CWRk5CiKjuB4UCkAqWrQSzNZuAG3tzWtlrqWQjHubDi8AUPHSAvUmJKpZW67nDr35UlNf9ejSXR3h55i1spjdKT5uxUkHDCTuE06DfvEgXG5JV7LPplFHpVlheF_, Time: 2023-12-30 12:12:47.609",
-        "-NmuQJX5OgrQDpb0Mn2L": "Token: dL8D1lAJ3f39XMAAG9ITjW:APA91bE0Mgr8fj87CWRk5CiKjuB4UCkAqWrQSzNZuAG3tzWtlrqWQjHubDi8AUPHSAvUmJKpZW67nDr35UlNf9ejSXR3h55i1spjdKT5uxUkHDCTuE06DfvEgXG5JV7LPplFHpVlheF_, Time: 2023-12-30 12:12:53.838",
-        "-NmuQKu4135T3xLjOYL4": "Token: dL8D1lAJ3f39XMAAG9ITjW:APA91bE0Mgr8fj87CWRk5CiKjuB4UCkAqWrQSzNZuAG3tzWtlrqWQjHubDi8AUPHSAvUmJKpZW67nDr35UlNf9ejSXR3h55i1spjdKT5uxUkHDCTuE06DfvEgXG5JV7LPplFHpVlheF_, Time: 2023-12-30 12:12:59.468",
-        "-NmuQP_yN8xwj-OBqs3E": "Token: dL8D1lAJ3f39XMAAG9ITjW:APA91bE0Mgr8fj87CWRk5CiKjuB4UCkAqWrQSzNZuAG3tzWtlrqWQjHubDi8AUPHSAvUmJKpZW67nDr35UlNf9ejSXR3h55i1spjdKT5uxUkHDCTuE06DfvEgXG5JV7LPplFHpVlheF_, Time: 2023-12-30 12:13:18.662",
-        "-NmuQT9ved_S14aYVauk": "Token: dL8D1lAJ3f39XMAAG9ITjW:APA91bE0Mgr8fj87CWRk5CiKjuB4UCkAqWrQSzNZuAG3tzWtlrqWQjHubDi8AUPHSAvUmJKpZW67nDr35UlNf9ejSXR3h55i1spjdKT5uxUkHDCTuE06DfvEgXG5JV7LPplFHpVlheF_, Time: 2023-12-30 12:13:33.314",
-        "-NmuQWEcFQzWL8rctdiZ": "Token: dL8D1lAJ3f39XMAAG9ITjW:APA91bE0Mgr8fj87CWRk5CiKjuB4UCkAqWrQSzNZuAG3tzWtlrqWQjHubDi8AUPHSAvUmJKpZW67nDr35UlNf9ejSXR3h55i1spjdKT5uxUkHDCTuE06DfvEgXG5JV7LPplFHpVlheF_, Time: 2023-12-30 12:13:45.903",
-        "-NmuQYOvBcefZF3jGyBP": "Token: dL8D1lAJ3f39XMAAG9ITjW:APA91bE0Mgr8fj87CWRk5CiKjuB4UCkAqWrQSzNZuAG3tzWtlrqWQjHubDi8AUPHSAvUmJKpZW67nDr35UlNf9ejSXR3h55i1spjdKT5uxUkHDCTuE06DfvEgXG5JV7LPplFHpVlheF_, Time: 2023-12-30 12:13:54.394",
-        "-NmuQbEaSlEGk2-58isu": "Token: dL8D1lAJ3f39XMAAG9ITjW:APA91bE0Mgr8fj87CWRk5CiKjuB4UCkAqWrQSzNZuAG3tzWtlrqWQjHubDi8AUPHSAvUmJKpZW67nDr35UlNf9ejSXR3h55i1spjdKT5uxUkHDCTuE06DfvEgXG5JV7LPplFHpVlheF_, Time: 2023-12-30 12:14:10.269",
-        "-NmuQecqZo-ZOlmgE_cO": "Token: dL8D1lAJ3f39XMAAG9ITjW:APA91bE0Mgr8fj87CWRk5CiKjuB4UCkAqWrQSzNZuAG3tzWtlrqWQjHubDi8AUPHSAvUmJKpZW67nDr35UlNf9ejSXR3h55i1spjdKT5uxUkHDCTuE06DfvEgXG5JV7LPplFHpVlheF_, Time: 2023-12-30 12:14:24.173",
-        "-NmuQmQmpVeqMJ0zgOs_": "Token: dL8D1lAJ3f39XMAAG9ITjW:APA91bE0Mgr8fj87CWRk5CiKjuB4UCkAqWrQSzNZuAG3tzWtlrqWQjHubDi8AUPHSAvUmJKpZW67nDr35UlNf9ejSXR3h55i1spjdKT5uxUkHDCTuE06DfvEgXG5JV7LPplFHpVlheF_, Time: 2023-12-30 12:14:56.105",
-        "-NmuQpYsl17nyaonMdci": "Token: dL8D1lAJ3f39XMAAG9ITjW:APA91bE0Mgr8fj87CWRk5CiKjuB4UCkAqWrQSzNZuAG3tzWtlrqWQjHubDi8AUPHSAvUmJKpZW67nDr35UlNf9ejSXR3h55i1spjdKT5uxUkHDCTuE06DfvEgXG5JV7LPplFHpVlheF_, Time: 2023-12-30 12:15:08.910",
-        "-NmuQsNZS0TVS2CSoBTX": "Token: dL8D1lAJ3f39XMAAG9ITjW:APA91bE0Mgr8fj87CWRk5CiKjuB4UCkAqWrQSzNZuAG3tzWtlrqWQjHubDi8AUPHSAvUmJKpZW67nDr35UlNf9ejSXR3h55i1spjdKT5uxUkHDCTuE06DfvEgXG5JV7LPplFHpVlheF_, Time: 2023-12-30 12:15:20.475",
-        "-NmuQu7WtVZuUNEqzaUL": "Token: dL8D1lAJ3f39XMAAG9ITjW:APA91bE0Mgr8fj87CWRk5CiKjuB4UCkAqWrQSzNZuAG3tzWtlrqWQjHubDi8AUPHSAvUmJKpZW67nDr35UlNf9ejSXR3h55i1spjdKT5uxUkHDCTuE06DfvEgXG5JV7LPplFHpVlheF_, Time: 2023-12-30 12:15:27.640"
-      },
-      "uuid": "V01-23-12-30–12:12-LcrOcG80y7bjw8L"
-    },
-    "V01-23-12-30–12:16-BaeKXwxpmj8N6v4": {
-      "appCloseTime": {
-        "-NmuR8ht78Xad-qth_6i": "2023-12-30 12:16:31.101",
-        "-NmuRBv_Pq5XL00hvXkB": "2023-12-30 12:16:44.482",
-        "-NmuRwb-wLQ877qRqvL6": "2023-12-30 12:19:58.726",
-        "-NmuRwb0zvpi3iAktGQA": "2023-12-30 12:19:58.726",
-        "-NmuRwb0zvpi3iAktGQB": "2023-12-30 12:19:58.726",
-        "-NmuSJe3HcNuc0RJlGxA": "2023-12-30 12:21:38.391",
-        "-NmuSJe4952aCaaq2q2S": "2023-12-30 12:21:38.392",
-        "-NmuSuoVzR4d9H8v5OFe": "2023-12-30 12:24:13.716",
-        "-NmuSuoW9X89uPW4z2ZI": "2023-12-30 12:24:13.716"
-      },
-      "appStartDate": {
-        "-NmuR6E-wFWDjRZbff0Z": "2023-12-30 12:16:20.530",
-        "-NmuRApRSBQwQOeXU6fY": "2023-12-30 12:16:39.730",
-        "-NmuREC1GjQ5zVE35Upn": "2023-12-30 12:16:53.524",
-        "-NmuRJgD6zMpW-VMgQP2": "2023-12-30 12:17:15.954",
-        "-NmuRXOk0CKjTQsV8nad": "2023-12-30 12:18:12.241",
-        "-NmuRyWzranap_IQ_drF": "2023-12-30 12:20:07.346",
-        "-NmuSGr7rJV33uTzKPUp": "2023-12-30 12:21:26.697",
-        "-NmuSLhlzcygF2ytGuvd": "2023-12-30 12:21:46.433",
-        "-NmuSTcnZFv6W8xEbT64": "2023-12-30 12:22:18.918"
-      },
-      "checkHighScoreTime": {
-        "-NmuRESgivm634zLGXlA": "2023-12-30 12:16:54.862",
-        "-NmuRS4BLaT5yA-toF4V": "2023-12-30 12:17:50.641"
-      },
-      "darkPatterns": 1,
-      "finishOfLevel": {
-        "-NmuRIVoUNSxHSahJLzj": "Level: 1, Won: false, Time: 2023-12-30 12:17:11.449",
-        "-NmuSl3FmIP9X2QERuyv": "Level: 1, Won: false, Time: 2023-12-30 12:23:34.639"
-      },
-      "pushToken": {
-        "-NmuR7GEFnX4k5fKap5P": "Token: ebWNugsHVpQnX-zjooAKiA:APA91bFnOo9LiVGVtXbcK_JeMCaaNrr0R6OuqaDb5_iDuPA3u9jzayxQb6TKkXFhYaXwF2iIGDPDUfiz9b0L3k1F2WqURwfWF7fTwUcrykMDusJBgGTPo2Ipc3bxrKTV1V2nfLJUE95p, Time: 2023-12-30 12:16:25.172",
-        "-NmuRAuQoGg1JNgpIZjd": "Token: ebWNugsHVpQnX-zjooAKiA:APA91bFnOo9LiVGVtXbcK_JeMCaaNrr0R6OuqaDb5_iDuPA3u9jzayxQb6TKkXFhYaXwF2iIGDPDUfiz9b0L3k1F2WqURwfWF7fTwUcrykMDusJBgGTPo2Ipc3bxrKTV1V2nfLJUE95p, Time: 2023-12-30 12:16:40.312",
-        "-NmuREF5mjpJbsqGm1pB": "Token: ebWNugsHVpQnX-zjooAKiA:APA91bFnOo9LiVGVtXbcK_JeMCaaNrr0R6OuqaDb5_iDuPA3u9jzayxQb6TKkXFhYaXwF2iIGDPDUfiz9b0L3k1F2WqURwfWF7fTwUcrykMDusJBgGTPo2Ipc3bxrKTV1V2nfLJUE95p, Time: 2023-12-30 12:16:53.997",
-        "-NmuRJaE3AtKzHUL84ui": "Token: ebWNugsHVpQnX-zjooAKiA:APA91bFnOo9LiVGVtXbcK_JeMCaaNrr0R6OuqaDb5_iDuPA3u9jzayxQb6TKkXFhYaXwF2iIGDPDUfiz9b0L3k1F2WqURwfWF7fTwUcrykMDusJBgGTPo2Ipc3bxrKTV1V2nfLJUE95p, Time: 2023-12-30 12:17:15.893",
-        "-NmuRXLBXnNaocCLDKoD": "Token: ebWNugsHVpQnX-zjooAKiA:APA91bFnOo9LiVGVtXbcK_JeMCaaNrr0R6OuqaDb5_iDuPA3u9jzayxQb6TKkXFhYaXwF2iIGDPDUfiz9b0L3k1F2WqURwfWF7fTwUcrykMDusJBgGTPo2Ipc3bxrKTV1V2nfLJUE95p, Time: 2023-12-30 12:18:12.211",
-        "-NmuRyeinIb5anOev4OI": "Token: ebWNugsHVpQnX-zjooAKiA:APA91bFnOo9LiVGVtXbcK_JeMCaaNrr0R6OuqaDb5_iDuPA3u9jzayxQb6TKkXFhYaXwF2iIGDPDUfiz9b0L3k1F2WqURwfWF7fTwUcrykMDusJBgGTPo2Ipc3bxrKTV1V2nfLJUE95p, Time: 2023-12-30 12:20:08.321",
-        "-NmuSGrL2uDq23117FFa": "Token: ebWNugsHVpQnX-zjooAKiA:APA91bFnOo9LiVGVtXbcK_JeMCaaNrr0R6OuqaDb5_iDuPA3u9jzayxQb6TKkXFhYaXwF2iIGDPDUfiz9b0L3k1F2WqURwfWF7fTwUcrykMDusJBgGTPo2Ipc3bxrKTV1V2nfLJUE95p, Time: 2023-12-30 12:21:26.952",
-        "-NmuSLt4nRCinm5OiwB6": "Token: ebWNugsHVpQnX-zjooAKiA:APA91bFnOo9LiVGVtXbcK_JeMCaaNrr0R6OuqaDb5_iDuPA3u9jzayxQb6TKkXFhYaXwF2iIGDPDUfiz9b0L3k1F2WqURwfWF7fTwUcrykMDusJBgGTPo2Ipc3bxrKTV1V2nfLJUE95p, Time: 2023-12-30 12:21:47.429",
-        "-NmuSTd0dHbKqtgJ6FTC": "Token: ebWNugsHVpQnX-zjooAKiA:APA91bFnOo9LiVGVtXbcK_JeMCaaNrr0R6OuqaDb5_iDuPA3u9jzayxQb6TKkXFhYaXwF2iIGDPDUfiz9b0L3k1F2WqURwfWF7fTwUcrykMDusJBgGTPo2Ipc3bxrKTV1V2nfLJUE95p, Time: 2023-12-30 12:22:19.168"
-      },
-      "startOfLevel": {
-        "-NmuRFxFm7qNTHDoaeYb": "Level: 1, Time: 2023-12-30 12:17:00.982",
-        "-NmuRKF8plERByzPbFu3": "Level: 1, Time: 2023-12-30 12:17:18.575",
-        "-NmuRUGFObeZfrSK7tL_": "Level: 1, Time: 2023-12-30 12:17:59.607",
-        "-NmuRYSTn2vIlYTA63mT": "Level: 1, Time: 2023-12-30 12:18:16.773",
-        "-NmuS-7NDR9n1MiWnsRm": "Level: 1, Time: 2023-12-30 12:20:14.315",
-        "-NmuS6y7jiZYrkOi6keT": "Level: 1, Time: 2023-12-30 12:20:46.426",
-        "-NmuSHKkV1TbM0OJD7Qa": "Level: 1, Time: 2023-12-30 12:21:28.899",
-        "-NmuSNEfelvDVBSU_6Ko": "Level: 1, Time: 2023-12-30 12:21:52.971",
-        "-NmuSW7Cjfd8yc8O1P64": "Level: 1, Time: 2023-12-30 12:22:29.356"
-      },
-      "uuid": "V01-23-12-30–12:16-BaeKXwxpmj8N6v4"
-    },
-    "V01-23-12-30–13:21-oNNRP7HBIk4Yp5m": {
-      "appCloseTime": {
-        "-Nmuf1_71uQOQx8j6ctR": "2023-12-30 13:21:34.340"
-      },
-      "appStartDate": {
-        "-NmuezYREfxfiqtLxy_7": "2023-12-30 13:21:21.421"
-      },
-      "darkPatterns": 0,
-      "uuid": "V01-23-12-30–13:21-oNNRP7HBIk4Yp5m"
+        "-NnECWsCHv821R-1Lo-_": "Token: fws4tl0irl1dKMnaQtxrDO:APA91bGHQrnml-7baJiYf6yV85STGnyiaHFok_1xM7RtCnsgPKu_6c9FWQddyvRivcpppUEbrscYDCoJD7qEMcxaF-xl_CEGMr3FOqxWvKLB1xR-_HN5qmGMqDtMwzrnW9reJ4m_JWrj, Time: 2024-01-03 13:04:48.221",
+        "-NnED4PqMVB7bNqc-l6r": "Token: fws4tl0irl1dKMnaQtxrDO:APA91bGHQrnml-7baJiYf6yV85STGnyiaHFok_1xM7RtCnsgPKu_6c9FWQddyvRivcpppUEbrscYDCoJD7qEMcxaF-xl_CEGMr3FOqxWvKLB1xR-_HN5qmGMqDtMwzrnW9reJ4m_JWrj, Time: 2024-01-03 13:07:05.141",
+        "-NnED4PrF5AaxwWEr14S": "Token: fws4tl0irl1dKMnaQtxrDO:APA91bGHQrnml-7baJiYf6yV85STGnyiaHFok_1xM7RtCnsgPKu_6c9FWQddyvRivcpppUEbrscYDCoJD7qEMcxaF-xl_CEGMr3FOqxWvKLB1xR-_HN5qmGMqDtMwzrnW9reJ4m_JWrj, Time: 2024-01-03 13:07:05.142"
+      },
+      "uuid": "V01-24-01-03–13:01-DrI7AZl9rD5Oq9B"
     }
   },
   "errors": {
     "V01-23-12-11–17:51-JAGk9gyXqpsRFMK": {
       "error": "TypeError: true: type 'bool' is not a subtype of type 'String?'",
       "isFlutterError": false,
-      "stacktrace": "TypeError: true: type 'bool' is not a subtype of type 'String?'\n    at Object.c (https://felpower.github.io/main.dart.js:5339:19)\n    at Object.bi (https://felpower.github.io/main.dart.js:6114:9)\n    at https://felpower.github.io/main.dart.js:57801:23\n    at aOk.a (https://felpower.github.io/main.dart.js:6709:63)\n    at aOk.$2 (https://felpower.github.io/main.dart.js:49252:14)\n    at aNd.$1 (https://felpower.github.io/main.dart.js:49246:21)\n    at Object.aOb (https://felpower.github.io/main.dart.js:6942:19)\n    at Zp.<anonymous> (https://felpower.github.io/main.dart.js:114951:68)\n    at a1B.ro (https://felpower.github.io/main.dart.js:50074:12)\n    at aEu.$0 (https://felpower.github.io/main.dart.js:49611:11)",
-      "timestamp": "2023-12-30T17:52:58.446",
+      "stacktrace": "TypeError: true: type 'bool' is not a subtype of type 'String?'\n    at Object.c (https://felpower.github.io/main.dart.js:5337:19)\n    at Object.bg (https://felpower.github.io/main.dart.js:6112:9)\n    at https://felpower.github.io/main.dart.js:57478:23\n    at aNd.a (https://felpower.github.io/main.dart.js:6707:63)\n    at aNd.$2 (https://felpower.github.io/main.dart.js:48918:14)\n    at aM8.$1 (https://felpower.github.io/main.dart.js:48912:21)\n    at Object.aN4 (https://felpower.github.io/main.dart.js:6940:19)\n    at YT.<anonymous> (https://felpower.github.io/main.dart.js:113500:68)\n    at a16.r8 (https://felpower.github.io/main.dart.js:49740:12)\n    at aDu.$0 (https://felpower.github.io/main.dart.js:49277:11)",
+      "timestamp": "2024-01-07T17:26:42.440",
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36"
+    },
+    "V01-23-12-12–20:44-1iCPUx06yRIOGyc": {
+      "error": "TypeError: true: type 'bool' is not a subtype of type 'String?'",
+      "isFlutterError": false,
+      "stacktrace": "TypeError: true: type 'bool' is not a subtype of type 'String?'\n    at Object.c (https://felpower.github.io/main.dart.js:5337:19)\n    at Object.bg (https://felpower.github.io/main.dart.js:6112:9)\n    at https://felpower.github.io/main.dart.js:57478:23\n    at aNd.a (https://felpower.github.io/main.dart.js:6707:63)\n    at aNd.$2 (https://felpower.github.io/main.dart.js:48918:14)\n    at aM8.$1 (https://felpower.github.io/main.dart.js:48912:21)\n    at Object.aN4 (https://felpower.github.io/main.dart.js:6940:19)\n    at YT.<anonymous> (https://felpower.github.io/main.dart.js:113500:68)\n    at a16.r8 (https://felpower.github.io/main.dart.js:49740:12)\n    at aDu.$0 (https://felpower.github.io/main.dart.js:49277:11)",
+      "timestamp": "2024-01-03T21:04:49.084",
       "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36"
     },
     "V01-23-12-13–16:00-IR9Ncrq1ALXXwCb": {
@@ -1027,6 +559,55 @@
       "stacktrace": "",
       "timestamp": "2023-12-30T12:11:31.044",
       "userAgent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36"
+    },
+    "V01-24-01-02–13:17-6ckfujnkAAFwLLi": {
+      "error": "A RenderFlex overflowed by 133 pixels on the right.",
+      "isFlutterError": true,
+      "stacktrace": "",
+      "timestamp": "2024-01-02T13:35:00.503",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0"
+    },
+    "V01-24-01-02–14:59-d8SGIVVv8fy81sq": {
+      "error": "Assertion failed: org-dartlang-sdk:///lib/_engine/engine/window.dart:84:12\n!isDisposed\n\"Trying to render a disposed EngineFlutterView.\"",
+      "isFlutterError": true,
+      "stacktrace": "",
+      "timestamp": "2024-01-02T15:05:18.935",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0"
+    },
+    "V01-24-01-02–15:05-gisl8eS6BlvfjI0": {
+      "error": "There are multiple heroes that share the same tag within a subtree.\nWithin each subtree for which heroes are to be animated (i.e. a PageRoute subtree), each Hero must have a unique non-null tag.\nIn this case, multiple heroes had the following tag: <default FloatingActionButton tag>\n# Here is the subtree for one of the offending heroes: Hero",
+      "isFlutterError": true,
+      "stacktrace": "",
+      "timestamp": "2024-01-02T15:11:29.019",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0"
+    },
+    "V01-24-01-02–15:15-uxLPbGcyydyzq7I": {
+      "error": "There are multiple heroes that share the same tag within a subtree.\nWithin each subtree for which heroes are to be animated (i.e. a PageRoute subtree), each Hero must have a unique non-null tag.\nIn this case, multiple heroes had the following tag: <default FloatingActionButton tag>\n# Here is the subtree for one of the offending heroes: Hero",
+      "isFlutterError": true,
+      "stacktrace": "",
+      "timestamp": "2024-01-02T15:16:25.286",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0"
+    },
+    "V01-24-01-02–15:19-IfMCXorvxoDMVG1": {
+      "error": "There are multiple heroes that share the same tag within a subtree.\nWithin each subtree for which heroes are to be animated (i.e. a PageRoute subtree), each Hero must have a unique non-null tag.\nIn this case, multiple heroes had the following tag: <default FloatingActionButton tag>\n# Here is the subtree for one of the offending heroes: Hero",
+      "isFlutterError": true,
+      "stacktrace": "",
+      "timestamp": "2024-01-02T15:19:32.157",
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36"
+    },
+    "V01-24-01-02–16:54-uJ1RFAJWYMy3cti": {
+      "error": "A RenderFlex overflowed by 140 pixels on the right.",
+      "isFlutterError": true,
+      "stacktrace": "",
+      "timestamp": "2024-01-02T17:13:43.432",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0"
+    },
+    "V01-24-01-03–13:01-DrI7AZl9rD5Oq9B": {
+      "error": "Assertion failed: file:///C:/masterarbeit/flutter/packages/flutter/lib/src/widgets/navigator.dart:3008:18\n!navigator._debugLocked\nis not true",
+      "isFlutterError": false,
+      "stacktrace": "dart-sdk/lib/_internal/js_dev_runtime/private/ddc_runtime/errors.dart 297:3  throw_\ndart-sdk/lib/_internal/js_dev_runtime/private/ddc_runtime/errors.dart 38:3   assertFailed\npackages/flutter/src/widgets/navigator.dart 3008:28                          <fn>\npackages/flutter/src/scheduler/ticker.dart 435:7                             thunk\ndart-sdk/lib/async/zone.dart 1407:47                                         _rootRunUnary\ndart-sdk/lib/async/zone.dart 1308:19                                         runUnary\ndart-sdk/lib/async/future_impl.dart 162:18                                   handleValue\ndart-sdk/lib/async/future_impl.dart 838:44                                   handleValueCallback\ndart-sdk/lib/async/future_impl.dart 867:13                                   _propagateToListeners\ndart-sdk/lib/async/future_impl.dart 643:5                                    [_completeWithValue]\ndart-sdk/lib/async/future_impl.dart 713:7                                    <fn>\ndart-sdk/lib/async/zone.dart 1399:13                                         _rootRun\ndart-sdk/lib/async/zone.dart 1301:19                                         run\ndart-sdk/lib/async/zone.dart 1209:7                                          runGuarded\ndart-sdk/lib/async/zone.dart 1249:23                                         callback\ndart-sdk/lib/async/schedule_microtask.dart 40:11                             _microtaskLoop\ndart-sdk/lib/async/schedule_microtask.dart 49:5                              _startMicrotaskLoop\ndart-sdk/lib/_internal/js_dev_runtime/patch/async_patch.dart 181:7           <fn>\n",
+      "timestamp": "2024-01-03T13:07:05.425",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0"
     }
   },
   "feedback": {
@@ -1268,7 +849,11 @@
       "appCloseTime": {
         "-NmpYMvIMPDNgVjZ-OTu": "2023-12-29 13:29:57.644",
         "-NmuK-Mdw_9-3zbM9wNa": "2023-12-30 11:45:17.286",
-        "-NmuK7Lj9a0qAShXpHIv": "2023-12-30 11:45:49.969"
+        "-NmuK7Lj9a0qAShXpHIv": "2023-12-30 11:45:49.969",
+        "-NnAt4blH4O1Prtg_R6H": "2024-01-02 21:36:28.571",
+        "-NnB1X4w0dHU6HQW55mc": "2024-01-02 22:17:44.683",
+        "-NnB9SLmLj0pHzUIpIuN": "2024-01-02 22:52:22.260",
+        "-NnB9hFCcJGIJ0nPsOkQ": "2024-01-02 22:53:27.407"
       },
       "appStartDate": {
         "-NlOmfxYRksySQUp5Axo": "2023-12-11 17:51:48.645",
@@ -1308,7 +893,21 @@
         "-NmuJnl-igzYWCpSEPEL": "2023-12-30 11:44:26.173",
         "-NmuJuJXlEzE53sPerjA": "2023-12-30 11:44:53.050",
         "-NmuK1HY6qGsB3nEtx4Q": "2023-12-30 11:45:25.683",
-        "-Nmvd9NVQlQYUg-wIgAG": "2023-12-30 17:52:58.945"
+        "-Nmvd9NVQlQYUg-wIgAG": "2023-12-30 17:52:58.945",
+        "-NnAsc8GJaeT9a3oMQHD": "2024-01-02 21:34:28.437",
+        "-NnAt668yciLdZbGXy5y": "2024-01-02 21:36:35.305",
+        "-NnAtJdhoT1M_5jjDaqN": "2024-01-02 21:37:30.763",
+        "-NnAzfe3jFdRJA82vh4p": "2024-01-02 22:05:17.852",
+        "-NnB-aqL9Wz1ZycOJzFn": "2024-01-02 22:09:20.298",
+        "-NnB1YkecBH1N24xwT7n": "2024-01-02 22:17:51.951",
+        "-NnB5P_y15gn8dfnzOIW": "2024-01-02 22:34:42.965",
+        "-NnB9U2mBZ5Ep__PZGe8": "2024-01-02 22:52:29.868",
+        "-NnB9ioC2g_fGz8--fgk": "2024-01-02 22:53:34.377",
+        "-NnDy4K9XLjkkP5HQ8IZ": "2024-01-03 11:57:10.403",
+        "-NnDyHBOIIf7Q6jZcvNh": "2024-01-03 11:58:03.059",
+        "-NnDyQ9semu_t-fI_6mZ": "2024-01-03 11:58:39.829",
+        "-NnE7K4wUgZmbAQv1uDB": "2024-01-03 12:41:56.367",
+        "-NnZjr_FDVV3P-3V36em": "2024-01-07 17:26:42.768"
       },
       "checkHighScoreTime": {
         "-NlOmvcTW3kLH2bjnmQ3": "2023-12-11 17:52:52.398",
@@ -1320,7 +919,12 @@
         "-Nlr-Gq8AoiJA2KNQcJw": "2023-12-17 10:00:10.644",
         "-NlsNjQWxCThLwO8t_Gy": "2023-12-17 16:26:40.383",
         "-Nm21n2ozMxA-b0Cn7f1": "2023-12-19 18:06:37.541",
-        "-Nm7Glua7pCxSdcaTeTe": "2023-12-20 18:30:11.068"
+        "-Nm7Glua7pCxSdcaTeTe": "2023-12-20 18:30:11.068",
+        "-NnB-GTUAko4nDeWrkqs": "2024-01-02 22:07:52.326",
+        "-NnB-KCnom1ONV2E3HEt": "2024-01-02 22:08:07.644",
+        "-NnDy5suuhGqCCiJHHKo": "2024-01-03 11:57:16.178",
+        "-NnZjtWIV8rAVJmKaBco": "2024-01-07 17:26:50.602",
+        "-NnZkQ8_oIczV6gAT-Au": "2024-01-07 17:29:08.348"
       },
       "collectDailyRewardsTime": {
         "-NlYixNEvbnRVI87MTgX": "2023-12-13 16:11:43.156",
@@ -1328,7 +932,8 @@
         "-Nlr-F9T8ZCgNCy5nS63": "2023-12-17 10:00:03.753",
         "-Nlx4KgMqEoEuX_Q6J79": "2023-12-18 14:20:00.424",
         "-Nm1_l8vxuJmfmwVDpQl": "2023-12-19 15:59:47.569",
-        "-Nm7GlGrbSFBxCYqME7O": "2023-12-20 18:30:08.461"
+        "-Nm7GlGrbSFBxCYqME7O": "2023-12-20 18:30:08.461",
+        "-NnZkRo1NGL4JDzIOs9f": "2024-01-07 17:29:15.162"
       },
       "darkPatterns": 1,
       "endSurvey": {
@@ -1345,13 +950,29 @@
         "-Nm21izu-qohjBvFXRd3": "Level: 9, Won: true, Time: 2023-12-19 18:06:20.909",
         "-Nm7GskL5MRYtYQY8iKL": "Level: 10, Won: true, Time: 2023-12-20 18:30:39.085",
         "-NmpOXD4rU0KeiFXWcdL": "Level: 1, Won: false, Time: 2023-12-29 12:46:58.434",
-        "-NmpYgMY979OK7CBFJ_W": "Level: 11, Won: true, Time: 2023-12-29 13:31:21.421"
+        "-NmpYgMY979OK7CBFJ_W": "Level: 11, Won: true, Time: 2023-12-29 13:31:21.421",
+        "-NnZk-s3Xu8Uocu_oW2I": "Level: 12, Won: true, Time: 2024-01-07 17:27:20.732",
+        "-NnZkM3y9zRUTmsObrzt": "Level: 13, Won: true, Time: 2024-01-07 17:28:51.669"
       },
       "initAppStartTime": {
         "-NlOmqAuER9oy1RNV3e-": "2023-12-11 17:52:30.088"
       },
       "pushClick": {
-        "-NlOt5h2DUXGuYQajK0k": "2023-12-11 18:19:51.042"
+        "-NlOt5h2DUXGuYQajK0k": "2023-12-11 18:19:51.042",
+        "-NnAtJY72vmBGARtVKO5": "2024-01-02 21:37:30.352",
+        "-NnAtJYBm4fX-LmJ2LJl": "2024-01-02 21:37:30.415",
+        "-NnAzfZ0ASwOzs1DX125": "2024-01-02 22:05:17.484",
+        "-NnAzfZ4JHhqnHR3xj0G": "2024-01-02 22:05:17.543",
+        "-NnB-ajfsI13CB9jeuKP": "2024-01-02 22:09:19.902",
+        "-NnB-ajkOQ6JRF5bKrFL": "2024-01-02 22:09:19.955",
+        "-NnB5PUmjJzCD-tMaTWn": "2024-01-02 22:34:42.594",
+        "-NnB5PUqCBN3yuZlc5i_": "2024-01-02 22:34:42.649",
+        "-NnDyH5V_YD9pCXm8rv5": "2024-01-03 11:58:02.691",
+        "-NnDyH5ZLbbEAFyz1fe2": "2024-01-03 11:58:02.756",
+        "-NnDyQ35nN_MbIKey-Gb": "2024-01-03 11:58:39.363",
+        "-NnDyQ3Clyu3ZhmedwbH": "2024-01-03 11:58:39.460",
+        "-NnE7JzRN9h1xHfQM8qe": "2024-01-03 12:41:55.971",
+        "-NnE7JzVfEDvJniQVbX1": "2024-01-03 12:41:56.034"
       },
       "pushToken": {
         "-NlOmiJGCGV232DpEVkW": "Token: cs2QAWmYyfXc2kI0OJhhg6:APA91bHoDMlytVEyjnqjATnZMc89ElzqGPkJ5PDkbRfPJm3lFp8nsHrru2rH87kOykOAKqy2pl-pTNY2mZjFr-vqfbIIUOv68vYwUB1m_oPAvP8Q1Lsx9Ps8msYCbshHKQ-E6YwJ4qz0, Time: 2023-12-11 17:51:57.860",
@@ -1417,7 +1038,9 @@
         "-NmpYPr0v0uiYksL2hgj": "Level: 11, Time: 2023-12-29 13:30:09.709",
         "-NmuJqMm38YIMP9CwJQf": "Level: 12, Time: 2023-12-30 11:44:36.351",
         "-NmuJwV9uYHpQVo6Mr3j": "Level: 12, Time: 2023-12-30 11:45:01.446",
-        "-NmvdAAIMcLDw57pO9in": "Level: 12, Time: 2023-12-30 17:53:01.653"
+        "-NmvdAAIMcLDw57pO9in": "Level: 12, Time: 2023-12-30 17:53:01.653",
+        "-NnZjun78zO-1YDlLZ-m": "Level: 12, Time: 2024-01-07 17:26:55.839",
+        "-NnZk3xBTZVN8LV3PfDu": "Level: 13, Time: 2024-01-07 17:27:37.443"
       },
       "startSurvey": {
         "-NlOmqAxygoX29dFZZv4": "SurveyResult: [ID: 1-28, ID: 2-0, ID: 3-4, ID: 4-3, ID: 5-0, ID: 7-1, ID: 8-.5, ID: 9-1]"
@@ -1614,7 +1237,9 @@
         "-NlnWYyOJVtl3TYgBVDY": "2023-12-16 17:47:06.196",
         "-NlsmPQuh-6dlFw5o3EI": "2023-12-17 18:18:50.226",
         "-NmL1OmidrWFHKb0celJ": "2023-12-23 10:37:42.233",
-        "-NmmOk_EXRJl-7Ngujjg": "2023-12-28 22:49:05.945"
+        "-NmmOk_EXRJl-7Ngujjg": "2023-12-28 22:49:05.945",
+        "-NnFl61rMJgLBGkny0Re": "2024-01-03 20:19:44.920",
+        "-NnFvQRfutv_6XZ1CSXY": "2024-01-03 21:04:49.937"
       },
       "darkPatterns": 0,
       "endSurvey": {
@@ -1648,7 +1273,8 @@
         "-Nle9JpllVJkq9GHFhTW": "Level: 24, Won: true Time: 2023-12-14 22:09:01.740",
         "-Nle9aaFQdh8jb1F9Lzv": "Level: 25, Won: true Time: 2023-12-14 22:10:14.492",
         "-NleA8Xxd_r6Wi3CmWIW": "Level: 26, Won: true Time: 2023-12-14 22:12:37.636",
-        "-NleAU6Fv1DXuYPEYG29": "Level: 27, Won: true Time: 2023-12-14 22:14:05.980"
+        "-NleAU6Fv1DXuYPEYG29": "Level: 27, Won: true Time: 2023-12-14 22:14:05.980",
+        "-NnFnosyRbDDDdgLuPJe": "Level: 2, Won: true, Time: 2024-01-03 20:31:37.298"
       },
       "initAppStartTime": {
         "-NlYCblHH8vBs--1l8WH": "2023-12-13 13:46:04.344"
@@ -1701,7 +1327,10 @@
         "-NleAG1VVODy6pRbfk5i": "Level: 27, Time: 2023-12-14 22:13:08.331",
         "-NlnW_HRPfC94ER6koDn": "Level: 28, Time: 2023-12-16 17:47:11.815",
         "-NlnWfzV1qLGCspMM4lr": "Level: 28, Time: 2023-12-16 17:47:39.271",
-        "-NmmOmVdKCuRD5VlL3yR": "Level: 4, Time: 2023-12-28 22:49:14.010"
+        "-NmmOmVdKCuRD5VlL3yR": "Level: 4, Time: 2023-12-28 22:49:14.010",
+        "-NnFlAYXaSzD3SpRPok2": "Level: 2, Time: 2024-01-03 20:20:03.726",
+        "-NnFnqgDpymc_3EimAfS": "Level: 8, Time: 2024-01-03 20:31:44.682",
+        "-NnFnwStd2VLT6BwWNGO": "Level: 10, Time: 2024-01-03 20:32:08.336"
       },
       "startSurvey": {
         "-NlYCblLcfsfy1EFD5Zg": "SurveyResult: [ID: 1-31, ID: 2-1, ID: 3-4, ID: 4-0, ID: 5-0, ID: 7-0, ID: 8-1, ID: 9-0]"
@@ -1934,9 +1563,13 @@
         "-Nm55CeWT47HaVi_bXbm": "2023-12-20 08:20:24.967",
         "-Nm55dfnOpLR-XGNNDMv": "2023-12-20 08:22:19.717",
         "-Nm55uG38xIH4xjhbCYo": "2023-12-20 08:23:27.642",
-        "-NmHUMprTpl90PTY-xuQ": "2023-12-22 18:05:46.829"
+        "-NmHUMprTpl90PTY-xuQ": "2023-12-22 18:05:46.829",
+        "-NnVRhnEjlVsnn98qqbO": "2024-01-06 21:24:33.205"
       },
       "darkPatterns": 0,
+      "endSurvey": {
+        "-NnVRqIRlhjs3qKWK5su": "SurveyResult: [ID: 1-2, ID: 2-5, ID: 3-0]"
+      },
       "finishOfLevel": {
         "-NlYeWTpMoVIvDGYpl1Z": "Level: 1, Won: true Time: 2023-12-13 15:52:20.785",
         "-NlYeyVQy5nOESb6dfNr": "Level: 2, Won: true Time: 2023-12-13 15:54:19.673",
@@ -1956,7 +1589,8 @@
         "-NldGbMNVnTxnjB9v7nA": "Token: cPTMaHioO1scj6ROdekSWs:APA91bE391y8UfTNWwuuwh6oVVWf-zla4cFIMcnvAa56DxAAiQJ6hGf0e1dGvdfUH73Nyi5ihENcdGCQ4ecwMSO2VFv6KnmHY9XJy_LEXDdgdRTBq4n21HDOPPT5Xa_kzc0AyjF7T_Ug, Time: 2023-12-14 18:01:14.584",
         "-NldH3p4PhMj2I4ilz6s": "Token: cPTMaHioO1scj6ROdekSWs:APA91bE391y8UfTNWwuuwh6oVVWf-zla4cFIMcnvAa56DxAAiQJ6hGf0e1dGvdfUH73Nyi5ihENcdGCQ4ecwMSO2VFv6KnmHY9XJy_LEXDdgdRTBq4n21HDOPPT5Xa_kzc0AyjF7T_Ug, Time: 2023-12-14 18:03:15.268",
         "-Nm55CbMF-WcR2UZpnWZ": "Token: cPTMaHioO1scj6ROdekSWs:APA91bE391y8UfTNWwuuwh6oVVWf-zla4cFIMcnvAa56DxAAiQJ6hGf0e1dGvdfUH73Nyi5ihENcdGCQ4ecwMSO2VFv6KnmHY9XJy_LEXDdgdRTBq4n21HDOPPT5Xa_kzc0AyjF7T_Ug, Time: 2023-12-20 08:20:24.790",
-        "-NmHUMvX5i_q4wZLnAy6": "Token: cPTMaHioO1scj6ROdekSWs:APA91bE391y8UfTNWwuuwh6oVVWf-zla4cFIMcnvAa56DxAAiQJ6hGf0e1dGvdfUH73Nyi5ihENcdGCQ4ecwMSO2VFv6KnmHY9XJy_LEXDdgdRTBq4n21HDOPPT5Xa_kzc0AyjF7T_Ug, Time: 2023-12-22 18:05:47.255"
+        "-NmHUMvX5i_q4wZLnAy6": "Token: cPTMaHioO1scj6ROdekSWs:APA91bE391y8UfTNWwuuwh6oVVWf-zla4cFIMcnvAa56DxAAiQJ6hGf0e1dGvdfUH73Nyi5ihENcdGCQ4ecwMSO2VFv6KnmHY9XJy_LEXDdgdRTBq4n21HDOPPT5Xa_kzc0AyjF7T_Ug, Time: 2023-12-22 18:05:47.255",
+        "-NnVRhtkwZfbGbXptiPi": "Token: cPTMaHioO1scj6ROdekSWs:APA91bE391y8UfTNWwuuwh6oVVWf-zla4cFIMcnvAa56DxAAiQJ6hGf0e1dGvdfUH73Nyi5ihENcdGCQ4ecwMSO2VFv6KnmHY9XJy_LEXDdgdRTBq4n21HDOPPT5Xa_kzc0AyjF7T_Ug, Time: 2024-01-06 21:24:33.673"
       },
       "startOfLevel": {
         "-NlYeG_rRHmbYNXcIlbP": "Level: 1, Time: 2023-12-13 15:51:15.700",
@@ -2891,21 +2525,34 @@
       "uuid": "V01-23-12-16–18:09-sYppaA3ZDKM0WJk"
     },
     "V01-23-12-17–12:06-NFKNJNE2qBzBfVv": {
+      "appCloseTime": {
+        "-NnDUz-Xme554-i3N1PW": "2024-01-03 09:45:40.338"
+      },
       "appStartDate": {
         "-NlrSGd8AzfOBBfC7O5I": "2023-12-17 12:06:52.258",
-        "-NmFj1LWn7y_BCRkKvug": "2023-12-22 09:54:59.572"
+        "-NmFj1LWn7y_BCRkKvug": "2023-12-22 09:54:59.572",
+        "-NnDUeJk3jqJgdnMj7sk": "2024-01-03 09:44:15.568"
       },
       "darkPatterns": 0,
+      "endSurvey": {
+        "-NnDUomxVwdfuKhnKWMS": "SurveyResult: [ID: 1-1, ID: 3-0]"
+      },
       "finishOfLevel": {
         "-NlrSrGAT94QtLuUdhsR": "Level: 1, Won: true, Time: 2023-12-17 12:09:27.288"
       },
       "initAppStartTime": {
         "-NlrSO-zoMZuDAk9WO7a": "2023-12-17 12:07:23.370"
       },
+      "pushClick": {
+        "-NnDUe3QS88QzgNV56h4": "2024-01-03 09:44:14.339",
+        "-NnDUe3ZigVwSO3aODix": "2024-01-03 09:44:14.437"
+      },
       "pushToken": {
         "-NlrSHZ7IXuk8f8AW6fF": "Token: dE1ZVk-bmg3jUDTq4aR9Fh:APA91bEcBiWcctF9vC2i6AMrWhDs-8cNwnkS0U6BD7EwRNZ49g0WwdZHhyS3q-i2yoUQORihNcj7uXpZYlVs4SiaurA_cHpsBRGYPtB-eRjMsODfrT5T4S1YeFohmeCfLitOGX1mfNO7, Time: 2023-12-17 12:06:56.956",
         "-NlrSO83wSI1gqHSsbIa": "Token: dE1ZVk-bmg3jUDTq4aR9Fh:APA91bEcBiWcctF9vC2i6AMrWhDs-8cNwnkS0U6BD7EwRNZ49g0WwdZHhyS3q-i2yoUQORihNcj7uXpZYlVs4SiaurA_cHpsBRGYPtB-eRjMsODfrT5T4S1YeFohmeCfLitOGX1mfNO7, Time: 2023-12-17 12:07:23.897",
-        "-NmFj1TM4HUJnZxE9idc": "Token: dE1ZVk-bmg3jUDTq4aR9Fh:APA91bEcBiWcctF9vC2i6AMrWhDs-8cNwnkS0U6BD7EwRNZ49g0WwdZHhyS3q-i2yoUQORihNcj7uXpZYlVs4SiaurA_cHpsBRGYPtB-eRjMsODfrT5T4S1YeFohmeCfLitOGX1mfNO7, Time: 2023-12-22 09:54:59.221"
+        "-NmFj1TM4HUJnZxE9idc": "Token: dE1ZVk-bmg3jUDTq4aR9Fh:APA91bEcBiWcctF9vC2i6AMrWhDs-8cNwnkS0U6BD7EwRNZ49g0WwdZHhyS3q-i2yoUQORihNcj7uXpZYlVs4SiaurA_cHpsBRGYPtB-eRjMsODfrT5T4S1YeFohmeCfLitOGX1mfNO7, Time: 2023-12-22 09:54:59.221",
+        "-NnDUeVikbx2iYiUUoYT": "Token: dE1ZVk-bmg3jUDTq4aR9Fh:APA91bEcBiWcctF9vC2i6AMrWhDs-8cNwnkS0U6BD7EwRNZ49g0WwdZHhyS3q-i2yoUQORihNcj7uXpZYlVs4SiaurA_cHpsBRGYPtB-eRjMsODfrT5T4S1YeFohmeCfLitOGX1mfNO7, Time: 2024-01-03 09:44:16.405",
+        "-NnDUeWkyEfuhfTuqxWK": "Token: dE1ZVk-bmg3jUDTq4aR9Fh:APA91bEcBiWcctF9vC2i6AMrWhDs-8cNwnkS0U6BD7EwRNZ49g0WwdZHhyS3q-i2yoUQORihNcj7uXpZYlVs4SiaurA_cHpsBRGYPtB-eRjMsODfrT5T4S1YeFohmeCfLitOGX1mfNO7, Time: 2024-01-03 09:44:16.472"
       },
       "startOfLevel": {
         "-NlrSQq-K5t8l33Xkyc-": "Level: 1, Time: 2023-12-17 12:07:34.963",
@@ -2917,8 +2564,13 @@
       "uuid": "V01-23-12-17–12:06-NFKNJNE2qBzBfVv"
     },
     "V01-23-12-17–19:03-shRAw7SMLWoLZ45": {
+      "appCloseTime": {
+        "-NnBDgB0zyDpQiwO8Vkr": "2024-01-02 23:10:52.391",
+        "-NnBDgbOQxHmnyv79ErD": "2024-01-02 23:10:54.143"
+      },
       "appStartDate": {
-        "-NlswjlEfPDqN4nCZJ9Q": "2023-12-17 19:04:00.187"
+        "-NlswjlEfPDqN4nCZJ9Q": "2023-12-17 19:04:00.187",
+        "-NnBDbM6ScxTkR7IsE3R": "2024-01-02 23:10:32.291"
       },
       "darkPatterns": 0,
       "finishOfLevel": {
@@ -2929,7 +2581,8 @@
       },
       "pushToken": {
         "-NlswmQpNxkvGuiBX4fI": "Token: dY1R2VvNNZbf4ACrX8lUd4:APA91bEFOFI17vWHKW48gb_U7iz2jUBmUjGX8andCxfxA8OG0SS2ookF_PE1e4tpxKbKOHzvuO2xYqFnID4MaITp9LyAx37bBHF5Or4xR5v8KYf9oErALVi1MX0rcPM4bV8jPDu56e2-, Time: 2023-12-17 19:04:11.234",
-        "-NlswtW69mU_99d7hp4n": "Token: dY1R2VvNNZbf4ACrX8lUd4:APA91bEFOFI17vWHKW48gb_U7iz2jUBmUjGX8andCxfxA8OG0SS2ookF_PE1e4tpxKbKOHzvuO2xYqFnID4MaITp9LyAx37bBHF5Or4xR5v8KYf9oErALVi1MX0rcPM4bV8jPDu56e2-, Time: 2023-12-17 19:04:40.244"
+        "-NlswtW69mU_99d7hp4n": "Token: dY1R2VvNNZbf4ACrX8lUd4:APA91bEFOFI17vWHKW48gb_U7iz2jUBmUjGX8andCxfxA8OG0SS2ookF_PE1e4tpxKbKOHzvuO2xYqFnID4MaITp9LyAx37bBHF5Or4xR5v8KYf9oErALVi1MX0rcPM4bV8jPDu56e2-, Time: 2023-12-17 19:04:40.244",
+        "-NnBDcNHELniznq0cO2J": "Token: fxwwY4pJ9RRFTJMj0jVzv5:APA91bERqw643y2n6L94xNLtaOBJC06xbwPCnSucZtgzjKhb17Z5lGKkDmX5f7z8QI8krhTQu63Qad2cKYIWAkZlEC4uxOqlgJnuyRdpOuc3Fku-UI1oaDB68HHx_l8jaE8ZzwWl27mk, Time: 2024-01-02 23:10:36.795"
       },
       "startOfLevel": {
         "-Nlsx1edqkkxvdsQ21wJ": "Level: 1, Time: 2023-12-17 19:05:17.713"
@@ -3450,6 +3103,41 @@
         "-NmyeGCLcC8C2jWrs884": "SurveyResult: [ID: 1-20, ID: 2-0, ID: 3-0, ID: 4-0, ID: 5-0, ID: 7-0, ID: 8-0, ID: 9-1]"
       },
       "uuid": "V01-23-12-31–07:56-q6EXCRXppyr9RUd"
+    },
+    "V01-24-01-03–21:08-lPlQFEft2dwHNnU": {
+      "appStartDate": {
+        "-NnFwByzexOHzIM0N4QJ": "2024-01-03 21:08:11.829"
+      },
+      "darkPatterns": 1,
+      "initAppStartTime": {
+        "-NnFwExa6_EJNo_X7eTd": "2024-01-03 21:08:25.561"
+      },
+      "pushToken": {
+        "-NnFwCpXxA5PxQHssdci": "Token: emFiCHmf_7GegApXrc1mNa:APA91bFCz-gLalUh9cHDBZWkZT8SG2_27aiXd9p7iJhQSbrpvqEVEpL9d8wbUn1U9DQyW2rZWj8OOw_P9OYoVZX46O8qZwdF_0u2vXICoUt10eE9YwM_EqmCzzW2DnzbEi1_4nqppQYi, Time: 2024-01-03 21:08:16.859"
+      },
+      "startSurvey": {
+        "-NnFwExf5auuoyNBG1kb": "SurveyResult: [ID: 1-17]"
+      },
+      "uuid": "V01-24-01-03–21:08-lPlQFEft2dwHNnU"
+    },
+    "V01-24-01-03–21:11-iDeNPijg3qSR4f2": {
+      "appStartDate": {
+        "-NnFx1WHdJDn8deKSOPU": "2024-01-03 21:11:52.296"
+      },
+      "darkPatterns": 1,
+      "endSurvey": {
+        "-NnFx9bUVXixIC-TOsCE": "SurveyResult: [ID: 1-2, ID: 2-1, ID: 3-0]"
+      },
+      "initAppStartTime": {
+        "-NnFx6HFNiylXP4qoeRg": "2024-01-03 21:12:11.968"
+      },
+      "pushToken": {
+        "-NnFx31bbkNRGvCsdiWK": "Token: e0ubAHRAHwGUZONknUUDsQ:APA91bFv_PDPg2gdQz78rFB05vgaqk6M0_eTl5pBaG7GIsZGWi6QPCpwGJ0WMSsw29iBY6OXofe0a-_mi1y-BWZWRzS_ujLAaUr0cey1ovqnA3I0q1vytpfls16WpmFPWlYerNCRCy_b, Time: 2024-01-03 21:11:58.688"
+      },
+      "startSurvey": {
+        "-NnFx6HLZpDFtcGj0afA": "SurveyResult: [ID: 1-99, ID: 2-2, ID: 3-2, ID: 4-4, ID: 5-2, ID: 7-6, ID: 9-3]"
+      },
+      "uuid": "V01-24-01-03–21:11-iDeNPijg3qSR4f2"
     }
   }
 }
