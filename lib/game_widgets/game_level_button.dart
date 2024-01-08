@@ -130,13 +130,14 @@ class GameLevelButton extends StatelessWidget {
     showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-              title: const Text('Boosterauswahl'),
+              title: const Text('Sonderjelly Auswahl'),
               content: Wrap(
                 children: [
                   Align(
                     alignment: Alignment.center,
                     child: Text(
-                      'Um einen Booster auszuwählen klicke bitte auf den entsprechenden Button oder starte das Spiel ohne Booster indem du auf "Spiel starten" klickst.',
+                      'Um ein Sonderjelly auszuwählen klicke bitte auf den entsprechenden Button '
+                          'oder starte das Spiel ohne Sonderjelly indem du auf "Spiel starten" klickst.',
                       textAlign: TextAlign.center,
                       style: TextStyle(color: darkModeActivated ? Colors.black : Colors.white), //
                       // Center
