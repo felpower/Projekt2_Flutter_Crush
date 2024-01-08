@@ -39,20 +39,10 @@ for user_id, user_info in users_data.items():
 def send_message(key):
 	message = messaging.Message(
 		token=key,
-		webpush=messaging.WebpushConfig(
-			fcm_options=messaging.WebpushFCMOptions(
-				link="https://felpower.github.io/"
-			),
-			notification=messaging.WebpushNotification(
-				title="JellyFun",
-				body="Hallo! Hast du heute schon gespielt?",
-				icon="https://github.com/felpower/felpower.github.io/blob/main/assets/assets/icons/android-chrome-512x512.png",
-				image="https://github.com/felpower/felpower.github.io/blob/main/assets/assets/icons/android-chrome-512x512.png",
-			)),
-		data={
-			"title": "JellyFun",
-			"body": "Hallo! Hast du heute schon gespielt?",
-		}
+		notification=messaging.Notification(
+			title="JellyFun",
+			body="Das ist eine TestNotification, da es bei der Pilotstudie zu Problemen kam."
+		)
 	)
 	response = messaging.send(message)
 	print(key)
@@ -74,7 +64,7 @@ def update_database(token_info):
 	now = datetime.now()
 	# Update the user's data in the database
 	user_ref = db.reference('/users/' + token_info['user_id'])
-	user_ref.update({'notification_sent': now})
+	user_ref.update({'notification_sent': str(now)})
 
 
 def send_single_notification(token=None):
@@ -88,6 +78,6 @@ def send_single_notification(token=None):
 
 send_notification()
 # send_single_notification(
-# 	"fVgvuxWuemKZogtdsKlH_w:APA91bGdTE2X5pDENLdCOYi4d3diGGpgA0ezxcJT7xFXzCrYpztzXS8bPnL631sOeW-RyX1xhtKLW6Ddrv26ZZQFwQ9_eemgRkFkkFEcKmN0O3zZac98tEPCYp3HSB5Jq6G5g_dX6QU8"
+# 	"fahfFRSWkAEBcjVVwgMWoY:APA91bFAhcBp9szuZgUGdSlbcXNiZbBggbetAzkWDjd0fkzfEvPYiEmcJGz7VUHKhUlVJLNCrxiYLgRyKc8DJLzU8MKo1zdWniHD1JnaCY6J1AH6efctMzKPP2kVmrrIIkEjk_luEmgc"
 # )
 # send_single_notification()
