@@ -2,18 +2,14 @@
 import 'dart:async';
 
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:universal_html/html.dart' as html;
 
 import '../helpers/device_helper.dart';
 
 class FirebaseMessagingWeb {
   Future<void> init() async {
     await initializeFirebase();
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
     getToken();
   }
 
@@ -38,11 +34,6 @@ class FirebaseMessagingWeb {
         settings.authorizationStatus == AuthorizationStatus.authorized ? true : false);
   }
 
-  @pragma('vm:entry-point')
-  Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-    print("Handling a background message: ${message.messageId}");
-  }
-
   static Future<String> getToken() async {
     try {
       String? token = await FirebaseMessaging.instance.getToken(
@@ -59,5 +50,4 @@ class FirebaseMessagingWeb {
       return "No token found, please reload page";
     }
   }
-
 }

@@ -36,20 +36,23 @@ dependencies:
   rxdart: ^0.27.7
   shared_preferences: ^2.2.2
   flutter_bloc: ^8.1.3
-  flutter_unity_widget: ^2022.2.0
-  pointer_interceptor: ^0.9.3+7 #Do Not upgrade
+  flutter_unity_widget: ^2022.2.1
+  pointer_interceptor: ^0.10.1
   fluttertoast: ^8.2.4
   dependency_validator: ^3.2.3
   universal_html: ^2.2.4
-  survey_kit: ^0.1.2 #Do Not upgrade
+  survey_kit: ^0.2.0
   intl: ^0.18.1 #Do Not upgrade
   url_launcher: ^6.2.2
   device_info_plus: ^9.1.1
   permission_handler: ^11.1.0
   firebase_core: ^2.24.2
-  firebase_messaging: ^14.7.9
-  firebase_database: ^10.3.8
-  firebase_storage: ^11.5.6
+  firebase_messaging:
+    git:
+      url: https://github.com/felpower/flutterfire.git
+      path: packages/firebase_messaging/firebase_messaging
+  firebase_database: ^10.4.0
+  firebase_storage: ^11.6.0
 
   flutter_web_plugins:
     sdk: flutter
