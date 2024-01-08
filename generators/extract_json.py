@@ -70,6 +70,8 @@ for user_id, user_info in users_data.items():
 		'checkHighscoreDate': "",
 		'pushClickTime': "",
 		'pushClickDate': "",
+		'notification_sent_time': "",
+		'notification_sent_date': "",
 		'appCloseTime': "",
 		'appCloseDate': "",
 		'darkPatterns': int(user_info.get('darkPatterns', 0)) if user_info.get('darkPatterns') is not None else '',
@@ -204,14 +206,25 @@ for user_id, user_info in users_data.items():
 
 	push_click = user_info.get('pushClick', None)
 	if push_click:
-		for push_click_time in push_click.values():
-			extracted_date_time = extract_date_time(push_click_time)
+		for push_sent_time in push_click.values():
+			extracted_date_time = extract_date_time(push_sent_time)
 			row['pushClickTime'] = str(extracted_date_time[1])
 			row['pushClickDate'] = str(extracted_date_time[0])
 			processed_data.append(row.copy())
 
 	row['pushClickTime'] = ""
 	row['pushClickDate'] = ""
+
+	push_time = user_info.get('notification_sent', None)
+	if push_time:
+		for push_sent_time in push_time.values():
+			extracted_date_time = extract_date_time(push_sent_time)
+			row['notification_sent_time'] = str(extracted_date_time[1])
+			row['notification_sent_date'] = str(extracted_date_time[0])
+			processed_data.append(row.copy())
+
+	row['notification_sent_time'] = ""
+	row['notification_sent_date'] = ""
 
 	start_survey = user_info.get('startSurvey', None)
 	if start_survey:
