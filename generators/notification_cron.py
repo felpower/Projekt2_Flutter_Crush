@@ -64,7 +64,7 @@ def update_database(token_info):
 	now = datetime.now()
 	# Update the user's data in the database
 	user_ref = db.reference('/users/' + token_info['user_id'])
-	user_ref.update({'notification_sent': str(now)})
+	user_ref.child('notification_sent').push().set(str(now))
 
 
 def send_single_notification(token=None):
