@@ -1,27 +1,23 @@
 ﻿namespace Match3 {
 	using UnityEngine;
 
-	public class PieceInputHandler : MonoBehaviour
-	{
+	public class PieceInputHandler : MonoBehaviour {
 		private Vector2 _startDragPosition;
 		private Vector2 _currentDragPosition;
 		private GameGrid _gameGrid;
 		private GamePiece _thisPiece;
-		
-		private void Awake()
-		{
+
+		private void Awake() {
 			_gameGrid = FindObjectOfType<GameGrid>();
 			_thisPiece = GetComponent<GamePiece>();
 		}
 
-		private void OnMouseDown()
-		{
+		private void OnMouseDown() {
 			_startDragPosition = Input.mousePosition;
 			_gameGrid.PressPiece(_thisPiece);
 		}
 
-		private void OnMouseDrag()
-		{
+		private void OnMouseDrag() {
 			_currentDragPosition = Input.mousePosition;
 			var dragVector = _currentDragPosition - _startDragPosition;
 
@@ -46,9 +42,6 @@
 			_gameGrid.EnterPiece(adjacentPiece);
 		}
 
-		private void OnMouseUp()
-		{
-			_gameGrid.ReleasePiece();
-		}
+		private void OnMouseUp() { _gameGrid.ReleasePiece(); }
 	}
 }

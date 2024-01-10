@@ -377,6 +377,7 @@ class _UnityScreenState extends State<UnityScreen> {
         builder: (BuildContext context) {
           return GameSplash(
             level: lvl,
+            powerup: powerUp.isNotEmpty,
             onComplete: () {
               _gameSplash.remove();
               // allow gesture detection
