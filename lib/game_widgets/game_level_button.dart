@@ -207,7 +207,7 @@ class GameLevelButton extends StatelessWidget {
       showDialog(
           context: context,
           builder: (BuildContext context) => AlertDialog(
-                title: const Text('Nicht genug Münzen um dieses PowerUp zu kaufen'),
+                title: const Text('Nicht genug Münzen um dieses Sonderjelly zu kaufen'),
                 content: const Text('Du kannst Münzen durch Spielen der Levels erhalten'),
                 elevation: 24,
                 shape: const RoundedRectangleBorder(

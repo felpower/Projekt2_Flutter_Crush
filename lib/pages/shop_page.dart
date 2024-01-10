@@ -103,7 +103,7 @@ class ShopState extends State<ShopPage> {
                           title: Text(shopItems[index].name,
                               style: const TextStyle(color: Colors.black)),
                           subtitle: Text(
-                              '${shopItems[index].description} - ${shopItems[index].cost} coins',
+                              '${shopItems[index].description} - ${shopItems[index].cost}\$',
                               style: const TextStyle(color: Colors.black)),
                           trailing: ElevatedButton(
                             child: const Text('Kaufen'),

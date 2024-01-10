@@ -1,6 +1,6 @@
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:flutter/material.dart';
-import 'package:universal_html/html.dart' as html
+import 'package:universal_html/html.dart' as html;
 
 class FeedbackPage extends StatefulWidget {
   const FeedbackPage({Key? key}) : super(key: key);

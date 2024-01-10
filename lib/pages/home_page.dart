@@ -113,9 +113,9 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    loadDailyReward();
     DarkPatternsState darkPatternsState =
         flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context).state;
+    loadDailyReward(darkPatternsState);
     GameBloc gameBloc = BlocProvider.of<GameBloc>(context);
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     Size screenSize = mediaQueryData.size;
@@ -148,7 +148,7 @@ class _HomePageState extends State<HomePage>
               return IconButton(
                 icon: const Icon(Icons.menu),
                 onPressed: () {
-                  loadDailyReward();
+                  loadDailyReward(darkPatternsState);
                   Scaffold.of(context).openEndDrawer();
                 },
                 tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
@@ -429,7 +429,7 @@ class _HomePageState extends State<HomePage>
   late int buntJelly;
   late int stripeJelly;
 
-  void loadDailyReward() async {
+  void loadDailyReward(DarkPatternsState darkPatternsState) async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     var dailyReward = sp.getString("dailyRewards");
     var firstTimeStart = sp.getString("firstStartTime");
@@ -450,12 +450,12 @@ class _HomePageState extends State<HomePage>
       stripeJelly = sp.getInt("stripeJelly") ?? 0;
     });
     if (firstTimeStart == null) {
-      var todaysReward = DailyRewardsService.getTodaysReward(1);
+      var todaysReward = DailyRewardsService.getTodaysReward(1, darkPatternsState);
       todaysAmount = todaysReward['amount'];
       todaysType = todaysReward['type'];
     } else {
       var daysSinceStart = DateTime.now().difference(DateTime.parse(firstTimeStart)).inDays;
-      var todaysReward = DailyRewardsService.getTodaysReward(daysSinceStart + 1);
+      var todaysReward = DailyRewardsService.getTodaysReward(daysSinceStart + 1, darkPatternsState);
       todaysAmount = todaysReward['amount'];
       todaysType = todaysReward['type'];
     }
