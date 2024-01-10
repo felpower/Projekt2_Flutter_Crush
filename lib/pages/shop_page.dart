@@ -80,7 +80,9 @@ class ShopState extends State<ShopPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Text('\$: $coins'),
-                      if (darkPatterns is! DarkPatternsDeactivatedState) Text('XP: $xp'),
+                      if (darkPatterns is DarkPatternsActivatedState ||
+                          darkPatterns is DarkPatternsCompetitionState)
+                        Text('XP: $xp'),
                       Text('Buntes Jelly: $buntJelly'),
                       Text('Gestreiftes Jelly: $stripeJelly'),
                     ],
@@ -91,8 +93,9 @@ class ShopState extends State<ShopPage> {
                     itemCount: shopItems.length,
                     itemBuilder: (context, index) {
                       if (shopItems[index].type == 'xp' &&
-                          darkPatterns is DarkPatternsDeactivatedState) {
-                        return Container(); // Return an empty container if the item is XP and dark patterns are deactivated
+                          !(darkPatterns is DarkPatternsActivatedState ||
+                              darkPatterns is DarkPatternsCompetitionState)) {
+                        return Container(); // Return an empty container if the item is XP and dark patterns are not activated or in competition state
                       }
                       return Container(
                         color: Colors.black.withOpacity(0.1), // Semi-transparent background
@@ -164,8 +167,7 @@ class ShopState extends State<ShopPage> {
         timeInSecForIosWeb: 5,
         backgroundColor: Colors.green,
         textColor: Colors.white,
-        fontSize: 16.0
-    );
+        fontSize: 16.0);
   }
 
   void loadSharedPreferences() async {
