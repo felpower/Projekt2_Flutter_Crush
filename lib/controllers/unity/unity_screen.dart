@@ -101,74 +101,76 @@ class _UnityScreenState extends State<UnityScreen> {
   Widget build(BuildContext context) {
     lvl = widget.levelNumber;
     coinBloc = flutter_bloc.BlocProvider.of<CoinBloc>(context);
-    return Scaffold(
-      floatingActionButton: PointerInterceptor(
-        child: Visibility(
-            visible: !gameOver,
-            child: FloatingActionButton(
-              backgroundColor: Colors.transparent,
-              child: Image.asset(
-                'assets/images/others/close.png',
-              ),
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) => PointerInterceptor(
-                            child: AlertDialog(
-                          title: const Text('Level abbrechen'),
-                          content: const Text('Bist du sicher, dass du das Level abbrechen '
-                              'wollen?'),
-                          elevation: 24,
-                          shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(16))),
-                          actions: <Widget>[
-                            TextButton(
-                                onPressed: () => {Navigator.pop(context, 'Cancel')},
-                                child: const Text('Nein')),
-                            TextButton(onPressed: () => {popUntil()}, child: const Text('Ja')),
-                          ],
-                        )));
-              },
-            )),
-      ),
-      body: Stack(
-        children: [
-          Card(
-              margin: const EdgeInsets.all(0),
-              clipBehavior: Clip.antiAlias,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              child: UnityWidget(
-                onUnityCreated: onUnityCreated,
-                onUnityMessage: onUnityMessage,
-                onUnitySceneLoaded: onUnitySceneLoaded,
-                useAndroidViewSurface: false,
-                borderRadius: const BorderRadius.all(Radius.circular(70)),
-              )),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: PointerInterceptor(
-                  child: FloatingActionButton(
-                backgroundColor: Colors.transparent,
-                elevation: 0.0,
-                onPressed: () async {
-                  SharedPreferences prefs = await SharedPreferences.getInstance();
-                  setState(() {
-                    isMusicOn = !isMusicOn;
-                    prefs.setBool('music', isMusicOn);
-                  });
-                  changeMusic();
-                },
-                child: isMusicOn ? const Icon(Icons.music_note) : const Icon(Icons.music_off),
-              )),
-            ),
+    return PopScope(
+        canPop: false,
+        child: Scaffold(
+          floatingActionButton: PointerInterceptor(
+            child: Visibility(
+                visible: !gameOver,
+                child: FloatingActionButton(
+                  backgroundColor: Colors.transparent,
+                  child: Image.asset(
+                    'assets/images/others/close.png',
+                  ),
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) => PointerInterceptor(
+                                child: AlertDialog(
+                              title: const Text('Level abbrechen'),
+                              content: const Text('Bist du sicher, dass du das Level abbrechen '
+                                  'wollen?'),
+                              elevation: 24,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(16))),
+                              actions: <Widget>[
+                                TextButton(
+                                    onPressed: () => {Navigator.pop(context, 'Cancel')},
+                                    child: const Text('Nein')),
+                                TextButton(onPressed: () => {popUntil()}, child: const Text('Ja')),
+                              ],
+                            )));
+                  },
+                )),
           ),
-        ],
-      ),
-    );
+          body: Stack(
+            children: [
+              Card(
+                  margin: const EdgeInsets.all(0),
+                  clipBehavior: Clip.antiAlias,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: UnityWidget(
+                    onUnityCreated: onUnityCreated,
+                    onUnityMessage: onUnityMessage,
+                    onUnitySceneLoaded: onUnitySceneLoaded,
+                    useAndroidViewSurface: false,
+                    borderRadius: const BorderRadius.all(Radius.circular(70)),
+                  )),
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: Padding(
+                  padding: const EdgeInsets.all(30.0),
+                  child: PointerInterceptor(
+                      child: FloatingActionButton(
+                    backgroundColor: Colors.transparent,
+                    elevation: 0.0,
+                    onPressed: () async {
+                      SharedPreferences prefs = await SharedPreferences.getInstance();
+                      setState(() {
+                        isMusicOn = !isMusicOn;
+                        prefs.setBool('music', isMusicOn);
+                      });
+                      changeMusic();
+                    },
+                    child: isMusicOn ? const Icon(Icons.music_note) : const Icon(Icons.music_off),
+                  )),
+                ),
+              ),
+            ],
+          ),
+        ));
   }
 
   void popUntil() {
@@ -212,7 +214,7 @@ class _UnityScreenState extends State<UnityScreen> {
                     : AlertDialog(
                         title: const Text('Keine Züge mehr möglich'),
                         content:
-                            Text('Du hast nicht genügend Münzen ($shufflePrice) für einen Shuffle? '
+                            Text('Du hast nicht genügend Münzen $shufflePrice für einen Shuffle? '
                                 'Du hast aktuell '
                                 '$coins Münzen. Das Spiel ist vorbei'),
                         elevation: 24,
