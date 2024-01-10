@@ -12,24 +12,28 @@ class CreditPanel extends StatelessWidget {
       onTap: () {
         var snackBar = text.contains("XP")
             ? const SnackBar(
-                content: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'XP werden genutzt um im HighScore(siehe',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      SizedBox(width: 5), // Add this line
-                      Icon(Icons.scoreboard, color: Colors.white),
-                      Text(
-                        ' oben rechts) voranzukommen!',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ],
-                  ),
+          content: Center(
+            child: Wrap(
+              alignment: WrapAlignment.center,
+              children: [
+                Text(
+                  'XP werden genutzt um im HighScore(siehe',
+                  style: TextStyle(color: Colors.white),
                 ),
-              )
+                SizedBox(width: 5),  // Add this line
+                Icon(Icons.scoreboard, color: Colors.white),
+                Text(
+                  ' oben rechts)',
+                  style: TextStyle(color: Colors.white),
+                ),
+                Text(
+                  ' voranzukommen!',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
+          ),
+        )
             : const SnackBar(
                 content: Text(
                     'Die \$ können benutzt werden um im Shop Items zu kaufen oder um Levels '
