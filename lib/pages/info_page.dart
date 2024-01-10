@@ -14,7 +14,9 @@ class DeviceToken extends StatefulWidget {
 class _DeviceTokenState extends State<DeviceToken> {
   String text = "";
   TextEditingController authorizationStatus = TextEditingController();
-  PageController _pageController = PageController(); // Add this line
+  PageController _pageController = PageController();
+
+  int _currentPage = 0; // Add this line
   @override
   Widget build(BuildContext context) {
     final DarkPatternsState darkPatternsState =
@@ -27,10 +29,16 @@ class _DeviceTokenState extends State<DeviceToken> {
           children: [
             Expanded(
                 child: PageView(
-                    controller: _pageController, // Add this line
+                    controller: _pageController,
+                    onPageChanged: (int page) {
+                      setState(() {
+                        _currentPage = page;
+                      });
+                    },
                     children: [
-                  SingleChildScrollView(
-                    child: const Column(
+                  const SingleChildScrollView(
+                    padding: EdgeInsets.all(8.0),
+                    child: Column(
                       children: [
                         Text('''1.	Spielbrett und Jellies: ''',
                             style: TextStyle(fontWeight: FontWeight.bold)),
@@ -43,6 +51,7 @@ class _DeviceTokenState extends State<DeviceToken> {
                     ),
                   ),
                   const SingleChildScrollView(
+                    padding: EdgeInsets.all(8.0),
                     child: Column(
                       children: [
                         Text('''2.	Spielzüge:''', style: TextStyle(fontWeight: FontWeight.bold)),
@@ -54,8 +63,9 @@ class _DeviceTokenState extends State<DeviceToken> {
                       ],
                     ),
                   ),
-                  SingleChildScrollView(
-                    child: const Column(
+                  const SingleChildScrollView(
+                    padding: EdgeInsets.all(8.0),
+                    child: Column(
                       children: [
                         Text("3.	Kombinationen und Boni:",
                             style: TextStyle(fontWeight: FontWeight.bold)),
@@ -75,7 +85,8 @@ class _DeviceTokenState extends State<DeviceToken> {
                     ),
                   ),
                   const SingleChildScrollView(
-                    child: const Column(
+                    padding: EdgeInsets.all(8.0),
+                    child: Column(
                       children: [
                         Text("4.	Levelziele:", style: TextStyle(fontWeight: FontWeight.bold)),
                         Text(
@@ -87,7 +98,8 @@ class _DeviceTokenState extends State<DeviceToken> {
                     ),
                   ),
                   const SingleChildScrollView(
-                    child: const Column(
+                    padding: EdgeInsets.all(8.0),
+                    child: Column(
                       children: [
                         Text("5.	Bewegungsbegrenzung und Zeitlimit: ",
                             style: TextStyle(fontWeight: FontWeight.bold)),
@@ -100,7 +112,8 @@ class _DeviceTokenState extends State<DeviceToken> {
                     ),
                   ),
                   const SingleChildScrollView(
-                    child: const Column(
+                    padding: EdgeInsets.all(8.0),
+                    child: Column(
                       children: [
                         Text("6.	Sonderjellies: ", style: TextStyle(fontWeight: FontWeight.bold)),
                         Text('''
@@ -109,7 +122,8 @@ Nutze Sonderjellies, um schwierige Level zu meistern. Diese können durch Spielv
                     ),
                   ),
                   const SingleChildScrollView(
-                    child: const Column(
+                    padding: EdgeInsets.all(8.0),
+                    child: Column(
                       children: [
                         Text("7.	Fortschritt und Herausforderungen: ",
                             style: TextStyle(fontWeight: FontWeight.bold)),
@@ -119,6 +133,7 @@ Nutze Sonderjellies, um schwierige Level zu meistern. Diese können durch Spielv
                     ),
                   ),
                   SingleChildScrollView(
+                    padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: [
                         const Text("8.	Startbildschirm: ",
@@ -148,6 +163,7 @@ Nutze Sonderjellies, um schwierige Level zu meistern. Diese können durch Spielv
                     ),
                   ),
                   SingleChildScrollView(
+                    padding: const EdgeInsets.all(8.0),
                     child: Column(children: [
                       const Text("Tipps und Tricks: ",
                           style: TextStyle(fontWeight: FontWeight.bold)),
@@ -170,73 +186,29 @@ Nutze Sonderjellies, um schwierige Level zu meistern. Diese können durch Spielv
                     ]),
                   )
                 ])),
-            Wrap(
-              alignment: WrapAlignment.center,
-              spacing: 8.0, // gap between adjacent chips
-              runSpacing: 4.0, // gap between lines
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
-                  child: const Text('1'),
+                  child: const Icon(Icons.arrow_back),
                   onPressed: () {
-                    _pageController.animateToPage(0,
-                        duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+                    if (_pageController.hasClients && _pageController.page! > 0) {
+                      _pageController.previousPage(
+                          duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+                    }
                   },
                 ),
+                Text('${_currentPage + 1} / 9'),
                 ElevatedButton(
-                  child: const Text('2'),
+                  child: const Icon(Icons.arrow_forward),
                   onPressed: () {
-                    _pageController.animateToPage(1,
-                        duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+                    if (_pageController.hasClients &&
+                        _pageController.page! < _pageController.position.maxScrollExtent) {
+                      _pageController.nextPage(
+                          duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+                    }
                   },
                 ),
-                ElevatedButton(
-                  child: const Text('3'),
-                  onPressed: () {
-                    _pageController.animateToPage(2,
-                        duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
-                  },
-                ),
-                ElevatedButton(
-                  child: const Text('4'),
-                  onPressed: () {
-                    _pageController.animateToPage(3,
-                        duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
-                  },
-                ),
-                ElevatedButton(
-                  child: const Text('5'),
-                  onPressed: () {
-                    _pageController.animateToPage(4,
-                        duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
-                  },
-                ),
-                ElevatedButton(
-                  child: const Text('6'),
-                  onPressed: () {
-                    _pageController.animateToPage(5,
-                        duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
-                  },
-                ),
-                ElevatedButton(
-                  child: const Text('7'),
-                  onPressed: () {
-                    _pageController.animateToPage(6,
-                        duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
-                  },
-                ),ElevatedButton(
-                  child: const Text('8'),
-                  onPressed: () {
-                    _pageController.animateToPage(7,
-                        duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
-                  },
-                ),ElevatedButton(
-                  child: const Text('9'),
-                  onPressed: () {
-                    _pageController.animateToPage(8,
-                        duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
-                  },
-                ),
-                // Add more FlatButtons as needed...
               ],
             ),
           ],
