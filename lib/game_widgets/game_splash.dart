@@ -72,11 +72,6 @@ class _GameSplashState extends State<GameSplash> with SingleTickerProviderStateM
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-
-    //
-    // Build the objectives
-    //
-
     return AnimatedBuilder(
       animation: _animationAppear,
       child: Material(
@@ -96,8 +91,8 @@ class _GameSplashState extends State<GameSplash> with SingleTickerProviderStateM
                   style: const TextStyle(fontSize: 24.0, color: Colors.white),
                 ),
                 widget.powerup
-                    ? const Text('Vergiss nicht dein gekauftes Sonderjelly zu setzen', style:
-                TextStyle(fontSize: 14.0, color: Colors.white))
+                    ? const Text('Vergiss nicht dein gekauftes Sonderjelly zu setzen',
+                        style: TextStyle(fontSize: 14.0, color: Colors.white))
                     : Container(),
                 const SizedBox(height: 8.0),
                 const Row(
