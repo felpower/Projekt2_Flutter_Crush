@@ -11,11 +11,30 @@ class CreditPanel extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         var snackBar = text.contains("XP")
-            ? const SnackBar(content: Text('XP werden genutzt um im HighScore(siehe oben rechts) '
-            'voranzukommen!'))
+            ? const SnackBar(
+                content: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'XP werden genutzt um im HighScore(siehe',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      SizedBox(width: 5), // Add this line
+                      Icon(Icons.scoreboard, color: Colors.white),
+                      Text(
+                        ' oben rechts) voranzukommen!',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ),
+              )
             : const SnackBar(
                 content: Text(
-                    '\$ können benutzt werden um im Shop Items zu kaufen oder um Levels freizuschalten!'));
+                    'Die \$ können benutzt werden um im Shop Items zu kaufen oder um Levels '
+                    'freizuschalten!',
+                    textAlign: TextAlign.center));
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       },
       child: Padding(
