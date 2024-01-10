@@ -24,6 +24,7 @@ class GameSplash extends StatefulWidget {
 class _GameSplashState extends State<GameSplash> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animationAppear;
+
   @override
   void initState() {
     super.initState();
@@ -90,7 +91,7 @@ class _GameSplashState extends State<GameSplash> with SingleTickerProviderStateM
                 ),
                 widget.powerup
                     ? const Text('Vergiss nicht dein gekauftes Sonderjelly zu setzen',
-                    style: TextStyle(fontSize: 14.0, color: Colors.white))
+                        style: TextStyle(fontSize: 14.0, color: Colors.white))
                     : Container(),
                 const SizedBox(height: 8.0),
                 const Row(

@@ -25,9 +25,9 @@ class OldVersionPage extends StatelessWidget {
               'Sollte dies nicht der Fall sein und Sie sind sich sicher auf der aktuellen '
               'Version zu sein, bitte klicken Sie nicht den Button und löschen Sie die Cookies '
               'nicht. Wir bitten Sie uns zu kontaktieren und diese Nummer mitzuteilen und '
-                  'gegebenenfalls von dieser Seite einen Screenshot zu machen:'
-                  '\n\n\n '
-                  '$currentVersion',
+              'gegebenenfalls von dieser Seite einen Screenshot zu machen:'
+              '\n\n\n '
+              '$currentVersion',
               textAlign: TextAlign.center,
               style: const TextStyle(
                   color: Colors.black,

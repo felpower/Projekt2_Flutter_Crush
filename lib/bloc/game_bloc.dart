@@ -23,7 +23,7 @@ class GameBloc implements BlocBase {
 
   Stream<int> get gameIsOver => _gameIsOverController.stream;
 
-    final PublishSubject<int> _maxLevelNumber = PublishSubject<int>();
+  final PublishSubject<int> _maxLevelNumber = PublishSubject<int>();
 
   Stream<int> get maxLevelNumber => _maxLevelNumber.stream;
 

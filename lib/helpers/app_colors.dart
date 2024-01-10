@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class AppColors {
   AppColors._();
 
@@ -29,7 +30,6 @@ class AppColors {
     final hexCode = hexColor.replaceAll('#', '');
     return Color(int.parse('FF$hexCode', radix: 16));
   }
-
 
   static Color getColorFortune(int number) {
     return getColor(number % 6);

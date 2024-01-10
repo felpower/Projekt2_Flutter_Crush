@@ -39,8 +39,7 @@ class _SurveyPageState extends State<SurveyPage> {
                       for (var questionResult in stepResult.results) {
                         if (questionResult.result != null && questionResult.result != "") {
                           resultString.add(
-                              "ID: ${questionResult.id?.id.toString()}-${questionResult
-                                  .valueIdentifier}");
+                              "ID: ${questionResult.id?.id.toString()}-${questionResult.valueIdentifier}");
                         }
                       }
                     }
@@ -469,8 +468,7 @@ class _SurveyPageState extends State<SurveyPage> {
             answerFormat: const TextAnswerFormat()),
         CompletionStep(
           stepIdentifier: StepIdentifier(id: '13'),
-          text:
-              '',
+          text: '',
           title: '',
           buttonText: 'Studie beenden',
         ),
