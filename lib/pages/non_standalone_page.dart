@@ -108,16 +108,16 @@ class _BeforeInstallPrompt extends State<NonStandalonePage> {
                       backgroundColor: Colors.white,
                       decoration: TextDecoration.none))
               : Container(),
-                  !isIosDevice
-                      ? const Image(
-                      image: AssetImage('assets/instructions/InstallAndroid_alt1.png'), fit: BoxFit
-                      .cover)
-                      : Container(),
-                  !isIosDevice
-                      ? const Image(
-                      image: AssetImage('assets/instructions/InstallAndroid_alt2.png'), fit: BoxFit
-                      .cover)
-                      : Container(),
+          !isIosDevice
+              ? const Image(
+                  image: AssetImage('assets/instructions/InstallAndroid_alt1.png'),
+                  fit: BoxFit.cover)
+              : Container(),
+          !isIosDevice
+              ? const Image(
+                  image: AssetImage('assets/instructions/InstallAndroid_alt2.png'),
+                  fit: BoxFit.cover)
+              : Container(),
         ]))));
   }
 }

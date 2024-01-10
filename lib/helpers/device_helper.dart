@@ -48,7 +48,7 @@ class DeviceHelper {
   static Future<String> isCurrentVersion() {
     var uuid = FirebaseStore.getUuid();
     return uuid.then((value) {
-      if (value.startsWith(FirebaseStore.getCurrentVersion()) ) {
+      if (value.startsWith(FirebaseStore.getCurrentVersion())) {
         return "isCurrentVersion";
       }
       return uuid;
