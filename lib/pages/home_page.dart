@@ -99,7 +99,6 @@ class _HomePageState extends State<HomePage>
 
   @override
   void didChangeDependencies() {
-    print("didChangeDependencies");
     super.didChangeDependencies();
   }
 
