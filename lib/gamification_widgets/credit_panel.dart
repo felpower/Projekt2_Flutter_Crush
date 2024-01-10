@@ -8,21 +8,32 @@ class CreditPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: paddingTop, left: 10, right: 10, bottom: 10),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.grey[300]?.withOpacity(0.7),
-          borderRadius: BorderRadius.circular(30.0),
-          border: Border.all(width: 5.0, color: Colors.black.withOpacity(0.5)),
-        ),
-        height: 80,
-        width: width,
-        child: Center(
-          child: Text(
-            text,
-            style:
-                const TextStyle(color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.bold),
+    return GestureDetector(
+      onTap: () {
+        var snackBar = text.contains("XP")
+            ? const SnackBar(content: Text('XP werden genutzt um im HighScore(siehe oben rechts) '
+            'voranzukommen!'))
+            : const SnackBar(
+                content: Text(
+                    '\$ können benutzt werden um im Shop Items zu kaufen oder um Levels freizuschalten!'));
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      },
+      child: Padding(
+        padding: EdgeInsets.only(top: paddingTop, left: 10, right: 10, bottom: 10),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.grey[300]?.withOpacity(0.7),
+            borderRadius: BorderRadius.circular(30.0),
+            border: Border.all(width: 5.0, color: Colors.black.withOpacity(0.5)),
+          ),
+          height: 80,
+          width: width,
+          child: Center(
+            child: Text(
+              text,
+              style:
+                  const TextStyle(color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.bold),
+            ),
           ),
         ),
       ),
