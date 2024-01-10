@@ -14,7 +14,7 @@ class DeviceToken extends StatefulWidget {
 class _DeviceTokenState extends State<DeviceToken> {
   String text = "";
   TextEditingController authorizationStatus = TextEditingController();
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
 
   int _currentPage = 0; // Add this line
   @override
