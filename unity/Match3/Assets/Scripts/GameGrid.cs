@@ -186,12 +186,10 @@ namespace Match3 {
 				var powerUp = sceneInfo.powerUp;
 				if (level.isFlutter && !string.IsNullOrEmpty(powerUp)) {
 					print("PowerUpBought: " + powerUp);
-					do {
-						powerX = Random.Range(0, xDim);
-						powerY = Random.Range(0, yDim);
-					} while (IsBubble(powerX, powerY));
-
-					yield return new WaitForSeconds(fillTime * 12);
+					_timeWhenWeNextDoSomething = Time.time + 100000f;
+					yield return new WaitUntil(() => _pressedPiece != null);
+					powerX = _pressedPiece.X;
+					powerY = _pressedPiece.Y;
 					ClearPiece(powerX, powerY, false, false);
 					if (powerUp.Contains("Clear")) {
 						var realPowerUp = Random.Range(0, 2) == 0 ? PieceType.RowClear : PieceType.ColumnClear;
@@ -202,19 +200,21 @@ namespace Match3 {
 						var newPiece = SpawnNewPiece(powerX, powerY, PieceType.Rainbow);
 						newPiece.ColorComponent.SetColor(ColorType.Any);
 					}
+
+					_timeWhenWeNextDoSomething = Time.time + TimeBetweenDoingSomething;
 				}
 
 				if (!level.isFlutter && TestPowerUp) {
+					_timeWhenWeNextDoSomething = Time.time + 100000f;
 					print("TestPowerUp: " + TestPowerUp);
-					powerX = Random.Range(0, xDim);
-					powerY = Random.Range(0, yDim);
-					yield return new WaitForSeconds(fillTime * 12);
+					// Wait for user input for powerup position
+					yield return new WaitUntil(() => _pressedPiece != null);
+					powerX = _pressedPiece.X;
+					powerY = _pressedPiece.Y;
 					ClearPiece(powerX, powerY);
 					var newPiece = SpawnNewPiece(powerX, powerY, PieceType.Rainbow);
 					newPiece.ColorComponent.SetColor(ColorType.Any);
-					// var newPiece = SpawnNewPiece(powerX, powerY, PieceType.ColumnClear);
-					// newPiece.ColorComponent.SetColor((ColorType)Random.Range(0,
-					// 	_pieces[0, 0].ColorComponent.NumColors));
+					_timeWhenWeNextDoSomething = Time.time + 2f;
 				}
 
 				_isFirst = false;

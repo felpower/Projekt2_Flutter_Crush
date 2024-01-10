@@ -6,9 +6,12 @@ import 'double_curved_container.dart';
 class GameSplash extends StatefulWidget {
   final int level;
 
+  final bool powerup;
+
   const GameSplash({
     Key? key,
     required this.level,
+    required this.powerup,
     required this.onComplete,
   }) : super(key: key);
 
@@ -92,6 +95,10 @@ class _GameSplashState extends State<GameSplash> with SingleTickerProviderStateM
                   'Level:  ${widget.level}',
                   style: const TextStyle(fontSize: 24.0, color: Colors.white),
                 ),
+                widget.powerup
+                    ? const Text('Vergiss nicht dein gekauftes Sonderjelly zu setzen', style:
+                TextStyle(fontSize: 14.0, color: Colors.white))
+                    : Container(),
                 const SizedBox(height: 8.0),
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -105,7 +112,7 @@ class _GameSplashState extends State<GameSplash> with SingleTickerProviderStateM
       builder: (BuildContext context, Widget? child) {
         return Positioned(
           left: 0.0,
-          top: 1+100.0 * _animationAppear.value,
+          top: 1 + 100.0 * _animationAppear.value,
           child: child!,
         );
       },
