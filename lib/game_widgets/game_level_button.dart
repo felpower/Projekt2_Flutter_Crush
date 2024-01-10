@@ -1,4 +1,4 @@
-import 'package:audioplayers/src/audioplayer.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:bachelor_flutter_crush/bloc/reporting_bloc/reporting_event.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/coins_bloc/coin_event.dart';
@@ -137,7 +137,7 @@ class GameLevelButton extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Text(
                       'Um ein Sonderjelly auszuwählen klicke bitte auf den entsprechenden Button '
-                          'oder starte das Spiel ohne Sonderjelly indem du auf "Spiel starten" klickst.',
+                      'oder starte das Spiel ohne Sonderjelly indem du auf "Spiel starten" klickst.',
                       textAlign: TextAlign.center,
                       style: TextStyle(color: darkModeActivated ? Colors.black : Colors.white), //
                       // Center
