@@ -6,6 +6,7 @@ import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_bloc.dart
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_state.dart';
 import 'package:bachelor_flutter_crush/game_widgets/game_level_button.dart';
 import 'package:bachelor_flutter_crush/helpers/url_helper.dart';
+import 'package:bachelor_flutter_crush/pages/shop_page.dart';
 import 'package:bachelor_flutter_crush/persistence/daily_rewards_service.dart';
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:bachelor_flutter_crush/services/firebase_messaging.dart';
@@ -404,6 +405,20 @@ class _HomePageState extends State<HomePage>
                     setMusic();
                   });
                 },
+              )),
+          Visibility(
+              visible: true,
+              child: ListTile(
+                leading: const Icon(Icons.shopping_basket),
+                title: const Text('Shop'),
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => const ShopPage()));
+                },
+                tileColor: Colors.grey[200],
+                // Background color to make it feel like a button
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)), // Rounded corners
               )),
         ],
       ),
