@@ -102,8 +102,6 @@ flutter:
     - assets/instructions/ins_2.png
     - assets/instructions/ins_3.png
     - assets/instructions/ins_4.png
-    - assets/instructions/ins_5.png
-    - assets/instructions/ins_5_alt.png
     - assets/instructions/ins_6_activated.png
     - assets/instructions/ins_6_deactivated.png
     - assets/instructions/ins_6_competition.png
