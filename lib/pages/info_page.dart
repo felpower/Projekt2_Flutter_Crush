@@ -177,20 +177,36 @@ class _DeviceTokenState extends State<DeviceToken> {
                           //Menü Text
                           if (darkPatternsState is DarkPatternsActivatedState)
                             const Text(
-                                '''Außerdem gibt es im Menü noch zwei weitere spannende Features für dich: Im Shop (1) kannst du mit den erspielten Münzen Sonderjellies kaufen. Außerdem wartet täglich eine neue Belohnung darauf von dir abgeholt zu werden (2). Die Musik kann ebenfalls im Menü ein- und ausgeschalten werden (3)
+                                '''Außerdem gibt es im Menü noch zwei weitere spannende Features für dich: Im Shop (1) kannst du mit den erspielten Münzen Sonderjellies kaufen. Außerdem wartet täglich eine neue Belohnung darauf von dir abgeholt zu werden (2). Die Musik kann ebenfalls im Menü ein- und ausgeschalten werden (3).
                                 ''')
                           else if (darkPatternsState is DarkPatternsDeactivatedState)
                             const Text(
-                                '''Außerdem gibt es im Menü noch ein weiters spannendes Feature für dich: Im Shop (1) kannst du mit den erspielten Münzen Sonderjellies kaufen. Die Musik kann ebenfalls im Menü ein- und ausgeschalten werden (2)
+                                '''Außerdem gibt es im Menü noch ein weiters spannendes Feature für dich: Im Shop (1) kannst du mit den erspielten Münzen Sonderjellies kaufen. Die Musik kann ebenfalls im Menü ein- und ausgeschalten werden (2).
                                 ''')
                           else if (darkPatternsState is DarkPatternsCompetitionState)
                             const Text(
-                                '''Außerdem gibt es im Menü noch ein weiters spannendes Feature für dich: Im Shop (1) kannst du mit den erspielten Münzen Sonderjellies kaufen. Die Musik kann ebenfalls im Menü ein- und ausgeschalten werden (2)
+                                '''Außerdem gibt es im Menü noch ein weiters spannendes Feature für dich: Im Shop (1) kannst du mit den erspielten Münzen Sonderjellies kaufen. Die Musik kann ebenfalls im Menü ein- und ausgeschalten werden (2).
                                 ''')
                           else if (darkPatternsState is DarkPatternsFoMoState)
                             const Text(
                                 '''Außerdem gibt es im Menü noch zwei weitere spannende Features für dich: Im Shop (1) kannst du mit den erspielten Münzen Sonderjellies kaufen. Außerdem wartet täglich eine neue Belohnung darauf von dir abgeholt zu werden (2). Die Musik kann ebenfalls im Menü ein- und ausgeschalten werden (3)
                                 '''),
+                          if (darkPatternsState is DarkPatternsActivatedState)
+                            const Image(
+                                image: AssetImage('assets/instructions/ins_6_1_activated.png'),
+                                fit: BoxFit.cover)
+                          else if (darkPatternsState is DarkPatternsDeactivatedState)
+                            const Image(
+                                image: AssetImage('assets/instructions/ins_6_1_deactivated.png'),
+                                fit: BoxFit.cover)
+                          else if (darkPatternsState is DarkPatternsCompetitionState)
+                            const Image(
+                                image: AssetImage('assets/instructions/ins_6_1_competition.png'),
+                                fit: BoxFit.cover)
+                          else if (darkPatternsState is DarkPatternsFoMoState)
+                            const Image(
+                                image: AssetImage('assets/instructions/ins_6_1_FoMo.png'),
+                                fit: BoxFit.cover),
                         ],
                       ),
                     ),

@@ -108,6 +108,10 @@ flutter:
     - assets/instructions/ins_6_deactivated.png
     - assets/instructions/ins_6_competition.png
     - assets/instructions/ins_6_FoMo.png
+    - assets/instructions/ins_6_1_activated.png
+    - assets/instructions/ins_6_1_deactivated.png
+    - assets/instructions/ins_6_1_competition.png
+    - assets/instructions/ins_6_1_FoMo.png
     - assets/instructions/InstallAndroid.png
     - assets/instructions/InstallIOS.png
     - assets/instructions/InstallAndroid_alt1.png
