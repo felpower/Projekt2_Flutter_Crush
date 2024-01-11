@@ -166,3 +166,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clearAnimation: {fileID: 7400000, guid: 4b1f0bee1352f414cbc8ac14fcc54b4f, type: 2}
+  sparkleAnimation: {fileID: 7400000, guid: 8eab3ba4e867dec46976ea579b6de1c8, type: 2}

@@ -93,6 +93,8 @@ flutter:
     - assets/images/background/background_new2.png
     - assets/images/bombs/jelly_gelb.png
     - assets/images/bombs/jelly_bunt.png
+    - assets/images/bombs/jelly_gelb_vertical.png
+    - assets/images/bombs/jelly_gelb_horizontal.png
     - assets/images/login/login-page.png
     - assets/images/others/close.png
     # Instructions
@@ -102,6 +104,10 @@ flutter:
     - assets/instructions/ins_4.png
     - assets/instructions/ins_5.png
     - assets/instructions/ins_5_alt.png
+    - assets/instructions/ins_6_activated.png
+    - assets/instructions/ins_6_deactivated.png
+    - assets/instructions/ins_6_competition.png
+    - assets/instructions/ins_6_FoMo.png
     - assets/instructions/InstallAndroid.png
     - assets/instructions/InstallIOS.png
     - assets/instructions/InstallAndroid_alt1.png

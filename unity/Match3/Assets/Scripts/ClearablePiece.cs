@@ -1,15 +1,17 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Match3 {
 	public class ClearablePiece : MonoBehaviour {
 		public AnimationClip clearAnimation;
-
 		protected GamePiece piece;
 
 		public bool IsBeingCleared { get; private set; }
 
-		private void Awake() { piece = GetComponent<GamePiece>(); }
+		private void Awake() {
+			piece = GetComponent<GamePiece>();
+		}
 
 		public virtual void Clear(bool includePoints) {
 			piece.GameGridRef.level.OnPieceCleared(piece, includePoints);
@@ -18,10 +20,10 @@ namespace Match3 {
 		}
 
 		private IEnumerator ClearCoroutine() {
-			var animator = GetComponent<Animator>();
+			var clearAnimator = GetComponent<Animator>();
 
-			if (animator) {
-				animator.Play(clearAnimation.name);
+			if (clearAnimator) {
+				clearAnimator.Play(clearAnimation.name);
 
 				yield return new WaitForSeconds(clearAnimation.length);
 

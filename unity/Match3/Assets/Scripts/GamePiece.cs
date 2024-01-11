@@ -27,6 +27,7 @@ namespace Match3 {
 
 		public MovablePiece MovableComponent { get; private set; }
 
+
 		public ColorPiece ColorComponent { get; private set; }
 
 		public ClearablePiece ClearableComponent { get; private set; }
