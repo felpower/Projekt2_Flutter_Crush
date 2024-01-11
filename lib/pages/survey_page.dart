@@ -192,12 +192,8 @@ class _SurveyPageState extends State<SurveyPage> {
         InstructionStep(
           title: 'Vor dem Spielstart',
           text: 'Vor dem Spielstart werden Ihnen noch ein paar Fragen zu Ihrer Person und Ihrem '
-              'üblichen Spielverhalten gestellt. \n'
-              'Bitte beantworten Sie diese ehrlich. Alle Ihre Daten'
-              ' werden auf einem Server, der in der EU (entsprechend DSGVO) gehostet wird, '
-              'anonymisiert (d.h. ohne einen möglichen Rückschluss auf Ihre Person; es werden keine personenbezogenen Daten '
-              'erfasst) gespeichert und anschließend für wissenschaftliche Zwecke ausgewertet.\n'
-              'Sie können jederzeit die Studienteilnahme beenden.',
+              'üblichen Spielverhalten gestellt. Dies wird maximal 5 Minuten in Anspruch nehmen. Bitte beantworten Sie alle Fragen ehrlich.   '
+              'All ihre Daten (Angaben aus dem Fragebogen und Daten aus dem Spiel) werden auf einem Server, der in der EU (DSGVO konform) gehostet wird, anonymisiert (d.h. ohne einen möglichen Rückschluss auf Ihre Person; es werden keine personenbezogenen Daten erfasst) gespeichert und anschließend für wissenschaftliche Zwecke ausgewertet. Sie können jederzeit die Studienteilnahme beenden.',
           buttonText: 'weiter',
         ),
         InstructionStep(
@@ -251,7 +247,7 @@ class _SurveyPageState extends State<SurveyPage> {
                     text:
                         'Selbstständig erwerbstätig (Selbstständige:r, Freie Dienstnehmer:in, Werkvertragsnehmer:in)',
                     value: '1'),
-                TextChoice(text: 'Arbeitssuchend ', value: '2'),
+                TextChoice(text: 'Arbeitssuchend, Karenz', value: '2'),
                 TextChoice(text: 'Schüler:in, Student:in', value: '3'),
                 TextChoice(text: 'Pensionist:in', value: '4'),
               ],
@@ -348,7 +344,7 @@ class _SurveyPageState extends State<SurveyPage> {
         InstructionStep(
           title: 'Liebe Studienteilnehmer:innen, vielen Dank für Ihre Teilnahme.',
           text:
-              'Zum Abschluss der Studie wären wir Ihnen dankbar, wenn Sie noch ein paar letzte Fragen beantworten würden. Dies wird maximal 5 Minuten in Anspruch nehmen. '
+              'Zum Abschluss der Studie wären wir Ihnen dankbar, wenn Sie noch ein paar letzte Fragen beantworten würden. Dies wird maximal 5 Minuten in Anspruch nehmen. Alle Angaben sind anonym.'
               ' Vielen Dank!',
           buttonText: 'Weiter',
         ),

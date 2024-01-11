@@ -28,164 +28,201 @@ class _DeviceTokenState extends State<DeviceToken> {
         body: Column(
           children: [
             Expanded(
-                child: PageView(
-                    controller: _pageController,
-                    onPageChanged: (int page) {
-                      setState(() {
-                        _currentPage = page;
-                      });
-                    },
-                    children: [
-                  const SingleChildScrollView(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Text('''1.	Spielbrett und Jellies: ''',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text(
-                            '''Das Spielbrett ist ein Gitter mit verschiedenen farbigen Jellies. Jedes Jelly hat eine einzigartige Farbe und Form. (siehe Bild)
+              child: PageView(
+                  controller: _pageController,
+                  onPageChanged: (int page) {
+                    setState(() {
+                      _currentPage = page;
+                    });
+                  },
+                  children: [
+                    const SingleChildScrollView(
+                      padding: EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Text('''1.	Spielbrett und Jellies: ''',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          Text(
+                              '''Das Spielbrett ist ein Gitter mit verschiedenen farbigen Jellies. Jedes Jelly hat eine einzigartige Farbe und Form. (siehe Bild)
           '''),
-                        Image(
-                            image: AssetImage('assets/instructions/ins_1.png'), fit: BoxFit.cover),
-                      ],
+                          Image(
+                              image: AssetImage('assets/instructions/ins_1.png'),
+                              fit: BoxFit.cover),
+                        ],
+                      ),
                     ),
-                  ),
-                  const SingleChildScrollView(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Text('''2.	Spielzüge:''', style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text(
-                            '''Tausche zwei benachbarte Jellies, um eine Reihe oder Spalte von mindestens drei gleichfarbigen Jellies zu bilden.
+                    const SingleChildScrollView(
+                      padding: EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Text('''2.	Spielzüge:''', style: TextStyle(fontWeight: FontWeight.bold)),
+                          Text(
+                              '''Tausche zwei benachbarte Jellies, um eine Reihe oder Spalte von mindestens drei gleichfarbigen Jellies zu bilden.
               '''),
-                        Image(
-                            image: AssetImage('assets/instructions/ins_2.png'), fit: BoxFit.cover),
-                      ],
+                          Image(
+                              image: AssetImage('assets/instructions/ins_2.png'),
+                              fit: BoxFit.cover),
+                        ],
+                      ),
                     ),
-                  ),
-                  const SingleChildScrollView(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Text("3.	Kombinationen und Boni:",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Padding(
-                            padding: EdgeInsets.only(left: 20.0),
-                            // Adjust the value for the desired indent
-                            child: Text(
-                                '''•	Kombiniere 4 Jellies, um ein spezielles Jelly zu erhalten, das eine ganze Reihe oder Spalte löschen kann. ''')),
-                        Image(image: AssetImage('assets/images/bombs/jelly_gelb.png'), height: 30),
-                        Padding(
-                            padding: EdgeInsets.only(left: 20.0),
-                            // Adjust the value for the desired indent
-                            child: Text('''
-  •	Kombiniere 5 Jellies in einer T- oder L-Form, um ein Regenbogen-Jelly zu bekommen, das alle   Jellies einer bestimmten Farbe vom Brett entfernt.''')),
-                        Image(image: AssetImage('assets/images/bombs/jelly_bunt.png'), height: 30),
-                      ],
+                    const SingleChildScrollView(
+                      padding: EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Text("3.	Kombinationen und Boni:",
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          Padding(
+                              padding: EdgeInsets.only(left: 20.0),
+                              // Adjust the value for the desired indent
+                              child: Text(
+                                  '''•	Kombiniere 4 Jellies, um ein Sonderjelly zu erhalten, das eine ganze Reihe (horizontal gestreift, Bild links) oder Spalte (vertikal gestreift, Bild rechts) löschen kann. ''')),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Image(
+                                  image: AssetImage('assets/images/bombs/jelly_gelb_vertical'
+                                      '.png'),
+                                  height: 50),
+                              Image(
+                                  image: AssetImage('assets/images/bombs/jelly_gelb_horizontal'
+                                      '.png'),
+                                  height: 50),
+                            ],
+                          ),
+                          Padding(
+                              padding: EdgeInsets.only(left: 20.0),
+                              // Adjust the value for the desired indent
+                              child: Text('''
+  •	Kombiniere 5 Jellies in einem T- oder L-Form, um ein Regenbogen-Jelly zu bekommen, das alle Jellies einer bestimmten Farbe vom Brett entfernt (die Richtung der Streifen ist dabei egal).''')),
+                          Image(
+                              image: AssetImage('assets/images/bombs/jelly_bunt.png'), height: 50),
+                          Padding(
+                              padding: EdgeInsets.only(left: 20.0),
+                              // Adjust the value for the desired indent
+                              child: Text(
+                                  '''Du kannst Sonderjellies auch im Shop oder direkt vor dem Levelstart kaufen. Pro Level kann nur ein Sonderjelly zu Beginn platziert werden, indem du auf das Jelly klickst, dass ersetzt werden soll. Die Sonderjellies können dir helfen schwierige Level zu meistern.
+''')),
+                        ],
+                      ),
                     ),
-                  ),
-                  const SingleChildScrollView(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Text("4.	Levelziele:", style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text(
-                            '''Jedes Level hat spezifische Ziele, wie das Erreichen einer bestimmten Punktzahl, das Sammeln einer Anzahl von bestimmten Jellies oder das Entfernen von Hindernissen. Das jeweilige Ziel wird in dem Kasten rechts oben auf dem Bildschirm angezeigt
+                    const SingleChildScrollView(
+                      padding: EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Text("4.	Levelziele:", style: TextStyle(fontWeight: FontWeight.bold)),
+                          Text(
+                              '''Jedes Level hat spezifische Ziele, wie das Erreichen einer bestimmten Punktzahl, das Sammeln einer Anzahl von bestimmten Jellies oder das Entfernen von Hindernissen. Das jeweilige Ziel wird in dem Kasten rechts oben auf dem Bildschirm angezeigt. (1). Die Sterne um unteren Bildrand (2) zeigen dir deinen Fortschritt an – sobald du einen Stern erreicht hast, gilt das Level als geschafft. Je mehr Sterne du jedoch erreichst, umso höher ist der Gewinn durch das absolvierte Level.
               '''),
-                        Image(
-                            image: AssetImage('assets/instructions/ins_3.png'), fit: BoxFit.cover),
-                      ],
+                          Image(
+                              image: AssetImage('assets/instructions/ins_3.png'),
+                              fit: BoxFit.cover),
+                        ],
+                      ),
                     ),
-                  ),
-                  const SingleChildScrollView(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Text("5.	Bewegungsbegrenzung und Zeitlimit: ",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text(
-                            '''Einige Level haben eine begrenzte Anzahl von Zügen oder ein Zeitlimit, um die Ziele zu erreichen. Dies wird in dem Kasten links oben auf dem Bildschirm angezeigt.
+                    const SingleChildScrollView(
+                      padding: EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Text("5.	Bewegungsbegrenzung und Zeitlimit: ",
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          Text(
+                              '''Einige Level haben eine begrenzte Anzahl von Zügen oder ein Zeitlimit, um die Ziele zu erreichen. Dies wird in dem Kasten links oben auf dem Bildschirm angezeigt.
           '''),
-                        Image(
-                            image: AssetImage('assets/instructions/ins_4.png'), fit: BoxFit.cover),
-                      ],
+                          Image(
+                              image: AssetImage('assets/instructions/ins_4.png'),
+                              fit: BoxFit.cover),
+                        ],
+                      ),
                     ),
-                  ),
-                  const SingleChildScrollView(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Text("6.	Sonderjellies: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text('''
-Nutze Sonderjellies, um schwierige Level zu meistern. Diese können durch Spielverlauf oder Käufe (direkt vor dem Levelstart) erworben werden.'''),
-                      ],
-                    ),
-                  ),
-                  const SingleChildScrollView(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Text("7.	Fortschritt und Herausforderungen: ",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text(
-                            '''Schalte neue Level und Herausforderungen frei, indem du im Spiel fortschreitest.'''),
-                      ],
-                    ),
-                  ),
-                  SingleChildScrollView(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        const Text("8.	Startbildschirm: ",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        darkPatternsState is DarkPatternsActivatedState
-                            ? const Text(
-                                '''Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)), wie viele XP du hast 
-                  (2)– diese bestimmten auch den Rang in der Highscore-Tafel (3), sowie die Anzahl an Münzen (4) (diese kannst du nutzen um 
-                  Sonderjellies zu kaufen). Im Menü (5) kannst du diese Instruktionen jederzeit erneut durchlesen, solltest du etwas vergessen 
-                  haben. ''')
-                            : const Text(
-                                '''Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)), wie viele Münzen du 
-                  hast (2) (diese kannst du nutzen um Sonderjellies zu kaufen). Im Menü (3) kannst du diese Instruktionen jederzeit erneut 
-                  durchlesen, 
-                  solltest du etwas vergessen haben. '''),
-                        darkPatternsState is DarkPatternsActivatedState
-                            ? const Image(
-                                image: AssetImage('assets/instructions/ins_5.png'),
+                    SingleChildScrollView(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          const Text("6.	Startbildschirm: ",
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          if (darkPatternsState is DarkPatternsActivatedState)
+                            const Text(
+                                '''Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)). In den oberen Kästchen siehst du einerseits deine aktuelle Anzahl an Münzen (2) (diese kannst du nutzen um Sonderjellies zu kaufen) und, wie viele XP du hast (3) (diese bestimmen deine Position im Ranking der Highscore-Tafel (4). Die Highscore-Tafel (4) zeigt dir an, wie gut du dich im Vergleich zu anderen Spielern schlägst. Im Menü (5) kannst du diese Instruktionen jederzeit erneut durchlesen, solltest du etwas vergessen haben. 
+                                ''')
+                          else if (darkPatternsState is DarkPatternsDeactivatedState)
+                            const Text(
+                                '''Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)) undwie viele Münzen du hast (2) (diese kannst du nutzen um Sonderjellies zu kaufen). Im Menü (3) kannst du diese Instruktionen jederzeit erneut durchlesen, solltest du etwas vergessen haben
+                                ''')
+                          else if (darkPatternsState is DarkPatternsCompetitionState)
+                            const Text(
+                                '''Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)). In den oberen Kästchen siehst du einerseits deine aktuelle Anzahl an Münzen (2) (diese kannst du nutzen um Sonderjellies zu kaufen) und, wie viele XP du hast (3) (diese bestimmen deine Position im Ranking der Highscore-Tafel (4). Die Highscore-Tafel (4) zeigt dir an, wie gut du dich im Vergleich zu anderen Spielern schlägst. Im Menü (5) kannst du diese Instruktionen jederzeit erneut durchlesen, solltest du etwas vergessen haben. 
+                                ''')
+                          else if (darkPatternsState is DarkPatternsFoMoState)
+                            const Text(
+                                '''Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)) und wie viele Münzen du hast (2) (diese kannst du nutzen um Sonderjellies zu kaufen). Im Menü (3) kannst du diese Instruktionen jederzeit erneut durchlesen, solltest du etwas vergessen haben.
+                                '''),
+                          //Images:
+                          if (darkPatternsState is DarkPatternsActivatedState)
+                            const Image(
+                                image: AssetImage('assets/instructions/ins_6_activated.png'),
                                 fit: BoxFit.cover)
-                            : const Image(
-                                image: AssetImage('assets/instructions/ins_5_alt.png'),
+                          else if (darkPatternsState is DarkPatternsDeactivatedState)
+                            const Image(
+                                image: AssetImage('assets/instructions/ins_6_deactivated.png'),
+                                fit: BoxFit.cover)
+                          else if (darkPatternsState is DarkPatternsCompetitionState)
+                            const Image(
+                                image: AssetImage('assets/instructions/ins_6_competition.png'),
+                                fit: BoxFit.cover)
+                          else if (darkPatternsState is DarkPatternsFoMoState)
+                            const Image(
+                                image: AssetImage('assets/instructions/ins_6_FoMo.png'),
                                 fit: BoxFit.cover),
-                        const SizedBox(width: 10, height: 20),
-                        const Text(
-                            '''Im Rahmen der Pilotstudie hast du außerdem auf dem Startbildschirm im Menü rechts oben einen Punkt „Feedback“. Nutze diesen bitte, sollte dir im Rahmen der Pilotstudie eine Störung oder irgendetwas anderes auffallen, dass dein Spielerlebnis behindert oder beeinflusst. Danke!'''),
-                      ],
+                          const SizedBox(height: 10),
+                          //Menü Text
+                          if (darkPatternsState is DarkPatternsActivatedState)
+                            const Text(
+                                '''Außerdem gibt es im Menü noch zwei weitere spannende Features für dich: Im Shop (1) kannst du mit den erspielten Münzen Sonderjellies kaufen. Außerdem wartet täglich eine neue Belohnung darauf von dir abgeholt zu werden (2). Die Musik kann ebenfalls im Menü ein- und ausgeschalten werden (3)
+                                ''')
+                          else if (darkPatternsState is DarkPatternsDeactivatedState)
+                            const Text(
+                                '''Außerdem gibt es im Menü noch ein weiters spannendes Feature für dich: Im Shop (1) kannst du mit den erspielten Münzen Sonderjellies kaufen. Die Musik kann ebenfalls im Menü ein- und ausgeschalten werden (2)
+                                ''')
+                          else if (darkPatternsState is DarkPatternsCompetitionState)
+                            const Text(
+                                '''Außerdem gibt es im Menü noch ein weiters spannendes Feature für dich: Im Shop (1) kannst du mit den erspielten Münzen Sonderjellies kaufen. Die Musik kann ebenfalls im Menü ein- und ausgeschalten werden (2)
+                                ''')
+                          else if (darkPatternsState is DarkPatternsFoMoState)
+                            const Text(
+                                '''Außerdem gibt es im Menü noch zwei weitere spannende Features für dich: Im Shop (1) kannst du mit den erspielten Münzen Sonderjellies kaufen. Außerdem wartet täglich eine neue Belohnung darauf von dir abgeholt zu werden (2). Die Musik kann ebenfalls im Menü ein- und ausgeschalten werden (3)
+                                '''),
+                        ],
+                      ),
                     ),
-                  ),
-                  SingleChildScrollView(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(children: [
-                      const Text("Tipps und Tricks: ",
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                      const Padding(
-                          padding: EdgeInsets.only(left: 20.0),
-                          // Adjust the value for the desired indent
-                          child: Text('''
+                    SingleChildScrollView(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          const Text("7.	Fortschritt und Herausforderungen: ",
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          const Text(
+                              '''Schalte neue Level und Herausforderungen frei, indem du im Spiel fortschreitest. Wenn du einmal keine Möglichkeit mehr für einen Spielzug hast (weil es keine Jellies gibt, die getauscht werden können um eine 3er Folge zu erzielen) kannst du die Option „shuffle“ für 50\$ nutzen um die Jellies auf dem Brett neu zu verteilen. Nutze Sonderjellies, um schwierige Level zu meistern.'''),
+                          const Padding(
+                              padding: EdgeInsets.only(left: 20.0),
+                              // Adjust the value for the desired indent
+                              child: Text('''
 •	Plane deine Züge voraus, um die effektivsten Kombinationen zu erstellen.
 •	Nutze die speziellen Jellies strategisch, um schwierige Bereiche zu meistern.
 •	Halte Ausschau nach unerwarteten Kettenreaktionen.
 ''')),
-                      const Text('''Viel Spaß beim Spielen!
+                          const Text('''Viel Spaß beim Spielen!
           ''', style: TextStyle(fontWeight: FontWeight.bold)),
-                      ElevatedButton(
-                          child: const Text('Spiel jetzt starten', textAlign: TextAlign.center),
-                          //
-                          onPressed: () {
-                            Navigator.pop(context);
-                          }),
-                    ]),
-                  )
-                ])),
+                          ElevatedButton(
+                              child: const Text('Spiel jetzt starten', textAlign: TextAlign.center),
+                              //
+                              onPressed: () {
+                                Navigator.pop(context);
+                              }),
+                        ],
+                      ),
+                    ),
+                  ]),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -198,7 +235,7 @@ Nutze Sonderjellies, um schwierige Level zu meistern. Diese können durch Spielv
                     }
                   },
                 ),
-                Text('${_currentPage + 1} / 9'),
+                Text('${_currentPage + 1} / 7'),
                 ElevatedButton(
                   child: const Icon(Icons.arrow_forward),
                   onPressed: () {

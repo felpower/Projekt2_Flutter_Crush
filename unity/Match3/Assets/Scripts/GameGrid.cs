@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Match3.FlutterUnityIntegration.Demo;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Match3 {
@@ -24,7 +23,6 @@ namespace Match3 {
 
 		private GamePiece[,] _checkMovesArray;
 		private IEnumerator _checkMovesCoroutine;
-
 		private GamePiece _enteredPiece;
 
 		private bool _gameOver;
@@ -39,6 +37,7 @@ namespace Match3 {
 		private GamePiece[,] _pieces;
 
 		private GamePiece _pressedPiece;
+		public GameObject pressedPieceAnimationPrefab;
 
 		public AudioClip winningSound; // The sound to play when the player won the game
 		public AudioClip losingSound; // The sound to play when the player lost the game
@@ -781,11 +780,29 @@ namespace Match3 {
 			return piecesOfColor;
 		}
 
+		private GameObject _currentPressedPieceAnimation;
+
 		public void PressPiece(GamePiece piece) {
 			_timeWhenWeNextDoSomething = Time.time + 100f;
 			_pressedPiece = piece;
 			print("Piece at X: " + _pressedPiece.X + ", Y: " + _pressedPiece.Y + ", Color: " +
 			      _pressedPiece.ColorComponent.Color);
+
+			// If there is an existing PoisonGas, destroy it
+			if (_currentPressedPieceAnimation != null) {
+				Destroy(_currentPressedPieceAnimation);
+			}
+
+			// Instantiate the PoisonGas Prefab at the position of the pressed piece
+			var position = GetWorldPosition(_pressedPiece.X, _pressedPiece.Y);
+			position.x += 0.5f;
+			position.y -= 0.5f;
+			Vector3 poisonGasPosition = new Vector3(position.x, position.y, .1f);
+			_currentPressedPieceAnimation =
+				Instantiate(pressedPieceAnimationPrefab, poisonGasPosition, Quaternion.identity);
+
+			// Scale down the PoisonGas prefab
+			_currentPressedPieceAnimation.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f); // Scale down by 1000x
 		}
 
 		public void EnterPiece(GamePiece piece) { _enteredPiece = piece; }

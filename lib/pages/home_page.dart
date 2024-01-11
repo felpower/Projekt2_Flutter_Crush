@@ -131,7 +131,7 @@ class _HomePageState extends State<HomePage>
                 return Tooltip(
                     message: 'Highscore',
                     child: IconButton(
-                      icon: const Icon(Icons.scoreboard),
+                      icon: const Icon(Icons.scoreboard, color: Colors.blue),
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => const HighScorePage()));
@@ -312,26 +312,27 @@ class _HomePageState extends State<HomePage>
             ),
             child: Text('Menü'),
           ),
-          ListTile(
-            leading: const Icon(Icons.feedback_outlined),
-            title: const Text('Feedback senden'),
-            onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const FeedbackPage()));
-            },
-            tileColor: Colors.grey[200],
-            // Background color to make it feel like a button
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Rounded corners
-          ),
           Visibility(
               visible: true,
               child: ListTile(
                 leading: const Icon(Icons.info),
-                title: const Text('Info Seite'),
+                title: const Text('Instruktionen'),
                 onTap: () {
                   Navigator.push(
                       context, MaterialPageRoute(builder: (context) => const DeviceToken()));
+                },
+                tileColor: Colors.grey[200],
+                // Background color to make it feel like a button
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)), // Rounded corners
+              )),Visibility(
+              visible: true,
+              child: ListTile(
+                leading: const Icon(Icons.shopping_basket),
+                title: const Text('Shop'),
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => const ShopPage()));
                 },
                 tileColor: Colors.grey[200],
                 // Background color to make it feel like a button
@@ -365,6 +366,35 @@ class _HomePageState extends State<HomePage>
                 )),
           Visibility(
               visible: true,
+              child: SwitchListTile(
+                tileColor: Colors.grey[200],
+                title: const Text('Musik'),
+                secondary: isMusicOn ? const Icon(Icons.music_note) : const Icon(Icons.music_off),
+                value: isMusicOn,
+                onChanged: (bool value) {
+                  setState(() {
+                    isMusicOn = value;
+                    setMusic();
+                  });
+                },
+              )),
+          Visibility(
+            visible: false,
+            child: ListTile(
+              leading: const Icon(Icons.feedback_outlined),
+              title: const Text('Feedback senden'),
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => const FeedbackPage()));
+              },
+              tileColor: Colors.grey[200],
+              // Background color to make it feel like a button
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12)), // Rounded corners
+            ),
+          ),
+          Visibility(
+              visible: true,
               child: ListTile(
                 leading: const Icon(Icons.token),
                 title: const Text('Imprint'),
@@ -392,33 +422,7 @@ class _HomePageState extends State<HomePage>
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)), // Rounded corners
               )),
-          Visibility(
-              visible: true,
-              child: SwitchListTile(
-                title: const Text('Musik'),
-                secondary: isMusicOn ? const Icon(Icons.music_note) : const Icon(Icons.music_off),
-                value: isMusicOn,
-                onChanged: (bool value) {
-                  setState(() {
-                    isMusicOn = value;
-                    setMusic();
-                  });
-                },
-              )),
-          Visibility(
-              visible: true,
-              child: ListTile(
-                leading: const Icon(Icons.shopping_basket),
-                title: const Text('Shop'),
-                onTap: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => const ShopPage()));
-                },
-                tileColor: Colors.grey[200],
-                // Background color to make it feel like a button
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)), // Rounded corners
-              )),
+
         ],
       ),
     );

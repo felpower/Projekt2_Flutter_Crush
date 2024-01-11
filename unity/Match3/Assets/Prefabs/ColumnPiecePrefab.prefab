@@ -251,4 +251,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clearAnimation: {fileID: 7400000, guid: 6a673afd418e34b498932892ee1d6fbc, type: 2}
+  sparkleAnimation: {fileID: 7400000, guid: 8eab3ba4e867dec46976ea579b6de1c8, type: 2}
   isRow: 0
