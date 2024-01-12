@@ -80,9 +80,6 @@ class ShopState extends State<ShopPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Text('\$: $coins'),
-                      if (darkPatterns is DarkPatternsActivatedState ||
-                          darkPatterns is DarkPatternsCompetitionState)
-                        Text('XP: $xp'),
                       Text('Buntes Jelly: $buntJelly'),
                       Text('Gestreiftes Jelly: $stripeJelly'),
                     ],
@@ -92,9 +89,7 @@ class ShopState extends State<ShopPage> {
                   child: ListView.builder(
                     itemCount: shopItems.length,
                     itemBuilder: (context, index) {
-                      if (shopItems[index].type == 'xp' &&
-                          !(darkPatterns is DarkPatternsActivatedState ||
-                              darkPatterns is DarkPatternsCompetitionState)) {
+                      if (shopItems[index].type == 'xp') {
                         return Container(); // Return an empty container if the item is XP and dark patterns are not activated or in competition state
                       }
                       return Container(

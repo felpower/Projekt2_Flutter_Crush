@@ -6,6 +6,7 @@ import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_bloc.dart
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_state.dart';
 import 'package:bachelor_flutter_crush/game_widgets/game_level_button.dart';
 import 'package:bachelor_flutter_crush/helpers/url_helper.dart';
+import 'package:bachelor_flutter_crush/pages/contact_page.dart';
 import 'package:bachelor_flutter_crush/pages/shop_page.dart';
 import 'package:bachelor_flutter_crush/persistence/daily_rewards_service.dart';
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
@@ -69,6 +70,8 @@ class _HomePageState extends State<HomePage>
     }
   }
 
+  Future<int>? _daysPlayedFuture;
+
   @override
   void initState() {
     super.initState();
@@ -95,6 +98,7 @@ class _HomePageState extends State<HomePage>
     checkNotification();
     loadMusic();
     playMusic();
+    _daysPlayedFuture = _getDaysPlayed();
   }
 
   @override
@@ -131,7 +135,7 @@ class _HomePageState extends State<HomePage>
                 return Tooltip(
                     message: 'Highscore',
                     child: IconButton(
-                      icon: const Icon(Icons.scoreboard, color: Colors.blue),
+                      icon: const Icon(Icons.emoji_events, color: Colors.blue),
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => const HighScorePage()));
@@ -206,6 +210,34 @@ class _HomePageState extends State<HomePage>
                               ],
                             );
                           }
+                        },
+                      ),
+                      flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
+                        builder: (context, state) {
+                          return Visibility(
+                            visible: darkPatternsState is DarkPatternsActivatedState ||
+                                darkPatternsState is DarkPatternsFoMoState,
+                            child: FutureBuilder<int>(
+                              future: _daysPlayedFuture,
+                              builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+                                if (snapshot.connectionState == ConnectionState.waiting) {
+                                  return const CircularProgressIndicator();
+                                } else if (snapshot.hasError) {
+                                  return const Text(
+                                      'Vergiss nicht deine tägliche Belohnung im Menü '
+                                      'oben abzuholen!');
+                                } else {
+                                  int daysPlayed = snapshot.data!;
+                                  if (daysPlayed >= 3) {
+                                    return Container();
+                                  } else {
+                                    return const Text(
+                                        "Vergiss nicht deine tägliche Belohnung im Menü abzuholen!");
+                                  }
+                                }
+                              },
+                            ),
+                          );
                         },
                       ),
                       Expanded(
@@ -316,7 +348,7 @@ class _HomePageState extends State<HomePage>
               visible: true,
               child: ListTile(
                 leading: const Icon(Icons.info),
-                title: const Text('Instruktionen'),
+                title: const Text('Instruktionen', style: TextStyle(color: Colors.grey)),
                 onTap: () {
                   Navigator.push(
                       context, MaterialPageRoute(builder: (context) => const DeviceToken()));
@@ -325,11 +357,12 @@ class _HomePageState extends State<HomePage>
                 // Background color to make it feel like a button
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)), // Rounded corners
-              )),Visibility(
+              )),
+          Visibility(
               visible: true,
               child: ListTile(
                 leading: const Icon(Icons.shopping_basket),
-                title: const Text('Shop'),
+                title: const Text('Shop', style: TextStyle(color: Colors.grey)),
                 onTap: () {
                   Navigator.push(
                       context, MaterialPageRoute(builder: (context) => const ShopPage()));
@@ -350,7 +383,7 @@ class _HomePageState extends State<HomePage>
                 child: ListTile(
                   enabled: !dailyRewardCollected,
                   leading: const Icon(Icons.card_giftcard),
-                  title: const Text('Tägliche Belohnung'),
+                  title: const Text('Tägliche Belohnung', style: TextStyle(color: Colors.grey)),
                   onTap: () {
                     setState(() {
                       dailyRewardCollected = true;
@@ -368,7 +401,7 @@ class _HomePageState extends State<HomePage>
               visible: true,
               child: SwitchListTile(
                 tileColor: Colors.grey[200],
-                title: const Text('Musik'),
+                title: const Text('Musik', style: TextStyle(color: Colors.grey)),
                 secondary: isMusicOn ? const Icon(Icons.music_note) : const Icon(Icons.music_off),
                 value: isMusicOn,
                 onChanged: (bool value) {
@@ -382,7 +415,7 @@ class _HomePageState extends State<HomePage>
             visible: false,
             child: ListTile(
               leading: const Icon(Icons.feedback_outlined),
-              title: const Text('Feedback senden'),
+              title: const Text('Feedback senden', style: TextStyle(color: Colors.grey)),
               onTap: () {
                 Navigator.push(
                     context, MaterialPageRoute(builder: (context) => const FeedbackPage()));
@@ -397,9 +430,23 @@ class _HomePageState extends State<HomePage>
               visible: true,
               child: ListTile(
                 leading: const Icon(Icons.token),
-                title: const Text('Imprint'),
+                title: const Text('Imprint', style: TextStyle(color: Colors.grey)),
                 onTap: () {
                   UrlHelper.launchURL('https://www.sba-research.org/imprint/');
+                },
+                tileColor: Colors.grey[200],
+                // Background color to make it feel like a button
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)), // Rounded corners
+              )),
+          Visibility(
+              visible: true,
+              child: ListTile(
+                leading: const Icon(Icons.info),
+                title: const Text('Kontakt', style: TextStyle(color: Colors.grey)),
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => const ContactPage()));
                 },
                 tileColor: Colors.grey[200],
                 // Background color to make it feel like a button
@@ -410,7 +457,7 @@ class _HomePageState extends State<HomePage>
               visible: false,
               child: ListTile(
                 leading: const Icon(Icons.token),
-                title: const Text('Fortune Wheel'),
+                title: const Text('Fortune Wheel', style: TextStyle(color: Colors.black)),
                 onTap: () {
                   List<int> itemList = [5, (5 * 0.5).ceil(), (5 * 0.75).ceil(), 5 * 2, 5 * 3, 1];
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -422,7 +469,6 @@ class _HomePageState extends State<HomePage>
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)), // Rounded corners
               )),
-
         ],
       ),
     );
@@ -462,6 +508,14 @@ class _HomePageState extends State<HomePage>
       todaysAmount = todaysReward['amount'];
       todaysType = todaysReward['type'];
     }
+  }
+
+  Future<int> _getDaysPlayed() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    DateTime? startDate = DateTime.tryParse(prefs.getString("firstTimeStart") ?? "");
+    startDate ??= DateTime.now();
+    int daysPlayed = DateTime.now().difference(startDate).inDays;
+    return daysPlayed;
   }
 
   void setDailyRewards() async {

@@ -137,16 +137,15 @@ class _UnityScreenState extends State<UnityScreen> {
             children: [
               Card(
                   margin: const EdgeInsets.all(0),
-                  clipBehavior: Clip.antiAlias,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                  clipBehavior: Clip.hardEdge,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero,
                   ),
                   child: UnityWidget(
                     onUnityCreated: onUnityCreated,
                     onUnityMessage: onUnityMessage,
                     onUnitySceneLoaded: onUnitySceneLoaded,
                     useAndroidViewSurface: false,
-                    borderRadius: const BorderRadius.all(Radius.circular(70)),
                   )),
               Align(
                 alignment: Alignment.bottomLeft,
