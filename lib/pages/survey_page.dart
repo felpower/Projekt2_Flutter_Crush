@@ -46,7 +46,8 @@ class _SurveyPageState extends State<SurveyPage> {
                     if (widget.title.contains("Start")) {
                       sendStartSurvey(resultString);
                       Navigator.pop(context);
-                      if (int.parse(resultString[0].split("-").last) >= 18) {
+                      var age = int.parse(resultString[0].split("-").last);
+                      if (age >= 18 && age <= 120) {
                         Navigator.push(
                             context, MaterialPageRoute(builder: (context) => const DeviceToken()));
                       } else {
@@ -308,7 +309,7 @@ class _SurveyPageState extends State<SurveyPage> {
       navigationRule: ConditionalNavigationRule(
         resultToStepIdentifierMapper: (input) {
           int age = int.parse(input!);
-          if (age < 18 || age > 200) {
+          if (age < 18 || age > 120) {
             return getStepIdentifier(task, "10");
           } else {
             return getStepIdentifier(task, "2");
