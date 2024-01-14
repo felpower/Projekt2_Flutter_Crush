@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../helpers/device_helper.dart';
 
 class FirebaseMessagingWeb {
-  Future<void> init() async {
+  static Future<void> init() async {
     await initializeFirebase();
     getToken();
   }
