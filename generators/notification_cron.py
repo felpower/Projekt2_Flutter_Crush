@@ -7,7 +7,6 @@ cred = credentials.Certificate('credentials.json')
 
 
 def load_database():
-	cred = credentials.Certificate('credentials.json')
 	firebase_admin.initialize_app(cred, {
 		'databaseURL': 'https://darkpatterns-ac762-default-rtdb.europe-west1.firebasedatabase.app'
 	})

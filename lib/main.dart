@@ -6,6 +6,7 @@ import 'package:bachelor_flutter_crush/pages/non_mobile_page.dart';
 import 'package:bachelor_flutter_crush/pages/non_standalone_page.dart';
 import 'package:bachelor_flutter_crush/pages/old_version_page.dart';
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
+import 'package:bachelor_flutter_crush/services/firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +47,7 @@ void main() async {
     }
     js.context['handleBeforeUnload'] = js.allowInterop(handleBeforeUnload);
     js.context.callMethod('setupBeforeUnloadListener');
+    FirebaseMessagingWeb.init();
     runApp(const Application());
   }, (error, stackTrace) {
     FirebaseStore.sendError(error.toString(), stacktrace: stackTrace.toString());
