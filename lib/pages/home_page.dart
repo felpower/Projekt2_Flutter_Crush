@@ -16,7 +16,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:universal_html/html.dart' as html;
 
 import '../bloc/bloc_provider.dart';
 import '../bloc/game_bloc.dart';
@@ -96,7 +95,6 @@ class _HomePageState extends State<HomePage>
       _controller.forward();
     });
     checkForFirstTimeStart();
-    checkNotification();
     loadMusic();
     playMusic();
     _daysPlayedFuture = _getDaysPlayed();
@@ -620,15 +618,6 @@ class _HomePageState extends State<HomePage>
           }
           return const CircularProgressIndicator();
         });
-  }
-
-  void checkNotification() {
-    Uri currentUrl = Uri.parse(html.window.location.href);
-    if (currentUrl.queryParameters['source'] == 'notification') {
-      print("Tapped Notification");
-      FirebaseStore.addNotificationTap(DateTime.now());
-      Navigator.of(context).pushReplacementNamed('/');
-    }
   }
 
   void setMusic() async {
