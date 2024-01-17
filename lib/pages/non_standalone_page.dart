@@ -85,12 +85,13 @@ Beim ersten Öffnen der App werden Sie gefragt, ob diese Ihnen Pushnachrichten s
                   
 Die Installation funktioniert je nach Smartphone wie in Option 1 oder Option 2 beschrieben (siehe unten).
                   
-Unabhängig davon werden Sie beim ersten Öffnen der App werden Sie gefragt, ob diese Ihnen Pushnachrichten senden darf. Bitte klicken Sie hier auf „Zulassen“. Dies ist wichtig für den vollen Funktionsumfang der Studie!''',
+Unabhängig davon werden Sie beim ersten Öffnen der App gefragt, ob diese Ihnen Pushnachrichten senden darf. Bitte klicken Sie hier auf „Zulassen“. Dies ist wichtig für den vollen Funktionsumfang der Studie!''',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Colors.black,
                       backgroundColor: Colors.white,
                       decoration: TextDecoration.none)),
+          const SizedBox(height: 20),
           !isIosDevice
               ? const Text('Option 1',
                   textAlign: TextAlign.center,
