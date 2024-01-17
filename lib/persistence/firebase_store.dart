@@ -142,7 +142,7 @@ class FirebaseStore {
         'timestamp': DateTime.now().toIso8601String(),
       };
       DatabaseReference ref = database.ref("errors/$userId");
-      ref.set(data);
+      ref.push().set(data);
     } catch (e) {
       print('Failed to send error: $e');
     }
@@ -164,7 +164,7 @@ class FirebaseStore {
         'fileUrl': downloadUrl,
       };
       DatabaseReference ref = database.ref("feedback/$uploadedFileId");
-      ref.set(data);
+      ref.push().set(data);
 
       Fluttertoast.showToast(msg: 'Feedback sent successfully!');
     } catch (e) {
