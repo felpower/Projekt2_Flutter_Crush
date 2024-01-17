@@ -189,6 +189,6 @@ class FirebaseStore {
   }
 
   static String getCurrentVersion() {
-    return "V01-";
+    return "V02-";
   }
 }
