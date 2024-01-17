@@ -8,6 +8,7 @@ import 'package:bachelor_flutter_crush/game_widgets/game_level_button.dart';
 import 'package:bachelor_flutter_crush/helpers/url_helper.dart';
 import 'package:bachelor_flutter_crush/pages/contact_page.dart';
 import 'package:bachelor_flutter_crush/pages/shop_page.dart';
+import 'package:bachelor_flutter_crush/pages/welcome_page.dart';
 import 'package:bachelor_flutter_crush/persistence/daily_rewards_service.dart';
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:bachelor_flutter_crush/services/firebase_messaging.dart';
@@ -593,12 +594,17 @@ class _HomePageState extends State<HomePage>
       if (prefs.getBool("isUnder18") == true) {
         Navigator.push(context, MaterialPageRoute(builder: (context) => const Under18Page()));
       }
+      if (prefs.getBool("firstStart") == null || prefs.getBool("firstStart") == true) {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const WelcomePage()));
+      }
       var endSurvey = prefs.getString("endSurvey");
       if (endSurvey != null) {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => const FinishedSurveyPage()));
       } else if (endSurvey == null) {
-        if (DateTime.now().isAfter(DateTime(2023, 12, 23))) {
+        var firstTimeStart = prefs.getString("firstStartTime");
+        if (firstTimeStart != null &&
+            DateTime.now().difference(DateTime.parse(firstTimeStart)).inDays > 30) {
           Navigator.of(context).pushNamed(
             "/endSurvey",
           );
@@ -614,13 +620,6 @@ class _HomePageState extends State<HomePage>
           }
           return const CircularProgressIndicator();
         });
-    if (prefs.getBool("firstStart") == null || prefs.getBool("firstStart") == true) {
-      if (!kDebugMode) {
-        Navigator.of(context).pushNamed(
-          "/startSurvey",
-        );
-      }
-    }
   }
 
   void checkNotification() {

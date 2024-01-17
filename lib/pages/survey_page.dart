@@ -20,161 +20,163 @@ class SurveyPage extends StatefulWidget {
 class _SurveyPageState extends State<SurveyPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        color: Colors.white,
-        child: Align(
-          alignment: Alignment.center,
-          child: FutureBuilder<Task>(
-            future: widget.title == "Start" ? buildStartSurvey() : buildEndSurvey(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done &&
-                  snapshot.hasData &&
-                  snapshot.data != null) {
-                final task = snapshot.data!;
-                return SurveyKit(
-                  onResult: (SurveyResult result) {
-                    List<String> resultString = [];
-                    for (var stepResult in result.results) {
-                      for (var questionResult in stepResult.results) {
-                        if (questionResult.result != null && questionResult.result != "") {
-                          resultString.add(
-                              "ID: ${questionResult.id?.id.toString()}-${questionResult.valueIdentifier}");
-                        }
-                      }
-                    }
-                    if (widget.title.contains("Start")) {
-                      sendStartSurvey(resultString);
-                      Navigator.pop(context);
-                      var age = int.parse(resultString[0].split("-").last);
-                      if (age >= 18 && age <= 120) {
-                        Navigator.push(
-                            context, MaterialPageRoute(builder: (context) => const DeviceToken()));
-                      } else {
-                        Navigator.push(
-                            context, MaterialPageRoute(builder: (context) => const Under18Page()));
-                      }
-                    } else {
-                      sendEndSurvey(resultString);
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => const FinishedSurveyPage()));
-                    }
-                  },
-                  task: task,
-                  showProgress: true,
-                  localizations: const {
-                    'cancel': '',
-                    'next': 'Weiter',
-                  },
-                  themeData: Theme.of(context).copyWith(
-                    primaryColor: Colors.cyan,
-                    appBarTheme: const AppBarTheme(
-                      color: Colors.white,
-                      iconTheme: IconThemeData(
-                        color: Colors.cyan,
-                      ),
-                      titleTextStyle: TextStyle(
-                        color: Colors.cyan,
-                      ),
-                    ),
-                    iconTheme: const IconThemeData(
-                      color: Colors.cyan,
-                    ),
-                    textSelectionTheme: const TextSelectionThemeData(
-                      cursorColor: Colors.cyan,
-                      selectionColor: Colors.cyan,
-                      selectionHandleColor: Colors.cyan,
-                    ),
-                    cupertinoOverrideTheme: const CupertinoThemeData(
-                      primaryColor: Colors.cyan,
-                    ),
-                    outlinedButtonTheme: OutlinedButtonThemeData(
-                      style: ButtonStyle(
-                        minimumSize: MaterialStateProperty.all(
-                          const Size(150.0, 60.0),
-                        ),
-                        side: MaterialStateProperty.resolveWith(
-                          (Set<MaterialState> state) {
-                            if (state.contains(MaterialState.disabled)) {
-                              return const BorderSide(
-                                color: Colors.grey,
-                              );
+    return PopScope(
+        canPop: false, // Prevents the user from using the back button
+        child: Scaffold(
+          body: Container(
+            color: Colors.white,
+            child: Align(
+              alignment: Alignment.center,
+              child: FutureBuilder<Task>(
+                future: widget.title == "Start" ? buildStartSurvey() : buildEndSurvey(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done &&
+                      snapshot.hasData &&
+                      snapshot.data != null) {
+                    final task = snapshot.data!;
+                    return SurveyKit(
+                      onResult: (SurveyResult result) {
+                        List<String> resultString = [];
+                        for (var stepResult in result.results) {
+                          for (var questionResult in stepResult.results) {
+                            if (questionResult.result != null && questionResult.result != "") {
+                              resultString.add(
+                                  "ID: ${questionResult.id?.id.toString()}-${questionResult.valueIdentifier}");
                             }
-                            return const BorderSide(
-                              color: Colors.cyan,
-                            );
-                          },
-                        ),
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
+                          }
+                        }
+                        if (widget.title.contains("Start")) {
+                          sendStartSurvey(resultString);
+                          Navigator.pop(context);
+                          var age = int.parse(resultString[0].split("-").last);
+                          if (age >= 18 && age <= 120) {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => const DeviceToken()));
+                          } else {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => const Under18Page()));
+                          }
+                        } else {
+                          sendEndSurvey(resultString);
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => const FinishedSurveyPage()));
+                        }
+                      },
+                      task: task,
+                      showProgress: true,
+                      localizations: const {
+                        'cancel': '',
+                        'next': 'Weiter',
+                      },
+                      themeData: Theme.of(context).copyWith(
+                        primaryColor: Colors.cyan,
+                        appBarTheme: const AppBarTheme(
+                          color: Colors.white,
+                          iconTheme: IconThemeData(
+                            color: Colors.cyan,
+                          ),
+                          titleTextStyle: TextStyle(
+                            color: Colors.cyan,
                           ),
                         ),
-                        textStyle: MaterialStateProperty.resolveWith(
-                          (Set<MaterialState> state) {
-                            if (state.contains(MaterialState.disabled)) {
-                              return Theme.of(context).textTheme.labelLarge?.copyWith(
+                        iconTheme: const IconThemeData(
+                          color: Colors.cyan,
+                        ),
+                        textSelectionTheme: const TextSelectionThemeData(
+                          cursorColor: Colors.cyan,
+                          selectionColor: Colors.cyan,
+                          selectionHandleColor: Colors.cyan,
+                        ),
+                        cupertinoOverrideTheme: const CupertinoThemeData(
+                          primaryColor: Colors.cyan,
+                        ),
+                        outlinedButtonTheme: OutlinedButtonThemeData(
+                          style: ButtonStyle(
+                            minimumSize: MaterialStateProperty.all(
+                              const Size(150.0, 60.0),
+                            ),
+                            side: MaterialStateProperty.resolveWith(
+                              (Set<MaterialState> state) {
+                                if (state.contains(MaterialState.disabled)) {
+                                  return const BorderSide(
                                     color: Colors.grey,
                                   );
-                            }
-                            return Theme.of(context).textTheme.labelLarge?.copyWith(
+                                }
+                                return const BorderSide(
                                   color: Colors.cyan,
                                 );
-                          },
-                        ),
-                      ),
-                    ),
-                    textButtonTheme: TextButtonThemeData(
-                      style: ButtonStyle(
-                        textStyle: MaterialStateProperty.all(
-                          Theme.of(context).textTheme.labelLarge?.copyWith(
-                                color: Colors.cyan,
+                              },
+                            ),
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
                               ),
+                            ),
+                            textStyle: MaterialStateProperty.resolveWith(
+                              (Set<MaterialState> state) {
+                                if (state.contains(MaterialState.disabled)) {
+                                  return Theme.of(context).textTheme.labelLarge?.copyWith(
+                                        color: Colors.grey,
+                                      );
+                                }
+                                return Theme.of(context).textTheme.labelLarge?.copyWith(
+                                      color: Colors.cyan,
+                                    );
+                              },
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    textTheme: const TextTheme(
-                      displayMedium: TextStyle(
-                        fontSize: 28.0,
-                        color: Colors.black,
-                      ),
-                      headlineSmall: TextStyle(
-                        fontSize: 24.0,
-                        color: Colors.black,
-                      ),
-                      bodyMedium: TextStyle(
-                        fontSize: 18.0,
-                        color: Colors.black,
-                      ),
-                      titleMedium: TextStyle(
-                        fontSize: 18.0,
-                        color: Colors.black,
-                      ),
-                    ),
-                    inputDecorationTheme: const InputDecorationTheme(
-                      labelStyle: TextStyle(
-                        color: Colors.black,
-                      ),
-                    ),
-                    colorScheme: ColorScheme.fromSwatch(
-                      primarySwatch: Colors.cyan,
-                    )
-                        .copyWith(
-                          onPrimary: Colors.white,
+                        textButtonTheme: TextButtonThemeData(
+                          style: ButtonStyle(
+                            textStyle: MaterialStateProperty.all(
+                              Theme.of(context).textTheme.labelLarge?.copyWith(
+                                    color: Colors.cyan,
+                                  ),
+                            ),
+                          ),
+                        ),
+                        textTheme: const TextTheme(
+                          displayMedium: TextStyle(
+                            fontSize: 28.0,
+                            color: Colors.black,
+                          ),
+                          headlineSmall: TextStyle(
+                            fontSize: 24.0,
+                            color: Colors.black,
+                          ),
+                          bodyMedium: TextStyle(
+                            fontSize: 18.0,
+                            color: Colors.black,
+                          ),
+                          titleMedium: TextStyle(
+                            fontSize: 18.0,
+                            color: Colors.black,
+                          ),
+                        ),
+                        inputDecorationTheme: const InputDecorationTheme(
+                          labelStyle: TextStyle(
+                            color: Colors.black,
+                          ),
+                        ),
+                        colorScheme: ColorScheme.fromSwatch(
+                          primarySwatch: Colors.cyan,
                         )
-                        .copyWith(background: Colors.white),
-                  ),
-                  surveyProgressbarConfiguration: SurveyProgressConfiguration(
-                    backgroundColor: Colors.white,
-                  ),
-                );
-              }
-              return const CircularProgressIndicator.adaptive();
-            },
+                            .copyWith(
+                              onPrimary: Colors.white,
+                            )
+                            .copyWith(background: Colors.white),
+                      ),
+                      surveyProgressbarConfiguration: SurveyProgressConfiguration(
+                        backgroundColor: Colors.white,
+                      ),
+                    );
+                  }
+                  return const CircularProgressIndicator.adaptive();
+                },
+              ),
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 
   Future<Task> buildStartSurvey() async {

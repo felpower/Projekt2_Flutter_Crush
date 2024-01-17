@@ -98,6 +98,8 @@ flutter:
     - assets/images/login/login-page.png
     - assets/images/others/close.png
     # Instructions
+    - assets/instructions/welcome_1.png
+    - assets/instructions/welcome_2.png
     - assets/instructions/ins_1.png
     - assets/instructions/ins_2.png
     - assets/instructions/ins_3.png
