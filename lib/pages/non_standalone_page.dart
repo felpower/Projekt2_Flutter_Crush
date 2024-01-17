@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:universal_html/html.dart';
+import 'package:pwa_install/pwa_install.dart';
 
 import '../helpers/device_helper.dart';
 
@@ -7,24 +7,19 @@ class NonStandalonePage extends StatefulWidget {
   const NonStandalonePage({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _BeforeInstallPrompt();
+  State<StatefulWidget> createState() => _NonStandalonePageState();
 }
 
-class _BeforeInstallPrompt extends State<NonStandalonePage> {
-  BeforeInstallPromptEvent? deferredPrompt;
-
-  bool isIosDevice = DeviceHelper.isIOSDevice();
+class _NonStandalonePageState extends State<NonStandalonePage> {
+  late bool isIosDevice;
 
   @override
   void initState() {
-    window.addEventListener('beforeinstallprompt', (e) {
-      e.preventDefault();
-      setState(() {
-        deferredPrompt = e as BeforeInstallPromptEvent;
-      });
-    });
     super.initState();
+    isIosDevice = DeviceHelper.isIOSDevice();
   }
+
+  String? error;
 
   @override
   Widget build(BuildContext context) {
@@ -45,13 +40,25 @@ class _BeforeInstallPrompt extends State<NonStandalonePage> {
                   decoration: TextDecoration.none)),
           const Text(
               ' fügen Sie bitte jetzt diese Seite auf Ihrem Smartphone ODER Tablet (nicht'
-              ' beides!) auf Ihren Homescreen/Startbildschirm hinzu.',
+              ' beides!) auf Ihren Homescreen/Startbildschirm hinzu',
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                   backgroundColor: Colors.white,
                   decoration: TextDecoration.none)),
+          if (PWAInstall().installPromptEnabled)
+            ElevatedButton(
+                onPressed: () {
+                  try {
+                    PWAInstall().promptInstall_();
+                  } catch (e) {
+                    setState(() {
+                      error = e.toString();
+                    });
+                  }
+                },
+                child: const Text('Installieren')),
           const Text('''
               
 Im Anschluss können Sie die Seite bzw. das Spiel wie jede gewöhnliche App handhaben.''',
@@ -107,6 +114,15 @@ Unabhängig davon werden Sie beim ersten Öffnen der App werden Sie gefragt, ob 
                   image: AssetImage('assets/instructions/InstallIos.png'), fit: BoxFit.cover)
               : const Image(
                   image: AssetImage('assets/instructions/InstallAndroid.png'), fit: BoxFit.cover),
+          !isIosDevice
+              ? const Text('Option 2',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      backgroundColor: Colors.white,
+                      decoration: TextDecoration.none))
+              : Container(),
           !isIosDevice
               ? const Text(
                   'Drücken Sie auf die drei Linien rechts unten auf dem Bildschirm  anschließend im Menü auf "Seite Hinzufügen" / "Add page to" --> "Homescreen"/"Startbildschirm" (siehe Bilder)',

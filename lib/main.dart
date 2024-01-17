@@ -12,9 +12,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
+import 'package:pwa_install/pwa_install.dart';
+import 'package:universal_html/html.dart' as html;
 import 'package:universal_html/js.dart' as js;
 
-import 'package:universal_html/html.dart' as html;
 void main() async {
   runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -36,6 +37,9 @@ void main() async {
         return;
       }
       if (!DeviceHelper.isStandalone()) {
+        PWAInstall().setup(installCallback: () {
+          debugPrint('APP INSTALLED!');
+        });
         runApp(const NonStandalonePage());
         return;
       }
