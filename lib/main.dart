@@ -14,6 +14,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:universal_html/js.dart' as js;
 
+import 'package:universal_html/html.dart' as html;
 void main() async {
   runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -38,6 +39,14 @@ void main() async {
         runApp(const NonStandalonePage());
         return;
       }
+    }
+    Uri currentUrl = Uri.parse(html.window.location.href);
+    if (currentUrl.queryParameters['source'] == 'notification') {
+      print("Tapped Notification");
+      FirebaseStore.addNotificationTap(DateTime.now());
+      // Remove the 'source' query parameter from the URL
+      Uri newUrl = currentUrl.replace(queryParameters: {});
+      html.window.history.replaceState(null, 'title', newUrl.toString());
     }
     await FirebaseStore.init();
     String currentVersion = await DeviceHelper.isCurrentVersion();

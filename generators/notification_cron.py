@@ -40,7 +40,7 @@ def send_message(key):
 		token=key,
 		notification=messaging.Notification(
 			title="JellyFun",
-			body="Das ist eine TestNotification, da es bei der Pilotstudie zu Problemen kam."
+			body="Das ist eine TestNotification, in den nächsten Tagen kann es vermehrt zu Test Notifications kommen."
 		)
 	)
 	response = messaging.send(message)
