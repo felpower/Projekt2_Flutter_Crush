@@ -531,6 +531,7 @@ class _SurveyPageState extends State<SurveyPage> {
     FirebaseStore.sendStartSurvey(resultString);
     prefs.setBool("firstStart", false);
     prefs.setString("firstStartTime", now.toString());
+    FirebaseStore.sendUserAgent();
   }
 
   void sendEndSurvey(List<String> resultString) async {
