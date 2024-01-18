@@ -189,6 +189,11 @@ class FirebaseStore {
   }
 
   static String getCurrentVersion() {
-    return "V02-";
+    String hostname = Uri.parse(html.window.location.href).host;
+    String version = "";
+    if (hostname.contains('felpower') || hostname.contains('localhost')) {
+      version = "testVersion-";
+    }
+    return "${version}V02-";
   }
 }
