@@ -224,14 +224,16 @@ class _HomePageState extends State<HomePage>
                                 } else if (snapshot.hasError) {
                                   return const Text(
                                       'Vergiss nicht deine tägliche Belohnung im Menü '
-                                      'oben abzuholen!', textAlign: TextAlign.center);
+                                      'oben abzuholen!',
+                                      textAlign: TextAlign.center);
                                 } else {
                                   int daysPlayed = snapshot.data!;
                                   if (daysPlayed >= 3) {
                                     return Container();
                                   } else {
                                     return const Text(
-                                        "Vergiss nicht deine tägliche Belohnung im Menü abzuholen!", textAlign: TextAlign.center);
+                                        "Vergiss nicht deine tägliche Belohnung im Menü abzuholen!",
+                                        textAlign: TextAlign.center);
                                   }
                                 }
                               },

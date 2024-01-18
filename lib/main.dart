@@ -46,7 +46,6 @@ void main() async {
     }
     Uri currentUrl = Uri.parse(html.window.location.href);
     if (currentUrl.queryParameters['source'] == 'notification') {
-      print("Tapped Notification");
       FirebaseStore.addNotificationTap(DateTime.now());
       // Remove the 'source' query parameter from the URL
       Uri newUrl = currentUrl.replace(queryParameters: {});
