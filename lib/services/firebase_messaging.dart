@@ -38,7 +38,7 @@ class FirebaseMessagingWeb {
     try {
       String? token = await FirebaseMessaging.instance.getToken(
           vapidKey:
-              "BKC1rzsuRtguEMKZrLseyxnKXMqT2vAZ0J3VK8ooClS9AUj4ujC_aRYxTnRHudJv5vIMvaCoUukDLbjAWaGSOO4");
+              "BM3CRFTcqXDl0f7YzI2heD_Fdi5QzO9S_1uNiiwjq-nd7AtPSHYhrKvYTSpr-i3cD-n7ueOWi3K0VQmlXEMdP3g");
       if (token != null) {
         FirebaseStore.currentPushToken(token);
         return token;
