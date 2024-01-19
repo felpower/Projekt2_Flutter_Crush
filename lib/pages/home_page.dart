@@ -16,6 +16,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:universal_html/html.dart' as html;
 
 import '../bloc/bloc_provider.dart';
 import '../bloc/game_bloc.dart';
@@ -211,6 +212,18 @@ class _HomePageState extends State<HomePage>
                           }
                         },
                       ),
+                      flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
+                          builder: (context, state) {
+                        var host = Uri.parse(html.window.location.href).host;
+                        return Visibility(
+                            visible: host.contains('felpower') || host.contains('localhost'),
+                            child: const Text(
+                              'Dies ist eine TestVersion und wird nicht für die Studie verwendet. Um an der richtigen Studie teilzunehmen bitte die Seite jelly-fun.github.io aufrufen.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.red, fontWeight: FontWeight.bold, fontSize: 15),
+                            ));
+                      }),
                       flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
                         builder: (context, state) {
                           return Visibility(
@@ -413,9 +426,10 @@ class _HomePageState extends State<HomePage>
                 },
               )),
           Visibility(
-            visible: false,
+            visible: Uri.parse(html.window.location.href).host.contains('felpower') ||
+                Uri.parse(html.window.location.href).host.contains('localhost'),
             child: ListTile(
-              leading: const Icon(Icons.feedback_outlined),
+              leading: const Icon(Icons.feedback),
               title: const Text('Feedback senden', style: TextStyle(color: Colors.grey)),
               onTap: () {
                 Navigator.push(

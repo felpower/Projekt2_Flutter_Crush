@@ -26,7 +26,7 @@ def generate_levels(num_new_levels, types, colors):
 		obstacle_types = random.sample(colors, random.randint(1, 4))
 		num_obstacles = x_dim * y_dim // 5
 		if level_type == "Colors":
-			num_obstacles = obstacle_types.__len__() * (i // 10 + 1)
+			num_obstacles = obstacle_types.__len__() * (i // 10 + 1) + 10
 		new_level = {
 			"level": i,
 			"type": level_type,

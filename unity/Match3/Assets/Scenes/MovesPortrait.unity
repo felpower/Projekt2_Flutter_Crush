@@ -282,6 +282,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114951757041656766, guid: e48363766c8c65a40931017ebcedffa0,
         type: 3}
+      propertyPath: m_Text
+      value: Verloren!
+      objectReference: {fileID: 0}
+    - target: {fileID: 114951757041656766, guid: e48363766c8c65a40931017ebcedffa0,
+        type: 3}
       propertyPath: m_Color.b
       value: 0.3764706
       objectReference: {fileID: 0}
