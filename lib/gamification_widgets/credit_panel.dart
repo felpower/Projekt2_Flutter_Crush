@@ -21,7 +21,7 @@ class CreditPanel extends StatelessWidget {
                   style: TextStyle(color: Colors.white),
                 ),
                 SizedBox(width: 5),  // Add this line
-                Icon(Icons.scoreboard, color: Colors.white),
+                Icon(Icons.emoji_events, color: Colors.blue),
                 Text(
                   ' oben rechts)',
                   style: TextStyle(color: Colors.white),

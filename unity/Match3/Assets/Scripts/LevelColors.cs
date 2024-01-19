@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Match3 {
 	public class LevelColors : Level {
-		private const int ScorePerPieceCleared = 1000;
+		private const int ScorePerPieceCleared = 50;
 
 		public int numMoves;
 		public ColorType[] obstacleTypes;

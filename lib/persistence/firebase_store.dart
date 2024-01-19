@@ -131,7 +131,8 @@ class FirebaseStore {
     };
   }
 
-  static void sendError(String error, {stacktrace = "", isFlutterError = false}) async {
+  static void sendError(String error,
+      {stacktrace = "", isFlutterError = false, extraInfo = ""}) async {
     print(error);
     try {
       var userId = await getUuid();
@@ -141,6 +142,7 @@ class FirebaseStore {
         'userAgent': html.window.navigator.userAgent,
         'isFlutterError': isFlutterError,
         'timestamp': DateTime.now().toIso8601String(),
+        'extraInfo': extraInfo,
       };
       DatabaseReference ref = database.ref("errors/$userId");
       ref.push().set(data);

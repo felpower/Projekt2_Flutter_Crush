@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/level_bloc/level_event.dart';
+import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
@@ -127,7 +128,13 @@ class _UnityScreenState extends State<UnityScreen> {
                                 TextButton(
                                     onPressed: () => {Navigator.pop(context, 'Cancel')},
                                     child: const Text('Nein')),
-                                TextButton(onPressed: () => {popUntil()}, child: const Text('Ja')),
+                                TextButton(
+                                    onPressed: () => {
+                                          flutter_bloc.BlocProvider.of<ReportingBloc>(context)
+                                              .add(ReportFinishLevelEvent(lvl, false)),
+                                          popUntil()
+                                        },
+                                    child: const Text('Ja')),
                               ],
                             )));
                   },
@@ -160,8 +167,8 @@ class _UnityScreenState extends State<UnityScreen> {
                       setState(() {
                         isMusicOn = !isMusicOn;
                         prefs.setBool('music', isMusicOn);
+                        changeMusic();
                       });
-                      changeMusic();
                     },
                     child: isMusicOn ? const Icon(Icons.music_note) : const Icon(Icons.music_off),
                   )),
@@ -285,72 +292,93 @@ class _UnityScreenState extends State<UnityScreen> {
   }
 
   void onUnityMessage(message) {
-    if (message.startsWith("checkReady")) {
-      unityReady = true;
-    }
-    if (message.startsWith("Resend Level Info")) {
-      changeScene();
-      return;
-    }
-    if (message.startsWith("Score: ")) {
-      return;
-    } else if (message.startsWith("Shuffle")) {
-      shuffleDialog();
-      return;
-    } else if (message.startsWith("GameOver: Won") && !gameOver) {
-      flutter_bloc.BlocProvider.of<ReportingBloc>(context).add(ReportFinishLevelEvent(lvl, true));
-      gameWon(message);
-    } else if (message.startsWith("GameOver: Lost") && !gameOver) {
-      flutter_bloc.BlocProvider.of<ReportingBloc>(context).add(ReportFinishLevelEvent(lvl, false));
-      gameLost();
-    } else if (message.startsWith("Reached Star:")) {
-      star = int.parse(message.replaceAll(RegExp(r'[^0-9]'), ''));
+    try {
+      if (message.startsWith("checkReady")) {
+        unityReady = true;
+      }
+      if (message.startsWith("Resend Level Info")) {
+        changeScene();
+        return;
+      }
+      if (message.startsWith("Score: ")) {
+        return;
+      } else if (message.startsWith("Shuffle")) {
+        shuffleDialog();
+        return;
+      } else if (message.startsWith("GameOver: Won") && !gameOver) {
+        flutter_bloc.BlocProvider.of<ReportingBloc>(context).add(ReportFinishLevelEvent(lvl, true));
+        gameWon(message);
+      } else if (message.startsWith("GameOver: Lost") && !gameOver) {
+        flutter_bloc.BlocProvider.of<ReportingBloc>(context)
+            .add(ReportFinishLevelEvent(lvl, false));
+        gameLost();
+      } else if (message.startsWith("Reached Star:")) {
+        star = int.parse(message.replaceAll(RegExp(r'[^0-9]'), ''));
+      }
+    } catch (e) {
+      FirebaseStore.sendError("onUnityMessage", stacktrace: e.toString());
     }
   }
 
   void onUnitySceneLoaded(SceneLoaded? scene) {
-    if (scene != null) {
-    } else {}
+    try {
+      if (scene != null) {
+      } else {}
+    } catch (e) {
+      FirebaseStore.sendError("onUnitySceneLoaded", stacktrace: e.toString());
+    }
   }
 
   // Callback that connects the created controller to the unity controller
   void onUnityCreated(controller) {
-    controller.resume();
-    unityWidgetController = controller;
+    try {
+      controller.resume();
+      unityWidgetController = controller;
+    } catch (e) {
+      FirebaseStore.sendError("onUnityCreated", stacktrace: e.toString());
+    }
   }
 
   void changeScene() {
-    Map<String, dynamic> jsonString = {};
+    try {
+      Map<String, dynamic> jsonString = {};
 
-    for (var x in gameBloc.levels) {
-      if (x.level == lvl) {
-        jsonString = x.toJson();
-        break;
+      for (var x in gameBloc.levels) {
+        if (x.level == lvl) {
+          jsonString = x.toJson();
+          break;
+        }
       }
-    }
 
-    String type = jsonString['type'];
-    jsonString['powerUp'] = powerUp;
-    while (unityWidgetController == null) {
-      print("Waiting for unityWidgetController");
-    }
+      String type = jsonString['type'];
+      jsonString['powerUp'] = powerUp;
+      while (unityWidgetController == null) {
+        print("Waiting for unityWidgetController");
+      }
 
-    print("Changing level to: $type Portrait");
-    jsonString['orientation'] = "Portrait";
-    postMessage(jsonString);
+      print("Changing level to: $type Portrait");
+      jsonString['orientation'] = "Portrait";
+      postMessage(jsonString);
+    } catch (e) {
+      FirebaseStore.sendError("Change Scene Error", stacktrace: e.toString());
+    }
   }
 
   void postMessage(Map<String, dynamic> jsonString) async {
-    while (!unityReady) {
-      try {
-        unityWidgetController?.postMessage('GameManager', 'CheckReady', 'checkReady');
-      } catch (e) {
-        print("Unity is not Ready");
+    try {
+      while (!unityReady) {
+        try {
+          unityWidgetController?.postMessage('GameManager', 'CheckReady', 'checkReady');
+        } catch (e) {
+          print("Unity is not Ready");
+        }
+        await Future.delayed(const Duration(seconds: 1));
       }
-      await Future.delayed(const Duration(seconds: 1));
+      unityWidgetController!.postJsonMessage('GameManager', 'LoadScene', jsonString);
+      changeMusic();
+    } catch (e) {
+      FirebaseStore.sendError("postMessage", stacktrace: e.toString());
     }
-    unityWidgetController!.postJsonMessage('GameManager', 'LoadScene', jsonString);
-    changeMusic();
   }
 
   void showGameOver(bool success) async {
@@ -373,20 +401,24 @@ class _UnityScreenState extends State<UnityScreen> {
   }
 
   void _showGameStartSplash(_) {
-    _gameSplash = OverlayEntry(
-        opaque: false,
-        builder: (BuildContext context) {
-          return GameSplash(
-            level: lvl,
-            powerup: powerUp.isNotEmpty,
-            onComplete: () {
-              _gameSplash.remove();
-              // allow gesture detection
-              changeScene();
-            },
-          );
-        });
-    Overlay.of(context).insert(_gameSplash);
+    try {
+      _gameSplash = OverlayEntry(
+          opaque: false,
+          builder: (BuildContext context) {
+            return GameSplash(
+              level: lvl,
+              powerup: powerUp.isNotEmpty,
+              onComplete: () {
+                _gameSplash.remove();
+                // allow gesture detection
+                changeScene();
+              },
+            );
+          });
+      Overlay.of(context).insert(_gameSplash);
+    } catch (e) {
+      FirebaseStore.sendError("onUnityMessage", stacktrace: e.toString());
+    }
   }
 
   void changeMusic() async {

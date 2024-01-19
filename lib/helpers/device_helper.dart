@@ -29,16 +29,21 @@ class DeviceHelper {
 
   static Future<bool> isMobile() async {
     DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
-    var platform = (await deviceInfoPlugin.webBrowserInfo).platform!;
-    if (equalsIgnoreCase(platform, "macOS") ||
-        equalsIgnoreCase(platform, "Win32") ||
-        equalsIgnoreCase(platform, "Win32") ||
-        equalsIgnoreCase(platform, "Linux") ||
-        equalsIgnoreCase(platform, "X11") ||
-        equalsIgnoreCase(platform, "CrOS")) {
-      return false;
-    }
+    var userAgent = (await deviceInfoPlugin.webBrowserInfo).userAgent!;
+    print("userAgent: $userAgent");
+    print("userAgent: ${html.window.navigator.userAgent}");
+    FirebaseStore.sendUserAgent();
     return true;
+    if (userAgent.contains("Mobi") ||
+        userAgent.contains("Android") ||
+        userAgent.contains("iPhone") ||
+        userAgent.contains("iPad") ||
+        userAgent.contains("iPod") ||
+        userAgent.contains("Windows Phone") ||
+        userAgent.contains("BlackBerry")) {
+      return true;
+    }
+    return false;
   }
 
   static bool equalsIgnoreCase(String? string1, String? string2) {

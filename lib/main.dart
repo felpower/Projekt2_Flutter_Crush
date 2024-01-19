@@ -31,6 +31,7 @@ void main() async {
             storageBucket: "darkpatterns-ac762.appspot.com",
             messagingSenderId: "552263184384",
             appId: "1:552263184384:web:87e17944dc571dc4e028e5"));
+    await FirebaseStore.init();
     if (!kDebugMode) {
       if (!await DeviceHelper.isMobile()) {
         runApp(const NonMobilePage());
@@ -51,7 +52,7 @@ void main() async {
       Uri newUrl = currentUrl.replace(queryParameters: {});
       html.window.history.replaceState(null, 'title', newUrl.toString());
     }
-    await FirebaseStore.init();
+
     String currentVersion = await DeviceHelper.isCurrentVersion();
     if (currentVersion != "isCurrentVersion") {
       runApp(OldVersionPage(currentVersion: currentVersion));

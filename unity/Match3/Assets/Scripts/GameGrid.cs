@@ -31,8 +31,6 @@ namespace Match3 {
 
 		private bool _isFirst = true;
 
-		private Camera _mainCamera;
-
 		private Dictionary<PieceType, GameObject> _piecePrefabDict;
 		private GamePiece[,] _pieces;
 
@@ -87,7 +85,7 @@ namespace Match3 {
 				var factor = 0f;
 				print(scene.name);
 				if (scene.name.Contains("Portrait"))
-					_mainCamera.orthographicSize = yDim + 2;
+					ScaleCamera();
 				else {
 					if (xDim > 8)
 						factor += (float)8 % xDim / 10 + 1;
@@ -95,9 +93,36 @@ namespace Match3 {
 						factor -= ((float)8 % xDim / 10 + 1) * -1;
 					print("Scale: " + _scale);
 					print("Scale Factor: " + _scale * factor);
-					_mainCamera.orthographicSize = Remap(_scale * factor, 0.562f, 1f, 4.9f, 8f);
+					// _mainCamera.orthographicSize = Remap(_scale * factor, 0.562f, 1f, 4.9f, 8f);
+					ScaleCamera();
 				}
 			}
+		}
+
+		private void ScaleCamera() {
+			// Assuming each cell in the grid is 1 unit in size
+			float gridSize = Mathf.Max(xDim, yDim); // The size of the grid in world units
+
+			// Calculate the aspect ratio
+			float screenRatio = (float)Screen.width / Screen.height;
+			float targetRatio = gridSize / gridSize;
+
+			if (screenRatio >= targetRatio) {
+				_mainCamera.orthographicSize = gridSize / 2;
+			} else {
+				float differenceInSize = targetRatio / screenRatio;
+				_mainCamera.orthographicSize = gridSize / 2 * differenceInSize;
+			}
+
+			// Position the camera to center the grid
+			// Adjust the position based on the grid's position
+			var position = transform.position;
+			var cameraTransform = _mainCamera.transform;
+			Vector3 gridCenter = new Vector3(position.x + gridSize / 2, position.y + gridSize / 2, cameraTransform.position.z);
+			cameraTransform.position = gridCenter - new Vector3(gridSize / 2, gridSize / 2, 0);
+
+			// Add a small margin
+			//Camera.main.orthographicSize -= 0.00002f;
 		}
 
 		private IEnumerator CheckMoves() {
@@ -125,9 +150,9 @@ namespace Match3 {
 			InstantiatePieces();
 		}
 
-		private static float Remap(float value, float from1, float to1, float from2, float to2) {
-			return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
-		}
+		// private static float Remap(float value, float from1, float to1, float from2, float to2) {
+		// 	return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
+		// }
 
 		private void InstantiatePieces(bool firstTime = true) {
 			_pieces = new GamePiece[xDim, yDim];
@@ -223,7 +248,7 @@ namespace Match3 {
 			yield return new WaitForSeconds(fillTime * 3);
 		}
 
-		bool IsBubble(int x, int y) { return _pieces[x, y].Type == PieceType.Bubble; }
+		// bool IsBubble(int x, int y) { return _pieces[x, y].Type == PieceType.Bubble; }
 
 		/// <summary>
 		///     One pass through all grid cells, moving them down one grid, if possible.
@@ -781,6 +806,7 @@ namespace Match3 {
 		}
 
 		private GameObject _currentPressedPieceAnimation;
+		private Camera _mainCamera;
 
 		public void PressPiece(GamePiece piece) {
 			_timeWhenWeNextDoSomething = Time.time + 100f;
@@ -802,7 +828,8 @@ namespace Match3 {
 				Instantiate(pressedPieceAnimationPrefab, poisonGasPosition, Quaternion.identity);
 
 			// Scale down the PoisonGas prefab
-			_currentPressedPieceAnimation.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f); // Scale down by 1000x
+			_currentPressedPieceAnimation.transform.localScale =
+				new Vector3(0.05f, 0.05f, 0.05f); // Scale down by 1000x
 		}
 
 		public void EnterPiece(GamePiece piece) { _enteredPiece = piece; }
