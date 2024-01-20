@@ -109,6 +109,7 @@ class _UnityScreenState extends State<UnityScreen> {
             child: Visibility(
                 visible: !gameOver,
                 child: FloatingActionButton(
+                  heroTag: 'closeFAB',
                   backgroundColor: Colors.transparent,
                   child: Image.asset(
                     'assets/images/others/close.png',
@@ -160,6 +161,7 @@ class _UnityScreenState extends State<UnityScreen> {
                   padding: const EdgeInsets.all(30.0),
                   child: PointerInterceptor(
                       child: FloatingActionButton(
+                    heroTag: 'musicFAB',
                     backgroundColor: Colors.transparent,
                     elevation: 0.0,
                     onPressed: () async {
