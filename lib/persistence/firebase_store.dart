@@ -91,9 +91,9 @@ class FirebaseStore {
     await _updateDocument(endSurvey, 'SurveyResult: $jsonResult');
   }
 
-  static void sendUserAgent() async {
+  static void sendUserAgent({website = false}) async {
     var userAgent = html.window.navigator.userAgent;
-    await _updateDocument('userAgent', 'UserAgent: $userAgent');
+    await _updateDocument('userAgent', 'UserAgent: $userAgent, Website: $website');
   }
 
   static void sendUserDeleted() async {

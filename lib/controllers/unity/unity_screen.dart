@@ -238,59 +238,71 @@ class _UnityScreenState extends State<UnityScreen> {
   }
 
   void gameWon(message) {
-    levelBloc.add(AddLevelEvent(lvl + 1));
+    try {
+      levelBloc.add(AddLevelEvent(lvl + 1));
 
-    setState(() {
-      fabVisible = false;
-    });
-    var xpCoins = 0;
-    if (message is int) {
-      xpCoins = lvl * message;
-    } else {
-      xpCoins = lvl * int.parse(message.replaceAll(RegExp(r'[^0-9]'), ''));
-    }
-    if (darkPatternsBloc.state is DarkPatternsActivatedState ||
-        darkPatternsBloc.state is DarkPatternsRewardsState) {
-      gameOver = true;
-      showFortuneWheel(xpCoins);
-    } else {
-      gameBloc.gameOver(xpCoins);
-      showGameOver(true);
-      gameOver = true;
-      Future.delayed(const Duration(seconds: 3), () {
-        Navigator.of(context).pop();
+      setState(() {
+        fabVisible = false;
       });
+      var xpCoins = 0;
+      if (message is int) {
+        xpCoins = lvl * message;
+      } else {
+        xpCoins = lvl * int.parse(message.replaceAll(RegExp(r'[^0-9]'), ''));
+      }
+      if (darkPatternsBloc.state is DarkPatternsActivatedState ||
+          darkPatternsBloc.state is DarkPatternsRewardsState) {
+        gameOver = true;
+        showFortuneWheel(xpCoins);
+      } else {
+        gameBloc.gameOver(xpCoins);
+        showGameOver(true);
+        gameOver = true;
+        Future.delayed(const Duration(seconds: 3), () {
+          Navigator.of(context).pop();
+        });
+      }
+    } catch (e) {
+      FirebaseStore.sendError("gameWonError", stacktrace: e.toString());
     }
   }
 
   void showFortuneWheel(int xpCoins) async {
-    List<int> itemList = [
-      xpCoins,
-      (xpCoins * 0.5).ceil(),
-      (xpCoins * 0.75).ceil(),
-      xpCoins * 2,
-      xpCoins * 3,
-      1
-    ];
+    try {
+      List<int> itemList = [
+        xpCoins,
+        (xpCoins * 0.5).ceil(),
+        (xpCoins * 0.75).ceil(),
+        xpCoins * 2,
+        xpCoins * 3,
+        1
+      ];
 
-    Future.delayed(const Duration(seconds: 5), () {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => FortuneWheel(items: itemList),
-      ));
-    });
+      Future.delayed(const Duration(seconds: 5), () {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => FortuneWheel(items: itemList),
+        ));
+      });
+    } catch (e) {
+      FirebaseStore.sendError("showFortuneWheelError", stacktrace: e.toString());
+    }
   }
 
   void gameLost() {
-    setState(() {
-      fabVisible = false;
-    });
-    gameOver = true;
-    gameBloc.gameOver(0);
-    _gameIsOverController.sink.add(false);
-    showGameOver(false);
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.of(context).pop();
-    });
+    try {
+      setState(() {
+        fabVisible = false;
+      });
+      gameOver = true;
+      gameBloc.gameOver(0);
+      _gameIsOverController.sink.add(false);
+      showGameOver(false);
+      Future.delayed(const Duration(seconds: 3), () {
+        Navigator.of(context).pop();
+      });
+    } catch (e) {
+      FirebaseStore.sendError("gameLostError", stacktrace: e.toString());
+    }
   }
 
   void onUnityMessage(message) {
@@ -362,7 +374,7 @@ class _UnityScreenState extends State<UnityScreen> {
       jsonString['orientation'] = "Portrait";
       postMessage(jsonString);
     } catch (e) {
-      FirebaseStore.sendError("Change Scene Error", stacktrace: e.toString());
+      FirebaseStore.sendError("ChangeSceneError", stacktrace: e.toString());
     }
   }
 
@@ -379,27 +391,31 @@ class _UnityScreenState extends State<UnityScreen> {
       unityWidgetController!.postJsonMessage('GameManager', 'LoadScene', jsonString);
       changeMusic();
     } catch (e) {
-      FirebaseStore.sendError("postMessage", stacktrace: e.toString());
+      FirebaseStore.sendError("PostMessageError", stacktrace: e.toString());
     }
   }
 
   void showGameOver(bool success) async {
-    if (_gameOverReceived) {
-      return;
+    try {
+      if (_gameOverReceived) {
+        return;
+      }
+      _gameOverReceived = true;
+      await Future.delayed(const Duration(seconds: 3));
+      _gameSplash = OverlayEntry(
+          opaque: false,
+          builder: (BuildContext context) {
+            return GameOverSplash(
+              success: success,
+              onComplete: () {
+                _gameSplash.remove();
+              },
+            );
+          });
+      Overlay.of(context).insert(_gameSplash);
+    } catch (e) {
+      FirebaseStore.sendError("showGameOverError", stacktrace: e.toString());
     }
-    _gameOverReceived = true;
-    await Future.delayed(const Duration(seconds: 3));
-    _gameSplash = OverlayEntry(
-        opaque: false,
-        builder: (BuildContext context) {
-          return GameOverSplash(
-            success: success,
-            onComplete: () {
-              _gameSplash.remove();
-            },
-          );
-        });
-    Overlay.of(context).insert(_gameSplash);
   }
 
   void _showGameStartSplash(_) {
@@ -419,16 +435,20 @@ class _UnityScreenState extends State<UnityScreen> {
           });
       Overlay.of(context).insert(_gameSplash);
     } catch (e) {
-      FirebaseStore.sendError("onUnityMessage", stacktrace: e.toString());
+      FirebaseStore.sendError("showGameStartSplashError", stacktrace: e.toString());
     }
   }
 
   void changeMusic() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      isMusicOn = prefs.getBool('music') ?? false;
-    });
-    print("Music: $isMusicOn");
-    unityWidgetController!.postMessage('GameManager', 'Music', isMusicOn.toString());
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      setState(() {
+        isMusicOn = prefs.getBool('music') ?? false;
+      });
+      print("Music: $isMusicOn");
+      unityWidgetController!.postMessage('GameManager', 'Music', isMusicOn.toString());
+    } catch (e) {
+      FirebaseStore.sendError("changeMusicError", stacktrace: e.toString());
+    }
   }
 }
