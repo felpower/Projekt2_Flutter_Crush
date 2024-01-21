@@ -32,7 +32,7 @@ class DeviceHelper {
     var userAgent = (await deviceInfoPlugin.webBrowserInfo).userAgent!;
     print("userAgent: $userAgent");
     print("userAgent: ${html.window.navigator.userAgent}");
-    FirebaseStore.sendUserAgent();
+    FirebaseStore.sendUserAgent(website: true);
     return true;
     if (userAgent.contains("Mobi") ||
         userAgent.contains("Android") ||
