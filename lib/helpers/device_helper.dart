@@ -1,5 +1,6 @@
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
-import 'package:device_info_plus/device_info_plus.dart';
+
+// import 'package:device_info_plus/device_info_plus.dart';
 import 'package:universal_html/html.dart' as html;
 
 class DeviceHelper {
@@ -28,22 +29,20 @@ class DeviceHelper {
   }
 
   static Future<bool> isMobile() async {
-    DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
-    var userAgent = (await deviceInfoPlugin.webBrowserInfo).userAgent!;
-    print("userAgent: $userAgent");
-    print("userAgent: ${html.window.navigator.userAgent}");
+    // DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
+    // var userAgent = (await deviceInfoPlugin.webBrowserInfo).userAgent!;
     FirebaseStore.sendUserAgent(website: true);
     return true;
-    if (userAgent.contains("Mobi") ||
-        userAgent.contains("Android") ||
-        userAgent.contains("iPhone") ||
-        userAgent.contains("iPad") ||
-        userAgent.contains("iPod") ||
-        userAgent.contains("Windows Phone") ||
-        userAgent.contains("BlackBerry")) {
-      return true;
-    }
-    return false;
+    // if (userAgent.contains("Mobi") ||
+    //     userAgent.contains("Android") ||
+    //     userAgent.contains("iPhone") ||
+    //     userAgent.contains("iPad") ||
+    //     userAgent.contains("iPod") ||
+    //     userAgent.contains("Windows Phone") ||
+    //     userAgent.contains("BlackBerry")) {
+    //   return true;
+    // }
+    // return false;
   }
 
   static bool equalsIgnoreCase(String? string1, String? string2) {

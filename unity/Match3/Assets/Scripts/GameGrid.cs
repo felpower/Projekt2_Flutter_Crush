@@ -20,7 +20,8 @@ namespace Match3 {
 		public PiecePrefab[] piecePrefabs;
 		public GameObject backgroundPrefab;
 		private bool _checkedMoves;
-
+		private bool _powerupPlaced;
+		private bool _powerupUsed;
 		private GamePiece[,] _checkMovesArray;
 		private IEnumerator _checkMovesCoroutine;
 		private GamePiece _enteredPiece;
@@ -118,7 +119,8 @@ namespace Match3 {
 			// Adjust the position based on the grid's position
 			var position = transform.position;
 			var cameraTransform = _mainCamera.transform;
-			Vector3 gridCenter = new Vector3(position.x + gridSize / 2, position.y + gridSize / 2, cameraTransform.position.z);
+			Vector3 gridCenter = new Vector3(position.x + gridSize / 2, position.y + gridSize / 2,
+				cameraTransform.position.z);
 			cameraTransform.position = gridCenter - new Vector3(gridSize / 2, gridSize / 2, 0);
 
 			// Add a small margin
@@ -208,6 +210,11 @@ namespace Match3 {
 				var sceneInfo = SceneInfoExtensions.GetAsSceneInfo();
 				int powerX, powerY;
 				var powerUp = sceneInfo.powerUp;
+				if (string.IsNullOrEmpty(powerUp)) {
+					_powerupPlaced = true;
+					_powerupUsed = true;
+				}
+
 				if (level.isFlutter && !string.IsNullOrEmpty(powerUp)) {
 					print("PowerUpBought: " + powerUp);
 					_timeWhenWeNextDoSomething = Time.time + 100000f;
@@ -225,6 +232,7 @@ namespace Match3 {
 						newPiece.ColorComponent.SetColor(ColorType.Any);
 					}
 
+					_powerupPlaced = true;
 					_timeWhenWeNextDoSomething = Time.time + TimeBetweenDoingSomething;
 				}
 
@@ -844,6 +852,12 @@ namespace Match3 {
 				Debug.Log("Still Waiting for PowerUp");
 				if (GetPiecesOfType(PieceType.Rainbow).Count > 0)
 					_isFirst = false;
+				return;
+			}
+
+			if (!_powerupPlaced || !_powerupUsed) {
+				_powerupPlaced = true;
+				_powerupUsed = true;
 				return;
 			}
 
