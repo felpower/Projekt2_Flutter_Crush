@@ -51,6 +51,7 @@ dependencies:
   firebase_messaging: ^14.7.10
   firebase_database: ^10.4.0
   firebase_storage: ^11.6.0
+  flutter_native_splash: ^2.3.9
 
   flutter_web_plugins:
     sdk: flutter
@@ -121,3 +122,7 @@ flutter:
     - assets/unityLevels.json
     # icons
     - assets/icons/android-chrome-512x512.png
+
+flutter_native_splash:
+  image: assets/instructions/splash_screen.png
+  color: "#42a5f5"

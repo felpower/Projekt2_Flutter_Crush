@@ -15,6 +15,7 @@ import 'package:bachelor_flutter_crush/services/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:universal_html/html.dart' as html;
 
@@ -44,7 +45,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin, WidgetsBindingObserver {
-  late AnimationController _controller;
   bool dailyRewardCollected = true;
 
   int todaysAmount = 0;
@@ -77,24 +77,7 @@ class _HomePageState extends State<HomePage>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 3500),
-    )..addListener(() {
-        setState(() {});
-      });
-    CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(
-        0.6,
-        1.0,
-        curve: Curves.easeInOut,
-      ),
-    );
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _controller.forward();
-    });
+    FlutterNativeSplash.remove();
     checkForFirstTimeStart();
     loadMusic();
     playMusic();
@@ -109,7 +92,6 @@ class _HomePageState extends State<HomePage>
   @override
   void dispose() {
     audioPlayer.stop();
-    _controller.dispose();
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }

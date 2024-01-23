@@ -77,6 +77,6 @@ def send_single_notification(token=None):
 
 send_notification()
 # send_single_notification(
-# 	"cKnK2BUXptXBbl1JJY5BB5:APA91bF5xi08__el6c4q4WzTn3X7P6M6YGAyos3BBObegEkXOnjiJje3jjL8N32SLOvhZABlR51FP_2IpTeu_q3TryehfL0XaUpdj0Hj9liTZxi-1wR_AHNz735Bw1Mo9P7wRCANpqW1"
+# 	"cKnK2BUXptXBbl1JJY5BB5:APA91bFDGSFJXWXrVigqIvlKamKkuL4U1OI87i58-FqjucZTqFGXKZqFxtcPfRWp5ZyWKD4lN_3dU6AeWP3Qfr8-zS_9Q7AKyp5NoTlBKe7z0yf0L_6p1kYJgCKVDhUW95V9BQAKutGg"
 # )
 # send_single_notification()
