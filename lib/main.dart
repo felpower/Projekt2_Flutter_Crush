@@ -15,10 +15,12 @@ import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:pwa_install/pwa_install.dart';
 import 'package:universal_html/html.dart' as html;
 import 'package:universal_html/js.dart' as js;
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() async {
   runZonedGuarded(() async {
-    WidgetsFlutterBinding.ensureInitialized();
+    WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
     usePathUrlStrategy();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     await Firebase.initializeApp(

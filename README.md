@@ -100,3 +100,7 @@ https://github.com/Cysharp/UniTask
 
 Dart Data Class
 Flutter Snippets
+
+## Change Splash Screen
+
+dart run flutter_native_splash:create
