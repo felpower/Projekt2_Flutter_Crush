@@ -1,10 +1,17 @@
 fileFormatVersion: 2
 guid: a62fb356db7d2834b87559058d1855a9
-timeCreated: 1457529478
-licenseType: Free
 MonoImporter:
+  externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - level: {instanceID: 0}
+  - backgroundPrefab: {instanceID: 0}
+  - pressedPieceAnimationPrefab: {instanceID: 0}
+  - winningSound: {fileID: 8300000, guid: bd3a9f89ee914dc44b383210524bcef6, type: 3}
+  - losingSound: {fileID: 8300000, guid: 68f23143c9893f943a80c09be21beaaa, type: 3}
+  - loopingSound: {fileID: 8300000, guid: ebebbd50f4cc1d2458cd2165a1aa9e81, type: 3}
+  - swapSound: {fileID: 8300000, guid: 22f04b358b576204fba33e0db525d908, type: 3}
+  - audioSource: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
