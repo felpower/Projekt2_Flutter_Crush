@@ -93,9 +93,9 @@ class _UnityScreenState extends State<UnityScreen> {
 
   @override
   dispose() {
-    super.dispose();
     _gameOverSubscription.cancel();
     unityWidgetController?.pause();
+    super.dispose();
   }
 
   @override
@@ -116,7 +116,7 @@ class _UnityScreenState extends State<UnityScreen> {
                   ),
                   onPressed: () {
                     try {
-                      FirebaseStore.sendError("closeFABError", stacktrace: "Close FAB pressed");
+                      FirebaseStore.sendLog("closeFABError", "Close FAB pressed");
                       showDialog(
                           context: context,
                           builder: (BuildContext context) => PointerInterceptor(
@@ -216,8 +216,7 @@ class _UnityScreenState extends State<UnityScreen> {
                       actions: <Widget>[
                         TextButton(
                             onPressed: () => {
-                                  unityWidgetController?.postMessage(
-                                      'Level', 'ShufflePieces', "ShufflePieces"),
+                                  postUnityMessage('Level', 'ShufflePieces', "ShufflePieces"),
                                   Navigator.pop(context, 'Cancel'),
                                   coinBloc.add(RemoveCoinsEvent(shufflePrice)),
                                   loadCoins()
@@ -319,8 +318,13 @@ class _UnityScreenState extends State<UnityScreen> {
 
   void onUnityMessage(message) {
     try {
+      print("Message received: $message");
       if (message.startsWith("checkReady")) {
-        unityReady = true;
+        print("Message received Unity is ready");
+        setState(() {
+          unityReady = true;
+        });
+        changeMusic();
       }
       if (!unityReady) {
         return;
@@ -370,6 +374,7 @@ class _UnityScreenState extends State<UnityScreen> {
       FirebaseStore.sendLog("onUnityCreated", controller.toString());
       controller.resume();
       unityWidgetController = controller;
+      checkUnityReady();
     } catch (e) {
       FirebaseStore.sendError("onUnityCreated", stacktrace: e.toString());
     }
@@ -394,26 +399,47 @@ class _UnityScreenState extends State<UnityScreen> {
 
       print("Changing level to: $type Portrait");
       jsonString['orientation'] = "Portrait";
-      postMessage(jsonString);
+      postUnityMessageJson(jsonString);
     } catch (e) {
       FirebaseStore.sendError("ChangeSceneError", stacktrace: e.toString());
     }
   }
 
-  void postMessage(Map<String, dynamic> jsonString) async {
+  void postUnityMessage(String gameObject, String methodName, message) async {
     try {
-      while (!unityReady) {
-        try {
-          unityWidgetController?.postMessage('GameManager', 'CheckReady', 'checkReady');
-        } catch (e) {
-          print("Unity is not Ready");
-        }
-        await Future.delayed(const Duration(seconds: 1));
+      if (!unityReady) {
+        print("Unity not ready still trying to post message");
+        FirebaseStore.sendError("postUnityMessageError",
+            stacktrace: "Unity not ready still trying to post message ");
       }
-      unityWidgetController!.postJsonMessage('GameManager', 'LoadScene', jsonString);
-      changeMusic();
+      unityWidgetController?.postMessage(gameObject, methodName, message);
     } catch (e) {
-      FirebaseStore.sendError("PostMessageError", stacktrace: e.toString());
+      FirebaseStore.sendError("postUnityMessageError", stacktrace: e.toString());
+    }
+  }
+
+  void postUnityMessageJson(Map<String, dynamic> jsonString) async {
+    try {
+      if (!unityReady) {
+        print("Unity not ready still trying to post message Json");
+        FirebaseStore.sendError("postUnityMessageJsonError",
+            stacktrace: "Unity not ready still trying to post message Json");
+      }
+      unityWidgetController?.postJsonMessage('GameManager', 'LoadScene', jsonString);
+    } catch (e) {
+      FirebaseStore.sendError("postUnityMessageJsonError", stacktrace: e.toString());
+    }
+  }
+
+  void checkUnityReady() async {
+    while (!unityReady) {
+      try {
+        unityWidgetController?.postMessage('GameManager', 'CheckReady', 'checkReady');
+        print("Check Unity is Ready");
+      } catch (e) {
+        print("Unity is not Ready");
+      }
+      await Future.delayed(const Duration(seconds: 1));
     }
   }
 
@@ -464,27 +490,27 @@ class _UnityScreenState extends State<UnityScreen> {
   void changeMusic() async {
     try {
       if (!unityReady) {
-        FirebaseStore.sendError("changeMusicError", stacktrace: "Unity not ready");
-        return;
+        print("changeMusicError stacktrace: Unity not ready");
       }
       SharedPreferences prefs = await SharedPreferences.getInstance();
       setState(() {
         isMusicOn = prefs.getBool('music') ?? false;
       });
       print("Music: $isMusicOn");
-      unityWidgetController!.postMessage('GameManager', 'Music', isMusicOn.toString());
+      postUnityMessage('GameManager', 'Music', isMusicOn.toString());
     } catch (e) {
       FirebaseStore.sendError("changeMusicError", stacktrace: e.toString());
     }
   }
 
   void onUnityUnloaded() {
-    if (!unityReady) {
-      return;
-    }
-    unityWidgetController!.pause();
-    FirebaseStore.sendError("onUnityUnloadedError", stacktrace: "Unity unloaded");
-    try {} catch (e) {
+    try {
+      if (!unityReady) {
+        return;
+      }
+      unityWidgetController!.pause();
+      FirebaseStore.sendLog("onUnityUnloaded", "Unity unloaded");
+    } catch (e) {
       FirebaseStore.sendError("onUnityUnloadedError", stacktrace: e.toString());
     }
   }
