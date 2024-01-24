@@ -43,10 +43,10 @@ dependencies:
   universal_html: ^2.2.4
   pwa_install: ^0.0.5
   survey_kit: ^0.2.0
-  intl: ^0.18.1 #Do Not upgrade
-  url_launcher: ^6.2.2
+  intl: ^0.18.1
+  url_launcher: ^6.2.4
   device_info_plus: ^9.1.1
-  permission_handler: ^11.1.0
+  permission_handler: ^11.2.0
   firebase_core: ^2.24.2
   firebase_messaging: ^14.7.10
   firebase_database: ^10.4.0
