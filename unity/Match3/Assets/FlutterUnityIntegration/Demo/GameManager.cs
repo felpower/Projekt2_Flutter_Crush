@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 namespace Match3.FlutterUnityIntegration.Demo {
 	public class GameManager : MonoBehaviour {
 		public static bool isMusicOn = true;
-		public GameGrid gameGrid; // Reference to the GameGrid script
+		public GameGrid gameGrid;
 
 		private void Start() { gameObject.AddComponent<UnityMessageManager>(); gameGrid = FindObjectOfType<GameGrid>();
 		}

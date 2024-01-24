@@ -93,9 +93,9 @@ class _UnityScreenState extends State<UnityScreen> {
 
   @override
   dispose() {
-    _gameOverSubscription.cancel();
-    unityWidgetController?.dispose();
     super.dispose();
+    _gameOverSubscription.cancel();
+    unityWidgetController?.pause();
   }
 
   @override
@@ -115,29 +115,34 @@ class _UnityScreenState extends State<UnityScreen> {
                     'assets/images/others/close.png',
                   ),
                   onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) => PointerInterceptor(
-                                child: AlertDialog(
-                              title: const Text('Level abbrechen'),
-                              content: const Text('Bist du sicher, dass du das Level abbrechen '
-                                  'wollen?'),
-                              elevation: 24,
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(16))),
-                              actions: <Widget>[
-                                TextButton(
-                                    onPressed: () => {Navigator.pop(context, 'Cancel')},
-                                    child: const Text('Nein')),
-                                TextButton(
-                                    onPressed: () => {
-                                          flutter_bloc.BlocProvider.of<ReportingBloc>(context)
-                                              .add(ReportFinishLevelEvent(lvl, false)),
-                                          popUntil()
-                                        },
-                                    child: const Text('Ja')),
-                              ],
-                            )));
+                    try {
+                      FirebaseStore.sendError("closeFABError", stacktrace: "Close FAB pressed");
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) => PointerInterceptor(
+                                  child: AlertDialog(
+                                title: const Text('Level abbrechen'),
+                                content: const Text('Bist du sicher, dass du das Level abbrechen '
+                                    'wollen?'),
+                                elevation: 24,
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(16))),
+                                actions: <Widget>[
+                                  TextButton(
+                                      onPressed: () => {Navigator.pop(context, 'Cancel')},
+                                      child: const Text('Nein')),
+                                  TextButton(
+                                      onPressed: () => {
+                                            flutter_bloc.BlocProvider.of<ReportingBloc>(context)
+                                                .add(ReportFinishLevelEvent(lvl, false)),
+                                            popUntil()
+                                          },
+                                      child: const Text('Ja')),
+                                ],
+                              )));
+                    } catch (e) {
+                      FirebaseStore.sendError("closeFABError", stacktrace: e.toString());
+                    }
                   },
                 )),
           ),
@@ -150,11 +155,14 @@ class _UnityScreenState extends State<UnityScreen> {
                     borderRadius: BorderRadius.zero,
                   ),
                   child: UnityWidget(
-                    onUnityCreated: onUnityCreated,
-                    onUnityMessage: onUnityMessage,
-                    onUnitySceneLoaded: onUnitySceneLoaded,
-                    useAndroidViewSurface: false,
-                  )),
+                      onUnityCreated: onUnityCreated,
+                      onUnityMessage: onUnityMessage,
+                      onUnitySceneLoaded: onUnitySceneLoaded,
+                      onUnityUnloaded: onUnityUnloaded,
+                      printSetupLog: false,
+                      layoutDirection: TextDirection.ltr,
+                      fullscreen: true,
+                      hideStatus: true)),
               Align(
                 alignment: Alignment.bottomLeft,
                 child: Padding(
@@ -165,12 +173,16 @@ class _UnityScreenState extends State<UnityScreen> {
                     backgroundColor: Colors.transparent,
                     elevation: 0.0,
                     onPressed: () async {
-                      SharedPreferences prefs = await SharedPreferences.getInstance();
-                      setState(() {
-                        isMusicOn = !isMusicOn;
-                        prefs.setBool('music', isMusicOn);
-                        changeMusic();
-                      });
+                      try {
+                        SharedPreferences prefs = await SharedPreferences.getInstance();
+                        setState(() {
+                          isMusicOn = !isMusicOn;
+                          prefs.setBool('music', isMusicOn);
+                          changeMusic();
+                        });
+                      } catch (e) {
+                        FirebaseStore.sendError("musicFABError", stacktrace: e.toString());
+                      }
                     },
                     child: isMusicOn ? const Icon(Icons.music_note) : const Icon(Icons.music_off),
                   )),
@@ -189,52 +201,52 @@ class _UnityScreenState extends State<UnityScreen> {
   int star = 0;
 
   void shuffleDialog() {
-    !gameOver
-        ? showDialog(
-            context: context,
-            builder: (BuildContext context) => PointerInterceptor(
-                child: coins > shufflePrice
-                    ? AlertDialog(
-                        title: const Text('Keine Züge mehr möglich'),
-                        content: Text('Willst du $shufflePrice Münzen ausgeben für einen Shuffle? '
-                            'Aktuell hast du $coins Münzen'),
-                        elevation: 24,
-                        shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(16))),
-                        actions: <Widget>[
-                          TextButton(
-                              onPressed: () => {
-                                    unityWidgetController?.postMessage(
-                                        'Level', 'ShufflePieces', "ShufflePieces"),
-                                    Navigator.pop(context, 'Cancel'),
-                                    coinBloc.add(RemoveCoinsEvent(shufflePrice)),
-                                    loadCoins()
-                                  },
-                              child: const Text('Ja')),
-                          TextButton(
-                              onPressed: () => {
-                                    star > 0 ? gameWon(star) : gameLost(),
-                                    Navigator.of(context).pop()
-                                  },
-                              child: const Text('Spiel vorbei')),
-                        ],
-                      )
-                    : AlertDialog(
-                        title: const Text('Keine Züge mehr möglich'),
-                        content:
-                            Text('Du hast nicht genügend Münzen $shufflePrice für einen Shuffle? '
-                                'Du hast aktuell '
-                                '$coins Münzen. Das Spiel ist vorbei'),
-                        elevation: 24,
-                        shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(16))),
-                        actions: <Widget>[
-                          TextButton(
-                              onPressed: () => {star > 0 ? gameWon(star) : gameLost(), popUntil()},
-                              child: const Text('OK')),
-                        ],
-                      )))
-        : null;
+    if (!gameOver) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) => PointerInterceptor(
+              child: coins > shufflePrice
+                  ? AlertDialog(
+                      title: const Text('Keine Züge mehr möglich'),
+                      content: Text('Willst du $shufflePrice Münzen ausgeben für einen Shuffle? '
+                          'Aktuell hast du $coins Münzen'),
+                      elevation: 24,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(16))),
+                      actions: <Widget>[
+                        TextButton(
+                            onPressed: () => {
+                                  unityWidgetController?.postMessage(
+                                      'Level', 'ShufflePieces', "ShufflePieces"),
+                                  Navigator.pop(context, 'Cancel'),
+                                  coinBloc.add(RemoveCoinsEvent(shufflePrice)),
+                                  loadCoins()
+                                },
+                            child: const Text('Ja')),
+                        TextButton(
+                            onPressed: () => {
+                                  star > 0 ? gameWon(star) : gameLost(),
+                                  Navigator.of(context).pop()
+                                },
+                            child: const Text('Spiel vorbei')),
+                      ],
+                    )
+                  : AlertDialog(
+                      title: const Text('Keine Züge mehr möglich'),
+                      content:
+                          Text('Du hast nicht genügend Münzen $shufflePrice für einen Shuffle? '
+                              'Du hast aktuell '
+                              '$coins Münzen. Das Spiel ist vorbei'),
+                      elevation: 24,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(16))),
+                      actions: <Widget>[
+                        TextButton(
+                            onPressed: () => {star > 0 ? gameWon(star) : gameLost(), popUntil()},
+                            child: const Text('OK')),
+                      ],
+                    )));
+    }
   }
 
   void gameWon(message) {
@@ -310,13 +322,18 @@ class _UnityScreenState extends State<UnityScreen> {
       if (message.startsWith("checkReady")) {
         unityReady = true;
       }
+      if (!unityReady) {
+        return;
+      }
       if (message.startsWith("Resend Level Info")) {
+        FirebaseStore.sendLog("ResendLevelInfo", message);
         changeScene();
         return;
       }
       if (message.startsWith("Score: ")) {
         return;
       } else if (message.startsWith("Shuffle")) {
+        FirebaseStore.sendLog("Shuffle", message);
         shuffleDialog();
         return;
       } else if (message.startsWith("GameOver: Won") && !gameOver) {
@@ -336,6 +353,10 @@ class _UnityScreenState extends State<UnityScreen> {
 
   void onUnitySceneLoaded(SceneLoaded? scene) {
     try {
+      if (!unityReady) {
+        FirebaseStore.sendLog("onUnitySceneLoaded", "Unity not ready");
+        return;
+      }
       if (scene != null) {
       } else {}
     } catch (e) {
@@ -346,6 +367,7 @@ class _UnityScreenState extends State<UnityScreen> {
   // Callback that connects the created controller to the unity controller
   void onUnityCreated(controller) {
     try {
+      FirebaseStore.sendLog("onUnityCreated", controller.toString());
       controller.resume();
       unityWidgetController = controller;
     } catch (e) {
@@ -441,6 +463,10 @@ class _UnityScreenState extends State<UnityScreen> {
 
   void changeMusic() async {
     try {
+      if (!unityReady) {
+        FirebaseStore.sendError("changeMusicError", stacktrace: "Unity not ready");
+        return;
+      }
       SharedPreferences prefs = await SharedPreferences.getInstance();
       setState(() {
         isMusicOn = prefs.getBool('music') ?? false;
@@ -449,6 +475,17 @@ class _UnityScreenState extends State<UnityScreen> {
       unityWidgetController!.postMessage('GameManager', 'Music', isMusicOn.toString());
     } catch (e) {
       FirebaseStore.sendError("changeMusicError", stacktrace: e.toString());
+    }
+  }
+
+  void onUnityUnloaded() {
+    if (!unityReady) {
+      return;
+    }
+    unityWidgetController!.pause();
+    FirebaseStore.sendError("onUnityUnloadedError", stacktrace: "Unity unloaded");
+    try {} catch (e) {
+      FirebaseStore.sendError("onUnityUnloadedError", stacktrace: e.toString());
     }
   }
 }

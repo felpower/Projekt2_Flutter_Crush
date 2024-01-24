@@ -81,22 +81,7 @@ namespace Match3 {
 				: Screen.height / (float)Screen.width;
 			if (Math.Abs(currentScale - _scale) > 0.0001f) {
 				_scale = currentScale;
-				var scene = SceneManager.GetActiveScene();
-				print(_scale);
-				var factor = 0f;
-				print(scene.name);
-				if (scene.name.Contains("Portrait"))
-					ScaleCamera();
-				else {
-					if (xDim > 8)
-						factor += (float)8 % xDim / 10 + 1;
-					else
-						factor -= ((float)8 % xDim / 10 + 1) * -1;
-					print("Scale: " + _scale);
-					print("Scale Factor: " + _scale * factor);
-					// _mainCamera.orthographicSize = Remap(_scale * factor, 0.562f, 1f, 4.9f, 8f);
-					ScaleCamera();
-				}
+				ScaleCamera();
 			}
 		}
 
@@ -105,26 +90,21 @@ namespace Match3 {
 			float gridSize = Mathf.Max(xDim, yDim); // The size of the grid in world units
 
 			// Calculate the aspect ratio
-			float screenRatio = (float)Screen.width / Screen.height;
-			float targetRatio = gridSize / gridSize;
+			var screenRatio = (float)Screen.width / Screen.height;
+			var targetRatio = gridSize / gridSize;
 
 			if (screenRatio >= targetRatio) {
 				_mainCamera.orthographicSize = gridSize / 2;
 			} else {
-				float differenceInSize = targetRatio / screenRatio;
+				var differenceInSize = targetRatio / screenRatio;
 				_mainCamera.orthographicSize = gridSize / 2 * differenceInSize;
 			}
 
-			// Position the camera to center the grid
-			// Adjust the position based on the grid's position
 			var position = transform.position;
 			var cameraTransform = _mainCamera.transform;
-			Vector3 gridCenter = new Vector3(position.x + gridSize / 2, position.y + gridSize / 2,
+			var gridCenter = new Vector3(position.x + gridSize / 2, position.y + gridSize / 2,
 				cameraTransform.position.z);
 			cameraTransform.position = gridCenter - new Vector3(gridSize / 2, gridSize / 2, 0);
-
-			// Add a small margin
-			//Camera.main.orthographicSize -= 0.00002f;
 		}
 
 		private IEnumerator CheckMoves() {

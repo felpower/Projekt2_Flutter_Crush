@@ -5,6 +5,7 @@ import 'dart:ui' as ui_web;
 
 import 'package:bachelor_flutter_crush/bloc/game_bloc.dart';
 import 'package:bachelor_flutter_crush/helpers/app_colors.dart';
+import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -82,26 +83,33 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
   }
 
   _buildResultOverlay() {
-    String x = 'Du hast $_selectedItem XP und \$ gewonnen. Glückwunsch!';
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
-              title: Text(x),
-              shape:
-                  const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16))),
-              actions: <Widget>[
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                    gameBloc.gameOver(_selectedItem!);
-                    gameIsOverController.sink.add(true);
-                    showGameOver(true);
-                  },
-                  child: const Text('Weiter'),
-                ),
-              ],
-            ));
+    if (mounted) {
+      // Check if the State object is in a valid context.
+      String x = 'Du hast $_selectedItem XP und \$ gewonnen. Glückwunsch!';
+      showDialog(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+                title: Text(x),
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(16))),
+                actions: <Widget>[
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                      gameBloc.gameOver(_selectedItem!);
+                      gameIsOverController.sink.add(true);
+                      showGameOver(true);
+                    },
+                    child: const Text('Weiter'),
+                  ),
+                ],
+              ));
+    } else {
+      FirebaseStore.sendError("FortuneWheelOverlayError",
+          stacktrace: "State object is not in a "
+              "valid context. Mounted: $mounted");
+    }
   }
 
   void showGameOver(bool success) {
