@@ -1,5 +1,4 @@
-﻿using FlutterUnityIntegration;
-using Match3.FlutterUnityIntegration;
+﻿using Match3.FlutterUnityIntegration;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
