@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 class NonMobilePage extends StatelessWidget {
   const NonMobilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    FlutterNativeSplash.remove();
     return MaterialApp(
         title: "Kein Mobiles Endgerät",
         theme: ThemeData.light(),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:pwa_install/pwa_install.dart';
 
 import '../helpers/device_helper.dart';
@@ -23,6 +24,7 @@ class _NonStandalonePageState extends State<NonStandalonePage> {
 
   @override
   Widget build(BuildContext context) {
+    FlutterNativeSplash.remove();
     return MaterialApp(
         title: "Herzlich Willkommen zur Studie",
         debugShowCheckedModeBanner: false,
