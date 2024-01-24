@@ -23,165 +23,161 @@ class _SurveyPageState extends State<SurveyPage> {
     return PopScope(
         canPop: false, // Prevents the user from using the back button
         child: Scaffold(
-          body: Container(
-            color: Colors.white,
-            child: Align(
-              alignment: Alignment.center,
-              child: FutureBuilder<Task>(
-                future: widget.title == "Start" ? buildStartSurvey() : buildEndSurvey(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done &&
-                      snapshot.hasData &&
-                      snapshot.data != null) {
-                    final task = snapshot.data!;
-                    return SurveyKit(
-                      onResult: (SurveyResult result) {
-                        List<String> resultString = [];
-                        for (var stepResult in result.results) {
-                          for (var questionResult in stepResult.results) {
-                            if (questionResult.result != null && questionResult.result != "") {
-                              resultString.add(
-                                  "ID: ${questionResult.id?.id.toString()}-${questionResult.valueIdentifier}");
-                            }
-                          }
-                        }
-                        if (widget.title.contains("Start")) {
-                          sendStartSurvey(resultString);
-                          Navigator.pop(context);
-                          var age = int.parse(resultString[0].split("-").last);
-                          if (age >= 18 && age <= 120) {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => const DeviceToken()));
-                          } else {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => const Under18Page()));
-                          }
-                        } else {
-                          sendEndSurvey(resultString);
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => const FinishedSurveyPage()));
-                        }
-                      },
-                      task: task,
-                      showProgress: true,
-                      localizations: const {
-                        'cancel': '',
-                        'next': 'Weiter',
-                      },
-                      themeData: Theme.of(context).copyWith(
-                        primaryColor: Colors.cyan,
-                        appBarTheme: const AppBarTheme(
-                          color: Colors.white,
-                          iconTheme: IconThemeData(
-                            color: Colors.cyan,
-                          ),
-                          titleTextStyle: TextStyle(
-                            color: Colors.cyan,
-                          ),
-                        ),
-                        iconTheme: const IconThemeData(
-                          color: Colors.cyan,
-                        ),
-                        textSelectionTheme: const TextSelectionThemeData(
-                          cursorColor: Colors.cyan,
-                          selectionColor: Colors.cyan,
-                          selectionHandleColor: Colors.cyan,
-                        ),
-                        cupertinoOverrideTheme: const CupertinoThemeData(
-                          primaryColor: Colors.cyan,
-                        ),
-                        outlinedButtonTheme: OutlinedButtonThemeData(
-                          style: ButtonStyle(
-                            minimumSize: MaterialStateProperty.all(
-                              const Size(150.0, 60.0),
-                            ),
-                            side: MaterialStateProperty.resolveWith(
-                              (Set<MaterialState> state) {
-                                if (state.contains(MaterialState.disabled)) {
-                                  return const BorderSide(
-                                    color: Colors.grey,
-                                  );
+            body: Container(
+                color: Colors.white,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: FutureBuilder<Task>(
+                      future: widget.title == "Start" ? buildStartSurvey() : buildEndSurvey(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done &&
+                            snapshot.hasData &&
+                            snapshot.data != null) {
+                          final task = snapshot.data!;
+                          return SurveyKit(
+                            onResult: (SurveyResult result) {
+                              List<String> resultString = [];
+                              for (var stepResult in result.results) {
+                                for (var questionResult in stepResult.result) {
+                                  if (questionResult.result != null &&
+                                      questionResult.result != "") {
+                                    resultString.add(
+                                        "ID: ${questionResult.id?.id.toString()}-${questionResult.valueIdentifier}");
+                                  }
                                 }
-                                return const BorderSide(
-                                  color: Colors.cyan,
-                                );
-                              },
-                            ),
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                            ),
-                            textStyle: MaterialStateProperty.resolveWith(
-                              (Set<MaterialState> state) {
-                                if (state.contains(MaterialState.disabled)) {
-                                  return Theme.of(context).textTheme.labelLarge?.copyWith(
-                                        color: Colors.grey,
-                                      );
+                              }
+                              if (widget.title.contains("Start")) {
+                                sendStartSurvey(resultString);
+                                Navigator.pop(context);
+                                var age = int.parse(resultString[0].split("-").last);
+                                if (age >= 18 && age <= 120) {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) => const DeviceToken()));
+                                } else {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) => const Under18Page()));
                                 }
-                                return Theme.of(context).textTheme.labelLarge?.copyWith(
-                                      color: Colors.cyan,
-                                    );
-                              },
-                            ),
-                          ),
-                        ),
-                        textButtonTheme: TextButtonThemeData(
-                          style: ButtonStyle(
-                            textStyle: MaterialStateProperty.all(
-                              Theme.of(context).textTheme.labelLarge?.copyWith(
-                                    color: Colors.cyan,
-                                  ),
-                            ),
-                          ),
-                        ),
-                        textTheme: const TextTheme(
-                          displayMedium: TextStyle(
-                            fontSize: 28.0,
-                            color: Colors.black,
-                          ),
-                          headlineSmall: TextStyle(
-                            fontSize: 24.0,
-                            color: Colors.black,
-                          ),
-                          bodyMedium: TextStyle(
-                            fontSize: 18.0,
-                            color: Colors.black,
-                          ),
-                          titleMedium: TextStyle(
-                            fontSize: 18.0,
-                            color: Colors.black,
-                          ),
-                        ),
-                        inputDecorationTheme: const InputDecorationTheme(
-                          labelStyle: TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
-                        colorScheme: ColorScheme.fromSwatch(
-                          primarySwatch: Colors.cyan,
-                        )
-                            .copyWith(
-                              onPrimary: Colors.white,
-                            )
-                            .copyWith(background: Colors.white),
-                      ),
-                      surveyProgressbarConfiguration: SurveyProgressConfiguration(
-                        backgroundColor: Colors.white,
-                      ),
-                    );
-                  }
-                  return const CircularProgressIndicator.adaptive();
-                },
-              ),
-            ),
-          ),
-        ));
+                              } else {
+                                sendEndSurvey(resultString);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const FinishedSurveyPage()));
+                              }
+                            },
+                            task: task,
+                            localizations: const {
+                              'cancel': '',
+                              'next': 'Weiter',
+                            },
+                          );
+                        }
+                      }),
+                ))));
   }
 
-  Future<Task> buildStartSurvey() async {
+  ThemeData get theme => Theme.of(context).copyWith(
+        useMaterial3: true,
+        primaryColor: Colors.cyan,
+        appBarTheme: const AppBarTheme(
+          color: Colors.white,
+          iconTheme: IconThemeData(
+            color: Colors.cyan,
+          ),
+          titleTextStyle: TextStyle(
+            color: Colors.cyan,
+          ),
+        ),
+        iconTheme: const IconThemeData(
+          color: Colors.cyan,
+        ),
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: Colors.cyan,
+          selectionColor: Colors.cyan,
+          selectionHandleColor: Colors.cyan,
+        ),
+        cupertinoOverrideTheme: const CupertinoThemeData(
+          primaryColor: Colors.cyan,
+        ),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: ButtonStyle(
+            minimumSize: MaterialStateProperty.all(
+              const Size(150.0, 60.0),
+            ),
+            side: MaterialStateProperty.resolveWith(
+              (Set<MaterialState> state) {
+                if (state.contains(MaterialState.disabled)) {
+                  return const BorderSide(
+                    color: Colors.grey,
+                  );
+                }
+                return const BorderSide(
+                  color: Colors.cyan,
+                );
+              },
+            ),
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+            ),
+            textStyle: MaterialStateProperty.resolveWith(
+              (Set<MaterialState> state) {
+                if (state.contains(MaterialState.disabled)) {
+                  return Theme.of(context).textTheme.labelLarge?.copyWith(
+                        color: Colors.grey,
+                      );
+                }
+                return Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: Colors.cyan,
+                    );
+              },
+            ),
+          ),
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: ButtonStyle(
+            textStyle: MaterialStateProperty.all(
+              Theme.of(context).textTheme.labelLarge?.copyWith(
+                    color: Colors.cyan,
+                  ),
+            ),
+          ),
+        ),
+        textTheme: const TextTheme(
+          displayMedium: TextStyle(
+            fontSize: 28.0,
+            color: Colors.black,
+          ),
+          headlineSmall: TextStyle(
+            fontSize: 24.0,
+            color: Colors.black,
+          ),
+          bodyMedium: TextStyle(
+            fontSize: 18.0,
+            color: Colors.black,
+          ),
+          titleMedium: TextStyle(
+            fontSize: 18.0,
+            color: Colors.black,
+          ),
+        ),
+        inputDecorationTheme: const InputDecorationTheme(
+          labelStyle: TextStyle(
+            color: Colors.black,
+          ),
+        ),
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: Colors.cyan,
+        )
+            .copyWith(
+              onPrimary: Colors.white,
+            )
+            .copyWith(background: Colors.white),
+      );
+
+  Future<Task> buildStartSurvey() {
     var task = NavigableTask(
-      id: TaskIdentifier(),
       steps: [
         InstructionStep(
           title: 'Sehr geehrte Studienteilnehmer:innen,',
@@ -207,7 +203,7 @@ class _SurveyPageState extends State<SurveyPage> {
         ),
         QuestionStep(
           title: 'Wie alt sind Sie?',
-          stepIdentifier: StepIdentifier(id: '1'),
+          id: "1",
           answerFormat: const IntegerAnswerFormat(
             defaultValue: 18,
             hint: 'Bitte geben Sie ihr Alter ein',
@@ -216,8 +212,8 @@ class _SurveyPageState extends State<SurveyPage> {
         ),
         QuestionStep(
             title: "Welches Geschlecht haben Sie",
-            stepIdentifier: StepIdentifier(id: '2'),
-            answerFormat: const SingleChoiceAnswerFormat(
+            id: "2",
+            answerFormat: SingleChoiceAnswerFormat(
               textChoices: [
                 TextChoice(text: 'Männlich', value: '0'),
                 TextChoice(text: 'Weiblich', value: '1'),
@@ -226,8 +222,8 @@ class _SurveyPageState extends State<SurveyPage> {
             )),
         QuestionStep(
             title: "Höchster Bildungsabschluss",
-            stepIdentifier: StepIdentifier(id: '3'),
-            answerFormat: const SingleChoiceAnswerFormat(
+            id: "3",
+            answerFormat: SingleChoiceAnswerFormat(
               textChoices: [
                 TextChoice(text: 'Pflichtschule/Hauptschule/Realschule', value: '0'),
                 TextChoice(text: 'Lehre', value: '1'),
@@ -239,8 +235,8 @@ class _SurveyPageState extends State<SurveyPage> {
         QuestionStep(
             title:
                 "In Ihrer (beruflichen) Haupttätigkeit (Tätigkeit mit den meisten Stunden), sind Sie…?",
-            stepIdentifier: StepIdentifier(id: '4'),
-            answerFormat: const SingleChoiceAnswerFormat(
+            id: "4",
+            answerFormat: SingleChoiceAnswerFormat(
               textChoices: [
                 TextChoice(
                     text:
@@ -257,8 +253,8 @@ class _SurveyPageState extends State<SurveyPage> {
             )),
         QuestionStep(
             title: "Wohnort?",
-            stepIdentifier: StepIdentifier(id: '5'),
-            answerFormat: const SingleChoiceAnswerFormat(
+            id: "5",
+            answerFormat: SingleChoiceAnswerFormat(
               textChoices: [
                 TextChoice(text: 'Österreich', value: '0'),
                 TextChoice(text: 'Deutschland', value: '1'),
@@ -266,15 +262,15 @@ class _SurveyPageState extends State<SurveyPage> {
               ],
             )),
         InstructionStep(
-          stepIdentifier: StepIdentifier(id: '6'),
+          id: "6",
           title: 'Angaben zum Spielverhalten',
           text: 'Als nächstes werden wir Ihnen einige Fragen zu Handyspielen stellen!',
           buttonText: 'Los geht\'s!',
         ),
         QuestionStep(
+            id: "7",
             title: "Wie häufig spielen Sie Spiele am Handy/Tablet?",
-            stepIdentifier: StepIdentifier(id: '7'),
-            answerFormat: const SingleChoiceAnswerFormat(
+            answerFormat: SingleChoiceAnswerFormat(
               textChoices: [
                 TextChoice(text: 'Täglich', value: '0'),
                 TextChoice(text: 'Jeden 2. Tag', value: '1'),
@@ -288,52 +284,53 @@ class _SurveyPageState extends State<SurveyPage> {
         QuestionStep(
             title:
                 "An Tagen an denen Sie am Handy/Tablet spielen: Wie viele Stunden spielen Sie durchschnittlich?",
-            stepIdentifier: StepIdentifier(id: '8'),
+            id: "8",
             answerFormat: const DoubleAnswerFormat(
               hint: 'Kommastellen mit . trennen',
             )),
         QuestionStep(
             title:
                 "Wie viel Geld geben Sie durchschnittlich pro Monat innerhalb von Spielen für kostenpflichtige Zusatzfunktionen wie z.B. Spiele-Levels, Skins, Upgrades am Handy/am Tablet aus („In-App-Kauf“)?",
-            stepIdentifier: StepIdentifier(id: '9'),
+            id: "9",
             answerFormat: const DoubleAnswerFormat(
               hint: 'Kommastellen mit . trennen',
             )),
         CompletionStep(
-            stepIdentifier: StepIdentifier(id: '10'),
+            id: "10",
             text: 'Danke für die Teilnahme an der Umfrage',
             title: 'Fertig!',
             buttonText: 'Umfrage beenden'),
       ],
     );
     task.addNavigationRule(
-      forTriggerStepIdentifier: getStepIdentifier(task, "1"),
+      forTriggerStepIdentifier: "1",
       navigationRule: ConditionalNavigationRule(
-        resultToStepIdentifierMapper: (input) {
-          int age = int.parse(input!);
+        resultToStepIdentifierMapper: (List<StepResult> results, StepResult? input) {
+          int age = int.parse(input!.result);
           if (age < 18 || age > 120) {
-            return getStepIdentifier(task, "10");
+            return "10";
           } else {
-            return getStepIdentifier(task, "2");
+            return "2";
           }
         },
       ),
     );
     task.addNavigationRule(
-      forTriggerStepIdentifier: getStepIdentifier(task, "7"),
-      navigationRule: ConditionalNavigationRule(resultToStepIdentifierMapper: (input) {
-        switch (input) {
+      forTriggerStepIdentifier: "7",
+      navigationRule: ConditionalNavigationRule(
+          resultToStepIdentifierMapper: (List<StepResult> results, StepResult? input) {
+        switch (input!.result) {
           case "0":
           case '1':
           case '2':
           case "3":
           case "4":
           case "5":
-            return getStepIdentifier(task, "8");
+            return "8";
           case "6":
-            return getStepIdentifier(task, "9");
+            return "9";
           default:
-            return getStepIdentifier(task, "9");
+            return "9";
         }
       }),
     );
@@ -342,7 +339,6 @@ class _SurveyPageState extends State<SurveyPage> {
 
   Future<Task> buildEndSurvey() {
     var task = NavigableTask(
-      id: TaskIdentifier(),
       steps: [
         InstructionStep(
           title: 'Liebe Studienteilnehmer:innen, vielen Dank für Ihre Teilnahme.',
@@ -353,8 +349,8 @@ class _SurveyPageState extends State<SurveyPage> {
         ),
         QuestionStep(
             title: 'Haben Sie das Spiel bis zum Ende bzw. bis zum jetzigen Zeitpunkt gespielt?',
-            stepIdentifier: StepIdentifier(id: '1'),
-            answerFormat: const SingleChoiceAnswerFormat(
+            id: "1",
+            answerFormat: SingleChoiceAnswerFormat(
               textChoices: [
                 TextChoice(text: 'Ja', value: '1'),
                 TextChoice(text: 'Nein', value: '2'),
@@ -363,8 +359,8 @@ class _SurveyPageState extends State<SurveyPage> {
         QuestionStep(
             title:
                 "Aus welchem Grund/welchen Gründen haben Sie das Spiel abgebrochen/nicht mehr gespielt?",
-            stepIdentifier: StepIdentifier(id: '2'),
-            answerFormat: const MultipleChoiceAnswerFormat(
+            id: "2",
+            answerFormat: MultipleChoiceAnswerFormat(
               textChoices: [
                 TextChoice(text: 'Technische Probleme', value: '0'),
                 TextChoice(text: 'Datenschutzbedenken', value: '1'),
@@ -379,8 +375,8 @@ class _SurveyPageState extends State<SurveyPage> {
         QuestionStep(
             title:
                 "Wenn Sie an das Spielen zurückdenken – hatten Sie während oder nach dem Spielen den Eindruck, dass bestimmte Spiel-Features Ihr Verhalten beeinflussen wollten?",
-            stepIdentifier: StepIdentifier(id: '3'),
-            answerFormat: const SingleChoiceAnswerFormat(
+            id: "3",
+            answerFormat: SingleChoiceAnswerFormat(
               textChoices: [
                 TextChoice(text: 'Ja', value: '1'),
                 TextChoice(text: 'Nein', value: '0'),
@@ -388,13 +384,13 @@ class _SurveyPageState extends State<SurveyPage> {
             )),
         InstructionStep(
             title: "",
-            stepIdentifier: StepIdentifier(id: '4'),
+            id: "4",
             text:
                 "Inwiefern hatten Sie das Gefühl, Ihr Spielverhalten sei möglicherweise beeinflusst worden?"),
         QuestionStep(
             title: "Spieldauer",
-            stepIdentifier: StepIdentifier(id: '5'),
-            answerFormat: const SingleChoiceAnswerFormat(
+            id: "5",
+            answerFormat: SingleChoiceAnswerFormat(
               textChoices: [
                 TextChoice(text: 'längere Spielzeit', value: '2'),
                 TextChoice(text: 'kürzere Spielzeit', value: '1'),
@@ -403,8 +399,8 @@ class _SurveyPageState extends State<SurveyPage> {
             )),
         QuestionStep(
             title: "Spielhäufigkeit",
-            stepIdentifier: StepIdentifier(id: '6'),
-            answerFormat: const SingleChoiceAnswerFormat(
+            id: "6",
+            answerFormat: SingleChoiceAnswerFormat(
               textChoices: [
                 TextChoice(text: 'häufiger gespielt', value: '2'),
                 TextChoice(text: 'seltener gespielt', value: '1'),
@@ -414,8 +410,8 @@ class _SurveyPageState extends State<SurveyPage> {
         QuestionStep(
             title:
                 "Bei welchen dieser Features hatten Sie den Eindruck, dass davon Ihr Spielverhalten beeinflusst wurde?",
-            stepIdentifier: StepIdentifier(id: '7'),
-            answerFormat: const MultipleChoiceAnswerFormat(
+            id: "7",
+            answerFormat: MultipleChoiceAnswerFormat(
               textChoices: [
                 TextChoice(text: 'Tägliche Belohnung zum Einsammeln', value: '1'),
                 TextChoice(text: 'Variable Belohnungen (=Glücksrad)', value: '2'),
@@ -428,8 +424,8 @@ class _SurveyPageState extends State<SurveyPage> {
             )),
         QuestionStep(
             title: "Haben Sie Push-Nachrichten erhalten?",
-            stepIdentifier: StepIdentifier(id: '8'),
-            answerFormat: const SingleChoiceAnswerFormat(
+            id: "8",
+            answerFormat: SingleChoiceAnswerFormat(
               textChoices: [
                 TextChoice(text: 'Ja', value: '1'),
                 TextChoice(text: 'Nein', value: '0'),
@@ -437,8 +433,8 @@ class _SurveyPageState extends State<SurveyPage> {
             )),
         QuestionStep(
             title: "Wie empfanden Sie die Häufigkeit der Push-Nachrichten?",
-            stepIdentifier: StepIdentifier(id: '9'),
-            answerFormat: const SingleChoiceAnswerFormat(
+            id: "9",
+            answerFormat: SingleChoiceAnswerFormat(
               textChoices: [
                 TextChoice(text: 'Zu selten', value: '0'),
                 TextChoice(text: 'Genau Richtig', value: '1'),
@@ -447,8 +443,8 @@ class _SurveyPageState extends State<SurveyPage> {
             )),
         QuestionStep(
             title: "Wie passend war(en) die Uhrzeit(en) der Push-Nachricht(en) für Sie?",
-            stepIdentifier: StepIdentifier(id: '10'),
-            answerFormat: const SingleChoiceAnswerFormat(
+            id: "10",
+            answerFormat: SingleChoiceAnswerFormat(
               textChoices: [
                 TextChoice(text: 'Sehr passend', value: '0'),
                 TextChoice(text: 'Wenig passend', value: '1'),
@@ -456,17 +452,17 @@ class _SurveyPageState extends State<SurveyPage> {
               ],
             )),
         QuestionStep(
+            id: "11",
             title: "Welche Uhrzeit(en) wäre(n) besser gewesen?",
-            stepIdentifier: StepIdentifier(id: '11'),
             answerFormat: const TextAnswerFormat()),
         QuestionStep(
             title:
                 "Möchten Sie zu dieser Studie oder zum besseren Verständnis Ihrer Antworten noch etwas anmerken?",
-            stepIdentifier: StepIdentifier(id: '12'),
+            id: "12",
             isOptional: true,
             answerFormat: const TextAnswerFormat()),
         CompletionStep(
-          stepIdentifier: StepIdentifier(id: '13'),
+          id: "13",
           text: '',
           title: '',
           buttonText: 'Studie beenden',
@@ -474,54 +470,42 @@ class _SurveyPageState extends State<SurveyPage> {
       ],
     );
     task.addNavigationRule(
-      forTriggerStepIdentifier: task.steps[1].stepIdentifier,
-      navigationRule: ConditionalNavigationRule(resultToStepIdentifierMapper: (input) {
-        switch (input) {
+      forTriggerStepIdentifier: "1",
+      navigationRule: ConditionalNavigationRule(
+          resultToStepIdentifierMapper: (List<StepResult> results, StepResult? input) {
+        switch (input!.result) {
           case "1":
-            return task.steps[3].stepIdentifier;
+            return "3";
           default:
-            return task.steps[2].stepIdentifier;
+            return "2";
         }
       }),
     );
     task.addNavigationRule(
-      forTriggerStepIdentifier: task.steps[3].stepIdentifier,
-      navigationRule: ConditionalNavigationRule(resultToStepIdentifierMapper: (input) {
-        switch (input) {
+      forTriggerStepIdentifier: "3",
+      navigationRule: ConditionalNavigationRule(
+          resultToStepIdentifierMapper: (List<StepResult> results, StepResult? input) {
+        switch (input!.result) {
           case "0":
-            return task.steps[13].stepIdentifier;
+            return "13";
           default:
-            return task.steps[4].stepIdentifier;
+            return "4";
         }
       }),
     );
     task.addNavigationRule(
-      forTriggerStepIdentifier: task.steps[10].stepIdentifier,
-      navigationRule: ConditionalNavigationRule(resultToStepIdentifierMapper: (input) {
-        switch (input) {
+      forTriggerStepIdentifier: "10",
+      navigationRule: ConditionalNavigationRule(
+          resultToStepIdentifierMapper: (List<StepResult> results, StepResult? input) {
+        switch (input!.result) {
           case "0":
-            return task.steps[12].stepIdentifier;
+            return "12";
           default:
-            return task.steps[9].stepIdentifier;
-        }
-      }),
-    );
-    task.addNavigationRule(
-      forTriggerStepIdentifier: task.steps[10].stepIdentifier,
-      navigationRule: ConditionalNavigationRule(resultToStepIdentifierMapper: (input) {
-        switch (input) {
-          case "0":
-            return task.steps[12].stepIdentifier;
-          default:
-            return task.steps[11].stepIdentifier;
+            return "9";
         }
       }),
     );
     return Future.value(task);
-  }
-
-  StepIdentifier getStepIdentifier(NavigableTask task, String stepIdentifier) {
-    return task.steps.where((e) => e.stepIdentifier.id == stepIdentifier).first.stepIdentifier;
   }
 
   void sendStartSurvey(List<String> resultString) async {
