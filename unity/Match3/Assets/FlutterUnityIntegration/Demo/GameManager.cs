@@ -7,7 +7,9 @@ namespace Match3.FlutterUnityIntegration.Demo {
 		public static bool isMusicOn = true;
 		public GameGrid gameGrid;
 
-		private void Start() { gameObject.AddComponent<UnityMessageManager>(); gameGrid = FindObjectOfType<GameGrid>();
+		private void Start() {
+			gameObject.AddComponent<UnityMessageManager>();
+			gameGrid = FindObjectOfType<GameGrid>();
 		}
 
 		public void LoadScene(string json) {
@@ -20,7 +22,10 @@ namespace Match3.FlutterUnityIntegration.Demo {
 			SceneManager.LoadScene(sceneInfo.type + sceneInfo.orientation);
 		}
 
-		public void CheckReady(string checkReady) { UnityMessageManager.Instance.SendMessageToFlutter("checkReady"); }
+		public void CheckReady(string checkReady) {
+			print("CheckReady: " + checkReady);
+			UnityMessageManager.Instance.SendMessageToFlutter("checkReady");
+		}
 
 
 		public void Music(string music) {
