@@ -199,4 +199,20 @@ class FirebaseStore {
     }
     return "${version}V02-";
   }
+
+  static Future<void> sendLog(String log, message) async {
+    try {
+      var userId = await getUuid();
+      final data = {
+        'log': log,
+        'message': message,
+        'userAgent': html.window.navigator.userAgent,
+        'timestamp': DateTime.now().toIso8601String(),
+      };
+      DatabaseReference ref = database.ref("logs/$userId");
+      ref.push().set(data);
+    } catch (e) {
+      print('Failed to send logs: $e');
+    }
+  }
 }
