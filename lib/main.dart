@@ -23,6 +23,11 @@ void main() async {
     FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
     usePathUrlStrategy();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+    FlutterError.onError = (FlutterErrorDetails details) {
+      FlutterError.dumpErrorToConsole(details);
+      FirebaseStore.sendError("FlutterOnErrorMain",
+          stacktrace: details.exceptionAsString(), extraInfo: details.toString());
+    };
     await Firebase.initializeApp(
         options: const FirebaseOptions(
             apiKey: "AIzaSyCcBYFUJbTyRWUjy6dhLbLLEj_lwhqnsh4",
@@ -65,6 +70,8 @@ void main() async {
     FirebaseMessagingWeb.init();
     runApp(const Application());
   }, (error, stackTrace) {
+    print('Caught error: $error');
+    print('Stacktrace: $stackTrace');
     FirebaseStore.sendError(error.toString(), stacktrace: stackTrace.toString());
   });
 }
