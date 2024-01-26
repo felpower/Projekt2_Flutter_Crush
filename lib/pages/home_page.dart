@@ -1,5 +1,4 @@
 // ignore_for_file: avoid_print
-import 'package:audioplayers/audioplayers.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_bloc.dart';
@@ -90,7 +89,6 @@ class _HomePageState extends State<HomePage>
 
   @override
   void dispose() {
-    audioPlayer.stop();
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
@@ -297,7 +295,6 @@ class _HomePageState extends State<HomePage>
                                                     : AppColors.getColorLevel(levelNumber + 1),
                                                 buntJelly: buntJelly,
                                                 stripeJelly: stripeJelly,
-                                                audioPlayer: audioPlayer,
                                               );
                                             }),
                                           );
@@ -394,7 +391,7 @@ class _HomePageState extends State<HomePage>
                       borderRadius: BorderRadius.circular(12)), // Rounded corners
                 )),
           Visibility(
-              visible: false,
+              visible: true,
               child: SwitchListTile(
                 tileColor: Colors.grey[200],
                 title: const Text('Musik', style: TextStyle(color: Colors.grey)),
@@ -623,8 +620,6 @@ class _HomePageState extends State<HomePage>
     prefs.setBool("music", isMusicOn);
     playMusic();
   }
-
-  AudioPlayer audioPlayer = AudioPlayer();
 
   void loadMusic() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

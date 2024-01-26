@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -37,6 +38,8 @@ class UnityScreen extends StatefulWidget {
 }
 
 class _UnityScreenState extends State<UnityScreen> {
+  AudioPlayer backgroundAudio = AudioPlayer();
+  AudioPlayer wonLostAudio = AudioPlayer();
   late GameBloc gameBloc;
   late LevelBloc levelBloc;
   late DarkPatternsBloc darkPatternsBloc;
@@ -61,15 +64,21 @@ class _UnityScreenState extends State<UnityScreen> {
   @override
   void initState() {
     super.initState();
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-    _gameOverReceived = false;
-    WidgetsBinding.instance.addPostFrameCallback(_showGameStartSplash);
-    loadCoins();
-    levelBloc = flutter_bloc.BlocProvider.of<LevelBloc>(context);
-    darkPatternsBloc = flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context);
+    try {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+      ]);
+      _gameOverReceived = false;
+      WidgetsBinding.instance.addPostFrameCallback(_showGameStartSplash);
+      loadCoins();
+      levelBloc = flutter_bloc.BlocProvider.of<LevelBloc>(context);
+      darkPatternsBloc = flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context);
+    } catch (e, s) {
+      print('Caught error: $e');
+      print('Stacktrace: $s');
+      FirebaseStore.sendError(e.toString(), stacktrace: s.toString());
+    }
   }
 
   void loadCoins() async {
@@ -93,103 +102,115 @@ class _UnityScreenState extends State<UnityScreen> {
 
   @override
   dispose() {
-    super.dispose();
+    stopMusic();
     _gameOverSubscription.cancel();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    lvl = widget.jsonData['level'];
-    coinBloc = flutter_bloc.BlocProvider.of<CoinBloc>(context);
-    return PopScope(
-        canPop: false,
-        child: Scaffold(
-          floatingActionButton: PointerInterceptor(
-            child: Visibility(
-                visible: !gameOver,
-                child: FloatingActionButton(
-                  heroTag: 'closeFAB',
-                  backgroundColor: Colors.transparent,
-                  child: const Icon(Icons.close, color: Colors.red),
-                  onPressed: () {
-                    try {
-                      FirebaseStore.sendLog("closeFAB", "Close FAB pressed");
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) => PointerInterceptor(
-                                  child: AlertDialog(
-                                title: const Text('Level abbrechen'),
-                                content: const Text('Bist du sicher, dass du das Level abbrechen '
-                                    'wollen?'),
-                                elevation: 24,
-                                shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(16))),
-                                actions: <Widget>[
-                                  TextButton(
-                                      onPressed: () => {Navigator.pop(context, 'Cancel')},
-                                      child: const Text('Nein')),
-                                  TextButton(
-                                      onPressed: () => {
-                                            flutter_bloc.BlocProvider.of<ReportingBloc>(context)
-                                                .add(ReportFinishLevelEvent(lvl, false)),
-                                            popUntil()
-                                          },
-                                      child: const Text('Ja')),
-                                ],
-                              )));
-                    } catch (e) {
-                      FirebaseStore.sendError("closeFABError", stacktrace: e.toString());
-                    }
-                  },
-                )),
-          ),
-          body: Stack(
-            children: [
-              Card(
-                  margin: const EdgeInsets.all(0),
-                  clipBehavior: Clip.hardEdge,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero,
+    try {
+      lvl = widget.jsonData['level'];
+      coinBloc = flutter_bloc.BlocProvider.of<CoinBloc>(context);
+      return PopScope(
+          canPop: false,
+          child: Scaffold(
+            floatingActionButton: PointerInterceptor(
+              child: Visibility(
+                  visible: unityReady && !gameOver,
+                  child: FloatingActionButton(
+                    heroTag: 'closeFAB',
+                    backgroundColor: Colors.transparent,
+                    child: const Icon(Icons.close, color: Colors.red),
+                    onPressed: () {
+                      try {
+                        FirebaseStore.sendLog("closeFAB", "Close FAB pressed");
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) => PointerInterceptor(
+                                    child: AlertDialog(
+                                  title: const Text('Level abbrechen'),
+                                  content: const Text('Bist du sicher, dass du das Level abbrechen '
+                                      'wollen?'),
+                                  elevation: 24,
+                                  shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                                  actions: <Widget>[
+                                    TextButton(
+                                        onPressed: () => {Navigator.pop(context, 'Cancel')},
+                                        child: const Text('Nein')),
+                                    TextButton(
+                                        onPressed: () => {
+                                              flutter_bloc.BlocProvider.of<ReportingBloc>(context)
+                                                  .add(ReportFinishLevelEvent(lvl, false)),
+                                              popUntil()
+                                            },
+                                        child: const Text('Ja')),
+                                  ],
+                                )));
+                      } catch (e) {
+                        FirebaseStore.sendError("closeFABError", stacktrace: e.toString());
+                      }
+                    },
+                  )),
+            ),
+            body: Stack(
+              children: [
+                Card(
+                    margin: const EdgeInsets.all(0),
+                    clipBehavior: Clip.hardEdge,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.zero,
+                    ),
+                    child: UnityWidget(
+                        onUnityCreated: onUnityCreated,
+                        onUnityMessage: onUnityMessage,
+                        onUnitySceneLoaded: onUnitySceneLoaded,
+                        onUnityUnloaded: onUnityUnloaded,
+                        printSetupLog: false,
+                        layoutDirection: TextDirection.ltr,
+                        fullscreen: true,
+                        hideStatus: true)),
+                Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: PointerInterceptor(
+                        child: FloatingActionButton(
+                      heroTag: 'musicFAB',
+                      backgroundColor: Colors.transparent,
+                      elevation: 0.0,
+                      onPressed: () async {
+                        FirebaseStore.sendLog("musicFab", "Music FAB pressed");
+                        try {
+                          SharedPreferences prefs = await SharedPreferences.getInstance();
+                          setState(() {
+                            isMusicOn = !isMusicOn;
+                            prefs.setBool('music', isMusicOn);
+                            changeMusic();
+                          });
+                        } catch (e) {
+                          FirebaseStore.sendError("musicFABError", stacktrace: e.toString());
+                        }
+                      },
+                      child: isMusicOn ? const Icon(Icons.music_note) : const Icon(Icons.music_off),
+                    )),
                   ),
-                  child: UnityWidget(
-                      onUnityCreated: onUnityCreated,
-                      onUnityMessage: onUnityMessage,
-                      onUnitySceneLoaded: onUnitySceneLoaded,
-                      onUnityUnloaded: onUnityUnloaded,
-                      printSetupLog: false,
-                      layoutDirection: TextDirection.ltr,
-                      fullscreen: true,
-                      hideStatus: true)),
-              // Align(
-              //   alignment: Alignment.bottomLeft,
-              //   child: Padding(
-              //     padding: const EdgeInsets.all(30.0),
-              //     child: PointerInterceptor(
-              //         child: FloatingActionButton(
-              //       heroTag: 'musicFAB',
-              //       backgroundColor: Colors.transparent,
-              //       elevation: 0.0,
-              //       onPressed: () async {
-              //         FirebaseStore.sendLog("musicFab", "Music FAB pressed");
-              //       //   try {
-              //       //     SharedPreferences prefs = await SharedPreferences.getInstance();
-              //       //     setState(() {
-              //       //       isMusicOn = !isMusicOn;
-              //       //       prefs.setBool('music', isMusicOn);
-              //       //       changeMusic();
-              //       //     });
-              //       //   } catch (e) {
-              //       //     FirebaseStore.sendError("musicFABError", stacktrace: e.toString());
-              //       //   }
-              //       },
-              //       child: isMusicOn ? const Icon(Icons.disabled_by_default) : const Icon(Icons
-              //           .disabled_by_default_outlined),
-              //     )),
-              //   ),
-              // ),
-            ],
-          ),
-        ));
+                ),
+              ],
+            ),
+          ));
+    } catch (e, s) {
+      print('Caught error: $e');
+      print('Stacktrace: $s');
+      FirebaseStore.sendError(e.toString(), stacktrace: s.toString());
+      return Center(
+        child: Text(
+          'An error occurred, please check the logs for more details. Stacktrace: $s, Error: $e',
+          style: const TextStyle(color: Colors.red),
+        ),
+      );
+    }
   }
 
   void popUntil() {
@@ -250,7 +271,7 @@ class _UnityScreenState extends State<UnityScreen> {
   void gameWon(message) {
     try {
       levelBloc.add(AddLevelEvent(lvl + 1));
-
+      playWonLostMusic(true);
       setState(() {
         fabVisible = false;
       });
@@ -303,6 +324,7 @@ class _UnityScreenState extends State<UnityScreen> {
       setState(() {
         fabVisible = false;
       });
+      playWonLostMusic(false);
       gameOver = true;
       gameBloc.gameOver(0);
       _gameIsOverController.sink.add(false);
@@ -478,19 +500,23 @@ class _UnityScreenState extends State<UnityScreen> {
   }
 
   void changeMusic() async {
-    // try {
-    //   if (!unityReady) {
-    //     print("changeMusicError stacktrace: Unity not ready");
-    //   }
-    //   SharedPreferences prefs = await SharedPreferences.getInstance();
-    //   setState(() {
-    //     isMusicOn = prefs.getBool('music') ?? false;
-    //   });
-    //   print("Music: $isMusicOn");
-    //   postUnityMessage('GameManager', 'Music', isMusicOn.toString());
-    // } catch (e) {
-    //   FirebaseStore.sendError("changeMusicError", stacktrace: e.toString());
-    // }
+    try {
+      if (!unityReady) {
+        print("changeMusicError stacktrace: Unity not ready");
+      }
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      setState(() {
+        isMusicOn = prefs.getBool('music') ?? false;
+      });
+      print("Music: $isMusicOn");
+      if (isMusicOn) {
+        playBackgroundMusic();
+      } else {
+        stopMusic();
+      }
+    } catch (e) {
+      FirebaseStore.sendError("changeMusicError", stacktrace: e.toString());
+    }
   }
 
   void onUnityUnloaded() {
@@ -502,6 +528,29 @@ class _UnityScreenState extends State<UnityScreen> {
       FirebaseStore.sendLog("onUnityUnloaded", "Unity unloaded");
     } catch (e) {
       FirebaseStore.sendError("onUnityUnloadedError", stacktrace: e.toString());
+    }
+  }
+
+  void playBackgroundMusic() async {
+    await backgroundAudio.setAsset('assets/audio/Background_Music.mp3');
+    backgroundAudio.play();
+  }
+
+  void stopMusic() async {
+    await backgroundAudio.stop();
+  }
+
+  void playWonLostMusic(bool won) {
+    stopMusic();
+    if (!isMusicOn) {
+      return;
+    }
+    if (won) {
+      wonLostAudio.setAsset('assets/audio/winning_music.mp3');
+      wonLostAudio.play();
+    } else {
+      wonLostAudio.setAsset('assets/audio/losing_music.mp3');
+      wonLostAudio.play();
     }
   }
 }
