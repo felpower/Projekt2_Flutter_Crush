@@ -25,7 +25,7 @@ namespace Match3 {
 			type = LevelType.Colors;
 			_numObstaclesLeft = numOfObstacles;
 			var obstacles = "";
-			foreach (var obstacle in obstacleTypes) {
+			foreach (var obstacle in obstacleTypes)
 				switch (obstacle) {
 					case ColorType.Red:
 						obstacles += "Rot, ";
@@ -46,7 +46,7 @@ namespace Match3 {
 						obstacles += "Pink, ";
 						break;
 				}
-			}
+
 			obstacles = obstacles.Substring(0, obstacles.Length - 2);
 
 			hud.SetLevelType(type, obstacles);

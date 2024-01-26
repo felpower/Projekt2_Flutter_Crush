@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Match3 {
 	public class ClearablePiece : MonoBehaviour {
@@ -9,9 +8,7 @@ namespace Match3 {
 
 		public bool IsBeingCleared { get; private set; }
 
-		private void Awake() {
-			piece = GetComponent<GamePiece>();
-		}
+		private void Awake() { piece = GetComponent<GamePiece>(); }
 
 		public virtual void Clear(bool includePoints) {
 			piece.GameGridRef.level.OnPieceCleared(piece, includePoints);

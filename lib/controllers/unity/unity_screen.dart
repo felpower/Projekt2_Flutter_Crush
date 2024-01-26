@@ -28,9 +28,9 @@ import '../fortune_wheel/fortune_wheel.dart';
 int coins = 0;
 
 class UnityScreen extends StatefulWidget {
-  const UnityScreen({Key? key, required this.levelNumber}) : super(key: key);
+  const UnityScreen({Key? key, required this.jsonData}) : super(key: key);
 
-  final int levelNumber;
+  final Map<String, dynamic> jsonData;
 
   @override
   State<UnityScreen> createState() => _UnityScreenState();
@@ -93,14 +93,13 @@ class _UnityScreenState extends State<UnityScreen> {
 
   @override
   dispose() {
-    _gameOverSubscription.cancel();
-    unityWidgetController?.pause();
     super.dispose();
+    _gameOverSubscription.cancel();
   }
 
   @override
   Widget build(BuildContext context) {
-    lvl = widget.levelNumber;
+    lvl = widget.jsonData['level'];
     coinBloc = flutter_bloc.BlocProvider.of<CoinBloc>(context);
     return PopScope(
         canPop: false,
@@ -111,12 +110,10 @@ class _UnityScreenState extends State<UnityScreen> {
                 child: FloatingActionButton(
                   heroTag: 'closeFAB',
                   backgroundColor: Colors.transparent,
-                  child: Image.asset(
-                    'assets/images/others/close.png',
-                  ),
+                  child: const Icon(Icons.close, color: Colors.red),
                   onPressed: () {
                     try {
-                      FirebaseStore.sendLog("closeFABError", "Close FAB pressed");
+                      FirebaseStore.sendLog("closeFAB", "Close FAB pressed");
                       showDialog(
                           context: context,
                           builder: (BuildContext context) => PointerInterceptor(
@@ -163,31 +160,33 @@ class _UnityScreenState extends State<UnityScreen> {
                       layoutDirection: TextDirection.ltr,
                       fullscreen: true,
                       hideStatus: true)),
-              Align(
-                alignment: Alignment.bottomLeft,
-                child: Padding(
-                  padding: const EdgeInsets.all(30.0),
-                  child: PointerInterceptor(
-                      child: FloatingActionButton(
-                    heroTag: 'musicFAB',
-                    backgroundColor: Colors.transparent,
-                    elevation: 0.0,
-                    onPressed: () async {
-                      try {
-                        SharedPreferences prefs = await SharedPreferences.getInstance();
-                        setState(() {
-                          isMusicOn = !isMusicOn;
-                          prefs.setBool('music', isMusicOn);
-                          changeMusic();
-                        });
-                      } catch (e) {
-                        FirebaseStore.sendError("musicFABError", stacktrace: e.toString());
-                      }
-                    },
-                    child: isMusicOn ? const Icon(Icons.music_note) : const Icon(Icons.music_off),
-                  )),
-                ),
-              ),
+              // Align(
+              //   alignment: Alignment.bottomLeft,
+              //   child: Padding(
+              //     padding: const EdgeInsets.all(30.0),
+              //     child: PointerInterceptor(
+              //         child: FloatingActionButton(
+              //       heroTag: 'musicFAB',
+              //       backgroundColor: Colors.transparent,
+              //       elevation: 0.0,
+              //       onPressed: () async {
+              //         FirebaseStore.sendLog("musicFab", "Music FAB pressed");
+              //       //   try {
+              //       //     SharedPreferences prefs = await SharedPreferences.getInstance();
+              //       //     setState(() {
+              //       //       isMusicOn = !isMusicOn;
+              //       //       prefs.setBool('music', isMusicOn);
+              //       //       changeMusic();
+              //       //     });
+              //       //   } catch (e) {
+              //       //     FirebaseStore.sendError("musicFABError", stacktrace: e.toString());
+              //       //   }
+              //       },
+              //       child: isMusicOn ? const Icon(Icons.disabled_by_default) : const Icon(Icons
+              //           .disabled_by_default_outlined),
+              //     )),
+              //   ),
+              // ),
             ],
           ),
         ));
@@ -371,7 +370,6 @@ class _UnityScreenState extends State<UnityScreen> {
   // Callback that connects the created controller to the unity controller
   void onUnityCreated(controller) {
     try {
-      FirebaseStore.sendLog("onUnityCreated", controller.toString());
       controller.resume();
       unityWidgetController = controller;
       checkUnityReady();
@@ -382,15 +380,7 @@ class _UnityScreenState extends State<UnityScreen> {
 
   void changeScene() {
     try {
-      Map<String, dynamic> jsonString = {};
-
-      for (var x in gameBloc.levels) {
-        if (x.level == lvl) {
-          jsonString = x.toJson();
-          break;
-        }
-      }
-
+      Map<String, dynamic> jsonString = widget.jsonData;
       String type = jsonString['type'];
       jsonString['powerUp'] = powerUp;
       while (unityWidgetController == null) {
@@ -488,19 +478,19 @@ class _UnityScreenState extends State<UnityScreen> {
   }
 
   void changeMusic() async {
-    try {
-      if (!unityReady) {
-        print("changeMusicError stacktrace: Unity not ready");
-      }
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      setState(() {
-        isMusicOn = prefs.getBool('music') ?? false;
-      });
-      print("Music: $isMusicOn");
-      postUnityMessage('GameManager', 'Music', isMusicOn.toString());
-    } catch (e) {
-      FirebaseStore.sendError("changeMusicError", stacktrace: e.toString());
-    }
+    // try {
+    //   if (!unityReady) {
+    //     print("changeMusicError stacktrace: Unity not ready");
+    //   }
+    //   SharedPreferences prefs = await SharedPreferences.getInstance();
+    //   setState(() {
+    //     isMusicOn = prefs.getBool('music') ?? false;
+    //   });
+    //   print("Music: $isMusicOn");
+    //   postUnityMessage('GameManager', 'Music', isMusicOn.toString());
+    // } catch (e) {
+    //   FirebaseStore.sendError("changeMusicError", stacktrace: e.toString());
+    // }
   }
 
   void onUnityUnloaded() {

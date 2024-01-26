@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Match3.FlutterUnityIntegration.Demo;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 namespace Match3 {
@@ -19,11 +17,12 @@ namespace Match3 {
 
 		public PiecePrefab[] piecePrefabs;
 		public GameObject backgroundPrefab;
+		public GameObject pressedPieceAnimationPrefab;
 		private bool _checkedMoves;
-		private bool _powerupPlaced;
-		private bool _powerupUsed;
 		private GamePiece[,] _checkMovesArray;
 		private IEnumerator _checkMovesCoroutine;
+
+		private GameObject _currentPressedPieceAnimation;
 		private GamePiece _enteredPiece;
 
 		private bool _gameOver;
@@ -31,18 +30,14 @@ namespace Match3 {
 		private bool _inverse;
 
 		private bool _isFirst = true;
+		private Camera _mainCamera;
 
 		private Dictionary<PieceType, GameObject> _piecePrefabDict;
 		private GamePiece[,] _pieces;
+		private bool _powerupPlaced;
+		private bool _powerupUsed;
 
 		private GamePiece _pressedPiece;
-		public GameObject pressedPieceAnimationPrefab;
-
-		public AudioClip winningSound; // The sound to play when the player won the game
-		public AudioClip losingSound; // The sound to play when the player lost the game
-		public AudioClip loopingSound; // The sound to play while the game is playing
-		public AudioClip swapSound; // The sound to play when pieces are swapped
-		public AudioSource audioSource; // The AudioSource component
 
 		private float _scale;
 
@@ -58,14 +53,6 @@ namespace Match3 {
 				_piecePrefabDict.TryAdd(piecePrefabs[i].type, piecePrefabs[i].prefab);
 
 			_timeWhenWeNextDoSomething = Time.time + TimeBetweenDoingSomething;
-			audioSource = GetComponent<AudioSource>();
-
-			audioSource.clip = loopingSound;
-			audioSource.loop = true;
-			if (GameManager.isMusicOn) {
-				audioSource.volume = 0.5f;
-				audioSource.Play();
-			}
 		}
 
 		private void Update() {
@@ -93,9 +80,9 @@ namespace Match3 {
 			var screenRatio = (float)Screen.width / Screen.height;
 			var targetRatio = gridSize / gridSize;
 
-			if (screenRatio >= targetRatio) {
+			if (screenRatio >= targetRatio)
 				_mainCamera.orthographicSize = gridSize / 2;
-			} else {
+			else {
 				var differenceInSize = targetRatio / screenRatio;
 				_mainCamera.orthographicSize = gridSize / 2 * differenceInSize;
 			}
@@ -324,7 +311,7 @@ namespace Match3 {
 			_checkMovesArray = _pieces.Clone() as GamePiece[,];
 
 			for (var row = 0; row < xDim; row++)
-				for (var col = 0; col < yDim; col++) {
+				for (var col = 0; col < yDim; col++)
 					try {
 						// Check horizontal swap
 						if (_checkMovesArray != null) {
@@ -381,7 +368,6 @@ namespace Match3 {
 					} catch (Exception e) {
 						Debug.LogWarning("Check if null-pointer appears here" + e);
 					}
-				}
 
 			return false;
 		}
@@ -437,9 +423,6 @@ namespace Match3 {
 		private void SwapPieces(GamePiece piece1, GamePiece piece2) {
 			if (_gameOver) return;
 			if (!piece1.IsMovable() || !piece2.IsMovable()) return;
-			if (GameManager.isMusicOn) {
-				audioSource.PlayOneShot(swapSound);
-			}
 
 			_pieces[piece1.X, piece1.Y] = piece2;
 			_pieces[piece2.X, piece2.Y] = piece1;
@@ -697,17 +680,13 @@ namespace Match3 {
 		}
 
 		private bool ClearPiece(int x, int y, bool includePoints = true, bool clearBubble = true) {
-			if (_pieces[x, y] == null) {
-				return false;
-			}
+			if (_pieces[x, y] == null) return false;
 
 			if (!_pieces[x, y].IsClearable() || _pieces[x, y].ClearableComponent.IsBeingCleared) return false;
 			_pieces[x, y].ClearableComponent.Clear(includePoints);
 			SpawnNewPiece(x, y, PieceType.Empty);
 
-			if (clearBubble) {
-				ClearObstacles(x, y);
-			}
+			if (clearBubble) ClearObstacles(x, y);
 
 			return true;
 		}
@@ -759,14 +738,7 @@ namespace Match3 {
 						ClearPiece(x, y);
 		}
 
-		public void GameOver(bool gameWon) {
-			if (GameManager.isMusicOn) {
-				audioSource.Stop();
-				audioSource.PlayOneShot(gameWon ? winningSound : losingSound);
-			}
-
-			_gameOver = true;
-		}
+		public void GameOver(bool gameWon) { _gameOver = true; }
 
 
 		public List<GamePiece> GetPiecesOfType(PieceType type) {
@@ -793,9 +765,6 @@ namespace Match3 {
 			return piecesOfColor;
 		}
 
-		private GameObject _currentPressedPieceAnimation;
-		private Camera _mainCamera;
-
 		public void PressPiece(GamePiece piece) {
 			_timeWhenWeNextDoSomething = Time.time + 100f;
 			_pressedPiece = piece;
@@ -803,15 +772,13 @@ namespace Match3 {
 			      _pressedPiece.ColorComponent.Color);
 
 			// If there is an existing PoisonGas, destroy it
-			if (_currentPressedPieceAnimation != null) {
-				Destroy(_currentPressedPieceAnimation);
-			}
+			if (_currentPressedPieceAnimation != null) Destroy(_currentPressedPieceAnimation);
 
 			// Instantiate the PoisonGas Prefab at the position of the pressed piece
 			var position = GetWorldPosition(_pressedPiece.X, _pressedPiece.Y);
 			position.x += 0.5f;
 			position.y -= 0.5f;
-			Vector3 poisonGasPosition = new Vector3(position.x, position.y, .1f);
+			var poisonGasPosition = new Vector3(position.x, position.y, .1f);
 			_currentPressedPieceAnimation =
 				Instantiate(pressedPieceAnimationPrefab, poisonGasPosition, Quaternion.identity);
 
