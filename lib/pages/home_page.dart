@@ -77,7 +77,6 @@ class _HomePageState extends State<HomePage>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    FlutterNativeSplash.remove();
     checkForFirstTimeStart();
     loadMusic();
     playMusic();
@@ -107,6 +106,7 @@ class _HomePageState extends State<HomePage>
     double webWidth = 500;
     double webHeight = 1000;
     double creditPanelWidth = kIsWeb ? webWidth / 4 : screenSize.width / 4;
+    FlutterNativeSplash.remove();
     return Scaffold(
       appBar: AppBar(
         title: const Text('JellyFun'),
@@ -394,7 +394,7 @@ class _HomePageState extends State<HomePage>
                       borderRadius: BorderRadius.circular(12)), // Rounded corners
                 )),
           Visibility(
-              visible: true,
+              visible: false,
               child: SwitchListTile(
                 tileColor: Colors.grey[200],
                 title: const Text('Musik', style: TextStyle(color: Colors.grey)),
@@ -403,7 +403,7 @@ class _HomePageState extends State<HomePage>
                 onChanged: (bool value) {
                   setState(() {
                     isMusicOn = value;
-                    setMusic();
+                    // setMusic();
                   });
                 },
               )),

@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using FlutterUnityIntegration;
+﻿using System;
+using System.Collections;
 using Match3.FlutterUnityIntegration;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Match3 {
@@ -55,10 +54,20 @@ namespace Match3 {
 				}
 
 			scoreText.enabled = true;
+
+			//Cleanup() method for Garbage Collection
 		}
 
-		public void OnReplayClicked() { SceneManager.LoadScene(SceneManager.GetActiveScene().name); }
+		public void Cleanup() {
+			screenParent = null;
+			scoreParent = null;
+			loseText = null;
+			scoreText = null;
+			stars = null;
 
-		public void OnDoneClicked() { UnityMessageManager.Instance.SendMessageToFlutter("Score: " + scoreText.text); }
+			Resources.UnloadUnusedAssets();
+
+			GC.Collect();
+		}
 	}
 }

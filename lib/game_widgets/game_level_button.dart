@@ -6,7 +6,7 @@ import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/d
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/level_bloc/level_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/level_bloc/level_event.dart';
-import 'package:bachelor_flutter_crush/controllers/unity/unity_screen.dart';
+import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,6 +15,7 @@ import 'package:universal_html/html.dart' as html;
 import '../bloc/bloc_provider.dart';
 import '../bloc/game_bloc.dart';
 import '../bloc/reporting_bloc/reporting_bloc.dart';
+import '../controllers/unity/unity_screen.dart';
 
 class GameLevelButton extends StatelessWidget {
   const GameLevelButton(
@@ -114,14 +115,25 @@ class GameLevelButton extends StatelessWidget {
   Future<void> openGame(ReportingBloc reportingBloc, GameBloc gameBloc, SharedPreferences prefs,
       BuildContext context) async {
     reportingBloc.add(ReportStartLevelEvent(levelNumber));
-    audioPlayer.stop();
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => UnityScreen(
-            levelNumber: levelNumber,
-          ),
-        ));
+    Map<String, dynamic>? jsonData;
+    for (var x in gameBloc.levels) {
+      if (x.level == levelNumber) {
+        jsonData = x.toJson();
+        break;
+      }
+    }
+    if (jsonData != null) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => UnityScreen(
+              jsonData: jsonData!,
+            ),
+          ));
+    } else {
+      FirebaseStore.sendError("OpenGameError",
+          extraInfo: "Level $levelNumber not found, jsonData is null");
+    }
   }
 
   void showBuyPowerUpDialog(ReportingBloc reportingBloc, GameBloc gameBloc, LevelBloc levelBloc,

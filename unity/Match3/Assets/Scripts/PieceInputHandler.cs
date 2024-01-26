@@ -1,10 +1,10 @@
-﻿namespace Match3 {
-	using UnityEngine;
+﻿using UnityEngine;
 
+namespace Match3 {
 	public class PieceInputHandler : MonoBehaviour {
-		private Vector2 _startDragPosition;
 		private Vector2 _currentDragPosition;
 		private GameGrid _gameGrid;
+		private Vector2 _startDragPosition;
 		private GamePiece _thisPiece;
 
 		private void Awake() {

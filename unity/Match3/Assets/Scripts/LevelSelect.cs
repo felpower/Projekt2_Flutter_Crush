@@ -1,12 +1,11 @@
 ﻿using System;
-using FlutterUnityIntegration;
 using Match3.FlutterUnityIntegration;
 using UnityEngine;
 
 namespace Match3 {
 	public class LevelSelect : MonoBehaviour {
 		public ButtonPlayerPrefs[] buttons;
-		
+
 		private void Start() {
 			gameObject.AddComponent<UnityMessageManager>();
 			for (var i = 0; i < buttons.Length; i++) {
