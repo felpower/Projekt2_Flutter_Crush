@@ -547,10 +547,9 @@ class _UnityScreenState extends State<UnityScreen> {
     }
     if (won) {
       wonLostAudio.setAsset('assets/audio/winning_music.mp3');
-      wonLostAudio.play();
     } else {
       wonLostAudio.setAsset('assets/audio/losing_music.mp3');
-      wonLostAudio.play();
     }
+    wonLostAudio.play();
   }
 }
