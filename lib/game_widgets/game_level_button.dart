@@ -239,8 +239,7 @@ class GameLevelButton extends StatelessWidget {
 
   void showBuyLevelDialog(LevelBloc levelBloc, CoinBloc coinBloc,
       DarkPatternsState darkPatternsState, BuildContext context) {
-    if (!levelBloc.state.levels.contains(levelNumber - 1) ||
-        darkPatternsState is DarkPatternsDeactivatedState) {
+    if (!levelBloc.state.levels.contains(levelNumber - 1)) {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
