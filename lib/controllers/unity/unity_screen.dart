@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:rxdart/rxdart.dart';
@@ -130,8 +131,8 @@ class _UnityScreenState extends State<UnityScreen> {
                             builder: (BuildContext context) => PointerInterceptor(
                                     child: AlertDialog(
                                   title: const Text('Level abbrechen'),
-                                  content: const Text('Bist du sicher, dass du das Level abbrechen '
-                                      'wollen?'),
+                                  content: const Text(
+                                      'Bist du sicher, dass du das Level abbrechen willst?'),
                                   elevation: 24,
                                   shape: const RoundedRectangleBorder(
                                       borderRadius: BorderRadius.all(Radius.circular(16))),
@@ -436,6 +437,24 @@ class _UnityScreenState extends State<UnityScreen> {
         print("Unity not ready still trying to post message Json");
         FirebaseStore.sendError("postUnityMessageJsonError",
             stacktrace: "Unity not ready still trying to post message Json");
+      }
+      var counter = 0;
+      while (!unityReady) {
+        await Future.delayed(const Duration(seconds: 1));
+        print("Waiting for Unity to be ready");
+        counter++;
+        if (counter >= 5) {
+          // If unityReady is still false after 5 seconds, show a Toast
+          if (!unityReady) {
+            Fluttertoast.showToast(
+              msg: "Unity kann nicht geladen werden. Bitte überprüfe deine Internetverbindung und"
+                  " lade die App neu.",
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.BOTTOM,
+            );
+          }
+          break;
+        }
       }
       unityWidgetController?.postJsonMessage('GameManager', 'LoadScene', jsonString);
     } catch (e) {
