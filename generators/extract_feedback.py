@@ -1,8 +1,8 @@
 import json
-import re
 from datetime import datetime
-import pandas as pd
+
 import firebase_admin
+import pandas as pd
 from firebase_admin import credentials
 from firebase_admin import db
 
@@ -44,6 +44,7 @@ users_data = load_database()['feedback']
 for user_id, user_info in users_data.items():
 	row = {'userId': user_id,
 		   'feedback': user_info.get('info', None),
+		   'timestamp': user_info.get('timestamp', None),
 		   'userAgent': user_info.get('userAgent', None),
 		   'file': user_info.get('fileUrl', None),
 		   'task_completed': False
