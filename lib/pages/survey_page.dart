@@ -202,8 +202,8 @@ class _SurveyPageState extends State<SurveyPage> {
         InstructionStep(
           title: 'Willkommen!',
           text:
-              'Wenn Sie über 18 Jahre alt sind und an der Studie teilnehmen möchten, klicken Sie bitte auf „Ich bin mit der Studienteilnahme einverstanden.“ und bestätigen so Ihr Einverständnis für die Studienteilnahme. ',
-          buttonText: 'Ich bin mit der Studienteilnahme einverstanden.',
+              'Wenn Sie über 18 Jahre alt sind und an der Studie teilnehmen möchten, klicken Sie bitte auf „Weiter“ und bestätigen so Ihr Einverständnis für die Studienteilnahme. ',
+          buttonText: 'weiter',
         ),
         QuestionStep(
           title: 'Wie alt sind Sie?',
@@ -311,7 +311,7 @@ class _SurveyPageState extends State<SurveyPage> {
       navigationRule: ConditionalNavigationRule(
         resultToStepIdentifierMapper: (input) {
           int age = int.parse(input!);
-          if (age < 18 || age > 120) {
+          if (age < 18) {
             return getStepIdentifier(task, "10");
           } else {
             return getStepIdentifier(task, "2");

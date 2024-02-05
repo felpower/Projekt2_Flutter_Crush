@@ -19,8 +19,7 @@ import 'package:universal_html/js.dart' as js;
 
 void main() async {
   runZonedGuarded(() async {
-    WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+    WidgetsFlutterBinding.ensureInitialized();
     usePathUrlStrategy();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     FlutterError.onError = (FlutterErrorDetails details) {
