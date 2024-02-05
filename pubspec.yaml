@@ -76,7 +76,7 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/icons/tile.png"
+  image_path: "assets/icons/favicon-32x32.png"
   remove_alpha_ios: true
 
 flutter:

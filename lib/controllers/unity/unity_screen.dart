@@ -74,7 +74,8 @@ class _UnityScreenState extends State<UnityScreen> {
       WidgetsBinding.instance.addPostFrameCallback(_showGameStartSplash);
       loadCoins();
       levelBloc = flutter_bloc.BlocProvider.of<LevelBloc>(context);
-      darkPatternsBloc = flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context);
+      darkPatternsBloc =
+          flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context);
     } catch (e, s) {
       print('Caught error: $e');
       print('Stacktrace: $s');
@@ -128,29 +129,36 @@ class _UnityScreenState extends State<UnityScreen> {
                         FirebaseStore.sendLog("closeFAB", "Close FAB pressed");
                         showDialog(
                             context: context,
-                            builder: (BuildContext context) => PointerInterceptor(
+                            builder: (BuildContext context) =>
+                                PointerInterceptor(
                                     child: AlertDialog(
                                   title: const Text('Level abbrechen'),
                                   content: const Text(
                                       'Bist du sicher, dass du das Level abbrechen willst?'),
                                   elevation: 24,
                                   shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(16))),
                                   actions: <Widget>[
                                     TextButton(
-                                        onPressed: () => {Navigator.pop(context, 'Cancel')},
+                                        onPressed: () =>
+                                            {Navigator.pop(context, 'Cancel')},
                                         child: const Text('Nein')),
                                     TextButton(
                                         onPressed: () => {
-                                              flutter_bloc.BlocProvider.of<ReportingBloc>(context)
-                                                  .add(ReportFinishLevelEvent(lvl, false)),
+                                              flutter_bloc.BlocProvider.of<
+                                                      ReportingBloc>(context)
+                                                  .add(ReportFinishLevelEvent(
+                                                      lvl, false)),
+                                              setLevelFinished(),
                                               popUntil()
                                             },
                                         child: const Text('Ja')),
                                   ],
                                 )));
                       } catch (e) {
-                        FirebaseStore.sendError("closeFABError", stacktrace: e.toString());
+                        FirebaseStore.sendError("closeFABError",
+                            stacktrace: e.toString());
                       }
                     },
                   )),
@@ -184,17 +192,21 @@ class _UnityScreenState extends State<UnityScreen> {
                       onPressed: () async {
                         FirebaseStore.sendLog("musicFab", "Music FAB pressed");
                         try {
-                          SharedPreferences prefs = await SharedPreferences.getInstance();
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
                           setState(() {
                             isMusicOn = !isMusicOn;
                             prefs.setBool('music', isMusicOn);
                             changeMusic();
                           });
                         } catch (e) {
-                          FirebaseStore.sendError("musicFABError", stacktrace: e.toString());
+                          FirebaseStore.sendError("musicFABError",
+                              stacktrace: e.toString());
                         }
                       },
-                      child: isMusicOn ? const Icon(Icons.music_note) : const Icon(Icons.music_off),
+                      child: isMusicOn
+                          ? const Icon(Icons.music_note)
+                          : const Icon(Icons.music_off),
                     )),
                   ),
                 ),
@@ -229,7 +241,8 @@ class _UnityScreenState extends State<UnityScreen> {
               child: coins > shufflePrice
                   ? AlertDialog(
                       title: const Text('Keine Züge mehr möglich'),
-                      content: Text('Willst du $shufflePrice Münzen ausgeben für einen Shuffle? '
+                      content: Text(
+                          'Willst du $shufflePrice Münzen ausgeben für einen Shuffle? '
                           'Aktuell hast du $coins Münzen'),
                       elevation: 24,
                       shape: const RoundedRectangleBorder(
@@ -237,7 +250,8 @@ class _UnityScreenState extends State<UnityScreen> {
                       actions: <Widget>[
                         TextButton(
                             onPressed: () => {
-                                  postUnityMessage('Level', 'ShufflePieces', "ShufflePieces"),
+                                  postUnityMessage('Level', 'ShufflePieces',
+                                      "ShufflePieces"),
                                   Navigator.pop(context, 'Cancel'),
                                   coinBloc.add(RemoveCoinsEvent(shufflePrice)),
                                   loadCoins()
@@ -253,16 +267,19 @@ class _UnityScreenState extends State<UnityScreen> {
                     )
                   : AlertDialog(
                       title: const Text('Keine Züge mehr möglich'),
-                      content:
-                          Text('Du hast nicht genügend Münzen $shufflePrice für einen Shuffle? '
-                              'Du hast aktuell '
-                              '$coins Münzen. Das Spiel ist vorbei'),
+                      content: Text(
+                          'Du hast nicht genügend Münzen $shufflePrice für einen Shuffle? '
+                          'Du hast aktuell '
+                          '$coins Münzen. Das Spiel ist vorbei'),
                       elevation: 24,
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(16))),
                       actions: <Widget>[
                         TextButton(
-                            onPressed: () => {star > 0 ? gameWon(star) : gameLost(), popUntil()},
+                            onPressed: () => {
+                                  star > 0 ? gameWon(star) : gameLost(),
+                                  popUntil()
+                                },
                             child: const Text('OK')),
                       ],
                     )));
@@ -271,6 +288,7 @@ class _UnityScreenState extends State<UnityScreen> {
 
   void gameWon(message) {
     try {
+      setLevelFinished();
       levelBloc.add(AddLevelEvent(lvl + 1));
       playWonLostMusic(true);
       setState(() {
@@ -316,12 +334,14 @@ class _UnityScreenState extends State<UnityScreen> {
         ));
       });
     } catch (e) {
-      FirebaseStore.sendError("showFortuneWheelError", stacktrace: e.toString());
+      FirebaseStore.sendError("showFortuneWheelError",
+          stacktrace: e.toString());
     }
   }
 
   void gameLost() {
     try {
+      setLevelFinished();
       setState(() {
         fabVisible = false;
       });
@@ -363,7 +383,8 @@ class _UnityScreenState extends State<UnityScreen> {
         shuffleDialog();
         return;
       } else if (message.startsWith("GameOver: Won") && !gameOver) {
-        flutter_bloc.BlocProvider.of<ReportingBloc>(context).add(ReportFinishLevelEvent(lvl, true));
+        flutter_bloc.BlocProvider.of<ReportingBloc>(context)
+            .add(ReportFinishLevelEvent(lvl, true));
         gameWon(message);
       } else if (message.startsWith("GameOver: Lost") && !gameOver) {
         flutter_bloc.BlocProvider.of<ReportingBloc>(context)
@@ -427,7 +448,8 @@ class _UnityScreenState extends State<UnityScreen> {
       }
       unityWidgetController?.postMessage(gameObject, methodName, message);
     } catch (e) {
-      FirebaseStore.sendError("postUnityMessageError", stacktrace: e.toString());
+      FirebaseStore.sendError("postUnityMessageError",
+          stacktrace: e.toString());
     }
   }
 
@@ -443,11 +465,12 @@ class _UnityScreenState extends State<UnityScreen> {
         await Future.delayed(const Duration(seconds: 1));
         print("Waiting for Unity to be ready");
         counter++;
-        if (counter >= 5) {
+        if (counter >= 15) {
           // If unityReady is still false after 5 seconds, show a Toast
           if (!unityReady) {
             Fluttertoast.showToast(
-              msg: "Unity kann nicht geladen werden. Bitte überprüfe deine Internetverbindung und"
+              msg:
+                  "Unity kann nicht geladen werden. Bitte überprüfe deine Internetverbindung und"
                   " lade die App neu.",
               toastLength: Toast.LENGTH_LONG,
               gravity: ToastGravity.BOTTOM,
@@ -456,16 +479,19 @@ class _UnityScreenState extends State<UnityScreen> {
           break;
         }
       }
-      unityWidgetController?.postJsonMessage('GameManager', 'LoadScene', jsonString);
+      unityWidgetController?.postJsonMessage(
+          'GameManager', 'LoadScene', jsonString);
     } catch (e) {
-      FirebaseStore.sendError("postUnityMessageJsonError", stacktrace: e.toString());
+      FirebaseStore.sendError("postUnityMessageJsonError",
+          stacktrace: e.toString());
     }
   }
 
   void checkUnityReady() async {
     while (!unityReady) {
       try {
-        unityWidgetController?.postMessage('GameManager', 'CheckReady', 'checkReady');
+        unityWidgetController?.postMessage(
+            'GameManager', 'CheckReady', 'checkReady');
         print("Check Unity is Ready");
       } catch (e) {
         print("Unity is not Ready");
@@ -475,6 +501,7 @@ class _UnityScreenState extends State<UnityScreen> {
   }
 
   void showGameOver(bool success) async {
+    setLevelFinished();
     try {
       if (_gameOverReceived) {
         return;
@@ -514,7 +541,8 @@ class _UnityScreenState extends State<UnityScreen> {
           });
       Overlay.of(context).insert(_gameSplash);
     } catch (e) {
-      FirebaseStore.sendError("showGameStartSplashError", stacktrace: e.toString());
+      FirebaseStore.sendError("showGameStartSplashError",
+          stacktrace: e.toString());
     }
   }
 
@@ -558,6 +586,11 @@ class _UnityScreenState extends State<UnityScreen> {
   void stopMusic() async {
     await backgroundAudio.stop();
   }
+
+  void setLevelFinished() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("levelStarted", "-1");
+  } //ToDo: Implement levelStarted feature on home_page, in order to reload the unity screen if the app crashes and levelStarted != -1, maybe change to String in order to also load spent jellies
 
   void playWonLostMusic(bool won) {
     stopMusic();
