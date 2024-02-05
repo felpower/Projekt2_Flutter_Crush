@@ -215,7 +215,7 @@ class _SurveyPageState extends State<SurveyPage> {
           isOptional: false,
         ),
         QuestionStep(
-            title: "Welches Geschlecht haben Sie",
+            title: "Welches Geschlecht haben Sie?",
             stepIdentifier: StepIdentifier(id: '2'),
             answerFormat: const SingleChoiceAnswerFormat(
               textChoices: [
