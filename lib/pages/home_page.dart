@@ -16,7 +16,6 @@ import 'package:bachelor_flutter_crush/services/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:universal_html/html.dart' as html;
 
@@ -640,16 +639,6 @@ class _HomePageState extends State<HomePage>
         prefs.setString("levelStarted", "0");
         print("jsonData: $jsonData");
         if (jsonData != null) {
-          Fluttertoast.showToast(
-              msg: "Level $level wird in 2 Sekunden neugestartet",
-              toastLength: Toast.LENGTH_LONG,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 5,
-              backgroundColor: Colors.black,
-              textColor: Colors.white,
-              fontSize: 16.0);
-          await Future.delayed(const Duration(seconds: 2));
-
           FirebaseStore.sendLog("RestartGame", "Level $level");
 
           Navigator.push(

@@ -197,7 +197,7 @@ class FirebaseStore {
     if (hostname.contains('felpower') || hostname.contains('localhost')) {
       version = "testVersion-";
     }
-    return "${version}V02-";
+    return "${version}V03-";
   }
 
   static Future<void> sendLog(String log, message) async {
