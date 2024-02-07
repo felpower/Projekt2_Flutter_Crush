@@ -33,7 +33,6 @@ import '../gamification_widgets/credit_panel.dart';
 import '../helpers/app_colors.dart';
 import 'feedback_page.dart';
 import 'finished_survey_page.dart';
-import 'gdpr_banner.dart';
 import 'high_score_page.dart';
 import 'info_page.dart';
 import 'under_18_page.dart';
@@ -327,14 +326,6 @@ class _HomePageState extends State<HomePage>
                     ],
                   ),
                 ),
-              ),
-            ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Material(
-                child: GdprBanner(),
               ),
             ),
           ],
