@@ -1,9 +1,11 @@
 // ignore_for_file: avoid_print
+import 'package:bachelor_flutter_crush/bloc/user_state_bloc/coins_bloc/coin_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
 import '../bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_bloc.dart';
 import '../bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
 
@@ -149,10 +151,15 @@ class ShopState extends State<ShopPage> {
         xp = xp + 50;
       });
     }
+
+    // Get the CoinBloc
+    CoinBloc coinBloc = flutter_bloc.BlocProvider.of<CoinBloc>(context);
+    // Subtract the cost from the user's coins and emit a new state
+    coinBloc.add(RemoveCoinsEvent(shopItems[index].cost));
+
     setState(() {
       coins -= shopItems[index].cost; // Subtract the cost from the user's coins
     });
-    sp.setInt('coin', coins); // Update the user's coins in SharedPreferences
 
     // Show a toast message with the name of the item bought and the new amount of coins
     Fluttertoast.showToast(

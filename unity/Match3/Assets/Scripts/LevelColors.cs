@@ -75,7 +75,10 @@ namespace Match3 {
 
 				currentScore += ScorePerPieceCleared * (numMoves - _movesUsed);
 				hud.SetScore(currentScore);
-				GameWin();
+				// Check if the current score is greater than or equal to score1Star
+				if (currentScore >= score1Star) {
+					GameWin();
+				}
 			}
 		}
 	}

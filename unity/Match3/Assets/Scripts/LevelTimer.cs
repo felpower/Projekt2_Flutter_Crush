@@ -19,7 +19,7 @@ namespace Match3 {
 				timeInSeconds = sceneInfo.timeInSeconds;
 			}
 
-			hud.SetTarget(targetScore);
+			hud.SetTarget(score1Star);
 			hud.SetRemaining($"{timeInSeconds / 60}:{timeInSeconds % 60:00}");
 		}
 
