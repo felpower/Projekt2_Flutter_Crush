@@ -70,7 +70,6 @@ public static class XcodePostBuild
         var targetGuid = pbx.GetUnityFrameworkTargetGuid();
         var projGuid = pbx.ProjectGuid();
 
-        // TODO: Rex optional set this value
         // Set skip_install to NO
         pbx.SetBuildProperty(targetGuid, "SKIP_INSTALL", "YES");
 

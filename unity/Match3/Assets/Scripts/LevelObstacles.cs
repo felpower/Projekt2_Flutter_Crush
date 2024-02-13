@@ -49,7 +49,10 @@
 
 				currentScore += ScorePerPieceCleared * (numMoves - _movesUsed);
 				hud.SetScore(currentScore);
-				GameWin();
+
+				if (currentScore >= score1Star) {
+					GameWin();
+				}
 			}
 		}
 	}

@@ -8,10 +8,10 @@ class FinishedSurveyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     checkSharedPreferences();
     return PopScope(
-        canPop: true, //ToDo: change to false
+        canPop: false,
         child: Scaffold(
             appBar: AppBar(
-              automaticallyImplyLeading: true, //ToDo: change to false
+              automaticallyImplyLeading: false,
               title: const Text('Vielen Dank für Ihre Teilnahme! '),
             ),
             body: const Column(

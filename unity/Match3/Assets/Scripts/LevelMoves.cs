@@ -16,7 +16,7 @@
 				targetScore = sceneInfo.targetScore;
 			}
 
-			hud.SetTarget(targetScore);
+			hud.SetTarget(score1Star);
 			hud.SetRemaining(numMoves);
 		}
 
