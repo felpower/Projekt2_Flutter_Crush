@@ -27,7 +27,7 @@
 
 			if (numMoves - _movesUsed != 0) return;
 
-			if (currentScore >= targetScore)
+			if (currentScore >= score1Star)
 				GameWin();
 			else
 				GameLose();

@@ -28,7 +28,13 @@
 
 			hud.SetRemaining(numMoves - _movesUsed);
 
-			if (numMoves - _movesUsed == 0 && _numObstaclesLeft > 0) GameLose();
+			if (numMoves - _movesUsed <= 0) {
+				if (_numObstaclesLeft > 0 || currentScore < score1Star) {
+					GameLose();
+				} else if (currentScore >= score1Star) {
+					GameWin();
+				}
+			}
 		}
 
 		public override void SetNumOfObstacles() {
@@ -45,12 +51,12 @@
 
 				_numObstaclesLeft--;
 				hud.SetTarget(_numObstaclesLeft);
-				if (_numObstaclesLeft != 0) continue;
+				if (_numObstaclesLeft > 0) continue;
 
 				currentScore += ScorePerPieceCleared * (numMoves - _movesUsed);
 				hud.SetScore(currentScore);
 
-				if (currentScore >= score1Star) {
+				if (currentScore >= score3Star) { 
 					GameWin();
 				}
 			}
