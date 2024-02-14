@@ -28,6 +28,10 @@
 
 			hud.SetRemaining(numMoves - _movesUsed);
 
+			if (_numObstaclesLeft <= 0 && currentScore >= score3Star) {
+				GameWin();
+			}
+
 			if (numMoves - _movesUsed <= 0) {
 				if (_numObstaclesLeft > 0 || currentScore < score1Star) {
 					GameLose();
@@ -56,7 +60,7 @@
 				currentScore += ScorePerPieceCleared * (numMoves - _movesUsed);
 				hud.SetScore(currentScore);
 
-				if (currentScore >= score3Star) { 
+				if (currentScore >= score3Star) {
 					GameWin();
 				}
 			}
