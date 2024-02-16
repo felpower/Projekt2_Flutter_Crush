@@ -35,7 +35,7 @@
 			if (numMoves - _movesUsed <= 0) {
 				if (_numObstaclesLeft > 0 || currentScore < score1Star) {
 					GameLose();
-				} else if (currentScore >= score1Star) {
+				} else {
 					GameWin();
 				}
 			}

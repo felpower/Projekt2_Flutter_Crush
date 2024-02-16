@@ -31,7 +31,6 @@ class DeviceHelper {
   static Future<bool> isMobile() async {
     // DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
     // var userAgent = (await deviceInfoPlugin.webBrowserInfo).userAgent!;
-    FirebaseStore.sendUserAgent(website: true);
     return true;
     // if (userAgent.contains("Mobi") ||
     //     userAgent.contains("Android") ||

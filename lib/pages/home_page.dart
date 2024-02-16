@@ -415,7 +415,8 @@ class _HomePageState extends State<HomePage>
               )),
           Visibility(
             visible: Uri.parse(html.window.location.href).host.contains('felpower') ||
-                Uri.parse(html.window.location.href).host.contains('localhost'),
+                Uri.parse(html.window.location.href).host.contains('localhost') ||
+                Uri.parse(html.window.location.href).host.contains('flutter'),
             child: ListTile(
               leading: const Icon(Icons.feedback),
               title: const Text('Feedback senden', style: TextStyle(color: Colors.grey)),
