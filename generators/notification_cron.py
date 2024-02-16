@@ -40,7 +40,7 @@ def send_message(key):
 		token=key,
 		notification=messaging.Notification(
 			title="JellyFun",
-			body="Das ist eine TestNotification, in den nächsten Tagen kann es vermehrt zu Test Notifications kommen."
+			body="Hallo! Hast du heute schon gespielt?"
 		)
 	)
 	response = messaging.send(message)
@@ -62,7 +62,11 @@ def update_database(token_info):
 	# Update the user's data in the database
 	now = datetime.now()
 	# Update the user's data in the database
-	user_ref = db.reference('/users/' + token_info['user_id'])
+	user_id_flutter = token_info['user_id']
+	if user_id_flutter.startswith("flutter"):
+		user_ref = db.reference('/flutter/' + token_info['user_id'])
+	else:
+		user_ref = db.reference('/users/' + token_info['user_id'])
 	user_ref.child('notification_sent').push().set(str(now))
 
 
