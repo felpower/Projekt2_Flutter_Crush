@@ -24,15 +24,27 @@ def extract_token(s):
 	return extracted_token
 
 
-users_data = load_database()['users']
-tokens = []
+database = load_database()
+
+users_data = database['users']
+user_tokens = []
 for user_id, user_info in users_data.items():
 	token_field = user_info.get('pushToken', None)
 	dark_patterns = int(user_info.get('darkPatterns', 0)) if user_info.get('darkPatterns') is not None else 0
 	if token_field:
 		last_token = extract_token(list(token_field.values())[-1])
 		if last_token is not None:
-			tokens.append({'user_id': user_id, 'token': last_token, 'dark_patterns': dark_patterns})
+			user_tokens.append({'user_id': user_id, 'token': last_token, 'dark_patterns': dark_patterns})
+
+flutter_data = database['flutter']
+flutter_tokens = []
+for user_id, user_info in flutter_data.items():
+	token_field = user_info.get('pushToken', None)
+	dark_patterns = int(user_info.get('darkPatterns', 0)) if user_info.get('darkPatterns') is not None else 0
+	if token_field:
+		last_token = extract_token(list(token_field.values())[-1])
+		if last_token is not None:
+			flutter_tokens.append({'user_id': user_id, 'token': last_token, 'dark_patterns': dark_patterns})
 
 
 def send_message(key):
@@ -49,7 +61,17 @@ def send_message(key):
 
 
 def send_notification():
-	for token_info in tokens:
+	for token_info in user_tokens:
+		try:
+			if token_info['dark_patterns'] > 0:
+				send_message(token_info['token'])
+				update_database(token_info)
+		except Exception as e:
+			print('Failed to send message:', e)
+
+
+def send_flutter_notification():
+	for token_info in flutter_tokens:
 		try:
 			if token_info['dark_patterns'] > 0:
 				send_message(token_info['token'])
@@ -64,9 +86,9 @@ def update_database(token_info):
 	# Update the user's data in the database
 	user_id_flutter = token_info['user_id']
 	if user_id_flutter.startswith("flutter"):
-		user_ref = db.reference('/flutter/' + token_info['user_id'])
+		user_ref = db.reference('/flutter/' + user_id_flutter)
 	else:
-		user_ref = db.reference('/users/' + token_info['user_id'])
+		user_ref = db.reference('/users/' + user_id_flutter)
 	user_ref.child('notification_sent').push().set(str(now))
 
 
@@ -79,7 +101,8 @@ def send_single_notification(token=None):
 		print('Failed to send message:', e)
 
 
-send_notification()
+# send_notification()
+send_flutter_notification()
 # send_single_notification(
 # 	"cKnK2BUXptXBbl1JJY5BB5:APA91bFDGSFJXWXrVigqIvlKamKkuL4U1OI87i58-FqjucZTqFGXKZqFxtcPfRWp5ZyWKD4lN_3dU6AeWP3Qfr8-zS_9Q7AKyp5NoTlBKe7z0yf0L_6p1kYJgCKVDhUW95V9BQAKutGg"
 # )
