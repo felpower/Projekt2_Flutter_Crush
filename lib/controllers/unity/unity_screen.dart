@@ -125,7 +125,6 @@ class _UnityScreenState extends State<UnityScreen> {
                     child: const Icon(Icons.close, color: Colors.red),
                     onPressed: () {
                       try {
-                        FirebaseStore.sendLog("closeFAB", "Close FAB pressed");
                         showDialog(
                             context: context,
                             builder: (BuildContext context) => PointerInterceptor(
@@ -183,7 +182,6 @@ class _UnityScreenState extends State<UnityScreen> {
                       backgroundColor: Colors.transparent,
                       elevation: 0.0,
                       onPressed: () async {
-                        FirebaseStore.sendLog("musicFab", "Music FAB pressed");
                         try {
                           SharedPreferences prefs = await SharedPreferences.getInstance();
                           setState(() {
@@ -247,6 +245,9 @@ class _UnityScreenState extends State<UnityScreen> {
                         TextButton(
                             onPressed: () => {
                                   star > 0 ? gameWon(star) : gameLost(),
+                                  star > 0
+                                      ? FirebaseStore.addFinishOfLevel(lvl, true)
+                                      : FirebaseStore.addFinishOfLevel(lvl, false),
                                   Navigator.of(context).pop()
                                 },
                             child: const Text('Spiel vorbei')),
@@ -263,7 +264,13 @@ class _UnityScreenState extends State<UnityScreen> {
                           borderRadius: BorderRadius.all(Radius.circular(16))),
                       actions: <Widget>[
                         TextButton(
-                            onPressed: () => {star > 0 ? gameWon(star) : gameLost(), popUntil()},
+                            onPressed: () => {
+                                  star > 0 ? gameWon(star) : gameLost(),
+                                  star > 0
+                                      ? FirebaseStore.addFinishOfLevel(lvl, true)
+                                      : FirebaseStore.addFinishOfLevel(lvl, false),
+                                  popUntil()
+                                },
                             child: const Text('OK')),
                       ],
                     )));
@@ -548,7 +555,6 @@ class _UnityScreenState extends State<UnityScreen> {
         return;
       }
       unityWidgetController!.pause();
-      FirebaseStore.sendLog("onUnityUnloaded", "Unity unloaded");
     } catch (e) {
       FirebaseStore.sendError("onUnityUnloadedError", stacktrace: e.toString());
     }

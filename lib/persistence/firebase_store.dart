@@ -105,6 +105,8 @@ class FirebaseStore {
     DatabaseReference ref;
     if (kDebugMode) {
       ref = database.ref("debug/$userId");
+    } else if (userId.contains('flutter')) {
+      ref = database.ref("flutter/$userId");
     } else {
       ref = database.ref("users/$userId");
     }
@@ -121,6 +123,8 @@ class FirebaseStore {
     DatabaseReference ref;
     if (kDebugMode) {
       ref = database.ref("debug/$userId");
+    } else if (userId.contains('flutter')) {
+      ref = database.ref("flutter/$userId");
     } else {
       ref = database.ref("users/$userId");
     }
@@ -197,7 +201,10 @@ class FirebaseStore {
     if (hostname.contains('felpower') || hostname.contains('localhost')) {
       version = "testVersion-";
     }
-    return "${version}V03-";
+    if (hostname.contains('flutter')) {
+      version = "flutter-";
+    }
+    return "${version}V04-";
   }
 
   static Future<void> sendLog(String log, message) async {
