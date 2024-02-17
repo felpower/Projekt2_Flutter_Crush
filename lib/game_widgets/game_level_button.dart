@@ -250,8 +250,8 @@ class GameLevelButton extends StatelessWidget {
           builder: (BuildContext context) => AlertDialog(
                 title: const Text(
                     'Nicht genug Münzen um dieses Sonderjelly zu kaufen'),
-                content: const Text(
-                    'Du kannst Münzen durch Spielen der Levels erhalten'),
+                content: Text(
+                    'Du kannst Münzen durch Spielen der Levels erhalten, du benötigst $powerUpPrice\$ um dieses Sonderjelly zu kaufen'),
                 elevation: 24,
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(16))),
@@ -298,8 +298,9 @@ class GameLevelButton extends StatelessWidget {
                         onPressed: () => {Navigator.pop(context, 'Cancel')},
                         child: const Text('Abbrechen')),
                     TextButton(
-                      onPressed: () =>
-                          buyLevel(coinBloc, levelBloc, 'Ok', context),
+                      onPressed: () => {
+                        FirebaseStore.addLevelBought(levelNumber),
+                        buyLevel(coinBloc, levelBloc, 'Ok', context),},
                       child: const Text('OK'),
                     )
                   ],
@@ -307,8 +308,8 @@ class GameLevelButton extends StatelessWidget {
               : AlertDialog(
                   title: const Text(
                       'Du hast nicht genug Münzen um dieses Level freizuschalten'),
-                  content: const Text(
-                      'Du kannst Münzen durch Spielen der Levels erhalten'),
+                  content: Text(
+                      'Du kannst Münzen durch Spielen der Levels erhalten, du benötigst $lvlPrice\$ um dieses Level freizuschalten'),
                   elevation: 24,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(16))),
