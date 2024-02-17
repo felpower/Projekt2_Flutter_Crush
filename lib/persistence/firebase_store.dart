@@ -23,7 +23,7 @@ class FirebaseStore {
   static const String startOfLevel = 'startOfLevel';
   static const String finishOfLevel = 'finishOfLevel';
   static const String checkHighScoreTime = 'checkHighScoreTime';
-
+  static const String levelBought = 'levelBought';
   static const String collectDailyRewardsTime = 'collectDailyRewardsTime';
   static const String appStartDate = 'appStartDate';
   static const String initAppStartTime = 'initAppStartTime';
@@ -31,11 +31,11 @@ class FirebaseStore {
   static const String appCloseTime = 'appCloseTime';
   static const String pushClick = 'pushClick';
   static const String startSurvey = 'startSurvey';
-
   static const String endSurvey = 'endSurvey';
   static const String userDeleted = 'userDeleted';
   static const String completeUserData = 'completeUserData';
   static const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+
   static final Random _rnd = Random();
 
   static Future<void> init() async {
@@ -98,6 +98,10 @@ class FirebaseStore {
 
   static void sendUserDeleted() async {
     await _updateDocument(userDeleted, 'User deleted');
+  }
+
+  static void addLevelBought(int levelNumber) async {
+    await _updateDocument(levelBought, 'Level: $levelNumber, Time: ${DateTime.now()}');
   }
 
   static Future<void> _updateDocument(String documentPropertyName, String information) async {

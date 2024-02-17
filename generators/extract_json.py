@@ -74,6 +74,9 @@ for user_id, user_info in users_data.items():
 		'finishOfLevelTime': "",
 		'finishOfLevelDate': "",
 		'levelWon': "",
+		'levelBought': "",
+		'levelBoughtTime': "",
+		'levelBoughtDate': "",
 		'collectDailyRewardsTime': "",
 		'collectDailyRewardsDate': "",
 		'checkHighscoreTime': "",
@@ -202,6 +205,20 @@ for user_id, user_info in users_data.items():
 	row['levelWon'] = ""
 	row['finishOfLevelTime'] = ""
 	row['finishOfLevelDate'] = ""
+
+	level_bought = user_info.get('levelBought', None)
+	if level_bought:
+		for levels_bought in level_bought.values():
+			level, time = levels_bought.split(', ')
+			extracted_date_time = extract_date_time(time)
+			row['levelBought'] = int(''.join(filter(str.isdigit, level)))
+			row['levelBoughtTime'] = str(extracted_date_time[1])
+			row['levelBoughtDate'] = str(extracted_date_time[0])
+			processed_data.append(row.copy())
+
+	row['levelBought'] = ""
+	row['levelBoughtTime'] = ""
+	row['levelBoughtDate'] = ""
 
 	# Processing 'collectDailyReward'
 	daily_rewards = user_info.get('collectDailyRewardsTime', None)

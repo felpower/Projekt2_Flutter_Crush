@@ -59,7 +59,13 @@ namespace Match3 {
 			_movesUsed++;
 
 			hud.SetRemaining(numMoves - _movesUsed);
-			if (numMoves - _movesUsed == 0 && _numObstaclesLeft > 0) GameLose();
+			if (numMoves - _movesUsed <= 0) {
+				if (_numObstaclesLeft > 0 || currentScore < score1Star) {
+					GameLose();
+				} else {
+					GameWin();
+				}
+			}
 		}
 
 		public override void OnPieceCleared(GamePiece piece, bool includePoints) {
@@ -76,7 +82,7 @@ namespace Match3 {
 				currentScore += ScorePerPieceCleared * (numMoves - _movesUsed);
 				hud.SetScore(currentScore);
 				// Check if the current score is greater than or equal to score1Star
-				if (currentScore >= score1Star) {
+				if (currentScore >= score3Star) {
 					GameWin();
 				}
 			}
