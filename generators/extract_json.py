@@ -51,9 +51,15 @@ else:
 		users_data = load_database()['users']
 	else:
 		users_data = load_json_file()['users']
-
 userCounter = 1
+inactive_users_data = []
+# Total number of users
+total_users = len(users_data)
+
+# Counter for inactive users starts from the total number of users
+inactive_user_counter = total_users
 for user_id, user_info in users_data.items():
+
 	row = {
 		'counter': userCounter,
 		'userId': user_id,
@@ -296,8 +302,35 @@ for user_id, user_info in users_data.items():
 				elif identifier == 12:
 					row['comments'] = answer
 			processed_data.append(row.copy())
-	userCounter += 1
-	processed_data.append({})
+
+	# Check if the user has any activity other than just opening the app
+	has_activity = any(
+		key in user_info for key in
+		['initAppStartTime', 'initAppStartDate', 'appStartDate''initAppStartTime', 'initAppStartDate', 'appStartTime',
+		 'appStartDate', 'levelStart', 'startOfLevelTime', 'startOfLevelDate', 'levelFinish', 'finishOfLevelTime',
+		 'finishOfLevelDate', 'levelWon', 'collectDailyRewardsTime', 'collectDailyRewardsDate', 'checkHighscoreTime',
+		 'checkHighscoreDate', 'pushClickTime', 'pushClickDate', 'notification_sent_time', 'notification_sent_date',
+		 'appCloseTime', 'appCloseDate', ])
+
+	# If the user has no other activity, add their data to the separate list and continue to the next user
+	if not has_activity:
+		inactive_users_data.append({
+			'counter': inactive_user_counter,
+			'userId': user_id,
+			'initAppStartTime': "",
+			'initAppStartDate': "",
+			'appStartTime': "",
+			'appStartDate': "",
+			'appCloseTime': "",
+			'appCloseDate': "",
+		})
+		inactive_user_counter -= 1
+	else:
+		userCounter += 1
+		processed_data.append({})
+
+# After processing all users, append the data of inactive users to the end of your main processed data list
+processed_data.extend(inactive_users_data)
 
 # Converting the processed data into a DataFrame
 processed_df = pd.DataFrame(processed_data)
