@@ -42,11 +42,15 @@ def load_json_file():
 
 use_database = True
 # Access the 'users' data
+use_flutter = True
 user_data = {}
-if use_database:
-	users_data = load_database()['users']
+if use_flutter:
+	users_data = load_database()['flutter']
 else:
-	users_data = load_json_file()['users']
+	if use_database:
+		users_data = load_database()['users']
+	else:
+		users_data = load_json_file()['users']
 
 userCounter = 1
 for user_id, user_info in users_data.items():
@@ -141,7 +145,12 @@ for user_id, user_info in users_data.items():
 	if start_of_level:
 		for levels in start_of_level.values():
 			level, time = levels.split(', ')
-			start_times[level] = extract_date_time(time)
+			# If the level is already in the dictionary, append the new start time
+			if level in start_times:
+				start_times[level].append(extract_date_time(time))
+			# If the level is not in the dictionary, create a new list with the start time
+			else:
+				start_times[level] = [extract_date_time(time)]
 
 	# Processing 'finishOfLevel'
 	finish_of_level = user_info.get('finishOfLevel', None)
@@ -152,26 +161,33 @@ for user_id, user_info in users_data.items():
 				levels = levels[:comma_index] + "," + levels[comma_index:]
 			level, won, time = levels.split(', ')
 			if level in start_times:
-				row['levelStart'] = int(''.join(filter(str.isdigit, level)))
-				row['startOfLevelTime'] = str(start_times[level][1])
-				row['startOfLevelDate'] = str(start_times[level][0])
-				row['levelFinish'] = int(''.join(filter(str.isdigit, level)))
-				row['levelWon'] = 1 if won.split(': ')[1].lower() == 'true' else 0
-				row['finishOfLevelTime'] = str(extract_date_time(time)[1])
-				row['finishOfLevelDate'] = str(extract_date_time(time)[0])
-				processed_data.append(row.copy())
-				del start_times[level]
+				# Use the first start time and remove it from the list
+				start_time = start_times[level].pop(0)
+				if start_time[0] is not None and start_time[1] is not None:
+					row['levelStart'] = int(''.join(filter(str.isdigit, level)))
+					row['startOfLevelTime'] = str(start_time[1])
+					row['startOfLevelDate'] = str(start_time[0])
+					row['levelFinish'] = int(''.join(filter(str.isdigit, level)))
+					row['levelWon'] = 1 if won.split(': ')[1].lower() == 'true' else 0
+					row['finishOfLevelTime'] = str(extract_date_time(time)[1])
+					row['finishOfLevelDate'] = str(extract_date_time(time)[0])
+					processed_data.append(row.copy())
+				# If there are no more start times for this level, remove it from the dictionary
+				if not start_times[level]:
+					del start_times[level]
 
 	# Append remaining 'startOfLevel' times that did not have a corresponding 'finishOfLevel'
-	for level, start_time in start_times.items():
-		row['levelStart'] = int(''.join(filter(str.isdigit, level)))
-		row['startOfLevelTime'] = str(start_time[1])
-		row['startOfLevelTime'] = str(start_time[0])
-		row['levelFinish'] = int(''.join(filter(str.isdigit, level)))
-		row['levelWon'] = 0
-		row['finishOfLevelTime'] = ""
-		row['finishOfLevelDate'] = ""
-		processed_data.append(row.copy())
+	for level, start_times in start_times.items():
+		for start_time in start_times:
+			if start_time is not None and len(start_time) >= 2:
+				row['levelStart'] = int(''.join(filter(str.isdigit, level)))
+				row['startOfLevelTime'] = str(start_time[1])
+				row['startOfLevelDate'] = str(start_time[0])
+				row['levelFinish'] = int(''.join(filter(str.isdigit, level)))
+				row['levelWon'] = 0
+				row['finishOfLevelTime'] = ""
+				row['finishOfLevelDate'] = ""
+				processed_data.append(row.copy())
 
 	row['levelStart'] = ""
 	row['startOfLevelTime'] = ""
