@@ -290,7 +290,6 @@ class _SurveyPageState extends State<SurveyPage> {
                 "An Tagen an denen Sie am Handy/Tablet spielen: Wie viele Stunden spielen Sie durchschnittlich?",
             stepIdentifier: StepIdentifier(id: '8'),
             answerFormat: const DoubleAnswerFormat(
-              hint: 'Kommastellen mit . trennen',
             )),
         QuestionStep(
             title:
