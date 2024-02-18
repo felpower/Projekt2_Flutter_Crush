@@ -77,6 +77,9 @@ for user_id, user_info in users_data.items():
 		'levelBought': "",
 		'levelBoughtTime': "",
 		'levelBoughtDate': "",
+		'itemBought': "",
+		'itemBoughtTime': "",
+		'itemBoughtDate': "",
 		'collectDailyRewardsTime': "",
 		'collectDailyRewardsDate': "",
 		'checkHighscoreTime': "",
@@ -219,6 +222,16 @@ for user_id, user_info in users_data.items():
 	row['levelBought'] = ""
 	row['levelBoughtTime'] = ""
 	row['levelBoughtDate'] = ""
+
+	item_bought = user_info.get('itemBought', None)
+	if item_bought:
+		for items_bought in item_bought.values():
+			item, time = items_bought.split(', ')
+			extracted_date_time = extract_date_time(time)
+			row['itemBought'] = item
+			row['itemBoughtTime'] = str(extracted_date_time[1])
+			row['itemBoughtDate'] = str(extracted_date_time[0])
+			processed_data.append(row.copy())
 
 	# Processing 'collectDailyReward'
 	daily_rewards = user_info.get('collectDailyRewardsTime', None)

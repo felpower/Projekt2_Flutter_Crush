@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
 import '../bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_bloc.dart';
 import '../bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
+import '../persistence/firebase_store.dart';
 
 class ShopPage extends StatefulWidget {
   const ShopPage({Key? key}) : super(key: key);
@@ -160,7 +161,7 @@ class ShopState extends State<ShopPage> {
     setState(() {
       coins -= shopItems[index].cost; // Subtract the cost from the user's coins
     });
-
+    FirebaseStore.addItemBought(shopItems[index].description);
     // Show a toast message with the name of the item bought and the new amount of coins
     Fluttertoast.showToast(
         msg: "Du hast ${shopItems[index].description} gekauft. Du hast noch $coins\$.",

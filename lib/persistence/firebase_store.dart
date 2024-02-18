@@ -24,6 +24,7 @@ class FirebaseStore {
   static const String finishOfLevel = 'finishOfLevel';
   static const String checkHighScoreTime = 'checkHighScoreTime';
   static const String levelBought = 'levelBought';
+  static const String itemBought = 'itemBought';
   static const String collectDailyRewardsTime = 'collectDailyRewardsTime';
   static const String appStartDate = 'appStartDate';
   static const String initAppStartTime = 'initAppStartTime';
@@ -102,6 +103,10 @@ class FirebaseStore {
 
   static void addLevelBought(int levelNumber) async {
     await _updateDocument(levelBought, 'Level: $levelNumber, Time: ${DateTime.now()}');
+  }
+
+  static void addItemBought(String item) async {
+    await _updateDocument(itemBought, 'Item: $item, Time: ${DateTime.now()}');
   }
 
   static Future<void> _updateDocument(String documentPropertyName, String information) async {

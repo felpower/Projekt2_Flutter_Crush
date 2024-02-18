@@ -31,6 +31,8 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
   int? _selectedItem;
   late OverlayEntry _gameSplash;
 
+  var _backupButtonVisible = false;
+
   @override
   void initState() {
     _showPressButton = true;
@@ -86,8 +88,12 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
     if (mounted) {
       // Check if the State object is in a valid context.
       String x = 'Du hast $_selectedItem XP und \$ gewonnen. Glückwunsch!';
+      setState(() {
+        _backupButtonVisible = true;
+      });
       showDialog(
           context: context,
+          barrierDismissible: false,
           builder: (BuildContext context) => AlertDialog(
                 title: Text(x),
                 shape: const RoundedRectangleBorder(
@@ -134,14 +140,31 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
         title: const Text('Drehe um XP und \$ zu erhalten'),
         automaticallyImplyLeading: false,
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/background/background_new.png'),
-            fit: BoxFit.cover,
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/background/background_new.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: _buildFortuneWheel(),
           ),
-        ),
-        child: _buildFortuneWheel(),
+          Visibility(
+              visible: _backupButtonVisible,
+              child: Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    gameBloc.gameOver(_selectedItem!);
+                    gameIsOverController.sink.add(true);
+                    showGameOver(true);
+                  },
+                  child: const Text('Weiter'),
+                ),
+              )),
+        ],
       ),
     );
   }

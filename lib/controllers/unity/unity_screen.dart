@@ -224,6 +224,7 @@ class _UnityScreenState extends State<UnityScreen> {
     if (!gameOver) {
       showDialog(
           context: context,
+          barrierDismissible: false,
           builder: (BuildContext context) => PointerInterceptor(
               child: coins > shufflePrice
                   ? AlertDialog(
