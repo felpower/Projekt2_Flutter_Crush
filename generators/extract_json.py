@@ -1,6 +1,6 @@
 import json
 import re
-from datetime import datetime
+from datetime import date, datetime
 
 import firebase_admin
 import pandas as pd
@@ -44,11 +44,12 @@ use_database = True
 # Access the 'users' data
 use_flutter = True
 user_data = {}
+database = load_database()
 if use_flutter:
-	users_data = load_database()['flutter']
+	users_data = database['flutter']
 else:
 	if use_database:
-		users_data = load_database()['users']
+		users_data = database['users']
 	else:
 		users_data = load_json_file()['users']
 userCounter = 1
@@ -61,8 +62,10 @@ inactive_user_counter = total_users
 for user_id, user_info in users_data.items():
 
 	row = {
-		'counter': userCounter,
+		'userNumber': userCounter,
 		'userId': user_id,
+		'daysSinceStart': "",
+		'daysPlayed': "",
 		'initAppStartTime': "",
 		'initAppStartDate': "",
 		'appStartTime': "",
@@ -117,11 +120,13 @@ for user_id, user_info in users_data.items():
 
 	# Extracting date and time from 'bootAppStartTime' if it exists
 	init_start_time = user_info.get('initAppStartTime', None)
+	days_since_start = 1
 	if init_start_time:
 		for date_time in init_start_time.values():
 			start_date, start_time = extract_date_time(date_time)
 			row['initAppStartDate'] = str(start_date)
 			row['initAppStartTime'] = str(start_time)
+			days_since_start = (date.today() - start_date).days
 			processed_data.append(row.copy())
 
 	row['initAppStartDate'] = ""
@@ -130,6 +135,12 @@ for user_id, user_info in users_data.items():
 	# # Extracting date and time from 'appStartTime' if it exists
 	app_start_date = user_info.get('appStartDate', None)
 	if app_start_date:
+		unique_dates = set(datetime.fromisoformat(date_time).date() for date_time in app_start_date.values())
+		row['daysPlayed'] = len(unique_dates)
+		row['daysSinceStart'] = days_since_start + 1
+		processed_data.append(row.copy())
+		row['daysPlayed'] = ""
+		row['daysSinceStart'] = ""
 		for date_time in app_start_date.values():
 			start_date, start_time = extract_date_time(date_time)
 			row['appStartDate'] = str(start_date)
