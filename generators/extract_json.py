@@ -77,6 +77,7 @@ for user_id, user_info in users_data.items():
 		'finishOfLevelTime': "",
 		'finishOfLevelDate': "",
 		'levelWon': "",
+		'timeNeededInSeconds': "",
 		'levelBought': "",
 		'levelBoughtTime': "",
 		'levelBoughtDate': "",
@@ -183,42 +184,53 @@ for user_id, user_info in users_data.items():
 				comma_index = levels.find(' Time:')
 				levels = levels[:comma_index] + "," + levels[comma_index:]
 			level, won, time = levels.split(', ')
-			if level in start_times:
-				# Use the first start time and remove it from the list
-				start_time = start_times[level].pop(0)
-				if start_time[0] is not None and start_time[1] is not None:
-					row['levelStart'] = int(''.join(filter(str.isdigit, level)))
-					row['startOfLevelTime'] = str(start_time[1])
-					row['startOfLevelDate'] = str(start_time[0])
-					row['levelFinish'] = int(''.join(filter(str.isdigit, level)))
-					row['levelWon'] = 1 if won.split(': ')[1].lower() == 'true' else 0
-					row['finishOfLevelTime'] = str(extract_date_time(time)[1])
-					row['finishOfLevelDate'] = str(extract_date_time(time)[0])
-					processed_data.append(row.copy())
-				# If there are no more start times for this level, remove it from the dictionary
-				if not start_times[level]:
-					del start_times[level]
+			if level in start_times and start_times[level]:  # Check if start_times[level] is not empty
+				# Convert 'finish_time' to datetime object
+				finish_time = extract_date_time(time)[1]
+				dummy_date = date.today()
+				finish_datetime = datetime.combine(dummy_date, finish_time)
 
-	# Append remaining 'startOfLevel' times that did not have a corresponding 'finishOfLevel'
+				# Find the closest start time
+				closest_start_time = min(start_times[level],
+										 key=lambda x: abs(datetime.combine(dummy_date, x[1]) - finish_datetime))
+
+				# Calculate the time difference
+				start_datetime = datetime.combine(dummy_date, closest_start_time[1])
+				time_difference = finish_datetime - start_datetime
+				row['levelStart'] = int(''.join(filter(str.isdigit, level)))
+				row['startOfLevelTime'] = str(closest_start_time[1])
+				row['startOfLevelDate'] = str(closest_start_time[0])
+				row['levelFinish'] = int(''.join(filter(str.isdigit, level)))
+				row['levelWon'] = 1 if won.split(': ')[1].lower() == 'true' else 0
+
+				row['finishOfLevelTime'] = str(finish_time)
+				row['finishOfLevelDate'] = str(extract_date_time(time)[0])
+				# Assign the time difference to the 'timeNeededInSec' field in the row dictionary
+				row['timeNeededInSeconds'] = time_difference.total_seconds()
+				start_times[level].remove(closest_start_time)
+				processed_data.append(row.copy())
+			else:
+				# If there is no matching startOfLevel for a finishOfLevel, skip this iteration
+				continue
+
+	row['finishOfLevelTime'] = ""
+	row['finishOfLevelDate'] = ""
+	row['timeNeededInSec'] = ""
+	row['levelWon'] = 0
+	row['levelFinish'] = ""
+	# After processing 'finishOfLevel'
 	for level, start_times in start_times.items():
 		for start_time in start_times:
 			if start_time is not None and len(start_time) >= 2:
 				row['levelStart'] = int(''.join(filter(str.isdigit, level)))
 				row['startOfLevelTime'] = str(start_time[1])
 				row['startOfLevelDate'] = str(start_time[0])
-				row['levelFinish'] = int(''.join(filter(str.isdigit, level)))
-				row['levelWon'] = 0
-				row['finishOfLevelTime'] = ""
-				row['finishOfLevelDate'] = ""
 				processed_data.append(row.copy())
 
 	row['levelStart'] = ""
 	row['startOfLevelTime'] = ""
 	row['startOfLevelDate'] = ""
-	row['levelFinish'] = ""
 	row['levelWon'] = ""
-	row['finishOfLevelTime'] = ""
-	row['finishOfLevelDate'] = ""
 
 	level_bought = user_info.get('levelBought', None)
 	if level_bought:
