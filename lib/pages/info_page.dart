@@ -111,8 +111,7 @@ class _DeviceTokenState extends State<DeviceToken> {
                         children: [
                           Text("4.	Levelziele:", style: TextStyle(fontWeight: FontWeight.bold)),
                           Text(
-                              '''Jedes Level hat spezifische Ziele, wie das Erreichen einer 
-                              bestimmten Punktzahl, das Sammeln einer Anzahl von bestimmten Jellies oder das Entfernen von Hindernissen. Das jeweilige Ziel wird in dem Kasten rechts oben auf dem Bildschirm angezeigt. (1). Die Sterne am unteren Bildrand (2) zeigen dir deinen Fortschritt an – sobald du einen Stern erreicht hast, gilt das Level als geschafft. Je mehr Sterne du jedoch erreichst, umso höher ist der Gewinn durch das absolvierte Level.
+                              '''Jedes Level hat spezifische Ziele, wie das Erreichen einer bestimmten Punktzahl, das Sammeln einer Anzahl von bestimmten Jellies oder das Entfernen von Hindernissen. Das jeweilige Ziel wird in dem Kasten rechts oben auf dem Bildschirm angezeigt. (1). Die Sterne am unteren Bildrand (2) zeigen dir deinen Fortschritt an – sobald du einen Stern erreicht hast, gilt das Level als geschafft. Je mehr Sterne du jedoch erreichst, umso höher ist der Gewinn durch das absolvierte Level.
               '''),
                           Image(
                               image: AssetImage('assets/instructions/ins_3.png'),

@@ -371,7 +371,7 @@ for user_id, user_info in users_data.items():
 		# If the user has no other activity, add their data to the separate list and continue to the next user
 		if not has_activity:
 			inactive_users_data.append({
-				'counter': inactive_user_counter,
+				'userNumber': inactive_user_counter,
 				'userId': user_id,
 				'initAppStartTime': "",
 				'initAppStartDate': "",
