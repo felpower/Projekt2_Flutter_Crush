@@ -42,14 +42,26 @@ def load_json_file():
 users_data = load_database()['feedback']
 
 for user_id, user_info in users_data.items():
-	row = {'userId': user_id,
-		   'feedback': user_info.get('info', None),
-		   'timestamp': user_info.get('timestamp', None),
-		   'userAgent': user_info.get('userAgent', None),
-		   'file': user_info.get('fileUrl', None),
-		   'task_completed': False
-		   }
-	processed_data.append(row.copy())
+	row = {'userId': user_id}
+	if 'uuid' not in user_info:
+		for key, nested_user_info in user_info.items():
+			if isinstance(nested_user_info, dict) and 'uuid' in nested_user_info:
+				row = {'userId': nested_user_info.get('uuid', None),
+					   'feedback': nested_user_info.get('info', None),
+					   'timestamp': nested_user_info.get('timestamp', None),
+					   'userAgent': nested_user_info.get('userAgent', None),
+					   'file': nested_user_info.get('fileUrl', None),
+					   }
+				processed_data.append(row.copy())
+	else:
+		row = {'userId': user_info.get('uuid', None),
+			   'feedback': user_info.get('info', None),
+			   'timestamp': user_info.get('timestamp', None),
+			   'userAgent': user_info.get('userAgent', None),
+			   'file': user_info.get('fileUrl', None),
+			   }
+		processed_data.append(row.copy())
+
 
 # Converting the processed data into a DataFrame
 processed_df = pd.DataFrame(processed_data)
