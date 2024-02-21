@@ -42,7 +42,7 @@ def load_json_file():
 
 use_database = True
 # Access the 'users' data
-use_flutter = False
+use_flutter = True
 user_data = {}
 database = load_database()
 if use_flutter:
@@ -193,9 +193,13 @@ for user_id, user_info in users_data.items():
 					# Find the closest start time
 					closest_start_time = min(start_times[level],
 											 key=lambda x: abs(datetime.combine(dummy_date, x[1]) - finish_datetime))
-
 					# Calculate the time difference
 					start_datetime = datetime.combine(dummy_date, closest_start_time[1])
+
+					# If startOfLevelTime is not before finishOfLevelTime, skip to the next finishOfLevelTime
+					if start_datetime > finish_datetime:
+						continue
+
 					time_difference = finish_datetime - start_datetime
 					row['levelStart'] = int(''.join(filter(str.isdigit, level)))
 					row['startOfLevelTime'] = str(closest_start_time[1])
@@ -387,6 +391,94 @@ for user_id, user_info in users_data.items():
 	except Exception as e:
 		print(f"Skipping user {user_id} due to error: {e}")
 		continue
+
+total_days_since_start = 0
+total_days_played = 0
+total_app_starts = 0
+total_time_needed = 0
+count = 0
+started_levels = 0
+finished_levels = 0
+levels_won = 0
+levels_bought = 0
+items_bought = 0
+daily_rewards = 0
+checked_highscore = 0
+push_clicked = 0
+notifications_sent = 0
+
+for data in processed_data:
+	if 'daysSinceStart' in data and data['daysSinceStart']:
+		total_days_since_start += int(data['daysSinceStart'])
+	if 'daysPlayed' in data and data['daysPlayed']:
+		total_days_played += int(data['daysPlayed'])
+	if 'appStartTime' in data and data['appStartTime']:
+		total_app_starts += 1
+	if 'timeNeededInSeconds' in data and data['timeNeededInSeconds']:
+		total_time_needed += int(data['timeNeededInSeconds'])
+		count += 1
+	if 'levelStart' in data and data['levelStart']:
+		started_levels += 1
+	if 'levelFinish' in data and data['levelFinish']:
+		finished_levels += 1
+	if 'levelWon' in data and data['levelWon'] == 1:
+		levels_won += 1
+	if 'levelBought' in data and data['levelBought']:
+		levels_bought += 1
+	if 'itemBought' in data and data['itemBought']:
+		items_bought += 1
+	if 'collectDailyRewardsTime' in data and data['collectDailyRewardsTime']:
+		daily_rewards += 1
+	if 'checkHighscoreTime' in data and data['checkHighscoreTime']:
+		checked_highscore += 1
+	if 'pushClickTime' in data and data['pushClickTime']:
+		push_clicked += 1
+	if 'notification_sent_time' in data and data['notification_sent_time']:
+		notifications_sent += 1
+
+average_time_needed = total_time_needed / count if count > 0 else 0
+
+statistics_overview = {
+	'userNumber': 'Statistics',
+	'daysSinceStart': "Days Since Start Total",
+	'daysPlayed': "Days Played Total",
+	'appStartTime': "Total App Starts",
+	'timeNeededInSeconds': "Average Playtime per level",
+	'levelStart': "Total Levels Started",
+	'levelFinish': "Total Levels Finished",
+	'levelWon': "Total Levels Won",
+	'levelBought': "Total Levels Bought",
+	'itemBought': 'Total Items Bought',
+	'collectDailyRewardsTime': 'Total Daily Rewards Collected',
+	'checkHighscoreTime': 'Total Highscores Checked',
+	'pushClickTime': 'Total Push Notifications Clicked',
+	'notification_sent_time': 'Total Notifications Sent',
+}
+
+processed_data.append(statistics_overview)
+
+statistics = {
+	'userNumber': 'Statistics',
+	'daysSinceStart': total_days_since_start,
+	'daysPlayed': total_days_played,
+	'appStartTime': total_app_starts,
+	'timeNeededInSeconds': average_time_needed,
+	'levelStart': started_levels,
+	'levelFinish': finished_levels,
+	'levelWon': levels_won,
+	'levelBought': levels_bought,
+	'itemBought': items_bought,
+	'collectDailyRewardsTime': daily_rewards,
+	'checkHighscoreTime': checked_highscore,
+	'pushClickTime': push_clicked,
+	'notification_sent_time': notifications_sent,
+}
+
+processed_data.append(statistics)
+
+# Add empty rows after the statistics
+processed_data.append({})
+processed_data.append({})
 
 # After processing all users, append the data of inactive users to the end of your main processed data list
 processed_data.extend(inactive_users_data)
