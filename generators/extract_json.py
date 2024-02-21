@@ -394,6 +394,7 @@ for user_id, user_info in users_data.items():
 
 total_days_since_start = 0
 total_days_played = 0
+daily_players = 0
 total_app_starts = 0
 total_time_needed = 0
 count = 0
@@ -406,17 +407,25 @@ daily_rewards = 0
 checked_highscore = 0
 push_clicked = 0
 notifications_sent = 0
+user_dark_patterns = {}
+dark_patterns_off = 0
+dark_patterns_on = 0
+average_age = 0
+user_counter = 0
 
 for data in processed_data:
 	if 'daysSinceStart' in data and data['daysSinceStart']:
 		total_days_since_start += int(data['daysSinceStart'])
+		if data['daysSinceStart'] == data['daysPlayed']:
+			daily_players += 1
 	if 'daysPlayed' in data and data['daysPlayed']:
 		total_days_played += int(data['daysPlayed'])
 	if 'appStartTime' in data and data['appStartTime']:
 		total_app_starts += 1
 	if 'timeNeededInSeconds' in data and data['timeNeededInSeconds']:
-		total_time_needed += int(data['timeNeededInSeconds'])
-		count += 1
+		if data['timeNeededInSeconds'] <= 300:
+			total_time_needed += int(data['timeNeededInSeconds'])
+			count += 1
 	if 'levelStart' in data and data['levelStart']:
 		started_levels += 1
 	if 'levelFinish' in data and data['levelFinish']:
@@ -435,6 +444,19 @@ for data in processed_data:
 		push_clicked += 1
 	if 'notification_sent_time' in data and data['notification_sent_time']:
 		notifications_sent += 1
+	user_id = data.get('userId')
+	if user_id and 'darkPatterns' in data:
+		# If the user is not in the dictionary, add them
+		if user_id not in user_dark_patterns:
+			user_counter += 1
+			user_dark_patterns[user_id] = data['darkPatterns']
+			# Increment the appropriate counter
+			if data['darkPatterns'] == 0:
+				dark_patterns_off += 1
+			elif data['darkPatterns'] == 1:
+				dark_patterns_on += 1
+	if 'age' in data and data['age']:
+		average_age += int(data['age'])
 
 average_time_needed = total_time_needed / count if count > 0 else 0
 
@@ -442,6 +464,7 @@ statistics_overview = {
 	'userNumber': 'Statistics',
 	'daysSinceStart': "Days Since Start Total",
 	'daysPlayed': "Days Played Total",
+	'initAppStartTime': 'Users that played daily',
 	'appStartTime': "Total App Starts",
 	'timeNeededInSeconds': "Average Playtime per level",
 	'levelStart': "Total Levels Started",
@@ -453,6 +476,9 @@ statistics_overview = {
 	'checkHighscoreTime': 'Total Highscores Checked',
 	'pushClickTime': 'Total Push Notifications Clicked',
 	'notification_sent_time': 'Total Notifications Sent',
+	'appCloseDate': 'DarkPatterns Off',
+	'darkPatterns': 'DarkPatterns On',
+	'age': 'Average Age',
 }
 
 processed_data.append(statistics_overview)
@@ -461,6 +487,7 @@ statistics = {
 	'userNumber': 'Statistics',
 	'daysSinceStart': total_days_since_start,
 	'daysPlayed': total_days_played,
+	'initAppStartTime': daily_players,
 	'appStartTime': total_app_starts,
 	'timeNeededInSeconds': average_time_needed,
 	'levelStart': started_levels,
@@ -472,6 +499,9 @@ statistics = {
 	'checkHighscoreTime': checked_highscore,
 	'pushClickTime': push_clicked,
 	'notification_sent_time': notifications_sent,
+	'appCloseDate': dark_patterns_off,
+	'darkPatterns': dark_patterns_on,
+	'age': average_age / user_counter,
 }
 
 processed_data.append(statistics)
