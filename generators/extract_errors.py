@@ -63,5 +63,11 @@ processed_df = pd.DataFrame(processed_data)
 processed_df.head()
 excel_file_path = 'errors.xlsx'
 
-# Save the DataFrame as an Excel file
+processed_df['timestamp'] = pd.to_datetime(processed_df['timestamp'])
+
+# Sort DataFrame by 'timestamp' in descending order
+processed_df = processed_df.sort_values(by='timestamp', ascending=False)
+
+# Save the sorted DataFrame to an Excel file
 processed_df.to_excel(excel_file_path, index=False)
+
