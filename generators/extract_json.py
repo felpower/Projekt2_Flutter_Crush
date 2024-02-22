@@ -401,6 +401,7 @@ count = 0
 started_levels = 0
 finished_levels = 0
 levels_won = 0
+max_level = 0
 levels_bought = 0
 items_bought = 0
 daily_rewards = 0
@@ -430,6 +431,8 @@ for data in processed_data:
 		started_levels += 1
 	if 'levelFinish' in data and data['levelFinish']:
 		finished_levels += 1
+		if int(data['levelFinish']) > max_level:
+			max_level = int(data['levelFinish'])
 	if 'levelWon' in data and data['levelWon'] == 1:
 		levels_won += 1
 	if 'levelBought' in data and data['levelBought']:
@@ -470,6 +473,7 @@ statistics_overview = {
 	'levelStart': "Total Levels Started",
 	'levelFinish': "Total Levels Finished",
 	'levelWon': "Total Levels Won",
+	'finishOfLevelTime': "Max Level",
 	'levelBought': "Total Levels Bought",
 	'itemBought': 'Total Items Bought',
 	'collectDailyRewardsTime': 'Total Daily Rewards Collected',
@@ -493,6 +497,7 @@ statistics = {
 	'levelStart': started_levels,
 	'levelFinish': finished_levels,
 	'levelWon': levels_won,
+	'finishOfLevelTime': max_level,
 	'levelBought': levels_bought,
 	'itemBought': items_bought,
 	'collectDailyRewardsTime': daily_rewards,
