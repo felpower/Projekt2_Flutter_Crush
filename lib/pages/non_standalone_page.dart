@@ -34,6 +34,10 @@ class _NonStandalonePageState extends State<NonStandalonePage> {
         home: Scaffold(
             body: Center(
                 child: ListView(padding: const EdgeInsets.all(20), children: [
+          Expanded(
+            flex: 8, // 40% of space
+            child: Image.asset('assets/icons/ak_uni_logo.jpg', fit: BoxFit.scaleDown),
+          ),
           const Text('Um an der Studie teilnehmen zu können',
               textAlign: TextAlign.center,
               style: TextStyle(
