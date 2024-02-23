@@ -286,7 +286,6 @@ class _SurveyPageState extends State<SurveyPage> {
                 "Wie viel Geld geben Sie durchschnittlich pro Monat innerhalb von Spielen für kostenpflichtige Zusatzfunktionen wie z.B. Spiele-Levels, Skins, Upgrades am Handy/am Tablet aus („In-App-Kauf“)?",
             stepIdentifier: StepIdentifier(id: '8'),
             answerFormat: const DoubleAnswerFormat(
-              hint: 'Kommastellen mit . trennen',
             )),
         CompletionStep(
             stepIdentifier: StepIdentifier(id: '9'),
