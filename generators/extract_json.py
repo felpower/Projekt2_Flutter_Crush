@@ -42,7 +42,7 @@ def load_json_file():
 
 use_database = True
 # Access the 'users' data
-use_flutter = True
+use_flutter = False
 user_data = {}
 database = load_database()
 if use_flutter:
@@ -392,128 +392,130 @@ for user_id, user_info in users_data.items():
 		print(f"Skipping user {user_id} due to error: {e}")
 		continue
 
-total_days_since_start = 0
-total_days_played = 0
-daily_players = 0
-total_app_starts = 0
-total_time_needed = 0
-count = 0
-started_levels = 0
-finished_levels = 0
-levels_won = 0
-max_level = 0
-levels_bought = 0
-items_bought = 0
-daily_rewards = 0
-checked_highscore = 0
-push_clicked = 0
-notifications_sent = 0
-user_dark_patterns = {}
-dark_patterns_off = 0
-dark_patterns_on = 0
-average_age = 0
-user_counter = 0
+if use_flutter:
 
-for data in processed_data:
-	if 'daysSinceStart' in data and data['daysSinceStart']:
-		total_days_since_start += int(data['daysSinceStart'])
-		if data['daysSinceStart'] == data['daysPlayed']:
-			daily_players += 1
-	if 'daysPlayed' in data and data['daysPlayed']:
-		total_days_played += int(data['daysPlayed'])
-	if 'appStartTime' in data and data['appStartTime']:
-		total_app_starts += 1
-	if 'timeNeededInSeconds' in data and data['timeNeededInSeconds']:
-		if data['timeNeededInSeconds'] <= 300:
-			total_time_needed += int(data['timeNeededInSeconds'])
-			count += 1
-	if 'levelStart' in data and data['levelStart']:
-		started_levels += 1
-	if 'levelFinish' in data and data['levelFinish']:
-		finished_levels += 1
-		if int(data['levelFinish']) > max_level:
-			max_level = int(data['levelFinish'])
-	if 'levelWon' in data and data['levelWon'] == 1:
-		levels_won += 1
-	if 'levelBought' in data and data['levelBought']:
-		levels_bought += 1
-	if 'itemBought' in data and data['itemBought']:
-		items_bought += 1
-	if 'collectDailyRewardsTime' in data and data['collectDailyRewardsTime']:
-		daily_rewards += 1
-	if 'checkHighscoreTime' in data and data['checkHighscoreTime']:
-		checked_highscore += 1
-	if 'pushClickTime' in data and data['pushClickTime']:
-		push_clicked += 1
-	if 'notification_sent_time' in data and data['notification_sent_time']:
-		notifications_sent += 1
-	user_id = data.get('userId')
-	if user_id and 'darkPatterns' in data:
-		# If the user is not in the dictionary, add them
-		if user_id not in user_dark_patterns:
-			user_counter += 1
-			user_dark_patterns[user_id] = data['darkPatterns']
-			# Increment the appropriate counter
-			if data['darkPatterns'] == 0:
-				dark_patterns_off += 1
-			elif data['darkPatterns'] == 1:
-				dark_patterns_on += 1
-	if 'age' in data and data['age']:
-		average_age += int(data['age'])
+	total_days_since_start = 0
+	total_days_played = 0
+	daily_players = 0
+	total_app_starts = 0
+	total_time_needed = 0
+	count = 0
+	started_levels = 0
+	finished_levels = 0
+	levels_won = 0
+	max_level = 0
+	levels_bought = 0
+	items_bought = 0
+	daily_rewards = 0
+	checked_highscore = 0
+	push_clicked = 0
+	notifications_sent = 0
+	user_dark_patterns = {}
+	dark_patterns_off = 0
+	dark_patterns_on = 0
+	average_age = 0
+	user_counter = 0
 
-average_time_needed = total_time_needed / count if count > 0 else 0
+	for data in processed_data:
+		if 'daysSinceStart' in data and data['daysSinceStart']:
+			total_days_since_start += int(data['daysSinceStart'])
+			if data['daysSinceStart'] == data['daysPlayed']:
+				daily_players += 1
+		if 'daysPlayed' in data and data['daysPlayed']:
+			total_days_played += int(data['daysPlayed'])
+		if 'appStartTime' in data and data['appStartTime']:
+			total_app_starts += 1
+		if 'timeNeededInSeconds' in data and data['timeNeededInSeconds']:
+			if data['timeNeededInSeconds'] <= 300:
+				total_time_needed += int(data['timeNeededInSeconds'])
+				count += 1
+		if 'levelStart' in data and data['levelStart']:
+			started_levels += 1
+		if 'levelFinish' in data and data['levelFinish']:
+			finished_levels += 1
+			if int(data['levelFinish']) > max_level:
+				max_level = int(data['levelFinish'])
+		if 'levelWon' in data and data['levelWon'] == 1:
+			levels_won += 1
+		if 'levelBought' in data and data['levelBought']:
+			levels_bought += 1
+		if 'itemBought' in data and data['itemBought']:
+			items_bought += 1
+		if 'collectDailyRewardsTime' in data and data['collectDailyRewardsTime']:
+			daily_rewards += 1
+		if 'checkHighscoreTime' in data and data['checkHighscoreTime']:
+			checked_highscore += 1
+		if 'pushClickTime' in data and data['pushClickTime']:
+			push_clicked += 1
+		if 'notification_sent_time' in data and data['notification_sent_time']:
+			notifications_sent += 1
+		user_id = data.get('userId')
+		if user_id and 'darkPatterns' in data:
+			# If the user is not in the dictionary, add them
+			if user_id not in user_dark_patterns:
+				user_counter += 1
+				user_dark_patterns[user_id] = data['darkPatterns']
+				# Increment the appropriate counter
+				if data['darkPatterns'] == 0:
+					dark_patterns_off += 1
+				elif data['darkPatterns'] == 1:
+					dark_patterns_on += 1
+		if 'age' in data and data['age']:
+			average_age += int(data['age'])
 
-statistics_overview = {
-	'userNumber': 'Statistics',
-	'daysSinceStart': "Days Since Start Total",
-	'daysPlayed': "Days Played Total",
-	'initAppStartTime': 'Users that played daily',
-	'appStartTime': "Total App Starts",
-	'timeNeededInSeconds': "Average Playtime per level",
-	'levelStart': "Total Levels Started",
-	'levelFinish': "Total Levels Finished",
-	'levelWon': "Total Levels Won",
-	'finishOfLevelTime': "Max Level",
-	'levelBought': "Total Levels Bought",
-	'itemBought': 'Total Items Bought',
-	'collectDailyRewardsTime': 'Total Daily Rewards Collected',
-	'checkHighscoreTime': 'Total Highscores Checked',
-	'pushClickTime': 'Total Push Notifications Clicked',
-	'notification_sent_time': 'Total Notifications Sent',
-	'appCloseDate': 'DarkPatterns Off',
-	'darkPatterns': 'DarkPatterns On',
-	'age': 'Average Age',
-}
+	average_time_needed = total_time_needed / count if count > 0 else 0
 
-processed_data.append(statistics_overview)
+	statistics_overview = {
+		'userNumber': 'Statistics',
+		'daysSinceStart': "Days Since Start Total",
+		'daysPlayed': "Days Played Total",
+		'initAppStartTime': 'Users that played daily',
+		'appStartTime': "Total App Starts",
+		'timeNeededInSeconds': "Average Playtime per level",
+		'levelStart': "Total Levels Started",
+		'levelFinish': "Total Levels Finished",
+		'levelWon': "Total Levels Won",
+		'finishOfLevelTime': "Max Level",
+		'levelBought': "Total Levels Bought",
+		'itemBought': 'Total Items Bought',
+		'collectDailyRewardsTime': 'Total Daily Rewards Collected',
+		'checkHighscoreTime': 'Total Highscores Checked',
+		'pushClickTime': 'Total Push Notifications Clicked',
+		'notification_sent_time': 'Total Notifications Sent',
+		'appCloseDate': 'DarkPatterns Off',
+		'darkPatterns': 'DarkPatterns On',
+		'age': 'Average Age',
+	}
 
-statistics = {
-	'userNumber': 'Statistics',
-	'daysSinceStart': total_days_since_start,
-	'daysPlayed': total_days_played,
-	'initAppStartTime': daily_players,
-	'appStartTime': total_app_starts,
-	'timeNeededInSeconds': average_time_needed,
-	'levelStart': started_levels,
-	'levelFinish': finished_levels,
-	'levelWon': levels_won,
-	'finishOfLevelTime': max_level,
-	'levelBought': levels_bought,
-	'itemBought': items_bought,
-	'collectDailyRewardsTime': daily_rewards,
-	'checkHighscoreTime': checked_highscore,
-	'pushClickTime': push_clicked,
-	'notification_sent_time': notifications_sent,
-	'appCloseDate': dark_patterns_off,
-	'darkPatterns': dark_patterns_on,
-	'age': average_age / user_counter,
-}
+	processed_data.append(statistics_overview)
 
-processed_data.append(statistics)
+	statistics = {
+		'userNumber': 'Statistics',
+		'daysSinceStart': total_days_since_start,
+		'daysPlayed': total_days_played,
+		'initAppStartTime': daily_players,
+		'appStartTime': total_app_starts,
+		'timeNeededInSeconds': average_time_needed,
+		'levelStart': started_levels,
+		'levelFinish': finished_levels,
+		'levelWon': levels_won,
+		'finishOfLevelTime': max_level,
+		'levelBought': levels_bought,
+		'itemBought': items_bought,
+		'collectDailyRewardsTime': daily_rewards,
+		'checkHighscoreTime': checked_highscore,
+		'pushClickTime': push_clicked,
+		'notification_sent_time': notifications_sent,
+		'appCloseDate': dark_patterns_off,
+		'darkPatterns': dark_patterns_on,
+		'age': average_age / user_counter,
+	}
 
-# Add empty rows after the statistics
-processed_data.append({})
-processed_data.append({})
+	processed_data.append(statistics)
+
+	# Add empty rows after the statistics
+	processed_data.append({})
+	processed_data.append({})
 
 # After processing all users, append the data of inactive users to the end of your main processed data list
 processed_data.extend(inactive_users_data)
