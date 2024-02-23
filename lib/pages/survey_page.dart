@@ -255,25 +255,15 @@ class _SurveyPageState extends State<SurveyPage> {
                 TextChoice(text: 'Pensionist:in', value: '4'),
               ],
             )),
-        QuestionStep(
-            title: "Wohnort?",
-            stepIdentifier: StepIdentifier(id: '5'),
-            answerFormat: const SingleChoiceAnswerFormat(
-              textChoices: [
-                TextChoice(text: 'Österreich', value: '0'),
-                TextChoice(text: 'Deutschland', value: '1'),
-                TextChoice(text: 'Anderes Land', value: '2'),
-              ],
-            )),
         InstructionStep(
-          stepIdentifier: StepIdentifier(id: '6'),
+          stepIdentifier: StepIdentifier(id: '5'),
           title: 'Angaben zum Spielverhalten',
           text: 'Als nächstes werden wir Ihnen einige Fragen zu Handyspielen stellen!',
           buttonText: 'Los geht\'s!',
         ),
         QuestionStep(
             title: "Wie häufig spielen Sie Spiele am Handy/Tablet?",
-            stepIdentifier: StepIdentifier(id: '7'),
+            stepIdentifier: StepIdentifier(id: '6'),
             answerFormat: const SingleChoiceAnswerFormat(
               textChoices: [
                 TextChoice(text: 'Täglich', value: '0'),
@@ -288,18 +278,18 @@ class _SurveyPageState extends State<SurveyPage> {
         QuestionStep(
             title:
                 "An Tagen an denen Sie am Handy/Tablet spielen: Wie viele Stunden spielen Sie durchschnittlich?",
-            stepIdentifier: StepIdentifier(id: '8'),
+            stepIdentifier: StepIdentifier(id: '7'),
             answerFormat: const DoubleAnswerFormat(
             )),
         QuestionStep(
             title:
                 "Wie viel Geld geben Sie durchschnittlich pro Monat innerhalb von Spielen für kostenpflichtige Zusatzfunktionen wie z.B. Spiele-Levels, Skins, Upgrades am Handy/am Tablet aus („In-App-Kauf“)?",
-            stepIdentifier: StepIdentifier(id: '9'),
+            stepIdentifier: StepIdentifier(id: '8'),
             answerFormat: const DoubleAnswerFormat(
               hint: 'Kommastellen mit . trennen',
             )),
         CompletionStep(
-            stepIdentifier: StepIdentifier(id: '10'),
+            stepIdentifier: StepIdentifier(id: '9'),
             text: 'Danke für die Teilnahme an der Umfrage',
             title: 'Fertig!',
             buttonText: 'Umfrage beenden'),
@@ -311,7 +301,7 @@ class _SurveyPageState extends State<SurveyPage> {
         resultToStepIdentifierMapper: (input) {
           int age = int.parse(input!);
           if (age < 18) {
-            return getStepIdentifier(task, "10");
+            return getStepIdentifier(task, "9");
           } else {
             return getStepIdentifier(task, "2");
           }
@@ -319,7 +309,7 @@ class _SurveyPageState extends State<SurveyPage> {
       ),
     );
     task.addNavigationRule(
-      forTriggerStepIdentifier: getStepIdentifier(task, "7"),
+      forTriggerStepIdentifier: getStepIdentifier(task, "6"),
       navigationRule: ConditionalNavigationRule(resultToStepIdentifierMapper: (input) {
         switch (input) {
           case "0":
@@ -328,11 +318,11 @@ class _SurveyPageState extends State<SurveyPage> {
           case "3":
           case "4":
           case "5":
-            return getStepIdentifier(task, "8");
+            return getStepIdentifier(task, "7");
           case "6":
-            return getStepIdentifier(task, "9");
+            return getStepIdentifier(task, "8");
           default:
-            return getStepIdentifier(task, "9");
+            return getStepIdentifier(task, "8");
         }
       }),
     );

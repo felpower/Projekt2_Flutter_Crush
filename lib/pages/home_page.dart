@@ -114,6 +114,7 @@ class _HomePageState extends State<HomePage>
         checkedForReopenGame = true;
       });
     }
+    var host = Uri.parse(html.window.location.href).host;
     return Scaffold(
       appBar: AppBar(
         title: const Text('JellyFun'),
@@ -203,7 +204,6 @@ class _HomePageState extends State<HomePage>
                       ),
                       flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
                           builder: (context, state) {
-                        var host = Uri.parse(html.window.location.href).host;
                         return Visibility(
                             visible: host.contains('felpower') || host.contains('localhost'),
                             child: const Text(
@@ -213,6 +213,18 @@ class _HomePageState extends State<HomePage>
                                   color: Colors.red, fontWeight: FontWeight.bold, fontSize: 15),
                             ));
                       }),
+                      Visibility(
+                        visible: html.window.navigator.userAgent.contains('17_4') &&
+                            (host.contains('felpower') || host.contains('jelly')),
+                        child: const Text(
+                            "Da sie auf iOS 17.4 geupdated "
+                            "haben, können "
+                            "sie nicht mehr an "
+                            "der Studie teilnehmen",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.red, fontWeight: FontWeight.bold, fontSize: 15)),
+                      ),
                       flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
                         builder: (context, state) {
                           return Visibility(
