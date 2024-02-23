@@ -56,7 +56,7 @@ userCounter = 1
 inactive_users_data = []
 # Total number of users
 total_users = len(users_data)
-
+# ToDo: Session counter einbauen
 # Counter for inactive users starts from the total number of users
 inactive_user_counter = total_users
 for user_id, user_info in users_data.items():
@@ -260,6 +260,10 @@ for user_id, user_info in users_data.items():
 				row['itemBoughtTime'] = str(extracted_date_time[1])
 				row['itemBoughtDate'] = str(extracted_date_time[0])
 				processed_data.append(row.copy())
+
+		row['itemBought'] = ""
+		row['itemBoughtTime'] = ""
+		row['itemBoughtDate'] = ""
 
 		# Processing 'collectDailyReward'
 		daily_rewards = user_info.get('collectDailyRewardsTime', None)
