@@ -38,6 +38,9 @@ void main() async {
             appId: "1:552263184384:web:87e17944dc571dc4e028e5"));
     await FirebaseStore.init();
     if (!kDebugMode) {
+      // Check for iOS 17.4, check for already installed let them continue play if they are not
+      // receiving notifications. If they are receiving notifications, forward them to iOS 17.4
+      // error page. Flag all iOS 17.4 users in database with date and timestamp.
       if (!await DeviceHelper.isMobile()) {
         runApp(const NonMobilePage());
         return;
