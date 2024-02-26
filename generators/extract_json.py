@@ -397,8 +397,19 @@ for user_id, user_info in users_data.items():
 			 'appCloseTime', 'appCloseDate', ])
 
 		# Convert date and time strings to datetime objects and sort
-		sorted_actions = sorted(actions,
-								key=lambda x: datetime.strptime(x['date'] + ' ' + x['time'], '%Y-%m-%d %H:%M:%S.%f'))
+		from datetime import datetime
+
+
+		def parse_date(date_string):
+			for fmt in ('%Y-%m-%d %H:%M:%S.%f', '%Y-%m-%d %H:%M:%S'):
+				try:
+					return datetime.strptime(date_string, fmt)
+				except ValueError:
+					pass
+			raise ValueError(f'No valid date format found for {date_string}')
+
+
+		sorted_actions = sorted(actions, key=lambda x: parse_date(x['date'] + ' ' + x['time']))
 
 		session = 0
 		session_counter = 0
