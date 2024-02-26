@@ -42,7 +42,7 @@ def load_json_file():
 
 use_database = True
 # Access the 'users' data
-use_flutter = False
+use_flutter = True
 user_data = {}
 database = load_database()
 if use_flutter:
@@ -94,6 +94,8 @@ for user_id, user_info in users_data.items():
 			'notification_sent_date': "",
 			'appCloseTime': "",
 			'appCloseDate': "",
+			'session': "",
+			'sessionCounter': "",
 			'darkPatterns': int(user_info.get('darkPatterns', 0)) if user_info.get('darkPatterns') is not None else '',
 			'age': "",
 			'gender': "",
@@ -132,6 +134,8 @@ for user_id, user_info in users_data.items():
 
 		row['initAppStartDate'] = ""
 		row['initAppStartTime'] = ""
+		session = 1
+		actions = []
 
 		# # Extracting date and time from 'appStartTime' if it exists
 		app_start_date = user_info.get('appStartDate', None)
@@ -146,10 +150,14 @@ for user_id, user_info in users_data.items():
 				start_date, start_time = extract_date_time(date_time)
 				row['appStartDate'] = str(start_date)
 				row['appStartTime'] = str(start_time)
+				row['session'] = session
+				session += 1
+				actions.append({'action': 'appStart', 'date': str(start_date), 'time': str(start_time)})
 				processed_data.append(row.copy())
 
 		row['appStartDate'] = ""
 		row['appStartTime'] = ""
+		row['session'] = ""
 
 		# Extracting date and time from 'bootAppStartTime' if it exists
 		app_close_date = user_info.get('appCloseTime', None)
@@ -208,10 +216,12 @@ for user_id, user_info in users_data.items():
 					row['levelWon'] = 1 if won.split(': ')[1].lower() == 'true' else 0
 
 					row['finishOfLevelTime'] = str(finish_time)
-					row['finishOfLevelDate'] = str(extract_date_time(time)[0])
+					finish_date = extract_date_time(time)[0]
+					row['finishOfLevelDate'] = str(finish_date)
 					# Assign the time difference to the 'timeNeededInSec' field in the row dictionary
 					row['timeNeededInSeconds'] = time_difference.total_seconds()
 					start_times[level].remove(closest_start_time)
+					actions.append({'action': 'levelFinished', 'date': str(finish_date), 'time': str(finish_time)})
 					processed_data.append(row.copy())
 				else:
 					# If there is no matching startOfLevel for a finishOfLevel, skip this iteration
@@ -245,6 +255,8 @@ for user_id, user_info in users_data.items():
 				row['levelBought'] = int(''.join(filter(str.isdigit, level)))
 				row['levelBoughtTime'] = str(extracted_date_time[1])
 				row['levelBoughtDate'] = str(extracted_date_time[0])
+				actions.append(
+					{'action': 'levelBought', 'date': str(extracted_date_time[0]), 'time': str(extracted_date_time[1])})
 				processed_data.append(row.copy())
 
 		row['levelBought'] = ""
@@ -259,6 +271,8 @@ for user_id, user_info in users_data.items():
 				row['itemBought'] = item
 				row['itemBoughtTime'] = str(extracted_date_time[1])
 				row['itemBoughtDate'] = str(extracted_date_time[0])
+				actions.append(
+					{'action': 'itemBought', 'date': str(extracted_date_time[0]), 'time': str(extracted_date_time[1])})
 				processed_data.append(row.copy())
 
 		row['itemBought'] = ""
@@ -272,6 +286,9 @@ for user_id, user_info in users_data.items():
 				extracted_date_time = extract_date_time(rewards_time)
 				row['collectDailyRewardsTime'] = str(extracted_date_time[1])
 				row['collectDailyRewardsDate'] = str(extracted_date_time[0])
+				actions.append(
+					{'action': 'dailyRewards', 'date': str(extracted_date_time[0]),
+					 'time': str(extracted_date_time[1])})
 				processed_data.append(row.copy())
 
 		row['collectDailyRewardsTime'] = ""
@@ -283,6 +300,9 @@ for user_id, user_info in users_data.items():
 				extracted_date_time = extract_date_time(high_score_time)
 				row['checkHighscoreTime'] = str(extracted_date_time[1])
 				row['checkHighscoreDate'] = str(extracted_date_time[0])
+				actions.append(
+					{'action': 'checkHighScore', 'date': str(extracted_date_time[0]),
+					 'time': str(extracted_date_time[1])})
 				processed_data.append(row.copy())
 
 		row['checkHighscoreTime'] = ""
@@ -375,6 +395,63 @@ for user_id, user_info in users_data.items():
 			 'checkHighscoreTime',
 			 'checkHighscoreDate', 'pushClickTime', 'pushClickDate', 'notification_sent_time', 'notification_sent_date',
 			 'appCloseTime', 'appCloseDate', ])
+
+		# Convert date and time strings to datetime objects and sort
+		sorted_actions = sorted(actions,
+								key=lambda x: datetime.strptime(x['date'] + ' ' + x['time'], '%Y-%m-%d %H:%M:%S.%f'))
+
+		session = 0
+		session_counter = 0
+		for action in sorted_actions:
+			if action['action'] == 'appStart':
+				session_counter = 0
+				session += 1
+				for dictionary in processed_data:
+					if (dictionary.get('appStartDate') == action['date'] and
+							dictionary.get('appStartTime') == action['time']):
+						dictionary['session'] = session
+						dictionary['sessionCounter'] = session_counter
+						break
+			if action['action'] == 'levelFinished':
+				session_counter += 1
+				for dictionary in processed_data:
+					if (dictionary.get('finishOfLevelDate') == action['date'] and
+							dictionary.get('finishOfLevelTime') == action['time']):
+						dictionary['session'] = session
+						dictionary['sessionCounter'] = session_counter
+						break
+			if action['action'] == 'levelBought':
+				session_counter += 1
+				for dictionary in processed_data:
+					if (dictionary.get('levelBoughtDate') == action['date'] and
+							dictionary.get('levelBoughtTime') == action['time']):
+						dictionary['session'] = session
+						dictionary['sessionCounter'] = session_counter
+						break
+			if action['action'] == 'itemBought':
+				session_counter += 1
+				for dictionary in processed_data:
+					if (dictionary.get('itemBoughtDate') == action['date'] and
+							dictionary.get('itemBoughtTime') == action['time']):
+						dictionary['session'] = session
+						dictionary['sessionCounter'] = session_counter
+						break
+			if action['action'] == 'dailyRewards':
+				session_counter += 1
+				for dictionary in processed_data:
+					if (dictionary.get('collectDailyRewardsDate') == action['date'] and
+							dictionary.get('collectDailyRewardsTime') == action['time']):
+						dictionary['session'] = session
+						dictionary['sessionCounter'] = session_counter
+						break
+			if action['action'] == 'checkHighScore':
+				session_counter += 1
+				for dictionary in processed_data:
+					if (dictionary.get('checkHighscoreDate') == action['date'] and
+							dictionary.get('checkHighscoreTime') == action['time']):
+						dictionary['session'] = session
+						dictionary['sessionCounter'] = session_counter
+						break
 
 		# If the user has no other activity, add their data to the separate list and continue to the next user
 		if not has_activity:
