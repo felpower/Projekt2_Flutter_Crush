@@ -1,5 +1,6 @@
 import json
 import re
+import traceback
 from datetime import date, datetime
 
 import firebase_admin
@@ -18,14 +19,12 @@ def extract_date_time(timestamp_str):
 		return None, None
 
 
-def load_database():
+def load_database(reference):
 	cred = credentials.Certificate('credentials.json')
 	firebase_admin.initialize_app(cred, {
 		'databaseURL': 'https://darkpatterns-ac762-default-rtdb.europe-west1.firebasedatabase.app'
 	})
-	ref = db.reference('/')
-	data = ref.get()
-	return data
+	return db.reference('/' + reference).get()
 
 
 processed_data = []
@@ -44,19 +43,17 @@ use_database = True
 # Access the 'users' data
 use_flutter = True
 user_data = {}
-database = load_database()
 if use_flutter:
-	users_data = database['flutter']
+	users_data = load_database("flutter")
 else:
 	if use_database:
-		users_data = database['users']
+		users_data = load_database('users')
 	else:
 		users_data = load_json_file()['users']
 userCounter = 1
 inactive_users_data = []
 # Total number of users
 total_users = len(users_data)
-# ToDo: Session counter einbauen
 # Counter for inactive users starts from the total number of users
 inactive_user_counter = total_users
 for user_id, user_info in users_data.items():
@@ -334,56 +331,83 @@ for user_id, user_info in users_data.items():
 		if start_survey:
 			for start_survey_result in start_survey.values():
 				for question in start_survey_result.split('[')[1].split(']')[0].split(', '):
-					x, answer = question.split('-')
-					identifier = int(re.findall(r'\b\d{1,2}\b', x)[0])
-					if identifier == 1:
-						row['age'] = answer
-					elif identifier == 2:
-						row['gender'] = answer
-					elif identifier == 3:
-						row['education'] = answer
-					elif identifier == 4:
-						row['occupation'] = answer
-					elif identifier == 5:
-						row['residence'] = answer
-					elif identifier == 7:
-						row['frequencyPlaying'] = answer
-					elif identifier == 8:
-						row['hoursPlaying'] = answer
-					elif identifier == 9:
-						row['moneySpent'] = answer
+					try:
+						x, answer = question.split('-')
+						identifier = int(re.findall(r'\b\d{1,2}\b', x)[0])
+						if identifier == 1:
+							row['age'] = answer
+						elif identifier == 2:
+							row['gender'] = answer
+						elif identifier == 3:
+							row['education'] = answer
+						elif identifier == 4:
+							row['occupation'] = answer
+						elif identifier == 5:
+							row['residence'] = answer
+						elif identifier == 7:
+							row['frequencyPlaying'] = answer
+						elif identifier == 8:
+							row['hoursPlaying'] = answer
+						elif identifier == 9:
+							row['moneySpent'] = answer
 
+					except ValueError:
+						continue
 				processed_data.append(row.copy())
+
+		row['age'] = ""
+		row['gender'] = ""
+		row['education'] = ""
+		row['occupation'] = ""
+		row['residence'] = ""
+		row['frequencyPlaying'] = ""
+		row['hoursPlaying'] = ""
+		row['moneySpent'] = ""
 
 		end_survey = user_info.get('endSurvey', None)
 		if end_survey:
 			for end_survey_result in end_survey.values():
 				for question in end_survey_result.split('[')[1].split(']')[0].split(', '):
-					x, answer = question.split('-')
-					identifier = int(re.findall(r'\b\d{1,2}\b', x)[0])
-					if identifier == 1:
-						row['playedtilend'] = answer
-					elif identifier == 2:
-						row['reasoncancel'] = answer
-					elif identifier == 3:
-						row['influenced'] = answer
-					elif identifier == 5:
-						row['influencedtime'] = answer
-					elif identifier == 6:
-						row['influencedfrequency'] = answer
-					elif identifier == 7:
-						row['patterninfluence'] = answer
-					elif identifier == 8:
-						row['pushreceived'] = answer
-					elif identifier == 9:
-						row['pushfrequency'] = answer
-					elif identifier == 10:
-						row['pushtimes'] = answer
-					elif identifier == 11:
-						row['pushbettertimes'] = answer
-					elif identifier == 12:
-						row['comments'] = answer
+					try:
+						x, answer = question.split('-')
+						identifier = int(re.findall(r'\b\d{1,2}\b', x)[0])
+						if identifier == 1:
+							row['playedtilend'] = answer
+						elif identifier == 2:
+							row['reasoncancel'] = answer
+						elif identifier == 3:
+							row['influenced'] = answer
+						elif identifier == 5:
+							row['influencedtime'] = answer
+						elif identifier == 6:
+							row['influencedfrequency'] = answer
+						elif identifier == 7:
+							row['patterninfluence'] = answer
+						elif identifier == 8:
+							row['pushreceived'] = answer
+						elif identifier == 9:
+							row['pushfrequency'] = answer
+						elif identifier == 10:
+							row['pushtimes'] = answer
+						elif identifier == 11:
+							row['pushbettertimes'] = answer
+						elif identifier == 12:
+							row['comments'] = answer
+					except ValueError:
+						continue
 				processed_data.append(row.copy())
+
+		row['playedtilend'] = ""
+		row['reasoncancel'] = ""
+		row['influenced'] = ""
+		row['influencedtime'] = ""
+		row['influencedfrequency'] = ""
+		row['patterninfluence'] = ""
+		row['pushreceived'] = ""
+		row['pushfrequency'] = ""
+		row['pushtimes'] = ""
+		row['pushbettertimes'] = ""
+		row['comments'] = ""
 
 		# Check if the user has any activity other than just opening the app
 		has_activity = any(
@@ -481,7 +505,7 @@ for user_id, user_info in users_data.items():
 			userCounter += 1
 			processed_data.append({})
 	except Exception as e:
-		print(f"Skipping user {user_id} due to error: {e}")
+		print(f"Skipping user {user_id} due to error: {e}\nTraceback: {traceback.format_exc()}")
 		continue
 
 if use_flutter:
