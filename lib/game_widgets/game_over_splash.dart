@@ -1,6 +1,7 @@
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_bloc.dart';
 import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_bloc.dart';
+import 'package:bachelor_flutter_crush/controllers/audio_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -73,7 +74,6 @@ class _GameOverSplashState extends State<GameOverSplash> with SingleTickerProvid
     Color darkColor = widget.success ? Colors.green[700]! : Colors.red[700]!;
     Color lightColor = widget.success ? Colors.green : Colors.red;
     String message = widget.success ? "Gewonnen" : "Verloren";
-
     return AnimatedBuilder(
       animation: _animationAppear,
       child: Material(

@@ -31,6 +31,7 @@ import '../controllers/fortune_wheel/fortune_wheel.dart';
 import '../controllers/unity/unity_screen.dart';
 import '../gamification_widgets/credit_panel.dart';
 import '../helpers/app_colors.dart';
+import '../helpers/global_variables.dart';
 import 'feedback_page.dart';
 import 'finished_survey_page.dart';
 import 'high_score_page.dart';
@@ -79,9 +80,11 @@ class _HomePageState extends State<HomePage>
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     checkForFirstTimeStart();
-    loadMusic();
-    playMusic();
     _daysPlayedFuture = _getDaysPlayed();
+    isMusicOn.addListener(() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setBool('music', isMusicOn.value);
+    });
   }
 
   bool checkedForReopenGame = false;
@@ -346,8 +349,6 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  bool isMusicOn = true;
-
   Drawer buildBurgerMenu(BuildContext context, DarkPatternsState darkPatternsState) {
     return Drawer(
       child: ListView(
@@ -413,16 +414,18 @@ class _HomePageState extends State<HomePage>
                 )),
           Visibility(
               visible: true,
-              child: SwitchListTile(
-                tileColor: Colors.grey[200],
-                title: const Text('Musik', style: TextStyle(color: Colors.grey)),
-                secondary: isMusicOn ? const Icon(Icons.music_note) : const Icon(Icons.music_off),
-                value: isMusicOn,
-                onChanged: (bool value) {
-                  setState(() {
-                    isMusicOn = value;
-                    setMusic();
-                  });
+              child: ValueListenableBuilder<bool>(
+                valueListenable: isMusicOn, // This is the ValueNotifier from unity_screen.dart
+                builder: (context, value, child) {
+                  return SwitchListTile(
+                    tileColor: Colors.grey[200],
+                    title: const Text('Musik', style: TextStyle(color: Colors.grey)),
+                    secondary: value ? const Icon(Icons.music_note) : const Icon(Icons.music_off),
+                    value: value,
+                    onChanged: (bool newValue) {
+                        isMusicOn.value = newValue;
+                    },
+                  );
                 },
               )),
           Visibility(
@@ -641,7 +644,6 @@ class _HomePageState extends State<HomePage>
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       var levelStarted = prefs.getString("levelStarted") ?? "0";
-      print("levelStarted: $levelStarted");
       if (levelStarted == "0") {
         return;
       }
@@ -650,7 +652,6 @@ class _HomePageState extends State<HomePage>
         Map<String, dynamic>? jsonData = jsonDecode(levelStarted);
         levelStarted = "0";
         prefs.setString("levelStarted", "0");
-        print("jsonData: $jsonData");
         if (jsonData != null) {
           FirebaseStore.sendLog("RestartGame", "Level $level");
 
@@ -668,33 +669,5 @@ class _HomePageState extends State<HomePage>
     } catch (e) {
       FirebaseStore.sendError("RestartGame", stacktrace: e.toString());
     }
-  }
-
-  void setMusic() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool("music", isMusicOn);
-    playMusic();
-  }
-
-  void loadMusic() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    isMusicOn = prefs.getBool("music") ?? true;
-  }
-
-  void playMusic() {
-    print("playMusic $isMusicOn");
-    // if (isMusicOn) {
-    //   audioPlayer.setReleaseMode(ReleaseMode.loop);
-    //   audioPlayer.setVolume(0.5);
-    //   Source source = AssetSource('audio/Background_Music.mp3');
-    //   audioPlayer.setSource(source);
-    //   try {
-    //     audioPlayer.resume();
-    //   } catch (e) {
-    //     print(e);
-    //   }
-    // } else {
-    //   audioPlayer.stop();
-    // }
   }
 }

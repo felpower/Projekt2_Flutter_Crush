@@ -13,13 +13,16 @@ import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 import 'bloc/bloc_provider.dart' as custom_bloc;
 import 'bloc/game_bloc.dart';
 import 'bloc/user_state_bloc/high_score_bloc/high_score_bloc.dart';
+import 'controllers/audio_manager.dart';
 
 class Application extends StatelessWidget {
   const Application({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return custom_bloc.BlocProvider<GameBloc>(
+    return custom_bloc.BlocProvider<AudioManager>(
+      bloc: AudioManager(),
+      child: custom_bloc.BlocProvider<GameBloc>(
         bloc: GameBloc(),
         child: flutter_bloc.MultiBlocProvider(
           providers: _getBlocs(context),
@@ -35,7 +38,9 @@ class Application extends StatelessWidget {
               '/endSurvey': (context) => const SurveyPage(title: "End"),
             },
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   List<flutter_bloc.BlocProvider> _getBlocs(BuildContext context) {
