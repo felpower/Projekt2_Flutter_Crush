@@ -10,12 +10,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../bloc/bloc_provider.dart';
+import '../../bloc/bloc_provider.dart' as custom_bloc;
 import '../../bloc/game_bloc.dart';
 import '../../bloc/reporting_bloc/reporting_bloc.dart';
 import '../../bloc/reporting_bloc/reporting_event.dart';
@@ -25,6 +24,8 @@ import '../../bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_bloc.dart';
 import '../../bloc/user_state_bloc/level_bloc/level_bloc.dart';
 import '../../game_widgets/game_over_splash.dart';
 import '../../game_widgets/game_splash.dart';
+import '../../helpers/global_variables.dart';
+import '../audio_manager.dart';
 import '../fortune_wheel/fortune_wheel.dart';
 
 int coins = 0;
@@ -39,9 +40,8 @@ class UnityScreen extends StatefulWidget {
 }
 
 class _UnityScreenState extends State<UnityScreen> {
-  AudioPlayer backgroundAudio = AudioPlayer();
-  AudioPlayer wonLostAudio = AudioPlayer();
   late GameBloc gameBloc;
+  late AudioManager audioManager;
   late LevelBloc levelBloc;
   late DarkPatternsBloc darkPatternsBloc;
   UnityWidgetController? unityWidgetController;
@@ -51,14 +51,13 @@ class _UnityScreenState extends State<UnityScreen> {
   int shufflePrice = 50;
   bool unityReady = false;
   String powerUp = "";
+  bool isFirstTap = true;
 
   Stream<bool> get gameIsOver => _gameIsOverController.stream;
   late int lvl;
   bool gameOver = false;
   late bool _gameOverReceived;
   bool fabVisible = true;
-
-  bool isMusicOn = false;
 
   late StreamSubscription _gameOverSubscription;
 
@@ -75,6 +74,8 @@ class _UnityScreenState extends State<UnityScreen> {
       loadCoins();
       levelBloc = flutter_bloc.BlocProvider.of<LevelBloc>(context);
       darkPatternsBloc = flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context);
+      loadMusicState();
+      audioManager = custom_bloc.BlocProvider.of<AudioManager>(context);
     } catch (e, s) {
       print('Caught error: $e');
       print('Stacktrace: $s');
@@ -90,12 +91,18 @@ class _UnityScreenState extends State<UnityScreen> {
     });
   }
 
+  void loadMusicState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    isMusicOn.value = prefs.getBool('music') ?? false;
+    print("Music is on: ${isMusicOn.value} in loadMusicState");
+  }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
     // Now that the context is available, retrieve the gameBloc
-    gameBloc = BlocProvider.of<GameBloc>(context);
+    gameBloc = custom_bloc.BlocProvider.of<GameBloc>(context);
 
     // Listen to "game over" notification
     _gameOverSubscription = gameIsOver.listen(showGameOver);
@@ -158,11 +165,13 @@ class _UnityScreenState extends State<UnityScreen> {
             body: Stack(
               children: [
                 Card(
-                    margin: const EdgeInsets.all(0),
-                    clipBehavior: Clip.hardEdge,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.zero,
-                    ),
+                  margin: const EdgeInsets.all(0),
+                  clipBehavior: Clip.hardEdge,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero,
+                  ),
+                  child: AbsorbPointer(
+                    absorbing: true,
                     child: UnityWidget(
                         onUnityCreated: onUnityCreated,
                         onUnityMessage: onUnityMessage,
@@ -171,7 +180,9 @@ class _UnityScreenState extends State<UnityScreen> {
                         printSetupLog: false,
                         layoutDirection: TextDirection.ltr,
                         fullscreen: true,
-                        hideStatus: true)),
+                        hideStatus: true),
+                  ),
+                ),
                 Align(
                   alignment: Alignment.bottomLeft,
                   child: Padding(
@@ -184,16 +195,19 @@ class _UnityScreenState extends State<UnityScreen> {
                       onPressed: () async {
                         try {
                           SharedPreferences prefs = await SharedPreferences.getInstance();
-                          setState(() {
-                            isMusicOn = !isMusicOn;
-                            prefs.setBool('music', isMusicOn);
-                            changeMusic();
-                          });
+                          isMusicOn.value = !isMusicOn.value;
+                          prefs.setBool('music', isMusicOn.value);
+                          changeMusic();
                         } catch (e) {
                           FirebaseStore.sendError("musicFABError", stacktrace: e.toString());
                         }
                       },
-                      child: isMusicOn ? const Icon(Icons.music_note) : const Icon(Icons.music_off),
+                      child: ValueListenableBuilder<bool>(
+                        valueListenable: isMusicOn,
+                        builder: (context, value, child) {
+                          return value ? const Icon(Icons.music_note) : const Icon(Icons.music_off);
+                        },
+                      ),
                     )),
                   ),
                 ),
@@ -357,9 +371,12 @@ class _UnityScreenState extends State<UnityScreen> {
         setState(() {
           unityReady = true;
         });
-        changeMusic();
       }
       if (!unityReady) {
+        return;
+      }
+      if (message.startsWith("First touch")) {
+        playBackgroundMusic();
         return;
       }
       if (message.startsWith("Resend Level Info")) {
@@ -532,15 +549,7 @@ class _UnityScreenState extends State<UnityScreen> {
 
   void changeMusic() async {
     try {
-      if (!unityReady) {
-        print("changeMusicError stacktrace: Unity not ready");
-      }
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      setState(() {
-        isMusicOn = prefs.getBool('music') ?? false;
-      });
-      print("Music: $isMusicOn");
-      if (isMusicOn) {
+      if (isMusicOn.value) {
         playBackgroundMusic();
       } else {
         stopMusic();
@@ -562,12 +571,12 @@ class _UnityScreenState extends State<UnityScreen> {
   }
 
   void playBackgroundMusic() async {
-    await backgroundAudio.setAsset('assets/audio/Background_Music.mp3');
-    backgroundAudio.play();
+    print("Playing Background Music ${isMusicOn.value}");
+    if (isMusicOn.value) audioManager.playBackgroundMusic();
   }
 
   void stopMusic() async {
-    await backgroundAudio.stop();
+    await audioManager.stopMusic();
   }
 
   void setLevelFinished() async {
@@ -576,16 +585,9 @@ class _UnityScreenState extends State<UnityScreen> {
   }
 
   void playWonLostMusic(bool won) {
-    stopMusic();
-    if (!isMusicOn) {
+    if (!isMusicOn.value) {
       return;
     }
-    print("Won: $won");
-    if (won) {
-      wonLostAudio.setAsset('assets/audio/winning_music.mp3');
-    } else {
-      wonLostAudio.setAsset('assets/audio/losing_music.mp3');
-    }
-    wonLostAudio.play();
+    audioManager.playWonLostMusic(won);
   }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Match3.FlutterUnityIntegration;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -30,6 +31,7 @@ namespace Match3 {
 		private bool _inverse;
 
 		private bool _isFirst = true;
+		private bool _isFirstTouch = true;
 		private Camera _mainCamera;
 
 		private Dictionary<PieceType, GameObject> _piecePrefabDict;
@@ -767,6 +769,10 @@ namespace Match3 {
 
 		public void PressPiece(GamePiece piece) {
 			_timeWhenWeNextDoSomething = Time.time + 100f;
+			if (_isFirstTouch) {
+				UnityMessageManager.Instance.SendMessageToFlutter("First touch on GameGrid");
+				_isFirstTouch = false;
+			}
 			_pressedPiece = piece;
 			print("Piece at X: " + _pressedPiece.X + ", Y: " + _pressedPiece.Y + ", Color: " +
 			      _pressedPiece.ColorComponent.Color);
