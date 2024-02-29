@@ -286,7 +286,7 @@ class _HomePageState extends State<HomePage>
                                     } else {
                                       return const Divider(
                                         color: Colors.transparent,
-                                        thickness: 0.0,
+                                        thickness: 5.0,
                                         height: 20.0,
                                       );
                                     }
@@ -423,7 +423,7 @@ class _HomePageState extends State<HomePage>
                     secondary: value ? const Icon(Icons.music_note) : const Icon(Icons.music_off),
                     value: value,
                     onChanged: (bool newValue) {
-                        isMusicOn.value = newValue;
+                      isMusicOn.value = newValue;
                     },
                   );
                 },
