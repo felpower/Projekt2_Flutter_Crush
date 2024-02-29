@@ -770,8 +770,8 @@ namespace Match3 {
 		public void PressPiece(GamePiece piece) {
 			_timeWhenWeNextDoSomething = Time.time + 100f;
 			if (_isFirstTouch) {
-				UnityMessageManager.Instance.SendMessageToFlutter("First touch on GameGrid");
 				_isFirstTouch = false;
+				UnityMessageManager.Instance.SendMessageToFlutter("First touch on GameGrid");
 			}
 			_pressedPiece = piece;
 			print("Piece at X: " + _pressedPiece.X + ", Y: " + _pressedPiece.Y + ", Color: " +
