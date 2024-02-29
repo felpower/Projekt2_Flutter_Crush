@@ -34,10 +34,9 @@ class _NonStandalonePageState extends State<NonStandalonePage> {
         home: Scaffold(
             body: Center(
                 child: ListView(padding: const EdgeInsets.all(20), children: [
-          Expanded(
-            flex: 8, // 40% of space
-            child: Image.asset('assets/icons/ak_uni_logo.jpg', fit: BoxFit.scaleDown),
-          ),
+                  const Image(
+                      image: AssetImage('assets/instructions/ak_uni_logo.png'),
+                      fit: BoxFit.cover),
           const Text('Um an der Studie teilnehmen zu können',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -118,7 +117,7 @@ Unabhängig davon werden Sie beim ersten Öffnen der App gefragt, ob diese Ihnen
               : Container(),
           isIosDevice
               ? const Image(
-                  image: AssetImage('assets/instructions/InstallIos.png'), fit: BoxFit.cover)
+                  image: AssetImage('assets/instructions/installios.png'), fit: BoxFit.cover)
               : const Image(
                   image: AssetImage('assets/instructions/InstallAndroid.png'), fit: BoxFit.cover),
           !isIosDevice

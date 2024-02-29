@@ -98,8 +98,8 @@ flutter:
     - assets/images/bombs/jelly_gelb_vertical.png
     - assets/images/bombs/jelly_gelb_horizontal.png
     - assets/images/login/login-page.png
-    - assets/icons/ak_uni_logo.jpg
     # Instructions
+    - assets/instructions/ak_uni_logo.png
     - assets/instructions/welcome_1.png
     - assets/instructions/welcome_2.png
     - assets/instructions/ins_1.png
@@ -115,7 +115,7 @@ flutter:
     - assets/instructions/ins_6_1_competition.png
     - assets/instructions/ins_6_1_FoMo.png
     - assets/instructions/InstallAndroid.png
-    - assets/instructions/InstallIos.png
+    - assets/instructions/installios.png
     - assets/instructions/InstallAndroid_alt1.png
     - assets/instructions/InstallAndroid_alt2.png
     # levels
