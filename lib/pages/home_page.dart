@@ -216,18 +216,6 @@ class _HomePageState extends State<HomePage>
                                   color: Colors.red, fontWeight: FontWeight.bold, fontSize: 15),
                             ));
                       }),
-                      Visibility(
-                        visible: html.window.navigator.userAgent.contains('17_4') &&
-                            (host.contains('felpower') || host.contains('jelly')),
-                        child: const Text(
-                            "Da sie auf iOS 17.4 geupdated "
-                            "haben, können "
-                            "sie nicht mehr an "
-                            "der Studie teilnehmen",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.red, fontWeight: FontWeight.bold, fontSize: 15)),
-                      ),
                       flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
                         builder: (context, state) {
                           return Visibility(
