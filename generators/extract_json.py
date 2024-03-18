@@ -41,7 +41,7 @@ def load_json_file():
 
 use_database = True
 # Access the 'users' data
-use_flutter = True
+use_flutter = False
 user_data = {}
 if use_flutter:
 	users_data = load_database("flutter")
