@@ -10,7 +10,6 @@ import 'package:bachelor_flutter_crush/pages/old_version_page.dart';
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:bachelor_flutter_crush/services/firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
@@ -39,18 +38,16 @@ void main() async {
             messagingSenderId: "552263184384",
             appId: "1:552263184384:web:87e17944dc571dc4e028e5"));
     await FirebaseStore.init();
-    if (!kDebugMode) {
-      if (!await DeviceHelper.isMobile()) {
-        runApp(const NonMobilePage());
-        return;
-      }
-      if (!DeviceHelper.isStandalone()) {
-        PWAInstall().setup(installCallback: () {
-          debugPrint('APP INSTALLED!');
-        });
-        runApp(const NonStandalonePage());
-        return;
-      }
+    if (!DeviceHelper.isMobile()) {
+      runApp(const NonMobilePage());
+      return;
+    }
+    if (!DeviceHelper.isStandalone()) {
+      PWAInstall().setup(installCallback: () {
+        debugPrint('APP INSTALLED!');
+      });
+      runApp(const NonStandalonePage());
+      return;
     }
     Uri currentUrl = Uri.parse(html.window.location.href);
     if (currentUrl.queryParameters['source'] == 'notification') {
