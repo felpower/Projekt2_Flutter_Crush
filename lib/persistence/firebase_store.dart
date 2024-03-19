@@ -210,7 +210,7 @@ class FirebaseStore {
     String hostname = Uri.parse(html.window.location.href).host;
     String version = "";
     if (hostname.contains('felpower') || hostname.contains('localhost')) {
-      return "testVersion-V04-";
+      return "testVersion-V10-";
     }
     if (hostname.contains('flutter')) {
       return "flutter-V10-";

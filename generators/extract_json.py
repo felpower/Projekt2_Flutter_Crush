@@ -41,7 +41,7 @@ def load_json_file():
 
 use_database = True
 # Access the 'users' data
-use_flutter = True
+use_flutter = False
 user_data = {}
 if use_flutter:
 	users_data = load_database("flutter")
@@ -531,6 +531,7 @@ if use_flutter:
 	dark_patterns_on = 0
 	average_age = 0
 	user_counter = 0
+	end_survey_counter = 0
 
 	for data in processed_data:
 		if 'daysSinceStart' in data and data['daysSinceStart']:
@@ -578,6 +579,8 @@ if use_flutter:
 					dark_patterns_on += 1
 		if 'age' in data and data['age']:
 			average_age += int(data['age'])
+		if 'playedtilend' in data and data['playedtilend']:
+			end_survey_counter += 1
 
 	average_time_needed = total_time_needed / count if count > 0 else 0
 
@@ -601,6 +604,7 @@ if use_flutter:
 		'appCloseDate': 'DarkPatterns Off',
 		'darkPatterns': 'DarkPatterns On',
 		'age': 'Average Age',
+		'gender': 'End Survey Done',
 	}
 
 	processed_data.append(statistics_overview)
@@ -625,6 +629,7 @@ if use_flutter:
 		'appCloseDate': dark_patterns_off,
 		'darkPatterns': dark_patterns_on,
 		'age': average_age / user_counter,
+		'gender': end_survey_counter,
 	}
 
 	processed_data.append(statistics)
