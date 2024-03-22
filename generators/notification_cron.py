@@ -49,7 +49,7 @@ for user_id, user_info in users_data.items():
 	days_since_start = 0
 	if init_app_start_time:
 		days_since_start = extract_days_since_start(init_app_start_time)
-	played_till_end = user_info.get('playedtilend', None)
+	played_till_end = user_info.get('endSurvey', None)
 	survey_filled = True if played_till_end else False
 	dark_patterns = int(user_info.get('darkPatterns', 0)) if user_info.get('darkPatterns') is not None else 0
 	if token_field:
@@ -66,7 +66,7 @@ for user_id, user_info in flutter_data.items():
 	days_since_start = 0
 	if init_app_start_time:
 		days_since_start = extract_days_since_start(init_app_start_time)
-	played_till_end = user_info.get('playedtilend', None)
+	played_till_end = user_info.get('endSurvey', None)
 	survey_filled = True if played_till_end else False
 	dark_patterns = int(user_info.get('darkPatterns', 0)) if user_info.get('darkPatterns') is not None else 0
 	if token_field:
@@ -134,11 +134,11 @@ def send_end_survey_reminder():
 	for token_info in user_tokens + flutter_tokens:
 		try:
 			if token_info['days_since_start'] > 30 and not token_info.get('survey_filled', False):
+				# print("Sent End Survey Reminder to user: " + token_info['user_id'] + ", who has played for " + str(
+				# 	token_info['days_since_start']) + " days")
 				send_message(token_info['token'],
 							 "Vielen Dank fürs Spielen, wir würden uns freuen, wenn du an unserer Umfrage teilnimmst!")
 				update_database(token_info)
-		# print("Sent End Survey Reminder to user: " + token_info['user_id'] + ", who has played for " + str(
-		# 	token_info['days_since_start']) + " days")
 		except Exception as e:
 			print('Failed to send message:', e)
 
