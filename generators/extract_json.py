@@ -531,6 +531,7 @@ if use_flutter:
 	dark_patterns_on = 0
 	average_age = 0
 	user_counter = 0
+	start_survey_done = 0
 	end_survey_counter = 0
 
 	for data in processed_data:
@@ -567,18 +568,20 @@ if use_flutter:
 		if 'notification_sent_time' in data and data['notification_sent_time']:
 			notifications_sent += 1
 		user_id = data.get('userId')
-		if user_id and 'darkPatterns' in data:
-			# If the user is not in the dictionary, add them
-			if user_id not in user_dark_patterns:
-				user_counter += 1
-				user_dark_patterns[user_id] = data['darkPatterns']
-				# Increment the appropriate counter
-				if data['darkPatterns'] == 0:
-					dark_patterns_off += 1
-				elif data['darkPatterns'] == 1:
-					dark_patterns_on += 1
 		if 'age' in data and data['age']:
 			average_age += int(data['age'])
+			start_survey_done += 1
+			user_id = data.get('userId')
+			if user_id and 'darkPatterns' in data:
+				# If the user is not in the dictionary, add them
+				if user_id not in user_dark_patterns:
+					user_counter += 1
+					user_dark_patterns[user_id] = data['darkPatterns']
+					# Increment the appropriate counter
+					if data['darkPatterns'] == 0:
+						dark_patterns_off += 1
+					elif data['darkPatterns'] == 1:
+						dark_patterns_on += 1
 		if 'playedtilend' in data and data['playedtilend']:
 			end_survey_counter += 1
 
@@ -604,7 +607,9 @@ if use_flutter:
 		'appCloseDate': 'DarkPatterns Off',
 		'darkPatterns': 'DarkPatterns On',
 		'age': 'Average Age',
-		'gender': 'End Survey Done',
+		'gender': 'Start Survey Done',
+		'education': 'End Survey Done',
+
 	}
 
 	processed_data.append(statistics_overview)
@@ -629,7 +634,8 @@ if use_flutter:
 		'appCloseDate': dark_patterns_off,
 		'darkPatterns': dark_patterns_on,
 		'age': average_age / user_counter,
-		'gender': end_survey_counter,
+		'gender': start_survey_done,
+		'education': end_survey_counter,
 	}
 
 	processed_data.append(statistics)
@@ -644,7 +650,10 @@ processed_data.extend(inactive_users_data)
 # Converting the processed data into a DataFrame
 processed_df = pd.DataFrame(processed_data)
 processed_df.head()
-excel_file_path = 'dark_patterns_data.xlsx'
+if use_flutter:
+	excel_file_path = 'flutter_data.xlsx'
+else:
+	excel_file_path = 'dark_patterns_data.xlsx'
 
 # Save the DataFrame as an Excel file
 processed_df.to_excel(excel_file_path, index=False, freeze_panes=(1, 1))

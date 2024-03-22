@@ -9,6 +9,9 @@ class DarkPatternsService {
   static Future<int> shouldDarkPatternsBeVisible() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     int? shouldDarkPatternsBeVisible = prefs.getInt(darkPatterns);
+    if (darkPatternsRandomValue > 1) {
+      darkPatternsRandomValue = 1;
+    }
     if (shouldDarkPatternsBeVisible == null) {
       shouldDarkPatternsBeVisible = darkPatternsRandomValue; // 1;//
       prefs.setInt(darkPatterns, shouldDarkPatternsBeVisible);
