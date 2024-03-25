@@ -92,7 +92,7 @@ def send_message(key, message_body="Hallo! Hast du heute schon gespielt?"):
 def send_notification():
 	for token_info in user_tokens:
 		try:
-			if token_info['dark_patterns'] > 0 and not token_info.get('survey_filled', False):
+			if token_info['dark_patterns'] == 1 and not token_info.get('survey_filled', False):
 				send_message(token_info['token'])
 				update_database(token_info)
 		except Exception as e:
@@ -102,7 +102,7 @@ def send_notification():
 def send_flutter_notification():
 	for token_info in flutter_tokens:
 		try:
-			if token_info['dark_patterns'] > 0 and not token_info.get('survey_filled', False):
+			if token_info['dark_patterns'] == 1 and not token_info.get('survey_filled', False):
 				send_message(token_info['token'])
 				update_database(token_info)
 		except Exception as e:
