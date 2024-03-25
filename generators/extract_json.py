@@ -529,6 +529,7 @@ if use_flutter:
 	user_dark_patterns = {}
 	dark_patterns_off = 0
 	dark_patterns_on = 0
+	dark_patterns_fomo = 0
 	average_age = 0
 	user_counter = 0
 	start_survey_done = 0
@@ -582,6 +583,8 @@ if use_flutter:
 						dark_patterns_off += 1
 					elif data['darkPatterns'] == 1:
 						dark_patterns_on += 1
+					elif data['darkPatterns'] == 2:
+						dark_patterns_fomo += 1
 		if 'playedtilend' in data and data['playedtilend']:
 			end_survey_counter += 1
 
@@ -605,7 +608,8 @@ if use_flutter:
 		'pushClickTime': 'Total Push Notifications Clicked',
 		'notification_sent_time': 'Total Notifications Sent',
 		'appCloseDate': 'DarkPatterns Off',
-		'darkPatterns': 'DarkPatterns On',
+		'session': 'DarkPatterns On',
+		'sessionCounter': 'DarkPatterns FOMO',
 		'age': 'Average Age',
 		'gender': 'Start Survey Done',
 		'education': 'End Survey Done',
@@ -632,7 +636,8 @@ if use_flutter:
 		'pushClickTime': push_clicked,
 		'notification_sent_time': notifications_sent,
 		'appCloseDate': dark_patterns_off,
-		'darkPatterns': dark_patterns_on,
+		'session': dark_patterns_on,
+		'sessionCounter': dark_patterns_fomo,
 		'age': average_age / user_counter,
 		'gender': start_survey_done,
 		'education': end_survey_counter,
