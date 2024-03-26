@@ -502,6 +502,7 @@ total_days_played = 0
 daily_players = 0
 users_played_last_three_days = 0
 users_played_any_of_last_three_days = 0
+installed_yesterday = 0
 total_app_starts = 0
 total_time_needed = 0
 count = 0
@@ -530,6 +531,8 @@ four_days_ago = datetime.now().date() - timedelta(days=4)
 # Get the dates for the last 3 days starting from yesterday
 last_three_dates = {four_days_ago + timedelta(days=i) for i in range(1, 4)}
 
+yesterday = (datetime.now() - timedelta(days=1)).date()
+
 # Initialize a dictionary to store the dates when each user played
 user_play_dates = {}
 for data in processed_data:
@@ -537,6 +540,12 @@ for data in processed_data:
 		total_days_since_start += int(data['daysSinceStart'])
 		if data['daysSinceStart'] == data['daysPlayed']:
 			daily_players += 1
+	if 'initAppStartDate' in data and data['initAppStartDate']:
+		# Convert the 'initAppStartDate' string to a date object
+		init_app_start_date = datetime.strptime(data['initAppStartDate'], '%Y-%m-%d').date()
+		# If the init_app_start_date is yesterday, increment the counter
+		if init_app_start_date == yesterday:
+			installed_yesterday += 1
 	if 'daysPlayed' in data and data['daysPlayed']:
 		total_days_played += int(data['daysPlayed'])
 	if 'appStartDate' in data and data['appStartDate']:
@@ -610,6 +619,7 @@ statistics_overview = {
 	'daysPlayed': "Days Played Total",
 	'initAppStartTime': 'Users that played daily',
 	'initAppStartDate': 'Played all last 3 days',
+	'startOfLevelTime': "Installed yesterday",
 	'appStartTime': "Played any of last 3 days",
 	'appStartDate': "Total App Starts",
 	'timeNeededInSeconds': "Average Playtime per level",
@@ -641,6 +651,7 @@ statistics = {
 	'daysPlayed': total_days_played,
 	'initAppStartTime': daily_players,
 	'initAppStartDate': users_played_last_three_days,
+	'startOfLevelTime': installed_yesterday,
 	'appStartTime': users_played_any_of_last_three_days,
 	'appStartDate': total_app_starts,
 	'timeNeededInSeconds': average_time_needed,
