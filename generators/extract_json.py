@@ -501,6 +501,7 @@ total_days_since_start = 0
 total_days_played = 0
 daily_players = 0
 users_played_last_three_days = 0
+users_played_any_of_last_three_days = 0
 total_app_starts = 0
 total_time_needed = 0
 count = 0
@@ -598,6 +599,8 @@ for data in processed_data:
 for play_dates in user_play_dates.values():
 	if last_three_dates.issubset(play_dates):
 		users_played_last_three_days += 1
+	if any(date in play_dates for date in last_three_dates):
+		users_played_any_of_last_three_days += 1
 average_time_needed = total_time_needed / count if count > 0 else 0
 
 statistics_overview = {
@@ -607,7 +610,8 @@ statistics_overview = {
 	'daysPlayed': "Days Played Total",
 	'initAppStartTime': 'Users that played daily',
 	'initAppStartDate': 'Played all last 3 days',
-	'appStartTime': "Total App Starts",
+	'appStartTime': "Played any of last 3 days",
+	'appStartDate': "Total App Starts",
 	'timeNeededInSeconds': "Average Playtime per level",
 	'levelStart': "Total Levels Started",
 	'levelFinish': "Total Levels Finished",
@@ -637,7 +641,8 @@ statistics = {
 	'daysPlayed': total_days_played,
 	'initAppStartTime': daily_players,
 	'initAppStartDate': users_played_last_three_days,
-	'appStartTime': total_app_starts,
+	'appStartTime': users_played_any_of_last_three_days,
+	'appStartDate': total_app_starts,
 	'timeNeededInSeconds': average_time_needed,
 	'levelStart': started_levels,
 	'levelFinish': finished_levels,
