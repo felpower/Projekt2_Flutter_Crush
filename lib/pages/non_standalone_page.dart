@@ -34,9 +34,7 @@ class _NonStandalonePageState extends State<NonStandalonePage> {
         home: Scaffold(
             body: Center(
                 child: ListView(padding: const EdgeInsets.all(20), children: [
-                  const Image(
-                      image: AssetImage('assets/instructions/ak_uni_logo.png'),
-                      fit: BoxFit.cover),
+          const Image(image: AssetImage('assets/instructions/ak_uni_logo.png'), fit: BoxFit.cover),
           const Text('Um an der Studie teilnehmen zu können',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -64,21 +62,13 @@ class _NonStandalonePageState extends State<NonStandalonePage> {
                   }
                 },
                 child: const Text('Installieren')),
-          const Text('''
-              
-Im Anschluss können Sie die Seite bzw. das Spiel wie jede gewöhnliche App handhaben.''',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Colors.black,
-                  backgroundColor: Colors.white,
-                  decoration: TextDecoration.none)),
           isIosDevice
               ? const Text('''
-                  
+
+Sollte diese Anleitung nicht Ihrer Darstellung entsprechen müssen Sie den Link kopieren und in Safari (Standardbrowser IOS) einfügen.          
+
 Drücken Sie auf den „Teilen“-Button (kleine Viereck mit dem Pfeil nach oben) -> Option -> zum Home-Bildschirm
-                  
-Achtung: Sollte diese Anleitung nicht Ihrer Darstellung entsprechen müssen Sie den Link kopieren und in Safari (Standardbrowser IOS) einfügen.
-                  
+
 Beim ersten Öffnen der App werden Sie gefragt, ob diese Ihnen Pushnachrichten senden darf. Bitte klicken Sie hier auf „Erlauben“. Dies ist wichtig für den vollen Funktionsumfang der Studie!
 ''',
                   textAlign: TextAlign.center,
@@ -86,7 +76,16 @@ Beim ersten Öffnen der App werden Sie gefragt, ob diese Ihnen Pushnachrichten s
                       color: Colors.black,
                       backgroundColor: Colors.white,
                       decoration: TextDecoration.none))
-              : const Text('''
+              : Container(),
+                  const Text('''
+Im Anschluss können Sie die Seite bzw. das Spiel wie jede gewöhnliche App handhaben.''',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.black,
+                          backgroundColor: Colors.white,
+                          decoration: TextDecoration.none)),
+          !isIosDevice
+              ? const Text('''
                   
 Die Installation funktioniert je nach Smartphone wie in Option 1 oder Option 2 beschrieben (siehe unten).
                   
@@ -95,7 +94,8 @@ Unabhängig davon werden Sie beim ersten Öffnen der App gefragt, ob diese Ihnen
                   style: TextStyle(
                       color: Colors.black,
                       backgroundColor: Colors.white,
-                      decoration: TextDecoration.none)),
+                      decoration: TextDecoration.none))
+              : Container(),
           const SizedBox(height: 20),
           !isIosDevice
               ? const Text('Option 1',

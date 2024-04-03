@@ -645,7 +645,7 @@ if use_flutter:
 	processed_data.append(statistics_overview)
 
 statistics = {
-	'userNumber': 'Statistics',
+	'userNumber': datetime.now(),
 	'userId': total_users - inactive_user_counter,
 	'daysSinceStart': total_days_since_start,
 	'daysPlayed': total_days_played,
