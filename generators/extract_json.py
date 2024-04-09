@@ -41,7 +41,7 @@ def load_json_file():
 
 use_database = True
 # Access the 'users' data
-use_flutter = False
+use_flutter = True
 user_data = {}
 if use_flutter:
 	users_data = load_database("flutter")
@@ -524,6 +524,8 @@ average_age = 0
 user_counter = 0
 start_survey_done = 0
 end_survey_counter = 0
+played_till_end = 0
+influenced = 0
 
 # Get the date 4 days ago
 four_days_ago = datetime.now().date() - timedelta(days=4)
@@ -603,6 +605,11 @@ for data in processed_data:
 					dark_patterns_fomo += 1
 	if 'playedtilend' in data and data['playedtilend']:
 		end_survey_counter += 1
+		if data['playedtilend'] == '1':
+			played_till_end += 1
+	if 'influenced' in data and data['influenced']:
+		if data['influenced'] == '1':
+			influenced += 1
 
 # Check if each user played each of the last 3 days
 for play_dates in user_play_dates.values():
@@ -639,6 +646,8 @@ statistics_overview = {
 	'age': 'Average Age',
 	'gender': 'Start Survey Done',
 	'education': 'End Survey Done',
+	'endSurvey': 'Played till end',
+	'endsurveydate': 'Realised DPs',
 }
 
 if use_flutter:
@@ -671,6 +680,8 @@ statistics = {
 	'age': average_age / user_counter,
 	'gender': start_survey_done,
 	'education': end_survey_counter,
+	'endSurvey': played_till_end,
+	'endsurveydate': influenced,
 }
 
 if use_flutter:
