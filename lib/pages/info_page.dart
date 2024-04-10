@@ -144,9 +144,9 @@ class _DeviceTokenState extends State<DeviceToken> {
                             const Text(
                                 '''Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)). In den oberen Kästchen siehst du einerseits deine aktuelle Anzahl an Münzen (2) (diese kannst du nutzen um Sonderjellies zu kaufen) und, wie viele XP du hast (3) (diese bestimmen deine Position im Ranking der Highscore-Tafel (4). Die Highscore-Tafel (4) zeigt dir an, wie gut du dich im Vergleich zu anderen Spielern schlägst. Im Menü (5) kannst du diese Instruktionen jederzeit erneut durchlesen, solltest du etwas vergessen haben. 
                                 ''')
-                          else if (darkPatternsState is DarkPatternsDeactivatedState)
+                          else if (darkPatternsState is DarkPatternsDeactivatedState || darkPatternsState is DarkPatternsRewardsState || darkPatternsState is DarkPatternsAppointmentState)
                             const Text(
-                                '''Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)) undwie viele Münzen du hast (2) (diese kannst du nutzen um Sonderjellies zu kaufen). Im Menü (3) kannst du diese Instruktionen jederzeit erneut durchlesen, solltest du etwas vergessen haben
+                                '''Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)) und wie viele Münzen du hast (2) (diese kannst du nutzen um Sonderjellies zu kaufen). Im Menü (3) kannst du diese Instruktionen jederzeit erneut durchlesen, solltest du etwas vergessen haben
                                 ''')
                           else if (darkPatternsState is DarkPatternsCompetitionState)
                             const Text(
@@ -161,7 +161,7 @@ class _DeviceTokenState extends State<DeviceToken> {
                             const Image(
                                 image: AssetImage('assets/instructions/ins_6_activated.png'),
                                 fit: BoxFit.cover)
-                          else if (darkPatternsState is DarkPatternsDeactivatedState)
+                          else if (darkPatternsState is DarkPatternsDeactivatedState || darkPatternsState is DarkPatternsRewardsState || darkPatternsState is DarkPatternsAppointmentState)
                             const Image(
                                 image: AssetImage('assets/instructions/ins_6_deactivated.png'),
                                 fit: BoxFit.cover)
@@ -179,7 +179,7 @@ class _DeviceTokenState extends State<DeviceToken> {
                             const Text(
                                 '''Außerdem gibt es im Menü noch zwei weitere spannende Features für dich: Im Shop (1) kannst du mit den erspielten Münzen Sonderjellies kaufen. Außerdem wartet täglich eine neue Belohnung darauf von dir abgeholt zu werden (2). Die Musik kann ebenfalls im Menü ein- und ausgeschalten werden (3).
                                 ''')
-                          else if (darkPatternsState is DarkPatternsDeactivatedState)
+                          else if (darkPatternsState is DarkPatternsDeactivatedState || darkPatternsState is DarkPatternsRewardsState || darkPatternsState is DarkPatternsAppointmentState)
                             const Text(
                                 '''Außerdem gibt es im Menü noch ein weiters spannendes Feature für dich: Im Shop (1) kannst du mit den erspielten Münzen Sonderjellies kaufen. Die Musik kann ebenfalls im Menü ein- und ausgeschalten werden (2).
                                 ''')
@@ -195,7 +195,7 @@ class _DeviceTokenState extends State<DeviceToken> {
                             const Image(
                                 image: AssetImage('assets/instructions/ins_6_1_activated.png'),
                                 fit: BoxFit.cover)
-                          else if (darkPatternsState is DarkPatternsDeactivatedState)
+                          else if (darkPatternsState is DarkPatternsDeactivatedState || darkPatternsState is DarkPatternsRewardsState || darkPatternsState is DarkPatternsAppointmentState)
                             const Image(
                                 image: AssetImage('assets/instructions/ins_6_1_deactivated.png'),
                                 fit: BoxFit.cover)
