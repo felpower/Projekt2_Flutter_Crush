@@ -701,6 +701,7 @@ if use_flutter:
 	processed_data.append({})
 	processed_data.append({})
 combined_statistics = dict(zip(statistics_overview.values(), statistics.values()))
+print("\n")
 for key, value in combined_statistics.items():
 	print(f"{key}: {value}")
 
