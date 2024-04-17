@@ -55,6 +55,7 @@ userCounter = 1
 total_users = len(users_data)
 # Counter for inactive users starts from the total number of users
 inactive_user_counter = total_users
+total_counter = 0
 for user_id, user_info in users_data.items():
 	try:
 		row = {
@@ -493,6 +494,8 @@ for user_id, user_info in users_data.items():
 		else:
 			userCounter += 1
 			processed_data.append({})
+		total_counter += 1
+		print(f"\rNumber of users processed: {total_counter}/{total_users}", end="")
 	except Exception as e:
 		print(f"Skipping user {user_id} due to error: {e}\nTraceback: {traceback.format_exc()}")
 		continue
