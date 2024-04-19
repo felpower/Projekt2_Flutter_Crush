@@ -523,8 +523,6 @@ class _SurveyPageState extends State<SurveyPage> {
   }
 
   void sendEndSurvey(List<String> resultString) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
     FirebaseStore.sendEndSurvey(resultString);
-    prefs.setString("endSurvey", DateTime.now().toString());
   }
 }
