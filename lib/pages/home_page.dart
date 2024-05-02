@@ -476,6 +476,21 @@ class _HomePageState extends State<HomePage>
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)), // Rounded corners
               )),
+          Visibility(
+              visible: false,
+              child: ListTile(
+                leading: const Icon(Icons.question_mark),
+                title: const Text('End Survey', style: TextStyle(color: Colors.black)),
+                onTap: () {
+                  Navigator.of(context).pushNamed(
+                    "/endSurvey",
+                  );
+                },
+                tileColor: Colors.grey[200],
+                // Background color to make it feel like a button
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)), // Rounded corners
+              )),
         ],
       ),
     );

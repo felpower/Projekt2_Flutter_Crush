@@ -490,17 +490,6 @@ class _SurveyPageState extends State<SurveyPage> {
           case "0":
             return task.steps[12].stepIdentifier;
           default:
-            return task.steps[9].stepIdentifier;
-        }
-      }),
-    );
-    task.addNavigationRule(
-      forTriggerStepIdentifier: task.steps[10].stepIdentifier,
-      navigationRule: ConditionalNavigationRule(resultToStepIdentifierMapper: (input) {
-        switch (input) {
-          case "0":
-            return task.steps[12].stepIdentifier;
-          default:
             return task.steps[11].stepIdentifier;
         }
       }),
