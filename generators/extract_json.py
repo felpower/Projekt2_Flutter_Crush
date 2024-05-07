@@ -2,7 +2,7 @@ import json
 import re
 import traceback
 from datetime import date, datetime, timedelta
-import time
+
 import firebase_admin
 import pandas as pd
 from firebase_admin import credentials
@@ -219,7 +219,7 @@ for user_id, user_info in users_data.items():
 
 					# Find the closest start time
 					closest_start_time = min(start_times[level],
-					                         key=lambda x: abs(datetime.combine(dummy_date, x[1]) - finish_datetime))
+											 key=lambda x: abs(datetime.combine(dummy_date, x[1]) - finish_datetime))
 					# Calculate the time difference
 					start_datetime = datetime.combine(dummy_date, closest_start_time[1])
 
@@ -579,17 +579,17 @@ user_play_dates = {}
 
 # Initialize the dictionaries
 dark_patterns_off_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users': 0, 'Total Levels Started': 0,
-                           'Total Levels Finished': 0, 'Total Levels Bought': 0, 'Total Items Bought': 0,
-                           'Average Age': 0, 'Max Level': 0}
+						   'Total Levels Finished': 0, 'Total Levels Bought': 0, 'Total Items Bought': 0,
+						   'Average Age': 0, 'Max Level': 0}
 dark_patterns_on_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users': 0, 'Total Levels Started': 0,
-                          'Total Levels Finished': 0, 'Total Levels Bought': 0, 'Total Items Bought': 0,
-                          'Average Age': 0, 'Max Level': 0}
+						  'Total Levels Finished': 0, 'Total Levels Bought': 0, 'Total Items Bought': 0,
+						  'Average Age': 0, 'Max Level': 0}
 dark_patterns_fomo_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users': 0, 'Total Levels Started': 0,
-                            'Total Levels Finished': 0, 'Total Levels Bought': 0, 'Total Items Bought': 0,
-                            'Average Age': 0, 'Max Level': 0}
+							'Total Levels Finished': 0, 'Total Levels Bought': 0, 'Total Items Bought': 0,
+							'Average Age': 0, 'Max Level': 0}
 dark_patterns_var_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users': 0, 'Total Levels Started': 0,
-                           'Total Levels Finished': 0, 'Total Levels Bought': 0, 'Total Items Bought': 0,
-                           'Average Age': 0, 'Max Level': 0}
+						   'Total Levels Finished': 0, 'Total Levels Bought': 0, 'Total Items Bought': 0,
+						   'Average Age': 0, 'Max Level': 0}
 
 try:
 	for data in processed_data:
@@ -597,8 +597,10 @@ try:
 		dark_pattern_type = data.get('darkPatterns')
 		if data.get('dropout') == 1 and user_id not in inactive_users:
 			dropout_counter += 1
-			dropout_age += data.get('age')
-			dropout_levels += data.get('levelStart')
+			if 'age' in data and data['age']:
+				dropout_age += data.get('age')
+			if 'levelStart' in data and data['levelStart']:
+				dropout_levels += data.get('levelStart')
 			if dark_pattern_type == 0:  # Off
 				dark_patterns_off_stats['Total Dropouts'] += 1
 			elif dark_pattern_type == 1:  # On
@@ -697,7 +699,7 @@ try:
 				dark_patterns_off_stats['Average Age'] += int(data.get('age'))
 			if data.get('levelFinish'):
 				dark_patterns_off_stats['Max Level'] = max(dark_patterns_off_stats['Max Level'],
-				                                           int(data.get('levelFinish')))
+														   int(data.get('levelFinish')))
 		elif dark_pattern_type == 1:  # On
 			if data.get('levelStart'):
 				dark_patterns_on_stats['Total Levels Started'] += 1
@@ -711,7 +713,7 @@ try:
 				dark_patterns_on_stats['Average Age'] += int(data.get('age'))
 			if data.get('levelFinish'):
 				dark_patterns_on_stats['Max Level'] = max(dark_patterns_on_stats['Max Level'],
-				                                          int(data.get('levelFinish')))
+														  int(data.get('levelFinish')))
 		elif dark_pattern_type == 2:  # FOMO
 			if data.get('levelStart'):
 				dark_patterns_fomo_stats['Total Levels Started'] += 1
@@ -725,7 +727,7 @@ try:
 				dark_patterns_fomo_stats['Average Age'] += int(data.get('age'))
 			if data.get('levelFinish'):
 				dark_patterns_fomo_stats['Max Level'] = max(dark_patterns_fomo_stats['Max Level'],
-				                                            int(data.get('levelFinish')))
+															int(data.get('levelFinish')))
 		elif dark_pattern_type == 3:  # VAR
 			if data.get('levelStart'):
 				dark_patterns_var_stats['Total Levels Started'] += 1
@@ -739,7 +741,7 @@ try:
 				dark_patterns_var_stats['Average Age'] += int(data.get('age'))
 			if data.get('levelFinish'):
 				dark_patterns_var_stats['Max Level'] = max(dark_patterns_var_stats['Max Level'],
-				                                           int(data.get('levelFinish')))
+														   int(data.get('levelFinish')))
 except Exception as e:
 	print(f"Error: {e}")
 average_time_needed = 0
@@ -754,10 +756,14 @@ try:
 	dark_patterns_fomo_stats['Active Users'] = dark_patterns_fomo - dark_patterns_fomo_stats['Total Dropouts']
 	dark_patterns_var_stats['Active Users'] = dark_patterns_var - dark_patterns_var_stats['Total Dropouts']
 
-	dark_patterns_off_stats['Average Age'] /= dark_patterns_off
-	dark_patterns_on_stats['Average Age'] /= dark_patterns_on
-	dark_patterns_fomo_stats['Average Age'] /= dark_patterns_fomo
-	dark_patterns_var_stats['Average Age'] /= dark_patterns_var
+	dark_patterns_off_stats['Average Age'] = dark_patterns_off_stats[
+												 'Average Age'] / dark_patterns_off if dark_patterns_off != 0 else 0
+	dark_patterns_on_stats['Average Age'] = dark_patterns_on_stats[
+												'Average Age'] / dark_patterns_on if dark_patterns_on != 0 else 0
+	dark_patterns_fomo_stats['Average Age'] = dark_patterns_fomo_stats[
+												  'Average Age'] / dark_patterns_fomo if dark_patterns_fomo != 0 else 0
+	dark_patterns_var_stats['Average Age'] = dark_patterns_var_stats[
+												 'Average Age'] / dark_patterns_var if dark_patterns_var != 0 else 0
 
 	# Check if each user played each of the last 3 days
 	for play_dates in user_play_dates.values():
