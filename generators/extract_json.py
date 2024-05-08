@@ -808,9 +808,6 @@ statistics_overview = {
 	'endsurveydate': 'Realised DPs',
 }
 
-if use_flutter:
-	processed_data.append(statistics_overview)
-
 statistics = {
 	'userNumber': datetime.now(),
 	'dropout': dropout_counter,
