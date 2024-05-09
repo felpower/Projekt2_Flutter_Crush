@@ -69,8 +69,10 @@ total_users = len(users_data)
 inactive_user_counter = total_users
 inactive_users = set()
 total_counter = 0
+play_dates_by_type = {0: {}, 1: {}, 2: {}, 3: {}}
 for user_id, user_info in users_data.items():
 	try:
+		dark_patterns_type = int(user_info.get('darkPatterns', 0)) if user_info.get('darkPatterns') is not None else ''
 		row = {
 			'userNumber': userCounter,
 			'userId': user_id,
@@ -107,7 +109,7 @@ for user_id, user_info in users_data.items():
 			'appCloseDate': "",
 			'session': "",
 			'sessionCounter': "",
-			'darkPatterns': int(user_info.get('darkPatterns', 0)) if user_info.get('darkPatterns') is not None else '',
+			'darkPatterns': dark_patterns_type,
 			'age': "",
 			'gender': "",
 			'education': "",
@@ -236,6 +238,9 @@ for user_id, user_info in users_data.items():
 
 					row['finishOfLevelTime'] = str(finish_time)
 					finish_date = extract_date_time(level_time)[0]
+					if user_id not in play_dates_by_type[dark_patterns_type]:
+						play_dates_by_type[dark_patterns_type][user_id] = []
+					play_dates_by_type[dark_patterns_type][user_id].append(finish_date)
 					row['finishOfLevelDate'] = str(finish_date)
 					# Assign the time difference to the 'timeNeededInSec' field in the row dictionary
 					row['timeNeededInSeconds'] = time_difference.total_seconds()
@@ -580,16 +585,16 @@ user_play_dates = {}
 # Initialize the dictionaries
 dark_patterns_off_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users': 0, 'Total Levels Started': 0,
 						   'Total Levels Finished': 0, 'Total Levels Bought': 0, 'Total Items Bought': 0,
-						   'Average Age': 0, 'Max Level': 0}
+						   'Average Age': 0, 'Max Level': 0, 'Longest Streak': 0}
 dark_patterns_on_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users': 0, 'Total Levels Started': 0,
 						  'Total Levels Finished': 0, 'Total Levels Bought': 0, 'Total Items Bought': 0,
-						  'Average Age': 0, 'Max Level': 0}
+						  'Average Age': 0, 'Max Level': 0, 'Longest Streak': 0}
 dark_patterns_fomo_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users': 0, 'Total Levels Started': 0,
 							'Total Levels Finished': 0, 'Total Levels Bought': 0, 'Total Items Bought': 0,
-							'Average Age': 0, 'Max Level': 0}
+							'Average Age': 0, 'Max Level': 0, 'Longest Streak': 0}
 dark_patterns_var_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users': 0, 'Total Levels Started': 0,
 						   'Total Levels Finished': 0, 'Total Levels Bought': 0, 'Total Items Bought': 0,
-						   'Average Age': 0, 'Max Level': 0}
+						   'Average Age': 0, 'Max Level': 0, 'Longest Streak': 0}
 
 try:
 	for data in processed_data:
@@ -745,6 +750,24 @@ try:
 except Exception as e:
 	print(f"Error: {e}")
 average_time_needed = 0
+longest_streaks = {0: 0, 1: 0, 2: 0, 3: 0}
+for dark_pattern_type, play_dates in play_dates_by_type.items():
+	for dates in play_dates.values():
+		# Sort the dates
+		dates.sort()
+
+		# Find the longest streak of consecutive dates
+		longest_streak = 0
+		current_streak = 1
+		for i in range(1, len(dates)):
+			if dates[i] == dates[i - 1] + timedelta(days=1):
+				current_streak += 1
+			else:
+				longest_streak = max(longest_streak, current_streak)
+				current_streak = 1
+		longest_streak = max(longest_streak, current_streak)
+
+		longest_streaks[dark_pattern_type] = max(longest_streaks[dark_pattern_type], longest_streak)
 try:
 	dark_patterns_off_stats['Total Users'] = dark_patterns_off
 	dark_patterns_on_stats['Total Users'] = dark_patterns_on
@@ -756,14 +779,32 @@ try:
 	dark_patterns_fomo_stats['Active Users'] = dark_patterns_fomo - dark_patterns_fomo_stats['Total Dropouts']
 	dark_patterns_var_stats['Active Users'] = dark_patterns_var - dark_patterns_var_stats['Total Dropouts']
 
-	dark_patterns_off_stats['Average Age'] = dark_patterns_off_stats[
-												 'Average Age'] / dark_patterns_off if dark_patterns_off != 0 else 0
-	dark_patterns_on_stats['Average Age'] = dark_patterns_on_stats[
-												'Average Age'] / dark_patterns_on if dark_patterns_on != 0 else 0
-	dark_patterns_fomo_stats['Average Age'] = dark_patterns_fomo_stats[
-												  'Average Age'] / dark_patterns_fomo if dark_patterns_fomo != 0 else 0
-	dark_patterns_var_stats['Average Age'] = dark_patterns_var_stats[
-												 'Average Age'] / dark_patterns_var if dark_patterns_var != 0 else 0
+	dark_patterns_off_stats['Average Age'] = round(
+		dark_patterns_off_stats['Average Age'] / dark_patterns_off if dark_patterns_off != 0 else 0, 2)
+	dark_patterns_on_stats['Average Age'] = round(
+		dark_patterns_on_stats['Average Age'] / dark_patterns_on if dark_patterns_on != 0 else 0, 2)
+	dark_patterns_fomo_stats['Average Age'] = round(
+		dark_patterns_fomo_stats['Average Age'] / dark_patterns_fomo if dark_patterns_fomo != 0 else 0, 2)
+	dark_patterns_var_stats['Average Age'] = round(
+		dark_patterns_var_stats['Average Age'] / dark_patterns_var if dark_patterns_var != 0 else 0, 2)
+
+	dark_patterns_off_stats['Average Levels'] = round(
+		dark_patterns_off_stats['Total Levels Started'] / dark_patterns_off_stats['Active Users'] if
+		dark_patterns_off_stats['Active Users'] != 0 else 0, 2)
+	dark_patterns_on_stats['Average Levels'] = round(
+		dark_patterns_on_stats['Total Levels Started'] / dark_patterns_on_stats['Active Users'] if
+		dark_patterns_on_stats['Active Users'] != 0 else 0, 2)
+	dark_patterns_fomo_stats['Average Levels'] = round(
+		dark_patterns_fomo_stats['Total Levels Started'] / dark_patterns_fomo_stats['Active Users'] if
+		dark_patterns_fomo_stats['Active Users'] != 0 else 0, 2)
+	dark_patterns_var_stats['Average Levels'] = round(
+		dark_patterns_var_stats['Total Levels Started'] / dark_patterns_var_stats['Active Users'] if
+		dark_patterns_var_stats['Active Users'] != 0 else 0, 2)
+
+	dark_patterns_off_stats['Longest Streak'] = longest_streaks[0]
+	dark_patterns_on_stats['Longest Streak'] = longest_streaks[1]
+	dark_patterns_fomo_stats['Longest Streak'] = longest_streaks[2]
+	dark_patterns_var_stats['Longest Streak'] = longest_streaks[3]
 
 	# Check if each user played each of the last 3 days
 	for play_dates in user_play_dates.values():
@@ -819,7 +860,7 @@ statistics = {
 	'startOfLevelTime': installed_yesterday,
 	'appStartTime': users_played_any_of_last_three_days,
 	'appStartDate': total_app_starts,
-	'timeNeededInSeconds': average_time_needed,
+	'timeNeededInSeconds': round(average_time_needed, 2),
 	'levelStart': started_levels,
 	'levelFinish': finished_levels,
 	'levelWon': levels_won,
@@ -834,7 +875,7 @@ statistics = {
 	'session': dark_patterns_on,
 	'sessionCounter': dark_patterns_fomo,
 	'darkPatterns': dark_patterns_var,
-	'age': average_age / user_counter,
+	'age': round(average_age / user_counter, 2),
 	'gender': start_survey_done,
 	'education': end_survey_counter,
 	'endSurvey': played_till_end,
@@ -851,7 +892,7 @@ for key, value in combined_statistics.items():
 	print(f"{key}: {value}")
 
 # Print the results
-print("Dropout Age:", dropout_age / dropout_counter)
+# print("Dropout Age:", dropout_age / dropout_counter)
 print("DarkPatterns Off:", dark_patterns_off_stats)
 print("DarkPatterns On:", dark_patterns_on_stats)
 print("DarkPatterns FOMO:", dark_patterns_fomo_stats)
