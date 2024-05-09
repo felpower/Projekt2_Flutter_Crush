@@ -53,7 +53,7 @@ def load_json_file():
 
 use_database = True
 # Access the 'users' data
-use_flutter = False
+use_flutter = True
 user_data = {}
 if use_flutter:
 	users_data = load_database("flutter")
@@ -897,6 +897,33 @@ print("DarkPatterns Off:", dark_patterns_off_stats)
 print("DarkPatterns On:", dark_patterns_on_stats)
 print("DarkPatterns FOMO:", dark_patterns_fomo_stats)
 print("DarkPatterns VAR:", dark_patterns_var_stats)
+
+# Determine the filename based on the value of use_flutter
+filename = 'statistics_flutter.txt' if use_flutter else 'statistics_ak.txt'
+
+# Open the file in write mode ('w')
+with open(filename, 'w') as file:
+	# Write the combined statistics to the file
+	file.write("Combined Statistics:\n")
+	for key, value in combined_statistics.items():
+		file.write(f"{key}: {value}\n")
+	file.write("\n")
+	# Write the dark_patterns statistics to the file
+	file.write("DarkPatterns Off:\n")
+	for key, value in dark_patterns_off_stats.items():
+		file.write(f"{key}: {value}\n")
+	file.write("\n")
+	file.write("DarkPatterns On:\n")
+	for key, value in dark_patterns_on_stats.items():
+		file.write(f"{key}: {value}\n")
+	file.write("\n")
+	file.write("DarkPatterns FOMO:\n")
+	for key, value in dark_patterns_fomo_stats.items():
+		file.write(f"{key}: {value}\n")
+	file.write("\n")
+	file.write("DarkPatterns VAR:\n")
+	for key, value in dark_patterns_var_stats.items():
+		file.write(f"{key}: {value}\n")
 
 # Converting the processed data into a DataFrame
 print("\nConverting the processed data into a DataFrame... Please wait")

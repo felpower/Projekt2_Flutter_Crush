@@ -1,0 +1,83 @@
+Combined Statistics:
+Statistics: 2024-05-09 19:12:29.284279
+Users dropped out: 48
+Inactive Users: 219
+Days Since Start Total: 7389
+Days Played Total: 456
+Users that played daily: 0
+Played all last 3 days: 0
+Installed yesterday: 0
+Played any of last 3 days: 1
+Total App Starts: 2041
+Average Playtime per level: 92.93
+Total Levels Started: 2575
+Total Levels Finished: 2035
+Total Levels Won: 1632
+Max Level: 447
+Total Levels Bought: 255
+Total Items Bought: 28
+Total Daily Rewards Collected: 44
+Total Highscores Checked: 279
+Total Push Notifications Clicked: 78
+Total Notifications Sent: 1681
+DarkPatterns Off: 54
+DarkPatterns On: 35
+DarkPatterns FOMO: 0
+DarkPatterns VAR: 0
+Average Age: 31.99
+Start Survey Done: 89
+End Survey Done: 21
+Played till end: 11
+Realised DPs: 9
+
+DarkPatterns Off:
+Total Users: 54
+Total Dropouts: 34
+Active Users: 20
+Total Levels Started: 806
+Total Levels Finished: 659
+Total Levels Bought: 11
+Total Items Bought: 3
+Average Age: 33.65
+Max Level: 86
+Longest Streak: 4
+Average Levels: 40.3
+
+DarkPatterns On:
+Total Users: 35
+Total Dropouts: 14
+Active Users: 21
+Total Levels Started: 1769
+Total Levels Finished: 1376
+Total Levels Bought: 244
+Total Items Bought: 25
+Average Age: 29.43
+Max Level: 447
+Longest Streak: 3
+Average Levels: 84.24
+
+DarkPatterns FOMO:
+Total Users: 0
+Total Dropouts: 0
+Active Users: 0
+Total Levels Started: 0
+Total Levels Finished: 0
+Total Levels Bought: 0
+Total Items Bought: 0
+Average Age: 0
+Max Level: 0
+Longest Streak: 0
+Average Levels: 0
+
+DarkPatterns VAR:
+Total Users: 0
+Total Dropouts: 0
+Active Users: 0
+Total Levels Started: 0
+Total Levels Finished: 0
+Total Levels Bought: 0
+Total Items Bought: 0
+Average Age: 0
+Max Level: 0
+Longest Streak: 0
+Average Levels: 0
