@@ -1045,7 +1045,7 @@ if use_flutter:
 else:
 	excel_file_path = 'dark_patterns_data.xlsx'
 print(
-	"\nSaving the DataFrame as an Excel file... Please wait and make sure the excel file stays close until creation is completed")
+	"\nSaving the DataFrame as an Excel file... Please wait and make sure the excel file stays closed until creation is completed")
 # Save the DataFrame as an Excel file
 processed_df.to_excel(excel_file_path, index=False, freeze_panes=(1, 1))
 print("Excel creation completed.")
