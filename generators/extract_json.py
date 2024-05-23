@@ -53,7 +53,7 @@ def load_json_file():
 
 use_database = True
 # Access the 'users' data
-use_flutter = False
+use_flutter = True
 user_data = {}
 if use_flutter:
 	users_data = load_database("flutter")
@@ -577,6 +577,7 @@ occupation_counter = {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
 frequency_playing_counter = {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0}
 total_hours_playing = 0
 end_survey_done = 0
+session_counter = {}
 
 # Get the date 4 days ago
 four_days_ago = datetime.now().date() - timedelta(days=4)
@@ -609,6 +610,8 @@ dark_patterns_off_stats.update({
 	'frequencyPlaying': frequency_playing_counter.copy(),
 	'hoursPlaying': total_hours_playing,
 	'endSurveyCount': end_survey_done,
+	'totalAppStarts': total_app_starts,
+	'Average Level Per Session': 0,
 })
 
 dark_patterns_on_stats.update({
@@ -618,6 +621,8 @@ dark_patterns_on_stats.update({
 	'frequencyPlaying': frequency_playing_counter.copy(),
 	'hoursPlaying': total_hours_playing,
 	'endSurveyCount': end_survey_done,
+	'totalAppStarts': total_app_starts,
+	'Average Level Per Session': 0,
 })
 
 dark_patterns_fomo_stats.update({
@@ -627,6 +632,8 @@ dark_patterns_fomo_stats.update({
 	'frequencyPlaying': frequency_playing_counter.copy(),
 	'hoursPlaying': total_hours_playing,
 	'endSurveyCount': end_survey_done,
+	'totalAppStarts': total_app_starts,
+	'Average Level Per Session': 0,
 })
 
 dark_patterns_var_stats.update({
@@ -636,6 +643,8 @@ dark_patterns_var_stats.update({
 	'frequencyPlaying': frequency_playing_counter.copy(),
 	'hoursPlaying': total_hours_playing,
 	'endSurveyCount': end_survey_done,
+	'totalAppStarts': total_app_starts,
+	'Average Level Per Session': 0,
 })
 try:
 	for data in processed_data:
@@ -747,6 +756,8 @@ try:
 				dark_patterns_off_stats['hoursPlaying'] += float(data['hoursPlaying'])
 			if 'endsurveydate' in data and data['endsurveydate']:
 				dark_patterns_off_stats['endSurveyCount'] += 1
+			if 'appStartTime' in data and data['appStartTime']:
+				dark_patterns_off_stats['totalAppStarts'] += 1
 		if dark_pattern_type == 1:  # On
 			if 'gender' in data and data['gender']:
 				dark_patterns_on_stats['gender'][data['gender']] += 1
@@ -761,6 +772,8 @@ try:
 				dark_patterns_on_stats['hoursPlaying'] += float(data['hoursPlaying'])
 			if 'endsurveydate' in data and data['endsurveydate']:
 				dark_patterns_on_stats['endSurveyCount'] += 1
+			if 'appStartTime' in data and data['appStartTime']:
+				dark_patterns_on_stats['totalAppStarts'] += 1
 		if dark_pattern_type == 2:  # Fomo
 			if 'gender' in data and data['gender']:
 				dark_patterns_fomo_stats['gender'][data['gender']] += 1
@@ -775,6 +788,8 @@ try:
 				dark_patterns_fomo_stats['hoursPlaying'] += float(data['hoursPlaying'])
 			if 'endsurveydate' in data and data['endsurveydate']:
 				dark_patterns_fomo_stats['endSurveyCount'] += 1
+			if 'appStartTime' in data and data['appStartTime']:
+				dark_patterns_fomo_stats['totalAppStarts'] += 1
 		if dark_pattern_type == 3:  # Var
 			if 'gender' in data and data['gender']:
 				dark_patterns_var_stats['gender'][data['gender']] += 1
@@ -789,6 +804,8 @@ try:
 				dark_patterns_var_stats['hoursPlaying'] += float(data['hoursPlaying'])
 			if 'endsurveydate' in data and data['endsurveydate']:
 				dark_patterns_var_stats['endSurveyCount'] += 1
+			if 'appStartTime' in data and data['appStartTime']:
+				dark_patterns_var_stats['totalAppStarts'] += 1
 		if 'playedtilend' in data and data['playedtilend']:
 			end_survey_counter += 1
 			if data['playedtilend'] == '1':
@@ -802,6 +819,10 @@ try:
 		# Increment the corresponding values based on the DarkPattern type
 		if dark_pattern_type == 0:  # Off
 			if data.get('levelStart'):
+				if user_id not in session_counter:
+					session_counter[user_id] = {'total_levelStarts': 0, 'total_sessions': set(), 'dark_pattern': dark_pattern_type}
+				session_counter[user_id]['total_levelStarts'] += 1
+				session_counter[user_id]['total_sessions'].add(data.get('session'))
 				dark_patterns_off_stats['Total Levels Started'] += 1
 			if data.get('levelFinish'):
 				dark_patterns_off_stats['Total Levels Finished'] += 1
@@ -816,6 +837,10 @@ try:
 														   int(data.get('levelFinish')))
 		elif dark_pattern_type == 1:  # On
 			if data.get('levelStart'):
+				if user_id not in session_counter:
+					session_counter[user_id] = {'total_levelStarts': 0, 'total_sessions': set(), 'dark_pattern': dark_pattern_type}
+				session_counter[user_id]['total_levelStarts'] += 1
+				session_counter[user_id]['total_sessions'].add(data.get('session'))
 				dark_patterns_on_stats['Total Levels Started'] += 1
 			if data.get('levelFinish'):
 				dark_patterns_on_stats['Total Levels Finished'] += 1
@@ -830,6 +855,10 @@ try:
 														  int(data.get('levelFinish')))
 		elif dark_pattern_type == 2:  # FOMO
 			if data.get('levelStart'):
+				if user_id not in session_counter:
+					session_counter[user_id] = {'total_levelStarts': 0, 'total_sessions': set(), 'dark_pattern': dark_pattern_type}
+				session_counter[user_id]['total_levelStarts'] += 1
+				session_counter[user_id]['total_sessions'].add(data.get('session'))
 				dark_patterns_fomo_stats['Total Levels Started'] += 1
 			if data.get('levelFinish'):
 				dark_patterns_fomo_stats['Total Levels Finished'] += 1
@@ -844,6 +873,10 @@ try:
 															int(data.get('levelFinish')))
 		elif dark_pattern_type == 3:  # VAR
 			if data.get('levelStart'):
+				if user_id not in session_counter:
+					session_counter[user_id] = {'total_levelStarts': 0, 'total_sessions': set(), 'dark_pattern': dark_pattern_type}
+				session_counter[user_id]['total_levelStarts'] += 1
+				session_counter[user_id]['total_sessions'].add(data.get('session'))
 				dark_patterns_var_stats['Total Levels Started'] += 1
 			if data.get('levelFinish'):
 				dark_patterns_var_stats['Total Levels Finished'] += 1
@@ -915,7 +948,20 @@ try:
 	dark_patterns_on_stats['Longest Streak'] = longest_streaks[1]
 	dark_patterns_fomo_stats['Longest Streak'] = longest_streaks[2]
 	dark_patterns_var_stats['Longest Streak'] = longest_streaks[3]
-
+	
+	for user in session_counter.values():
+		if user['dark_pattern'] == 0:
+			dark_patterns_off_stats['Average Level Per Session'] += user['total_levelStarts']/len(user['total_sessions'])
+		elif user['dark_pattern'] == 1:
+			dark_patterns_on_stats['Average Level Per Session'] += user['total_levelStarts']/len(user['total_sessions'])
+		elif user['dark_pattern'] == 2:
+			dark_patterns_fomo_stats['Average Level Per Session'] += user['total_levelStarts']/len(user['total_sessions'])
+		elif user['dark_pattern'] == 3:
+			dark_patterns_var_stats['Average Level Per Session'] += user['total_levelStarts']/len(user['total_sessions'])
+	dark_patterns_off_stats['Average Level Per Session'] = round(dark_patterns_off_stats['Average Level Per Session']/dark_patterns_off_stats['Active Users']if dark_patterns_off_stats['Active Users'] != 0 else 0, 2)
+	dark_patterns_on_stats['Average Level Per Session'] = round(dark_patterns_on_stats['Average Level Per Session']/dark_patterns_on_stats['Active Users'] if dark_patterns_on_stats['Active Users'] != 0 else 0, 2)
+	dark_patterns_fomo_stats['Average Level Per Session'] = round(dark_patterns_fomo_stats['Average Level Per Session']/dark_patterns_fomo_stats['Active Users'] if dark_patterns_fomo_stats['Active Users'] != 0 else 0, 2)
+	dark_patterns_var_stats['Average Level Per Session'] = round(dark_patterns_var_stats['Average Level Per Session']/dark_patterns_var_stats['Active Users'] if dark_patterns_var_stats['Active Users'] != 0 else 0, 2)
 	# Check if each user played each of the last 3 days
 	for play_dates in user_play_dates.values():
 		if last_three_dates.issubset(play_dates):
@@ -1018,8 +1064,9 @@ for key, value in combined_statistics.items():
 # print("Dropout Age:", dropout_age / dropout_counter)
 print("DarkPatterns Off:", dark_patterns_off_stats)
 print("DarkPatterns On:", dark_patterns_on_stats)
-print("DarkPatterns FOMO:", dark_patterns_fomo_stats)
-print("DarkPatterns VAR:", dark_patterns_var_stats)
+if not use_flutter:
+	print("DarkPatterns FOMO:", dark_patterns_fomo_stats)
+	print("DarkPatterns VAR:", dark_patterns_var_stats)
 
 # Determine the filename based on the value of use_flutter
 filename = 'statistics_flutter.txt' if use_flutter else 'statistics_ak.txt'
