@@ -70,6 +70,7 @@ inactive_user_counter = total_users
 inactive_users = set()
 total_counter = 0
 play_dates_by_type = {0: {}, 1: {}, 2: {}, 3: {}}
+latest_endsurveydate = None
 for user_id, user_info in users_data.items():
 	try:
 		dark_patterns_type = int(user_info.get('darkPatterns', 0)) if user_info.get('darkPatterns') is not None else ''
@@ -114,7 +115,6 @@ for user_id, user_info in users_data.items():
 			'gender': "",
 			'education': "",
 			'occupation': "",
-			'residence': "",
 			'frequencyPlaying': "",
 			'hoursPlaying': "",
 			'moneySpent': "",
@@ -370,13 +370,11 @@ for user_id, user_info in users_data.items():
 							row['education'] = answer
 						elif identifier == 4:
 							row['occupation'] = answer
-						elif identifier == 5:
-							row['residence'] = answer
-						elif identifier == 7:
+						elif identifier == 6:
 							row['frequencyPlaying'] = answer
-						elif identifier == 8:
+						elif identifier == 7:
 							row['hoursPlaying'] = answer
-						elif identifier == 9:
+						elif identifier == 8:
 							row['moneySpent'] = answer
 
 					except ValueError:
@@ -387,7 +385,6 @@ for user_id, user_info in users_data.items():
 		row['gender'] = ""
 		row['education'] = ""
 		row['occupation'] = ""
-		row['residence'] = ""
 		row['frequencyPlaying'] = ""
 		row['hoursPlaying'] = ""
 		row['moneySpent'] = ""
@@ -396,8 +393,11 @@ for user_id, user_info in users_data.items():
 		if end_survey:
 			end_survey_date = decode_push_id(list(end_survey.keys())[0])
 			timestamp_datetime = datetime.fromtimestamp(end_survey_date / 1000)
-			row['endsurveydate'] = str(timestamp_datetime.date())
+			endsurveydate = str(timestamp_datetime.date())
+			row['endsurveydate'] = endsurveydate
 			row['endsurveytime'] = str(timestamp_datetime.time())
+			if not latest_endsurveydate or endsurveydate > latest_endsurveydate:
+				latest_endsurveydate = endsurveydate
 			for end_survey_result in end_survey.values():
 				for question in end_survey_result.split('[')[1].split(']')[0].split(', '):
 					try:
@@ -571,6 +571,13 @@ played_till_end = 0
 influenced = 0
 influenced_time = 0
 
+gender_counter = {'0': 0, '1': 0, '2': 0}
+education_counter = {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
+occupation_counter = {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
+frequency_playing_counter = {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0}
+total_hours_playing = 0
+end_survey_done = 0
+
 # Get the date 4 days ago
 four_days_ago = datetime.now().date() - timedelta(days=4)
 
@@ -595,7 +602,41 @@ dark_patterns_fomo_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users
 dark_patterns_var_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users': 0, 'Total Levels Started': 0,
 						   'Total Levels Finished': 0, 'Total Levels Bought': 0, 'Total Items Bought': 0,
 						   'Average Age': 0, 'Max Level': 0, 'Longest Streak': 0}
+dark_patterns_off_stats.update({
+	'gender': gender_counter.copy(),
+	'education': education_counter.copy(),
+	'occupation': occupation_counter.copy(),
+	'frequencyPlaying': frequency_playing_counter.copy(),
+	'hoursPlaying': total_hours_playing,
+	'endSurveyCount': end_survey_done,
+})
 
+dark_patterns_on_stats.update({
+	'gender': gender_counter.copy(),
+	'education': education_counter.copy(),
+	'occupation': occupation_counter.copy(),
+	'frequencyPlaying': frequency_playing_counter.copy(),
+	'hoursPlaying': total_hours_playing,
+	'endSurveyCount': end_survey_done,
+})
+
+dark_patterns_fomo_stats.update({
+	'gender': gender_counter.copy(),
+	'education': education_counter.copy(),
+	'occupation': occupation_counter.copy(),
+	'frequencyPlaying': frequency_playing_counter.copy(),
+	'hoursPlaying': total_hours_playing,
+	'endSurveyCount': end_survey_done,
+})
+
+dark_patterns_var_stats.update({
+	'gender': gender_counter.copy(),
+	'education': education_counter.copy(),
+	'occupation': occupation_counter.copy(),
+	'frequencyPlaying': frequency_playing_counter.copy(),
+	'hoursPlaying': total_hours_playing,
+	'endSurveyCount': end_survey_done,
+})
 try:
 	for data in processed_data:
 		user_id = data.get('userId')
@@ -680,6 +721,62 @@ try:
 						dark_patterns_fomo += 1
 					elif data['darkPatterns'] == 3:
 						dark_patterns_var += 1
+		if dark_pattern_type == 0:  # Off
+			if 'gender' in data and data['gender']:
+				dark_patterns_off_stats['gender'][data['gender']] += 1
+			if 'education' in data and data['education']:
+				dark_patterns_off_stats['education'][data['education']] += 1
+			if 'occupation' in data and data['occupation']:
+				dark_patterns_off_stats['occupation'][data['occupation']] = dark_patterns_off_stats['occupation'].get(
+					data['occupation'], 0) + 1
+			if 'frequencyPlaying' in data and data['frequencyPlaying']:
+				dark_patterns_off_stats['frequencyPlaying'][data['frequencyPlaying']] += 1
+			if 'hoursPlaying' in data and data['hoursPlaying']:
+				dark_patterns_off_stats['hoursPlaying'] += float(data['hoursPlaying'])
+			if 'endsurveydate' in data and data['endsurveydate']:
+				dark_patterns_off_stats['endSurveyCount'] += 1
+		if dark_pattern_type == 1:  # On
+			if 'gender' in data and data['gender']:
+				dark_patterns_on_stats['gender'][data['gender']] += 1
+			if 'education' in data and data['education']:
+				dark_patterns_on_stats['education'][data['education']] += 1
+			if 'occupation' in data and data['occupation']:
+				dark_patterns_on_stats['occupation'][data['occupation']] = dark_patterns_on_stats['occupation'].get(
+					data['occupation'], 0) + 1
+			if 'frequencyPlaying' in data and data['frequencyPlaying']:
+				dark_patterns_on_stats['frequencyPlaying'][data['frequencyPlaying']] += 1
+			if 'hoursPlaying' in data and data['hoursPlaying']:
+				dark_patterns_on_stats['hoursPlaying'] += float(data['hoursPlaying'])
+			if 'endsurveydate' in data and data['endsurveydate']:
+				dark_patterns_on_stats['endSurveyCount'] += 1
+		if dark_pattern_type == 2:  # Fomo
+			if 'gender' in data and data['gender']:
+				dark_patterns_fomo_stats['gender'][data['gender']] += 1
+			if 'education' in data and data['education']:
+				dark_patterns_fomo_stats['education'][data['education']] += 1
+			if 'occupation' in data and data['occupation']:
+				dark_patterns_fomo_stats['occupation'][data['occupation']] = dark_patterns_fomo_stats['occupation'].get(
+					data['occupation'], 0) + 1
+			if 'frequencyPlaying' in data and data['frequencyPlaying']:
+				dark_patterns_fomo_stats['frequencyPlaying'][data['frequencyPlaying']] += 1
+			if 'hoursPlaying' in data and data['hoursPlaying']:
+				dark_patterns_fomo_stats['hoursPlaying'] += float(data['hoursPlaying'])
+			if 'endsurveydate' in data and data['endsurveydate']:
+				dark_patterns_fomo_stats['endSurveyCount'] += 1
+		if dark_pattern_type == 3:  # Var
+			if 'gender' in data and data['gender']:
+				dark_patterns_var_stats['gender'][data['gender']] += 1
+			if 'education' in data and data['education']:
+				dark_patterns_var_stats['education'][data['education']] += 1
+			if 'occupation' in data and data['occupation']:
+				dark_patterns_var_stats['occupation'][data['occupation']] = dark_patterns_var_stats['occupation'].get(
+					data['occupation'], 0) + 1
+			if 'frequencyPlaying' in data and data['frequencyPlaying']:
+				dark_patterns_var_stats['frequencyPlaying'][data['frequencyPlaying']] += 1
+			if 'hoursPlaying' in data and data['hoursPlaying']:
+				dark_patterns_var_stats['hoursPlaying'] += float(data['hoursPlaying'])
+			if 'endsurveydate' in data and data['endsurveydate']:
+				dark_patterns_var_stats['endSurveyCount'] += 1
 		if 'playedtilend' in data and data['playedtilend']:
 			end_survey_counter += 1
 			if data['playedtilend'] == '1':
@@ -749,6 +846,7 @@ try:
 														   int(data.get('levelFinish')))
 except Exception as e:
 	print(f"Error: {e}")
+	traceback.print_exc()
 average_time_needed = 0
 longest_streaks = {0: 0, 1: 0, 2: 0, 3: 0}
 for dark_pattern_type, play_dates in play_dates_by_type.items():
@@ -815,6 +913,7 @@ try:
 	average_time_needed = total_time_needed / count if count > 0 else 0
 except Exception as e:
 	print(f"Error: {e}")
+	traceback.print_exc()
 
 statistics_overview = {
 	'userNumber': 'Statistics',
@@ -838,15 +937,21 @@ statistics_overview = {
 	'checkHighscoreTime': 'Total Highscores Checked',
 	'pushClickTime': 'Total Push Notifications Clicked',
 	'notification_sent_time': 'Total Notifications Sent',
+	'notification_sent_date': 'End Survey Done',
+	'appCloseTime': 'Start Survey Done',
 	'appCloseDate': 'DarkPatterns Off',
 	'session': 'DarkPatterns On',
 	'sessionCounter': 'DarkPatterns FOMO',
 	'darkPatterns': 'DarkPatterns VAR',
 	'age': 'Average Age',
-	'gender': 'Start Survey Done',
-	'education': 'End Survey Done',
+	'gender': 'Gender',
+	'education': 'Education',
+	'occupation': 'Occupation',
+	'frequencyPlaying': 'Frequency of Playing',
+	'hoursPlaying': 'Hours of Playing',
 	'endSurvey': 'Played till end',
-	'endsurveydate': 'Realised DPs',
+	'endsurveytime': 'Realised DPs',
+	'endsurveydate': 'Last EndSurvey Done',
 }
 
 statistics = {
@@ -870,16 +975,22 @@ statistics = {
 	'collectDailyRewardsTime': daily_rewards,
 	'checkHighscoreTime': checked_highscore,
 	'pushClickTime': push_clicked,
+	'appCloseTime': start_survey_done,
+	'notification_sent_date': end_survey_counter,
 	'notification_sent_time': notifications_sent,
 	'appCloseDate': dark_patterns_off,
 	'session': dark_patterns_on,
 	'sessionCounter': dark_patterns_fomo,
 	'darkPatterns': dark_patterns_var,
 	'age': round(average_age / user_counter, 2),
-	'gender': start_survey_done,
-	'education': end_survey_counter,
+	'gender': gender_counter,
+	'education': education_counter,
+	'occupation': occupation_counter,
+	'frequencyPlaying': frequency_playing_counter,
+	'hoursPlaying': total_hours_playing,
 	'endSurvey': played_till_end,
-	'endsurveydate': influenced,
+	'endsurveytime': influenced,
+	'endsurveydate': latest_endsurveydate,
 }
 
 if use_flutter:
@@ -933,7 +1044,8 @@ if use_flutter:
 	excel_file_path = 'flutter_data.xlsx'
 else:
 	excel_file_path = 'dark_patterns_data.xlsx'
-print("\nSaving the DataFrame as an Excel file... Please wait and make sure the excel file stays close until creation is completed")
+print(
+	"\nSaving the DataFrame as an Excel file... Please wait and make sure the excel file stays close until creation is completed")
 # Save the DataFrame as an Excel file
 processed_df.to_excel(excel_file_path, index=False, freeze_panes=(1, 1))
 print("Excel creation completed.")

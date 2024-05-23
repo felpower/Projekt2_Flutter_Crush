@@ -1,34 +1,40 @@
 Combined Statistics:
-Statistics: 2024-05-18 11:01:00.875777
+Statistics: 2024-05-23 10:37:47.464303
 Users dropped out: 163
-Inactive Users: 1946
-Days Since Start Total: 15397
-Days Played Total: 1477
+Inactive Users: 1947
+Days Since Start Total: 16932
+Days Played Total: 1495
 Users that played daily: 2
-Played all last 3 days: 3
+Played all last 3 days: 0
 Installed yesterday: 0
-Played any of last 3 days: 17
-Total App Starts: 21319
-Average Playtime per level: 96.33
-Total Levels Started: 15183
-Total Levels Finished: 11116
-Total Levels Won: 9757
+Played any of last 3 days: 8
+Total App Starts: 21394
+Average Playtime per level: 96.38
+Total Levels Started: 15223
+Total Levels Finished: 11144
+Total Levels Won: 9781
 Max Level: 501
 Total Levels Bought: 1006
 Total Items Bought: 219
 Total Daily Rewards Collected: 307
 Total Highscores Checked: 358
-Total Push Notifications Clicked: 90
-Total Notifications Sent: 2625
+Total Push Notifications Clicked: 92
+Total Notifications Sent: 307
+End Survey Done: 67
+Start Survey Done: 2913
 DarkPatterns Off: 78
 DarkPatterns On: 85
 DarkPatterns FOMO: 78
 DarkPatterns VAR: 66
 Average Age: 38.42
-Start Survey Done: 307
-End Survey Done: 64
-Played till end: 34
-Realised DPs: 28
+Gender: {'0': 0, '1': 0, '2': 0}
+Education: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
+Occupation: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
+Frequency of Playing: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0}
+Hours of Playing: 0
+Played till end: 35
+Realised DPs: 30
+Last EndSurvey Done: 2024-05-22
 
 DarkPatterns Off:
 Total Users: 78
@@ -41,6 +47,12 @@ Total Items Bought: 7
 Average Age: 35.73
 Max Level: 252
 Longest Streak: 3
+gender: {'0': 19, '1': 56, '2': 1}
+education: {'0': 4, '1': 14, '2': 8, '3': 21, '4': 29}
+occupation: {'0': 61, '1': 3, '2': 5, '3': 7, '4': 0}
+frequencyPlaying: {'0': 29, '1': 14, '2': 4, '3': 5, '4': 2, '5': 10, '6': 12}
+hoursPlaying: 98.55
+endSurveyCount: 19
 Average Levels: 77.05
 
 DarkPatterns On:
@@ -54,6 +66,12 @@ Total Items Bought: 119
 Average Age: 37.58
 Max Level: 501
 Longest Streak: 4
+gender: {'0': 32, '1': 50, '2': 1}
+education: {'0': 4, '1': 12, '2': 6, '3': 19, '4': 42}
+occupation: {'0': 68, '1': 4, '2': 2, '3': 5, '4': 4}
+frequencyPlaying: {'0': 30, '1': 17, '2': 4, '3': 2, '4': 2, '5': 19, '6': 9}
+hoursPlaying: 122.89999999999999
+endSurveyCount: 22
 Average Levels: 104.38
 
 DarkPatterns FOMO:
@@ -67,17 +85,29 @@ Total Items Bought: 93
 Average Age: 39.15
 Max Level: 500
 Longest Streak: 4
+gender: {'0': 37, '1': 38, '2': 1}
+education: {'0': 4, '1': 15, '2': 5, '3': 25, '4': 26}
+occupation: {'0': 59, '1': 7, '2': 4, '3': 6, '4': 0}
+frequencyPlaying: {'0': 26, '1': 10, '2': 8, '3': 9, '4': 4, '5': 11, '6': 8}
+hoursPlaying: 86.65
+endSurveyCount: 18
 Average Levels: 124.29
 
 DarkPatterns VAR:
 Total Users: 66
 Total Dropouts: 41
 Active Users: 25
-Total Levels Started: 3213
-Total Levels Finished: 2346
+Total Levels Started: 3253
+Total Levels Finished: 2374
 Total Levels Bought: 3
 Total Items Bought: 0
 Average Age: 41.8
 Max Level: 189
 Longest Streak: 3
-Average Levels: 128.52
+gender: {'0': 25, '1': 39, '2': 1}
+education: {'0': 1, '1': 13, '2': 10, '3': 12, '4': 29}
+occupation: {'0': 49, '1': 4, '2': 3, '3': 4, '4': 5}
+frequencyPlaying: {'0': 19, '1': 12, '2': 6, '3': 4, '4': 5, '5': 11, '6': 8}
+hoursPlaying: 71.5
+endSurveyCount: 8
+Average Levels: 130.12

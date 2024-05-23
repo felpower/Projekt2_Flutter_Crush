@@ -1,5 +1,5 @@
 Combined Statistics:
-Statistics: 2024-05-18 11:02:50.871371
+Statistics: 2024-05-18 15:57:58.698836
 Users dropped out: 48
 Inactive Users: 220
 Days Since Start Total: 8199
@@ -19,14 +19,19 @@ Total Items Bought: 28
 Total Daily Rewards Collected: 44
 Total Highscores Checked: 279
 Total Push Notifications Clicked: 78
-Total Notifications Sent: 1820
+Total Notifications Sent: 89
+End Survey Done: 21
+Start Survey Done: 1820
 DarkPatterns Off: 54
 DarkPatterns On: 35
 DarkPatterns FOMO: 0
 DarkPatterns VAR: 0
 Average Age: 31.99
-Start Survey Done: 89
-End Survey Done: 21
+Gender: {'0': 0, '1': 0, '2': 0}
+Education: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
+Occupation: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
+Frequency of Playing: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0}
+Hours of Playing: 0
 Played till end: 11
 Realised DPs: 9
 
@@ -41,6 +46,11 @@ Total Items Bought: 3
 Average Age: 33.65
 Max Level: 86
 Longest Streak: 4
+gender: {'0': 50, '1': 37, '2': 1}
+education: {'0': 2, '1': 15, '2': 5, '3': 28, '4': 38}
+occupation: {'0': 53, '1': 2, '2': 3, '3': 24, '4': 6}
+frequencyPlaying: {'0': 1, '1': 0, '2': 0, '3': 1, '4': 0, '5': 0, '6': 0}
+hoursPlaying: 320.5
 Average Levels: 40.45
 
 DarkPatterns On:
@@ -54,6 +64,11 @@ Total Items Bought: 25
 Average Age: 29.43
 Max Level: 501
 Longest Streak: 3
+gender: {'0': 0, '1': 0, '2': 0}
+education: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
+occupation: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
+frequencyPlaying: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0}
+hoursPlaying: 0
 Average Levels: 85.38
 
 DarkPatterns FOMO:
@@ -67,6 +82,11 @@ Total Items Bought: 0
 Average Age: 0
 Max Level: 0
 Longest Streak: 0
+gender: {'0': 0, '1': 0, '2': 0}
+education: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
+occupation: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
+frequencyPlaying: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0}
+hoursPlaying: 0
 Average Levels: 0
 
 DarkPatterns VAR:
@@ -80,4 +100,9 @@ Total Items Bought: 0
 Average Age: 0
 Max Level: 0
 Longest Streak: 0
+gender: {'0': 0, '1': 0, '2': 0}
+education: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
+occupation: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
+frequencyPlaying: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0}
+hoursPlaying: 0
 Average Levels: 0
