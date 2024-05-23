@@ -703,6 +703,18 @@ try:
 		if 'notification_sent_time' in data and data['notification_sent_time']:
 			notifications_sent += 1
 		user_id = data.get('userId')
+		if 'gender' in data and data['gender']:
+			gender_counter[data['gender']] += 1
+		if 'education' in data and data['education']:
+			education_counter[data['education']] += 1
+		if 'occupation' in data and data['occupation']:
+			occupation_counter[data['occupation']] += 1
+		if 'frequencyPlaying' in data and data['frequencyPlaying']:
+			frequency_playing_counter[data['frequencyPlaying']] += 1
+		if 'hoursPlaying' in data and data['hoursPlaying']:
+			total_hours_playing += float(data['hoursPlaying'])
+		if 'endSurvey' in data and data['endSurvey']:
+			end_survey_done += 1
 		if 'age' in data and data['age']:
 			average_age += int(data['age'])
 			start_survey_done += 1
