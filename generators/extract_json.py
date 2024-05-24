@@ -53,7 +53,7 @@ def load_json_file():
 
 use_database = True
 # Access the 'users' data
-use_flutter = True
+use_flutter = False
 user_data = {}
 if use_flutter:
 	users_data = load_database("flutter")
@@ -948,7 +948,7 @@ try:
 	dark_patterns_on_stats['Longest Streak'] = longest_streaks[1]
 	dark_patterns_fomo_stats['Longest Streak'] = longest_streaks[2]
 	dark_patterns_var_stats['Longest Streak'] = longest_streaks[3]
-	
+
 	for user in session_counter.values():
 		if user['dark_pattern'] == 0:
 			dark_patterns_off_stats['Average Level Per Session'] += user['total_levelStarts']/len(user['total_sessions'])
