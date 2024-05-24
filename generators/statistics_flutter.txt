@@ -50,7 +50,6 @@ Longest Streak: 4
 gender: {'0': 32, '1': 20, '2': 1}
 education: {'0': 2, '1': 8, '2': 5, '3': 17, '4': 21}
 occupation: {'0': 30, '1': 1, '2': 3, '3': 13, '4': 6}
-frequencyPlaying: {'0': 1, '1': 0, '2': 0, '3': 1, '4': 0, '5': 0, '6': 0}
 hoursPlaying: 206.5
 endSurveyCount: 10
 totalAppStarts: 470
@@ -71,7 +70,6 @@ Longest Streak: 3
 gender: {'0': 18, '1': 17, '2': 0}
 education: {'0': 0, '1': 7, '2': 0, '3': 11, '4': 17}
 occupation: {'0': 23, '1': 1, '2': 0, '3': 11, '4': 0}
-frequencyPlaying: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0}
 hoursPlaying: 114.0
 endSurveyCount: 11
 totalAppStarts: 1612
