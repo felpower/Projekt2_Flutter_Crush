@@ -46,8 +46,8 @@ def load_json_file():
 	# Path to your JSON file
 	json_file_path = 'darkpatterns-ac762-default-rtdb-export.json'
 	# Load the JSON file into a Python dictionary with the correct encoding
-	with open(json_file_path, 'r', encoding='utf-8') as file:  # or use 'latin-1', 'iso-8859-1', or 'cp1252'
-		json_data = json.load(file)
+	with open(json_file_path, 'r', encoding='utf-8') as json_file:  # or use 'latin-1', 'iso-8859-1', or 'cp1252'
+		json_data = json.load(json_file)
 		return json_data
 
 
