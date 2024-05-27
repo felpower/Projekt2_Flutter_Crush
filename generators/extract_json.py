@@ -53,7 +53,7 @@ def load_json_file():
 
 use_database = True
 # Access the 'users' data
-use_flutter = False
+use_flutter = True
 user_data = {}
 if use_flutter:
 	users_data = load_database("flutter")
@@ -582,6 +582,7 @@ pattern_influence_counter = {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6'
 total_hours_playing = 0
 end_survey_done = 0
 session_counter = {}
+comments = []
 
 # Get the date 4 days ago
 four_days_ago = datetime.now().date() - timedelta(days=4)
@@ -597,16 +598,20 @@ user_play_dates = {}
 # Initialize the dictionaries
 dark_patterns_off_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users': 0, 'Total Levels Started': 0,
 						   'Total Levels Finished': 0, 'Total Levels Bought': 0, 'Total Items Bought': 0,
-						   'Average Age': 0, 'Max Level': 0, 'Longest Streak': 0}
+						   'Average Age': 0, 'Max Level': 0, 'Longest Streak': 0, 'Total Notifications Sent': 0,
+						   'Total Notifications Pushed': 0, }
 dark_patterns_on_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users': 0, 'Total Levels Started': 0,
 						  'Total Levels Finished': 0, 'Total Levels Bought': 0, 'Total Items Bought': 0,
-						  'Average Age': 0, 'Max Level': 0, 'Longest Streak': 0}
+						  'Average Age': 0, 'Max Level': 0, 'Longest Streak': 0, 'Total Notifications Sent': 0,
+						  'Total Notifications Pushed': 0, }
 dark_patterns_fomo_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users': 0, 'Total Levels Started': 0,
 							'Total Levels Finished': 0, 'Total Levels Bought': 0, 'Total Items Bought': 0,
-							'Average Age': 0, 'Max Level': 0, 'Longest Streak': 0}
+							'Average Age': 0, 'Max Level': 0, 'Longest Streak': 0, 'Total Notifications Sent': 0,
+							'Total Notifications Pushed': 0, }
 dark_patterns_var_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users': 0, 'Total Levels Started': 0,
 						   'Total Levels Finished': 0, 'Total Levels Bought': 0, 'Total Items Bought': 0,
-						   'Average Age': 0, 'Max Level': 0, 'Longest Streak': 0}
+						   'Average Age': 0, 'Max Level': 0, 'Longest Streak': 0, 'Total Notifications Sent': 0,
+						   'Total Notifications Pushed': 0, }
 dark_patterns_off_stats.update({
 	'gender': gender_counter.copy(),
 	'education': education_counter.copy(),
@@ -682,6 +687,8 @@ dark_patterns_var_stats.update({
 	'totalAppStarts': total_app_starts,
 	'Average Level Per Session': 0,
 })
+print("Finished processing User data")
+print("Starting to process Dark Patterns data")
 try:
 	for data in processed_data:
 		user_id = data.get('userId')
@@ -761,7 +768,10 @@ try:
 		if 'endSurvey' in data and data['endSurvey']:
 			end_survey_done += 1
 		if 'age' in data and data['age']:
-			average_age += int(data['age'])
+			user_age = int(data['age'])
+			average_age += user_age
+			if user_age == 33 or user_age == 41:
+				print("User_id: " + user_id + ", Dark Pattern Type: " + str(dark_pattern_type))
 			start_survey_done += 1
 			user_id = data.get('userId')
 			if user_id and 'darkPatterns' in data:
@@ -804,15 +814,18 @@ try:
 			if 'influenced' in data and data['influenced'] == '1':
 				dark_patterns_off_stats['influenced'] += 1
 			if 'influencedtime' in data and data['influencedtime']:
-				dark_patterns_off_stats['influencedtime'][data['influencedtime']] = dark_patterns_off_stats['influencedtime'].get(
+				dark_patterns_off_stats['influencedtime'][data['influencedtime']] = dark_patterns_off_stats[
+																						'influencedtime'].get(
 					data['influencedtime'], 0) + 1
 			if 'influencedfrequency' in data and data['influencedfrequency']:
-				dark_patterns_off_stats['influencedfrequency'][data['influencedfrequency']] = dark_patterns_off_stats['influencedfrequency'].get(
+				dark_patterns_off_stats['influencedfrequency'][data['influencedfrequency']] = dark_patterns_off_stats[
+																								  'influencedfrequency'].get(
 					data['influencedfrequency'], 0) + 1
 			if 'patterninfluence' in data and data['patterninfluence']:
 				patterns = data['patterninfluence'].split(',')
 				for pattern in patterns:
-					dark_patterns_off_stats['patterninfluence'][pattern] = dark_patterns_off_stats['patterninfluence'].get(
+					dark_patterns_off_stats['patterninfluence'][pattern] = dark_patterns_off_stats[
+																			   'patterninfluence'].get(
 						pattern, 0) + 1
 			if 'pushreceived' in data and data['pushreceived'] == '1':
 				dark_patterns_off_stats['pushreceived'] += 1
@@ -827,7 +840,8 @@ try:
 				dark_patterns_on_stats['occupation'][data['occupation']] = dark_patterns_on_stats['occupation'].get(
 					data['occupation'], 0) + 1
 			if 'frequencyPlaying' in data and data['frequencyPlaying']:
-				dark_patterns_on_stats['frequencyPlaying'][data['frequencyPlaying']] = dark_patterns_on_stats['frequencyPlaying'].get(
+				dark_patterns_on_stats['frequencyPlaying'][data['frequencyPlaying']] = dark_patterns_on_stats[
+																						   'frequencyPlaying'].get(
 					data['frequencyPlaying'], 0) + 1
 			if 'hoursPlaying' in data and data['hoursPlaying']:
 				dark_patterns_on_stats['hoursPlaying'] += float(data['hoursPlaying'])
@@ -845,15 +859,18 @@ try:
 			if 'influenced' in data and data['influenced'] == '1':
 				dark_patterns_on_stats['influenced'] += 1
 			if 'influencedtime' in data and data['influencedtime']:
-				dark_patterns_on_stats['influencedtime'][data['influencedtime']] = dark_patterns_on_stats['influencedtime'].get(
+				dark_patterns_on_stats['influencedtime'][data['influencedtime']] = dark_patterns_on_stats[
+																					   'influencedtime'].get(
 					data['influencedtime'], 0) + 1
 			if 'influencedfrequency' in data and data['influencedfrequency']:
-				dark_patterns_on_stats['influencedfrequency'][data['influencedfrequency']] = dark_patterns_on_stats['influencedfrequency'].get(
+				dark_patterns_on_stats['influencedfrequency'][data['influencedfrequency']] = dark_patterns_on_stats[
+																								 'influencedfrequency'].get(
 					data['influencedfrequency'], 0) + 1
 			if 'patterninfluence' in data and data['patterninfluence']:
 				patterns = data['patterninfluence'].split(',')
 				for pattern in patterns:
-					dark_patterns_on_stats['patterninfluence'][pattern] = dark_patterns_on_stats['patterninfluence'].get(
+					dark_patterns_on_stats['patterninfluence'][pattern] = dark_patterns_on_stats[
+																			  'patterninfluence'].get(
 						pattern, 0) + 1
 			if 'pushreceived' in data and data['pushreceived'] == '1':
 				dark_patterns_on_stats['pushreceived'] += 1
@@ -885,15 +902,18 @@ try:
 			if 'influenced' in data and data['influenced'] == '1':
 				dark_patterns_fomo_stats['influenced'] += 1
 			if 'influencedtime' in data and data['influencedtime']:
-				dark_patterns_fomo_stats['influencedtime'][data['influencedtime']] = dark_patterns_fomo_stats['influencedtime'].get(
+				dark_patterns_fomo_stats['influencedtime'][data['influencedtime']] = dark_patterns_fomo_stats[
+																						 'influencedtime'].get(
 					data['influencedtime'], 0) + 1
 			if 'influencedfrequency' in data and data['influencedfrequency']:
-				dark_patterns_fomo_stats['influencedfrequency'][data['influencedfrequency']] = dark_patterns_fomo_stats['influencedfrequency'].get(
+				dark_patterns_fomo_stats['influencedfrequency'][data['influencedfrequency']] = dark_patterns_fomo_stats[
+																								   'influencedfrequency'].get(
 					data['influencedfrequency'], 0) + 1
 			if 'patterninfluence' in data and data['patterninfluence']:
 				patterns = data['patterninfluence'].split(',')
 				for pattern in patterns:
-					dark_patterns_fomo_stats['patterninfluence'][pattern] = dark_patterns_fomo_stats['patterninfluence'].get(
+					dark_patterns_fomo_stats['patterninfluence'][pattern] = dark_patterns_fomo_stats[
+																				'patterninfluence'].get(
 						pattern, 0) + 1
 			if 'pushreceived' in data and data['pushreceived'] == '1':
 				dark_patterns_fomo_stats['pushreceived'] += 1
@@ -925,15 +945,18 @@ try:
 			if 'influenced' in data and data['influenced'] == '1':
 				dark_patterns_var_stats['influenced'] += 1
 			if 'influencedtime' in data and data['influencedtime']:
-				dark_patterns_var_stats['influencedtime'][data['influencedtime']] = dark_patterns_var_stats['influencedtime'].get(
+				dark_patterns_var_stats['influencedtime'][data['influencedtime']] = dark_patterns_var_stats[
+																						'influencedtime'].get(
 					data['influencedtime'], 0) + 1
 			if 'influencedfrequency' in data and data['influencedfrequency']:
-				dark_patterns_var_stats['influencedfrequency'][data['influencedfrequency']] = dark_patterns_var_stats['influencedfrequency'].get(
+				dark_patterns_var_stats['influencedfrequency'][data['influencedfrequency']] = dark_patterns_var_stats[
+																								  'influencedfrequency'].get(
 					data['influencedfrequency'], 0) + 1
 			if 'patterninfluence' in data and data['patterninfluence']:
 				patterns = data['patterninfluence'].split(',')
 				for pattern in patterns:
-					dark_patterns_var_stats['patterninfluence'][pattern] = dark_patterns_var_stats['patterninfluence'].get(
+					dark_patterns_var_stats['patterninfluence'][pattern] = dark_patterns_var_stats[
+																			   'patterninfluence'].get(
 						pattern, 0) + 1
 			if 'pushreceived' in data and data['pushreceived'] == '1':
 				dark_patterns_var_stats['pushreceived'] += 1
@@ -949,6 +972,12 @@ try:
 		if 'influencedtime' in data and data['influencedtime']:
 			if data['influencedtime'] == '1':
 				influenced_time += 1
+		if 'comments' in data and data['comments']:
+			comments.append({
+				'userId': user_id,
+				'comments': data['comments'],
+				'darkPatterns': dark_pattern_type
+			})
 		# Increment the corresponding values based on the DarkPattern type
 		if dark_pattern_type == 0:  # Off
 			if data.get('levelStart'):
@@ -988,6 +1017,10 @@ try:
 			if data.get('levelFinish'):
 				dark_patterns_on_stats['Max Level'] = max(dark_patterns_on_stats['Max Level'],
 														  int(data.get('levelFinish')))
+			if data.get('notification_sent_time'):
+				dark_patterns_on_stats['Total Notifications Sent'] += 1
+			if data.get('pushClickTime'):
+				dark_patterns_on_stats['Total Notifications Pushed'] += 1
 		elif dark_pattern_type == 2:  # FOMO
 			if data.get('levelStart'):
 				if user_id not in session_counter:
@@ -1218,6 +1251,8 @@ statistics = {
 	'endsurveydate': latest_endsurveydate,
 }
 
+print("Finished processing Dark Patterns Data")
+
 if use_flutter:
 	processed_data.append(statistics)
 	processed_data.append({})
@@ -1262,6 +1297,8 @@ with open(filename, 'w') as file:
 	for key, value in dark_patterns_var_stats.items():
 		file.write(f"{key}: {value}\n")
 
+for comment in comments:
+	print(comment)
 # Converting the processed data into a DataFrame
 print("\nConverting the processed data into a DataFrame... Please wait")
 processed_df = pd.DataFrame(processed_data)
