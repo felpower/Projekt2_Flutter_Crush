@@ -53,7 +53,7 @@ def load_json_file():
 
 use_database = True
 # Access the 'users' data
-use_flutter = False
+use_flutter = True
 user_data = {}
 if use_flutter:
 	users_data = load_database("flutter")
@@ -575,6 +575,10 @@ gender_counter = {'0': 0, '1': 0, '2': 0}
 education_counter = {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
 occupation_counter = {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
 frequency_playing_counter = {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0}
+reason_cancel_counter = {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0}
+influenced_time_counter = {'0': 0, '1': 0, '2': 0}
+influenced_frequency_counter = {'0': 0, '1': 0, '2': 0}
+pattern_influence_counter = {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0}
 total_hours_playing = 0
 end_survey_done = 0
 session_counter = {}
@@ -609,7 +613,15 @@ dark_patterns_off_stats.update({
 	'occupation': occupation_counter.copy(),
 	'frequencyPlaying': frequency_playing_counter.copy(),
 	'hoursPlaying': total_hours_playing,
+	'moneySpent': 0,
 	'endSurveyCount': end_survey_done,
+	'playedtilend': 0,
+	'reasoncancel': reason_cancel_counter.copy(),
+	'influenced': 0,
+	'influencedtime': influenced_time_counter.copy(),
+	'influencedfrequency': influenced_frequency_counter.copy(),
+	'patterninfluence': pattern_influence_counter.copy(),
+	'pushreceived': 0,
 	'totalAppStarts': total_app_starts,
 	'Average Level Per Session': 0,
 })
@@ -620,7 +632,15 @@ dark_patterns_on_stats.update({
 	'occupation': occupation_counter.copy(),
 	'frequencyPlaying': frequency_playing_counter.copy(),
 	'hoursPlaying': total_hours_playing,
+	'moneySpent': 0,
 	'endSurveyCount': end_survey_done,
+	'playedtilend': 0,
+	'reasoncancel': reason_cancel_counter.copy(),
+	'influenced': 0,
+	'influencedtime': influenced_time_counter.copy(),
+	'influencedfrequency': influenced_frequency_counter.copy(),
+	'patterninfluence': pattern_influence_counter.copy(),
+	'pushreceived': 0,
 	'totalAppStarts': total_app_starts,
 	'Average Level Per Session': 0,
 })
@@ -631,7 +651,15 @@ dark_patterns_fomo_stats.update({
 	'occupation': occupation_counter.copy(),
 	'frequencyPlaying': frequency_playing_counter.copy(),
 	'hoursPlaying': total_hours_playing,
+	'moneySpent': 0,
 	'endSurveyCount': end_survey_done,
+	'playedtilend': 0,
+	'reasoncancel': reason_cancel_counter.copy(),
+	'influenced': 0,
+	'influencedtime': influenced_time_counter.copy(),
+	'influencedfrequency': influenced_frequency_counter.copy(),
+	'patterninfluence': pattern_influence_counter.copy(),
+	'pushreceived': 0,
 	'totalAppStarts': total_app_starts,
 	'Average Level Per Session': 0,
 })
@@ -642,7 +670,15 @@ dark_patterns_var_stats.update({
 	'occupation': occupation_counter.copy(),
 	'frequencyPlaying': frequency_playing_counter.copy(),
 	'hoursPlaying': total_hours_playing,
+	'moneySpent': 0,
 	'endSurveyCount': end_survey_done,
+	'playedtilend': 0,
+	'reasoncancel': reason_cancel_counter.copy(),
+	'influenced': 0,
+	'influencedtime': influenced_time_counter.copy(),
+	'influencedfrequency': influenced_frequency_counter.copy(),
+	'patterninfluence': pattern_influence_counter.copy(),
+	'pushreceived': 0,
 	'totalAppStarts': total_app_starts,
 	'Average Level Per Session': 0,
 })
@@ -754,8 +790,32 @@ try:
 				dark_patterns_off_stats['frequencyPlaying'][data['frequencyPlaying']] += 1
 			if 'hoursPlaying' in data and data['hoursPlaying']:
 				dark_patterns_off_stats['hoursPlaying'] += float(data['hoursPlaying'])
+			if 'moneySpent' in data and data['moneySpent']:
+				dark_patterns_off_stats['moneySpent'] += float(data['moneySpent'])
 			if 'endsurveydate' in data and data['endsurveydate']:
 				dark_patterns_off_stats['endSurveyCount'] += 1
+			if 'playedtilend' in data and data['playedtilend'] == '1':
+				dark_patterns_off_stats['playedtilend'] += 1
+			if 'reasoncancel' in data and data['reasoncancel']:
+				reasons = data['reasoncancel'].split(',')
+				for reason in reasons:
+					dark_patterns_off_stats['reasoncancel'][reason] = dark_patterns_off_stats['reasoncancel'].get(
+						reason, 0) + 1
+			if 'influenced' in data and data['influenced'] == '1':
+				dark_patterns_off_stats['influenced'] += 1
+			if 'influencedtime' in data and data['influencedtime']:
+				dark_patterns_off_stats['influencedtime'][data['influencedtime']] = dark_patterns_off_stats['influencedtime'].get(
+					data['influencedtime'], 0) + 1
+			if 'influencedfrequency' in data and data['influencedfrequency']:
+				dark_patterns_off_stats['influencedfrequency'][data['influencedfrequency']] = dark_patterns_off_stats['influencedfrequency'].get(
+					data['influencedfrequency'], 0) + 1
+			if 'patterninfluence' in data and data['patterninfluence']:
+				patterns = data['patterninfluence'].split(',')
+				for pattern in patterns:
+					dark_patterns_off_stats['patterninfluence'][pattern] = dark_patterns_off_stats['patterninfluence'].get(
+						pattern, 0) + 1
+			if 'pushreceived' in data and data['pushreceived'] == '1':
+				dark_patterns_off_stats['pushreceived'] += 1
 			if 'appStartTime' in data and data['appStartTime']:
 				dark_patterns_off_stats['totalAppStarts'] += 1
 		if dark_pattern_type == 1:  # On
@@ -767,11 +827,36 @@ try:
 				dark_patterns_on_stats['occupation'][data['occupation']] = dark_patterns_on_stats['occupation'].get(
 					data['occupation'], 0) + 1
 			if 'frequencyPlaying' in data and data['frequencyPlaying']:
-				dark_patterns_on_stats['frequencyPlaying'][data['frequencyPlaying']] += 1
+				dark_patterns_on_stats['frequencyPlaying'][data['frequencyPlaying']] = dark_patterns_on_stats['frequencyPlaying'].get(
+					data['frequencyPlaying'], 0) + 1
 			if 'hoursPlaying' in data and data['hoursPlaying']:
 				dark_patterns_on_stats['hoursPlaying'] += float(data['hoursPlaying'])
+			if 'moneySpent' in data and data['moneySpent']:
+				dark_patterns_on_stats['moneySpent'] += float(data['moneySpent'])
 			if 'endsurveydate' in data and data['endsurveydate']:
 				dark_patterns_on_stats['endSurveyCount'] += 1
+			if 'playedtilend' in data and data['playedtilend'] == '1':
+				dark_patterns_on_stats['playedtilend'] += 1
+			if 'reasoncancel' in data and data['reasoncancel']:
+				reasons = data['reasoncancel'].split(',')
+				for reason in reasons:
+					dark_patterns_on_stats['reasoncancel'][reason] = dark_patterns_on_stats['reasoncancel'].get(
+						reason, 0) + 1
+			if 'influenced' in data and data['influenced'] == '1':
+				dark_patterns_on_stats['influenced'] += 1
+			if 'influencedtime' in data and data['influencedtime']:
+				dark_patterns_on_stats['influencedtime'][data['influencedtime']] = dark_patterns_on_stats['influencedtime'].get(
+					data['influencedtime'], 0) + 1
+			if 'influencedfrequency' in data and data['influencedfrequency']:
+				dark_patterns_on_stats['influencedfrequency'][data['influencedfrequency']] = dark_patterns_on_stats['influencedfrequency'].get(
+					data['influencedfrequency'], 0) + 1
+			if 'patterninfluence' in data and data['patterninfluence']:
+				patterns = data['patterninfluence'].split(',')
+				for pattern in patterns:
+					dark_patterns_on_stats['patterninfluence'][pattern] = dark_patterns_on_stats['patterninfluence'].get(
+						pattern, 0) + 1
+			if 'pushreceived' in data and data['pushreceived'] == '1':
+				dark_patterns_on_stats['pushreceived'] += 1
 			if 'appStartTime' in data and data['appStartTime']:
 				dark_patterns_on_stats['totalAppStarts'] += 1
 		if dark_pattern_type == 2:  # Fomo
@@ -786,8 +871,32 @@ try:
 				dark_patterns_fomo_stats['frequencyPlaying'][data['frequencyPlaying']] += 1
 			if 'hoursPlaying' in data and data['hoursPlaying']:
 				dark_patterns_fomo_stats['hoursPlaying'] += float(data['hoursPlaying'])
+			if 'moneySpent' in data and data['moneySpent']:
+				dark_patterns_fomo_stats['moneySpent'] += float(data['moneySpent'])
 			if 'endsurveydate' in data and data['endsurveydate']:
 				dark_patterns_fomo_stats['endSurveyCount'] += 1
+			if 'playedtilend' in data and data['playedtilend'] == '1':
+				dark_patterns_fomo_stats['playedtilend'] += 1
+			if 'reasoncancel' in data and data['reasoncancel']:
+				reasons = data['reasoncancel'].split(',')
+				for reason in reasons:
+					dark_patterns_fomo_stats['reasoncancel'][reason] = dark_patterns_fomo_stats['reasoncancel'].get(
+						reason, 0) + 1
+			if 'influenced' in data and data['influenced'] == '1':
+				dark_patterns_fomo_stats['influenced'] += 1
+			if 'influencedtime' in data and data['influencedtime']:
+				dark_patterns_fomo_stats['influencedtime'][data['influencedtime']] = dark_patterns_fomo_stats['influencedtime'].get(
+					data['influencedtime'], 0) + 1
+			if 'influencedfrequency' in data and data['influencedfrequency']:
+				dark_patterns_fomo_stats['influencedfrequency'][data['influencedfrequency']] = dark_patterns_fomo_stats['influencedfrequency'].get(
+					data['influencedfrequency'], 0) + 1
+			if 'patterninfluence' in data and data['patterninfluence']:
+				patterns = data['patterninfluence'].split(',')
+				for pattern in patterns:
+					dark_patterns_fomo_stats['patterninfluence'][pattern] = dark_patterns_fomo_stats['patterninfluence'].get(
+						pattern, 0) + 1
+			if 'pushreceived' in data and data['pushreceived'] == '1':
+				dark_patterns_fomo_stats['pushreceived'] += 1
 			if 'appStartTime' in data and data['appStartTime']:
 				dark_patterns_fomo_stats['totalAppStarts'] += 1
 		if dark_pattern_type == 3:  # Var
@@ -802,8 +911,32 @@ try:
 				dark_patterns_var_stats['frequencyPlaying'][data['frequencyPlaying']] += 1
 			if 'hoursPlaying' in data and data['hoursPlaying']:
 				dark_patterns_var_stats['hoursPlaying'] += float(data['hoursPlaying'])
+			if 'moneySpent' in data and data['moneySpent']:
+				dark_patterns_var_stats['moneySpent'] += float(data['moneySpent'])
 			if 'endsurveydate' in data and data['endsurveydate']:
 				dark_patterns_var_stats['endSurveyCount'] += 1
+			if 'playedtilend' in data and data['playedtilend'] == '1':
+				dark_patterns_var_stats['playedtilend'] += 1
+			if 'reasoncancel' in data and data['reasoncancel']:
+				reasons = data['reasoncancel'].split(',')
+				for reason in reasons:
+					dark_patterns_var_stats['reasoncancel'][reason] = dark_patterns_var_stats['reasoncancel'].get(
+						reason, 0) + 1
+			if 'influenced' in data and data['influenced'] == '1':
+				dark_patterns_var_stats['influenced'] += 1
+			if 'influencedtime' in data and data['influencedtime']:
+				dark_patterns_var_stats['influencedtime'][data['influencedtime']] = dark_patterns_var_stats['influencedtime'].get(
+					data['influencedtime'], 0) + 1
+			if 'influencedfrequency' in data and data['influencedfrequency']:
+				dark_patterns_var_stats['influencedfrequency'][data['influencedfrequency']] = dark_patterns_var_stats['influencedfrequency'].get(
+					data['influencedfrequency'], 0) + 1
+			if 'patterninfluence' in data and data['patterninfluence']:
+				patterns = data['patterninfluence'].split(',')
+				for pattern in patterns:
+					dark_patterns_var_stats['patterninfluence'][pattern] = dark_patterns_var_stats['patterninfluence'].get(
+						pattern, 0) + 1
+			if 'pushreceived' in data and data['pushreceived'] == '1':
+				dark_patterns_var_stats['pushreceived'] += 1
 			if 'appStartTime' in data and data['appStartTime']:
 				dark_patterns_var_stats['totalAppStarts'] += 1
 		if 'playedtilend' in data and data['playedtilend']:
@@ -820,7 +953,8 @@ try:
 		if dark_pattern_type == 0:  # Off
 			if data.get('levelStart'):
 				if user_id not in session_counter:
-					session_counter[user_id] = {'total_levelStarts': 0, 'total_sessions': set(), 'dark_pattern': dark_pattern_type}
+					session_counter[user_id] = {'total_levelStarts': 0, 'total_sessions': set(),
+												'dark_pattern': dark_pattern_type}
 				session_counter[user_id]['total_levelStarts'] += 1
 				session_counter[user_id]['total_sessions'].add(data.get('session'))
 				dark_patterns_off_stats['Total Levels Started'] += 1
@@ -838,7 +972,8 @@ try:
 		elif dark_pattern_type == 1:  # On
 			if data.get('levelStart'):
 				if user_id not in session_counter:
-					session_counter[user_id] = {'total_levelStarts': 0, 'total_sessions': set(), 'dark_pattern': dark_pattern_type}
+					session_counter[user_id] = {'total_levelStarts': 0, 'total_sessions': set(),
+												'dark_pattern': dark_pattern_type}
 				session_counter[user_id]['total_levelStarts'] += 1
 				session_counter[user_id]['total_sessions'].add(data.get('session'))
 				dark_patterns_on_stats['Total Levels Started'] += 1
@@ -856,7 +991,8 @@ try:
 		elif dark_pattern_type == 2:  # FOMO
 			if data.get('levelStart'):
 				if user_id not in session_counter:
-					session_counter[user_id] = {'total_levelStarts': 0, 'total_sessions': set(), 'dark_pattern': dark_pattern_type}
+					session_counter[user_id] = {'total_levelStarts': 0, 'total_sessions': set(),
+												'dark_pattern': dark_pattern_type}
 				session_counter[user_id]['total_levelStarts'] += 1
 				session_counter[user_id]['total_sessions'].add(data.get('session'))
 				dark_patterns_fomo_stats['Total Levels Started'] += 1
@@ -874,7 +1010,8 @@ try:
 		elif dark_pattern_type == 3:  # VAR
 			if data.get('levelStart'):
 				if user_id not in session_counter:
-					session_counter[user_id] = {'total_levelStarts': 0, 'total_sessions': set(), 'dark_pattern': dark_pattern_type}
+					session_counter[user_id] = {'total_levelStarts': 0, 'total_sessions': set(),
+												'dark_pattern': dark_pattern_type}
 				session_counter[user_id]['total_levelStarts'] += 1
 				session_counter[user_id]['total_sessions'].add(data.get('session'))
 				dark_patterns_var_stats['Total Levels Started'] += 1
@@ -949,19 +1086,49 @@ try:
 	dark_patterns_fomo_stats['Longest Streak'] = longest_streaks[2]
 	dark_patterns_var_stats['Longest Streak'] = longest_streaks[3]
 
+	dark_patterns_off_stats['hoursPlaying'] = round(
+		dark_patterns_off_stats['hoursPlaying'] / dark_patterns_off if dark_patterns_off != 0 else 0, 2)
+	dark_patterns_on_stats['hoursPlaying'] = round(
+		dark_patterns_on_stats['hoursPlaying'] / dark_patterns_on if dark_patterns_on != 0 else 0, 2)
+	dark_patterns_fomo_stats['hoursPlaying'] = round(
+		dark_patterns_fomo_stats['hoursPlaying'] / dark_patterns_fomo if dark_patterns_fomo != 0 else 0, 2)
+	dark_patterns_var_stats['hoursPlaying'] = round(
+		dark_patterns_var_stats['hoursPlaying'] / dark_patterns_var if dark_patterns_var != 0 else 0, 2)
+
+	dark_patterns_off_stats['moneySpent'] = round(
+		dark_patterns_off_stats['moneySpent'] / dark_patterns_off if dark_patterns_off != 0 else 0, 2)
+	dark_patterns_on_stats['moneySpent'] = round(
+		dark_patterns_on_stats['moneySpent'] / dark_patterns_on if dark_patterns_on != 0 else 0, 2)
+	dark_patterns_fomo_stats['moneySpent'] = round(
+		dark_patterns_fomo_stats['moneySpent'] / dark_patterns_fomo if dark_patterns_fomo != 0 else 0, 2)
+	dark_patterns_var_stats['moneySpent'] = round(
+		dark_patterns_var_stats['moneySpent'] / dark_patterns_var if dark_patterns_var != 0 else 0, 2)
+
 	for user in session_counter.values():
 		if user['dark_pattern'] == 0:
-			dark_patterns_off_stats['Average Level Per Session'] += user['total_levelStarts']/len(user['total_sessions'])
+			dark_patterns_off_stats['Average Level Per Session'] += user['total_levelStarts'] / len(
+				user['total_sessions'])
 		elif user['dark_pattern'] == 1:
-			dark_patterns_on_stats['Average Level Per Session'] += user['total_levelStarts']/len(user['total_sessions'])
+			dark_patterns_on_stats['Average Level Per Session'] += user['total_levelStarts'] / len(
+				user['total_sessions'])
 		elif user['dark_pattern'] == 2:
-			dark_patterns_fomo_stats['Average Level Per Session'] += user['total_levelStarts']/len(user['total_sessions'])
+			dark_patterns_fomo_stats['Average Level Per Session'] += user['total_levelStarts'] / len(
+				user['total_sessions'])
 		elif user['dark_pattern'] == 3:
-			dark_patterns_var_stats['Average Level Per Session'] += user['total_levelStarts']/len(user['total_sessions'])
-	dark_patterns_off_stats['Average Level Per Session'] = round(dark_patterns_off_stats['Average Level Per Session']/dark_patterns_off_stats['Active Users']if dark_patterns_off_stats['Active Users'] != 0 else 0, 2)
-	dark_patterns_on_stats['Average Level Per Session'] = round(dark_patterns_on_stats['Average Level Per Session']/dark_patterns_on_stats['Active Users'] if dark_patterns_on_stats['Active Users'] != 0 else 0, 2)
-	dark_patterns_fomo_stats['Average Level Per Session'] = round(dark_patterns_fomo_stats['Average Level Per Session']/dark_patterns_fomo_stats['Active Users'] if dark_patterns_fomo_stats['Active Users'] != 0 else 0, 2)
-	dark_patterns_var_stats['Average Level Per Session'] = round(dark_patterns_var_stats['Average Level Per Session']/dark_patterns_var_stats['Active Users'] if dark_patterns_var_stats['Active Users'] != 0 else 0, 2)
+			dark_patterns_var_stats['Average Level Per Session'] += user['total_levelStarts'] / len(
+				user['total_sessions'])
+	dark_patterns_off_stats['Average Level Per Session'] = round(
+		dark_patterns_off_stats['Average Level Per Session'] / dark_patterns_off_stats['Active Users'] if
+		dark_patterns_off_stats['Active Users'] != 0 else 0, 2)
+	dark_patterns_on_stats['Average Level Per Session'] = round(
+		dark_patterns_on_stats['Average Level Per Session'] / dark_patterns_on_stats['Active Users'] if
+		dark_patterns_on_stats['Active Users'] != 0 else 0, 2)
+	dark_patterns_fomo_stats['Average Level Per Session'] = round(
+		dark_patterns_fomo_stats['Average Level Per Session'] / dark_patterns_fomo_stats['Active Users'] if
+		dark_patterns_fomo_stats['Active Users'] != 0 else 0, 2)
+	dark_patterns_var_stats['Average Level Per Session'] = round(
+		dark_patterns_var_stats['Average Level Per Session'] / dark_patterns_var_stats['Active Users'] if
+		dark_patterns_var_stats['Active Users'] != 0 else 0, 2)
 	# Check if each user played each of the last 3 days
 	for play_dates in user_play_dates.values():
 		if last_three_dates.issubset(play_dates):

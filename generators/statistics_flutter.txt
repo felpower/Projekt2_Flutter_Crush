@@ -1,8 +1,8 @@
 Combined Statistics:
-Statistics: 2024-05-23 18:25:18.991353
+Statistics: 2024-05-27 11:58:01.753444
 Users dropped out: 48
 Inactive Users: 220
-Days Since Start Total: 8649
+Days Since Start Total: 9009
 Days Played Total: 459
 Users that played daily: 0
 Played all last 3 days: 0
@@ -21,7 +21,7 @@ Total Highscores Checked: 279
 Total Push Notifications Clicked: 78
 Total Notifications Sent: 89
 End Survey Done: 21
-Start Survey Done: 1903
+Start Survey Done: 1963
 DarkPatterns Off: 54
 DarkPatterns On: 35
 DarkPatterns FOMO: 0
@@ -50,8 +50,17 @@ Longest Streak: 4
 gender: {'0': 32, '1': 20, '2': 1}
 education: {'0': 2, '1': 8, '2': 5, '3': 17, '4': 21}
 occupation: {'0': 30, '1': 1, '2': 3, '3': 13, '4': 6}
-hoursPlaying: 206.5
+frequencyPlaying: {'0': 1, '1': 0, '2': 0, '3': 1, '4': 0, '5': 0, '6': 0}
+hoursPlaying: 3.82
+moneySpent: 0.82
 endSurveyCount: 10
+playedtilend: 5
+reasoncancel: {'0': 0, '1': 0, '2': 1, '3': 0, '4': 1, '5': 3, '6': 2, '7': 2}
+influenced: 4
+influencedtime: {'0': 0, '1': 2, '2': 2}
+influencedfrequency: {'0': 1, '1': 2, '2': 1}
+patterninfluence: {'0': 2, '1': 1, '2': 1, '3': 1, '4': 2, '5': 1, '6': 1}
+pushreceived: 1
 totalAppStarts: 470
 Average Level Per Session: 5.36
 Average Levels: 40.45
@@ -70,8 +79,17 @@ Longest Streak: 3
 gender: {'0': 18, '1': 17, '2': 0}
 education: {'0': 0, '1': 7, '2': 0, '3': 11, '4': 17}
 occupation: {'0': 23, '1': 1, '2': 0, '3': 11, '4': 0}
-hoursPlaying: 114.0
+frequencyPlaying: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0}
+hoursPlaying: 3.26
+moneySpent: 0.82
 endSurveyCount: 11
+playedtilend: 6
+reasoncancel: {'0': 0, '1': 0, '2': 1, '3': 1, '4': 0, '5': 3, '6': 3, '7': 1}
+influenced: 5
+influencedtime: {'0': 0, '1': 2, '2': 3}
+influencedfrequency: {'0': 1, '1': 0, '2': 4}
+patterninfluence: {'0': 0, '1': 1, '2': 4, '3': 4, '4': 3, '5': 1, '6': 1}
+pushreceived: 3
 totalAppStarts: 1612
 Average Level Per Session: 5.19
 Average Levels: 85.38
@@ -92,7 +110,15 @@ education: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
 occupation: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
 frequencyPlaying: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0}
 hoursPlaying: 0
+moneySpent: 0
 endSurveyCount: 0
+playedtilend: 0
+reasoncancel: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0}
+influenced: 0
+influencedtime: {'0': 0, '1': 0, '2': 0}
+influencedfrequency: {'0': 0, '1': 0, '2': 0}
+patterninfluence: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0}
+pushreceived: 0
 totalAppStarts: 0
 Average Level Per Session: 0
 Average Levels: 0
@@ -113,7 +139,15 @@ education: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
 occupation: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
 frequencyPlaying: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0}
 hoursPlaying: 0
+moneySpent: 0
 endSurveyCount: 0
+playedtilend: 0
+reasoncancel: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0}
+influenced: 0
+influencedtime: {'0': 0, '1': 0, '2': 0}
+influencedfrequency: {'0': 0, '1': 0, '2': 0}
+patterninfluence: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0}
+pushreceived: 0
 totalAppStarts: 0
 Average Level Per Session: 0
 Average Levels: 0
