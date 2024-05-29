@@ -1,8 +1,8 @@
 Combined Statistics:
-Statistics: 2024-05-27 17:37:15.708537
+Statistics: 2024-05-29 11:49:58.491109
 Users dropped out: 48
 Inactive Users: 220
-Days Since Start Total: 9009
+Days Since Start Total: 9189
 Days Played Total: 459
 Users that played daily: 0
 Played all last 3 days: 0
@@ -21,7 +21,7 @@ Total Highscores Checked: 279
 Total Push Notifications Clicked: 78
 Total Notifications Sent: 89
 End Survey Done: 21
-Start Survey Done: 1963
+Start Survey Done: 1989
 DarkPatterns Off: 54
 DarkPatterns On: 35
 DarkPatterns FOMO: 0
@@ -78,7 +78,7 @@ Total Items Bought: 25
 Average Age: 29.43
 Max Level: 501
 Longest Streak: 3
-Total Notifications Sent: 1621
+Total Notifications Sent: 1641
 Total Notifications Pushed: 70
 gender: {'0': 18, '1': 17, '2': 0}
 education: {'0': 0, '1': 7, '2': 0, '3': 11, '4': 17}
