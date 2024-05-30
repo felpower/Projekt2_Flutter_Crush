@@ -71,6 +71,13 @@ inactive_users = set()
 total_counter = 0
 play_dates_by_type = {0: {}, 1: {}, 2: {}, 3: {}}
 latest_endsurveydate = None
+
+print("Starting to process User data for ", end="")
+if use_flutter:
+	print("Flutter stats")
+else:
+	print("AK stats")
+
 for user_id, user_info in users_data.items():
 	try:
 		dark_patterns_type = int(user_info.get('darkPatterns', 0)) if user_info.get('darkPatterns') is not None else ''
@@ -770,8 +777,8 @@ try:
 		if 'age' in data and data['age']:
 			user_age = int(data['age'])
 			average_age += user_age
-			if user_age == 33 or user_age == 41:
-				print("User_id: " + user_id + ", Dark Pattern Type: " + str(dark_pattern_type))
+			# if user_age == 33 or user_age == 41:
+			# 	print("User_id: " + user_id + ", Dark Pattern Type: " + str(dark_pattern_type))
 			start_survey_done += 1
 			user_id = data.get('userId')
 			if user_id and 'darkPatterns' in data:
@@ -1296,9 +1303,10 @@ with open(filename, 'w') as file:
 	file.write("DarkPatterns VAR:\n")
 	for key, value in dark_patterns_var_stats.items():
 		file.write(f"{key}: {value}\n")
-
-for comment in comments:
-	print(comment)
+printing = False
+if printing:
+	for comment in comments:
+		print(comment)
 # Converting the processed data into a DataFrame
 print("\nConverting the processed data into a DataFrame... Please wait")
 processed_df = pd.DataFrame(processed_data)
