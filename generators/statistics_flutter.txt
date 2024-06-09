@@ -1,5 +1,5 @@
 Combined Statistics:
-Statistics: 2024-06-09 15:02:39.338629
+Statistics: 2024-06-09 18:56:59.980786
 Users dropped out: 48
 Inactive Users: 221
 Days Since Start Total: 10179
@@ -13,7 +13,7 @@ Average Playtime per level: 92.88
 Total Levels Started: 2603
 Total Levels Finished: 2060
 Total Levels Won: 1641
-Max Level: 501
+Max Level Users: 1
 Total Levels Bought: 302
 Total Items Bought: 28
 Total Daily Rewards Collected: 44
@@ -21,7 +21,7 @@ Total Highscores Checked: 279
 Total Push Notifications Clicked: 78
 Total Notifications Sent: 89
 End Survey Done: 21
-Start Survey Done: 2145
+Start Survey Done: 2171
 DarkPatterns Off: 54
 DarkPatterns On: 35
 DarkPatterns FOMO: 0
@@ -46,6 +46,7 @@ Total Levels Bought: 11
 Total Items Bought: 3
 Average Age: 33.65
 Max Level: 86
+Users Max Level: 0
 Longest Streak: 4
 Total Notifications Sent: 0
 Total Notifications Pushed: 0
@@ -77,8 +78,9 @@ Total Levels Bought: 291
 Total Items Bought: 25
 Average Age: 29.43
 Max Level: 501
+Users Max Level: 1
 Longest Streak: 3
-Total Notifications Sent: 1761
+Total Notifications Sent: 1781
 Total Notifications Pushed: 70
 gender: {'0': 18, '1': 17, '2': 0}
 education: {'0': 0, '1': 7, '2': 0, '3': 11, '4': 17}
@@ -108,6 +110,7 @@ Total Levels Bought: 0
 Total Items Bought: 0
 Average Age: 0
 Max Level: 0
+Users Max Level: 0
 Longest Streak: 0
 Total Notifications Sent: 0
 Total Notifications Pushed: 0
@@ -139,6 +142,7 @@ Total Levels Bought: 0
 Total Items Bought: 0
 Average Age: 0
 Max Level: 0
+Users Max Level: 0
 Longest Streak: 0
 Total Notifications Sent: 0
 Total Notifications Pushed: 0
