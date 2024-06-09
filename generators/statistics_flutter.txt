@@ -1,13 +1,13 @@
 Combined Statistics:
-Statistics: 2024-05-30 15:03:10.599359
+Statistics: 2024-06-09 15:02:39.338629
 Users dropped out: 48
-Inactive Users: 220
-Days Since Start Total: 9279
+Inactive Users: 221
+Days Since Start Total: 10179
 Days Played Total: 460
 Users that played daily: 0
 Played all last 3 days: 0
 Installed yesterday: 0
-Played any of last 3 days: 1
+Played any of last 3 days: 0
 Total App Starts: 2083
 Average Playtime per level: 92.88
 Total Levels Started: 2603
@@ -21,7 +21,7 @@ Total Highscores Checked: 279
 Total Push Notifications Clicked: 78
 Total Notifications Sent: 89
 End Survey Done: 21
-Start Survey Done: 2002
+Start Survey Done: 2145
 DarkPatterns Off: 54
 DarkPatterns On: 35
 DarkPatterns FOMO: 0
@@ -78,7 +78,7 @@ Total Items Bought: 25
 Average Age: 29.43
 Max Level: 501
 Longest Streak: 3
-Total Notifications Sent: 1651
+Total Notifications Sent: 1761
 Total Notifications Pushed: 70
 gender: {'0': 18, '1': 17, '2': 0}
 education: {'0': 0, '1': 7, '2': 0, '3': 11, '4': 17}

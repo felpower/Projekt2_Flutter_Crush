@@ -42,26 +42,36 @@ def load_database(reference):
 processed_data = []
 
 
-def load_json_file():
-	# Path to your JSON file
-	json_file_path = 'darkpatterns-ac762-default-rtdb-export.json'
+def load_json_file(json_file_name):
 	# Load the JSON file into a Python dictionary with the correct encoding
-	with open(json_file_path, 'r', encoding='utf-8') as json_file:  # or use 'latin-1', 'iso-8859-1', or 'cp1252'
+	with open(json_file_name+".json", 'r') as json_file:  # or use 'latin-1', 'iso-8859-1', or 'cp1252'
 		json_data = json.load(json_file)
 		return json_data
 
 
 use_database = True
 # Access the 'users' data
-use_flutter = True
+use_flutter = False
 user_data = {}
+
+
+def save_users_data_as_file(file_name, data_from_users):
+	with open(file_name + '.json', 'w') as save_file:
+		json.dump(data_from_users, save_file)
+
+
 if use_flutter:
-	users_data = load_database("flutter")
+	if use_database:
+		users_data = load_database("flutter")
+		save_users_data_as_file("flutter_file", users_data)
+	else:
+		users_data = load_json_file("flutter_file")
 else:
 	if use_database:
 		users_data = load_database('users')
 	else:
-		users_data = load_json_file()['users']
+		users_data = load_json_file("ak_file")
+	save_users_data_as_file("ak_file", users_data)
 userCounter = 1
 # Total number of users
 total_users = len(users_data)

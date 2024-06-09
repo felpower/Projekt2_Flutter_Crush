@@ -1,60 +1,60 @@
 Combined Statistics:
-Statistics: 2024-05-30 15:00:29.697207
-Users dropped out: 163
-Inactive Users: 1952
-Days Since Start Total: 19081
-Days Played Total: 1506
+Statistics: 2024-06-09 15:09:26.022280
+Users dropped out: 165
+Inactive Users: 1956
+Days Since Start Total: 22165
+Days Played Total: 1517
 Users that played daily: 2
 Played all last 3 days: 0
 Installed yesterday: 0
 Played any of last 3 days: 2
-Total App Starts: 21406
-Average Playtime per level: 96.38
-Total Levels Started: 15223
-Total Levels Finished: 11144
-Total Levels Won: 9781
+Total App Starts: 21434
+Average Playtime per level: 96.3
+Total Levels Started: 15236
+Total Levels Finished: 11157
+Total Levels Won: 9793
 Max Level: 501
 Total Levels Bought: 1006
 Total Items Bought: 219
 Total Daily Rewards Collected: 307
 Total Highscores Checked: 358
-Total Push Notifications Clicked: 96
-Total Notifications Sent: 307
-End Survey Done: 72
-Start Survey Done: 3300
-DarkPatterns Off: 78
+Total Push Notifications Clicked: 100
+Total Notifications Sent: 309
+End Survey Done: 75
+Start Survey Done: 3788
+DarkPatterns Off: 79
 DarkPatterns On: 85
 DarkPatterns FOMO: 78
-DarkPatterns VAR: 66
-Average Age: 38.42
-Gender: {'0': 113, '1': 183, '2': 4}
-Education: {'0': 13, '1': 54, '2': 29, '3': 77, '4': 126}
-Occupation: {'0': 237, '1': 18, '2': 14, '3': 22, '4': 9}
-Frequency of Playing: {'0': 104, '1': 53, '2': 22, '3': 20, '4': 13, '5': 51, '6': 37}
-Hours of Playing: 379.59999999999997
-Played till end: 39
-Realised DPs: 34
-Last EndSurvey Done: 2024-05-27
+DarkPatterns VAR: 67
+Average Age: 38.43
+Gender: {'0': 114, '1': 184, '2': 4}
+Education: {'0': 13, '1': 54, '2': 29, '3': 78, '4': 127}
+Occupation: {'0': 239, '1': 18, '2': 14, '3': 22, '4': 9}
+Frequency of Playing: {'0': 105, '1': 54, '2': 22, '3': 20, '4': 13, '5': 51, '6': 37}
+Hours of Playing: 381.59999999999997
+Played till end: 40
+Realised DPs: 35
+Last EndSurvey Done: 2024-06-03
 
 DarkPatterns Off:
-Total Users: 78
-Total Dropouts: 36
+Total Users: 79
+Total Dropouts: 37
 Active Users: 42
-Total Levels Started: 3236
-Total Levels Finished: 2555
+Total Levels Started: 3240
+Total Levels Finished: 2559
 Total Levels Bought: 21
 Total Items Bought: 7
-Average Age: 35.73
+Average Age: 35.87
 Max Level: 252
 Longest Streak: 3
 Total Notifications Sent: 0
 Total Notifications Pushed: 0
-gender: {'0': 19, '1': 56, '2': 1}
-education: {'0': 4, '1': 14, '2': 8, '3': 21, '4': 29}
-occupation: {'0': 61, '1': 3, '2': 5, '3': 7, '4': 0}
-frequencyPlaying: {'0': 29, '1': 14, '2': 4, '3': 5, '4': 2, '5': 10, '6': 12}
+gender: {'0': 20, '1': 56, '2': 1}
+education: {'0': 4, '1': 14, '2': 8, '3': 21, '4': 30}
+occupation: {'0': 62, '1': 3, '2': 5, '3': 7, '4': 0}
+frequencyPlaying: {'0': 30, '1': 14, '2': 4, '3': 5, '4': 2, '5': 10, '6': 12}
 hoursPlaying: 1.26
-moneySpent: 1.22
+moneySpent: 1.2
 endSurveyCount: 19
 playedtilend: 6
 reasoncancel: {'0': 0, '1': 0, '2': 0, '3': 6, '4': 0, '5': 9, '6': 6, '7': 1}
@@ -63,9 +63,9 @@ influencedtime: {'0': 2, '1': 2, '2': 2}
 influencedfrequency: {'0': 4, '1': 1, '2': 1}
 patterninfluence: {'0': 3, '1': 1, '2': 1, '3': 1, '4': 1, '5': 3, '6': 0}
 pushreceived: 1
-totalAppStarts: 4420
-Average Level Per Session: 2.01
-Average Levels: 77.05
+totalAppStarts: 4424
+Average Level Per Session: 2.04
+Average Levels: 77.14
 
 DarkPatterns On:
 Total Users: 85
@@ -78,7 +78,7 @@ Total Items Bought: 119
 Average Age: 37.58
 Max Level: 501
 Longest Streak: 4
-Total Notifications Sent: 2514
+Total Notifications Sent: 2779
 Total Notifications Pushed: 68
 gender: {'0': 32, '1': 50, '2': 1}
 education: {'0': 4, '1': 12, '2': 6, '3': 19, '4': 42}
@@ -117,45 +117,45 @@ occupation: {'0': 59, '1': 7, '2': 4, '3': 6, '4': 0}
 frequencyPlaying: {'0': 26, '1': 10, '2': 8, '3': 9, '4': 4, '5': 11, '6': 8}
 hoursPlaying: 1.11
 moneySpent: 1.94
-endSurveyCount: 18
+endSurveyCount: 19
 playedtilend: 9
-reasoncancel: {'0': 0, '1': 0, '2': 1, '3': 1, '4': 0, '5': 7, '6': 2, '7': 1}
+reasoncancel: {'0': 0, '1': 0, '2': 1, '3': 2, '4': 0, '5': 8, '6': 2, '7': 1}
 influenced: 10
 influencedtime: {'0': 6, '1': 1, '2': 3}
 influencedfrequency: {'0': 3, '1': 2, '2': 5}
 patterninfluence: {'0': 1, '1': 8, '2': 2, '3': 0, '4': 0, '5': 2, '6': 0}
 pushreceived: 2
-totalAppStarts: 5588
+totalAppStarts: 5591
 Average Level Per Session: 2.34
 Average Levels: 124.29
 
 DarkPatterns VAR:
-Total Users: 66
-Total Dropouts: 41
+Total Users: 67
+Total Dropouts: 42
 Active Users: 25
-Total Levels Started: 3253
-Total Levels Finished: 2374
+Total Levels Started: 3262
+Total Levels Finished: 2383
 Total Levels Bought: 3
 Total Items Bought: 0
-Average Age: 41.8
+Average Age: 41.7
 Max Level: 189
 Longest Streak: 3
 Total Notifications Sent: 0
 Total Notifications Pushed: 0
-gender: {'0': 25, '1': 39, '2': 1}
-education: {'0': 1, '1': 13, '2': 10, '3': 12, '4': 29}
-occupation: {'0': 49, '1': 4, '2': 3, '3': 4, '4': 5}
-frequencyPlaying: {'0': 19, '1': 12, '2': 6, '3': 4, '4': 5, '5': 11, '6': 8}
+gender: {'0': 25, '1': 40, '2': 1}
+education: {'0': 1, '1': 13, '2': 10, '3': 13, '4': 29}
+occupation: {'0': 50, '1': 4, '2': 3, '3': 4, '4': 5}
+frequencyPlaying: {'0': 19, '1': 13, '2': 6, '3': 4, '4': 5, '5': 11, '6': 8}
 hoursPlaying: 1.08
-moneySpent: 0.44
-endSurveyCount: 13
-playedtilend: 10
-reasoncancel: {'0': 0, '1': 0, '2': 0, '3': 2, '4': 0, '5': 0, '6': 0, '7': 1}
-influenced: 8
-influencedtime: {'0': 3, '1': 1, '2': 4}
-influencedfrequency: {'0': 3, '1': 2, '2': 3}
-patterninfluence: {'0': 3, '1': 2, '2': 4, '3': 0, '4': 0, '5': 1, '6': 0}
+moneySpent: 0.43
+endSurveyCount: 15
+playedtilend: 11
+reasoncancel: {'0': 0, '1': 0, '2': 0, '3': 3, '4': 0, '5': 1, '6': 1, '7': 1}
+influenced: 9
+influencedtime: {'0': 3, '1': 1, '2': 5}
+influencedfrequency: {'0': 4, '1': 2, '2': 3}
+patterninfluence: {'0': 3, '1': 2, '2': 5, '3': 0, '4': 0, '5': 2, '6': 0}
 pushreceived: 1
-totalAppStarts: 4563
-Average Level Per Session: 3.08
-Average Levels: 130.12
+totalAppStarts: 4584
+Average Level Per Session: 3.12
+Average Levels: 130.48
