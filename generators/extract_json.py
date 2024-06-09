@@ -44,7 +44,7 @@ processed_data = []
 
 def load_json_file(json_file_name):
 	# Load the JSON file into a Python dictionary with the correct encoding
-	with open(json_file_name+".json", 'r') as json_file:  # or use 'latin-1', 'iso-8859-1', or 'cp1252'
+	with open(json_file_name + ".json", 'r') as json_file:  # or use 'latin-1', 'iso-8859-1', or 'cp1252'
 		json_data = json.load(json_file)
 		return json_data
 
@@ -615,19 +615,23 @@ user_play_dates = {}
 # Initialize the dictionaries
 dark_patterns_off_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users': 0, 'Total Levels Started': 0,
 						   'Total Levels Finished': 0, 'Total Levels Bought': 0, 'Total Items Bought': 0,
-						   'Average Age': 0, 'Max Level': 0, 'Longest Streak': 0, 'Total Notifications Sent': 0,
+						   'Average Age': 0, 'Max Level': 0, 'Users Max Level': 0, 'Longest Streak': 0,
+						   'Total Notifications Sent': 0,
 						   'Total Notifications Pushed': 0, }
 dark_patterns_on_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users': 0, 'Total Levels Started': 0,
 						  'Total Levels Finished': 0, 'Total Levels Bought': 0, 'Total Items Bought': 0,
-						  'Average Age': 0, 'Max Level': 0, 'Longest Streak': 0, 'Total Notifications Sent': 0,
+						  'Average Age': 0, 'Max Level': 0, 'Users Max Level': 0, 'Longest Streak': 0,
+						  'Total Notifications Sent': 0,
 						  'Total Notifications Pushed': 0, }
 dark_patterns_fomo_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users': 0, 'Total Levels Started': 0,
 							'Total Levels Finished': 0, 'Total Levels Bought': 0, 'Total Items Bought': 0,
-							'Average Age': 0, 'Max Level': 0, 'Longest Streak': 0, 'Total Notifications Sent': 0,
+							'Average Age': 0, 'Max Level': 0, 'Users Max Level': 0, 'Longest Streak': 0,
+							'Total Notifications Sent': 0,
 							'Total Notifications Pushed': 0, }
 dark_patterns_var_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users': 0, 'Total Levels Started': 0,
 						   'Total Levels Finished': 0, 'Total Levels Bought': 0, 'Total Items Bought': 0,
-						   'Average Age': 0, 'Max Level': 0, 'Longest Streak': 0, 'Total Notifications Sent': 0,
+						   'Average Age': 0, 'Max Level': 0, 'Users Max Level': 0, 'Longest Streak': 0,
+						   'Total Notifications Sent': 0,
 						   'Total Notifications Pushed': 0, }
 dark_patterns_off_stats.update({
 	'gender': gender_counter.copy(),
@@ -755,8 +759,9 @@ try:
 			started_levels += 1
 		if 'levelFinish' in data and data['levelFinish']:
 			finished_levels += 1
-			if int(data['levelFinish']) > max_level:
-				max_level = int(data['levelFinish'])
+			max_level_us = int(data['levelFinish'])
+			if max_level_us == 501:
+				max_level += 1
 		if 'levelWon' in data and data['levelWon'] == 1:
 			levels_won += 1
 		if 'levelBought' in data and data['levelBought']:
@@ -1013,8 +1018,12 @@ try:
 			if data.get('age'):
 				dark_patterns_off_stats['Average Age'] += int(data.get('age'))
 			if data.get('levelFinish'):
+				max_level_finish = int(data.get('levelFinish'))
 				dark_patterns_off_stats['Max Level'] = max(dark_patterns_off_stats['Max Level'],
-														   int(data.get('levelFinish')))
+														   max_level_finish)
+				if max_level_finish == 501:
+					dark_patterns_off_stats['Users Max Level'] += 1
+
 		elif dark_pattern_type == 1:  # On
 			if data.get('levelStart'):
 				if user_id not in session_counter:
@@ -1032,8 +1041,11 @@ try:
 			if data.get('age'):
 				dark_patterns_on_stats['Average Age'] += int(data.get('age'))
 			if data.get('levelFinish'):
+				max_level_finish = int(data.get('levelFinish'))
 				dark_patterns_on_stats['Max Level'] = max(dark_patterns_on_stats['Max Level'],
-														  int(data.get('levelFinish')))
+														  max_level_finish)
+				if max_level_finish == 501:
+					dark_patterns_on_stats['Users Max Level'] += 1
 			if data.get('notification_sent_time'):
 				dark_patterns_on_stats['Total Notifications Sent'] += 1
 			if data.get('pushClickTime'):
@@ -1055,8 +1067,11 @@ try:
 			if data.get('age'):
 				dark_patterns_fomo_stats['Average Age'] += int(data.get('age'))
 			if data.get('levelFinish'):
+				max_level_finish = int(data.get('levelFinish'))
 				dark_patterns_fomo_stats['Max Level'] = max(dark_patterns_fomo_stats['Max Level'],
-															int(data.get('levelFinish')))
+															max_level_finish)
+				if max_level_finish == 501:
+					dark_patterns_fomo_stats['Users Max Level'] += 1
 		elif dark_pattern_type == 3:  # VAR
 			if data.get('levelStart'):
 				if user_id not in session_counter:
@@ -1074,8 +1089,11 @@ try:
 			if data.get('age'):
 				dark_patterns_var_stats['Average Age'] += int(data.get('age'))
 			if data.get('levelFinish'):
+				max_level_finish = int(data.get('levelFinish'))
 				dark_patterns_var_stats['Max Level'] = max(dark_patterns_var_stats['Max Level'],
-														   int(data.get('levelFinish')))
+														   max_level_finish)
+				if max_level_finish == 501:
+					dark_patterns_var_stats['Users Max Level'] += 1
 except Exception as e:
 	print(f"Error: {e}")
 	traceback.print_exc()
@@ -1205,7 +1223,7 @@ statistics_overview = {
 	'levelStart': "Total Levels Started",
 	'levelFinish': "Total Levels Finished",
 	'levelWon': "Total Levels Won",
-	'finishOfLevelTime': "Max Level",
+	'finishOfLevelTime': "Max Level Users",
 	'levelBought': "Total Levels Bought",
 	'itemBought': 'Total Items Bought',
 	'collectDailyRewardsTime': 'Total Daily Rewards Collected',
