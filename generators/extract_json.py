@@ -90,6 +90,8 @@ else:
 
 for user_id, user_info in users_data.items():
 	try:
+		if user_id == 'V10-24-03-19–10:59-jK5uKx8ZoznLQPQ' or user_id == 'V10-24-04-08–19:51-c2dR2Ca7llLRvhe':
+			continue
 		dark_patterns_type = int(user_info.get('darkPatterns', 0)) if user_info.get('darkPatterns') is not None else ''
 		row = {
 			'userNumber': userCounter,
