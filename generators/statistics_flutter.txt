@@ -1,5 +1,5 @@
 Combined Statistics:
-Statistics: 2024-06-18 12:07:42.423699
+Statistics: 2024-06-18 12:47:42.770191
 Users dropped out: 48
 Inactive Users: 221
 Days Since Start Total: 10989
@@ -46,8 +46,11 @@ Total Levels Finished: 660
 Total Levels Won: 584
 Average Playtime per level: 165.97
 Hours of Playing: 37.34
+Seconds per Session: 361.39
 Total Levels Bought: 11
 Total Items Bought: 3
+Total Daily Rewards Collected: 0
+Total Highscores Checked: 0
 Average Age: 33.65
 Max Level: 86
 Users Max Level: 0
@@ -81,8 +84,11 @@ Total Levels Finished: 1400
 Total Levels Won: 1057
 Average Playtime per level: 229.4
 Hours of Playing: 114.25
+Seconds per Session: 492.0
 Total Levels Bought: 291
 Total Items Bought: 25
+Total Daily Rewards Collected: 44
+Total Highscores Checked: 279
 Average Age: 29.43
 Max Level: 501
 Users Max Level: 1
@@ -116,8 +122,11 @@ Total Levels Finished: 0
 Total Levels Won: 0
 Average Playtime per level: 0
 Hours of Playing: 0.0
+Seconds per Session: 0
 Total Levels Bought: 0
 Total Items Bought: 0
+Total Daily Rewards Collected: 0
+Total Highscores Checked: 0
 Average Age: 0
 Max Level: 0
 Users Max Level: 0
@@ -151,8 +160,11 @@ Total Levels Finished: 0
 Total Levels Won: 0
 Average Playtime per level: 0
 Hours of Playing: 0.0
+Seconds per Session: 0
 Total Levels Bought: 0
 Total Items Bought: 0
+Total Daily Rewards Collected: 0
+Total Highscores Checked: 0
 Average Age: 0
 Max Level: 0
 Users Max Level: 0
