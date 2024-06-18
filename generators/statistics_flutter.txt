@@ -1,27 +1,28 @@
 Combined Statistics:
-Statistics: 2024-06-09 18:56:59.980786
+Statistics: 2024-06-18 12:07:42.423699
 Users dropped out: 48
 Inactive Users: 221
-Days Since Start Total: 10179
+Days Since Start Total: 10989
 Days Played Total: 460
 Users that played daily: 0
 Played all last 3 days: 0
 Installed yesterday: 0
 Played any of last 3 days: 0
 Total App Starts: 2083
-Average Playtime per level: 92.88
+Average Playtime per level: 264.93
 Total Levels Started: 2603
 Total Levels Finished: 2060
 Total Levels Won: 1641
 Max Level Users: 1
 Total Levels Bought: 302
+Hours of Playing: 151.59
 Total Items Bought: 28
 Total Daily Rewards Collected: 44
 Total Highscores Checked: 279
 Total Push Notifications Clicked: 78
-Total Notifications Sent: 89
+Total Notifications Sent: 2288
 End Survey Done: 21
-Start Survey Done: 2171
+Start Survey Done: 89
 DarkPatterns Off: 54
 DarkPatterns On: 35
 DarkPatterns FOMO: 0
@@ -31,7 +32,7 @@ Gender: {'0': 50, '1': 37, '2': 1}
 Education: {'0': 2, '1': 15, '2': 5, '3': 28, '4': 38}
 Occupation: {'0': 53, '1': 2, '2': 3, '3': 24, '4': 6}
 Frequency of Playing: {'0': 1, '1': 0, '2': 0, '3': 1, '4': 0, '5': 0, '6': 0}
-Hours of Playing: 320.5
+hoursPlaying/user: 3.6
 Played till end: 11
 Realised DPs: 9
 Last EndSurvey Done: 2024-04-22
@@ -42,6 +43,9 @@ Total Dropouts: 34
 Active Users: 20
 Total Levels Started: 810
 Total Levels Finished: 660
+Total Levels Won: 584
+Average Playtime per level: 165.97
+Hours of Playing: 37.34
 Total Levels Bought: 11
 Total Items Bought: 3
 Average Age: 33.65
@@ -74,13 +78,16 @@ Total Dropouts: 14
 Active Users: 21
 Total Levels Started: 1793
 Total Levels Finished: 1400
+Total Levels Won: 1057
+Average Playtime per level: 229.4
+Hours of Playing: 114.25
 Total Levels Bought: 291
 Total Items Bought: 25
 Average Age: 29.43
 Max Level: 501
 Users Max Level: 1
 Longest Streak: 3
-Total Notifications Sent: 1781
+Total Notifications Sent: 1871
 Total Notifications Pushed: 70
 gender: {'0': 18, '1': 17, '2': 0}
 education: {'0': 0, '1': 7, '2': 0, '3': 11, '4': 17}
@@ -106,6 +113,9 @@ Total Dropouts: 0
 Active Users: 0
 Total Levels Started: 0
 Total Levels Finished: 0
+Total Levels Won: 0
+Average Playtime per level: 0
+Hours of Playing: 0.0
 Total Levels Bought: 0
 Total Items Bought: 0
 Average Age: 0
@@ -138,6 +148,9 @@ Total Dropouts: 0
 Active Users: 0
 Total Levels Started: 0
 Total Levels Finished: 0
+Total Levels Won: 0
+Average Playtime per level: 0
+Hours of Playing: 0.0
 Total Levels Bought: 0
 Total Items Bought: 0
 Average Age: 0

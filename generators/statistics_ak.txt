@@ -1,27 +1,28 @@
 Combined Statistics:
-Statistics: 2024-06-14 18:37:39.882641
+Statistics: 2024-06-18 12:14:33.060236
 Users dropped out: 165
-Inactive Users: 1956
-Days Since Start Total: 23642
-Days Played Total: 1507
+Inactive Users: 1957
+Days Since Start Total: 24874
+Days Played Total: 1508
 Users that played daily: 2
 Played all last 3 days: 0
 Installed yesterday: 0
-Played any of last 3 days: 0
-Total App Starts: 21330
-Average Playtime per level: 96.41
+Played any of last 3 days: 1
+Total App Starts: 21331
+Average Playtime per level: 265.82
 Total Levels Started: 15171
 Total Levels Finished: 11099
 Total Levels Won: 9736
 Max Level Users: 4
 Total Levels Bought: 1006
+Hours of Playing: 819.52
 Total Items Bought: 218
 Total Daily Rewards Collected: 303
 Total Highscores Checked: 358
 Total Push Notifications Clicked: 98
-Total Notifications Sent: 308
+Total Notifications Sent: 4267
 End Survey Done: 74
-Start Survey Done: 4094
+Start Survey Done: 308
 DarkPatterns Off: 79
 DarkPatterns On: 85
 DarkPatterns FOMO: 77
@@ -31,7 +32,7 @@ Gender: {'0': 113, '1': 184, '2': 4}
 Education: {'0': 13, '1': 54, '2': 29, '3': 78, '4': 126}
 Occupation: {'0': 238, '1': 18, '2': 14, '3': 22, '4': 9}
 Frequency of Playing: {'0': 105, '1': 54, '2': 22, '3': 20, '4': 12, '5': 51, '6': 37}
-Hours of Playing: 380.59999999999997
+hoursPlaying/user: 1.24
 Played till end: 40
 Realised DPs: 34
 Last EndSurvey Done: 2024-06-03
@@ -42,6 +43,9 @@ Total Dropouts: 37
 Active Users: 42
 Total Levels Started: 3240
 Total Levels Finished: 2559
+Total Levels Won: 2357
+Average Playtime per level: 201.36
+Hours of Playing: 181.23
 Total Levels Bought: 21
 Total Items Bought: 7
 Average Age: 35.87
@@ -74,13 +78,16 @@ Total Dropouts: 43
 Active Users: 42
 Total Levels Started: 4384
 Total Levels Finished: 3289
+Total Levels Won: 2848
+Average Playtime per level: 208.76
+Hours of Playing: 254.22
 Total Levels Bought: 566
 Total Items Bought: 119
 Average Age: 37.58
 Max Level: 501
 Users Max Level: 4
 Longest Streak: 4
-Total Notifications Sent: 2947
+Total Notifications Sent: 3043
 Total Notifications Pushed: 68
 gender: {'0': 32, '1': 50, '2': 1}
 education: {'0': 4, '1': 12, '2': 6, '3': 19, '4': 42}
@@ -106,6 +113,9 @@ Total Dropouts: 43
 Active Users: 34
 Total Levels Started: 4285
 Total Levels Finished: 2868
+Total Levels Won: 2400
+Average Playtime per level: 141.38
+Hours of Playing: 168.28
 Total Levels Bought: 416
 Total Items Bought: 92
 Average Age: 39.23
@@ -128,7 +138,7 @@ influencedtime: {'0': 5, '1': 1, '2': 3}
 influencedfrequency: {'0': 3, '1': 2, '2': 4}
 patterninfluence: {'0': 1, '1': 7, '2': 2, '3': 0, '4': 0, '5': 2, '6': 0}
 pushreceived: 1
-totalAppStarts: 5486
+totalAppStarts: 5487
 Average Level Per Session: 2.38
 Average Levels: 126.03
 
@@ -138,6 +148,9 @@ Total Dropouts: 42
 Active Users: 25
 Total Levels Started: 3262
 Total Levels Finished: 2383
+Total Levels Won: 2131
+Average Playtime per level: 238.15
+Hours of Playing: 215.79
 Total Levels Bought: 3
 Total Items Bought: 0
 Average Age: 41.7
