@@ -1040,7 +1040,10 @@ try:
 														   max_level_finish)
 				if max_level_finish == 501:
 					dark_patterns_off_stats['Users Max Level'] += 1
-
+			if data.get('notification_sent_time'):
+				dark_patterns_off_stats['Total Notifications Sent'] += 1
+			if data.get('pushClickTime'):
+				dark_patterns_off_stats['Total Notifications Pushed'] += 1
 		elif dark_pattern_type == 1:  # On
 			if data.get('levelStart'):
 				if user_id not in session_counter:
@@ -1105,6 +1108,10 @@ try:
 															max_level_finish)
 				if max_level_finish == 501:
 					dark_patterns_fomo_stats['Users Max Level'] += 1
+			if data.get('notification_sent_time'):
+				dark_patterns_fomo_stats['Total Notifications Sent'] += 1
+			if data.get('pushClickTime'):
+				dark_patterns_fomo_stats['Total Notifications Pushed'] += 1
 		elif dark_pattern_type == 3:  # VAR
 			if data.get('levelStart'):
 				if user_id not in session_counter:
@@ -1135,6 +1142,10 @@ try:
 														   max_level_finish)
 				if max_level_finish == 501:
 					dark_patterns_var_stats['Users Max Level'] += 1
+			if data.get('notification_sent_time'):
+				dark_patterns_var_stats['Total Notifications Sent'] += 1
+			if data.get('pushClickTime'):
+				dark_patterns_var_stats['Total Notifications Pushed'] += 1
 except Exception as e:
 	print(f"Error: {e}")
 	traceback.print_exc()
