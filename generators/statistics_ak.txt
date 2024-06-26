@@ -1,14 +1,15 @@
 Combined Statistics:
-Statistics: 2024-06-24 13:11:33.655345
+Statistics: 2024-06-26 15:57:22.516900
 Users dropped out: 165
 Inactive Users: 1959
-Days Since Start Total: 26624
-Days Played Total: 1499
+Days Since Start Total: 27238
+Days Played Total: 1500
 Users that played daily: 2
 Played all last 3 days: 0
-Installed yesterday: 0
+Average Level per Session: 2.465
+Average Level per Player: 93.59876543209876
 Played any of last 3 days: 1
-Total App Starts: 21308
+Total App Starts: 21309
 Average Playtime per level: 261.47
 Total Levels Started: 15163
 Total Levels Finished: 11092
@@ -20,7 +21,7 @@ Total Items Bought: 218
 Total Daily Rewards Collected: 302
 Total Highscores Checked: 358
 Total Push Notifications Clicked: 98
-Total Notifications Sent: 4551
+Total Notifications Sent: 4631
 End Survey Done: 75
 Start Survey Done: 307
 DarkPatterns Off: 79
@@ -93,7 +94,7 @@ Average Age: 37.54
 Max Level: 501
 Users Max Level: 4
 Longest Streak: 4
-Total Notifications Sent: 3198
+Total Notifications Sent: 3242
 Total Notifications Pushed: 68
 gender: {'0': 32, '1': 49, '2': 1}
 education: {'0': 4, '1': 12, '2': 6, '3': 19, '4': 41}
@@ -185,6 +186,6 @@ influencedtime: {'0': 3, '1': 1, '2': 5}
 influencedfrequency: {'0': 4, '1': 2, '2': 3}
 patterninfluence: {'0': 3, '1': 2, '2': 5, '3': 0, '4': 0, '5': 2, '6': 0}
 pushreceived: 1
-totalAppStarts: 4586
+totalAppStarts: 4587
 Average Level Per Session: 3.12
 Average Levels: 130.48
