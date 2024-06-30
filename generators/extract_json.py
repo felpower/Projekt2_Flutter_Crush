@@ -154,6 +154,28 @@ for user_id, user_info in users_data.items():
 		}
 		user_start_dates = set()
 
+		# Processing 'startOfLevel'
+		start_of_level = user_info.get('startOfLevel', None)
+		start_times = {}
+		if start_of_level:
+			for levels in start_of_level.values():
+				level, level_time = levels.split(', ')
+				# If the level is already in the dictionary, append the new start time
+				extracted_start_time = extract_date_time(level_time)
+				user_start_dates.add(extracted_start_time[0])
+				if level in start_times:
+					start_times[level].append(extracted_start_time)
+				# If the level is not in the dictionary, create a new list with the start time
+				else:
+					start_times[level] = [extracted_start_time]
+		if len(user_start_dates) >= 2:
+			row['dropout'] = 0
+		else:
+			row['dropout'] = 1
+			continue
+		processed_data.append(row.copy())
+		row['dropout'] = ""
+
 		# Extracting date and time from 'bootAppStartTime' if it exists
 		init_start_time = user_info.get('initAppStartTime', None)
 		days_since_start = 1
@@ -204,26 +226,7 @@ for user_id, user_info in users_data.items():
 		row['appCloseDate'] = ""
 		row['appCloseTime'] = ""
 
-		# Processing 'startOfLevel'
-		start_of_level = user_info.get('startOfLevel', None)
-		start_times = {}
-		if start_of_level:
-			for levels in start_of_level.values():
-				level, level_time = levels.split(', ')
-				# If the level is already in the dictionary, append the new start time
-				extracted_start_time = extract_date_time(level_time)
-				user_start_dates.add(extracted_start_time[0])
-				if level in start_times:
-					start_times[level].append(extracted_start_time)
-				# If the level is not in the dictionary, create a new list with the start time
-				else:
-					start_times[level] = [extracted_start_time]
-		if len(user_start_dates) >= 2:
-			row['dropout'] = 0
-		else:
-			row['dropout'] = 1
-		processed_data.append(row.copy())
-		row['dropout'] = ""
+
 		# Processing 'finishOfLevel'
 		finish_of_level = user_info.get('finishOfLevel', None)
 		if finish_of_level:
@@ -724,20 +727,21 @@ try:
 	for data in processed_data:
 		user_id = data.get('userId')
 		dark_pattern_type = data.get('darkPatterns')
-		if data.get('dropout') == 1 and user_id not in inactive_users:
-			dropout_counter += 1
-			if 'age' in data and data['age']:
-				dropout_age += data.get('age')
-			if 'levelStart' in data and data['levelStart']:
-				dropout_levels += data.get('levelStart')
-			if dark_pattern_type == 0:  # Off
-				dark_patterns_off_stats['Total Dropouts'] += 1
-			elif dark_pattern_type == 1:  # On
-				dark_patterns_on_stats['Total Dropouts'] += 1
-			elif dark_pattern_type == 2:  # FOMO
-				dark_patterns_fomo_stats['Total Dropouts'] += 1
-			elif dark_pattern_type == 3:  # VAR
-				dark_patterns_var_stats['Total Dropouts'] += 1
+		if data.get('dropout') == 1:
+			if user_id not in inactive_users:
+				dropout_counter += 1
+				if 'age' in data and data['age']:
+					dropout_age += data.get('age')
+				if 'levelStart' in data and data['levelStart']:
+					dropout_levels += data.get('levelStart')
+				if dark_pattern_type == 0:  # Off
+					dark_patterns_off_stats['Total Dropouts'] += 1
+				elif dark_pattern_type == 1:  # On
+					dark_patterns_on_stats['Total Dropouts'] += 1
+				elif dark_pattern_type == 2:  # FOMO
+					dark_patterns_fomo_stats['Total Dropouts'] += 1
+				elif dark_pattern_type == 3:  # VAR
+					dark_patterns_var_stats['Total Dropouts'] += 1
 			continue
 		if 'daysSinceStart' in data and data['daysSinceStart']:
 			total_days_since_start += int(data['daysSinceStart'])
@@ -1012,13 +1016,13 @@ try:
 		# Increment the corresponding values based on the DarkPattern type
 		if dark_pattern_type == 0:  # Off
 			if data.get('levelStart'):
-				if user_id not in session_counter:
-					session_counter[user_id] = {'total_levelStarts': 0, 'total_sessions': set(),
-												'dark_pattern': dark_pattern_type}
-				session_counter[user_id]['total_levelStarts'] += 1
-				session_counter[user_id]['total_sessions'].add(data.get('session'))
 				dark_patterns_off_stats['Total Levels Started'] += 1
 			if data.get('levelFinish'):
+				if user_id not in session_counter:
+					session_counter[user_id] = {'total_levelFinished': 0, 'total_sessions': set(),
+												'dark_pattern': dark_pattern_type}
+				session_counter[user_id]['total_levelFinished'] += 1
+				session_counter[user_id]['total_sessions'].add(data.get('session'))
 				dark_patterns_off_stats['Total Levels Finished'] += 1
 			if data.get('levelWon'):
 				dark_patterns_off_stats['Total Levels Won'] += 1
@@ -1046,13 +1050,13 @@ try:
 				dark_patterns_off_stats['Total Notifications Pushed'] += 1
 		elif dark_pattern_type == 1:  # On
 			if data.get('levelStart'):
-				if user_id not in session_counter:
-					session_counter[user_id] = {'total_levelStarts': 0, 'total_sessions': set(),
-												'dark_pattern': dark_pattern_type}
-				session_counter[user_id]['total_levelStarts'] += 1
-				session_counter[user_id]['total_sessions'].add(data.get('session'))
 				dark_patterns_on_stats['Total Levels Started'] += 1
 			if data.get('levelFinish'):
+				if user_id not in session_counter:
+					session_counter[user_id] = {'total_levelFinished': 0, 'total_sessions': set(),
+												'dark_pattern': dark_pattern_type}
+				session_counter[user_id]['total_levelFinished'] += 1
+				session_counter[user_id]['total_sessions'].add(data.get('session'))
 				dark_patterns_on_stats['Total Levels Finished'] += 1
 			if data.get('levelWon'):
 				dark_patterns_on_stats['Total Levels Won'] += 1
@@ -1080,13 +1084,13 @@ try:
 				dark_patterns_on_stats['Total Notifications Pushed'] += 1
 		elif dark_pattern_type == 2:  # FOMO
 			if data.get('levelStart'):
-				if user_id not in session_counter:
-					session_counter[user_id] = {'total_levelStarts': 0, 'total_sessions': set(),
-												'dark_pattern': dark_pattern_type}
-				session_counter[user_id]['total_levelStarts'] += 1
-				session_counter[user_id]['total_sessions'].add(data.get('session'))
 				dark_patterns_fomo_stats['Total Levels Started'] += 1
 			if data.get('levelFinish'):
+				if user_id not in session_counter:
+					session_counter[user_id] = {'total_levelFinished': 0, 'total_sessions': set(),
+												'dark_pattern': dark_pattern_type}
+				session_counter[user_id]['total_levelFinished'] += 1
+				session_counter[user_id]['total_sessions'].add(data.get('session'))
 				dark_patterns_fomo_stats['Total Levels Finished'] += 1
 			if data.get('levelWon'):
 				dark_patterns_fomo_stats['Total Levels Won'] += 1
@@ -1114,13 +1118,13 @@ try:
 				dark_patterns_fomo_stats['Total Notifications Pushed'] += 1
 		elif dark_pattern_type == 3:  # VAR
 			if data.get('levelStart'):
-				if user_id not in session_counter:
-					session_counter[user_id] = {'total_levelStarts': 0, 'total_sessions': set(),
-												'dark_pattern': dark_pattern_type}
-				session_counter[user_id]['total_levelStarts'] += 1
-				session_counter[user_id]['total_sessions'].add(data.get('session'))
 				dark_patterns_var_stats['Total Levels Started'] += 1
 			if data.get('levelFinish'):
+				if user_id not in session_counter:
+					session_counter[user_id] = {'total_levelFinished': 0, 'total_sessions': set(),
+												'dark_pattern': dark_pattern_type}
+				session_counter[user_id]['total_levelFinished'] += 1
+				session_counter[user_id]['total_sessions'].add(data.get('session'))
 				dark_patterns_var_stats['Total Levels Finished'] += 1
 			if data.get('levelWon'):
 				dark_patterns_var_stats['Total Levels Won'] += 1
@@ -1178,6 +1182,11 @@ try:
 	dark_patterns_on_stats['Active Users'] = dark_patterns_on - dark_patterns_on_stats['Total Dropouts']
 	dark_patterns_fomo_stats['Active Users'] = dark_patterns_fomo - dark_patterns_fomo_stats['Total Dropouts']
 	dark_patterns_var_stats['Active Users'] = dark_patterns_var - dark_patterns_var_stats['Total Dropouts']
+
+	dark_patterns_off = dark_patterns_off_stats['Active Users']
+	dark_patterns_on = dark_patterns_on_stats['Active Users']
+	dark_patterns_fomo = dark_patterns_fomo_stats['Active Users']
+	dark_patterns_var = dark_patterns_var_stats['Active Users']
 
 	dark_patterns_off_stats['Average Playtime per level'] = round(
 		dark_patterns_off_stats['Hours of Playing'] / dark_patterns_off_stats['Total Levels Started'] if
@@ -1271,16 +1280,16 @@ try:
 
 	for user in session_counter.values():
 		if user['dark_pattern'] == 0:
-			dark_patterns_off_stats['Average Level Per Session'] += user['total_levelStarts'] / len(
+			dark_patterns_off_stats['Average Level Per Session'] += user['total_levelFinished'] / len(
 				user['total_sessions'])
 		elif user['dark_pattern'] == 1:
-			dark_patterns_on_stats['Average Level Per Session'] += user['total_levelStarts'] / len(
+			dark_patterns_on_stats['Average Level Per Session'] += user['total_levelFinished'] / len(
 				user['total_sessions'])
 		elif user['dark_pattern'] == 2:
-			dark_patterns_fomo_stats['Average Level Per Session'] += user['total_levelStarts'] / len(
+			dark_patterns_fomo_stats['Average Level Per Session'] += user['total_levelFinished'] / len(
 				user['total_sessions'])
 		elif user['dark_pattern'] == 3:
-			dark_patterns_var_stats['Average Level Per Session'] += user['total_levelStarts'] / len(
+			dark_patterns_var_stats['Average Level Per Session'] += user['total_levelFinished'] / len(
 				user['total_sessions'])
 
 	dark_patterns_off_stats['Average Level Per Session'] = round(
@@ -1334,6 +1343,7 @@ statistics_overview = {
 	'levelFinish': "Total Levels Finished",
 	'levelWon': "Total Levels Won",
 	'finishOfLevelTime': "Max Level Users",
+	'finishOfLevelDate': "Total Users",
 	'levelBought': "Total Levels Bought",
 	'levelBoughtTime': "Hours of Playing",
 	'itemBought': 'Total Items Bought',
@@ -1375,6 +1385,7 @@ statistics = {
 	'levelFinish': finished_levels,
 	'levelWon': levels_won,
 	'finishOfLevelTime': max_level,
+	'finishOfLevelDate': dark_patterns_on + dark_patterns_off + dark_patterns_fomo + dark_patterns_var,
 	'levelBought': levels_bought,
 	'levelBoughtTime': hours_playing_per_user,
 	'itemBought': items_bought,
