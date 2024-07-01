@@ -561,7 +561,7 @@ for user_id, user_info in users_data.items():
 		print(f"Skipping user {user_id} due to error: {e}\nTraceback: {traceback.format_exc()}")
 		continue
 
-print("Active Users: ", userCounter)
+print("\nActive Users: ", userCounter)
 dropout_counter = 0
 dropout_age = 0
 dropout_levels = 0
@@ -1324,8 +1324,7 @@ try:
 		if any(date in play_dates for date in last_three_dates):
 			users_played_any_of_last_three_days += 1
 	average_time_needed_per_level = total_time_needed / level_counter if level_counter > 0 else 0
-	average_level_per_player = started_levels / (
-				inactive_user_counter - dropout_counter) if inactive_user_counter > 0 else 0
+	average_level_per_player = finished_levels / userCounter if userCounter > 0 else 0
 except Exception as e:
 	print(f"Error: {e}")
 	traceback.print_exc()
