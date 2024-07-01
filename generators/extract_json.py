@@ -172,6 +172,9 @@ for user_id, user_info in users_data.items():
 			row['dropout'] = 0
 		else:
 			row['dropout'] = 1
+			inactive_users.add(user_id)
+			inactive_user_counter -= 1
+			total_counter += 1
 			continue
 		processed_data.append(row.copy())
 		row['dropout'] = ""
@@ -558,6 +561,7 @@ for user_id, user_info in users_data.items():
 		print(f"Skipping user {user_id} due to error: {e}\nTraceback: {traceback.format_exc()}")
 		continue
 
+print("Active Users: ", userCounter)
 dropout_counter = 0
 dropout_age = 0
 dropout_levels = 0
