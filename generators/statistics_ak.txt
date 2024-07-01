@@ -1,13 +1,13 @@
 Combined Statistics:
-Statistics: 2024-07-01 09:08:56.456231
+Statistics: 2024-07-01 10:28:22.138390
 Users dropped out: 0
-Inactive Users: 2124
+Inactive Users: 2125
 Days Since Start Total: 15202
 Days Played Total: 1305
 Users that played daily: 0
 Played all last 3 days: 0
 Average Level per Session: 1.0250000000000001
-Average Level per Player: 87.24691358024691
+Average Level per Player: 63.49068322981366
 Played any of last 3 days: 1
 Total App Starts: 19711
 Average Playtime per level: 269.68
