@@ -1,5 +1,5 @@
 Combined Statistics:
-Statistics: 2024-07-18 09:17:12.320076
+Statistics: 2024-07-18 09:23:23.671868
 Users dropped out: 0
 Inactive Users: 2129
 Days Since Start Total: 17922
@@ -21,7 +21,7 @@ Hours of Playing: 765.75
 Total Items Bought: 202
 Total Daily Rewards Collected: 279
 Total Highscores Checked: 330
-Level Finished After Push was clicked: 0
+Played After Notification Pushed: 31
 Total Push Notifications Clicked after 30 days: 32
 Total Push Notifications Clicked: 58
 Total Notifications Sent after 30 days: 1788
@@ -62,6 +62,7 @@ Users Max Level: 0
 Longest Streak: 3
 Total Notifications Sent: 0
 Total Notifications Pushed: 0
+Played After Notification Pushed: 0
 Notifications sent after 30 days: 316
 Notifications clicked after 30 days: 11
 gender: {'0': 11, '1': 36, '2': 0}
@@ -102,6 +103,7 @@ Users Max Level: 4
 Longest Streak: 4
 Total Notifications Sent: 873
 Total Notifications Pushed: 58
+Played After Notification Pushed: 31
 Notifications sent after 30 days: 1119
 Notifications clicked after 30 days: 9
 gender: {'0': 15, '1': 29, '2': 1}
@@ -142,6 +144,7 @@ Users Max Level: 0
 Longest Streak: 4
 Total Notifications Sent: 0
 Total Notifications Pushed: 0
+Played After Notification Pushed: 0
 Notifications sent after 30 days: 286
 Notifications clicked after 30 days: 5
 gender: {'0': 18, '1': 18, '2': 1}
@@ -182,6 +185,7 @@ Users Max Level: 0
 Longest Streak: 3
 Total Notifications Sent: 0
 Total Notifications Pushed: 0
+Played After Notification Pushed: 0
 Notifications sent after 30 days: 67
 Notifications clicked after 30 days: 7
 gender: {'0': 11, '1': 19, '2': 1}
