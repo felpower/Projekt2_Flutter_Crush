@@ -51,7 +51,7 @@ def load_json_file(json_file_name):
 
 use_database = True
 # Access the 'users' data
-use_flutter = False
+use_flutter = True
 user_data = {}
 
 
@@ -81,6 +81,7 @@ inactive_users = set()
 total_counter = 0
 play_dates_by_type = {0: {}, 1: {}, 2: {}, 3: {}}
 latest_endsurveydate = None
+level_finished_after_push = 0
 
 print("Starting to process User data for ", end="")
 if use_flutter:
@@ -364,6 +365,7 @@ for user_id, user_info in users_data.items():
 				extracted_date_time = extract_date_time(push_sent_time)
 				row['pushClickTime'] = str(extracted_date_time[1])
 				row['pushClickDate'] = str(extracted_date_time[0])
+				actions.append({'action': 'pushClickTime', 'date': str(extracted_date_time[0]), 'time': str(extracted_date_time[1])})
 				processed_data.append(row.copy())
 
 		row['pushClickTime'] = ""
@@ -497,18 +499,40 @@ for user_id, user_info in users_data.items():
 
 		session = 0
 		session_counter = 0
+		session_initiated = False
+		push_session = -1
+		session_already_counted = -1
 		for action in sorted_actions:
+			# if action['action'] == 'pushClickTime':
+			# 	session_counter = 0
+			# 	session += 1
+			# 	push_session = session
+			# 	session_initiated = True
+			# 	# Update session and sessionCounter for pushClickTime related actions
+			# 	for dictionary in processed_data:
+			# 		if (dictionary.get('pushClickDate') == action['date'] and
+			# 				dictionary.get('pushClickTime') == action['time']):
+			# 			dictionary['session'] = session
+			# 			dictionary['sessionCounter'] = session_counter
+			# 			break
 			if action['action'] == 'appStart':
-				session_counter = 0
-				session += 1
+				if not session_initiated:  # Check if session was not initiated by pushClickTime
+					session_counter = 0
+					session += 1
+				else:
+					session_counter += 1
 				for dictionary in processed_data:
 					if (dictionary.get('appStartDate') == action['date'] and
 							dictionary.get('appStartTime') == action['time']):
 						dictionary['session'] = session
 						dictionary['sessionCounter'] = session_counter
 						break
+				session_initiated = False  # Reset for the next iteration
 			if action['action'] == 'levelFinished':
 				session_counter += 1
+				if session == push_session and session != session_already_counted:
+					session_already_counted = session
+					level_finished_after_push += 1
 				for dictionary in processed_data:
 					if (dictionary.get('finishOfLevelDate') == action['date'] and
 							dictionary.get('finishOfLevelTime') == action['time']):
@@ -547,7 +571,6 @@ for user_id, user_info in users_data.items():
 						dictionary['session'] = session
 						dictionary['sessionCounter'] = session_counter
 						break
-
 		# If the user has no other activity, add their data to the separate list and continue to the next user
 		if not has_activity:
 			inactive_users.add(user_id)
@@ -584,6 +607,7 @@ daily_rewards = 0
 checked_highscore = 0
 push_clicked = 0
 notifications_sent = 0
+notifications_sent_after_30_days = 0
 user_dark_patterns = {}
 dark_patterns_off = 0
 dark_patterns_on = 0
@@ -599,6 +623,8 @@ influenced_time = 0
 total_sessions = 0
 average_level_per_session = 0
 average_level_per_player = 0
+push_after_30_days = 0
+
 
 gender_counter = {'0': 0, '1': 0, '2': 0}
 education_counter = {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
@@ -613,6 +639,7 @@ hours_playing_per_user = 0
 end_survey_done = 0
 session_counter = {}
 comments = []
+init_app_start_date = None
 
 # Get the date 4 days ago
 four_days_ago = datetime.now().date() - timedelta(days=4)
@@ -631,25 +658,29 @@ dark_patterns_off_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users'
 						   'Hours of Playing': 0, 'Seconds per Session': 0, 'Total Levels Bought': 0,
 						   'Total Items Bought': 0, 'Total Daily Rewards Collected': 0, 'Total Highscores Checked': 0,
 						   'Average Age': 0, 'Max Level': 0, 'Users Max Level': 0, 'Longest Streak': 0,
-						   'Total Notifications Sent': 0, 'Total Notifications Pushed': 0, }
+						   'Total Notifications Sent': 0, 'Total Notifications Pushed': 0,'Notifications sent after 30 days': 0,
+						   'Notifications clicked after 30 days': 0}
 dark_patterns_on_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users': 0, 'Total Levels Started': 0,
 						  'Total Levels Finished': 0, 'Total Levels Won': 0, 'Average Playtime per level': 0,
 						  'Hours of Playing': 0, 'Seconds per Session': 0, 'Total Levels Bought': 0,
 						  'Total Items Bought': 0, 'Total Daily Rewards Collected': 0, 'Total Highscores Checked': 0,
 						  'Average Age': 0, 'Max Level': 0, 'Users Max Level': 0, 'Longest Streak': 0,
-						  'Total Notifications Sent': 0, 'Total Notifications Pushed': 0, }
+						  'Total Notifications Sent': 0, 'Total Notifications Pushed': 0,'Notifications sent after 30 days': 0,
+						   'Notifications clicked after 30 days': 0}
 dark_patterns_fomo_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users': 0, 'Total Levels Started': 0,
 							'Total Levels Finished': 0, 'Total Levels Won': 0, 'Average Playtime per level': 0,
 							'Hours of Playing': 0, 'Seconds per Session': 0, 'Total Levels Bought': 0,
 							'Total Items Bought': 0, 'Total Daily Rewards Collected': 0, 'Total Highscores Checked': 0,
 							'Average Age': 0, 'Max Level': 0, 'Users Max Level': 0, 'Longest Streak': 0,
-							'Total Notifications Sent': 0, 'Total Notifications Pushed': 0, }
+							'Total Notifications Sent': 0, 'Total Notifications Pushed': 0,'Notifications sent after 30 days': 0,
+						   'Notifications clicked after 30 days': 0}
 dark_patterns_var_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users': 0, 'Total Levels Started': 0,
 						   'Total Levels Finished': 0, 'Total Levels Won': 0, 'Average Playtime per level': 0,
 						   'Hours of Playing': 0, 'Seconds per Session': 0, 'Total Levels Bought': 0,
 						   'Total Items Bought': 0, 'Total Daily Rewards Collected': 0, 'Total Highscores Checked': 0,
 						   'Average Age': 0, 'Max Level': 0, 'Users Max Level': 0, 'Longest Streak': 0,
-						   'Total Notifications Sent': 0, 'Total Notifications Pushed': 0, }
+						   'Total Notifications Sent': 0, 'Total Notifications Pushed': 0,'Notifications sent after 30 days': 0,
+						   'Notifications clicked after 30 days': 0}
 dark_patterns_off_stats.update({
 	'gender': gender_counter.copy(),
 	'education': education_counter.copy(),
@@ -789,10 +820,20 @@ try:
 			daily_rewards += 1
 		if 'checkHighscoreTime' in data and data['checkHighscoreTime']:
 			checked_highscore += 1
-		if 'pushClickTime' in data and data['pushClickTime']:
-			push_clicked += 1
-		if 'notification_sent_time' in data and data['notification_sent_time']:
-			notifications_sent += 1
+		if 'pushClickDate' in data and data['pushClickDate']:
+			push_click_date = datetime.strptime(data['pushClickDate'], '%Y-%m-%d').date()
+			date_difference = (push_click_date - init_app_start_date).days
+			if date_difference <= 30:
+				push_clicked += 1
+			else:
+				push_after_30_days += 1
+		if 'notification_sent_date' in data and data['notification_sent_date']:
+			notification_sent_date = datetime.strptime(data['notification_sent_date'], '%Y-%m-%d').date()
+			date_difference = (notification_sent_date - init_app_start_date).days
+			if date_difference <= 30:
+				notifications_sent += 1
+			else:
+				notifications_sent_after_30_days += 1
 		user_id = data.get('userId')
 		if 'gender' in data and data['gender']:
 			gender_counter[data['gender']] += 1
@@ -1048,10 +1089,20 @@ try:
 														   max_level_finish)
 				if max_level_finish == 501:
 					dark_patterns_off_stats['Users Max Level'] += 1
-			if data.get('notification_sent_time'):
-				dark_patterns_off_stats['Total Notifications Sent'] += 1
-			if data.get('pushClickTime'):
-				dark_patterns_off_stats['Total Notifications Pushed'] += 1
+			if data.get('notification_sent_date'):
+				notification_sent_date = datetime.strptime(data['notification_sent_date'], '%Y-%m-%d').date()
+				date_difference = (notification_sent_date - init_app_start_date).days
+				if date_difference <= 30:
+					dark_patterns_off_stats['Total Notifications Sent'] += 1
+				else:
+					dark_patterns_off_stats['Notifications sent after 30 days'] += 1
+			if data.get('pushClickDate'):
+				push_click_date = datetime.strptime(data['pushClickDate'], '%Y-%m-%d').date()
+				date_difference = (push_click_date - init_app_start_date).days
+				if date_difference <= 30:
+					dark_patterns_off_stats['Total Notifications Pushed'] += 1
+				else:
+					dark_patterns_off_stats['Notifications clicked after 30 days'] += 1
 		elif dark_pattern_type == 1:  # On
 			if data.get('levelStart'):
 				dark_patterns_on_stats['Total Levels Started'] += 1
@@ -1082,10 +1133,20 @@ try:
 														  max_level_finish)
 				if max_level_finish == 501:
 					dark_patterns_on_stats['Users Max Level'] += 1
-			if data.get('notification_sent_time'):
-				dark_patterns_on_stats['Total Notifications Sent'] += 1
-			if data.get('pushClickTime'):
-				dark_patterns_on_stats['Total Notifications Pushed'] += 1
+			if data.get('notification_sent_date'):
+				notification_sent_date = datetime.strptime(data['notification_sent_date'], '%Y-%m-%d').date()
+				date_difference = (notification_sent_date - init_app_start_date).days
+				if date_difference <= 30:
+					dark_patterns_on_stats['Total Notifications Sent'] += 1
+				else:
+					dark_patterns_on_stats['Notifications sent after 30 days'] += 1
+			if data.get('pushClickDate'):
+				push_click_date = datetime.strptime(data['pushClickDate'], '%Y-%m-%d').date()
+				date_difference = (push_click_date - init_app_start_date).days
+				if date_difference <= 30:
+					dark_patterns_on_stats['Total Notifications Pushed'] += 1
+				else:
+					dark_patterns_on_stats['Notifications clicked after 30 days'] += 1
 		elif dark_pattern_type == 2:  # FOMO
 			if data.get('levelStart'):
 				dark_patterns_fomo_stats['Total Levels Started'] += 1
@@ -1116,10 +1177,20 @@ try:
 															max_level_finish)
 				if max_level_finish == 501:
 					dark_patterns_fomo_stats['Users Max Level'] += 1
-			if data.get('notification_sent_time'):
-				dark_patterns_fomo_stats['Total Notifications Sent'] += 1
-			if data.get('pushClickTime'):
-				dark_patterns_fomo_stats['Total Notifications Pushed'] += 1
+			if data.get('notification_sent_date'):
+				notification_sent_date = datetime.strptime(data['notification_sent_date'], '%Y-%m-%d').date()
+				date_difference = (notification_sent_date - init_app_start_date).days
+				if date_difference <= 30:
+					dark_patterns_fomo_stats['Total Notifications Sent'] += 1
+				else:
+					dark_patterns_fomo_stats['Notifications sent after 30 days'] += 1
+			if data.get('pushClickDate'):
+				push_click_date = datetime.strptime(data['pushClickDate'], '%Y-%m-%d').date()
+				date_difference = (push_click_date - init_app_start_date).days
+				if date_difference <= 30:
+					dark_patterns_fomo_stats['Total Notifications Pushed'] += 1
+				else:
+					dark_patterns_fomo_stats['Notifications clicked after 30 days'] += 1
 		elif dark_pattern_type == 3:  # VAR
 			if data.get('levelStart'):
 				dark_patterns_var_stats['Total Levels Started'] += 1
@@ -1150,10 +1221,20 @@ try:
 														   max_level_finish)
 				if max_level_finish == 501:
 					dark_patterns_var_stats['Users Max Level'] += 1
-			if data.get('notification_sent_time'):
-				dark_patterns_var_stats['Total Notifications Sent'] += 1
-			if data.get('pushClickTime'):
-				dark_patterns_var_stats['Total Notifications Pushed'] += 1
+			if data.get('notification_sent_date'):
+				notification_sent_date = datetime.strptime(data['notification_sent_date'], '%Y-%m-%d').date()
+				date_difference = (notification_sent_date - init_app_start_date).days
+				if date_difference <= 30:
+					dark_patterns_var_stats['Total Notifications Sent'] += 1
+				else:
+					dark_patterns_var_stats['Notifications sent after 30 days'] += 1
+			if data.get('pushClickDate'):
+				push_click_date = datetime.strptime(data['pushClickDate'], '%Y-%m-%d').date()
+				date_difference = (push_click_date - init_app_start_date).days
+				if date_difference <= 30:
+					dark_patterns_var_stats['Total Notifications Pushed'] += 1
+				else:
+					dark_patterns_var_stats['Notifications clicked after 30 days'] += 1
 except Exception as e:
 	print(f"Error: {e}")
 	traceback.print_exc()
@@ -1351,8 +1432,11 @@ statistics_overview = {
 	'levelBoughtTime': "Hours of Playing",
 	'itemBought': 'Total Items Bought',
 	'collectDailyRewardsTime': 'Total Daily Rewards Collected',
-	'checkHighscoreTime': 'Total Highscores Checked',
+	'collectDailyRewardsDate':'Total Highscores Checked',
+	'checkHighscoreTime': 'Level Finished After Push was clicked',
+	'checkHighscoreDate': 'Total Push Notifications Clicked after 30 days',
 	'pushClickTime': 'Total Push Notifications Clicked',
+	'pushClickDate': 'Total Notifications Sent after 30 days',
 	'notification_sent_time': 'Total Notifications Sent',
 	'notification_sent_date': 'End Survey Done',
 	'appCloseTime': 'Start Survey Done',
@@ -1393,8 +1477,11 @@ statistics = {
 	'levelBoughtTime': hours_playing_per_user,
 	'itemBought': items_bought,
 	'collectDailyRewardsTime': daily_rewards,
-	'checkHighscoreTime': checked_highscore,
+	'collectDailyRewardsDate': checked_highscore,
+	'checkHighscoreTime': level_finished_after_push,
+	'checkHighscoreDate': push_after_30_days,
 	'pushClickTime': push_clicked,
+	'pushClickDate': notifications_sent_after_30_days,
 	'notification_sent_time': notifications_sent,
 	'notification_sent_date': end_survey_counter,
 	'appCloseTime': start_survey_done,
