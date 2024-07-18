@@ -51,7 +51,7 @@ def load_json_file(json_file_name):
 
 use_database = True
 # Access the 'users' data
-use_flutter = True
+use_flutter = False
 user_data = {}
 
 
@@ -503,18 +503,18 @@ for user_id, user_info in users_data.items():
 		push_session = -1
 		session_already_counted = -1
 		for action in sorted_actions:
-			# if action['action'] == 'pushClickTime':
-			# 	session_counter = 0
-			# 	session += 1
-			# 	push_session = session
-			# 	session_initiated = True
-			# 	# Update session and sessionCounter for pushClickTime related actions
-			# 	for dictionary in processed_data:
-			# 		if (dictionary.get('pushClickDate') == action['date'] and
-			# 				dictionary.get('pushClickTime') == action['time']):
-			# 			dictionary['session'] = session
-			# 			dictionary['sessionCounter'] = session_counter
-			# 			break
+			if action['action'] == 'pushClickTime':
+				session_counter = 0
+				session += 1
+				push_session = session
+				session_initiated = True
+				# Update session and sessionCounter for pushClickTime related actions
+				for dictionary in processed_data:
+					if (dictionary.get('pushClickDate') == action['date'] and
+							dictionary.get('pushClickTime') == action['time']):
+						dictionary['session'] = session
+						dictionary['sessionCounter'] = session_counter
+						break
 			if action['action'] == 'appStart':
 				if not session_initiated:  # Check if session was not initiated by pushClickTime
 					session_counter = 0
@@ -658,28 +658,28 @@ dark_patterns_off_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users'
 						   'Hours of Playing': 0, 'Seconds per Session': 0, 'Total Levels Bought': 0,
 						   'Total Items Bought': 0, 'Total Daily Rewards Collected': 0, 'Total Highscores Checked': 0,
 						   'Average Age': 0, 'Max Level': 0, 'Users Max Level': 0, 'Longest Streak': 0,
-						   'Total Notifications Sent': 0, 'Total Notifications Pushed': 0,'Notifications sent after 30 days': 0,
+						   'Total Notifications Sent': 0, 'Total Notifications Pushed': 0, 'Played After Notification Pushed':0,'Notifications sent after 30 days': 0,
 						   'Notifications clicked after 30 days': 0}
 dark_patterns_on_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users': 0, 'Total Levels Started': 0,
 						  'Total Levels Finished': 0, 'Total Levels Won': 0, 'Average Playtime per level': 0,
 						  'Hours of Playing': 0, 'Seconds per Session': 0, 'Total Levels Bought': 0,
 						  'Total Items Bought': 0, 'Total Daily Rewards Collected': 0, 'Total Highscores Checked': 0,
 						  'Average Age': 0, 'Max Level': 0, 'Users Max Level': 0, 'Longest Streak': 0,
-						  'Total Notifications Sent': 0, 'Total Notifications Pushed': 0,'Notifications sent after 30 days': 0,
+						  'Total Notifications Sent': 0, 'Total Notifications Pushed': 0,'Played After Notification Pushed':0,'Notifications sent after 30 days': 0,
 						   'Notifications clicked after 30 days': 0}
 dark_patterns_fomo_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users': 0, 'Total Levels Started': 0,
 							'Total Levels Finished': 0, 'Total Levels Won': 0, 'Average Playtime per level': 0,
 							'Hours of Playing': 0, 'Seconds per Session': 0, 'Total Levels Bought': 0,
 							'Total Items Bought': 0, 'Total Daily Rewards Collected': 0, 'Total Highscores Checked': 0,
 							'Average Age': 0, 'Max Level': 0, 'Users Max Level': 0, 'Longest Streak': 0,
-							'Total Notifications Sent': 0, 'Total Notifications Pushed': 0,'Notifications sent after 30 days': 0,
+							'Total Notifications Sent': 0, 'Total Notifications Pushed': 0,'Played After Notification Pushed':0,'Notifications sent after 30 days': 0,
 						   'Notifications clicked after 30 days': 0}
 dark_patterns_var_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users': 0, 'Total Levels Started': 0,
 						   'Total Levels Finished': 0, 'Total Levels Won': 0, 'Average Playtime per level': 0,
 						   'Hours of Playing': 0, 'Seconds per Session': 0, 'Total Levels Bought': 0,
 						   'Total Items Bought': 0, 'Total Daily Rewards Collected': 0, 'Total Highscores Checked': 0,
 						   'Average Age': 0, 'Max Level': 0, 'Users Max Level': 0, 'Longest Streak': 0,
-						   'Total Notifications Sent': 0, 'Total Notifications Pushed': 0,'Notifications sent after 30 days': 0,
+						   'Total Notifications Sent': 0, 'Total Notifications Pushed': 0,'Played After Notification Pushed':0,'Notifications sent after 30 days': 0,
 						   'Notifications clicked after 30 days': 0}
 dark_patterns_off_stats.update({
 	'gender': gender_counter.copy(),
@@ -1390,6 +1390,8 @@ try:
 		dark_patterns_var_stats['Average Level Per Session'] / dark_patterns_var_stats['Active Users'] if
 		dark_patterns_var_stats['Active Users'] != 0 else 0, 2)
 
+	dark_patterns_on_stats['Played After Notification Pushed'] = level_finished_after_push
+
 	total_sessions = dark_patterns_off_stats['Average Level Per Session'] + dark_patterns_on_stats[
 		'Average Level Per Session'] + dark_patterns_fomo_stats['Average Level Per Session'] + dark_patterns_var_stats[
 						 'Average Level Per Session']
@@ -1433,7 +1435,7 @@ statistics_overview = {
 	'itemBought': 'Total Items Bought',
 	'collectDailyRewardsTime': 'Total Daily Rewards Collected',
 	'collectDailyRewardsDate':'Total Highscores Checked',
-	'checkHighscoreTime': 'Level Finished After Push was clicked',
+	'checkHighscoreTime': 'Played After Notification Pushed',
 	'checkHighscoreDate': 'Total Push Notifications Clicked after 30 days',
 	'pushClickTime': 'Total Push Notifications Clicked',
 	'pushClickDate': 'Total Notifications Sent after 30 days',
