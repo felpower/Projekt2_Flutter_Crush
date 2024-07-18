@@ -1,15 +1,15 @@
 Combined Statistics:
-Statistics: 2024-07-17 13:47:43.531260
+Statistics: 2024-07-18 09:17:12.320076
 Users dropped out: 0
 Inactive Users: 2129
-Days Since Start Total: 17762
-Days Played Total: 1310
+Days Since Start Total: 17922
+Days Played Total: 1311
 Users that played daily: 0
 Played all last 3 days: 0
 Average Level per Session: 1.0250000000000001
 Average Level per Player: 63.49068322981366
-Played any of last 3 days: 2
-Total App Starts: 19720
+Played any of last 3 days: 1
+Total App Starts: 19722
 Average Playtime per level: 269.68
 Total Levels Started: 14134
 Total Levels Finished: 10222
@@ -21,6 +21,7 @@ Hours of Playing: 765.75
 Total Items Bought: 202
 Total Daily Rewards Collected: 279
 Total Highscores Checked: 330
+Level Finished After Push was clicked: 0
 Total Push Notifications Clicked after 30 days: 32
 Total Push Notifications Clicked: 58
 Total Notifications Sent after 30 days: 1788
@@ -117,7 +118,7 @@ influencedtime: {'0': 4, '1': 0, '2': 6}
 influencedfrequency: {'0': 2, '1': 0, '2': 8}
 patterninfluence: {'0': 0, '1': 7, '2': 6, '3': 4, '4': 6, '5': 3, '6': 0}
 pushreceived: 7
-totalAppStarts: 6299
+totalAppStarts: 6301
 Average Level Per Session: 1.01
 Average Levels: 89.96
 
