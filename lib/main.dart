@@ -38,17 +38,17 @@ void main() async {
             messagingSenderId: "552263184384",
             appId: "1:552263184384:web:87e17944dc571dc4e028e5"));
     await FirebaseStore.init();
-    if (!DeviceHelper.isMobile()) {
-      runApp(const NonMobilePage());
-      return;
-    }
-    if (!DeviceHelper.isStandalone()) {
-      PWAInstall().setup(installCallback: () {
-        debugPrint('APP INSTALLED!');
-      });
-      runApp(const NonStandalonePage());
-      return;
-    }
+    // if (!DeviceHelper.isMobile()) {
+    //   runApp(const NonMobilePage());
+    //   return;
+    // }
+    // if (!DeviceHelper.isStandalone()) {
+    //   PWAInstall().setup(installCallback: () {
+    //     debugPrint('APP INSTALLED!');
+    //   });
+    //   runApp(const NonStandalonePage());
+    //   return;
+    // }
     Uri currentUrl = Uri.parse(html.window.location.href);
     if (currentUrl.queryParameters['source'] == 'notification') {
       FirebaseStore.addNotificationTap(DateTime.now());
