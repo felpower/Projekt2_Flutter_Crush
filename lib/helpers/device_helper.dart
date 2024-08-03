@@ -27,7 +27,6 @@ class DeviceHelper {
   }
 
   static bool isMobile() {
-    print("UserAgent: $userAgent");
     if (userAgent.contains("Mobi") ||
         userAgent.contains("Android") ||
         userAgent.contains("iPhone") ||

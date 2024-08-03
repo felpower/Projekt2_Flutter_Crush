@@ -92,12 +92,12 @@ class _SurveyPageState extends State<SurveyPage> {
                         ),
                         outlinedButtonTheme: OutlinedButtonThemeData(
                           style: ButtonStyle(
-                            minimumSize: MaterialStateProperty.all(
+                            minimumSize: WidgetStateProperty.all(
                               const Size(150.0, 60.0),
                             ),
-                            side: MaterialStateProperty.resolveWith(
-                              (Set<MaterialState> state) {
-                                if (state.contains(MaterialState.disabled)) {
+                            side: WidgetStateProperty.resolveWith(
+                              (Set<WidgetState> state) {
+                                if (state.contains(WidgetState.disabled)) {
                                   return const BorderSide(
                                     color: Colors.grey,
                                   );
@@ -107,14 +107,14 @@ class _SurveyPageState extends State<SurveyPage> {
                                 );
                               },
                             ),
-                            shape: MaterialStateProperty.all(
+                            shape: WidgetStateProperty.all(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
                             ),
-                            textStyle: MaterialStateProperty.resolveWith(
-                              (Set<MaterialState> state) {
-                                if (state.contains(MaterialState.disabled)) {
+                            textStyle: WidgetStateProperty.resolveWith(
+                              (Set<WidgetState> state) {
+                                if (state.contains(WidgetState.disabled)) {
                                   return Theme.of(context).textTheme.labelLarge?.copyWith(
                                         color: Colors.grey,
                                       );
@@ -128,7 +128,7 @@ class _SurveyPageState extends State<SurveyPage> {
                         ),
                         textButtonTheme: TextButtonThemeData(
                           style: ButtonStyle(
-                            textStyle: MaterialStateProperty.all(
+                            textStyle: WidgetStateProperty.all(
                               Theme.of(context).textTheme.labelLarge?.copyWith(
                                     color: Colors.cyan,
                                   ),
@@ -164,7 +164,7 @@ class _SurveyPageState extends State<SurveyPage> {
                             .copyWith(
                               onPrimary: Colors.white,
                             )
-                            .copyWith(background: Colors.white),
+                            .copyWith(surface: Colors.white),
                       ),
                       surveyProgressbarConfiguration: SurveyProgressConfiguration(
                         backgroundColor: Colors.white,

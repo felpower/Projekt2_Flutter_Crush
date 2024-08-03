@@ -194,8 +194,8 @@ class HighScoreState extends State<HighScorePage> {
     for (User user in users) {
       rows.add(DataRow(
           color: user.isUser
-              ? MaterialStateColor.resolveWith((states) => AppColors.getColorFromHex("#e52012"))
-              : MaterialStateColor.resolveWith((states) => AppColors.getColorFromHex(("#80c9e2"))),
+              ? WidgetStateColor.resolveWith((states) => AppColors.getColorFromHex("#e52012"))
+              : WidgetStateColor.resolveWith((states) => AppColors.getColorFromHex(("#80c9e2"))),
           cells: [
             DataCell(Text('#${user.place}')),
             DataCell(Text(user.name)),
