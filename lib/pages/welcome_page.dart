@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'info_page.dart';
+
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
 
@@ -51,9 +53,8 @@ class _WelcomePageState extends State<WelcomePage> {
                             ElevatedButton(
                                 onPressed: () {
                                   Navigator.pop(context);
-                                  Navigator.of(context).pushNamed(
-                                    "/startSurvey",
-                                  );
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) => const DeviceToken()));
                                 },
                                 child: const Text("Zur Umfrage"))
                           ],

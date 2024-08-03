@@ -33,10 +33,10 @@ class Application extends StatelessWidget {
             darkTheme: ThemeData.light(),
             themeMode: ThemeMode.light,
             home: const HomePage(),
-            routes: {
-              '/startSurvey': (context) => const SurveyPage(title: "Start"),
-              '/endSurvey': (context) => const SurveyPage(title: "End"),
-            },
+            // routes: {
+            //   '/startSurvey': (context) => const SurveyPage(title: "Start"),
+            //   '/endSurvey': (context) => const SurveyPage(title: "End"),
+            // },
           ),
         ),
       ),
