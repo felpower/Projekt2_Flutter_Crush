@@ -210,12 +210,12 @@ class FirebaseStore {
     String hostname = Uri.parse(html.window.location.href).host;
     String version = "";
     if (hostname.contains('felpower') || hostname.contains('localhost')) {
-      return "testVersion-V10-";
+      return "testVersion-V20-";
     }
     if (hostname.contains('flutter')) {
-      return "flutter-V10-";
+      return "flutter-V20-";
     }
-    return "${version}V10-";
+    return "${version}V20-";
   }
 
   static Future<void> sendLog(String log, message) async {

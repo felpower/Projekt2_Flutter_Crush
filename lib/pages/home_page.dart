@@ -33,10 +33,10 @@ import '../gamification_widgets/credit_panel.dart';
 import '../helpers/app_colors.dart';
 import '../helpers/global_variables.dart';
 import 'feedback_page.dart';
-import 'finished_survey_page.dart';
+// import 'finished_survey_page.dart';
 import 'high_score_page.dart';
 import 'info_page.dart';
-import 'under_18_page.dart';
+// import 'under_18_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -612,25 +612,25 @@ class _HomePageState extends State<HomePage>
   void checkForFirstTimeStart() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (!kDebugMode) {
-      if (prefs.getBool("isUnder18") == true) {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const Under18Page()));
-      }
+      // if (prefs.getBool("isUnder18") == true) {
+      //   Navigator.push(context, MaterialPageRoute(builder: (context) => const Under18Page()));
+      // }
       if (prefs.getBool("firstStart") == null || prefs.getBool("firstStart") == true) {
         Navigator.push(context, MaterialPageRoute(builder: (context) => const WelcomePage()));
       }
-      var endSurvey = prefs.getString("endSurvey");
-      if (endSurvey != null) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const FinishedSurveyPage()));
-      } else if (endSurvey == null) {
-        var firstTimeStart = prefs.getString("firstStartTime");
-        if (firstTimeStart != null &&
-            DateTime.now().difference(DateTime.parse(firstTimeStart)).inDays > 30) {
-          Navigator.of(context).pushNamed(
-            "/endSurvey",
-          );
-        }
-      }
+      // var endSurvey = prefs.getString("endSurvey");
+      // if (endSurvey != null) {
+      //   Navigator.push(
+      //       context, MaterialPageRoute(builder: (context) => const FinishedSurveyPage()));
+      // } else if (endSurvey == null) {
+      //   var firstTimeStart = prefs.getString("firstStartTime");
+      //   if (firstTimeStart != null &&
+      //       DateTime.now().difference(DateTime.parse(firstTimeStart)).inDays > 30) {
+      //     Navigator.of(context).pushNamed(
+      //       "/endSurvey",
+      //     );
+      //   }
+      // }
     }
     FutureBuilder<String>(
         future: FirebaseMessagingWeb.getToken(),

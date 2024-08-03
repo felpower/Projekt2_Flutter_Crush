@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class DarkPatternsService {
   static const String darkPatterns = 'darkPatterns';
-  static int darkPatternsValue = 3;
+  static int darkPatternsValue = Random().nextInt(7);
 
   static Future<int> shouldDarkPatternsBeVisible() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();

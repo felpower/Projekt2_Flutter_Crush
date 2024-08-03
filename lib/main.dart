@@ -4,7 +4,7 @@ import 'dart:async';
 
 import 'package:bachelor_flutter_crush/application.dart';
 import 'package:bachelor_flutter_crush/helpers/device_helper.dart';
-import 'package:bachelor_flutter_crush/pages/non_mobile_page.dart';
+// import 'package:bachelor_flutter_crush/pages/non_mobile_page.dart';
 import 'package:bachelor_flutter_crush/pages/non_standalone_page.dart';
 import 'package:bachelor_flutter_crush/pages/old_version_page.dart';
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
@@ -42,13 +42,13 @@ void main() async {
     //   runApp(const NonMobilePage());
     //   return;
     // }
-    // if (!DeviceHelper.isStandalone()) {
-    //   PWAInstall().setup(installCallback: () {
-    //     debugPrint('APP INSTALLED!');
-    //   });
-    //   runApp(const NonStandalonePage());
-    //   return;
-    // }
+    if (!DeviceHelper.isStandalone()) {
+      PWAInstall().setup(installCallback: () {
+        debugPrint('APP INSTALLED!');
+      });
+      runApp(const NonStandalonePage());
+      return;
+    }
     Uri currentUrl = Uri.parse(html.window.location.href);
     if (currentUrl.queryParameters['source'] == 'notification') {
       FirebaseStore.addNotificationTap(DateTime.now());

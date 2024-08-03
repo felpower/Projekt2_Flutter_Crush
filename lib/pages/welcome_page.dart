@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'info_page.dart';
 
@@ -52,11 +53,12 @@ class _WelcomePageState extends State<WelcomePage> {
                                 fit: BoxFit.cover),
                             ElevatedButton(
                                 onPressed: () {
+                                  setFirstStart();
                                   Navigator.pop(context);
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) => const DeviceToken()));
                                 },
-                                child: const Text("Zur Umfrage"))
+                                child: const Text("Spiel Starten"))
                           ],
                         )
                       ]),
@@ -69,5 +71,11 @@ class _WelcomePageState extends State<WelcomePage> {
                 ),
               ],
             )));
+  }
+  void setFirstStart() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var now = DateTime.now();
+    prefs.setBool("firstStart", false);
+    prefs.setString("firstStartTime", now.toString());
   }
 }
