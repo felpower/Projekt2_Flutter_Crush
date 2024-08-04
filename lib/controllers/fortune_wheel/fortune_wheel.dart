@@ -8,6 +8,7 @@ import 'package:bachelor_flutter_crush/helpers/app_colors.dart';
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../bloc/bloc_provider.dart';
 import '../../game_widgets/game_over_splash.dart';
@@ -21,7 +22,8 @@ class FortuneWheel extends StatefulWidget {
   State<FortuneWheel> createState() => _FortuneWheelState();
 }
 
-class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderStateMixin {
+class _FortuneWheelState extends State<FortuneWheel>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late GameBloc gameBloc;
   late Animation<double> _animation;
@@ -39,20 +41,23 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
     super.initState();
 
     gameBloc = BlocProvider.of<GameBloc>(context);
-    _controller = AnimationController(vsync: this, duration: const Duration(seconds: 5));
+    _controller =
+        AnimationController(vsync: this, duration: const Duration(seconds: 5));
 
-    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeOutQuart)
-      ..addListener(() {
-        setState(() {
-          _accumulatedRotation = ui_web.lerpDouble(0, _targetRotation, _animation.value)!;
-        });
-      })
-      ..addStatusListener((status) {
-        if (status == AnimationStatus.completed) {
-          print("Wheel stopped on: $_selectedItem");
-          _buildResultOverlay();
-        }
-      });
+    _animation =
+        CurvedAnimation(parent: _controller, curve: Curves.easeOutQuart)
+          ..addListener(() {
+            setState(() {
+              _accumulatedRotation =
+                  ui_web.lerpDouble(0, _targetRotation, _animation.value)!;
+            });
+          })
+          ..addStatusListener((status) {
+            if (status == AnimationStatus.completed) {
+              print("Wheel stopped on: $_selectedItem");
+              _buildResultOverlay();
+            }
+          });
   }
 
   void spin() {
@@ -77,7 +82,8 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
     double segmentAngle = 2 * pi / widget.items.length;
 
     // This calculation determines how many segments are passed during rotation.
-    int index = ((rotationInRadians / segmentAngle) % widget.items.length).floor();
+    int index =
+        ((rotationInRadians / segmentAngle) % widget.items.length).floor();
 
     // Since the wheel rotates clockwise but items are painted counter-clockwise,
     // we need to invert the index.
@@ -145,7 +151,8 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/background/background_new.png'),
+                image:
+                    AssetImage('assets/images/background/background_new.png'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -169,11 +176,40 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
     );
   }
 
+  void _showDarkPatternsInfo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var dpInfoShown = prefs.getBool('darkPatternsInfoVAR');
+    if (dpInfoShown == null || dpInfoShown == false) {
+      return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('DarkPatterns Hinweiss'),
+            content: const Text(
+                'Achtung! Variable Belohnungen wie bei diesem Glücksrad können dazu führen, dass Sie '
+                'mehr Zeit und Geld investieren, als Sie ursprünglich beabsichtigt haben. Bitte seien '
+                'Sie vorsichtig und spielen Sie verantwortungsbewusst.'),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  prefs.setBool('darkPatternsInfoVAR', true);
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
   Widget _buildFortuneWheel() {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    double wheelSize = min(screenWidth, screenHeight) * 0.8; // Taking 80% of the smaller dimension
-
+    double wheelSize = min(screenWidth, screenHeight) *
+        0.8; // Taking 80% of the smaller dimension
+    _showDarkPatternsInfo();
     return Center(
       child: GestureDetector(
         onPanEnd: (details) => spin(),
@@ -206,7 +242,8 @@ class _FortuneWheelState extends State<FortuneWheel> with SingleTickerProviderSt
                 ),
                 child: const Center(
                   child: Material(
-                    type: MaterialType.transparency, // Avoids additional visual effects
+                    type: MaterialType.transparency,
+                    // Avoids additional visual effects
                     child: Text(
                       'Tippe Hier!',
                       textAlign: TextAlign.center,
@@ -271,10 +308,12 @@ class _WheelPainter extends CustomPainter {
 
       // Calculate text position
       final labelRadius = wheelRadius - 40; // Adjust this for label positioning
-      final xOffset =
-          wheelRadius + labelRadius * cos(angle + sweepAngle / 2) - textPainter.width / 2;
-      final yOffset =
-          wheelRadius + labelRadius * sin(angle + sweepAngle / 2) - textPainter.height / 2;
+      final xOffset = wheelRadius +
+          labelRadius * cos(angle + sweepAngle / 2) -
+          textPainter.width / 2;
+      final yOffset = wheelRadius +
+          labelRadius * sin(angle + sweepAngle / 2) -
+          textPainter.height / 2;
 
       textPainter.paint(canvas, Offset(xOffset, yOffset));
     }
@@ -286,5 +325,7 @@ class _WheelPainter extends CustomPainter {
   }
 }
 
-bool _showPressButton = true; // New variable to track visibility of the 'Press' button
-double _accumulatedRotation = 0.0; // New variable to store the accumulated rotation over time
+bool _showPressButton =
+    true; // New variable to track visibility of the 'Press' button
+double _accumulatedRotation =
+    0.0; // New variable to store the accumulated rotation over time

@@ -33,6 +33,7 @@ import '../gamification_widgets/credit_panel.dart';
 import '../helpers/app_colors.dart';
 import '../helpers/global_variables.dart';
 import 'feedback_page.dart';
+
 // import 'finished_survey_page.dart';
 import 'high_score_page.dart';
 import 'info_page.dart';
@@ -51,6 +52,7 @@ class _HomePageState extends State<HomePage>
 
   int todaysAmount = 0;
   String todaysType = '';
+  bool darkPatternsInfoActive = false;
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -118,20 +120,24 @@ class _HomePageState extends State<HomePage>
       });
     }
     var host = Uri.parse(html.window.location.href).host;
+    // _showDarkPatternsInfoNotification();
     return Scaffold(
       appBar: AppBar(
         title: const Text('JellyFun'),
         actions: [
           flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
             builder: (context, state) {
-              if (state is DarkPatternsActivatedState || state is DarkPatternsCompetitionState) {
+              if (state is DarkPatternsActivatedState ||
+                  state is DarkPatternsCompetitionState) {
                 return Tooltip(
                     message: 'Highscore',
                     child: IconButton(
                       icon: const Icon(Icons.emoji_events, color: Colors.blue),
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => const HighScorePage()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const HighScorePage()));
                       },
                     ));
               } else {
@@ -160,7 +166,8 @@ class _HomePageState extends State<HomePage>
             Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/background/background_new2.png'),
+                  image: AssetImage(
+                      'assets/images/background/background_new2.png'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -175,7 +182,8 @@ class _HomePageState extends State<HomePage>
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
+                      flutter_bloc.BlocBuilder<DarkPatternsBloc,
+                          DarkPatternsState>(
                         builder: (context, state) {
                           if (state is DarkPatternsActivatedState ||
                               state is DarkPatternsCompetitionState) {
@@ -184,11 +192,13 @@ class _HomePageState extends State<HomePage>
                               children: [
                                 flutter_bloc.BlocBuilder<XpBloc, XpState>(
                                     builder: (context, state) {
-                                  return CreditPanel('XP: ${state.amount}', 30, creditPanelWidth);
+                                  return CreditPanel('XP: ${state.amount}', 30,
+                                      creditPanelWidth);
                                 }),
                                 flutter_bloc.BlocBuilder<CoinBloc, CoinState>(
                                     builder: (context, state) {
-                                  return CreditPanel('\$: ${state.amount}', 30, creditPanelWidth);
+                                  return CreditPanel('\$: ${state.amount}', 30,
+                                      creditPanelWidth);
                                 })
                               ],
                             );
@@ -198,33 +208,41 @@ class _HomePageState extends State<HomePage>
                               children: [
                                 flutter_bloc.BlocBuilder<CoinBloc, CoinState>(
                                     builder: (context, state) {
-                                  return CreditPanel('\$: ${state.amount}', 30, creditPanelWidth);
+                                  return CreditPanel('\$: ${state.amount}', 30,
+                                      creditPanelWidth);
                                 })
                               ],
                             );
                           }
                         },
                       ),
-                      flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
-                          builder: (context, state) {
+                      flutter_bloc.BlocBuilder<DarkPatternsBloc,
+                          DarkPatternsState>(builder: (context, state) {
                         return Visibility(
-                            visible: host.contains('felpower') || host.contains('localhost'),
+                            visible: host.contains('felpower') ||
+                                host.contains('localhost'),
                             child: const Text(
                               'Dies ist eine TestVersion und wird nicht für die Studie verwendet. Um an der richtigen Studie teilzunehmen bitte die Seite jelly-fun.github.io aufrufen.',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  color: Colors.red, fontWeight: FontWeight.bold, fontSize: 15),
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15),
                             ));
                       }),
-                      flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
+                      flutter_bloc.BlocBuilder<DarkPatternsBloc,
+                          DarkPatternsState>(
                         builder: (context, state) {
                           return Visibility(
-                            visible: darkPatternsState is DarkPatternsActivatedState ||
+                            visible: darkPatternsState
+                                    is DarkPatternsActivatedState ||
                                 darkPatternsState is DarkPatternsFoMoState,
                             child: FutureBuilder<int>(
                               future: _daysPlayedFuture,
-                              builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-                                if (snapshot.connectionState == ConnectionState.waiting) {
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<int> snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
                                   return const CircularProgressIndicator();
                                 } else if (snapshot.hasError) {
                                   return const Text(
@@ -256,16 +274,20 @@ class _HomePageState extends State<HomePage>
                               // Calculate the total number of dividers we will have
                               int totalDividers = (levelCount / 6).ceil();
                               // Calculate total item count: level rows + divider rows
-                              int itemCount = (levelCount / 3).ceil() + totalDividers;
+                              int itemCount =
+                                  (levelCount / 3).ceil() + totalDividers;
                               return ListView.builder(
                                 itemCount: itemCount,
                                 itemBuilder: (BuildContext context, int index) {
                                   // Check if the current index is a divider row
-                                  bool isDividerRow = (index + 1) % 3 == 0 && index != 0;
+                                  bool isDividerRow =
+                                      (index + 1) % 3 == 0 && index != 0;
                                   if (isDividerRow) {
                                     // Return a divider for the designated rows
-                                    if (darkPatternsState is DarkPatternsActivatedState ||
-                                        darkPatternsState is DarkPatternsCollectionState) {
+                                    if (darkPatternsState
+                                            is DarkPatternsActivatedState ||
+                                        darkPatternsState
+                                            is DarkPatternsCollectionState) {
                                       return const Divider(
                                         color: Colors.black,
                                         thickness: 5.0,
@@ -280,19 +302,23 @@ class _HomePageState extends State<HomePage>
                                     }
                                   } else {
                                     // Calculate how many dividers come before the current index
-                                    int dividersBefore = ((index + 1) / 3).floor();
+                                    int dividersBefore =
+                                        ((index + 1) / 3).floor();
                                     // Calculate the first level number for this row, adjusting for dividers
                                     int levelIndex = index - dividersBefore;
                                     int firstLevelNumber = levelIndex * 3;
                                     // Generate a row with up to 3 level buttons
                                     return Row(
-                                      children: List<Widget>.generate(3, (buttonIndex) {
+                                      children: List<Widget>.generate(3,
+                                          (buttonIndex) {
                                         // Calculate the level number for this button
-                                        int levelNumber = firstLevelNumber + buttonIndex;
+                                        int levelNumber =
+                                            firstLevelNumber + buttonIndex;
                                         if (levelNumber < levelCount) {
                                           // If within range, return a GameLevelButton
                                           return Expanded(
-                                            child: flutter_bloc.BlocBuilder<LevelBloc, LevelState>(
+                                            child: flutter_bloc.BlocBuilder<
+                                                    LevelBloc, LevelState>(
                                                 builder: (context, state) {
                                               return GameLevelButton(
                                                 width: 80.0,
@@ -304,7 +330,8 @@ class _HomePageState extends State<HomePage>
                                                         darkPatternsState
                                                             is! DarkPatternsCollectionState
                                                     ? AppColors.getColorLevel(1)
-                                                    : AppColors.getColorLevel(levelNumber + 1),
+                                                    : AppColors.getColorLevel(
+                                                        levelNumber + 1),
                                                 buntJelly: buntJelly,
                                                 stripeJelly: stripeJelly,
                                               );
@@ -312,7 +339,8 @@ class _HomePageState extends State<HomePage>
                                           );
                                         } else {
                                           // If the levelNumber exceeds levelCount, return an empty widget
-                                          return const Expanded(child: SizedBox.shrink());
+                                          return const Expanded(
+                                              child: SizedBox.shrink());
                                         }
                                       }),
                                     );
@@ -321,7 +349,8 @@ class _HomePageState extends State<HomePage>
                               );
                             } else {
                               // Handle the case when snapshot doesn't have data
-                              return const Center(child: CircularProgressIndicator());
+                              return const Center(
+                                  child: CircularProgressIndicator());
                             }
                           },
                         ),
@@ -337,7 +366,8 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  Drawer buildBurgerMenu(BuildContext context, DarkPatternsState darkPatternsState) {
+  Drawer buildBurgerMenu(
+      BuildContext context, DarkPatternsState darkPatternsState) {
     return Drawer(
       child: ListView(
         children: <Widget>[
@@ -351,10 +381,13 @@ class _HomePageState extends State<HomePage>
               visible: true,
               child: ListTile(
                 leading: const Icon(Icons.info),
-                title: const Text('Instruktionen', style: TextStyle(color: Colors.grey)),
+                title: const Text('Instruktionen',
+                    style: TextStyle(color: Colors.grey)),
                 onTap: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => const DeviceToken()));
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const DeviceToken()));
                 },
                 tileColor: Colors.grey[200],
                 // Background color to make it feel like a button
@@ -368,7 +401,22 @@ class _HomePageState extends State<HomePage>
                 title: const Text('Shop', style: TextStyle(color: Colors.grey)),
                 onTap: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => const ShopPage()));
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ShopPage()));
+                },
+                tileColor: Colors.grey[200],
+                // Background color to make it feel like a button
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)), // Rounded corners
+              )),
+          Visibility(
+              visible: darkPatternsState is !DarkPatternsDeactivatedState,
+              child: ListTile(
+                leading: const Icon(Icons.pattern),
+                title: const Text('Reset Dark Patterns', style: TextStyle(color: Colors.grey)),
+                onTap: () {
+                  resetDarkPatterns();
                 },
                 tileColor: Colors.grey[200],
                 // Background color to make it feel like a button
@@ -386,7 +434,8 @@ class _HomePageState extends State<HomePage>
                 child: ListTile(
                   enabled: !dailyRewardCollected,
                   leading: const Icon(Icons.card_giftcard),
-                  title: const Text('Tägliche Belohnung', style: TextStyle(color: Colors.grey)),
+                  title: const Text('Tägliche Belohnung',
+                      style: TextStyle(color: Colors.grey)),
                   onTap: () {
                     setState(() {
                       dailyRewardCollected = true;
@@ -398,17 +447,22 @@ class _HomePageState extends State<HomePage>
                   tileColor: Colors.grey[200],
                   // Background color to make it feel like a button
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)), // Rounded corners
+                      borderRadius:
+                          BorderRadius.circular(12)), // Rounded corners
                 )),
           Visibility(
               visible: true,
               child: ValueListenableBuilder<bool>(
-                valueListenable: isMusicOn, // This is the ValueNotifier from unity_screen.dart
+                valueListenable: isMusicOn,
+                // This is the ValueNotifier from unity_screen.dart
                 builder: (context, value, child) {
                   return SwitchListTile(
                     tileColor: Colors.grey[200],
-                    title: const Text('Musik', style: TextStyle(color: Colors.grey)),
-                    secondary: value ? const Icon(Icons.music_note) : const Icon(Icons.music_off),
+                    title: const Text('Musik',
+                        style: TextStyle(color: Colors.grey)),
+                    secondary: value
+                        ? const Icon(Icons.music_note)
+                        : const Icon(Icons.music_off),
                     value: value,
                     onChanged: (bool newValue) {
                       isMusicOn.value = newValue;
@@ -417,15 +471,22 @@ class _HomePageState extends State<HomePage>
                 },
               )),
           Visibility(
-            visible: Uri.parse(html.window.location.href).host.contains('felpower') ||
-                Uri.parse(html.window.location.href).host.contains('localhost') ||
+            visible: Uri.parse(html.window.location.href)
+                    .host
+                    .contains('felpower') ||
+                Uri.parse(html.window.location.href)
+                    .host
+                    .contains('localhost') ||
                 Uri.parse(html.window.location.href).host.contains('flutter'),
             child: ListTile(
               leading: const Icon(Icons.feedback),
-              title: const Text('Feedback senden', style: TextStyle(color: Colors.grey)),
+              title: const Text('Feedback senden',
+                  style: TextStyle(color: Colors.grey)),
               onTap: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => const FeedbackPage()));
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const FeedbackPage()));
               },
               tileColor: Colors.grey[200],
               // Background color to make it feel like a button
@@ -437,7 +498,8 @@ class _HomePageState extends State<HomePage>
               visible: true,
               child: ListTile(
                 leading: const Icon(Icons.token),
-                title: const Text('Imprint', style: TextStyle(color: Colors.grey)),
+                title:
+                    const Text('Imprint', style: TextStyle(color: Colors.grey)),
                 onTap: () {
                   UrlHelper.launchURL('https://www.sba-research.org/imprint/');
                 },
@@ -450,10 +512,13 @@ class _HomePageState extends State<HomePage>
               visible: true,
               child: ListTile(
                 leading: const Icon(Icons.info),
-                title: const Text('Kontakt', style: TextStyle(color: Colors.grey)),
+                title:
+                    const Text('Kontakt', style: TextStyle(color: Colors.grey)),
                 onTap: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => const ContactPage()));
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ContactPage()));
                 },
                 tileColor: Colors.grey[200],
                 // Background color to make it feel like a button
@@ -464,9 +529,17 @@ class _HomePageState extends State<HomePage>
               visible: false,
               child: ListTile(
                 leading: const Icon(Icons.token),
-                title: const Text('Fortune Wheel', style: TextStyle(color: Colors.black)),
+                title: const Text('Fortune Wheel',
+                    style: TextStyle(color: Colors.black)),
                 onTap: () {
-                  List<int> itemList = [5, (5 * 0.5).ceil(), (5 * 0.75).ceil(), 5 * 2, 5 * 3, 1];
+                  List<int> itemList = [
+                    5,
+                    (5 * 0.5).ceil(),
+                    (5 * 0.75).ceil(),
+                    5 * 2,
+                    5 * 3,
+                    1
+                  ];
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                     builder: (context) => FortuneWheel(items: itemList),
                   ));
@@ -480,7 +553,8 @@ class _HomePageState extends State<HomePage>
               visible: false,
               child: ListTile(
                 leading: const Icon(Icons.question_mark),
-                title: const Text('End Survey', style: TextStyle(color: Colors.black)),
+                title: const Text('End Survey',
+                    style: TextStyle(color: Colors.black)),
                 onTap: () {
                   Navigator.of(context).pushNamed(
                     "/endSurvey",
@@ -510,7 +584,8 @@ class _HomePageState extends State<HomePage>
     }
     if (dailyReward != null) {
       setState(() {
-        difference = DateTime.now().difference(DateTime.parse(dailyReward)).inHours;
+        difference =
+            DateTime.now().difference(DateTime.parse(dailyReward)).inHours;
       });
       if (difference >= 24) {
         dailyRewardCollected = false;
@@ -521,12 +596,15 @@ class _HomePageState extends State<HomePage>
       stripeJelly = sp.getInt("stripeJelly") ?? 0;
     });
     if (firstTimeStart == null) {
-      var todaysReward = DailyRewardsService.getTodaysReward(1, darkPatternsState);
+      var todaysReward =
+          DailyRewardsService.getTodaysReward(1, darkPatternsState);
       todaysAmount = todaysReward['amount'];
       todaysType = todaysReward['type'];
     } else {
-      var daysSinceStart = DateTime.now().difference(DateTime.parse(firstTimeStart)).inDays;
-      var todaysReward = DailyRewardsService.getTodaysReward(daysSinceStart + 1, darkPatternsState);
+      var daysSinceStart =
+          DateTime.now().difference(DateTime.parse(firstTimeStart)).inDays;
+      var todaysReward = DailyRewardsService.getTodaysReward(
+          daysSinceStart + 1, darkPatternsState);
       todaysAmount = todaysReward['amount'];
       todaysType = todaysReward['type'];
     }
@@ -534,7 +612,8 @@ class _HomePageState extends State<HomePage>
 
   Future<int> _getDaysPlayed() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    DateTime? startDate = DateTime.tryParse(prefs.getString("firstTimeStart") ?? "");
+    DateTime? startDate =
+        DateTime.tryParse(prefs.getString("firstTimeStart") ?? "");
     startDate ??= DateTime.now();
     int daysPlayed = DateTime.now().difference(startDate).inDays;
     return daysPlayed;
@@ -548,9 +627,11 @@ class _HomePageState extends State<HomePage>
     } else if (todaysType.contains('gestreift')) {
       sp.setInt("stripeJelly", stripeJelly += todaysAmount);
     } else if (todaysType.contains("XP")) {
-      flutter_bloc.BlocProvider.of<XpBloc>(context).add(AddXpEvent(todaysAmount));
+      flutter_bloc.BlocProvider.of<XpBloc>(context)
+          .add(AddXpEvent(todaysAmount));
     } else if (todaysType.contains("\$")) {
-      flutter_bloc.BlocProvider.of<CoinBloc>(context).add(AddCoinsEvent(todaysAmount));
+      flutter_bloc.BlocProvider.of<CoinBloc>(context)
+          .add(AddCoinsEvent(todaysAmount));
     }
   }
 
@@ -562,7 +643,8 @@ class _HomePageState extends State<HomePage>
         builder: (context) {
           return AlertDialog(
             title: const Text('Tägliche Belohnung bereits abgeholt'),
-            content: Text('Tägliche Belohnung können wieder in $actualDifference Stunden abgeholt '
+            content: Text(
+                'Tägliche Belohnung können wieder in $actualDifference Stunden abgeholt '
                 'werden'),
             actions: [
               TextButton(
@@ -581,7 +663,8 @@ class _HomePageState extends State<HomePage>
             title: const Text('Deine tägliche Belohnung'),
             content: todaysType.contains('Sonderjelly')
                 ? Wrap(children: [
-                    Text('Heute hast du $todaysAmount $todaysType erhalten. Komm morgen wieder!'),
+                    Text(
+                        'Heute hast du $todaysAmount $todaysType erhalten. Komm morgen wieder!'),
                     Center(
                       child: Image.asset(
                         todaysType.contains('bunt')
@@ -591,10 +674,13 @@ class _HomePageState extends State<HomePage>
                       ),
                     ),
                   ])
-                : Text('Heute hast du $todaysAmount $todaysType erhalten. Komm morgen wieder!'),
+                : Text(
+                    'Heute hast du $todaysAmount $todaysType erhalten. Komm morgen wieder!'),
             actions: [
               TextButton(
                 onPressed: () {
+                  _showDarkPatternsInfo();
+
                   Navigator.of(context).pop();
                   setState(() {
                     difference = 0;
@@ -609,14 +695,78 @@ class _HomePageState extends State<HomePage>
     }
   }
 
+  void _showDarkPatternsInfoNotification() async {
+    if (darkPatternsInfoActive) {
+      return;
+    }
+    darkPatternsInfoActive = true;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var dpInfoShown = prefs.getBool('darkPatternsInfoNotification');
+    var fromNotification = prefs.getBool('fromNotification');
+    if ((fromNotification != null && fromNotification == true) &&
+        (dpInfoShown == null || dpInfoShown == false)) {
+        print("fromNotification: $fromNotification and dpInfoShown: $dpInfoShown");
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text('DarkPatterns Hinweiss'),
+              content: const Text(
+                  'Achtung! Notifications können dazu führen, dass Sie mehr Zeit in ein Spiel investieren, '
+                  'als Sie ursprünglich beabsichtigt haben. Bitte seien Sie vorsichtig und spielen Sie verantwortungsbewusst.'),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('OK'),
+                  onPressed: () {
+                    prefs.setBool('darkPatternsInfoNotification', true);
+                    prefs.setBool('fromNotification', false);
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+    }
+  }
+
+  void _showDarkPatternsInfo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var dpInfoShown = prefs.getBool('darkPatternsInfoFoMo');
+    if (dpInfoShown == null || dpInfoShown == false) {
+      return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('DarkPatterns Hinweiss'),
+            content: const Text(
+                'Achtung! Tägliche Belohnungen können dazu führen, dass Sie mehr Zeit investieren, '
+                'als Sie ursprünglich beabsichtigt haben. Bitte seien Sie vorsichtig und spielen Sie verantwortungsbewusst.'),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  prefs.setBool('darkPatternsInfoFoMo', true);
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
   void checkForFirstTimeStart() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (!kDebugMode) {
       // if (prefs.getBool("isUnder18") == true) {
       //   Navigator.push(context, MaterialPageRoute(builder: (context) => const Under18Page()));
       // }
-      if (prefs.getBool("firstStart") == null || prefs.getBool("firstStart") == true) {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const WelcomePage()));
+      if (prefs.getBool("firstStart") == null ||
+          prefs.getBool("firstStart") == true) {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const WelcomePage()));
       }
       // var endSurvey = prefs.getString("endSurvey");
       // if (endSurvey != null) {
@@ -635,7 +785,8 @@ class _HomePageState extends State<HomePage>
     FutureBuilder<String>(
         future: FirebaseMessagingWeb.getToken(),
         builder: (context, snapshot) {
-          if (snapshot.hasData && snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasData &&
+              snapshot.connectionState == ConnectionState.done) {
             print(snapshot.data!);
             return Text(snapshot.data!);
           }
@@ -672,5 +823,31 @@ class _HomePageState extends State<HomePage>
     } catch (e) {
       FirebaseStore.sendError("RestartGame", stacktrace: e.toString());
     }
+  }
+
+  void resetDarkPatterns() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('darkPatternsInfoNotification', false);
+    prefs.setBool('darkPatternsInfoVAR', false);
+    prefs.setBool('darkPatternsInfoScore', false);
+
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('DarkPatterns zurückgesetzt'),
+          content: const Text(
+              'Die DarkPatterns wurden zurückgesetzt'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
