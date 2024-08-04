@@ -72,6 +72,7 @@ class HighScoreState extends State<HighScorePage> {
   void _showUsernameDialog() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? username = prefs.getString('username');
+    var darkPatternsInfoScore = prefs.getBool('darkPatternsInfoScore');
     if (username == null || username.isEmpty) {
       final TextEditingController usernameController = TextEditingController();
       return showDialog(
@@ -88,11 +89,12 @@ class HighScoreState extends State<HighScorePage> {
                 child: const Text('OK'),
                 onPressed: () {
                   setState(() {
-                    users[users.indexWhere((element) => element.isUser == true)].name =
-                        usernameController.text;
+                    users[users.indexWhere((element) => element.isUser == true)]
+                        .name = usernameController.text;
                     prefs.setString('username', usernameController.text);
                   });
                   Navigator.of(context).pop();
+                  _showDarkPatternsInfo();
                 },
               ),
             ],
@@ -100,6 +102,32 @@ class HighScoreState extends State<HighScorePage> {
         },
       );
     }
+    if (darkPatternsInfoScore == null || darkPatternsInfoScore == false) {
+      _showDarkPatternsInfo();
+    }
+  }
+
+  void _showDarkPatternsInfo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('DarkPatterns Hinweiss'),
+          content: const Text(
+              'In der Highscore Liste können DarkPatterns enthalten sein. Diese sind spezielle Einträge, die nicht von den Nutzern erstellt wurden, sondern von der App. Sie dienen dazu, die Nutzer zu manipulieren und zu täuschen. Sie sind nicht echt und sollten immer mit Vorsicht betrachtet werden.'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                prefs.setBool('darkPatternsInfoScore', true);
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void updateUserAndHighScore(SharedPreferences prefs) {
@@ -125,7 +153,8 @@ class HighScoreState extends State<HighScorePage> {
       int randomNumber = random.nextInt(15) + 1;
       users[1].xp = randomNumber + xp;
       for (var i = 2; i < users.length; i++) {
-        users[i].xp = users[i].xp + random.nextInt(xp - users[i].xp); //Make user not loose points
+        users[i].xp = users[i].xp +
+            random.nextInt(xp - users[i].xp); //Make user not loose points
       }
       prefs.setString("highScore", User.encode(users));
     }
@@ -149,7 +178,8 @@ class HighScoreState extends State<HighScorePage> {
                 Container(
                     decoration: const BoxDecoration(
                         image: DecorationImage(
-                  image: AssetImage('assets/images/background/background_new.png'),
+                  image:
+                      AssetImage('assets/images/background/background_new.png'),
                   fit: BoxFit.cover,
                 ))),
                 ListView(
@@ -194,8 +224,10 @@ class HighScoreState extends State<HighScorePage> {
     for (User user in users) {
       rows.add(DataRow(
           color: user.isUser
-              ? WidgetStateColor.resolveWith((states) => AppColors.getColorFromHex("#e52012"))
-              : WidgetStateColor.resolveWith((states) => AppColors.getColorFromHex(("#80c9e2"))),
+              ? WidgetStateColor.resolveWith(
+                  (states) => AppColors.getColorFromHex("#e52012"))
+              : WidgetStateColor.resolveWith(
+                  (states) => AppColors.getColorFromHex(("#80c9e2"))),
           cells: [
             DataCell(Text('#${user.place}')),
             DataCell(Text(user.name)),

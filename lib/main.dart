@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:pwa_install/pwa_install.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:universal_html/html.dart' as html;
 import 'package:universal_html/js.dart' as js;
 
@@ -52,6 +53,7 @@ void main() async {
     Uri currentUrl = Uri.parse(html.window.location.href);
     if (currentUrl.queryParameters['source'] == 'notification') {
       FirebaseStore.addNotificationTap(DateTime.now());
+      startFromNotification();
       // Remove the 'source' query parameter from the URL
       Uri newUrl = currentUrl.replace(queryParameters: {});
       html.window.history.replaceState(null, 'title', newUrl.toString());
@@ -71,6 +73,11 @@ void main() async {
     print('Stacktrace: $stackTrace');
     FirebaseStore.sendError(error.toString(), stacktrace: stackTrace.toString());
   });
+}
+
+Future<void> startFromNotification() async {
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  preferences.setBool('fromNotification', true);
 }
 
 void handleBeforeUnload() {
