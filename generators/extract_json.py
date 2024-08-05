@@ -93,6 +93,8 @@ for user_id, user_info in users_data.items():
 	try:
 		if user_id == 'V10-24-03-19–11:02-1JXsC7So1tiNEhp' or user_id == 'V10-24-04-08–19:51-c2dR2Ca7llLRvhe':
 			continue
+		if not use_flutter and not user_id.startswith("V10-"):
+			continue
 		dark_patterns_type = int(user_info.get('darkPatterns', 0)) if user_info.get('darkPatterns') is not None else ''
 		row = {
 			'userNumber': userCounter,
@@ -634,6 +636,8 @@ reason_cancel_counter = {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0,
 influenced_time_counter = {'0': 0, '1': 0, '2': 0}
 influenced_frequency_counter = {'0': 0, '1': 0, '2': 0}
 pattern_influence_counter = {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0}
+pushfrequency_counter = {'0': 0, '1': 0, '2': 0}
+pushtimes_counter = {'0': 0, '1': 0, '2': 0}
 total_hours_playing = 0
 hours_playing_per_user = 0
 end_survey_done = 0
@@ -696,6 +700,10 @@ dark_patterns_off_stats.update({
 	'influencedfrequency': influenced_frequency_counter.copy(),
 	'patterninfluence': pattern_influence_counter.copy(),
 	'pushreceived': 0,
+	'pushfrequency': pushfrequency_counter.copy(),
+	'pushtimes': pushtimes_counter.copy(),
+	'pushbettertimes': "",
+	'comments': "",
 	'totalAppStarts': total_app_starts,
 	'Average Level Per Session': 0,
 })
@@ -715,6 +723,10 @@ dark_patterns_on_stats.update({
 	'influencedfrequency': influenced_frequency_counter.copy(),
 	'patterninfluence': pattern_influence_counter.copy(),
 	'pushreceived': 0,
+	'pushfrequency': pushfrequency_counter.copy(),
+	'pushtimes': pushtimes_counter.copy(),
+	'pushbettertimes': "",
+	'comments': "",
 	'totalAppStarts': total_app_starts,
 	'Average Level Per Session': 0,
 })
@@ -734,6 +746,10 @@ dark_patterns_fomo_stats.update({
 	'influencedfrequency': influenced_frequency_counter.copy(),
 	'patterninfluence': pattern_influence_counter.copy(),
 	'pushreceived': 0,
+	'pushfrequency': pushfrequency_counter.copy(),
+	'pushtimes': pushtimes_counter.copy(),
+	'pushbettertimes': "",
+	'comments': "",
 	'totalAppStarts': total_app_starts,
 	'Average Level Per Session': 0,
 })
@@ -753,6 +769,10 @@ dark_patterns_var_stats.update({
 	'influencedfrequency': influenced_frequency_counter.copy(),
 	'patterninfluence': pattern_influence_counter.copy(),
 	'pushreceived': 0,
+	'pushfrequency': pushfrequency_counter.copy(),
+	'pushtimes': pushtimes_counter.copy(),
+	'pushbettertimes': "",
+	'comments': "",
 	'totalAppStarts': total_app_starts,
 	'Average Level Per Session': 0,
 })
@@ -909,6 +929,18 @@ try:
 						pattern, 0) + 1
 			if 'pushreceived' in data and data['pushreceived'] == '1':
 				dark_patterns_off_stats['pushreceived'] += 1
+			if 'pushfrequency' in data and data['pushfrequency']:
+				dark_patterns_off_stats['pushfrequency'][data['pushfrequency']] = dark_patterns_off_stats[
+																					  'pushfrequency'].get(
+					data['pushfrequency'], 0) + 1
+			if 'pushtimes' in data and data['pushtimes']:
+				dark_patterns_off_stats['pushtimes'][data['pushtimes']] = dark_patterns_off_stats[
+																					  'pushtimes'].get(
+					data['pushtimes'], 0) + 1
+			if 'pushbettertimes' in data and data['pushbettertimes']:
+				dark_patterns_off_stats['pushbettertimes'] += data['pushbettertimes'] + ", "
+			if 'comments' in data and data['comments']:
+				dark_patterns_off_stats['comments'] += data['comments'] + ", "
 			if 'appStartTime' in data and data['appStartTime']:
 				dark_patterns_off_stats['totalAppStarts'] += 1
 		if dark_pattern_type == 1:  # On
@@ -954,6 +986,18 @@ try:
 						pattern, 0) + 1
 			if 'pushreceived' in data and data['pushreceived'] == '1':
 				dark_patterns_on_stats['pushreceived'] += 1
+			if 'pushfrequency' in data and data['pushfrequency']:
+				dark_patterns_on_stats['pushfrequency'][data['pushfrequency']] = dark_patterns_on_stats[
+																					  'pushfrequency'].get(
+					data['pushfrequency'], 0) + 1
+			if 'pushtimes' in data and data['pushtimes']:
+				dark_patterns_on_stats['pushtimes'][data['pushtimes']] = dark_patterns_on_stats[
+																					  'pushtimes'].get(
+					data['pushtimes'], 0) + 1
+			if 'pushbettertimes' in data and data['pushbettertimes']:
+				dark_patterns_on_stats['pushbettertimes'] += data['pushbettertimes'] + ", "
+			if 'comments' in data and data['comments']:
+				dark_patterns_on_stats['comments'] += data['comments'] + ", "
 			if 'appStartTime' in data and data['appStartTime']:
 				dark_patterns_on_stats['totalAppStarts'] += 1
 		if dark_pattern_type == 2:  # Fomo
@@ -997,6 +1041,18 @@ try:
 						pattern, 0) + 1
 			if 'pushreceived' in data and data['pushreceived'] == '1':
 				dark_patterns_fomo_stats['pushreceived'] += 1
+			if 'pushfrequency' in data and data['pushfrequency']:
+				dark_patterns_fomo_stats['pushfrequency'][data['pushfrequency']] = dark_patterns_fomo_stats[
+																					  'pushfrequency'].get(
+					data['pushfrequency'], 0) + 1
+			if 'pushtimes' in data and data['pushtimes']:
+				dark_patterns_fomo_stats['pushtimes'][data['pushtimes']] = dark_patterns_fomo_stats[
+																					  'pushtimes'].get(
+					data['pushtimes'], 0) + 1
+			if 'pushbettertimes' in data and data['pushbettertimes']:
+				dark_patterns_fomo_stats['pushbettertimes'] += data['pushbettertimes'] + ", "
+			if 'comments' in data and data['comments']:
+				dark_patterns_fomo_stats['comments'] += data['comments'] + ", "
 			if 'appStartTime' in data and data['appStartTime']:
 				dark_patterns_fomo_stats['totalAppStarts'] += 1
 		if dark_pattern_type == 3:  # Var
@@ -1040,6 +1096,18 @@ try:
 						pattern, 0) + 1
 			if 'pushreceived' in data and data['pushreceived'] == '1':
 				dark_patterns_var_stats['pushreceived'] += 1
+			if 'pushfrequency' in data and data['pushfrequency']:
+				dark_patterns_var_stats['pushfrequency'][data['pushfrequency']] = dark_patterns_var_stats[
+																					  'pushfrequency'].get(
+					data['pushfrequency'], 0) + 1
+			if 'pushtimes' in data and data['pushtimes']:
+				dark_patterns_var_stats['pushtimes'][data['pushtimes']] = dark_patterns_var_stats[
+																					  'pushtimes'].get(
+					data['pushtimes'], 0) + 1
+			if 'pushbettertimes' in data and data['pushbettertimes']:
+				dark_patterns_var_stats['pushbettertimes'] += data['pushbettertimes'] + ", "
+			if 'comments' in data and data['comments']:
+				dark_patterns_var_stats['comments'] += data['comments'] + ", "
 			if 'appStartTime' in data and data['appStartTime']:
 				dark_patterns_var_stats['totalAppStarts'] += 1
 		if 'playedtilend' in data and data['playedtilend']:
