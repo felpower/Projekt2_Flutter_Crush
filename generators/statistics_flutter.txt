@@ -1,26 +1,26 @@
 Combined Statistics:
-Statistics: 2024-07-18 09:26:08.365414
+Statistics: 2024-08-05 13:24:57.819151
 Users dropped out: 0
-Inactive Users: 269
-Days Since Start Total: 7301
-Days Played Total: 404
+Inactive Users: 272
+Days Since Start Total: 8165
+Days Played Total: 406
 Users that played daily: 0
 Played all last 3 days: 0
 Average Level per Session: 2.6950000000000003
-Average Level per Player: 39.10204081632653
-Played any of last 3 days: 0
-Total App Starts: 1975
-Average Playtime per level: 273.68
-Total Levels Started: 2434
-Total Levels Finished: 1916
-Total Levels Won: 1507
+Average Level per Player: 39.12244897959184
+Played any of last 3 days: 1
+Total App Starts: 1980
+Average Playtime per level: 273.58
+Total Levels Started: 2435
+Total Levels Finished: 1917
+Total Levels Won: 1508
 Max Level Users: 1
 Total Users: 47
 Total Levels Bought: 302
-Hours of Playing: 145.66
+Hours of Playing: 145.68
 Total Items Bought: 28
 Total Daily Rewards Collected: 42
-Total Highscores Checked: 277
+Total Highscores Checked: 279
 Played After Notification Pushed: 44
 Total Push Notifications Clicked after 30 days: 16
 Total Push Notifications Clicked: 61
@@ -79,6 +79,10 @@ influencedtime: {'0': 0, '1': 2, '2': 1}
 influencedfrequency: {'0': 0, '1': 2, '2': 1}
 patterninfluence: {'0': 1, '1': 1, '2': 1, '3': 1, '4': 2, '5': 1, '6': 1}
 pushreceived: 1
+pushfrequency: {'0': 0, '1': 1, '2': 2}
+pushtimes: {'0': 3, '1': 0, '2': 0}
+pushbettertimes: 
+comments: Super App, 
 totalAppStarts: 393
 Average Level Per Session: 2.27
 Average Levels: 30.35
@@ -87,16 +91,16 @@ DarkPatterns On:
 Total Users: 24
 Total Dropouts: 0
 Active Users: 24
-Total Levels Started: 1736
-Total Levels Finished: 1353
-Total Levels Won: 1010
-Average Playtime per level: 235.59
-Hours of Playing: 113.61
-Seconds per Session: 520.99
+Total Levels Started: 1737
+Total Levels Finished: 1354
+Total Levels Won: 1011
+Average Playtime per level: 235.5
+Hours of Playing: 113.63
+Seconds per Session: 520.43
 Total Levels Bought: 291
 Total Items Bought: 25
 Total Daily Rewards Collected: 42
-Total Highscores Checked: 277
+Total Highscores Checked: 279
 Average Age: 30.67
 Max Level: 501
 Users Max Level: 1
@@ -120,9 +124,13 @@ influencedtime: {'0': 0, '1': 2, '2': 3}
 influencedfrequency: {'0': 1, '1': 0, '2': 4}
 patterninfluence: {'0': 0, '1': 1, '2': 4, '3': 4, '4': 3, '5': 1, '6': 1}
 pushreceived: 3
-totalAppStarts: 1582
+pushfrequency: {'0': 1, '1': 2, '2': 2}
+pushtimes: {'0': 5, '1': 0, '2': 0}
+pushbettertimes: 
+comments: sehr cooles spiel, 
+totalAppStarts: 1587
 Average Level Per Session: 3.12
-Average Levels: 72.33
+Average Levels: 72.38
 
 DarkPatterns FOMO:
 Total Users: 0
@@ -161,6 +169,10 @@ influencedtime: {'0': 0, '1': 0, '2': 0}
 influencedfrequency: {'0': 0, '1': 0, '2': 0}
 patterninfluence: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0}
 pushreceived: 0
+pushfrequency: {'0': 0, '1': 0, '2': 0}
+pushtimes: {'0': 0, '1': 0, '2': 0}
+pushbettertimes: 
+comments: 
 totalAppStarts: 0
 Average Level Per Session: 0
 Average Levels: 0
@@ -202,6 +214,10 @@ influencedtime: {'0': 0, '1': 0, '2': 0}
 influencedfrequency: {'0': 0, '1': 0, '2': 0}
 patterninfluence: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0}
 pushreceived: 0
+pushfrequency: {'0': 0, '1': 0, '2': 0}
+pushtimes: {'0': 0, '1': 0, '2': 0}
+pushbettertimes: 
+comments: 
 totalAppStarts: 0
 Average Level Per Session: 0
 Average Levels: 0
