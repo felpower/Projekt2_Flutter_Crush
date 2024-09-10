@@ -180,7 +180,7 @@ class GameLevelButton extends StatelessWidget {
                           'assets/images/bombs/jelly_gelb.png',
                           height: 30,
                         ),
-                        label: Text(stripeJelly == 0 ? '$tntPrice\$' : 'kostenlos',
+                        label: Text(stripeJelly == 0 ? '$tntPrice🪙' : 'kostenlos',
                             style:
                                 TextStyle(color: darkModeActivated ? Colors.black : Colors.white)),
                       ),
@@ -191,7 +191,7 @@ class GameLevelButton extends StatelessWidget {
                               "Rainbow", minePrice, coinBloc, reportingBloc, gameBloc, context);
                         },
                         icon: Image.asset('assets/images/bombs/jelly_bunt.png', height: 30),
-                        label: Text(buntJelly == 0 ? '$minePrice\$' : 'kostenlos',
+                        label: Text(buntJelly == 0 ? '$minePrice🪙' : 'kostenlos',
                             style:
                                 TextStyle(color: darkModeActivated ? Colors.black : Colors.white)),
                       ),
@@ -226,7 +226,7 @@ class GameLevelButton extends StatelessWidget {
           builder: (BuildContext context) => AlertDialog(
                 title: const Text('Nicht genug Münzen um dieses Sonderjelly zu kaufen'),
                 content: Text(
-                    'Du kannst Münzen durch Spielen der Levels erhalten, du benötigst $powerUpPrice\$ um dieses Sonderjelly zu kaufen'),
+                    'Du kannst Münzen durch Spielen der Levels erhalten, du benötigst $powerUpPrice🪙 um dieses Sonderjelly zu kaufen'),
                 elevation: 24,
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(16))),
@@ -261,7 +261,7 @@ class GameLevelButton extends StatelessWidget {
           builder: (BuildContext context) => coinBloc.state.amount >= 500
               ? AlertDialog(
                   title: Text('Level $levelNumber freischalten?'),
-                  content: Text('Willst du level $levelNumber für $lvlPrice\$ freischalten?'),
+                  content: Text('Willst du level $levelNumber für $lvlPrice🪙 freischalten?'),
                   elevation: 24,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(16))),
@@ -281,7 +281,7 @@ class GameLevelButton extends StatelessWidget {
               : AlertDialog(
                   title: const Text('Du hast nicht genug Münzen um dieses Level freizuschalten'),
                   content: Text(
-                      'Du kannst Münzen durch Spielen der Levels erhalten, du benötigst $lvlPrice\$ um dieses Level freizuschalten'),
+                      'Du kannst Münzen durch Spielen der Levels erhalten, du benötigst $lvlPrice🪙 um dieses Level freizuschalten'),
                   elevation: 24,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(16))),

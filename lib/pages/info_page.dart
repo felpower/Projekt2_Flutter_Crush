@@ -217,7 +217,7 @@ class _DeviceTokenState extends State<DeviceToken> {
                           const Text("7.	Fortschritt und Herausforderungen: ",
                               style: TextStyle(fontWeight: FontWeight.bold)),
                           const Text(
-                              '''Schalte neue Level und Herausforderungen frei, indem du im Spiel fortschreitest. Wenn du einmal keine Möglichkeit mehr für einen Spielzug hast (weil es keine Jellies gibt, die getauscht werden können um eine 3er Folge zu erzielen) kannst du die Option „shuffle“ für 50\$ nutzen um die Jellies auf dem Brett neu zu verteilen. Nutze Sonderjellies, um schwierige Level zu meistern.'''),
+                              '''Schalte neue Level und Herausforderungen frei, indem du im Spiel fortschreitest. Wenn du einmal keine Möglichkeit mehr für einen Spielzug hast (weil es keine Jellies gibt, die getauscht werden können um eine 3er Folge zu erzielen) kannst du die Option „shuffle“ für 50🪙 nutzen um die Jellies auf dem Brett neu zu verteilen. Nutze Sonderjellies, um schwierige Level zu meistern.'''),
                           const Padding(
                               padding: EdgeInsets.only(left: 20.0),
                               // Adjust the value for the desired indent

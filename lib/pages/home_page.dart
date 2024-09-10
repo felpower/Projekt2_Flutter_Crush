@@ -50,6 +50,9 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   bool dailyRewardCollected = true;
 
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
   int todaysAmount = 0;
   String todaysType = '';
   bool darkPatternsInfoActive = false;
@@ -83,6 +86,13 @@ class _HomePageState extends State<HomePage>
     WidgetsBinding.instance.addObserver(this);
     checkForFirstTimeStart();
     _daysPlayedFuture = _getDaysPlayed();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 1),
+      vsync: this,
+    )..repeat(reverse: true);
+
+    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
+
     isMusicOn.addListener(() async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setBool('music', isMusicOn.value);
@@ -99,6 +109,7 @@ class _HomePageState extends State<HomePage>
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    _controller.dispose();
     super.dispose();
   }
 
@@ -125,6 +136,7 @@ class _HomePageState extends State<HomePage>
       appBar: AppBar(
         title: const Text('JellyFun'),
         actions: [
+          showPulsatingAppBarIcon(),
           flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
             builder: (context, state) {
               if (state is DarkPatternsActivatedState ||
@@ -197,7 +209,7 @@ class _HomePageState extends State<HomePage>
                                 }),
                                 flutter_bloc.BlocBuilder<CoinBloc, CoinState>(
                                     builder: (context, state) {
-                                  return CreditPanel('\$: ${state.amount}', 30,
+                                  return CreditPanel('🪙: ${state.amount}', 30,
                                       creditPanelWidth);
                                 })
                               ],
@@ -208,7 +220,7 @@ class _HomePageState extends State<HomePage>
                               children: [
                                 flutter_bloc.BlocBuilder<CoinBloc, CoinState>(
                                     builder: (context, state) {
-                                  return CreditPanel('\$: ${state.amount}', 30,
+                                  return CreditPanel('🪙: ${state.amount}', 30,
                                       creditPanelWidth);
                                 })
                               ],
@@ -366,6 +378,51 @@ class _HomePageState extends State<HomePage>
     );
   }
 
+  Stack showPulsatingAppBarIcon() {
+    return Stack(
+      children: [
+        Tooltip(
+          message: 'Shop',
+          child: IconButton(
+            icon: const Icon(Icons.shopping_basket_outlined),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ShopPage()),
+              );
+            },
+          ),
+        ),
+        Positioned.fill(
+          child: IgnorePointer(
+            ignoring: true,
+            child: AnimatedBuilder(
+              animation: _animation,
+              builder: (context, child) {
+                return Opacity(
+                  opacity: _animation.value,
+                  child: child,
+                );
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      Colors.red.withOpacity(0.9),
+                      Colors.transparent,
+                    ],
+                    stops: [0.0, 1.0],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   Drawer buildBurgerMenu(
       BuildContext context, DarkPatternsState darkPatternsState) {
     return Drawer(
@@ -411,12 +468,17 @@ class _HomePageState extends State<HomePage>
                     borderRadius: BorderRadius.circular(12)), // Rounded corners
               )),
           Visibility(
-              visible: darkPatternsState is !DarkPatternsDeactivatedState && Uri.parse(html.window.location.href)
-        .host
-        .contains('felpower'),
+              visible: darkPatternsState is! DarkPatternsDeactivatedState &&
+                  (Uri.parse(html.window.location.href)
+                          .host
+                          .contains('felpower') ||
+                      Uri.parse(html.window.location.href)
+                          .host
+                          .contains('localhost')),
               child: ListTile(
                 leading: const Icon(Icons.pattern),
-                title: const Text('Reset Dark Patterns', style: TextStyle(color: Colors.grey)),
+                title: const Text('Reset Dark Patterns',
+                    style: TextStyle(color: Colors.grey)),
                 onTap: () {
                   resetDarkPatterns();
                 },
@@ -631,7 +693,7 @@ class _HomePageState extends State<HomePage>
     } else if (todaysType.contains("XP")) {
       flutter_bloc.BlocProvider.of<XpBloc>(context)
           .add(AddXpEvent(todaysAmount));
-    } else if (todaysType.contains("\$")) {
+    } else if (todaysType.contains("🪙")) {
       flutter_bloc.BlocProvider.of<CoinBloc>(context)
           .add(AddCoinsEvent(todaysAmount));
     }
@@ -703,57 +765,113 @@ class _HomePageState extends State<HomePage>
     }
     darkPatternsInfoActive = true;
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isExpanded = false;
     var dpInfoShown = prefs.getBool('darkPatternsInfoNotification');
     var fromNotification = prefs.getBool('fromNotification');
+
     if ((fromNotification != null && fromNotification == true) &&
         (dpInfoShown == null || dpInfoShown == false)) {
-        print("fromNotification: $fromNotification and dpInfoShown: $dpInfoShown");
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              scrollable: true,
-              title: const Text('Das war gerade ein Dark Pattern!'),
-              content: const Text(
-                  'Hast du schon einmal gespielt, nur weil dir eine Push-Benachrichtigung vorgeschlagen hat, jetzt wieder einzusteigen? Oft werden solche Nachrichten genutzt, um Druck aufzubauen – vielleicht wurde dir ein zeitlich begrenzter Bonus versprochen oder Extra-Punkte, wenn du sofort spielst. Diese Benachrichtigungen sollen dich daran erinnern, das Spiel zu öffnen, auch wenn du gar nicht daran gedacht hast. Entwickler setzen darauf, dass du durch den Hinweis neugierig wirst und nicht widerstehen kannst, es gleich auszuprobieren.'),
-              actions: <Widget>[
-                TextButton(
-                  child: const Text('OK'),
-                  onPressed: () {
-                    prefs.setBool('darkPatternsInfoNotification', true);
-                    prefs.setBool('fromNotification', false);
-                    Navigator.of(context).pop();
-                  },
+      print(
+          "fromNotification: $fromNotification and dpInfoShown: $dpInfoShown");
+      showDialog(
+        context: context,
+        builder: (context) {
+          return StatefulBuilder(
+            builder: (context, setState) {
+              return AlertDialog(
+                title: const Text('Das war gerade ein Dark Pattern!'),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (isExpanded)
+                      const Text(
+                        'Hast du schon einmal gespielt, nur weil dir eine Push-Benachrichtigung vorgeschlagen hat, jetzt wieder einzusteigen? Oft werden solche Nachrichten genutzt, um Druck aufzubauen – vielleicht wurde dir ein zeitlich begrenzter Bonus versprochen oder Extra-Punkte, wenn du sofort spielst. Diese Benachrichtigungen sollen dich daran erinnern, das Spiel zu öffnen, auch wenn du gar nicht daran gedacht hast. Entwickler setzen darauf, dass du durch den Hinweis neugierig wirst und nicht widerstehen kannst, es gleich auszuprobieren.',
+                      ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isExpanded = !isExpanded;
+                        });
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(isExpanded ? "" : 'Mehr erfahren'),
+                          isExpanded
+                              ? const Icon(Icons.expand_less)
+                              : const Icon(Icons.expand_more),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            );
-          },
-        );
+                actions: <Widget>[
+                  TextButton(
+                    child: const Text('OK'),
+                    onPressed: () {
+                      prefs.setBool('darkPatternsInfoNotification', true);
+                      prefs.setBool('fromNotification', false);
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        },
+      );
     }
   }
 
   void _showDarkPatternsInfo() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isExpanded = false;
     var dpInfoShown = prefs.getBool('darkPatternsInfoFoMo');
+
     if (dpInfoShown == null || dpInfoShown == false) {
       return showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
-            scrollable: true,
-            title: const Text('Das war gerade ein Dark Pattern!'),
-            content: const Text(
-                'Achtung! Tägliche Belohnungen können dazu führen, dass Sie mehr Zeit investieren, '
-                'als Sie ursprünglich beabsichtigt haben. Bitte seien Sie vorsichtig und spielen Sie verantwortungsbewusst.'),
-            actions: <Widget>[
-              TextButton(
-                child: const Text('OK'),
-                onPressed: () {
-                  prefs.setBool('darkPatternsInfoFoMo', true);
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
+          return StatefulBuilder(
+            builder: (context, setState) {
+              return AlertDialog(
+                title: const Text('Das war gerade ein Dark Pattern!'),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (isExpanded)
+                      const Text(
+                        'Hast du bemerkt, dass du täglich eine kleine Überraschung bekommst, wenn du das Spiel öffnest? Diese täglichen Belohnungen sind so gestaltet, dass du motiviert wirst, immer wieder zurückzukehren, um nichts zu verpassen. Je länger du spielst, desto größer wird oft die Belohnung. So entsteht der Druck, das Spiel wirklich jeden Tag zu öffnen, um die maximale Belohnung zu sichern. Genau das ist der Trick dahinter: Dich regelmäßig ins Spiel zu locken, damit du dranbleibst.',
+                      ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isExpanded = !isExpanded;
+                        });
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(isExpanded ? "" : 'Mehr erfahren'),
+                          isExpanded
+                              ? const Icon(Icons.expand_less)
+                              : const Icon(Icons.expand_more),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: const Text('OK'),
+                    onPressed: () {
+                      prefs.setBool('darkPatternsInfoFoMo', true);
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
           );
         },
       );
@@ -828,19 +946,20 @@ class _HomePageState extends State<HomePage>
     }
   }
 
-  void resetDarkPatterns() async{
+  void resetDarkPatterns() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('darkPatternsInfoNotification', false);
     prefs.setBool('darkPatternsInfoVAR', false);
     prefs.setBool('darkPatternsInfoScore', false);
+    prefs.setBool('darkPatternsInfoShop', false);
+    prefs.setBool('darkPatternsInfoFoMo', false);
 
     return showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           title: const Text('DarkPatterns zurückgesetzt'),
-          content: const Text(
-              'Die DarkPatterns wurden zurückgesetzt'),
+          content: const Text('Die DarkPatterns wurden zurückgesetzt'),
           actions: <Widget>[
             TextButton(
               child: const Text('OK'),

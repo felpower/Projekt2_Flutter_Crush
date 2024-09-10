@@ -43,7 +43,7 @@ flutter run -d web-server --web-port 8080 --web-hostname 0.0.0.0
 
 ipconfig check for IP4 address
 
-On mobile go to: 192.168.0.80:8080
+On mobile go to: 192.168.88.131:8080
 
 On PC go to
 chrome://inspect/#devices
@@ -104,3 +104,13 @@ Flutter Snippets
 ## Change Splash Screen
 
 dart run flutter_native_splash:create
+
+## ToDo's
+
+✅ Klick auf „Kaufen“ im Shop -> Info auf Dark Patterns
+✅ Dollar tauschen gegen Münz-Emoji
+✅ Infobox ausklappbar machen
+✅ Shop in die Menüleiste
+Info auf Sonderangebot im Hauptspiel
+Werbung wieder reingeben
+bei Dark Pattern Infobox dazuschreiben wieviele Dark Patterns bereits gefunden wurden

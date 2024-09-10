@@ -36,7 +36,7 @@ class CreditPanel extends StatelessWidget {
         )
             : const SnackBar(
                 content: Text(
-                    'Die \$ können benutzt werden um im Shop Items zu kaufen oder um Levels '
+                    'Die 🪙 können benutzt werden um im Shop Items zu kaufen oder um Levels '
                     'freizuschalten!',
                     textAlign: TextAlign.center));
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
