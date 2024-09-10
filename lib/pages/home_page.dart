@@ -49,10 +49,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   bool dailyRewardCollected = true;
-
+  late ValueNotifier<int> _darkPatternsCountNotifier;
   late AnimationController _controller;
   late Animation<double> _animation;
-
   int todaysAmount = 0;
   String todaysType = '';
   bool darkPatternsInfoActive = false;
@@ -92,11 +91,17 @@ class _HomePageState extends State<HomePage>
     )..repeat(reverse: true);
 
     _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
-
+    _darkPatternsCountNotifier = ValueNotifier<int>(0);
+    updateDarkPatternsCount();
     isMusicOn.addListener(() async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setBool('music', isMusicOn.value);
     });
+  }
+
+  Future<void> updateDarkPatternsCount() async {
+    int count = await _countDarkPatternsFound();
+    _darkPatternsCountNotifier.value = count;
   }
 
   bool checkedForReopenGame = false;
@@ -110,6 +115,7 @@ class _HomePageState extends State<HomePage>
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     _controller.dispose();
+    _darkPatternsCountNotifier.dispose();
     super.dispose();
   }
 
@@ -137,26 +143,7 @@ class _HomePageState extends State<HomePage>
         title: const Text('JellyFun'),
         actions: [
           showPulsatingAppBarIcon(),
-          flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
-            builder: (context, state) {
-              if (state is DarkPatternsActivatedState ||
-                  state is DarkPatternsCompetitionState) {
-                return Tooltip(
-                    message: 'Highscore',
-                    child: IconButton(
-                      icon: const Icon(Icons.emoji_events, color: Colors.blue),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const HighScorePage()));
-                      },
-                    ));
-              } else {
-                return Container();
-              }
-            },
-          ),
+          showHighscoreTooltip(),
           Builder(
             builder: (BuildContext context) {
               return IconButton(
@@ -378,6 +365,29 @@ class _HomePageState extends State<HomePage>
     );
   }
 
+  flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState> showHighscoreTooltip() {
+    return flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
+          builder: (context, state) {
+            if (state is DarkPatternsActivatedState ||
+                state is DarkPatternsCompetitionState) {
+              return Tooltip(
+                  message: 'Highscore',
+                  child: IconButton(
+                    icon: const Icon(Icons.emoji_events, color: Colors.blue),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HighScorePage()));
+                    },
+                  ));
+            } else {
+              return Container();
+            }
+          },
+        );
+  }
+
   Stack showPulsatingAppBarIcon() {
     return Stack(
       children: [
@@ -412,7 +422,7 @@ class _HomePageState extends State<HomePage>
                       Colors.red.withOpacity(0.9),
                       Colors.transparent,
                     ],
-                    stops: [0.0, 1.0],
+                    stops: const [0.0, 1.0],
                   ),
                 ),
               ),
@@ -425,6 +435,7 @@ class _HomePageState extends State<HomePage>
 
   Drawer buildBurgerMenu(
       BuildContext context, DarkPatternsState darkPatternsState) {
+    updateDarkPatternsCount();
     return Drawer(
       child: ListView(
         children: <Widget>[
@@ -629,9 +640,32 @@ class _HomePageState extends State<HomePage>
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)), // Rounded corners
               )),
+          ValueListenableBuilder<int>(
+            valueListenable: _darkPatternsCountNotifier,
+            builder: (context, count, child) {
+              return ListTile(
+                leading: const Icon(Icons.info),
+                title: Text('Dark Patterns Found $count/4',
+                    style: const TextStyle(color: Colors.black)),
+                tileColor: Colors.grey[200],
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)), // Rounded corners
+              );
+            },
+          ),
         ],
       ),
     );
+  }
+  Future<int> _countDarkPatternsFound() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int count = 0;
+    if (prefs.getBool('darkPatternsInfoNotification') ?? false) count++;
+    if (prefs.getBool('darkPatternsInfoVAR') ?? false) count++;
+    if (prefs.getBool('darkPatternsInfoScore') ?? false) count++;
+    if (prefs.getBool('darkPatternsInfoShop') ?? false) count++;
+    if (prefs.getBool('darkPatternsInfoFoMo') ?? false) count++;
+    return count;
   }
 
   late int difference;
@@ -744,7 +778,6 @@ class _HomePageState extends State<HomePage>
               TextButton(
                 onPressed: () {
                   _showDarkPatternsInfo();
-
                   Navigator.of(context).pop();
                   setState(() {
                     difference = 0;
@@ -867,6 +900,9 @@ class _HomePageState extends State<HomePage>
                     onPressed: () {
                       prefs.setBool('darkPatternsInfoFoMo', true);
                       Navigator.of(context).pop();
+                      setState(() {
+                        updateDarkPatternsCount();
+                      });
                     },
                   ),
                 ],
@@ -953,6 +989,10 @@ class _HomePageState extends State<HomePage>
     prefs.setBool('darkPatternsInfoScore', false);
     prefs.setBool('darkPatternsInfoShop', false);
     prefs.setBool('darkPatternsInfoFoMo', false);
+
+    setState(() {
+      updateDarkPatternsCount();
+    });
 
     return showDialog(
       context: context,
