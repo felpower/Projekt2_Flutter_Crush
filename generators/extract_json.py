@@ -232,7 +232,6 @@ for user_id, user_info in users_data.items():
 		row['appCloseDate'] = ""
 		row['appCloseTime'] = ""
 
-
 		# Processing 'finishOfLevel'
 		finish_of_level = user_info.get('finishOfLevel', None)
 		if finish_of_level:
@@ -367,7 +366,8 @@ for user_id, user_info in users_data.items():
 				extracted_date_time = extract_date_time(push_sent_time)
 				row['pushClickTime'] = str(extracted_date_time[1])
 				row['pushClickDate'] = str(extracted_date_time[0])
-				actions.append({'action': 'pushClickTime', 'date': str(extracted_date_time[0]), 'time': str(extracted_date_time[1])})
+				actions.append({'action': 'pushClickTime', 'date': str(extracted_date_time[0]),
+								'time': str(extracted_date_time[1])})
 				processed_data.append(row.copy())
 
 		row['pushClickTime'] = ""
@@ -627,7 +627,6 @@ average_level_per_session = 0
 average_level_per_player = 0
 push_after_30_days = 0
 
-
 gender_counter = {'0': 0, '1': 0, '2': 0}
 education_counter = {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
 occupation_counter = {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
@@ -662,28 +661,32 @@ dark_patterns_off_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users'
 						   'Hours of Playing': 0, 'Seconds per Session': 0, 'Total Levels Bought': 0,
 						   'Total Items Bought': 0, 'Total Daily Rewards Collected': 0, 'Total Highscores Checked': 0,
 						   'Average Age': 0, 'Max Level': 0, 'Users Max Level': 0, 'Longest Streak': 0,
-						   'Total Notifications Sent': 0, 'Total Notifications Pushed': 0, 'Played After Notification Pushed':0,'Notifications sent after 30 days': 0,
+						   'Total Notifications Sent': 0, 'Total Notifications Pushed': 0,
+						   'Played After Notification Pushed': 0, 'Notifications sent after 30 days': 0,
 						   'Notifications clicked after 30 days': 0}
 dark_patterns_on_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users': 0, 'Total Levels Started': 0,
 						  'Total Levels Finished': 0, 'Total Levels Won': 0, 'Average Playtime per level': 0,
 						  'Hours of Playing': 0, 'Seconds per Session': 0, 'Total Levels Bought': 0,
 						  'Total Items Bought': 0, 'Total Daily Rewards Collected': 0, 'Total Highscores Checked': 0,
 						  'Average Age': 0, 'Max Level': 0, 'Users Max Level': 0, 'Longest Streak': 0,
-						  'Total Notifications Sent': 0, 'Total Notifications Pushed': 0,'Played After Notification Pushed':0,'Notifications sent after 30 days': 0,
-						   'Notifications clicked after 30 days': 0}
+						  'Total Notifications Sent': 0, 'Total Notifications Pushed': 0,
+						  'Played After Notification Pushed': 0, 'Notifications sent after 30 days': 0,
+						  'Notifications clicked after 30 days': 0}
 dark_patterns_fomo_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users': 0, 'Total Levels Started': 0,
 							'Total Levels Finished': 0, 'Total Levels Won': 0, 'Average Playtime per level': 0,
 							'Hours of Playing': 0, 'Seconds per Session': 0, 'Total Levels Bought': 0,
 							'Total Items Bought': 0, 'Total Daily Rewards Collected': 0, 'Total Highscores Checked': 0,
 							'Average Age': 0, 'Max Level': 0, 'Users Max Level': 0, 'Longest Streak': 0,
-							'Total Notifications Sent': 0, 'Total Notifications Pushed': 0,'Played After Notification Pushed':0,'Notifications sent after 30 days': 0,
-						   'Notifications clicked after 30 days': 0}
+							'Total Notifications Sent': 0, 'Total Notifications Pushed': 0,
+							'Played After Notification Pushed': 0, 'Notifications sent after 30 days': 0,
+							'Notifications clicked after 30 days': 0}
 dark_patterns_var_stats = {'Total Users': 0, 'Total Dropouts': 0, 'Active Users': 0, 'Total Levels Started': 0,
 						   'Total Levels Finished': 0, 'Total Levels Won': 0, 'Average Playtime per level': 0,
 						   'Hours of Playing': 0, 'Seconds per Session': 0, 'Total Levels Bought': 0,
 						   'Total Items Bought': 0, 'Total Daily Rewards Collected': 0, 'Total Highscores Checked': 0,
 						   'Average Age': 0, 'Max Level': 0, 'Users Max Level': 0, 'Longest Streak': 0,
-						   'Total Notifications Sent': 0, 'Total Notifications Pushed': 0,'Played After Notification Pushed':0,'Notifications sent after 30 days': 0,
+						   'Total Notifications Sent': 0, 'Total Notifications Pushed': 0,
+						   'Played After Notification Pushed': 0, 'Notifications sent after 30 days': 0,
 						   'Notifications clicked after 30 days': 0}
 dark_patterns_off_stats.update({
 	'gender': gender_counter.copy(),
@@ -935,7 +938,7 @@ try:
 					data['pushfrequency'], 0) + 1
 			if 'pushtimes' in data and data['pushtimes']:
 				dark_patterns_off_stats['pushtimes'][data['pushtimes']] = dark_patterns_off_stats[
-																					  'pushtimes'].get(
+																			  'pushtimes'].get(
 					data['pushtimes'], 0) + 1
 			if 'pushbettertimes' in data and data['pushbettertimes']:
 				dark_patterns_off_stats['pushbettertimes'] += data['pushbettertimes'] + ", "
@@ -988,11 +991,11 @@ try:
 				dark_patterns_on_stats['pushreceived'] += 1
 			if 'pushfrequency' in data and data['pushfrequency']:
 				dark_patterns_on_stats['pushfrequency'][data['pushfrequency']] = dark_patterns_on_stats[
-																					  'pushfrequency'].get(
+																					 'pushfrequency'].get(
 					data['pushfrequency'], 0) + 1
 			if 'pushtimes' in data and data['pushtimes']:
 				dark_patterns_on_stats['pushtimes'][data['pushtimes']] = dark_patterns_on_stats[
-																					  'pushtimes'].get(
+																			 'pushtimes'].get(
 					data['pushtimes'], 0) + 1
 			if 'pushbettertimes' in data and data['pushbettertimes']:
 				dark_patterns_on_stats['pushbettertimes'] += data['pushbettertimes'] + ", "
@@ -1043,11 +1046,11 @@ try:
 				dark_patterns_fomo_stats['pushreceived'] += 1
 			if 'pushfrequency' in data and data['pushfrequency']:
 				dark_patterns_fomo_stats['pushfrequency'][data['pushfrequency']] = dark_patterns_fomo_stats[
-																					  'pushfrequency'].get(
+																					   'pushfrequency'].get(
 					data['pushfrequency'], 0) + 1
 			if 'pushtimes' in data and data['pushtimes']:
 				dark_patterns_fomo_stats['pushtimes'][data['pushtimes']] = dark_patterns_fomo_stats[
-																					  'pushtimes'].get(
+																			   'pushtimes'].get(
 					data['pushtimes'], 0) + 1
 			if 'pushbettertimes' in data and data['pushbettertimes']:
 				dark_patterns_fomo_stats['pushbettertimes'] += data['pushbettertimes'] + ", "
@@ -1102,7 +1105,7 @@ try:
 					data['pushfrequency'], 0) + 1
 			if 'pushtimes' in data and data['pushtimes']:
 				dark_patterns_var_stats['pushtimes'][data['pushtimes']] = dark_patterns_var_stats[
-																					  'pushtimes'].get(
+																			  'pushtimes'].get(
 					data['pushtimes'], 0) + 1
 			if 'pushbettertimes' in data and data['pushbettertimes']:
 				dark_patterns_var_stats['pushbettertimes'] += data['pushbettertimes'] + ", "
@@ -1502,7 +1505,7 @@ statistics_overview = {
 	'levelBoughtTime': "Hours of Playing",
 	'itemBought': 'Total Items Bought',
 	'collectDailyRewardsTime': 'Total Daily Rewards Collected',
-	'collectDailyRewardsDate':'Total Highscores Checked',
+	'collectDailyRewardsDate': 'Total Highscores Checked',
 	'checkHighscoreTime': 'Played After Notification Pushed',
 	'checkHighscoreDate': 'Total Push Notifications Clicked after 30 days',
 	'pushClickTime': 'Total Push Notifications Clicked',

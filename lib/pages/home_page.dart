@@ -411,7 +411,9 @@ class _HomePageState extends State<HomePage>
                     borderRadius: BorderRadius.circular(12)), // Rounded corners
               )),
           Visibility(
-              visible: darkPatternsState is !DarkPatternsDeactivatedState,
+              visible: darkPatternsState is !DarkPatternsDeactivatedState && Uri.parse(html.window.location.href)
+        .host
+        .contains('felpower'),
               child: ListTile(
                 leading: const Icon(Icons.pattern),
                 title: const Text('Reset Dark Patterns', style: TextStyle(color: Colors.grey)),
@@ -710,10 +712,10 @@ class _HomePageState extends State<HomePage>
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: const Text('DarkPatterns Hinweiss'),
+              scrollable: true,
+              title: const Text('Das war gerade ein Dark Pattern!'),
               content: const Text(
-                  'Achtung! Notifications können dazu führen, dass Sie mehr Zeit in ein Spiel investieren, '
-                  'als Sie ursprünglich beabsichtigt haben. Bitte seien Sie vorsichtig und spielen Sie verantwortungsbewusst.'),
+                  'Hast du schon einmal gespielt, nur weil dir eine Push-Benachrichtigung vorgeschlagen hat, jetzt wieder einzusteigen? Oft werden solche Nachrichten genutzt, um Druck aufzubauen – vielleicht wurde dir ein zeitlich begrenzter Bonus versprochen oder Extra-Punkte, wenn du sofort spielst. Diese Benachrichtigungen sollen dich daran erinnern, das Spiel zu öffnen, auch wenn du gar nicht daran gedacht hast. Entwickler setzen darauf, dass du durch den Hinweis neugierig wirst und nicht widerstehen kannst, es gleich auszuprobieren.'),
               actions: <Widget>[
                 TextButton(
                   child: const Text('OK'),
@@ -738,7 +740,8 @@ class _HomePageState extends State<HomePage>
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text('DarkPatterns Hinweiss'),
+            scrollable: true,
+            title: const Text('Das war gerade ein Dark Pattern!'),
             content: const Text(
                 'Achtung! Tägliche Belohnungen können dazu führen, dass Sie mehr Zeit investieren, '
                 'als Sie ursprünglich beabsichtigt haben. Bitte seien Sie vorsichtig und spielen Sie verantwortungsbewusst.'),

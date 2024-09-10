@@ -113,9 +113,10 @@ class HighScoreState extends State<HighScorePage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('DarkPatterns Hinweiss'),
+          scrollable: true,
+          title: const Text('Das war gerade ein Dark Pattern!'),
           content: const Text(
-              'In der Highscore Liste können DarkPatterns enthalten sein. Diese sind spezielle Einträge, die nicht von den Nutzern erstellt wurden, sondern von der App. Sie dienen dazu, die Nutzer zu manipulieren und zu täuschen. Sie sind nicht echt und sollten immer mit Vorsicht betrachtet werden.'),
+              'Manchmal nutzen Spiele eine gefälschte Highscore-Liste, um Spieler glauben zu lassen, sie treten gegen echte Menschen an. Diese Listen zeigen beeindruckend hohe Punktzahlen, die scheinbar von anderen Spielern erreicht wurden. Doch in Wirklichkeit werden diese Zahlen oft vom Spiel selbst generiert, um dich dazu zu bringen, weiterzuspielen. Der Gedanke, „nur noch ein paar Punkte“ zu machen, um an die Spitze zu kommen, sorgt dafür, dass du immer wieder versuchst, deinen Platz in der Rangliste zu verbessern – obwohl die Konkurrenz gar nicht echt ist.'),
           actions: <Widget>[
             TextButton(
               child: const Text('OK'),
