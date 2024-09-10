@@ -109,23 +109,52 @@ class HighScoreState extends State<HighScorePage> {
 
   void _showDarkPatternsInfo() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return showDialog(
+    bool isExpanded = false;
+    showDialog(
       context: context,
       builder: (context) {
-        return AlertDialog(
-          scrollable: true,
-          title: const Text('Das war gerade ein Dark Pattern!'),
-          content: const Text(
-              'Manchmal nutzen Spiele eine gefälschte Highscore-Liste, um Spieler glauben zu lassen, sie treten gegen echte Menschen an. Diese Listen zeigen beeindruckend hohe Punktzahlen, die scheinbar von anderen Spielern erreicht wurden. Doch in Wirklichkeit werden diese Zahlen oft vom Spiel selbst generiert, um dich dazu zu bringen, weiterzuspielen. Der Gedanke, „nur noch ein paar Punkte“ zu machen, um an die Spitze zu kommen, sorgt dafür, dass du immer wieder versuchst, deinen Platz in der Rangliste zu verbessern – obwohl die Konkurrenz gar nicht echt ist.'),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('OK'),
-              onPressed: () {
-                prefs.setBool('darkPatternsInfoScore', true);
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              title: const Text('Das war gerade ein Dark Pattern!'),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                      'Manchmal nutzen Spiele eine gefälschte Highscore-Liste, um Spieler glauben zu lassen, sie treten gegen echte Menschen an.'),
+                  if (isExpanded)
+                    const Text(
+                      'Diese Listen zeigen beeindruckend hohe Punktzahlen, die scheinbar von anderen Spielern erreicht wurden. Doch in Wirklichkeit werden diese Zahlen oft vom Spiel selbst generiert, um dich dazu zu bringen, weiterzuspielen. Der Gedanke, „nur noch ein paar Punkte“ zu machen, um an die Spitze zu kommen, sorgt dafür, dass du immer wieder versuchst, deinen Platz in der Rangliste zu verbessern – obwohl die Konkurrenz gar nicht echt ist.',
+                    ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isExpanded = !isExpanded;
+                      });
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(isExpanded ? "" : 'Mehr erfahren'),
+                        isExpanded
+                            ? const Icon(Icons.expand_less)
+                            : const Icon(Icons.expand_more),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('OK'),
+                  onPressed: () {
+                    prefs.setBool('darkPatternsInfoScore', true);
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
         );
       },
     );

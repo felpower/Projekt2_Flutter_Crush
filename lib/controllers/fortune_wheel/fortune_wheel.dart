@@ -93,7 +93,7 @@ class _FortuneWheelState extends State<FortuneWheel>
   _buildResultOverlay() {
     if (mounted) {
       // Check if the State object is in a valid context.
-      String x = 'Du hast $_selectedItem XP und \$ gewonnen. Glückwunsch!';
+      String x = 'Du hast $_selectedItem XP und 🪙 gewonnen. Glückwunsch!';
       setState(() {
         _backupButtonVisible = true;
       });
@@ -108,7 +108,6 @@ class _FortuneWheelState extends State<FortuneWheel>
                   ElevatedButton(
                     onPressed: () {
                       _showDarkPatternsInfo();
-
                     },
                     child: const Text('Weiter'),
                   ),
@@ -140,7 +139,7 @@ class _FortuneWheelState extends State<FortuneWheel>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Drehe um XP und \$ zu erhalten'),
+        title: const Text('Drehe um XP und 🪙 zu erhalten'),
         automaticallyImplyLeading: false,
       ),
       body: Stack(
@@ -175,30 +174,58 @@ class _FortuneWheelState extends State<FortuneWheel>
 
   void _showDarkPatternsInfo() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isExpanded = false;
     var dpInfoShown = prefs.getBool('darkPatternsInfoVAR');
+
     if (dpInfoShown == null || dpInfoShown == false) {
       return showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
-            scrollable: true,
-            title: const Text('Das war gerade ein Dark Pattern!'),
-            content: const Text(
-                'Das Glücksrad, das du gerade gedreht hast, ist ein Dark Pattern, welches in vielen Smartphone-Spielen zu finden ist. Es basiert auf dem Prinzip, dass Menschen häufiger zu einem Spiel zurückkehren, wenn sie unvorhersehbare Belohnungen erhalten. Jedes Mal, wenn man das Rad dreht, könnte man eine kleine oder große Belohnung bekommen – oder manchmal gar nichts. Das macht das Ganze besonders spannend, weil man nie weiß, was als Nächstes kommt.\n Hast du bemerkt, dass du öfter das Spiel öffnest, nur um das Glücksrad zu drehen? Fühlst du dich motiviert, es immer wieder zu versuchen, in der Hoffnung, eine größere Belohnung zu bekommen? Genau das ist die Absicht der Spieleentwickler: Sie wollen, dass du länger im Spiel bleibst und vielleicht sogar echtes Geld ausgibst, um weitere Chancen auf Belohnungen zu bekommen.'),
-            actions: <Widget>[
-              TextButton(
-                child: const Text('OK'),
-                onPressed: () {
-                  prefs.setBool('darkPatternsInfoVAR', true);
-                  Navigator.of(context).pop();
-                  Navigator.pop(context);
-                  Navigator.pop(context);
-                  gameBloc.gameOver(_selectedItem!);
-                  gameIsOverController.sink.add(true);
-                  showGameOver(true);
-                },
-              ),
-            ],
+          return StatefulBuilder(
+            builder: (context, setState) {
+              return AlertDialog(
+                title: const Text('Das war gerade ein Dark Pattern!'),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (isExpanded)
+                      const Text(
+                        'Das Glücksrad, das du gerade gedreht hast, ist ein Dark Pattern, welches in vielen Smartphone-Spielen zu finden ist. Es basiert auf dem Prinzip, dass Menschen häufiger zu einem Spiel zurückkehren, wenn sie unvorhersehbare Belohnungen erhalten. Jedes Mal, wenn man das Rad dreht, könnte man eine kleine oder große Belohnung bekommen – oder manchmal gar nichts. Das macht das Ganze besonders spannend, weil man nie weiß, was als Nächstes kommt.\n Hast du bemerkt, dass du öfter das Spiel öffnest, nur um das Glücksrad zu drehen? Fühlst du dich motiviert, es immer wieder zu versuchen, in der Hoffnung, eine größere Belohnung zu bekommen? Genau das ist die Absicht der Spieleentwickler: Sie wollen, dass du länger im Spiel bleibst und vielleicht sogar echtes Geld ausgibst, um weitere Chancen auf Belohnungen zu bekommen.',
+                      ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isExpanded = !isExpanded;
+                        });
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(isExpanded ? "" : 'Mehr erfahren'),
+                          isExpanded
+                              ? const Icon(Icons.expand_less)
+                              : const Icon(Icons.expand_more),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: const Text('OK'),
+                    onPressed: () {
+                      prefs.setBool('darkPatternsInfoVAR', true);
+                      Navigator.of(context).pop();
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                      gameBloc.gameOver(_selectedItem!);
+                      gameIsOverController.sink.add(true);
+                      showGameOver(true);
+                    },
+                  ),
+                ],
+              );
+            },
           );
         },
       );
@@ -209,7 +236,6 @@ class _FortuneWheelState extends State<FortuneWheel>
       gameIsOverController.sink.add(true);
       showGameOver(true);
     }
-
   }
 
   Widget _buildFortuneWheel() {

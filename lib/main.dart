@@ -43,13 +43,13 @@ void main() async {
     //   runApp(const NonMobilePage());
     //   return;
     // }
-    if (!DeviceHelper.isStandalone()) {
-      PWAInstall().setup(installCallback: () {
-        debugPrint('APP INSTALLED!');
-      });
-      runApp(const NonStandalonePage());
-      return;
-    }
+    // if (!DeviceHelper.isStandalone()) {
+    //   PWAInstall().setup(installCallback: () {
+    //     debugPrint('APP INSTALLED!');
+    //   });
+    //   runApp(const NonStandalonePage());
+    //   return;
+    // }
     Uri currentUrl = Uri.parse(html.window.location.href);
     if (currentUrl.queryParameters['source'] == 'notification') {
       FirebaseStore.addNotificationTap(DateTime.now());

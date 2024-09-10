@@ -69,7 +69,8 @@ class ShopState extends State<ShopPage> {
             Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/background/background_new.png'),
+                  image:
+                      AssetImage('assets/images/background/background_new.png'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -82,7 +83,7 @@ class ShopState extends State<ShopPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Text('\$: $coins'),
+                      Text('🪙: $coins'),
                       Text('Buntes Jelly: $buntJelly'),
                       Text('Gestreiftes Jelly: $stripeJelly'),
                     ],
@@ -96,20 +97,22 @@ class ShopState extends State<ShopPage> {
                         return Container(); // Return an empty container if the item is XP and dark patterns are not activated or in competition state
                       }
                       return Container(
-                        color: Colors.black.withOpacity(0.1), // Semi-transparent background
+                        color: Colors.black.withOpacity(0.1),
+                        // Semi-transparent background
                         child: ListTile(
                           title: Text(shopItems[index].name,
                               style: const TextStyle(color: Colors.black)),
                           subtitle: Text(
-                              '${shopItems[index].description} - ${shopItems[index].cost}\$',
+                              '${shopItems[index].description} - ${shopItems[index].cost}🪙',
                               style: const TextStyle(color: Colors.black)),
                           trailing: ElevatedButton(
                             child: const Text('Kaufen'),
                             onPressed: () {
                               if (shopItems[index].cost > coins) {
                                 Fluttertoast.showToast(
-                                    msg: "Du hast nur $coins\$, für dieses Item brauchst du aber "
-                                        "${shopItems[index].cost}\$",
+                                    msg:
+                                        "Du hast nur $coins🪙, für dieses Item brauchst du aber "
+                                        "${shopItems[index].cost}🪙",
                                     toastLength: Toast.LENGTH_LONG,
                                     gravity: ToastGravity.BOTTOM,
                                     timeInSecForIosWeb: 5,
@@ -162,15 +165,77 @@ class ShopState extends State<ShopPage> {
       coins -= shopItems[index].cost; // Subtract the cost from the user's coins
     });
     FirebaseStore.addItemBought(shopItems[index].description);
-    // Show a toast message with the name of the item bought and the new amount of coins
+    _showDarkPatternsInfo(index);
+  }
+
+  void showToastItemBought(int index) {
     Fluttertoast.showToast(
-        msg: "Du hast ${shopItems[index].description} gekauft. Du hast noch $coins\$.",
+        msg:
+            "Du hast ${shopItems[index].description} gekauft. Du hast noch $coins🪙.",
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 5,
         backgroundColor: Colors.green,
         textColor: Colors.white,
         fontSize: 16.0);
+  }
+
+  void _showDarkPatternsInfo(int index) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isExpanded = false;
+    var dpInfoShown = prefs.getBool('darkPatternsInfoShop');
+
+    if (dpInfoShown == null || dpInfoShown == false) {
+      return showDialog(
+        context: context,
+        builder: (context) {
+          return StatefulBuilder(
+            builder: (context, setState) {
+              return AlertDialog(
+                title: const Text('Das war gerade ein Dark Pattern!'),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (isExpanded)
+                      const Text(
+                        'Hier Text für die Info über Dark Patterns im Shop. Das war ein Dark Pattern, weil...',
+                      ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isExpanded = !isExpanded;
+                        });
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(isExpanded ? "" : 'Mehr erfahren'),
+                          isExpanded
+                              ? const Icon(Icons.expand_less)
+                              : const Icon(Icons.expand_more),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: const Text('OK'),
+                    onPressed: () {
+                      prefs.setBool('darkPatternsInfoShop', true);
+                      Navigator.of(context).pop();
+                      showToastItemBought(index);
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        },
+      );
+    } else {
+      showToastItemBought(index);
+    }
   }
 
   void loadSharedPreferences() async {
