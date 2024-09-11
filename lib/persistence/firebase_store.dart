@@ -30,6 +30,7 @@ class FirebaseStore {
   static const String initAppStartTime = 'initAppStartTime';
   static const String initAppStartDate = 'initAppStartDate';
   static const String appCloseTime = 'appCloseTime';
+  static const String watchedAddTime = 'watchedAddTime';
   static const String pushClick = 'pushClick';
   static const String startSurvey = 'startSurvey';
   static const String endSurvey = 'endSurvey';
@@ -70,6 +71,10 @@ class FirebaseStore {
 
   static Future<void> addCloseApp(DateTime dateTime) async {
     await _updateDocument(appCloseTime, dateTime.toString());
+  }
+
+  static Future<void> watchedAdd(DateTime dateTime) async {
+    await _updateDocument(watchedAddTime, dateTime.toString());
   }
 
   static Future<void> grantPushPermission(bool granted) async {
