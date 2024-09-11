@@ -192,6 +192,7 @@ class ShopState extends State<ShopPage> {
           return StatefulBuilder(
             builder: (context, setState) {
               return AlertDialog(
+                scrollable: true,
                 title: const Text('Das war gerade ein Dark Pattern!'),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
