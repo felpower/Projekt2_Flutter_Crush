@@ -665,7 +665,7 @@ class _HomePageState extends State<HomePage>
             builder: (context, count, child) {
               return ListTile(
                 leading: const Icon(Icons.info),
-                title: Text('Dark Patterns Found $count/4',
+                title: Text('Dark Patterns Found $count/5',
                     style: const TextStyle(color: Colors.black)),
                 tileColor: Colors.grey[200],
                 shape: RoundedRectangleBorder(
@@ -686,6 +686,7 @@ class _HomePageState extends State<HomePage>
     if (prefs.getBool('darkPatternsInfoScore') ?? false) count++;
     if (prefs.getBool('darkPatternsInfoShop') ?? false) count++;
     if (prefs.getBool('darkPatternsInfoFoMo') ?? false) count++;
+    if (prefs.getBool('darkPatternsInfoAdds') ?? false) count++;
     return count;
   }
 
@@ -1010,6 +1011,7 @@ class _HomePageState extends State<HomePage>
     prefs.setBool('darkPatternsInfoScore', false);
     prefs.setBool('darkPatternsInfoShop', false);
     prefs.setBool('darkPatternsInfoFoMo', false);
+    prefs.setBool('darkPatternsInfoAdds', false);
 
     setState(() {
       updateDarkPatternsCount();
