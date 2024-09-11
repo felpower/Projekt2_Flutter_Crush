@@ -447,19 +447,24 @@ class _HomePageState extends State<HomePage>
             ),
             child: Text('Menü'),
           ),
-          Visibility(child: ListTile(
-            leading: const Icon(Icons.ad_units),
-            title: const Text('Watch Add for money',
-                style: TextStyle(color: Colors.grey)),
-            onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => const AdvertisementVideoPlayer()));
-            },
-            tileColor: Colors.grey[200],
-            // Background color to make it feel like a button
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12)), // Rounded corners
-          )),
+          Visibility(
+              visible: true,
+              child: ListTile(
+                leading: const Icon(Icons.ad_units),
+                title: const Text('Watch Adds for 🪙',
+                    style: TextStyle(color: Colors.grey)),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const AdvertisementVideoPlayer(isForcedAd: false)));
+                },
+                tileColor: Colors.grey[200],
+                // Background color to make it feel like a button
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)), // Rounded corners
+              )),
           Visibility(
               visible: true,
               child: ListTile(

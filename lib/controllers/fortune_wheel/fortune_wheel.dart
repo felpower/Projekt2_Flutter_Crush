@@ -12,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../bloc/bloc_provider.dart';
 import '../../game_widgets/game_over_splash.dart';
+import '../advertisement_video_player.dart';
 
 class FortuneWheel extends StatefulWidget {
   final List<int> items;
@@ -184,6 +185,7 @@ class _FortuneWheelState extends State<FortuneWheel>
           return StatefulBuilder(
             builder: (context, setState) {
               return AlertDialog(
+                scrollable: true,
                 title: const Text('Das war gerade ein Dark Pattern!'),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -221,6 +223,11 @@ class _FortuneWheelState extends State<FortuneWheel>
                       gameBloc.gameOver(_selectedItem!);
                       gameIsOverController.sink.add(true);
                       showGameOver(true);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const AdvertisementVideoPlayer(isForcedAd: true)));
                     },
                   ),
                 ],
@@ -235,6 +242,11 @@ class _FortuneWheelState extends State<FortuneWheel>
       gameBloc.gameOver(_selectedItem!);
       gameIsOverController.sink.add(true);
       showGameOver(true);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+              const AdvertisementVideoPlayer(isForcedAd: true,)));
     }
   }
 
