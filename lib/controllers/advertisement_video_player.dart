@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 
 import '../bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
 import '../bloc/user_state_bloc/coins_bloc/coin_event.dart';
+import '../persistence/firebase_store.dart';
 
 class AdvertisementVideoPlayer extends StatefulWidget {
   final bool isForcedAd;
@@ -50,6 +51,7 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
   }
 
   void rewardUserWithCoins() {
+    FirebaseStore.watchedAdd(DateTime.now());
     flutter_bloc.BlocProvider.of<CoinBloc>(context)
         .add(AddCoinsEvent(100));
     Fluttertoast.showToast(
@@ -118,6 +120,7 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
     double x = details.globalPosition.dx;
     double y = details.globalPosition.dy;
   }
+
   void _showDarkPatternsInfo() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool isExpanded = false;
