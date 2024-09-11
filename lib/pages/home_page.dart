@@ -33,6 +33,7 @@ import '../controllers/unity/unity_screen.dart';
 import '../gamification_widgets/credit_panel.dart';
 import '../helpers/app_colors.dart';
 import '../helpers/global_variables.dart';
+import '../persistence/level_service.dart';
 import 'feedback_page.dart';
 
 // import 'finished_survey_page.dart';
@@ -61,6 +62,7 @@ class _HomePageState extends State<HomePage>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     switch (state) {
       case AppLifecycleState.resumed:
+        _checkLevels();
         FirebaseStore.addStartApp(DateTime.now());
         break;
       case AppLifecycleState.inactive:
@@ -131,6 +133,7 @@ class _HomePageState extends State<HomePage>
     double webWidth = 500;
     double webHeight = 1000;
     double creditPanelWidth = kIsWeb ? webWidth / 4 : screenSize.width / 4;
+
     if (!checkedForReopenGame) {
       checkForReopenGame();
       setState(() {
@@ -455,10 +458,11 @@ class _HomePageState extends State<HomePage>
                     style: TextStyle(color: Colors.grey)),
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const AdvertisementVideoPlayer(isForcedAd: false)));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AdvertisementVideoPlayer(isForcedAd: false),
+                    ),
+                  );
                 },
                 tileColor: Colors.grey[200],
                 // Background color to make it feel like a button
@@ -665,7 +669,7 @@ class _HomePageState extends State<HomePage>
             builder: (context, count, child) {
               return ListTile(
                 leading: const Icon(Icons.info),
-                title: Text('Dark Patterns gefunden $count/6',
+                title: Text('Dark Patterns gefunden $count/7',
                     style: const TextStyle(color: Colors.black)),
                 tileColor: Colors.grey[200],
                 shape: RoundedRectangleBorder(
@@ -687,6 +691,7 @@ class _HomePageState extends State<HomePage>
     if (prefs.getBool('darkPatternsInfoShop') ?? false) count++;
     if (prefs.getBool('darkPatternsInfoFoMo') ?? false) count++;
     if (prefs.getBool('darkPatternsInfoAdds') ?? false) count++;
+    if (prefs.getBool('darkPatternsInfoCompleted') ?? false) count++;
     return count;
   }
 
@@ -799,7 +804,7 @@ class _HomePageState extends State<HomePage>
             actions: [
               TextButton(
                 onPressed: () {
-                  _showDarkPatternsInfo();
+                  _showDarkPatternsInfoFoMo();
                   Navigator.of(context).pop();
                   setState(() {
                     difference = 0;
@@ -879,7 +884,7 @@ class _HomePageState extends State<HomePage>
     }
   }
 
-  void _showDarkPatternsInfo() async {
+  void _showDarkPatternsInfoFoMo() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool isExpanded = false;
     var dpInfoShown = prefs.getBool('darkPatternsInfoFoMo');
@@ -1014,6 +1019,7 @@ class _HomePageState extends State<HomePage>
     prefs.setBool('darkPatternsInfoShop', false);
     prefs.setBool('darkPatternsInfoFoMo', false);
     prefs.setBool('darkPatternsInfoAdds', false);
+    prefs.setBool('darkPatternsInfoCompleted', false);
 
     setState(() {
       updateDarkPatternsCount();
@@ -1036,5 +1042,84 @@ class _HomePageState extends State<HomePage>
         );
       },
     );
+  }
+
+  List<String>? previousLevels;
+
+  Future<void> _checkLevels() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String>? levels = prefs.getStringList('level');
+    print("Levels: $previousLevels");
+
+    if (levels != null &&
+        levels.contains("6") &&
+        !levels.contains("7") &&
+        (previousLevels == null || !previousLevels!.contains("6"))) {
+      print("Level 6 reached");
+      _showDarkPatternsInfoCompleted();
+    }
+
+    // Update previous levels
+    previousLevels = levels;
+  }
+
+  void _showDarkPatternsInfoCompleted() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isExpanded = false;
+    var dpInfoShown = prefs.getBool('darkPatternsInfoCompleted');
+    print("dpInfoShown: $dpInfoShown");
+    if (dpInfoShown == null || dpInfoShown == false) {
+      prefs.setBool('darkPatternsInfoCompleted', true);
+      return showDialog(
+        context: context,
+        builder: (context) {
+          return StatefulBuilder(
+            builder: (context, setState) {
+              return AlertDialog(
+                scrollable: true,
+                title: const Text('Das war gerade ein Dark Pattern!'),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (isExpanded)
+                      const Text(
+                        'Das Gefühl, deine Sammlung im Spiel endlich vervollständigt zu haben, ist ein typisches Dark Pattern, das in vielen Smartphone-Spielen verwendet wird. Die Sammlungen sind so gestaltet, dass du das Bedürfnis verspürst, jedes einzelne Item zu erwerben, um die vollständige Belohnung zu erhalten. Oft fehlt dir am Ende nur noch ein kleines Teil, und das Spiel bietet dir gezielt die Möglichkeit, dieses fehlende Item entweder durch stundenlanges Spielen oder gegen echtes Geld zu bekommen. Hast du bemerkt, wie zufriedenstellend es ist, eine Sammlung abzuschließen? Oder dass du immer wieder spielst oder sogar Geld ausgibst, nur um das letzte Teil zu erhalten? Das ist genau so beabsichtigt: Spieleentwickler wollen, dass du dich motiviert fühlst, diese letzte Lücke zu füllen, indem du mehr Zeit im Spiel verbringst oder Geld investierst, um das Gefühl der Vollständigkeit zu erreichen.',
+                      ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isExpanded = !isExpanded;
+                        });
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(isExpanded ? "" : 'Mehr erfahren'),
+                          isExpanded
+                              ? const Icon(Icons.expand_less)
+                              : const Icon(Icons.expand_more),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: const Text('OK'),
+                    onPressed: () {
+                      prefs.setBool('darkPatternsInfoCompleted', true);
+                      Navigator.of(context).pop();
+                      setState(() {
+                        updateDarkPatternsCount();
+                      });
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        },
+      );
+    }
   }
 }
