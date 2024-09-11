@@ -112,5 +112,5 @@ dart run flutter_native_splash:create
 ✅ Infobox ausklappbar machen
 ✅ Shop in die Menüleiste
 Info auf Sonderangebot im Hauptspiel
-Werbung wieder reingeben
-bei Dark Pattern Infobox dazuschreiben wieviele Dark Patterns bereits gefunden wurden
+✅Werbung wieder reingeben
+✅bei Dark Pattern Infobox dazuschreiben wieviele Dark Patterns bereits gefunden wurden

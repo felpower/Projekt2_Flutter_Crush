@@ -11,11 +11,14 @@ import '../persistence/firebase_store.dart';
 class AdvertisementVideoPlayer extends StatefulWidget {
   final bool isForcedAd;
 
-  const AdvertisementVideoPlayer({Key? key, required this.isForcedAd}) : super(key: key);
+  const AdvertisementVideoPlayer({Key? key, required this.isForcedAd})
+      : super(key: key);
 
   @override
-  State<AdvertisementVideoPlayer> createState() => _AdvertisementVideoPlayerState();
+  State<AdvertisementVideoPlayer> createState() =>
+      _AdvertisementVideoPlayerState();
 }
+
 class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
   late VideoPlayerController controller;
   bool startedPlaying = false;
@@ -24,11 +27,13 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
   void initState() {
     super.initState();
     bool popped = false;
-    controller = VideoPlayerController.asset('assets/videos/spinning_earth.mp4');
+    controller =
+        VideoPlayerController.asset('assets/videos/spinning_earth.mp4');
     controller.addListener(() async {
       if (startedPlaying && !controller.value.isPlaying && !popped) {
         popped = true;
         if (!widget.isForcedAd) {
+          _showDarkPatternsInfo();
           rewardUserWithCoins();
         }
         Navigator.of(context).pop();
@@ -52,8 +57,7 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
 
   void rewardUserWithCoins() {
     FirebaseStore.watchedAdd(DateTime.now());
-    flutter_bloc.BlocProvider.of<CoinBloc>(context)
-        .add(AddCoinsEvent(100));
+    flutter_bloc.BlocProvider.of<CoinBloc>(context).add(AddCoinsEvent(100));
     Fluttertoast.showToast(
       msg: "You have been rewarded with 100 🪙",
       toastLength: Toast.LENGTH_LONG,
@@ -63,57 +67,60 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<bool>(
-      future: started(),
-      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-        if (snapshot.data == true) {
-          return Stack(
-            children: [
-              Positioned.fill(
-                child: FittedBox(
-                  fit: BoxFit.fill,
-                  child: SizedBox(
-                    width: controller.value.size.width,
-                    height: controller.value.size.height,
-                    child: VideoPlayer(controller),
+    return PopScope(
+        canPop: false,
+        child: FutureBuilder<bool>(
+          future: started(),
+          builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+            if (snapshot.data == true) {
+              return Stack(
+                children: [
+                  Positioned.fill(
+                    child: FittedBox(
+                      fit: BoxFit.fill,
+                      child: SizedBox(
+                        width: controller.value.size.width,
+                        height: controller.value.size.height,
+                        child: VideoPlayer(controller),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              GestureDetector(
-                onTapDown: (tapDownEvent) => _onTapDown(tapDownEvent),
-              ),
-                Positioned(
-                  top: 30,
-                  right: 10,
-                  child: FutureBuilder(
-                    future: Future.delayed(const Duration(milliseconds: 3000)),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        return TextButton(
-                          child: const Icon(
-                            Icons.close,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {
-                            if (!widget.isForcedAd) {
-                              rewardUserWithCoins();
-                            }
-                            _showDarkPatternsInfo();
-                          },
-                        );
-                      } else {
-                        return const Icon(Icons.update, color: Colors.white);
-                      }
-                    },
+                  GestureDetector(
+                    onTapDown: (tapDownEvent) => _onTapDown(tapDownEvent),
                   ),
-                ),
-            ],
-          );
-        } else {
-          return const Center(child: CircularProgressIndicator());
-        }
-      },
-    );
+                  Positioned(
+                    top: 30,
+                    right: 10,
+                    child: FutureBuilder(
+                      future:
+                          Future.delayed(const Duration(milliseconds: 8000)),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          return TextButton(
+                            child: const Icon(
+                              Icons.close,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {
+                              if (!widget.isForcedAd) {
+                                rewardUserWithCoins();
+                                _showDarkPatternsInfo();
+                              }
+                            },
+                          );
+                        } else {
+                          return const Icon(Icons.update, color: Colors.white);
+                        }
+                      },
+                    ),
+                  ),
+                ],
+              );
+            } else {
+              return const Center(child: CircularProgressIndicator());
+            }
+          },
+        ));
   }
 
   _onTapDown(var details) {
@@ -176,7 +183,6 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
         },
       );
     } else {
-      Navigator.pop(context);
       Navigator.pop(context);
     }
   }

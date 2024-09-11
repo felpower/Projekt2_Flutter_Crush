@@ -665,7 +665,7 @@ class _HomePageState extends State<HomePage>
             builder: (context, count, child) {
               return ListTile(
                 leading: const Icon(Icons.info),
-                title: Text('Dark Patterns Found $count/5',
+                title: Text('Dark Patterns gefunden $count/6',
                     style: const TextStyle(color: Colors.black)),
                 tileColor: Colors.grey[200],
                 shape: RoundedRectangleBorder(
@@ -834,6 +834,7 @@ class _HomePageState extends State<HomePage>
           return StatefulBuilder(
             builder: (context, setState) {
               return AlertDialog(
+                scrollable: true,
                 title: const Text('Das war gerade ein Dark Pattern!'),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -890,6 +891,7 @@ class _HomePageState extends State<HomePage>
           return StatefulBuilder(
             builder: (context, setState) {
               return AlertDialog(
+                scrollable: true,
                 title: const Text('Das war gerade ein Dark Pattern!'),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,

@@ -138,39 +138,41 @@ class _FortuneWheelState extends State<FortuneWheel>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Drehe um XP und 🪙 zu erhalten'),
-        automaticallyImplyLeading: false,
-      ),
-      body: Stack(
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image:
-                    AssetImage('assets/images/background/background_new.png'),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: _buildFortuneWheel(),
+    return PopScope(
+        canPop: false,
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text('Drehe um XP und 🪙 zu erhalten'),
+            automaticallyImplyLeading: false,
           ),
-          Visibility(
-              visible: _backupButtonVisible,
-              child: Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    gameBloc.gameOver(_selectedItem!);
-                    gameIsOverController.sink.add(true);
-                    showGameOver(true);
-                  },
-                  child: const Text('Weiter'),
+          body: Stack(
+            children: [
+              Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+                        'assets/images/background/background_new.png'),
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              )),
-        ],
-      ),
-    );
+                child: _buildFortuneWheel(),
+              ),
+              Visibility(
+                  visible: _backupButtonVisible,
+                  child: Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        gameBloc.gameOver(_selectedItem!);
+                        gameIsOverController.sink.add(true);
+                        showGameOver(true);
+                      },
+                      child: const Text('Weiter'),
+                    ),
+                  )),
+            ],
+          ),
+        ));
   }
 
   void _showDarkPatternsInfo() async {
@@ -227,7 +229,8 @@ class _FortuneWheelState extends State<FortuneWheel>
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  const AdvertisementVideoPlayer(isForcedAd: true)));
+                                  const AdvertisementVideoPlayer(
+                                      isForcedAd: true)));
                     },
                   ),
                 ],
@@ -245,8 +248,9 @@ class _FortuneWheelState extends State<FortuneWheel>
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) =>
-              const AdvertisementVideoPlayer(isForcedAd: true,)));
+              builder: (context) => const AdvertisementVideoPlayer(
+                    isForcedAd: true,
+                  )));
     }
   }
 
