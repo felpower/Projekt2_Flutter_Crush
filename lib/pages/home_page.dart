@@ -27,6 +27,7 @@ import '../bloc/user_state_bloc/coins_bloc/coin_state.dart';
 import '../bloc/user_state_bloc/level_bloc/level_bloc.dart';
 import '../bloc/user_state_bloc/level_bloc/level_state.dart';
 import '../bloc/user_state_bloc/xp_bloc/xp_event.dart';
+import '../controllers/advertisement_video_player.dart';
 import '../controllers/fortune_wheel/fortune_wheel.dart';
 import '../controllers/unity/unity_screen.dart';
 import '../gamification_widgets/credit_panel.dart';
@@ -446,6 +447,19 @@ class _HomePageState extends State<HomePage>
             ),
             child: Text('Menü'),
           ),
+          Visibility(child: ListTile(
+            leading: const Icon(Icons.ad_units),
+            title: const Text('Watch Add for money',
+                style: TextStyle(color: Colors.grey)),
+            onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => const AdvertisementVideoPlayer()));
+            },
+            tileColor: Colors.grey[200],
+            // Background color to make it feel like a button
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12)), // Rounded corners
+          )),
           Visibility(
               visible: true,
               child: ListTile(
