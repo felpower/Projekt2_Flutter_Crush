@@ -181,6 +181,8 @@ class _FortuneWheelState extends State<FortuneWheel>
     var dpInfoShown = prefs.getBool('darkPatternsInfoVAR');
 
     if (dpInfoShown == null || dpInfoShown == false) {
+      dpInfoShown = true;
+      prefs.setBool('darkPatternsInfoVAR', true);
       return showDialog(
         context: context,
         builder: (context) {
@@ -218,13 +220,11 @@ class _FortuneWheelState extends State<FortuneWheel>
                   TextButton(
                     child: const Text('OK'),
                     onPressed: () {
-                      prefs.setBool('darkPatternsInfoVAR', true);
-                      Navigator.of(context).pop();
+                      // gameBloc.gameOver(_selectedItem!);
+                      // gameIsOverController.sink.add(true);
+                      // showGameOver(true);
                       Navigator.pop(context);
                       Navigator.pop(context);
-                      gameBloc.gameOver(_selectedItem!);
-                      gameIsOverController.sink.add(true);
-                      showGameOver(true);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -241,16 +241,15 @@ class _FortuneWheelState extends State<FortuneWheel>
       );
     } else {
       Navigator.pop(context);
-      Navigator.pop(context);
-      gameBloc.gameOver(_selectedItem!);
-      gameIsOverController.sink.add(true);
-      showGameOver(true);
       Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) => const AdvertisementVideoPlayer(
                     isForcedAd: true,
                   )));
+      // gameBloc.gameOver(_selectedItem!);
+      // gameIsOverController.sink.add(true);
+      // showGameOver(true);
     }
   }
 

@@ -105,6 +105,8 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
                               if (!widget.isForcedAd) {
                                 rewardUserWithCoins();
                                 _showDarkPatternsInfo();
+                              } else {
+                                Navigator.of(context).pop();
                               }
                             },
                           );
@@ -183,6 +185,7 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
         },
       );
     } else {
+      Navigator.pop(context);
       Navigator.pop(context);
     }
   }
