@@ -107,7 +107,7 @@ class HighScoreState extends State<HighScorePage> {
     }
   }
 
-  void _showDarkPatternsInfo() async {
+  void _showDarkPatternsInfo() async { //ToDo: Move to back button
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool isExpanded = false;
     showDialog(
