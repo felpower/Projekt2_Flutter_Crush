@@ -10,7 +10,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../bloc/reporting_bloc/reporting_bloc.dart';
 import '../bloc/reporting_bloc/reporting_event.dart';
 import '../model/user.dart';
-import 'home_page.dart';
 
 int xp = 0;
 String updateHighScore = "what?";
