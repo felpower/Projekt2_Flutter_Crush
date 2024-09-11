@@ -137,7 +137,7 @@ class _HomePageState extends State<HomePage>
       });
     }
     var host = Uri.parse(html.window.location.href).host;
-    // _showDarkPatternsInfoNotification();
+    _showDarkPatternsInfoNotification();
     return Scaffold(
       appBar: AppBar(
         title: const Text('JellyFun'),
@@ -365,27 +365,28 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState> showHighscoreTooltip() {
+  flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>
+      showHighscoreTooltip() {
     return flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
-          builder: (context, state) {
-            if (state is DarkPatternsActivatedState ||
-                state is DarkPatternsCompetitionState) {
-              return Tooltip(
-                  message: 'Highscore',
-                  child: IconButton(
-                    icon: const Icon(Icons.emoji_events, color: Colors.blue),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const HighScorePage()));
-                    },
-                  ));
-            } else {
-              return Container();
-            }
-          },
-        );
+      builder: (context, state) {
+        if (state is DarkPatternsActivatedState ||
+            state is DarkPatternsCompetitionState) {
+          return Tooltip(
+              message: 'Highscore',
+              child: IconButton(
+                icon: const Icon(Icons.emoji_events, color: Colors.blue),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HighScorePage()));
+                },
+              ));
+        } else {
+          return Container();
+        }
+      },
+    );
   }
 
   Stack showPulsatingAppBarIcon() {
@@ -657,6 +658,7 @@ class _HomePageState extends State<HomePage>
       ),
     );
   }
+
   Future<int> _countDarkPatternsFound() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int count = 0;
