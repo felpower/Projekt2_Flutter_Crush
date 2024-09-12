@@ -29,6 +29,7 @@ class HighScoreState extends State<HighScorePage> {
   void initState() {
     super.initState();
     _loadHighScore();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _showUsernameDialog());
   }
 
   _loadHighScore() async {
@@ -63,6 +64,39 @@ class HighScoreState extends State<HighScorePage> {
       update = true;
     }
     return update;
+  }
+
+  void _showUsernameDialog() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? username = prefs.getString('username');
+    if (username == null || username.isEmpty) {
+      final TextEditingController usernameController = TextEditingController();
+      return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Username eingeben'),
+            content: TextField(
+              controller: usernameController,
+              decoration: const InputDecoration(hintText: "Username"),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  setState(() {
+                    users[users.indexWhere((element) => element.isUser == true)]
+                        .name = usernameController.text;
+                    prefs.setString('username', usernameController.text);
+                  });
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   Future<bool> _onWillPop() async {
