@@ -33,9 +33,7 @@ import '../controllers/unity/unity_screen.dart';
 import '../gamification_widgets/credit_panel.dart';
 import '../helpers/app_colors.dart';
 import '../helpers/global_variables.dart';
-import '../persistence/level_service.dart';
 import 'feedback_page.dart';
-
 // import 'finished_survey_page.dart';
 import 'high_score_page.dart';
 import 'info_page.dart';
@@ -57,12 +55,12 @@ class _HomePageState extends State<HomePage>
   int todaysAmount = 0;
   String todaysType = '';
   bool darkPatternsInfoActive = false;
+  bool _isHomePageActive = false;
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     switch (state) {
       case AppLifecycleState.resumed:
-        _checkLevels();
         FirebaseStore.addStartApp(DateTime.now());
         break;
       case AppLifecycleState.inactive:
@@ -96,6 +94,13 @@ class _HomePageState extends State<HomePage>
     _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
     _darkPatternsCountNotifier = ValueNotifier<int>(0);
     updateDarkPatternsCount();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      print('HomePage is active');
+      setState(() {
+        _isHomePageActive = true;
+      });
+      _checkLevels();
+    });
     isMusicOn.addListener(() async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setBool('music', isMusicOn.value);
@@ -119,6 +124,7 @@ class _HomePageState extends State<HomePage>
     WidgetsBinding.instance.removeObserver(this);
     _controller.dispose();
     _darkPatternsCountNotifier.dispose();
+    _isHomePageActive = false;
     super.dispose();
   }
 
@@ -460,7 +466,8 @@ class _HomePageState extends State<HomePage>
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const AdvertisementVideoPlayer(isForcedAd: false),
+                      builder: (context) =>
+                          const AdvertisementVideoPlayer(isForcedAd: false),
                     ),
                   );
                 },
@@ -1050,12 +1057,12 @@ class _HomePageState extends State<HomePage>
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? levels = prefs.getStringList('level');
     print("Levels: $previousLevels");
-
-    if (levels != null &&
+    if (_isHomePageActive &&
+        levels != null &&
         levels.contains("6") &&
         !levels.contains("7") &&
         (previousLevels == null || !previousLevels!.contains("6"))) {
-      print("Level 6 reached");
+      //Ensure to make it show only when the user is on the homepage
       _showDarkPatternsInfoCompleted();
     }
 
