@@ -194,9 +194,10 @@ class _FortuneWheelState extends State<FortuneWheel>
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    const Text('Das Glücksrad, das du gerade gedreht hast, ist ein Dark Pattern, welches in vielen Smartphone-Spielen zu finden ist. '),
                     if (isExpanded)
                       const Text(
-                        'Das Glücksrad, das du gerade gedreht hast, ist ein Dark Pattern, welches in vielen Smartphone-Spielen zu finden ist. Es basiert auf dem Prinzip, dass Menschen häufiger zu einem Spiel zurückkehren, wenn sie unvorhersehbare Belohnungen erhalten. Jedes Mal, wenn man das Rad dreht, könnte man eine kleine oder große Belohnung bekommen – oder manchmal gar nichts. Das macht das Ganze besonders spannend, weil man nie weiß, was als Nächstes kommt.\n Hast du bemerkt, dass du öfter das Spiel öffnest, nur um das Glücksrad zu drehen? Fühlst du dich motiviert, es immer wieder zu versuchen, in der Hoffnung, eine größere Belohnung zu bekommen? Genau das ist die Absicht der Spieleentwickler: Sie wollen, dass du länger im Spiel bleibst und vielleicht sogar echtes Geld ausgibst, um weitere Chancen auf Belohnungen zu bekommen.',
+                        'Es basiert auf dem Prinzip, dass Menschen häufiger zu einem Spiel zurückkehren, wenn sie unvorhersehbare Belohnungen erhalten. Jedes Mal, wenn man das Rad dreht, könnte man eine kleine oder große Belohnung bekommen – oder manchmal gar nichts. Das macht das Ganze besonders spannend, weil man nie weiß, was als Nächstes kommt.\n Hast du bemerkt, dass du öfter das Spiel öffnest, nur um das Glücksrad zu drehen? Fühlst du dich motiviert, es immer wieder zu versuchen, in der Hoffnung, eine größere Belohnung zu bekommen? Genau das ist die Absicht der Spieleentwickler: Sie wollen, dass du länger im Spiel bleibst und vielleicht sogar echtes Geld ausgibst, um weitere Chancen auf Belohnungen zu bekommen.',
                       ),
                     GestureDetector(
                       onTap: () {

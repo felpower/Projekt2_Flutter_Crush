@@ -147,9 +147,10 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    const Text('Das Werbevideo, das du gerade gesehen hast, ist ein Dark Pattern, das gezielt in vielen Smartphone-Spielen verwendet wird. '),
                     if (isExpanded)
                       const Text(
-                        'Das Werbevideo, das du gerade gesehen hast, ist ein Dark Pattern, das gezielt in vielen Smartphone-Spielen verwendet wird. Es nutzt emotionale Manipulation, um dich dazu zu bringen, häufiger zu spielen und möglicherweise In-Game-Käufe zu tätigen. Das Video zeigt dir verlockende Angebote, die oft nur für kurze Zeit verfügbar sind, was ein Gefühl von Dringlichkeit und Verknappung erzeugt. Dies sorgt dafür, dass du das Gefühl hast, schnell handeln zu müssen, bevor das Angebot verschwindet. Ist dir aufgefallen, dass du dich dazu gedrängt fühlst, auf das Angebot einzugehen, bevor es abläuft? Vielleicht hast du sogar darüber nachgedacht, echtes Geld auszugeben, um das exklusive Item oder Bonuspaket zu bekommen? Genau das ist das Ziel dieser Taktik: Sie soll dich emotional ansprechen und dich davon überzeugen, dass du eine einzigartige Chance verpasst, wenn du nicht sofort handelst.',
+                        'Es nutzt emotionale Manipulation, um dich dazu zu bringen, häufiger zu spielen und möglicherweise In-Game-Käufe zu tätigen. Das Video zeigt dir verlockende Angebote, die oft nur für kurze Zeit verfügbar sind, was ein Gefühl von Dringlichkeit und Verknappung erzeugt. Dies sorgt dafür, dass du das Gefühl hast, schnell handeln zu müssen, bevor das Angebot verschwindet. Ist dir aufgefallen, dass du dich dazu gedrängt fühlst, auf das Angebot einzugehen, bevor es abläuft? Vielleicht hast du sogar darüber nachgedacht, echtes Geld auszugeben, um das exklusive Item oder Bonuspaket zu bekommen? Genau das ist das Ziel dieser Taktik: Sie soll dich emotional ansprechen und dich davon überzeugen, dass du eine einzigartige Chance verpasst, wenn du nicht sofort handelst.',
                       ),
                     GestureDetector(
                       onTap: () {
