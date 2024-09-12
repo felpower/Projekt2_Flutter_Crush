@@ -851,9 +851,10 @@ class _HomePageState extends State<HomePage>
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    const Text('Hast du schon einmal gespielt, nur weil dir eine Push-Benachrichtigung vorgeschlagen hat, jetzt wieder einzusteigen?'),
                     if (isExpanded)
                       const Text(
-                        'Hast du schon einmal gespielt, nur weil dir eine Push-Benachrichtigung vorgeschlagen hat, jetzt wieder einzusteigen? Oft werden solche Nachrichten genutzt, um Druck aufzubauen – vielleicht wurde dir ein zeitlich begrenzter Bonus versprochen oder Extra-Punkte, wenn du sofort spielst. Diese Benachrichtigungen sollen dich daran erinnern, das Spiel zu öffnen, auch wenn du gar nicht daran gedacht hast. Entwickler setzen darauf, dass du durch den Hinweis neugierig wirst und nicht widerstehen kannst, es gleich auszuprobieren.',
+                        'Oft werden solche Nachrichten genutzt, um Druck aufzubauen – vielleicht wurde dir ein zeitlich begrenzter Bonus versprochen oder Extra-Punkte, wenn du sofort spielst. Diese Benachrichtigungen sollen dich daran erinnern, das Spiel zu öffnen, auch wenn du gar nicht daran gedacht hast. Entwickler setzen darauf, dass du durch den Hinweis neugierig wirst und nicht widerstehen kannst, es gleich auszuprobieren.',
                       ),
                     GestureDetector(
                       onTap: () {
@@ -908,9 +909,10 @@ class _HomePageState extends State<HomePage>
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    const Text('Hast du bemerkt, dass du täglich eine kleine Überraschung bekommst, wenn du das Spiel öffnest?'),
                     if (isExpanded)
                       const Text(
-                        'Hast du bemerkt, dass du täglich eine kleine Überraschung bekommst, wenn du das Spiel öffnest? Diese täglichen Belohnungen sind so gestaltet, dass du motiviert wirst, immer wieder zurückzukehren, um nichts zu verpassen. Je länger du spielst, desto größer wird oft die Belohnung. So entsteht der Druck, das Spiel wirklich jeden Tag zu öffnen, um die maximale Belohnung zu sichern. Genau das ist der Trick dahinter: Dich regelmäßig ins Spiel zu locken, damit du dranbleibst.',
+                        'Diese täglichen Belohnungen sind so gestaltet, dass du motiviert wirst, immer wieder zurückzukehren, um nichts zu verpassen. Je länger du spielst, desto größer wird oft die Belohnung. So entsteht der Druck, das Spiel wirklich jeden Tag zu öffnen, um die maximale Belohnung zu sichern. Genau das ist der Trick dahinter: Dich regelmäßig ins Spiel zu locken, damit du dranbleibst.',
                       ),
                     GestureDetector(
                       onTap: () {
@@ -1088,9 +1090,10 @@ class _HomePageState extends State<HomePage>
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    const Text('Das Gefühl, deine Sammlung im Spiel endlich vervollständigt zu haben, ist ein typisches Dark Pattern, das in vielen Smartphone-Spielen verwendet wird. '),
                     if (isExpanded)
                       const Text(
-                        'Das Gefühl, deine Sammlung im Spiel endlich vervollständigt zu haben, ist ein typisches Dark Pattern, das in vielen Smartphone-Spielen verwendet wird. Die Sammlungen sind so gestaltet, dass du das Bedürfnis verspürst, jedes einzelne Item zu erwerben, um die vollständige Belohnung zu erhalten. Oft fehlt dir am Ende nur noch ein kleines Teil, und das Spiel bietet dir gezielt die Möglichkeit, dieses fehlende Item entweder durch stundenlanges Spielen oder gegen echtes Geld zu bekommen. Hast du bemerkt, wie zufriedenstellend es ist, eine Sammlung abzuschließen? Oder dass du immer wieder spielst oder sogar Geld ausgibst, nur um das letzte Teil zu erhalten? Das ist genau so beabsichtigt: Spieleentwickler wollen, dass du dich motiviert fühlst, diese letzte Lücke zu füllen, indem du mehr Zeit im Spiel verbringst oder Geld investierst, um das Gefühl der Vollständigkeit zu erreichen.',
+                        'Die Sammlungen sind so gestaltet, dass du das Bedürfnis verspürst, jedes einzelne Item zu erwerben, um die vollständige Belohnung zu erhalten. Oft fehlt dir am Ende nur noch ein kleines Teil, und das Spiel bietet dir gezielt die Möglichkeit, dieses fehlende Item entweder durch stundenlanges Spielen oder gegen echtes Geld zu bekommen. Hast du bemerkt, wie zufriedenstellend es ist, eine Sammlung abzuschließen? Oder dass du immer wieder spielst oder sogar Geld ausgibst, nur um das letzte Teil zu erhalten? Das ist genau so beabsichtigt: Spieleentwickler wollen, dass du dich motiviert fühlst, diese letzte Lücke zu füllen, indem du mehr Zeit im Spiel verbringst oder Geld investierst, um das Gefühl der Vollständigkeit zu erreichen.',
                       ),
                     GestureDetector(
                       onTap: () {
