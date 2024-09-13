@@ -41,12 +41,6 @@ def parse_date(date_string):
 
 database = load_database()
 
-users_data = database['users']
-user_tokens = extract_token(users_data)
-
-flutter_data = database['flutter']
-flutter_tokens = extract_token(flutter_data)
-
 
 def extract_tokens(data_users):
 	tokens = []
@@ -65,6 +59,14 @@ def extract_tokens(data_users):
 				tokens.append({'user_id': user_id, 'token': last_token, 'dark_patterns': dark_patterns,
 							   'days_since_start': days_since_start, 'survey_filled': survey_filled})
 	return tokens
+
+
+users_data = database['users']
+user_tokens = extract_tokens(users_data)
+
+flutter_data = database['flutter']
+flutter_tokens = extract_tokens(flutter_data)
+
 
 
 def send_message(key, message_body="Hallo! Hast du heute schon gespielt?"):
