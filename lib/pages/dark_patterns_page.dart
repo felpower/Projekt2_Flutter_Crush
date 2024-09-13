@@ -33,7 +33,7 @@ class DarkPatternsPageState extends State<DarkPatternsPage> {
         'Fear of Missing Out': prefs.getBool('darkPatternsInfoFoMo') ?? false,
         'Werbung': prefs.getBool('darkPatternsInfoAdds') ?? false,
         'Complete the Collection':
-            prefs.getBool('darkPatternsInfoCompleted') ?? false,
+        prefs.getBool('darkPatternsInfoCompleted') ?? false,
       };
     });
   }
@@ -76,8 +76,6 @@ class DarkPatternsPageState extends State<DarkPatternsPage> {
           );
         },
       );
-      // The user has previously denied the request
-      // Show an alert to the user
     }
   }
 
@@ -106,8 +104,17 @@ class DarkPatternsPageState extends State<DarkPatternsPage> {
               ),
               ListView(
                 children: darkPatterns.entries.map((entry) {
+                  bool isNotification = entry.key == 'Notification';
                   return ListTile(
-                    title: Text(entry.key),
+                    title: Text(
+                      entry.key,
+                      style: TextStyle(
+                        color: isNotification && !notificationsActivated ? Colors.grey : Colors.black,
+                        decoration: isNotification && !notificationsActivated
+                            ? TextDecoration.lineThrough
+                            : TextDecoration.none,
+                      ),
+                    ),
                     trailing: Icon(
                       entry.value ? Icons.check_circle : Icons.cancel,
                       color: entry.value ? Colors.green : Colors.red,
