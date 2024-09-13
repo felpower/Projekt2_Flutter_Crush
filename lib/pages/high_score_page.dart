@@ -99,15 +99,12 @@ class HighScoreState extends State<HighScorePage> {
     }
   }
 
-  Future<bool> _onWillPop() async {
+  Future<void> _onWillPop(bool didPop, dynamic result) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var dpInfoShown = prefs.getBool('darkPatternsInfoScore');
     if (dpInfoShown == null || dpInfoShown == false) {
       _showDarkPatternsInfo();
-    } else {
-      Navigator.of(context).pop();
     }
-    return false;
   }
 
   void _showDarkPatternsInfo() async {
@@ -156,8 +153,7 @@ class HighScoreState extends State<HighScorePage> {
                     child: const Text('OK'),
                     onPressed: () {
                       prefs.setBool('darkPatternsInfoScore', true);
-                      Navigator.of(context).pop();
-                      Navigator.of(context).pop();
+                      Navigator.pop(context);
                     },
                   ),
                 ],
@@ -204,8 +200,8 @@ class HighScoreState extends State<HighScorePage> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: _onWillPop,
+    return PopScope(
+      onPopInvokedWithResult: _onWillPop,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
@@ -213,13 +209,7 @@ class HighScoreState extends State<HighScorePage> {
             title: const Text('High Score'),
             leading: BackButton(
               onPressed: () async {
-                SharedPreferences prefs = await SharedPreferences.getInstance();
-                var dpInfoShown = prefs.getBool('darkPatternsInfoScore');
-                if (dpInfoShown == null || dpInfoShown == false) {
-                  _showDarkPatternsInfo();
-                } else {
                   Navigator.of(context).pop();
-                }
               },
             ),
           ),
@@ -228,7 +218,8 @@ class HighScoreState extends State<HighScorePage> {
               Container(
                 decoration: const BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage('assets/images/background/background_new.png'),
+                    image: AssetImage(
+                        'assets/images/background/background_new.png'),
                     fit: BoxFit.cover,
                   ),
                 ),
