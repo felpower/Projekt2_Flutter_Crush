@@ -126,8 +126,8 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
   }
 
   _onTapDown(var details) {
-    double x = details.globalPosition.dx;
-    double y = details.globalPosition.dy;
+    // double x = details.globalPosition.dx;
+    // double y = details.globalPosition.dy;
   }
 
   void _showDarkPatternsInfo() async {
