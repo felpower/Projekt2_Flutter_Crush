@@ -683,8 +683,7 @@ class _HomePageState extends State<HomePage>
                       MaterialPageRoute(
                           builder: (context) => const DarkPatternsPage()));
                 },
-                title: Text('Dark Patterns gefunden $count/7',
-                    style: const TextStyle(color: Colors.black)),
+                title: Text('Dark Patterns gefunden $count/7', style: const TextStyle(color: Colors.grey)),
                 tileColor: Colors.grey[200],
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)), // Rounded corners
