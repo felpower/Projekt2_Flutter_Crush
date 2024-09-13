@@ -33,6 +33,7 @@ import '../controllers/unity/unity_screen.dart';
 import '../gamification_widgets/credit_panel.dart';
 import '../helpers/app_colors.dart';
 import '../helpers/global_variables.dart';
+import 'dark_patterns_page.dart';
 import 'feedback_page.dart';
 // import 'finished_survey_page.dart';
 import 'high_score_page.dart';
@@ -676,6 +677,12 @@ class _HomePageState extends State<HomePage>
             builder: (context, count, child) {
               return ListTile(
                 leading: const Icon(Icons.info),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const DarkPatternsPage()));
+                },
                 title: Text('Dark Patterns gefunden $count/7',
                     style: const TextStyle(color: Colors.black)),
                 tileColor: Colors.grey[200],
