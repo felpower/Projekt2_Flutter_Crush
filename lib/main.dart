@@ -4,6 +4,8 @@ import 'dart:async';
 
 import 'package:bachelor_flutter_crush/application.dart';
 import 'package:bachelor_flutter_crush/helpers/device_helper.dart';
+import 'package:bachelor_flutter_crush/pages/non_mobile_page.dart';
+
 // import 'package:bachelor_flutter_crush/pages/non_mobile_page.dart';
 import 'package:bachelor_flutter_crush/pages/non_standalone_page.dart';
 import 'package:bachelor_flutter_crush/pages/old_version_page.dart';
@@ -26,7 +28,8 @@ void main() async {
     FlutterError.onError = (FlutterErrorDetails details) {
       FlutterError.dumpErrorToConsole(details);
       FirebaseStore.sendError("FlutterOnErrorMain",
-          stacktrace: details.exceptionAsString(), extraInfo: details.toString());
+          stacktrace: details.exceptionAsString(),
+          extraInfo: details.toString());
     };
     await Firebase.initializeApp(
         options: const FirebaseOptions(
@@ -39,18 +42,21 @@ void main() async {
             messagingSenderId: "552263184384",
             appId: "1:552263184384:web:87e17944dc571dc4e028e5"));
     await FirebaseStore.init();
-    // if (!DeviceHelper.isMobile()) {
-    //   runApp(const NonMobilePage());
-    //   return;
-    // }
-    // if (!DeviceHelper.isStandalone()) {
-    //   PWAInstall().setup(installCallback: () {
-    //     debugPrint('APP INSTALLED!');
-    //   });
-    //   runApp(const NonStandalonePage());
-    //   return;
-    // }
     Uri currentUrl = Uri.parse(html.window.location.href);
+    if (!currentUrl.host.contains('localhost')) {
+      if (!DeviceHelper.isMobile()) {
+        runApp(const NonMobilePage());
+        return;
+      }
+      if (!DeviceHelper.isStandalone()) {
+        PWAInstall().setup(installCallback: () {
+          debugPrint('APP INSTALLED!');
+        });
+        runApp(const NonStandalonePage());
+        return;
+      }
+    }
+
     if (currentUrl.queryParameters['source'] == 'notification') {
       FirebaseStore.addNotificationTap(DateTime.now());
       startFromNotification();
@@ -71,7 +77,8 @@ void main() async {
   }, (error, stackTrace) {
     print('Caught error: $error');
     print('Stacktrace: $stackTrace');
-    FirebaseStore.sendError(error.toString(), stacktrace: stackTrace.toString());
+    FirebaseStore.sendError(error.toString(),
+        stacktrace: stackTrace.toString());
   });
 }
 
