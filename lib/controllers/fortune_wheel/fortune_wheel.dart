@@ -179,6 +179,7 @@ class _FortuneWheelState extends State<FortuneWheel>
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool isExpanded = false;
     var dpInfoShown = prefs.getBool('darkPatternsInfoVAR');
+    var isAdsRemoved = prefs.getBool('isAdsRemoved');
 
     if (dpInfoShown == null || dpInfoShown == false) {
       dpInfoShown = true;
@@ -194,7 +195,8 @@ class _FortuneWheelState extends State<FortuneWheel>
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text('Das Glücksrad, das du gerade gedreht hast, ist ein Dark Pattern, welches in vielen Smartphone-Spielen zu finden ist. '),
+                    const Text(
+                        'Das Glücksrad, das du gerade gedreht hast, ist ein Dark Pattern, welches in vielen Smartphone-Spielen zu finden ist. '),
                     if (isExpanded)
                       const Text(
                         'Es basiert auf dem Prinzip, dass Menschen häufiger zu einem Spiel zurückkehren, wenn sie unvorhersehbare Belohnungen erhalten. Jedes Mal, wenn man das Rad dreht, könnte man eine kleine oder große Belohnung bekommen – oder manchmal gar nichts. Das macht das Ganze besonders spannend, weil man nie weiß, was als Nächstes kommt.\n Hast du bemerkt, dass du öfter das Spiel öffnest, nur um das Glücksrad zu drehen? Fühlst du dich motiviert, es immer wieder zu versuchen, in der Hoffnung, eine größere Belohnung zu bekommen? Genau das ist die Absicht der Spieleentwickler: Sie wollen, dass du länger im Spiel bleibst und vielleicht sogar echtes Geld ausgibst, um weitere Chancen auf Belohnungen zu bekommen.',
@@ -221,17 +223,16 @@ class _FortuneWheelState extends State<FortuneWheel>
                   TextButton(
                     child: const Text('OK'),
                     onPressed: () {
-                      // gameBloc.gameOver(_selectedItem!);
-                      // gameIsOverController.sink.add(true);
-                      // showGameOver(true);
                       Navigator.pop(context);
                       Navigator.pop(context);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const AdvertisementVideoPlayer(
-                                      isForcedAd: true)));
+                      if (isAdsRemoved == null || !isAdsRemoved) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const AdvertisementVideoPlayer(
+                                        isForcedAd: true)));
+                      }
                     },
                   ),
                 ],
@@ -242,15 +243,13 @@ class _FortuneWheelState extends State<FortuneWheel>
       );
     } else {
       Navigator.pop(context);
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => const AdvertisementVideoPlayer(
-                    isForcedAd: true,
-                  )));
-      // gameBloc.gameOver(_selectedItem!);
-      // gameIsOverController.sink.add(true);
-      // showGameOver(true);
+      if (isAdsRemoved == null || !isAdsRemoved) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    const AdvertisementVideoPlayer(isForcedAd: true)));
+      }
     }
   }
 

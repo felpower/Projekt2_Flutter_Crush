@@ -16,6 +16,7 @@ import 'package:bachelor_flutter_crush/services/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:universal_html/html.dart' as html;
 
@@ -96,7 +97,6 @@ class _HomePageState extends State<HomePage>
     _darkPatternsCountNotifier = ValueNotifier<int>(0);
     updateDarkPatternsCount();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      print('HomePage is active');
       setState(() {
         _isHomePageActive = true;
       });
@@ -452,6 +452,7 @@ class _HomePageState extends State<HomePage>
       child: ListView(
         children: <Widget>[
           const DrawerHeader(
+            margin: EdgeInsets.all(0.0),
             decoration: BoxDecoration(
               color: Colors.blue,
             ),
@@ -461,7 +462,7 @@ class _HomePageState extends State<HomePage>
               visible: true,
               child: ListTile(
                 leading: const Icon(Icons.ad_units),
-                title: const Text('Watch Adds for 🪙',
+                title: const Text('Werbung schauen für 🪙',
                     style: TextStyle(color: Colors.grey)),
                 onTap: () {
                   Navigator.push(
@@ -471,6 +472,20 @@ class _HomePageState extends State<HomePage>
                           const AdvertisementVideoPlayer(isForcedAd: false),
                     ),
                   );
+                },
+                tileColor: Colors.grey[200],
+                // Background color to make it feel like a button
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)), // Rounded corners
+              )),
+          Visibility(
+              visible: true,
+              child: ListTile(
+                leading: const Icon(Icons.ad_units_sharp),
+                title: const Text('Werbung ausschalten für 🪙',
+                    style: TextStyle(color: Colors.grey)),
+                onTap: () {
+                  _showRemoveAdsDialog();
                 },
                 tileColor: Colors.grey[200],
                 // Background color to make it feel like a button
@@ -520,7 +535,7 @@ class _HomePageState extends State<HomePage>
                           .contains('localhost')),
               child: ListTile(
                 leading: const Icon(Icons.pattern),
-                title: const Text('Reset Dark Patterns',
+                title: const Text('Dark Patterns zurücksetzen',
                     style: TextStyle(color: Colors.grey)),
                 onTap: () {
                   resetDarkPatterns();
@@ -683,7 +698,8 @@ class _HomePageState extends State<HomePage>
                       MaterialPageRoute(
                           builder: (context) => const DarkPatternsPage()));
                 },
-                title: Text('Dark Patterns gefunden $count/7', style: const TextStyle(color: Colors.grey)),
+                title: Text('Dark Patterns gefunden $count/7',
+                    style: const TextStyle(color: Colors.grey)),
                 tileColor: Colors.grey[200],
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)), // Rounded corners
@@ -857,7 +873,8 @@ class _HomePageState extends State<HomePage>
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text('Hast du schon einmal gespielt, nur weil dir eine Push-Benachrichtigung vorgeschlagen hat, jetzt wieder einzusteigen?'),
+                    const Text(
+                        'Hast du schon einmal gespielt, nur weil dir eine Push-Benachrichtigung vorgeschlagen hat, jetzt wieder einzusteigen?'),
                     if (isExpanded)
                       const Text(
                         'Oft werden solche Nachrichten genutzt, um Druck aufzubauen – vielleicht wurde dir ein zeitlich begrenzter Bonus versprochen oder Extra-Punkte, wenn du sofort spielst. Diese Benachrichtigungen sollen dich daran erinnern, das Spiel zu öffnen, auch wenn du gar nicht daran gedacht hast. Entwickler setzen darauf, dass du durch den Hinweis neugierig wirst und nicht widerstehen kannst, es gleich auszuprobieren.',
@@ -915,7 +932,8 @@ class _HomePageState extends State<HomePage>
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text('Hast du bemerkt, dass du täglich eine kleine Überraschung bekommst, wenn du das Spiel öffnest?'),
+                    const Text(
+                        'Hast du bemerkt, dass du täglich eine kleine Überraschung bekommst, wenn du das Spiel öffnest?'),
                     if (isExpanded)
                       const Text(
                         'Diese täglichen Belohnungen sind so gestaltet, dass du motiviert wirst, immer wieder zurückzukehren, um nichts zu verpassen. Je länger du spielst, desto größer wird oft die Belohnung. So entsteht der Druck, das Spiel wirklich jeden Tag zu öffnen, um die maximale Belohnung zu sichern. Genau das ist der Trick dahinter: Dich regelmäßig ins Spiel zu locken, damit du dranbleibst.',
@@ -1064,11 +1082,9 @@ class _HomePageState extends State<HomePage>
   Future<void> _checkLevels() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? levels = prefs.getStringList('level');
-    print("Levels: $previousLevels");
     if (_isHomePageActive &&
         levels != null &&
         levels.contains("6") &&
-        !levels.contains("7") &&
         (previousLevels == null || !previousLevels!.contains("6"))) {
       //Ensure to make it show only when the user is on the homepage
       _showDarkPatternsInfoCompleted();
@@ -1096,7 +1112,8 @@ class _HomePageState extends State<HomePage>
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text('Das Gefühl, deine Sammlung im Spiel endlich vervollständigt zu haben, ist ein typisches Dark Pattern, das in vielen Smartphone-Spielen verwendet wird. '),
+                    const Text(
+                        'Das Gefühl, deine Sammlung im Spiel endlich vervollständigt zu haben, ist ein typisches Dark Pattern, das in vielen Smartphone-Spielen verwendet wird. '),
                     if (isExpanded)
                       const Text(
                         'Die Sammlungen sind so gestaltet, dass du das Bedürfnis verspürst, jedes einzelne Item zu erwerben, um die vollständige Belohnung zu erhalten. Oft fehlt dir am Ende nur noch ein kleines Teil, und das Spiel bietet dir gezielt die Möglichkeit, dieses fehlende Item entweder durch stundenlanges Spielen oder gegen echtes Geld zu bekommen. Hast du bemerkt, wie zufriedenstellend es ist, eine Sammlung abzuschließen? Oder dass du immer wieder spielst oder sogar Geld ausgibst, nur um das letzte Teil zu erhalten? Das ist genau so beabsichtigt: Spieleentwickler wollen, dass du dich motiviert fühlst, diese letzte Lücke zu füllen, indem du mehr Zeit im Spiel verbringst oder Geld investierst, um das Gefühl der Vollständigkeit zu erreichen.',
@@ -1137,5 +1154,60 @@ class _HomePageState extends State<HomePage>
         },
       );
     }
+  }
+
+  void _showRemoveAdsDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Werbung ausschalten'),
+          content:
+              const Text('Möchtest du die Werbung ausschalten für 500 🪙?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Nein'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Ja'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                // Get the CoinBloc
+                CoinBloc coinBloc =
+                    flutter_bloc.BlocProvider.of<CoinBloc>(context);
+                int amount = coinBloc.state.amount;
+                if (amount >= 500) {
+                  coinBloc.add(RemoveCoinsEvent(500));
+                  Fluttertoast.showToast(
+                      msg: "Werbung wurde entfernt",
+                      toastLength: Toast.LENGTH_LONG,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 5,
+                      backgroundColor: Colors.green,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
+                  SharedPreferences.getInstance().then((prefs) {
+                    prefs.setBool('isAdsRemoved', true);
+                  });
+                } else {
+                  Fluttertoast.showToast(
+                      msg:
+                          "Du hast nur $amount 🪙, für das entfernen der Werbung benötigst du 500🪙",
+                      toastLength: Toast.LENGTH_LONG,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 5,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
+                }
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
