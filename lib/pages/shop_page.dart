@@ -197,7 +197,8 @@ class ShopState extends State<ShopPage> {
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text('Der In-Game-Shop, den du gerade besucht hast, ist ein weiteres Beispiel für einen Dark Pattern, der in vielen Smartphone-Spielen vorkommt. '),
+                    const Text(
+                        'Der In-Game-Shop, den du gerade besucht hast, ist ein weiteres Beispiel für einen Dark Pattern, der in vielen Smartphone-Spielen vorkommt. '),
                     if (isExpanded)
                       const Text(
                         'Hier werden die Gegenstände oft in einer Art präsentiert, die dich dazu verleiten soll, mehr zu kaufen, als du ursprünglich vorhattest. Häufig siehst du "begrenzte Zeit"-Angebote, Bündelpreise oder besondere Rabatte, die dir das Gefühl geben, ein Schnäppchen zu machen. Manchmal wird sogar dein Spielfortschritt durch den Erwerb dieser Items direkt beeinflusst, was den Druck erhöht, Geld auszugeben. Hast du bemerkt, wie oft du durch den Shop stöberst, auf der Suche nach dem nächsten „Deal“? Oder dass du dich motiviert fühlst, einen Kauf zu tätigen, um schneller voranzukommen oder besondere Vorteile zu erhalten? Das ist kein Zufall: Die Entwickler möchten, dass du das Gefühl hast, etwas zu verpassen, wenn du diese Angebote nicht wahrnimmst, und hoffen, dass du echtes Geld investierst, um im Spiel erfolgreicher zu sein.',

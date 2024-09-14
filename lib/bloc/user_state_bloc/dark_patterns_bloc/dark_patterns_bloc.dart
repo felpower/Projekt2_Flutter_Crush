@@ -9,8 +9,10 @@ class DarkPatternsBloc extends Bloc<DarkPatternsEvent, DarkPatternsState> {
     add(LoadDarkPatternsEvent());
   }
 
-  void _loadDarkPatterns(LoadDarkPatternsEvent event, Emitter<DarkPatternsState> emit) async {
-    int shouldDarkPatternsBeDisplayed = await DarkPatternsService.shouldDarkPatternsBeVisible();
+  void _loadDarkPatterns(
+      LoadDarkPatternsEvent event, Emitter<DarkPatternsState> emit) async {
+    int shouldDarkPatternsBeDisplayed =
+        await DarkPatternsService.shouldDarkPatternsBeVisible();
     if (shouldDarkPatternsBeDisplayed == 0) {
       emit(DarkPatternsDeactivatedState());
       return;

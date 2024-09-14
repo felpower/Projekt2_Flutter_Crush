@@ -45,14 +45,20 @@ class Application extends StatelessWidget {
   List<flutter_bloc.BlocProvider> _getBlocs(BuildContext context) {
     return [
       flutter_bloc.BlocProvider<CoinBloc>(
-          create: (context) => CoinBloc(custom_bloc.BlocProvider.of<GameBloc>(context))),
+          create: (context) =>
+              CoinBloc(custom_bloc.BlocProvider.of<GameBloc>(context))),
       flutter_bloc.BlocProvider<XpBloc>(
-          create: (context) => XpBloc(custom_bloc.BlocProvider.of<GameBloc>(context))),
-      flutter_bloc.BlocProvider<HighScoreBloc>(create: (context) => HighScoreBloc()),
+          create: (context) =>
+              XpBloc(custom_bloc.BlocProvider.of<GameBloc>(context))),
+      flutter_bloc.BlocProvider<HighScoreBloc>(
+          create: (context) => HighScoreBloc()),
       flutter_bloc.BlocProvider<LevelBloc>(
-          create: (context) => LevelBloc(flutter_bloc.BlocProvider.of<XpBloc>(context))),
-      flutter_bloc.BlocProvider<ReportingBloc>(create: (context) => ReportingBloc()),
-      flutter_bloc.BlocProvider<DarkPatternsBloc>(create: (context) => DarkPatternsBloc())
+          create: (context) =>
+              LevelBloc(flutter_bloc.BlocProvider.of<XpBloc>(context))),
+      flutter_bloc.BlocProvider<ReportingBloc>(
+          create: (context) => ReportingBloc()),
+      flutter_bloc.BlocProvider<DarkPatternsBloc>(
+          create: (context) => DarkPatternsBloc())
     ];
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:video_player/video_player.dart';
-import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 
 import '../bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
 import '../bloc/user_state_bloc/coins_bloc/coin_event.dart';
@@ -147,7 +147,8 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text('Das Werbevideo, das du gerade gesehen hast, ist ein Dark Pattern, das gezielt in vielen Smartphone-Spielen verwendet wird. '),
+                    const Text(
+                        'Das Werbevideo, das du gerade gesehen hast, ist ein Dark Pattern, das gezielt in vielen Smartphone-Spielen verwendet wird. '),
                     if (isExpanded)
                       const Text(
                         'Es nutzt emotionale Manipulation, um dich dazu zu bringen, häufiger zu spielen und möglicherweise In-Game-Käufe zu tätigen. Das Video zeigt dir verlockende Angebote, die oft nur für kurze Zeit verfügbar sind, was ein Gefühl von Dringlichkeit und Verknappung erzeugt. Dies sorgt dafür, dass du das Gefühl hast, schnell handeln zu müssen, bevor das Angebot verschwindet. Ist dir aufgefallen, dass du dich dazu gedrängt fühlst, auf das Angebot einzugehen, bevor es abläuft? Vielleicht hast du sogar darüber nachgedacht, echtes Geld auszugeben, um das exklusive Item oder Bonuspaket zu bekommen? Genau das ist das Ziel dieser Taktik: Sie soll dich emotional ansprechen und dich davon überzeugen, dass du eine einzigartige Chance verpasst, wenn du nicht sofort handelst.',

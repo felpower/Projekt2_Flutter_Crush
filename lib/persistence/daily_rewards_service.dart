@@ -67,7 +67,8 @@ class DailyRewardsService {
     {'tag': 30, 'amount': 1, 'type': 'Sonderjelly bunt'}
   ];
 
-  static List<Map<String, dynamic>> getRewards(DarkPatternsState darkPatternsState) {
+  static List<Map<String, dynamic>> getRewards(
+      DarkPatternsState darkPatternsState) {
     if (darkPatternsState is DarkPatternsActivatedState) {
       return rewardsWithXP;
     } else {
@@ -75,7 +76,8 @@ class DailyRewardsService {
     }
   }
 
-  static Map<String, dynamic> getTodaysReward(int tag, DarkPatternsState darkPatternsState) {
+  static Map<String, dynamic> getTodaysReward(
+      int tag, DarkPatternsState darkPatternsState) {
     tag = tag > 30 ? tag % 30 : tag;
     var foundReward = getRewards(darkPatternsState).firstWhere(
       (reward) => reward['tag'] == tag,

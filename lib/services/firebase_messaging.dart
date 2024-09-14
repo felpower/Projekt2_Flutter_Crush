@@ -29,9 +29,12 @@ class FirebaseMessagingWeb {
       sound: true,
     );
     NotificationSettings settings = await messaging.getNotificationSettings();
-    prefs.setString("notificationSettings", settings.authorizationStatus.toString());
+    prefs.setString(
+        "notificationSettings", settings.authorizationStatus.toString());
     FirebaseStore.grantPushPermission(
-        settings.authorizationStatus == AuthorizationStatus.authorized ? true : false);
+        settings.authorizationStatus == AuthorizationStatus.authorized
+            ? true
+            : false);
   }
 
   static Future<String> getToken() async {

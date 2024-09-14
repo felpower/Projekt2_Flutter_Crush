@@ -5,9 +5,11 @@ class AppColors {
 
   static getColorLevel(int level) {
     // Normalize level to a 0-based index for easier calculation
-    int levelIndex = (level - 1) % 30; // This will map levels 1-30 to 0-29 repeatedly
+    int levelIndex =
+        (level - 1) % 30; // This will map levels 1-30 to 0-29 repeatedly
     // Calculate the color number based on the levelIndex, where each group of 6 levels gets a unique number
-    int colorIndex = levelIndex ~/ 6; // This will map levels 0-5 to 0, 6-11 to 1, etc.
+    int colorIndex =
+        levelIndex ~/ 6; // This will map levels 0-5 to 0, 6-11 to 1, etc.
     return getColor(colorIndex);
   }
 

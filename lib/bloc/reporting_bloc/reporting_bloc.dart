@@ -14,23 +14,28 @@ class ReportingBloc extends Bloc<ReportingEvent, ReportingState> {
     add(ReportStartAppEvent(DateTime.now()));
   }
 
-  void _onReportStartLevelEvent(ReportStartLevelEvent event, Emitter<ReportingState> emit) {
+  void _onReportStartLevelEvent(
+      ReportStartLevelEvent event, Emitter<ReportingState> emit) {
     FirebaseStore.addStartOfLevel(event.levelNumber);
   }
 
-  void _onReportFinishLevelEvent(ReportFinishLevelEvent event, Emitter<ReportingState> emit) {
+  void _onReportFinishLevelEvent(
+      ReportFinishLevelEvent event, Emitter<ReportingState> emit) {
     FirebaseStore.addFinishOfLevel(event.levelNumber, event.won);
   }
 
-  void _onCheckHighScoreEvent(ReportCheckHighScoreEvent event, Emitter<ReportingState> emit) {
+  void _onCheckHighScoreEvent(
+      ReportCheckHighScoreEvent event, Emitter<ReportingState> emit) {
     FirebaseStore.checkHighScore(event.time);
   }
 
-  void _onStartAppEvent(ReportStartAppEvent event, Emitter<ReportingState> emit) {
+  void _onStartAppEvent(
+      ReportStartAppEvent event, Emitter<ReportingState> emit) {
     FirebaseStore.addStartApp(event.time);
   }
 
-  void _onCloseAppEvent(ReportCloseAppEvent event, Emitter<ReportingState> emit) {
+  void _onCloseAppEvent(
+      ReportCloseAppEvent event, Emitter<ReportingState> emit) {
     FirebaseStore.addCloseApp(event.time);
   }
 }

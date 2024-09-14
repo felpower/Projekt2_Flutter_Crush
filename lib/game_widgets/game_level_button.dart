@@ -45,18 +45,22 @@ class GameLevelButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final GameBloc gameBloc = BlocProvider.of<GameBloc>(context);
-    final LevelBloc levelBloc = flutter_bloc.BlocProvider.of<LevelBloc>(context);
+    final LevelBloc levelBloc =
+        flutter_bloc.BlocProvider.of<LevelBloc>(context);
     final CoinBloc coinBloc = flutter_bloc.BlocProvider.of<CoinBloc>(context);
-    final ReportingBloc reportingBloc = flutter_bloc.BlocProvider.of<ReportingBloc>(context);
-    final darkPatternsState = flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context).state;
+    final ReportingBloc reportingBloc =
+        flutter_bloc.BlocProvider.of<ReportingBloc>(context);
+    final darkPatternsState =
+        flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context).state;
     bool disabled = !levelBloc.state.levels.contains(levelNumber);
 
     return InkWell(
       onTap: () {
         disabled
-            ? showBuyLevelDialog(levelBloc, coinBloc, darkPatternsState, context)
-            : showBuyPowerUpDialog(
-                reportingBloc, gameBloc, levelBloc, coinBloc, darkPatternsState, context);
+            ? showBuyLevelDialog(
+                levelBloc, coinBloc, darkPatternsState, context)
+            : showBuyPowerUpDialog(reportingBloc, gameBloc, levelBloc, coinBloc,
+                darkPatternsState, context);
       },
       child: Center(
         child: Padding(
@@ -111,8 +115,8 @@ class GameLevelButton extends StatelessWidget {
     );
   }
 
-  Future<void> openGame(ReportingBloc reportingBloc, GameBloc gameBloc, SharedPreferences prefs,
-      BuildContext context) async {
+  Future<void> openGame(ReportingBloc reportingBloc, GameBloc gameBloc,
+      SharedPreferences prefs, BuildContext context) async {
     try {
       reportingBloc.add(ReportStartLevelEvent(levelNumber));
       Map<String, dynamic>? jsonData;
@@ -139,9 +143,15 @@ class GameLevelButton extends StatelessWidget {
     }
   }
 
-  void showBuyPowerUpDialog(ReportingBloc reportingBloc, GameBloc gameBloc, LevelBloc levelBloc,
-      CoinBloc coinBloc, DarkPatternsState darkPatternsState, BuildContext context) {
-    var darkModeActivated = html.window.matchMedia('(prefers-color-scheme: dark)').matches;
+  void showBuyPowerUpDialog(
+      ReportingBloc reportingBloc,
+      GameBloc gameBloc,
+      LevelBloc levelBloc,
+      CoinBloc coinBloc,
+      DarkPatternsState darkPatternsState,
+      BuildContext context) {
+    var darkModeActivated =
+        html.window.matchMedia('(prefers-color-scheme: dark)').matches;
     showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialog(
@@ -154,7 +164,10 @@ class GameLevelButton extends StatelessWidget {
                       'Um ein Sonderjelly auszuwählen klicke bitte auf den entsprechenden Button '
                       'oder starte das Spiel ohne Sonderjelly indem du auf "Spiel starten" klickst.',
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: darkModeActivated ? Colors.black : Colors.white), //
+                      style: TextStyle(
+                          color: darkModeActivated
+                              ? Colors.black
+                              : Colors.white), //
                       // Center
                       // align the
                       // text
@@ -163,8 +176,8 @@ class GameLevelButton extends StatelessWidget {
                 ],
               ),
               elevation: 24,
-              shape:
-                  const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(8))),
               actions: <Widget>[
                 Center(
                   // Center the buttons
@@ -174,31 +187,39 @@ class GameLevelButton extends StatelessWidget {
                     children: [
                       ElevatedButton.icon(
                         onPressed: () {
-                          buyPowerUp("Clear", tntPrice, coinBloc, reportingBloc, gameBloc, context);
+                          buyPowerUp("Clear", tntPrice, coinBloc, reportingBloc,
+                              gameBloc, context);
                         },
                         icon: Image.asset(
                           'assets/images/bombs/jelly_gelb.png',
                           height: 30,
                         ),
-                        label: Text(stripeJelly == 0 ? '$tntPrice🪙' : 'kostenlos',
-                            style:
-                                TextStyle(color: darkModeActivated ? Colors.black : Colors.white)),
+                        label: Text(
+                            stripeJelly == 0 ? '$tntPrice🪙' : 'kostenlos',
+                            style: TextStyle(
+                                color: darkModeActivated
+                                    ? Colors.black
+                                    : Colors.white)),
                       ),
                       const SizedBox(height: 10),
                       ElevatedButton.icon(
                         onPressed: () {
-                          buyPowerUp(
-                              "Rainbow", minePrice, coinBloc, reportingBloc, gameBloc, context);
+                          buyPowerUp("Rainbow", minePrice, coinBloc,
+                              reportingBloc, gameBloc, context);
                         },
-                        icon: Image.asset('assets/images/bombs/jelly_bunt.png', height: 30),
-                        label: Text(buntJelly == 0 ? '$minePrice🪙' : 'kostenlos',
-                            style:
-                                TextStyle(color: darkModeActivated ? Colors.black : Colors.white)),
+                        icon: Image.asset('assets/images/bombs/jelly_bunt.png',
+                            height: 30),
+                        label: Text(
+                            buntJelly == 0 ? '$minePrice🪙' : 'kostenlos',
+                            style: TextStyle(
+                                color: darkModeActivated
+                                    ? Colors.black
+                                    : Colors.white)),
                       ),
                       const SizedBox(height: 10),
                       ElevatedButton(
-                        onPressed: () =>
-                            buyPowerUp("", 0, coinBloc, reportingBloc, gameBloc, context),
+                        onPressed: () => buyPowerUp(
+                            "", 0, coinBloc, reportingBloc, gameBloc, context),
                         child: const Text('Spiel starten'),
                       ),
                     ],
@@ -208,8 +229,13 @@ class GameLevelButton extends StatelessWidget {
             ));
   }
 
-  Future<void> buyPowerUp(item, powerUpPrice, CoinBloc coinBloc, ReportingBloc reportingBloc,
-      GameBloc gameBloc, BuildContext context) async {
+  Future<void> buyPowerUp(
+      item,
+      powerUpPrice,
+      CoinBloc coinBloc,
+      ReportingBloc reportingBloc,
+      GameBloc gameBloc,
+      BuildContext context) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("powerUp", item);
     if (item.contains("Clear") && stripeJelly > 0) {
@@ -224,7 +250,8 @@ class GameLevelButton extends StatelessWidget {
       showDialog(
           context: context,
           builder: (BuildContext context) => AlertDialog(
-                title: const Text('Nicht genug Münzen um dieses Sonderjelly zu kaufen'),
+                title: const Text(
+                    'Nicht genug Münzen um dieses Sonderjelly zu kaufen'),
                 content: Text(
                     'Du kannst Münzen durch Spielen der Levels erhalten, du benötigst $powerUpPrice🪙 um dieses Sonderjelly zu kaufen'),
                 elevation: 24,
@@ -251,7 +278,9 @@ class GameLevelButton extends StatelessWidget {
         builder: (context) => AlertDialog(
           title: Text('Du musst zuerst Level ${levelNumber - 1} freischalten'),
           actions: <Widget>[
-            TextButton(onPressed: () => {Navigator.pop(context, 'Ok')}, child: const Text('Ok')),
+            TextButton(
+                onPressed: () => {Navigator.pop(context, 'Ok')},
+                child: const Text('Ok')),
           ],
         ),
       );
@@ -261,7 +290,8 @@ class GameLevelButton extends StatelessWidget {
           builder: (BuildContext context) => coinBloc.state.amount >= 500
               ? AlertDialog(
                   title: Text('Level $levelNumber freischalten?'),
-                  content: Text('Willst du level $levelNumber für $lvlPrice🪙 freischalten?'),
+                  content: Text(
+                      'Willst du level $levelNumber für $lvlPrice🪙 freischalten?'),
                   elevation: 24,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(16))),
@@ -279,7 +309,8 @@ class GameLevelButton extends StatelessWidget {
                   ],
                 )
               : AlertDialog(
-                  title: const Text('Du hast nicht genug Münzen um dieses Level freizuschalten'),
+                  title: const Text(
+                      'Du hast nicht genug Münzen um dieses Level freizuschalten'),
                   content: Text(
                       'Du kannst Münzen durch Spielen der Levels erhalten, du benötigst $lvlPrice🪙 um dieses Level freizuschalten'),
                   elevation: 24,
@@ -295,7 +326,8 @@ class GameLevelButton extends StatelessWidget {
     }
   }
 
-  void buyLevel(CoinBloc coinBloc, LevelBloc levelBloc, String text, BuildContext context) {
+  void buyLevel(CoinBloc coinBloc, LevelBloc levelBloc, String text,
+      BuildContext context) {
     coinBloc.add(RemoveCoinsEvent(lvlPrice));
     levelBloc.add(AddLevelEvent(levelNumber));
     Navigator.pop(context, 'OK');
