@@ -28,7 +28,9 @@ class _SurveyPageState extends State<SurveyPage> {
             child: Align(
               alignment: Alignment.center,
               child: FutureBuilder<Task>(
-                future: widget.title == "Start" ? buildStartSurvey() : buildEndSurvey(),
+                future: widget.title == "Start"
+                    ? buildStartSurvey()
+                    : buildEndSurvey(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done &&
                       snapshot.hasData &&
@@ -39,7 +41,8 @@ class _SurveyPageState extends State<SurveyPage> {
                         List<String> resultString = [];
                         for (var stepResult in result.results) {
                           for (var questionResult in stepResult.results) {
-                            if (questionResult.result != null && questionResult.result != "") {
+                            if (questionResult.result != null &&
+                                questionResult.result != "") {
                               resultString.add(
                                   "ID: ${questionResult.id?.id.toString()}-${questionResult.valueIdentifier}");
                             }
@@ -50,16 +53,23 @@ class _SurveyPageState extends State<SurveyPage> {
                           Navigator.pop(context);
                           var age = int.parse(resultString[0].split("-").last);
                           if (age >= 18 && age <= 120) {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => const DeviceToken()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const DeviceToken()));
                           } else {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => const Under18Page()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Under18Page()));
                           }
                         } else {
                           sendEndSurvey(resultString);
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => const FinishedSurveyPage()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const FinishedSurveyPage()));
                         }
                       },
                       task: task,
@@ -115,11 +125,17 @@ class _SurveyPageState extends State<SurveyPage> {
                             textStyle: WidgetStateProperty.resolveWith(
                               (Set<WidgetState> state) {
                                 if (state.contains(WidgetState.disabled)) {
-                                  return Theme.of(context).textTheme.labelLarge?.copyWith(
+                                  return Theme.of(context)
+                                      .textTheme
+                                      .labelLarge
+                                      ?.copyWith(
                                         color: Colors.grey,
                                       );
                                 }
-                                return Theme.of(context).textTheme.labelLarge?.copyWith(
+                                return Theme.of(context)
+                                    .textTheme
+                                    .labelLarge
+                                    ?.copyWith(
                                       color: Colors.cyan,
                                     );
                               },
@@ -166,7 +182,8 @@ class _SurveyPageState extends State<SurveyPage> {
                             )
                             .copyWith(surface: Colors.white),
                       ),
-                      surveyProgressbarConfiguration: SurveyProgressConfiguration(
+                      surveyProgressbarConfiguration:
+                          SurveyProgressConfiguration(
                         backgroundColor: Colors.white,
                       ),
                     );
@@ -194,7 +211,8 @@ class _SurveyPageState extends State<SurveyPage> {
         ),
         InstructionStep(
           title: 'Vor dem Spielstart',
-          text: 'Vor dem Spielstart werden Ihnen noch ein paar Fragen zu Ihrer Person und Ihrem '
+          text:
+              'Vor dem Spielstart werden Ihnen noch ein paar Fragen zu Ihrer Person und Ihrem '
               'üblichen Spielverhalten gestellt. Dies wird maximal 5 Minuten in Anspruch nehmen. Bitte beantworten Sie alle Fragen ehrlich.   '
               'All ihre Daten (Angaben aus dem Fragebogen und Daten aus dem Spiel) werden auf einem Server, der in der EU (DSGVO konform) gehostet wird, anonymisiert (d.h. ohne einen möglichen Rückschluss auf Ihre Person; es werden keine personenbezogenen Daten erfasst) gespeichert und anschließend für wissenschaftliche Zwecke ausgewertet. Sie können jederzeit die Studienteilnahme beenden.',
           buttonText: 'weiter',
@@ -229,7 +247,8 @@ class _SurveyPageState extends State<SurveyPage> {
             stepIdentifier: StepIdentifier(id: '3'),
             answerFormat: const SingleChoiceAnswerFormat(
               textChoices: [
-                TextChoice(text: 'Pflichtschule/Hauptschule/Realschule', value: '0'),
+                TextChoice(
+                    text: 'Pflichtschule/Hauptschule/Realschule', value: '0'),
                 TextChoice(text: 'Lehre', value: '1'),
                 TextChoice(text: 'Fachschule/Handelsschule', value: '2'),
                 TextChoice(text: 'Matura/Abitur', value: '3'),
@@ -258,7 +277,8 @@ class _SurveyPageState extends State<SurveyPage> {
         InstructionStep(
           stepIdentifier: StepIdentifier(id: '5'),
           title: 'Angaben zum Spielverhalten',
-          text: 'Als nächstes werden wir Ihnen einige Fragen zu Handyspielen stellen!',
+          text:
+              'Als nächstes werden wir Ihnen einige Fragen zu Handyspielen stellen!',
           buttonText: 'Los geht\'s!',
         ),
         QuestionStep(
@@ -279,14 +299,12 @@ class _SurveyPageState extends State<SurveyPage> {
             title:
                 "An Tagen an denen Sie am Handy/Tablet spielen: Wie viele Stunden spielen Sie durchschnittlich?",
             stepIdentifier: StepIdentifier(id: '7'),
-            answerFormat: const DoubleAnswerFormat(
-            )),
+            answerFormat: const DoubleAnswerFormat()),
         QuestionStep(
             title:
                 "Wie viel Geld geben Sie durchschnittlich pro Monat innerhalb von Spielen für kostenpflichtige Zusatzfunktionen wie z.B. Spiele-Levels, Skins, Upgrades am Handy/am Tablet aus („In-App-Kauf“)?",
             stepIdentifier: StepIdentifier(id: '8'),
-            answerFormat: const DoubleAnswerFormat(
-            )),
+            answerFormat: const DoubleAnswerFormat()),
         CompletionStep(
             stepIdentifier: StepIdentifier(id: '9'),
             text: 'Danke für die Teilnahme an der Umfrage',
@@ -309,7 +327,8 @@ class _SurveyPageState extends State<SurveyPage> {
     );
     task.addNavigationRule(
       forTriggerStepIdentifier: getStepIdentifier(task, "6"),
-      navigationRule: ConditionalNavigationRule(resultToStepIdentifierMapper: (input) {
+      navigationRule:
+          ConditionalNavigationRule(resultToStepIdentifierMapper: (input) {
         switch (input) {
           case "0":
           case '1':
@@ -333,14 +352,16 @@ class _SurveyPageState extends State<SurveyPage> {
       id: TaskIdentifier(),
       steps: [
         InstructionStep(
-          title: 'Liebe Studienteilnehmer:innen, vielen Dank für Ihre Teilnahme.',
+          title:
+              'Liebe Studienteilnehmer:innen, vielen Dank für Ihre Teilnahme.',
           text:
               'Zum Abschluss der Studie wären wir Ihnen dankbar, wenn Sie noch ein paar letzte Fragen beantworten würden. Dies wird maximal 5 Minuten in Anspruch nehmen. Alle Angaben sind anonym.'
               ' Vielen Dank!',
           buttonText: 'Weiter',
         ),
         QuestionStep(
-            title: 'Haben Sie das Spiel bis zum Ende bzw. bis zum jetzigen Zeitpunkt gespielt?',
+            title:
+                'Haben Sie das Spiel bis zum Ende bzw. bis zum jetzigen Zeitpunkt gespielt?',
             stepIdentifier: StepIdentifier(id: '1'),
             answerFormat: const SingleChoiceAnswerFormat(
               textChoices: [
@@ -405,11 +426,18 @@ class _SurveyPageState extends State<SurveyPage> {
             stepIdentifier: StepIdentifier(id: '7'),
             answerFormat: const MultipleChoiceAnswerFormat(
               textChoices: [
-                TextChoice(text: 'Tägliche Belohnung zum Einsammeln', value: '1'),
-                TextChoice(text: 'Variable Belohnungen (=Glücksrad)', value: '2'),
-                TextChoice(text: 'Punktetabelle mit Rangfolge der Spieler*innen', value: '3'),
-                TextChoice(text: 'Push-Nachrichten die zum Spielen animieren', value: '4'),
-                TextChoice(text: 'Level waren in Blöcken angeordnet', value: '5'),
+                TextChoice(
+                    text: 'Tägliche Belohnung zum Einsammeln', value: '1'),
+                TextChoice(
+                    text: 'Variable Belohnungen (=Glücksrad)', value: '2'),
+                TextChoice(
+                    text: 'Punktetabelle mit Rangfolge der Spieler*innen',
+                    value: '3'),
+                TextChoice(
+                    text: 'Push-Nachrichten die zum Spielen animieren',
+                    value: '4'),
+                TextChoice(
+                    text: 'Level waren in Blöcken angeordnet', value: '5'),
                 TextChoice(text: 'alle der genannten', value: '6'),
                 TextChoice(text: 'keines der genannten ', value: '0'),
               ],
@@ -434,7 +462,8 @@ class _SurveyPageState extends State<SurveyPage> {
               ],
             )),
         QuestionStep(
-            title: "Wie passend war(en) die Uhrzeit(en) der Push-Nachricht(en) für Sie?",
+            title:
+                "Wie passend war(en) die Uhrzeit(en) der Push-Nachricht(en) für Sie?",
             stepIdentifier: StepIdentifier(id: '10'),
             answerFormat: const SingleChoiceAnswerFormat(
               textChoices: [
@@ -463,7 +492,8 @@ class _SurveyPageState extends State<SurveyPage> {
     );
     task.addNavigationRule(
       forTriggerStepIdentifier: task.steps[1].stepIdentifier,
-      navigationRule: ConditionalNavigationRule(resultToStepIdentifierMapper: (input) {
+      navigationRule:
+          ConditionalNavigationRule(resultToStepIdentifierMapper: (input) {
         switch (input) {
           case "1":
             return task.steps[3].stepIdentifier;
@@ -474,7 +504,8 @@ class _SurveyPageState extends State<SurveyPage> {
     );
     task.addNavigationRule(
       forTriggerStepIdentifier: task.steps[3].stepIdentifier,
-      navigationRule: ConditionalNavigationRule(resultToStepIdentifierMapper: (input) {
+      navigationRule:
+          ConditionalNavigationRule(resultToStepIdentifierMapper: (input) {
         switch (input) {
           case "0":
             return task.steps[13].stepIdentifier;
@@ -485,7 +516,8 @@ class _SurveyPageState extends State<SurveyPage> {
     );
     task.addNavigationRule(
       forTriggerStepIdentifier: task.steps[10].stepIdentifier,
-      navigationRule: ConditionalNavigationRule(resultToStepIdentifierMapper: (input) {
+      navigationRule:
+          ConditionalNavigationRule(resultToStepIdentifierMapper: (input) {
         switch (input) {
           case "0":
             return task.steps[12].stepIdentifier;
@@ -498,7 +530,10 @@ class _SurveyPageState extends State<SurveyPage> {
   }
 
   StepIdentifier getStepIdentifier(NavigableTask task, String stepIdentifier) {
-    return task.steps.where((e) => e.stepIdentifier.id == stepIdentifier).first.stepIdentifier;
+    return task.steps
+        .where((e) => e.stepIdentifier.id == stepIdentifier)
+        .first
+        .stepIdentifier;
   }
 
   void sendStartSurvey(List<String> resultString) async {

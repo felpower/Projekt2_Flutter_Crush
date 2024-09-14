@@ -4,7 +4,8 @@ import 'package:universal_html/html.dart' as html;
 import 'package:universal_html/js.dart' as js;
 
 class OldVersionPage extends StatelessWidget {
-  const OldVersionPage({Key? key, required this.currentVersion}) : super(key: key);
+  const OldVersionPage({Key? key, required this.currentVersion})
+      : super(key: key);
 
   final String currentVersion;
 

@@ -34,7 +34,9 @@ class _NonStandalonePageState extends State<NonStandalonePage> {
         home: Scaffold(
             body: Center(
                 child: ListView(padding: const EdgeInsets.all(20), children: [
-          const Image(image: AssetImage('assets/instructions/ak_uni_logo.png'), fit: BoxFit.cover),
+          const Image(
+              image: AssetImage('assets/instructions/ak_uni_logo.png'),
+              fit: BoxFit.cover),
           const Text('Um an der Studie teilnehmen zu können',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -77,13 +79,13 @@ Beim ersten Öffnen der App werden Sie gefragt, ob diese Ihnen Pushnachrichten s
                       backgroundColor: Colors.white,
                       decoration: TextDecoration.none))
               : Container(),
-                  const Text('''
+          const Text('''
 Im Anschluss können Sie die Seite bzw. das Spiel wie jede gewöhnliche App handhaben.''',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.black,
-                          backgroundColor: Colors.white,
-                          decoration: TextDecoration.none)),
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: Colors.black,
+                  backgroundColor: Colors.white,
+                  decoration: TextDecoration.none)),
           !isIosDevice
               ? const Text('''
                   
@@ -117,9 +119,11 @@ Unabhängig davon werden Sie beim ersten Öffnen der App gefragt, ob diese Ihnen
               : Container(),
           isIosDevice
               ? const Image(
-                  image: AssetImage('assets/instructions/installios.png'), fit: BoxFit.cover)
+                  image: AssetImage('assets/instructions/installios.png'),
+                  fit: BoxFit.cover)
               : const Image(
-                  image: AssetImage('assets/instructions/InstallAndroid.png'), fit: BoxFit.cover),
+                  image: AssetImage('assets/instructions/InstallAndroid.png'),
+                  fit: BoxFit.cover),
           !isIosDevice
               ? const Text('Option 2',
                   textAlign: TextAlign.center,
@@ -140,12 +144,14 @@ Unabhängig davon werden Sie beim ersten Öffnen der App gefragt, ob diese Ihnen
               : Container(),
           !isIosDevice
               ? const Image(
-                  image: AssetImage('assets/instructions/InstallAndroid_alt1.png'),
+                  image:
+                      AssetImage('assets/instructions/InstallAndroid_alt1.png'),
                   fit: BoxFit.cover)
               : Container(),
           !isIosDevice
               ? const Image(
-                  image: AssetImage('assets/instructions/InstallAndroid_alt2.png'),
+                  image:
+                      AssetImage('assets/instructions/InstallAndroid_alt2.png'),
                   fit: BoxFit.cover)
               : Container(),
         ]))));

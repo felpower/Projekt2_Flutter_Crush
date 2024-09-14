@@ -23,7 +23,8 @@ class GameOverSplash extends StatefulWidget {
   State<GameOverSplash> createState() => _GameOverSplashState();
 }
 
-class _GameOverSplashState extends State<GameOverSplash> with SingleTickerProviderStateMixin {
+class _GameOverSplashState extends State<GameOverSplash>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animationAppear;
 
@@ -101,23 +102,29 @@ class _GameOverSplashState extends State<GameOverSplash> with SingleTickerProvid
                             color: Colors.white,
                           )),
                     ),
-                    BlocBuilder<DarkPatternsBloc, DarkPatternsState>(builder: (context, state) {
+                    BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
+                        builder: (context, state) {
                       if (state is DarkPatternsActivatedState ||
                           state is DarkPatternsCompetitionState) {
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            BlocBuilder<XpBloc, XpState>(builder: (context, state) {
-                              String xpText =
-                                  state is MultipliedXpState ? ' x ${state.multiplier}' : '';
-                              return Text('Erhaltene XP: ${state.addedAmount}$xpText',
+                            BlocBuilder<XpBloc, XpState>(
+                                builder: (context, state) {
+                              String xpText = state is MultipliedXpState
+                                  ? ' x ${state.multiplier}'
+                                  : '';
+                              return Text(
+                                  'Erhaltene XP: ${state.addedAmount}$xpText',
                                   style: const TextStyle(
                                     fontSize: 15.0,
                                     color: Colors.white,
                                   ));
                             }),
-                            BlocBuilder<CoinBloc, CoinState>(builder: (context, state) {
-                              return Text('Erhaltene Münzen: ${state.addedAmount}',
+                            BlocBuilder<CoinBloc, CoinState>(
+                                builder: (context, state) {
+                              return Text(
+                                  'Erhaltene Münzen: ${state.addedAmount}',
                                   style: const TextStyle(
                                     fontSize: 15.0,
                                     color: Colors.white,
@@ -129,8 +136,10 @@ class _GameOverSplashState extends State<GameOverSplash> with SingleTickerProvid
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            BlocBuilder<CoinBloc, CoinState>(builder: (context, state) {
-                              return Text('Erhaltene Münzen: ${state.addedAmount}',
+                            BlocBuilder<CoinBloc, CoinState>(
+                                builder: (context, state) {
+                              return Text(
+                                  'Erhaltene Münzen: ${state.addedAmount}',
                                   style: const TextStyle(
                                     fontSize: 15.0,
                                     color: Colors.white,

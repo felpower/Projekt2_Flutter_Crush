@@ -12,14 +12,17 @@ class DeviceHelper {
   }
 
   static bool isIOSDevice() {
-    if (userAgent.contains('iPad') || userAgent.contains('iPhone') || userAgent.contains('iPod')) {
+    if (userAgent.contains('iPad') ||
+        userAgent.contains('iPhone') ||
+        userAgent.contains('iPod')) {
       return true;
     }
     return false;
   }
 
   static bool isStandalone() {
-    final isStandAlone = html.window.matchMedia('(display-mode: standalone)').matches;
+    final isStandAlone =
+        html.window.matchMedia('(display-mode: standalone)').matches;
     if (!isStandAlone) {
       return false;
     }

@@ -19,13 +19,16 @@ class FinishedSurveyPage extends StatelessWidget {
                 Text('''
 Diese Studie diente dem Erfassen von natürlichem Spielverhalten bei Handy/Tabletspielen und dem Einfluss sogenannter Dark Patterns. Unter Dark Patterns versteht man Features/Eigenschaften des Spiels, die dazu dienen sollen, Spieler:innen zu häufigerem oder längerem Spielen zu animieren oder Geld für oder im Spiel auszugeben. Mit Ihrer Teilnahme leisten Sie einen wichtigen Beitrag dazu, den Einfluss solcher Dark Patterns noch genauer zu verstehen. Damit können Spieler:innen in Zukunft besser über deren Auswirkungen aufgeklärt und das Spielen solcher Spiele sicherer gestaltet werden.
                 ''', textAlign: TextAlign.center),
-                Text('''Universität Wien''', style: TextStyle(fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+                Text('''Universität Wien''',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center),
                 Text('''
 Floragasse 7, 5. Stock, 1040 Wien
 office@sba-research.org
 +43 (1) 505 36 88''', textAlign: TextAlign.center),
                 SizedBox(height: 20),
-                Text('''Kammer für Arbeiter und Angestellte für Niederösterreich''',
+                Text(
+                    '''Kammer für Arbeiter und Angestellte für Niederösterreich''',
                     style: TextStyle(fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center),
                 Text('''

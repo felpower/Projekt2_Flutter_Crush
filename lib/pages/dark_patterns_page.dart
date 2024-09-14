@@ -1,6 +1,6 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
 class DarkPatternsPage extends StatefulWidget {
   const DarkPatternsPage({Key? key}) : super(key: key);
@@ -33,7 +33,7 @@ class DarkPatternsPageState extends State<DarkPatternsPage> {
         'Fear of Missing Out': prefs.getBool('darkPatternsInfoFoMo') ?? false,
         'Werbung': prefs.getBool('darkPatternsInfoAdds') ?? false,
         'Complete the Collection':
-        prefs.getBool('darkPatternsInfoCompleted') ?? false,
+            prefs.getBool('darkPatternsInfoCompleted') ?? false,
       };
     });
   }
@@ -64,7 +64,7 @@ class DarkPatternsPageState extends State<DarkPatternsPage> {
             title: const Text('Benachrichtigungen blockiert'),
             content: const Text(
                 'Du hast die Benachrichtigungen blockiert. Bitte aktiviere sie in den Einstellungen. '
-                    'Um alle Dark Patterns zu sehen, müssen die Benachrichtigungen aktiviert sein.'),
+                'Um alle Dark Patterns zu sehen, müssen die Benachrichtigungen aktiviert sein.'),
             actions: <Widget>[
               TextButton(
                 child: const Text('OK'),
@@ -109,7 +109,9 @@ class DarkPatternsPageState extends State<DarkPatternsPage> {
                     title: Text(
                       entry.key,
                       style: TextStyle(
-                        color: isNotification && !notificationsActivated ? Colors.grey : Colors.black,
+                        color: isNotification && !notificationsActivated
+                            ? Colors.grey
+                            : Colors.black,
                         decoration: isNotification && !notificationsActivated
                             ? TextDecoration.lineThrough
                             : TextDecoration.none,

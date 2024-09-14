@@ -36,7 +36,8 @@ class FirebaseStore {
   static const String endSurvey = 'endSurvey';
   static const String userDeleted = 'userDeleted';
   static const String completeUserData = 'completeUserData';
-  static const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+  static const _chars =
+      'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
 
   static final Random _rnd = Random();
 
@@ -58,11 +59,13 @@ class FirebaseStore {
   }
 
   static Future<void> addStartOfLevel(int levelNumber) async {
-    await _updateDocument(startOfLevel, 'Level: $levelNumber, Time: ${DateTime.now()}');
+    await _updateDocument(
+        startOfLevel, 'Level: $levelNumber, Time: ${DateTime.now()}');
   }
 
   static Future<void> addFinishOfLevel(int levelNumber, bool won) async {
-    await _updateDocument(finishOfLevel, 'Level: $levelNumber, Won: $won, Time: ${DateTime.now()}');
+    await _updateDocument(finishOfLevel,
+        'Level: $levelNumber, Won: $won, Time: ${DateTime.now()}');
   }
 
   static Future<void> addStartApp(DateTime dateTime) async {
@@ -78,7 +81,8 @@ class FirebaseStore {
   }
 
   static Future<void> grantPushPermission(bool granted) async {
-    await _updateDocument(grantedPushPermission, 'Granted: $granted, Time: ${DateTime.now()}');
+    await _updateDocument(
+        grantedPushPermission, 'Granted: $granted, Time: ${DateTime.now()}');
   }
 
   static Future<void> currentPushToken(String token) async {
@@ -99,7 +103,8 @@ class FirebaseStore {
 
   static void sendUserAgent({website = false}) async {
     var userAgent = html.window.navigator.userAgent;
-    await _updateDocument('userAgent', 'UserAgent: $userAgent, Website: $website');
+    await _updateDocument(
+        'userAgent', 'UserAgent: $userAgent, Website: $website');
   }
 
   static void sendUserDeleted() async {
@@ -107,14 +112,16 @@ class FirebaseStore {
   }
 
   static void addLevelBought(int levelNumber) async {
-    await _updateDocument(levelBought, 'Level: $levelNumber, Time: ${DateTime.now()}');
+    await _updateDocument(
+        levelBought, 'Level: $levelNumber, Time: ${DateTime.now()}');
   }
 
   static void addItemBought(String item) async {
     await _updateDocument(itemBought, 'Item: $item, Time: ${DateTime.now()}');
   }
 
-  static Future<void> _updateDocument(String documentPropertyName, String information) async {
+  static Future<void> _updateDocument(
+      String documentPropertyName, String information) async {
     var userId = await getUuid();
     DatabaseReference ref;
     if (kDebugMode) {
@@ -129,7 +136,8 @@ class FirebaseStore {
 
   static addUser() async {
     var userId = await getUuid();
-    int darkPatternsState = await DarkPatternsService.shouldDarkPatternsBeVisible();
+    int darkPatternsState =
+        await DarkPatternsService.shouldDarkPatternsBeVisible();
     final data = {
       uuid: userId,
       darkPatterns: darkPatternsState,
@@ -141,7 +149,7 @@ class FirebaseStore {
       ref = database.ref("flutter/$userId");
     } else if (userId.contains('felpower')) {
       ref = database.ref("felpower/$userId");
-    }else {
+    } else {
       ref = database.ref("users/$userId");
     }
     ref.update(data);
@@ -176,7 +184,8 @@ class FirebaseStore {
       var userId = await getUuid();
       final String userAgent = html.window.navigator.userAgent;
       String uploadedFileId = _getRandomString(15);
-      var taskSnapshot = await storage.ref('feedback/$uploadedFileId').putBlob(file);
+      var taskSnapshot =
+          await storage.ref('feedback/$uploadedFileId').putBlob(file);
       String downloadUrl = await taskSnapshot.ref.getDownloadURL();
       final data = {
         'info': info,

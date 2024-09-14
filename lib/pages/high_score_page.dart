@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:math';
+
 import 'package:bachelor_flutter_crush/helpers/app_colors.dart';
 import 'package:bachelor_flutter_crush/persistence/high_score_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../bloc/reporting_bloc/reporting_bloc.dart';
 import '../bloc/reporting_bloc/reporting_event.dart';
 import '../model/user.dart';
@@ -209,7 +211,7 @@ class HighScoreState extends State<HighScorePage> {
             title: const Text('High Score'),
             leading: BackButton(
               onPressed: () async {
-                  Navigator.of(context).pop();
+                Navigator.of(context).pop();
               },
             ),
           ),
