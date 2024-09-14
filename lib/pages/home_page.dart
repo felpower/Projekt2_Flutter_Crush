@@ -451,12 +451,12 @@ class _HomePageState extends State<HomePage>
     return Drawer(
       child: ListView(
         children: <Widget>[
-          const DrawerHeader(
-            margin: EdgeInsets.all(0.0),
-            decoration: BoxDecoration(
+          Container(
+            padding: const EdgeInsets.all(16.0),
+            decoration: const BoxDecoration(
               color: Colors.blue,
             ),
-            child: Text('Menü'),
+            child: const Text('Menü'),
           ),
           Visibility(
               visible: true,
