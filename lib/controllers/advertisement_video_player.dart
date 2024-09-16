@@ -188,7 +188,6 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
       );
     } else {
       Navigator.pop(context);
-      Navigator.pop(context);
     }
   }
 }
