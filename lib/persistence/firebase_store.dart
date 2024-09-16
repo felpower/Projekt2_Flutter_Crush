@@ -123,25 +123,10 @@ class FirebaseStore {
   static Future<void> _updateDocument(
       String documentPropertyName, String information) async {
     var userId = await getUuid();
-    DatabaseReference ref;
-    if (kDebugMode) {
-      ref = database.ref("debug/$userId");
-    } else if (userId.contains('flutter')) {
-      ref = database.ref("flutter/$userId");
-    } else {
-      ref = database.ref("users/$userId");
-    }
-    ref.child(documentPropertyName).push().set(information);
+    getDatabaseRef(userId).child(documentPropertyName).push().set(information);
   }
 
-  static addUser() async {
-    var userId = await getUuid();
-    int darkPatternsState =
-        await DarkPatternsService.shouldDarkPatternsBeVisible();
-    final data = {
-      uuid: userId,
-      darkPatterns: darkPatternsState,
-    };
+  static DatabaseReference getDatabaseRef(String userId) {
     DatabaseReference ref;
     if (kDebugMode) {
       ref = database.ref("debug/$userId");
@@ -152,7 +137,18 @@ class FirebaseStore {
     } else {
       ref = database.ref("users/$userId");
     }
-    ref.update(data);
+    return ref;
+  }
+
+  static addUser() async {
+    var userId = await getUuid();
+    int darkPatternsState =
+        await DarkPatternsService.shouldDarkPatternsBeVisible();
+    final data = {
+      uuid: userId,
+      darkPatterns: darkPatternsState,
+    };
+    getDatabaseRef(userId).update(data);
 
     FlutterError.onError = (FlutterErrorDetails details) {
       sendError(details.exceptionAsString(), isFlutterError: true);
@@ -223,8 +219,11 @@ class FirebaseStore {
   static String getCurrentVersion() {
     String hostname = Uri.parse(html.window.location.href).host;
     String version = "";
-    if (hostname.contains('felpower') || hostname.contains('localhost')) {
+    if (hostname.contains('localhost')) {
       return "testVersion-V20-";
+    }
+    if (hostname.contains('felpower')) {
+      return "felpower-V20-";
     }
     if (hostname.contains('flutter')) {
       return "flutter-V20-";

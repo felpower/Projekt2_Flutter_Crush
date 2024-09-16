@@ -1,0 +1,223 @@
+Combined Statistics:
+Statistics: 2024-08-05 13:24:57.819151
+Users dropped out: 0
+Inactive Users: 272
+Days Since Start Total: 8165
+Days Played Total: 406
+Users that played daily: 0
+Played all last 3 days: 0
+Average Level per Session: 2.6950000000000003
+Average Level per Player: 39.12244897959184
+Played any of last 3 days: 1
+Total App Starts: 1980
+Average Playtime per level: 273.58
+Total Levels Started: 2435
+Total Levels Finished: 1917
+Total Levels Won: 1508
+Max Level Users: 1
+Total Users: 47
+Total Levels Bought: 302
+Hours of Playing: 145.68
+Total Items Bought: 28
+Total Daily Rewards Collected: 42
+Total Highscores Checked: 279
+Played After Notification Pushed: 44
+Total Push Notifications Clicked after 30 days: 16
+Total Push Notifications Clicked: 61
+Total Notifications Sent after 30 days: 1438
+Total Notifications Sent: 486
+End Survey Done: 20
+Start Survey Done: 47
+DarkPatterns Off: 23
+DarkPatterns On: 24
+DarkPatterns FOMO: 0
+DarkPatterns VAR: 0
+Average Age: 31.38
+Gender: {'0': 27, '1': 19, '2': 1}
+Education: {'0': 1, '1': 8, '2': 1, '3': 12, '4': 25}
+Occupation: {'0': 30, '1': 1, '2': 2, '3': 13, '4': 1}
+Frequency of Playing: {'0': 1, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0}
+hoursPlaying/user: 3.12
+Played till end: 11
+Realised DPs: 8
+Last EndSurvey Done: 2024-04-22
+
+DarkPatterns Off:
+Total Users: 23
+Total Dropouts: 0
+Active Users: 23
+Total Levels Started: 698
+Total Levels Finished: 563
+Total Levels Won: 497
+Average Playtime per level: 165.32
+Hours of Playing: 32.05
+Seconds per Session: 393.83
+Total Levels Bought: 11
+Total Items Bought: 3
+Total Daily Rewards Collected: 0
+Total Highscores Checked: 0
+Average Age: 32.13
+Max Level: 86
+Users Max Level: 0
+Longest Streak: 4
+Total Notifications Sent: 0
+Total Notifications Pushed: 0
+Played After Notification Pushed: 0
+Notifications sent after 30 days: 209
+Notifications clicked after 30 days: 7
+gender: {'0': 14, '1': 8, '2': 1}
+education: {'0': 1, '1': 3, '2': 1, '3': 5, '4': 13}
+occupation: {'0': 13, '1': 1, '2': 2, '3': 6, '4': 1}
+frequencyPlaying: {'0': 1, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0}
+hoursPlaying: 3.33
+moneySpent: 0.87
+endSurveyCount: 9
+playedtilend: 5
+reasoncancel: {'0': 0, '1': 0, '2': 1, '3': 0, '4': 1, '5': 3, '6': 2, '7': 1}
+influenced: 3
+influencedtime: {'0': 0, '1': 2, '2': 1}
+influencedfrequency: {'0': 0, '1': 2, '2': 1}
+patterninfluence: {'0': 1, '1': 1, '2': 1, '3': 1, '4': 2, '5': 1, '6': 1}
+pushreceived: 1
+pushfrequency: {'0': 0, '1': 1, '2': 2}
+pushtimes: {'0': 3, '1': 0, '2': 0}
+pushbettertimes: 
+comments: Super App, 
+totalAppStarts: 393
+Average Level Per Session: 2.27
+Average Levels: 30.35
+
+DarkPatterns On:
+Total Users: 24
+Total Dropouts: 0
+Active Users: 24
+Total Levels Started: 1737
+Total Levels Finished: 1354
+Total Levels Won: 1011
+Average Playtime per level: 235.5
+Hours of Playing: 113.63
+Seconds per Session: 520.43
+Total Levels Bought: 291
+Total Items Bought: 25
+Total Daily Rewards Collected: 42
+Total Highscores Checked: 279
+Average Age: 30.67
+Max Level: 501
+Users Max Level: 1
+Longest Streak: 3
+Total Notifications Sent: 486
+Total Notifications Pushed: 61
+Played After Notification Pushed: 44
+Notifications sent after 30 days: 1229
+Notifications clicked after 30 days: 9
+gender: {'0': 13, '1': 11, '2': 0}
+education: {'0': 0, '1': 5, '2': 0, '3': 7, '4': 12}
+occupation: {'0': 17, '1': 0, '2': 0, '3': 7, '4': 0}
+frequencyPlaying: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0}
+hoursPlaying: 2.92
+moneySpent: 0.68
+endSurveyCount: 11
+playedtilend: 6
+reasoncancel: {'0': 0, '1': 0, '2': 1, '3': 1, '4': 0, '5': 3, '6': 3, '7': 1}
+influenced: 5
+influencedtime: {'0': 0, '1': 2, '2': 3}
+influencedfrequency: {'0': 1, '1': 0, '2': 4}
+patterninfluence: {'0': 0, '1': 1, '2': 4, '3': 4, '4': 3, '5': 1, '6': 1}
+pushreceived: 3
+pushfrequency: {'0': 1, '1': 2, '2': 2}
+pushtimes: {'0': 5, '1': 0, '2': 0}
+pushbettertimes: 
+comments: sehr cooles spiel, 
+totalAppStarts: 1587
+Average Level Per Session: 3.12
+Average Levels: 72.38
+
+DarkPatterns FOMO:
+Total Users: 0
+Total Dropouts: 0
+Active Users: 0
+Total Levels Started: 0
+Total Levels Finished: 0
+Total Levels Won: 0
+Average Playtime per level: 0
+Hours of Playing: 0.0
+Seconds per Session: 0
+Total Levels Bought: 0
+Total Items Bought: 0
+Total Daily Rewards Collected: 0
+Total Highscores Checked: 0
+Average Age: 0
+Max Level: 0
+Users Max Level: 0
+Longest Streak: 0
+Total Notifications Sent: 0
+Total Notifications Pushed: 0
+Played After Notification Pushed: 0
+Notifications sent after 30 days: 0
+Notifications clicked after 30 days: 0
+gender: {'0': 0, '1': 0, '2': 0}
+education: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
+occupation: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
+frequencyPlaying: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0}
+hoursPlaying: 0
+moneySpent: 0
+endSurveyCount: 0
+playedtilend: 0
+reasoncancel: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0}
+influenced: 0
+influencedtime: {'0': 0, '1': 0, '2': 0}
+influencedfrequency: {'0': 0, '1': 0, '2': 0}
+patterninfluence: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0}
+pushreceived: 0
+pushfrequency: {'0': 0, '1': 0, '2': 0}
+pushtimes: {'0': 0, '1': 0, '2': 0}
+pushbettertimes: 
+comments: 
+totalAppStarts: 0
+Average Level Per Session: 0
+Average Levels: 0
+
+DarkPatterns VAR:
+Total Users: 0
+Total Dropouts: 0
+Active Users: 0
+Total Levels Started: 0
+Total Levels Finished: 0
+Total Levels Won: 0
+Average Playtime per level: 0
+Hours of Playing: 0.0
+Seconds per Session: 0
+Total Levels Bought: 0
+Total Items Bought: 0
+Total Daily Rewards Collected: 0
+Total Highscores Checked: 0
+Average Age: 0
+Max Level: 0
+Users Max Level: 0
+Longest Streak: 0
+Total Notifications Sent: 0
+Total Notifications Pushed: 0
+Played After Notification Pushed: 0
+Notifications sent after 30 days: 0
+Notifications clicked after 30 days: 0
+gender: {'0': 0, '1': 0, '2': 0}
+education: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
+occupation: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
+frequencyPlaying: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0}
+hoursPlaying: 0
+moneySpent: 0
+endSurveyCount: 0
+playedtilend: 0
+reasoncancel: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0}
+influenced: 0
+influencedtime: {'0': 0, '1': 0, '2': 0}
+influencedfrequency: {'0': 0, '1': 0, '2': 0}
+patterninfluence: {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0}
+pushreceived: 0
+pushfrequency: {'0': 0, '1': 0, '2': 0}
+pushtimes: {'0': 0, '1': 0, '2': 0}
+pushbettertimes: 
+comments: 
+totalAppStarts: 0
+Average Level Per Session: 0
+Average Levels: 0
