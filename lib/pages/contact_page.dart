@@ -19,7 +19,7 @@ class ContactPage extends StatelessWidget {
               padding: EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  Text('''Universität Wien''',
+                  Text('''SBA Research''',
                       style: TextStyle(fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center),
                   Text('''
