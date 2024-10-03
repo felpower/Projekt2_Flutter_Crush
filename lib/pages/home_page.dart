@@ -406,7 +406,7 @@ class _HomePageState extends State<HomePage>
         Tooltip(
           message: 'Shop',
           child: IconButton(
-            icon: const Icon(Icons.shopping_basket_outlined),
+            icon: const Icon(Icons.shopping_cart_outlined),
             onPressed: () {
               Navigator.push(
                 context,
@@ -512,7 +512,7 @@ class _HomePageState extends State<HomePage>
           Visibility(
               visible: true,
               child: ListTile(
-                leading: const Icon(Icons.shopping_basket),
+                leading: const Icon(Icons.shopping_cart),
                 title: const Text('Shop', style: TextStyle(color: Colors.grey)),
                 onTap: () {
                   Navigator.push(
