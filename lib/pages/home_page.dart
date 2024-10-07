@@ -36,6 +36,7 @@ import '../helpers/app_colors.dart';
 import '../helpers/global_variables.dart';
 import 'dark_patterns_page.dart';
 import 'feedback_page.dart';
+
 // import 'finished_survey_page.dart';
 import 'high_score_page.dart';
 import 'info_page.dart';
@@ -52,6 +53,7 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   bool dailyRewardCollected = true;
   late ValueNotifier<int> _darkPatternsCountNotifier;
+  late ValueNotifier<bool> _showDarkPatternsInfoNotifier;
   late AnimationController _controller;
   late Animation<double> _animation;
   int todaysAmount = 0;
@@ -95,6 +97,9 @@ class _HomePageState extends State<HomePage>
 
     _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
     _darkPatternsCountNotifier = ValueNotifier<int>(0);
+    _showDarkPatternsInfoNotifier =
+        ValueNotifier<bool>(true); // Initialize with default value
+    _loadShowDarkPatternsInfoState();
     updateDarkPatternsCount();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
@@ -125,6 +130,7 @@ class _HomePageState extends State<HomePage>
     WidgetsBinding.instance.removeObserver(this);
     _controller.dispose();
     _darkPatternsCountNotifier.dispose();
+    _showDarkPatternsInfoNotifier.dispose();
     _isHomePageActive = false;
     super.dispose();
   }
@@ -147,7 +153,7 @@ class _HomePageState extends State<HomePage>
         checkedForReopenGame = true;
       });
     }
-    var host = Uri.parse(html.window.location.href).host;
+    // var host = Uri.parse(html.window.location.href).host;
     _showDarkPatternsInfoNotification();
     return Scaffold(
       appBar: AppBar(
@@ -155,12 +161,12 @@ class _HomePageState extends State<HomePage>
         actions: [
           showPulsatingAppBarIcon(),
           showHighscoreTooltip(),
+          showDailyRewardsAppBarIcon(),
           Builder(
             builder: (BuildContext context) {
               return IconButton(
                 icon: const Icon(Icons.menu),
                 onPressed: () {
-                  loadDailyReward(darkPatternsState);
                   Scaffold.of(context).openEndDrawer();
                 },
                 tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
@@ -228,11 +234,10 @@ class _HomePageState extends State<HomePage>
                       ),
                       flutter_bloc.BlocBuilder<DarkPatternsBloc,
                           DarkPatternsState>(builder: (context, state) {
-                        return Visibility(
-                            visible: host.contains('felpower') ||
-                                host.contains('localhost'),
-                            child: const Text(
-                              'Dies ist eine TestVersion und wird nicht für die Studie verwendet. Um an der richtigen Studie teilzunehmen bitte die Seite jelly-fun.github.io aufrufen.',
+                        return const Visibility(
+                            visible: true,
+                            child: Text(
+                              'Zurzeit gibt es ein Sonderangebot im Shop für 20% Rabatt auf alle Jellys!',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: Colors.red,
@@ -270,6 +275,18 @@ class _HomePageState extends State<HomePage>
                                   }
                                 }
                               },
+                            ),
+                          );
+                        },
+                      ),
+                      ValueListenableBuilder<bool>(
+                        valueListenable: _showDarkPatternsInfoNotifier,
+                        builder: (context, showInfo, child) {
+                          return Visibility(
+                            visible: showInfo,
+                            child: const Text(
+                              'Du Kannst Infos zu Dark Patterns im Menü ansehen!',
+                              style: TextStyle(color: Colors.black),
                             ),
                           );
                         },
@@ -525,53 +542,35 @@ class _HomePageState extends State<HomePage>
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)), // Rounded corners
               )),
-          Visibility(
-              visible: darkPatternsState is! DarkPatternsDeactivatedState &&
-                  (Uri.parse(html.window.location.href)
-                          .host
-                          .contains('felpower') ||
-                      Uri.parse(html.window.location.href)
-                          .host
-                          .contains('localhost')),
-              child: ListTile(
-                leading: const Icon(Icons.pattern),
-                title: const Text('Dark Patterns zurücksetzen',
-                    style: TextStyle(color: Colors.grey)),
-                onTap: () {
-                  resetDarkPatterns();
-                },
-                tileColor: Colors.grey[200],
-                // Background color to make it feel like a button
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)), // Rounded corners
-              )),
           if (darkPatternsState is DarkPatternsActivatedState ||
               darkPatternsState is DarkPatternsFoMoState)
-            GestureDetector(
-                onTap: () {
-                  if (dailyRewardCollected) {
-                    _showDailyRewardsCollectedDialog(dailyRewardCollected);
-                  }
-                },
-                child: ListTile(
-                  enabled: !dailyRewardCollected,
-                  leading: const Icon(Icons.card_giftcard),
-                  title: const Text('Tägliche Belohnung',
-                      style: TextStyle(color: Colors.grey)),
-                  onTap: () {
-                    setState(() {
-                      dailyRewardCollected = true;
-                      setDailyRewards();
-                      FirebaseStore.collectedDailyRewards(DateTime.now());
-                    });
-                    _showDailyRewardsCollectedDialog(!dailyRewardCollected);
-                  },
-                  tileColor: Colors.grey[200],
-                  // Background color to make it feel like a button
-                  shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(12)), // Rounded corners
-                )),
+            Visibility(
+                visible: false,
+                child: GestureDetector(
+                    onTap: () {
+                      if (dailyRewardCollected) {
+                        _showDailyRewardsCollectedDialog(dailyRewardCollected);
+                      }
+                    },
+                    child: ListTile(
+                      enabled: !dailyRewardCollected,
+                      leading: const Icon(Icons.card_giftcard),
+                      title: const Text('Tägliche Belohnung',
+                          style: TextStyle(color: Colors.grey)),
+                      onTap: () {
+                        setState(() {
+                          dailyRewardCollected = true;
+                          setDailyRewards();
+                          FirebaseStore.collectedDailyRewards(DateTime.now());
+                        });
+                        _showDailyRewardsCollectedDialog(!dailyRewardCollected);
+                      },
+                      tileColor: Colors.grey[200],
+                      // Background color to make it feel like a button
+                      shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(12)), // Rounded corners
+                    ))),
           Visibility(
               visible: true,
               child: ValueListenableBuilder<bool>(
@@ -692,11 +691,18 @@ class _HomePageState extends State<HomePage>
             builder: (context, count, child) {
               return ListTile(
                 leading: const Icon(Icons.info),
-                onTap: () {
+                onTap: () async {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const DarkPatternsPage()));
+                  _showDarkPatternsInfoNotifier.value =
+                      false; // Hide the info text
+
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  await prefs.setBool(
+                      'showDarkPatternsInfoText', false); // Save the state
                 },
                 title: Text('Dark Patterns gefunden $count/7',
                     style: const TextStyle(color: Colors.grey)),
@@ -706,6 +712,20 @@ class _HomePageState extends State<HomePage>
               );
             },
           ),
+          Visibility(
+              visible: false,
+              child: ListTile(
+                leading: const Icon(Icons.pattern),
+                title: const Text('Dark Patterns zurücksetzen',
+                    style: TextStyle(color: Colors.grey)),
+                onTap: () {
+                  resetDarkPatterns();
+                },
+                tileColor: Colors.grey[200],
+                // Background color to make it feel like a button
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)), // Rounded corners
+              )),
         ],
       ),
     );
@@ -728,27 +748,28 @@ class _HomePageState extends State<HomePage>
   late int buntJelly;
   late int stripeJelly;
 
-  void loadDailyReward(DarkPatternsState darkPatternsState) async {
+  Future<void> loadDailyReward(DarkPatternsState darkPatternsState) async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     var dailyReward = sp.getString("dailyRewards");
     var firstTimeStart = sp.getString("firstStartTime");
 
     if (dailyReward == null) {
-      dailyRewardCollected = false;
-    }
-    if (dailyReward != null) {
+      setState(() {
+        dailyRewardCollected = false;
+      });
+    } else {
       setState(() {
         difference =
             DateTime.now().difference(DateTime.parse(dailyReward)).inHours;
+        dailyRewardCollected = difference < 24;
       });
-      if (difference >= 24) {
-        dailyRewardCollected = false;
-      }
     }
+
     setState(() {
       buntJelly = sp.getInt("buntJelly") ?? 0;
       stripeJelly = sp.getInt("stripeJelly") ?? 0;
     });
+
     if (firstTimeStart == null) {
       var todaysReward =
           DailyRewardsService.getTodaysReward(1, darkPatternsState);
@@ -789,7 +810,10 @@ class _HomePageState extends State<HomePage>
     }
   }
 
-  void _showDailyRewardsCollectedDialog(bool dailyRewardCollected) {
+  Future<void> _showDailyRewardsCollectedDialog(bool dailyRewardCollected) async {
+    var darkPatternsState =
+        flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context).state;
+    await loadDailyReward(darkPatternsState);
     if (dailyRewardCollected) {
       var actualDifference = 24 - difference;
       showDialog(
@@ -802,8 +826,10 @@ class _HomePageState extends State<HomePage>
                 'werden'),
             actions: [
               TextButton(
-                onPressed: () => Navigator.of(context).pop(),
                 child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
               ),
             ],
           );
@@ -1053,6 +1079,7 @@ class _HomePageState extends State<HomePage>
     prefs.setBool('darkPatternsInfoFoMo', false);
     prefs.setBool('darkPatternsInfoAdds', false);
     prefs.setBool('darkPatternsInfoCompleted', false);
+    prefs.setBool('showDarkPatternsInfoText', true);
 
     setState(() {
       updateDarkPatternsCount();
@@ -1207,6 +1234,33 @@ class _HomePageState extends State<HomePage>
             ),
           ],
         );
+      },
+    );
+  }
+
+  Future<void> _loadShowDarkPatternsInfoState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool showInfo = prefs.getBool('showDarkPatternsInfoText') ?? true;
+    _showDarkPatternsInfoNotifier = ValueNotifier<bool>(showInfo);
+  }
+
+  IconButton showDailyRewardsAppBarIcon() {
+    return IconButton(
+      icon: Icon(
+        Icons.card_giftcard,
+        color: dailyRewardCollected ? Colors.grey : Colors.lightBlue,
+      ),
+      onPressed: () {
+        setState(() {
+          print("Daily Reward Collected: $dailyRewardCollected");
+          _showDailyRewardsCollectedDialog(dailyRewardCollected);
+          if (!dailyRewardCollected) {
+            dailyRewardCollected = true;
+            setDailyRewards();
+            FirebaseStore.collectedDailyRewards(DateTime.now());
+          }
+        });
+
       },
     );
   }

@@ -124,6 +124,13 @@ class DarkPatternsPageState extends State<DarkPatternsPage> {
                   );
                 }).toList(),
               ),
+              Center(
+                child: ElevatedButton(
+                  onPressed: resetDarkPatterns,
+                  child: const Text('Dark Patterns zurücksetzen',
+                      style: TextStyle(color: Colors.grey)),
+                ),
+              ),
               if (!notificationsActivated)
                 Center(
                   child: ElevatedButton(
@@ -132,5 +139,39 @@ class DarkPatternsPageState extends State<DarkPatternsPage> {
                   ),
                 ),
             ])));
+  }
+
+  void resetDarkPatterns() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('darkPatternsInfoNotification', false);
+    await prefs.setBool('darkPatternsInfoVAR', false);
+    await prefs.setBool('darkPatternsInfoScore', false);
+    await prefs.setBool('darkPatternsInfoShop', false);
+    await prefs.setBool('darkPatternsInfoFoMo', false);
+    await prefs.setBool('darkPatternsInfoAdds', false);
+    await prefs.setBool('darkPatternsInfoCompleted', false);
+    await prefs.setBool('showDarkPatternsInfoText', true);
+
+    setState(() {
+      darkPatterns.updateAll((key, value) => false);
+    });
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('DarkPatterns zurückgesetzt'),
+          content: const Text('Die DarkPatterns wurden zurückgesetzt'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

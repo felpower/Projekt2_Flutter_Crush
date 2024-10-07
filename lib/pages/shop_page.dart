@@ -69,8 +69,7 @@ class ShopState extends State<ShopPage> {
             Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image:
-                      AssetImage('assets/images/background/background_new.png'),
+                  image: AssetImage('assets/images/background/background_new.png'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -96,23 +95,40 @@ class ShopState extends State<ShopPage> {
                       if (shopItems[index].type == 'xp') {
                         return Container(); // Return an empty container if the item is XP and dark patterns are not activated or in competition state
                       }
+                      double discountedPrice = shopItems[index].cost * 0.8;
                       return Container(
                         color: Colors.black.withOpacity(0.1),
                         // Semi-transparent background
                         child: ListTile(
                           title: Text(shopItems[index].name,
                               style: const TextStyle(color: Colors.black)),
-                          subtitle: Text(
-                              '${shopItems[index].description} - ${shopItems[index].cost}🪙',
-                              style: const TextStyle(color: Colors.black)),
+                          subtitle: RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: '${shopItems[index].cost}🪙 ',
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    decoration: TextDecoration.lineThrough,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: '${discountedPrice.toStringAsFixed(0)}🪙',
+                                  style: const TextStyle(
+                                    color: Colors.red,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                           trailing: ElevatedButton(
                             child: const Text('Kaufen'),
                             onPressed: () {
                               if (shopItems[index].cost > coins) {
                                 Fluttertoast.showToast(
                                     msg:
-                                        "Du hast nur $coins🪙, für dieses Item brauchst du aber "
-                                        "${shopItems[index].cost}🪙",
+                                    "Du hast nur $coins🪙, für dieses Item brauchst du aber "
+                                        "$discountedPrice🪙",
                                     toastLength: Toast.LENGTH_LONG,
                                     gravity: ToastGravity.BOTTOM,
                                     timeInSecForIosWeb: 5,
@@ -159,10 +175,10 @@ class ShopState extends State<ShopPage> {
     // Get the CoinBloc
     CoinBloc coinBloc = flutter_bloc.BlocProvider.of<CoinBloc>(context);
     // Subtract the cost from the user's coins and emit a new state
-    coinBloc.add(RemoveCoinsEvent(shopItems[index].cost));
+    coinBloc.add(RemoveCoinsEvent((shopItems[index].cost*0.8) as int));
 
     setState(() {
-      coins -= shopItems[index].cost; // Subtract the cost from the user's coins
+      coins -= (shopItems[index].cost*0.8) as int; // Subtract the cost from the user's coins
     });
     FirebaseStore.addItemBought(shopItems[index].description);
     _showDarkPatternsInfo(index);

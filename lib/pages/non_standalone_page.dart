@@ -26,7 +26,7 @@ class _NonStandalonePageState extends State<NonStandalonePage> {
   Widget build(BuildContext context) {
     FlutterNativeSplash.remove();
     return MaterialApp(
-        title: "Herzlich Willkommen zur Studie",
+        title: "Herzlich Willkommen",
         debugShowCheckedModeBanner: false,
         theme: ThemeData.light(),
         darkTheme: ThemeData.light(),
@@ -37,7 +37,7 @@ class _NonStandalonePageState extends State<NonStandalonePage> {
           const Image(
               image: AssetImage('assets/instructions/ak_uni_logo.png'),
               fit: BoxFit.cover),
-          const Text('Um an der Studie teilnehmen zu können',
+          const Text('Um das Spiel spielen zu können',
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: Colors.black,
@@ -71,7 +71,7 @@ Sollte diese Anleitung nicht Ihrer Darstellung entsprechen müssen Sie den Link 
 
 Drücken Sie auf den „Teilen“-Button (kleine Viereck mit dem Pfeil nach oben) -> Option -> zum Home-Bildschirm
 
-Beim ersten Öffnen der App werden Sie gefragt, ob diese Ihnen Pushnachrichten senden darf. Bitte klicken Sie hier auf „Erlauben“. Dies ist wichtig für den vollen Funktionsumfang der Studie!
+Beim ersten Öffnen der App werden Sie gefragt, ob diese Ihnen Pushnachrichten senden darf. Bitte klicken Sie hier auf „Erlauben“. Dies ist wichtig für den vollen Funktionsumfang des Spiels!
 ''',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -91,7 +91,7 @@ Im Anschluss können Sie die Seite bzw. das Spiel wie jede gewöhnliche App hand
                   
 Die Installation funktioniert je nach Smartphone wie in Option 1 oder Option 2 beschrieben (siehe unten).
                   
-Unabhängig davon werden Sie beim ersten Öffnen der App gefragt, ob diese Ihnen Pushnachrichten senden darf. Bitte klicken Sie hier auf „Zulassen“. Dies ist wichtig für den vollen Funktionsumfang der Studie!''',
+Unabhängig davon werden Sie beim ersten Öffnen der App gefragt, ob diese Ihnen Pushnachrichten senden darf. Bitte klicken Sie hier auf „Zulassen“. Dies ist wichtig für den vollen Funktionsumfang des Spiels!''',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Colors.black,
