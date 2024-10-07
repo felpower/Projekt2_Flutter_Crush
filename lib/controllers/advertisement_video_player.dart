@@ -93,7 +93,7 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
                     right: 10,
                     child: FutureBuilder(
                       future:
-                          Future.delayed(const Duration(milliseconds: 8000)),
+                          Future.delayed(const Duration(milliseconds: 1000)),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.done) {
                           return TextButton(
@@ -103,10 +103,11 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
                             ),
                             onPressed: () {
                               if (!widget.isForcedAd) {
-                                rewardUserWithCoins();
                                 _showDarkPatternsInfo();
+                                rewardUserWithCoins();
                               } else {
                                 Navigator.of(context).pop();
+                                _showRemoveAdsDialog();
                               }
                             },
                           );
@@ -123,6 +124,59 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
             }
           },
         ));
+  }
+
+  void _showRemoveAdsDialog() {
+    if (context == null || !mounted) return; // Ensure context is valid and widget is mounted
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Werbung ausschalten'),
+          content: const Text('Möchtest du die Werbung ausschalten für 500 🪙?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Nein'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Ja'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                // Get the CoinBloc
+                CoinBloc coinBloc = flutter_bloc.BlocProvider.of<CoinBloc>(context);
+                int amount = coinBloc.state.amount;
+                if (amount >= 500) {
+                  coinBloc.add(RemoveCoinsEvent(500));
+                  Fluttertoast.showToast(
+                      msg: "Werbung wurde entfernt",
+                      toastLength: Toast.LENGTH_LONG,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 5,
+                      backgroundColor: Colors.green,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
+                  SharedPreferences.getInstance().then((prefs) {
+                    prefs.setBool('isAdsRemoved', true);
+                  });
+                } else {
+                  Fluttertoast.showToast(
+                      msg: "Du hast nur $amount 🪙, für das entfernen der Werbung benötigst du 500🪙",
+                      toastLength: Toast.LENGTH_LONG,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 5,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
+                }
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   _onTapDown(var details) {

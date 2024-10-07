@@ -111,11 +111,11 @@ dart run flutter_native_splash:create
 ✅ Dollar tauschen gegen Münz-Emoji
 ✅ Infobox ausklappbar machen
 ✅ Shop in die Menüleiste
-✅Werbung wieder reingeben
-✅bei Dark Pattern Infobox dazuschreiben wieviele Dark Patterns bereits gefunden wurden
-Info auf Sonderangebot im Hauptspiel
-Ads-free Info nach angesehener Werbung einblenden
-Studienteilnahmeinfo bei Nicht installierter App entfernen
-Dark Patterns gefunden Info auf der Home Page anzeigen
-Daily Rewards im Home Screen oben anzeigen Hellbalu wenn abholbar, wenn nicht, dann grau
-Dark Patterns zurücksetzen Button in die Dark Patterns gefunden Info einbauen
+✅ Werbung wieder reingeben
+✅ bei Dark Pattern Infobox dazuschreiben wieviele Dark Patterns bereits gefunden wurden
+✅ Info auf Sonderangebot im Hauptspiel
+✅ Ads-free Info nach angesehener Werbung einblenden
+✅ Studienteilnahmeinfo bei Nicht installierter App entfernen
+✅ Dark Patterns gefunden Info auf der Home Page anzeigen
+✅ Daily Rewards im Home Screen oben anzeigen Hellbalu wenn abholbar, wenn nicht, dann grau
+✅ Dark Patterns zurücksetzen Button in die Dark Patterns gefunden Info einbauen
