@@ -103,41 +103,43 @@ class DarkPatternsPageState extends State<DarkPatternsPage> {
                 ),
               ),
               ListView(
-                children: darkPatterns.entries.map((entry) {
-                  bool isNotification = entry.key == 'Notification';
-                  return ListTile(
-                    title: Text(
-                      entry.key,
-                      style: TextStyle(
-                        color: isNotification && !notificationsActivated
-                            ? Colors.grey
-                            : Colors.black,
-                        decoration: isNotification && !notificationsActivated
-                            ? TextDecoration.lineThrough
-                            : TextDecoration.none,
+                children: [
+                  ...darkPatterns.entries.map((entry) {
+                    bool isNotification = entry.key == 'Notification';
+                    return ListTile(
+                      title: Text(
+                        entry.key,
+                        style: TextStyle(
+                          color: isNotification && !notificationsActivated
+                              ? Colors.grey
+                              : Colors.black,
+                          decoration: isNotification && !notificationsActivated
+                              ? TextDecoration.lineThrough
+                              : TextDecoration.none,
+                        ),
+                      ),
+                      trailing: Icon(
+                        entry.value ? Icons.check_circle : Icons.cancel,
+                        color: entry.value ? Colors.green : Colors.red,
+                      ),
+                    );
+                  }),
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: resetDarkPatterns,
+                      child: const Text('Dark Patterns zurücksetzen',
+                          style: TextStyle(color: Colors.grey)),
+                    ),
+                  ),
+                  if (!notificationsActivated)
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: activateNotifications,
+                        child: const Text('Activate Notifications'),
                       ),
                     ),
-                    trailing: Icon(
-                      entry.value ? Icons.check_circle : Icons.cancel,
-                      color: entry.value ? Colors.green : Colors.red,
-                    ),
-                  );
-                }).toList(),
+                ],
               ),
-              Center(
-                child: ElevatedButton(
-                  onPressed: resetDarkPatterns,
-                  child: const Text('Dark Patterns zurücksetzen',
-                      style: TextStyle(color: Colors.grey)),
-                ),
-              ),
-              if (!notificationsActivated)
-                Center(
-                  child: ElevatedButton(
-                    onPressed: activateNotifications,
-                    child: const Text('Activate Notifications'),
-                  ),
-                ),
             ])));
   }
 
