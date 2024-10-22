@@ -56,6 +56,9 @@ class _HomePageState extends State<HomePage>
   late ValueNotifier<bool> _showDarkPatternsInfoNotifier;
   late AnimationController _controller;
   late Animation<double> _animation;
+
+  late AnimationController _textAnimationController;
+  late Animation<double> _textAnimation;
   int todaysAmount = 0;
   String todaysType = '';
   bool darkPatternsInfoActive = false;
@@ -94,8 +97,9 @@ class _HomePageState extends State<HomePage>
       duration: const Duration(seconds: 1),
       vsync: this,
     )..repeat(reverse: true);
-
     _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
+    _textAnimation = Tween<double>(begin: 0.5, end: 1.0).animate(_controller);
+
     _darkPatternsCountNotifier = ValueNotifier<int>(0);
     _showDarkPatternsInfoNotifier =
         ValueNotifier<bool>(true); // Initialize with default value
@@ -153,7 +157,6 @@ class _HomePageState extends State<HomePage>
         checkedForReopenGame = true;
       });
     }
-    // var host = Uri.parse(html.window.location.href).host;
     _showDarkPatternsInfoNotification();
     return Scaffold(
       appBar: AppBar(
@@ -161,7 +164,7 @@ class _HomePageState extends State<HomePage>
         actions: [
           showPulsatingAppBarIcon(),
           showHighscoreTooltip(),
-          showDailyRewardsAppBarIcon(),
+          showPulsatingDailyRewardsAppBarIcon(),
           Builder(
             builder: (BuildContext context) {
               return IconButton(
@@ -232,19 +235,25 @@ class _HomePageState extends State<HomePage>
                           }
                         },
                       ),
-                      flutter_bloc.BlocBuilder<DarkPatternsBloc,
-                          DarkPatternsState>(builder: (context, state) {
-                        return const Visibility(
+                      flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
+                        builder: (context, state) {
+                          return Visibility(
                             visible: true,
-                            child: Text(
-                              'Zurzeit gibt es ein Sonderangebot im Shop für 20% Rabatt auf alle Jellys!',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
+                            child: FadeTransition(
+                              opacity: _textAnimation,
+                              child: const Text(
+                                'Zurzeit gibt es ein Sonderangebot im Shop für 20% Rabatt auf alle Jellys!',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
                                   color: Colors.red,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 15),
-                            ));
-                      }),
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                       flutter_bloc.BlocBuilder<DarkPatternsBloc,
                           DarkPatternsState>(
                         builder: (context, state) {
@@ -1010,8 +1019,10 @@ class _HomePageState extends State<HomePage>
       // }
       if (prefs.getBool("firstStart") == null ||
           prefs.getBool("firstStart") == true) {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const WelcomePage()));
+        prefs.setBool("firstStart", false);
+        prefs.setString("firstStartTime",  DateTime.now().toString());
+        // Navigator.push(context,
+        //     MaterialPageRoute(builder: (context) => const WelcomePage()));
       }
       // var endSurvey = prefs.getString("endSurvey");
       // if (endSurvey != null) {
@@ -1262,6 +1273,60 @@ class _HomePageState extends State<HomePage>
         });
 
       },
+    );
+  }
+
+  Stack showPulsatingDailyRewardsAppBarIcon() {
+    return Stack(
+      children: [
+        Tooltip(
+          message: 'Daily Rewards',
+          child: IconButton(
+            icon: Icon(
+              Icons.card_giftcard,
+              color: dailyRewardCollected ? Colors.grey : Colors.lightBlue,
+            ),
+            onPressed: () {
+              setState(() {
+                print("Daily Reward Collected: $dailyRewardCollected");
+                _showDailyRewardsCollectedDialog(dailyRewardCollected);
+                if (!dailyRewardCollected) {
+                  dailyRewardCollected = true;
+                  setDailyRewards();
+                  FirebaseStore.collectedDailyRewards(DateTime.now());
+                }
+              });
+            },
+          ),
+        ),
+        if (!dailyRewardCollected)
+          Positioned.fill(
+            child: IgnorePointer(
+              ignoring: true,
+              child: AnimatedBuilder(
+                animation: _animation,
+                builder: (context, child) {
+                  return Opacity(
+                    opacity: _animation.value,
+                    child: child,
+                  );
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: RadialGradient(
+                      colors: [
+                        Colors.red.withOpacity(0.9),
+                        Colors.transparent,
+                      ],
+                      stops: const [0.0, 1.0],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+      ],
     );
   }
 }

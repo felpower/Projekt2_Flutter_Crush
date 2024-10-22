@@ -27,16 +27,16 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
   void initState() {
     super.initState();
     bool popped = false;
-    controller =
-        VideoPlayerController.asset('assets/videos/spinning_earth.mp4');
+    controller = VideoPlayerController.asset('assets/videos/spinning_earth.mp4');
+
     controller.addListener(() async {
       if (startedPlaying && !controller.value.isPlaying && !popped) {
-        popped = true;
         if (!widget.isForcedAd) {
+          popped = true;
           _showDarkPatternsInfo();
           rewardUserWithCoins();
+          Navigator.of(context).pop();
         }
-        Navigator.of(context).pop();
       }
     });
   }
@@ -48,7 +48,7 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
   }
 
   Future<bool> started() async {
-    controller.setLooping(false);
+    controller.setLooping(true);
     await controller.initialize();
     await controller.play();
     startedPlaying = true;
@@ -68,72 +68,74 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-        canPop: false,
-        child: FutureBuilder<bool>(
-          future: started(),
-          builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-            if (snapshot.data == true) {
-              return Stack(
-                children: [
-                  Positioned.fill(
-                    child: FittedBox(
-                      fit: BoxFit.fill,
-                      child: SizedBox(
-                        width: controller.value.size.width,
-                        height: controller.value.size.height,
-                        child: VideoPlayer(controller),
-                      ),
+      canPop: false,
+      child: FutureBuilder<bool>(
+        future: started(),
+        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+          if (snapshot.data == true) {
+            return Stack(
+              children: [
+                Positioned.fill(
+                  child: FittedBox(
+                    fit: BoxFit.fill,
+                    child: SizedBox(
+                      width: controller.value.size.width,
+                      height: controller.value.size.height,
+                      child: VideoPlayer(controller),
                     ),
                   ),
-                  GestureDetector(
-                    onTapDown: (tapDownEvent) => _onTapDown(tapDownEvent),
+                ),
+                GestureDetector(
+                  onTapDown: (tapDownEvent) => _onTapDown(tapDownEvent),
+                ),
+                Positioned(
+                  top: 30,
+                  right: 10,
+                  child: FutureBuilder(
+                    future: Future.delayed(const Duration(milliseconds: 8000)),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return TextButton(
+                          child: const Icon(
+                            Icons.close,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            if (!widget.isForcedAd) {
+                              _showDarkPatternsInfo();
+                              rewardUserWithCoins();
+                            } else {
+                              Navigator.of(context).pop();
+                              _showRemoveAdsDialog();
+                            }
+                          },
+                        );
+                      } else {
+                        return const Icon(Icons.update, color: Colors.white);
+                      }
+                    },
                   ),
-                  Positioned(
-                    top: 30,
-                    right: 10,
-                    child: FutureBuilder(
-                      future:
-                          Future.delayed(const Duration(milliseconds: 1000)),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          return TextButton(
-                            child: const Icon(
-                              Icons.close,
-                              color: Colors.white,
-                            ),
-                            onPressed: () {
-                              if (!widget.isForcedAd) {
-                                _showDarkPatternsInfo();
-                                rewardUserWithCoins();
-                              } else {
-                                Navigator.of(context).pop();
-                                _showRemoveAdsDialog();
-                              }
-                            },
-                          );
-                        } else {
-                          return const Icon(Icons.update, color: Colors.white);
-                        }
-                      },
-                    ),
-                  ),
-                ],
-              );
-            } else {
-              return const Center(child: CircularProgressIndicator());
-            }
-          },
-        ));
+                ),
+              ],
+            );
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
+    );
   }
 
   void _showRemoveAdsDialog() {
-    if (context == null || !mounted) return; // Ensure context is valid and widget is mounted
+    if (context == null || !mounted)
+      return; // Ensure context is valid and widget is mounted
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           title: const Text('Werbung ausschalten'),
-          content: const Text('Möchtest du die Werbung ausschalten für 500 🪙?'),
+          content:
+              const Text('Möchtest du die Werbung ausschalten für 500 🪙?'),
           actions: <Widget>[
             TextButton(
               child: const Text('Nein'),
@@ -146,7 +148,8 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
               onPressed: () {
                 Navigator.of(context).pop();
                 // Get the CoinBloc
-                CoinBloc coinBloc = flutter_bloc.BlocProvider.of<CoinBloc>(context);
+                CoinBloc coinBloc =
+                    flutter_bloc.BlocProvider.of<CoinBloc>(context);
                 int amount = coinBloc.state.amount;
                 if (amount >= 500) {
                   coinBloc.add(RemoveCoinsEvent(500));
@@ -163,7 +166,8 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
                   });
                 } else {
                   Fluttertoast.showToast(
-                      msg: "Du hast nur $amount 🪙, für das entfernen der Werbung benötigst du 500🪙",
+                      msg:
+                          "Du hast nur $amount 🪙, für das entfernen der Werbung benötigst du 500🪙",
                       toastLength: Toast.LENGTH_LONG,
                       gravity: ToastGravity.BOTTOM,
                       timeInSecForIosWeb: 5,

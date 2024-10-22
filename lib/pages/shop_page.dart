@@ -100,7 +100,7 @@ class ShopState extends State<ShopPage> {
                         color: Colors.black.withOpacity(0.1),
                         // Semi-transparent background
                         child: ListTile(
-                          title: Text(shopItems[index].name,
+                          title: Text(shopItems[index].description,
                               style: const TextStyle(color: Colors.black)),
                           subtitle: RichText(
                             text: TextSpan(
