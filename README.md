@@ -121,5 +121,5 @@ dart run flutter_native_splash:create
 ✅ Dark Patterns zurücksetzen Button in die Dark Patterns gefunden Info einbauen
 ✅ Instruktionen weggeben und auch das Tutorial weggeben
 ✅ Animation bei den täglichen Belohnungen einfügen, genau wie beim Shop
-Instruktionen/Tutorial bilder bearbeiten und aktualisieren
-Levelziele(Instruktionen 4. Levelziele) in der Info anpassen damit das klarer wird mit den Levelzielen
+✅ Instruktionen/Tutorial bilder bearbeiten und aktualisieren
+✅ Levelziele(Instruktionen 4. Levelziele) in der Info anpassen damit das klarer wird mit den Levelzielen

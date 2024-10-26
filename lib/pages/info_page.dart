@@ -119,7 +119,7 @@ class _DeviceTokenState extends State<DeviceToken> {
                           Text("4.	Levelziele:",
                               style: TextStyle(fontWeight: FontWeight.bold)),
                           Text(
-                              '''Jedes Level hat spezifische Ziele, wie das Erreichen einer bestimmten Punktzahl, das Sammeln einer Anzahl von bestimmten Jellies oder das Entfernen von Hindernissen. Das jeweilige Ziel wird in dem Kasten rechts oben auf dem Bildschirm angezeigt. (1). Die Sterne am unteren Bildrand (2) zeigen dir deinen Fortschritt an – sobald du einen Stern erreicht hast, gilt das Level als geschafft. Je mehr Sterne du jedoch erreichst, umso höher ist der Gewinn durch das absolvierte Level.
+                              '''Jedes Level hat spezifische Ziele, wie das Erreichen einer bestimmten Punktzahl, das Sammeln einer Anzahl von bestimmten Jellies oder das Entfernen von Hindernissen. Das jeweilige Ziel wird in dem Kasten rechts oben auf dem Bildschirm angezeigt. (1). Die Sterne am unteren Bildrand (2) zeigen dir deinen Fortschritt an – sobald du einen Stern erreicht hast, gilt das Level als geschafft. Je mehr Sterne du jedoch erreichst, umso höher ist der Gewinn durch das absolvierte Level. Das Level endet automatisch, wenn du alle Sterne erreicht hast oder keine Züge/keine Zeit mehr übrig sind/ist.
               '''),
                           Image(
                               image:
@@ -152,7 +152,7 @@ class _DeviceTokenState extends State<DeviceToken> {
                               style: TextStyle(fontWeight: FontWeight.bold)),
                           if (darkPatternsState is DarkPatternsActivatedState)
                             const Text(
-                                '''Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)). In den oberen Kästchen siehst du einerseits deine aktuelle Anzahl an Münzen (2) (diese kannst du nutzen um Sonderjellies zu kaufen) und, wie viele XP du hast (3) (diese bestimmen deine Position im Ranking der Highscore-Tafel (4). Die Highscore-Tafel (4) zeigt dir an, wie gut du dich im Vergleich zu anderen Spielern schlägst. Im Menü (5) kannst du diese Instruktionen jederzeit erneut durchlesen, solltest du etwas vergessen haben. 
+                                '''Im Hauptmenü siehst du welche Level du bereits freigespielt hast (Kästchen hat eine deckende Farbe (1)). In den oberen Kästchen siehst du einerseits deine aktuelle Anzahl an Münzen (2) (diese kannst du nutzen um Sonderjellies zu kaufen) und, wie viele XP du hast (3) (diese bestimmen deine Position im Ranking der Highscore-Tafel (5). Im Shop (4) kannst du mit den erspielten Münzen Sonderjellies kaufen. Die Highscore-Tafel (5) zeigt dir an, wie gut du dich im Vergleich zu anderen Spielern schlägst. Außerdem wartet täglich eine neue Belohnung darauf von dir abgeholt zu werden (6). Im Menü (7) kannst du diese Instruktionen jederzeit erneut durchlesen, solltest du etwas vergessen haben. 
                                 ''')
                           else if (darkPatternsState
                                   is DarkPatternsDeactivatedState ||
@@ -199,7 +199,7 @@ class _DeviceTokenState extends State<DeviceToken> {
                           //Menü Text
                           if (darkPatternsState is DarkPatternsActivatedState)
                             const Text(
-                                '''Außerdem gibt es im Menü noch zwei weitere spannende Features für dich: Im Shop (1) kannst du mit den erspielten Münzen Sonderjellies kaufen. Außerdem wartet täglich eine neue Belohnung darauf von dir abgeholt zu werden (2). Die Musik kann ebenfalls im Menü ein- und ausgeschaltet werden (3).
+                                '''Außerdem gibt es im Menü noch weitere spannende Features für dich: Du kannst dir im Menü Werbung anschauen(1) damit du Münzen verdienst, die du dann Im Shop(3) ausgeben kannst. Wenn du genug Geld hast, kannst du die Werbung, die nach jedem Level kommt außerdem für Münzen ausschalten(2). Im Shop (3) kannst du mit den erspielten Münzen Sonderjellies kaufen. Die Musik kann ebenfalls im Menü ein- und ausgeschaltet werden (4). Außerdem gibt es die Möglichkeit im Menü zu schauen wie viele der Dark Patterns du bereits entdeckt hast (5).
                                 ''')
                           else if (darkPatternsState
                                   is DarkPatternsDeactivatedState ||
