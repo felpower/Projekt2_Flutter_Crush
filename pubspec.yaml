@@ -124,7 +124,7 @@ flutter:
     # icons
     - assets/icons/android-chrome-512x512.png
     # videos
-    - assets/videos/spinning_earth.mp4
+    - assets/videos/werbung_ak.mp4
 
 flutter_native_splash:
   image: assets/instructions/splash_screen.png

@@ -87,6 +87,8 @@ class _HomePageState extends State<HomePage>
 
   Future<int>? _daysPlayedFuture;
 
+  bool musicChecked = false;
+
   @override
   void initState() {
     super.initState();
@@ -111,10 +113,22 @@ class _HomePageState extends State<HomePage>
       });
       _checkLevels();
     });
-    isMusicOn.addListener(() async {
+    _loadMusicPreference();
+  }
+
+  Future<void> _loadMusicPreference() async {
+    if (!musicChecked) {
+      musicChecked = true;
+      print("Loading music preference");
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setBool('music', isMusicOn.value);
-    });
+      bool music = prefs.getBool('music') ?? false;
+      isMusicOn.value = music;
+    }
+  }
+
+  Future<void> _setMusicPreference(bool value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('music', value);
   }
 
   Future<void> updateDarkPatternsCount() async {
@@ -235,7 +249,8 @@ class _HomePageState extends State<HomePage>
                           }
                         },
                       ),
-                      flutter_bloc.BlocBuilder<DarkPatternsBloc, DarkPatternsState>(
+                      flutter_bloc.BlocBuilder<DarkPatternsBloc,
+                          DarkPatternsState>(
                         builder: (context, state) {
                           return Visibility(
                             visible: true,
@@ -596,6 +611,8 @@ class _HomePageState extends State<HomePage>
                     value: value,
                     onChanged: (bool newValue) {
                       isMusicOn.value = newValue;
+                      print("Music is now $newValue");
+                      _setMusicPreference(newValue);
                     },
                   );
                 },
@@ -780,6 +797,7 @@ class _HomePageState extends State<HomePage>
     });
 
     if (firstTimeStart == null) {
+      //ToDo: Fix this error, that firstTimeStart is always called even though it is not null
       var todaysReward =
           DailyRewardsService.getTodaysReward(1, darkPatternsState);
       todaysAmount = todaysReward['amount'];
@@ -819,7 +837,8 @@ class _HomePageState extends State<HomePage>
     }
   }
 
-  Future<void> _showDailyRewardsCollectedDialog(bool dailyRewardCollected) async {
+  Future<void> _showDailyRewardsCollectedDialog(
+      bool dailyRewardCollected) async {
     var darkPatternsState =
         flutter_bloc.BlocProvider.of<DarkPatternsBloc>(context).state;
     await loadDailyReward(darkPatternsState);
@@ -1020,7 +1039,7 @@ class _HomePageState extends State<HomePage>
       if (prefs.getBool("firstStart") == null ||
           prefs.getBool("firstStart") == true) {
         prefs.setBool("firstStart", false);
-        prefs.setString("firstStartTime",  DateTime.now().toString());
+        prefs.setString("firstStartTime", DateTime.now().toString());
         // Navigator.push(context,
         //     MaterialPageRoute(builder: (context) => const WelcomePage()));
       }
@@ -1271,7 +1290,6 @@ class _HomePageState extends State<HomePage>
             FirebaseStore.collectedDailyRewards(DateTime.now());
           }
         });
-
       },
     );
   }

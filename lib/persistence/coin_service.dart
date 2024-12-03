@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class CoinService {
   static const String coin = 'coin';
-  static const int initialCoins = 150;
+  static const int initialCoins = 650;
 
   static Future<int> addCoins(int amount) async {
     int currentCoins = await getCoins();

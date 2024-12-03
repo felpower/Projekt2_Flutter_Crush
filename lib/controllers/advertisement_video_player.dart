@@ -27,7 +27,7 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
   void initState() {
     super.initState();
     bool popped = false;
-    controller = VideoPlayerController.asset('assets/videos/spinning_earth.mp4');
+    controller = VideoPlayerController.asset('assets/videos/werbung_ak.mp4');
 
     controller.addListener(() async {
       if (startedPlaying && !controller.value.isPlaying && !popped) {
@@ -52,12 +52,15 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
     await controller.initialize();
     await controller.play();
     startedPlaying = true;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool music = prefs.getBool('music') ?? false;
+    music ? controller.setVolume(1) : controller.setVolume(0);
     return true;
   }
 
   void rewardUserWithCoins() {
     FirebaseStore.watchedAdd(DateTime.now());
-    flutter_bloc.BlocProvider.of<CoinBloc>(context).add(AddCoinsEvent(100));
+    flutter_bloc.BlocProvider.of<CoinBloc>(context).add(AddCoinsEvent(200));
     Fluttertoast.showToast(
       msg: "You have been rewarded with 100 🪙",
       toastLength: Toast.LENGTH_LONG,

@@ -263,7 +263,7 @@ class ShopState extends State<ShopPage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       darkPatterns = darkPatternsState;
-      coins = prefs.getInt('coin') ?? 150;
+      coins = prefs.getInt('coin') ?? 650;
       buntJelly = prefs.getInt("buntJelly") ?? 0;
       stripeJelly = prefs.getInt("stripeJelly") ?? 0;
       xp = prefs.getInt("xp") ?? 0;
