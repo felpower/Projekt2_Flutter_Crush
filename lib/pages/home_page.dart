@@ -8,6 +8,7 @@ import 'package:bachelor_flutter_crush/bloc/user_state_bloc/xp_bloc/xp_state.dar
 import 'package:bachelor_flutter_crush/game_widgets/game_level_button.dart';
 import 'package:bachelor_flutter_crush/helpers/url_helper.dart';
 import 'package:bachelor_flutter_crush/pages/contact_page.dart';
+import 'package:bachelor_flutter_crush/pages/privacy_policy.dart';
 import 'package:bachelor_flutter_crush/pages/shop_page.dart';
 import 'package:bachelor_flutter_crush/pages/welcome_page.dart';
 import 'package:bachelor_flutter_crush/persistence/daily_rewards_service.dart';
@@ -673,6 +674,23 @@ class _HomePageState extends State<HomePage>
                     borderRadius: BorderRadius.circular(12)), // Rounded corners
               )),
           Visibility(
+              visible: true,
+              child: ListTile(
+                leading: const Icon(Icons.info),
+                title: const Text('Datenschutz',
+                    style: TextStyle(color: Colors.grey)),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const PrivacyPolicyPage()));
+                },
+                tileColor: Colors.grey[200],
+                // Background color to make it feel like a button
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)), // Rounded corners
+              )),
+          Visibility(
               visible: false,
               child: ListTile(
                 leading: const Icon(Icons.token),
@@ -1110,6 +1128,7 @@ class _HomePageState extends State<HomePage>
     prefs.setBool('darkPatternsInfoAdds', false);
     prefs.setBool('darkPatternsInfoCompleted', false);
     prefs.setBool('showDarkPatternsInfoText', true);
+    prefs.setBool('isAdsRemoved', false);
 
     setState(() {
       updateDarkPatternsCount();
@@ -1213,59 +1232,81 @@ class _HomePageState extends State<HomePage>
     }
   }
 
-  void _showRemoveAdsDialog() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Werbung ausschalten'),
-          content:
-              const Text('Möchtest du die Werbung ausschalten für 500 🪙?'),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Nein'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: const Text('Ja'),
-              onPressed: () {
-                Navigator.of(context).pop();
-                // Get the CoinBloc
-                CoinBloc coinBloc =
-                    flutter_bloc.BlocProvider.of<CoinBloc>(context);
-                int amount = coinBloc.state.amount;
-                if (amount >= 500) {
-                  coinBloc.add(RemoveCoinsEvent(500));
-                  Fluttertoast.showToast(
-                      msg: "Werbung wurde entfernt",
-                      toastLength: Toast.LENGTH_LONG,
-                      gravity: ToastGravity.BOTTOM,
-                      timeInSecForIosWeb: 5,
-                      backgroundColor: Colors.green,
-                      textColor: Colors.white,
-                      fontSize: 16.0);
-                  SharedPreferences.getInstance().then((prefs) {
-                    prefs.setBool('isAdsRemoved', true);
-                  });
-                } else {
-                  Fluttertoast.showToast(
-                      msg:
-                          "Du hast nur $amount 🪙, für das entfernen der Werbung benötigst du 500🪙",
-                      toastLength: Toast.LENGTH_LONG,
-                      gravity: ToastGravity.BOTTOM,
-                      timeInSecForIosWeb: 5,
-                      backgroundColor: Colors.red,
-                      textColor: Colors.white,
-                      fontSize: 16.0);
-                }
-              },
-            ),
-          ],
-        );
-      },
-    );
+  void _showRemoveAdsDialog() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isAdsRemoved = prefs.getBool('isAdsRemoved') ?? false;
+    if (isAdsRemoved) {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text('Werbung ausschalten'),
+              content: const Text('Du hast die Werbung bereits entfernt'),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('OK'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          });
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Werbung ausschalten'),
+            content:
+                const Text('Möchtest du die Werbung ausschalten für 500 🪙?'),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('Nein'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: const Text('Ja'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  // Get the CoinBloc
+                  CoinBloc coinBloc =
+                      flutter_bloc.BlocProvider.of<CoinBloc>(context);
+                  int amount = coinBloc.state.amount;
+                  if (amount >= 500) {
+                    coinBloc.add(RemoveCoinsEvent(500));
+                    Fluttertoast.showToast(
+                        msg: "Werbung wurde entfernt",
+                        toastLength: Toast.LENGTH_LONG,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 5,
+                        backgroundColor: Colors.green,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                    SharedPreferences.getInstance().then((prefs) {
+                      prefs.setBool('isAdsRemoved', true);
+                      prefs.setBool('darkPatternsInfoAdds', true);
+                    });
+                  } else {
+                    Fluttertoast.showToast(
+                        msg:
+                            "Du hast nur $amount 🪙, für das entfernen der Werbung benötigst du 500🪙",
+                        toastLength: Toast.LENGTH_LONG,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 5,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                  }
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   Future<void> _loadShowDarkPatternsInfoState() async {

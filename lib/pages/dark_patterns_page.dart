@@ -153,6 +153,7 @@ class DarkPatternsPageState extends State<DarkPatternsPage> {
     await prefs.setBool('darkPatternsInfoAdds', false);
     await prefs.setBool('darkPatternsInfoCompleted', false);
     await prefs.setBool('showDarkPatternsInfoText', true);
+    await prefs.setBool('isAdsRemoved', false);
 
     setState(() {
       darkPatterns.updateAll((key, value) => false);

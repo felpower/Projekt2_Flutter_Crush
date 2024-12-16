@@ -34,9 +34,22 @@ class _NonStandalonePageState extends State<NonStandalonePage> {
         home: Scaffold(
             body: Center(
                 child: ListView(padding: const EdgeInsets.all(20), children: [
-          const Image(
-              image: AssetImage('assets/instructions/ak_uni_logo.png'),
-              fit: BoxFit.cover),
+                  const Row(
+                    children: [
+                      Expanded(
+                        child: Image(
+                          image: AssetImage('assets/instructions/ak_logo.jpg'),
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                      Expanded(
+                        child: Image(
+                          image: AssetImage('assets/instructions/sba_logo.png'),
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ],
+                  ),
           const Text('Um das Spiel spielen zu können',
               textAlign: TextAlign.center,
               style: TextStyle(
