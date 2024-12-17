@@ -23,11 +23,15 @@ jobs:
         env:
           FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
         run: |
-          mkdir -p credentials
-          echo "$FIREBASE_CREDENTIALS" > credentials/cred.json
+          echo "$FIREBASE_CREDENTIALS" | tr -d '\r' > credentials/cred.json
+
+      - name: Debug credentials
+        run: |
+          echo "Length of cred.json: $(wc -c < credentials/cred.json)"
 
       - name: Verify credentials file
-        run: cat credentials/cred.json
+        run: |
+          python -c "import json; json.load(open('credentials/cred.json'))"
 
       - name: Install dependencies
         run: |
