@@ -204,3 +204,5 @@ generators/~$errors.xlsx
 generators/A_Simulation_Study_on_the_Impact_of_Dark_Patterns_in_Mobile_Games_on_User_Interaction.pdf
 
 generators/ai_checker.py
+
+generators/credentials.json
