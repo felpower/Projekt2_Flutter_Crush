@@ -3,7 +3,10 @@ from datetime import datetime
 import firebase_admin
 from firebase_admin import messaging, credentials, db
 
-cred = credentials.Certificate('credentials/credentials.json')
+try:
+	cred = credentials.Certificate('credentials/credentials.json')
+except:
+	cred = credentials.Certificate('credentials/cred.json')
 
 
 def load_database():
