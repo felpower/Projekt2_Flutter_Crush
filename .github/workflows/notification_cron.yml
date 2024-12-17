@@ -25,14 +25,6 @@ jobs:
         run: |
           echo "$FIREBASE_CREDENTIALS" | tr -d '\r' > generators/credentials/cred.json
 
-      - name: Debug credentials
-        run: |
-          echo "Length of cred.json: $(wc -c < generators/credentials/cred.json)"
-
-      - name: Verify credentials file
-        run: |
-          python -c "import json; json.load(open('generators/credentials/cred.json'))"
-
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
