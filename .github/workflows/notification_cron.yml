@@ -23,7 +23,7 @@ jobs:
         env:
           FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
         run: |
-          echo "$FIREBASE_CREDENTIALS" | tr -d '\r' > credentials/cred.json
+          echo "$FIREBASE_CREDENTIALS" | tr -d '\r' > generators/credentials/cred.json
 
       - name: Debug credentials
         run: |
