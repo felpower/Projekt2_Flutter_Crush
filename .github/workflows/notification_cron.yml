@@ -27,11 +27,11 @@ jobs:
 
       - name: Debug credentials
         run: |
-          echo "Length of cred.json: $(wc -c < credentials/cred.json)"
+          echo "Length of cred.json: $(wc -c < generators/credentials/cred.json)"
 
       - name: Verify credentials file
         run: |
-          python -c "import json; json.load(open('credentials/cred.json'))"
+          python -c "import json; json.load(open('generators/credentials/cred.json'))"
 
       - name: Install dependencies
         run: |
