@@ -27,7 +27,7 @@ jobs:
           echo "$FIREBASE_CREDENTIALS" > credentials/cred.json
 
       - name: Verify credentials file
-        run: cat credentials/credentials.json
+        run: cat credentials/cred.json
 
       - name: Install dependencies
         run: |
