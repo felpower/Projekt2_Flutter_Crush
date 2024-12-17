@@ -32,7 +32,7 @@ def decode_push_id(push_id):
 
 
 def load_database(reference):
-	cred = credentials.Certificate('credentials.json')
+	cred = credentials.Certificate('credentials/credentials.json')
 	firebase_admin.initialize_app(cred, {
 		'databaseURL': 'https://darkpatterns-ac762-default-rtdb.europe-west1.firebasedatabase.app'
 	})
