@@ -28,6 +28,7 @@ jobs:
         env:
           FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
         run: |
+          mkdir -p credentials
           echo "$FIREBASE_CREDENTIALS" > credentials/credentials.json
 
       - name: Run script
