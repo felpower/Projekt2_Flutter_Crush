@@ -24,6 +24,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install firebase_admin
 
+      - name: Set up Firebase credentials
+        env:
+          FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
+        run: |
+          echo "$FIREBASE_CREDENTIALS" > credentials/credentials.json
+
       - name: Run script
         run: |
           cd generators
