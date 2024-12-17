@@ -125,9 +125,9 @@ def send_end_survey_reminder():
 
 
 send_notification(user_tokens)
-send_notification(flutter_tokens)
+# send_notification(flutter_tokens)
 # send_end_survey_reminder()
 # send_single_notification(
-# 	"eVC8w1RUNGtGS5qTfEjAb2:APA91bGa661Vyk_sKc0CDs07iA8uaRWN7iXxd7H0_ydJnquO1x8JkuwvBOdyI-6DPeJRfA9WwVRIXsHuhZFwT5ttKxawUePTHM6zHnGv-LBQ3bS6fGabrOGG26PD0I5lMFgEo3v7D5Ex"
+# 	"ej8Oq0LnM9UJRgjvKYtxm5:APA91bGH_hzQPOBn3psuHZ_BmQP61G-VSYH3Fvy5S6QhiARnNP_AIRg911nBSw9i3PRhI5IGpUNgGuYqI4HrX4gQef8QH0SfV3qgBC7KQdDUo-hzQMsrMIQ"
 # )
 # send_single_notification()
