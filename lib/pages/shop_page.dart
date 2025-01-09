@@ -124,7 +124,7 @@ class ShopState extends State<ShopPage> {
                           trailing: ElevatedButton(
                             child: const Text('Kaufen'),
                             onPressed: () {
-                              if (shopItems[index].cost > coins) {
+                              if (discountedPrice > coins) {
                                 Fluttertoast.showToast(
                                     msg:
                                     "Du hast nur $coins🪙, für dieses Item brauchst du aber "
