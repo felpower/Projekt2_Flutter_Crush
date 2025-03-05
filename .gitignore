@@ -57,6 +57,10 @@ ExportedObj/
 # Unity3D generated file on crash reports
 sysinfo.txt
 
+# All assets in the flutter and unity directories
+/assets
+/unity/Match3/Assets
+
 # Builds
 *.apk
 *.aab
