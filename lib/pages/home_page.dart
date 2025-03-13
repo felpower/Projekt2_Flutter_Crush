@@ -11,8 +11,8 @@ import 'package:bachelor_flutter_crush/pages/contact_page.dart';
 import 'package:bachelor_flutter_crush/pages/privacy_policy.dart';
 import 'package:bachelor_flutter_crush/pages/shop_page.dart';
 import 'package:bachelor_flutter_crush/pages/token_page.dart';
-import 'package:bachelor_flutter_crush/pages/welcome_page.dart';
 import 'package:bachelor_flutter_crush/persistence/daily_rewards_service.dart';
+import 'package:bachelor_flutter_crush/persistence/dark_patterns_service.dart';
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:bachelor_flutter_crush/services/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -38,8 +38,6 @@ import '../helpers/app_colors.dart';
 import '../helpers/global_variables.dart';
 import 'dark_patterns_page.dart';
 import 'feedback_page.dart';
-
-// import 'finished_survey_page.dart';
 import 'high_score_page.dart';
 import 'info_page.dart';
 // import 'under_18_page.dart';
@@ -648,7 +646,7 @@ class _HomePageState extends State<HomePage>
               child: ListTile(
                 leading: const Icon(Icons.generating_tokens_sharp),
                 title:
-                const Text('Token', style: TextStyle(color: Colors.grey)),
+                    const Text('Token', style: TextStyle(color: Colors.grey)),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -994,6 +992,7 @@ class _HomePageState extends State<HomePage>
                       prefs.setBool('darkPatternsInfoNotification', true);
                       prefs.setBool('fromNotification', false);
                       Navigator.of(context).pop();
+                      DarkPatternsService.getDarkPatternReward(context);
                     },
                   ),
                 ],
@@ -1052,6 +1051,7 @@ class _HomePageState extends State<HomePage>
                     onPressed: () {
                       prefs.setBool('darkPatternsInfoFoMo', true);
                       Navigator.of(context).pop();
+                      DarkPatternsService.getDarkPatternReward(context);
                       setState(() {
                         updateDarkPatternsCount();
                       });
@@ -1236,6 +1236,7 @@ class _HomePageState extends State<HomePage>
                     onPressed: () {
                       prefs.setBool('darkPatternsInfoCompleted', true);
                       Navigator.of(context).pop();
+                      DarkPatternsService.getDarkPatternReward(context);
                       setState(() {
                         updateDarkPatternsCount();
                       });

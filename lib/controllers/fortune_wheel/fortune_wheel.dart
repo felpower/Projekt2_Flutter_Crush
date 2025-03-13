@@ -12,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../bloc/bloc_provider.dart';
 import '../../game_widgets/game_over_splash.dart';
+import '../../persistence/dark_patterns_service.dart';
 import '../advertisement_video_player.dart';
 
 class FortuneWheel extends StatefulWidget {
@@ -225,6 +226,7 @@ class _FortuneWheelState extends State<FortuneWheel>
                     onPressed: () {
                       Navigator.pop(context);
                       Navigator.pop(context);
+                      DarkPatternsService.getDarkPatternReward(context);
                       if (isAdsRemoved == null || !isAdsRemoved) {
                         Navigator.push(
                             context,

@@ -81,7 +81,7 @@ class DailyRewardsService {
     tag = tag > 30 ? tag % 30 : tag;
     var foundReward = getRewards(darkPatternsState).firstWhere(
       (reward) => reward['tag'] == tag,
-      orElse: () => {'amount': 'Not Found', 'type': 'Not Found'},
+      orElse: () => {'tag': 0, 'amount': 2, 'type': 'Sonderjelly bunt'},
     );
     return foundReward;
   }

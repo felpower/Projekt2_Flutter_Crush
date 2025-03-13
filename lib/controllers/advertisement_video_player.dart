@@ -1,3 +1,4 @@
+import 'package:bachelor_flutter_crush/persistence/dark_patterns_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutter_bloc;
 import 'package:fluttertoast/fluttertoast.dart';
@@ -239,6 +240,7 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
                       prefs.setBool('darkPatternsInfoAdds', true);
                       Navigator.of(context).pop();
                       Navigator.of(context).pop();
+                      DarkPatternsService.getDarkPatternReward(context);
                     },
                   ),
                 ],

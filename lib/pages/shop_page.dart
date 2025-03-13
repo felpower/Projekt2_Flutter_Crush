@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../bloc/user_state_bloc/coins_bloc/coin_bloc.dart';
 import '../bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_bloc.dart';
 import '../bloc/user_state_bloc/dark_patterns_bloc/dark_patterns_state.dart';
+import '../persistence/dark_patterns_service.dart';
 import '../persistence/firebase_store.dart';
 
 class ShopPage extends StatefulWidget {
@@ -69,7 +70,8 @@ class ShopState extends State<ShopPage> {
             Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/background/background_new.png'),
+                  image:
+                      AssetImage('assets/images/background/background_new.png'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -113,7 +115,8 @@ class ShopState extends State<ShopPage> {
                                   ),
                                 ),
                                 TextSpan(
-                                  text: '${discountedPrice.toStringAsFixed(0)}🪙',
+                                  text:
+                                      '${discountedPrice.toStringAsFixed(0)}🪙',
                                   style: const TextStyle(
                                     color: Colors.red,
                                   ),
@@ -127,7 +130,7 @@ class ShopState extends State<ShopPage> {
                               if (discountedPrice > coins) {
                                 Fluttertoast.showToast(
                                     msg:
-                                    "Du hast nur $coins🪙, für dieses Item brauchst du aber "
+                                        "Du hast nur $coins🪙, für dieses Item brauchst du aber "
                                         "$discountedPrice🪙",
                                     toastLength: Toast.LENGTH_LONG,
                                     gravity: ToastGravity.BOTTOM,
@@ -175,10 +178,11 @@ class ShopState extends State<ShopPage> {
     // Get the CoinBloc
     CoinBloc coinBloc = flutter_bloc.BlocProvider.of<CoinBloc>(context);
     // Subtract the cost from the user's coins and emit a new state
-    coinBloc.add(RemoveCoinsEvent((shopItems[index].cost*0.8) as int));
+    coinBloc.add(RemoveCoinsEvent((shopItems[index].cost * 0.8) as int));
 
     setState(() {
-      coins -= (shopItems[index].cost*0.8) as int; // Subtract the cost from the user's coins
+      coins -= (shopItems[index].cost * 0.8)
+          as int; // Subtract the cost from the user's coins
     });
     FirebaseStore.addItemBought(shopItems[index].description);
     _showDarkPatternsInfo(index);
@@ -241,9 +245,14 @@ class ShopState extends State<ShopPage> {
                   TextButton(
                     child: const Text('OK'),
                     onPressed: () {
+                      setState(() {
+                        coins += 500;
+                      });
                       prefs.setBool('darkPatternsInfoShop', true);
                       Navigator.of(context).pop();
                       showToastItemBought(index);
+
+                      DarkPatternsService.getDarkPatternReward(context);
                     },
                   ),
                 ],
