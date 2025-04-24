@@ -3,7 +3,7 @@ name: Send Notification Workflow
 on:
   schedule:
     - cron: '0 16 * * *'  # Run every day at 6 PM Austrian Standard Time (UTC+1)
-    - cron: '0 15 * 3-10 Sun'  # Run every day at 6 PM Austrian Daylight Saving Time (UTC+2)
+    - cron: '0 13 * * Sun'  # Run every day at 6 PM Austrian Daylight Saving Time (UTC+2)
   workflow_dispatch:  # Manual trigger
 
 jobs:
