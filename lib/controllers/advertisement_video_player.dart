@@ -131,8 +131,9 @@ class _AdvertisementVideoPlayerState extends State<AdvertisementVideoPlayer> {
   }
 
   void _showRemoveAdsDialog() {
-    if (context == null || !mounted)
+    if (context == null || !mounted) {
       return; // Ensure context is valid and widget is mounted
+    }
     showDialog(
       context: context,
       builder: (context) {

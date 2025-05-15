@@ -14,6 +14,7 @@ class DeviceHelper {
   static bool isIOSDevice() {
     if (userAgent.contains('iPad') ||
         userAgent.contains('iPhone') ||
+        userAgent.contains("Macintosh") ||
         userAgent.contains('iPod')) {
       return true;
     }
@@ -35,6 +36,7 @@ class DeviceHelper {
         userAgent.contains("iPhone") ||
         userAgent.contains("iPad") ||
         userAgent.contains("iPod") ||
+        userAgent.contains("Macintosh") ||
         userAgent.contains("Windows Phone") ||
         userAgent.contains("BlackBerry")) {
       return true;

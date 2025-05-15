@@ -235,6 +235,11 @@ PrefabInstance:
       propertyPath: level
       value: 
       objectReference: {fileID: 1773144088}
+    - target: {fileID: 114701695403606658, guid: e48363766c8c65a40931017ebcedffa0,
+        type: 3}
+      propertyPath: canvasScaler
+      value: 
+      objectReference: {fileID: 226560819}
     - target: {fileID: 114805096943555670, guid: e48363766c8c65a40931017ebcedffa0,
         type: 3}
       propertyPath: m_Color.b
@@ -306,6 +311,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: b721d70b722c4eb46917b05437128eee,
         type: 3}
+    - target: {fileID: 114994384024679194, guid: e48363766c8c65a40931017ebcedffa0,
+        type: 3}
+      propertyPath: m_ScaleFactor
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114994384024679194, guid: e48363766c8c65a40931017ebcedffa0,
+        type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224009881792241406, guid: e48363766c8c65a40931017ebcedffa0,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -1053,6 +1068,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e48363766c8c65a40931017ebcedffa0, type: 3}
+--- !u!114 &226560819 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114994384024679194, guid: e48363766c8c65a40931017ebcedffa0,
+    type: 3}
+  m_PrefabInstance: {fileID: 226560818}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &226560820 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114701695403606658, guid: e48363766c8c65a40931017ebcedffa0,

@@ -1,4 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PrivacyPolicyPage extends StatelessWidget {
   const PrivacyPolicyPage({Key? key}) : super(key: key);
@@ -14,27 +16,47 @@ class PrivacyPolicyPage extends StatelessWidget {
                   textAlign: TextAlign.center),
               centerTitle: true,
             ),
-            body: const Center(
+            body: Center(
                 child: SingleChildScrollView(
-                  padding: EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Text('''Datenschutz und Datensicherheit bei der Nutzung unserer Websites sind für uns sehr wichtig. Wir möchten Sie daher an dieser Stelle darüber informieren, welche Ihrer personenbezogenen Daten wir bei Ihrem Besuch auf unseren Websites erfassen und für welche Zwecke diese genutzt werden. Wichtig ist, dass die im Rahmen dieses Angebotes gespeicherten Daten ausschließlich für die Nutzung der angebotenen Plattform gespeichert werden und nicht mit anderen Daten der Projektbetreiber verknüpft werden. Verantwortlicher im Sinne der DSGVO ist:
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        style: const TextStyle(color: Colors.black),
+                        children: [
+                          const TextSpan(
+                            text:
+                                '''Datenschutz und Datensicherheit bei der Nutzung unserer Websites sind für uns sehr wichtig. Wir möchten Sie daher an dieser Stelle darüber informieren, welche Ihrer personenbezogenen Daten wir bei Ihrem Besuch auf unseren Websites erfassen und für welche Zwecke diese genutzt werden. Wichtig ist, dass die im Rahmen dieses Angebotes gespeicherten Daten ausschließlich für die Nutzung der angebotenen Plattform gespeichert werden und nicht mit anderen Daten der Projektbetreiber verknüpft werden. Verantwortlicher im Sinne der DSGVO ist:
 
 Kammer für Arbeiter und Angestellte für Niederösterreich (AK Niederösterrreich)
 AK-Platz 1
 3100 St. Pölten
-onlinebetrug@aknoe.at
+mailbox@aknoe.at
 +43 (0)5 7171
 
-Der Datenschutzbeauftragte ist erreichbar unter:
-An den Datenschutzbeauftragten der AK Niederösterreich
-AK-Platz 1
-3100 St. Pölten
-datenschutz@aknoe.at
-+43 (0)5 7171
+Die Datenschutzerklärung der AK Niederösterreich ist hier abrufbar: ''',
+                          ),
+                          TextSpan(
+                            text: 'https://noe.arbeiterkammer.at/datenschutz',
+                            style: const TextStyle(
+                                color: Colors.blue,
+                                decoration: TextDecoration.underline),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () async {
+                                final url = Uri.parse(
+                                    'https://noe.arbeiterkammer.at/datenschutz');
+                                if (await canLaunchUrl(url)) {
+                                  await launchUrl(url);
+                                }
+                              },
+                          ),
+                          const TextSpan(text: '''
 
-Für die Nutzung des Spiels wird eine zufällig erzeugte ID für die Dauer der Simulation erstellt und der Zugriff auf gstaic.com (von Google) für die Push-Benachrichtigungen benötigt. Hier stellt Art. 6 Abs. 1 lit b die Rechtsgrundlage dar. Die Speicherung erfolgt für die Dauer der Simulation.
+Eine Zusammenführung der verschiedenen Daten findet nicht statt.
+
+Für die Nutzung des Spiels wird eine zufällig erzeugte ID für die Dauer der Simulation erstellt und der Zugriff auf gstaic.com (von Google) für die Push-Benachrichtigungen benötigt. Da dies für die Funktion unumgänglich ist, stellt hier Art. 6 Abs. 1 lit b DSGVO die Rechtsgrundlage dar. Die Speicherung erfolgt für die Dauer der Simulation.
 
 Sie haben das Recht auf Auskunft, Berichtigung, Löschung oder Einschränkung der Verarbeitung Ihrer gespeicherten Daten, ein Widerspruchsrecht gegen die Verarbeitung sowie ein Recht auf Datenübertragbarkeit und auf Beschwerde gemäß den geltenden Bestimmungen des Datenschutzrechts. Sofern Sie eines der genannten Rechte uns gegenüber geltend machen wollen, so wenden Sie sich datenschutz@aknoe.at oder am Postweg an den:
 Datenschutzbeauftragten der AK Niederösterreich
@@ -62,9 +84,13 @@ Beschwerderecht
 Sind Sie der Meinung, dass wir Ihre Daten auf unzulässige Weise verarbeiten? Dann nehmen Sie bitte Kontakt mit uns auf, damit wir versuchen können, allfällige Fragen oder Missverständnisse aufzuklären. Zusätzlich haben Sie natürlich auch das Recht, sich bei der Österreichischen Datenschutzbehörde zu beschweren.
 Österreichische Datenschutzbehörde
 Barichgasse 40-42, 1030 Wien
-dsb@dsb.gv.at''', textAlign: TextAlign.center),
-                    ],
-                  ),
-                ))));
+dsb@dsb.gv.at
+
+''')
+                        ],
+                      ))
+                ],
+              ),
+            ))));
   }
 }

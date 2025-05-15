@@ -190,6 +190,18 @@ class _UnityScreenState extends State<UnityScreen> {
                         hideStatus: true),
                   ),
                 ),
+                // Align(
+                //   alignment: Alignment.bottomLeft,
+                //   child: Padding(
+                //       padding: const EdgeInsets.all(30.0),
+                //       child: PointerInterceptor(
+                //           child: Visibility(
+                //               visible: unityReady && !gameOver,
+                //               child: IconButton(
+                //                 icon: const Icon(Icons.menu),
+                //                 onPressed: () => _showSettingsMenu(context),
+                //               )))),
+                // ),
                 Align(
                   alignment: Alignment.bottomLeft,
                   child: Padding(
@@ -236,6 +248,78 @@ class _UnityScreenState extends State<UnityScreen> {
         ),
       );
     }
+  }
+
+  void _showSettingsMenu(BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    double screenScale = prefs.getDouble('screenScale') ?? 0.5;
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return PointerInterceptor(
+          child: StatefulBuilder(
+            builder: (context, setState) {
+              return AlertDialog(
+                title: const Text('Settings'),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Music'),
+                        Switch(
+                          value: isMusicOn.value,
+                          onChanged: (value) async {
+                            setState(() {
+                              isMusicOn.value = value;
+                            });
+                            prefs.setBool('music', value);
+                            value ? playBackgroundMusic() : stopMusic();
+                          },
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Skalierung'),
+                        Text(screenScale.toStringAsFixed(1)),
+                      ],
+                    ),
+                    Slider(
+                      value: screenScale,
+                      min: 0.1,
+                      max: 1.0,
+                      divisions: 10,
+                      onChanged: (value) {
+                        setState(() {
+                          screenScale = value;
+                        });
+                      },
+                      onChangeEnd: (value) async {
+                        prefs.setDouble('screenScale', value);
+                        print("Screen scale changed to: $value");
+                        postUnityMessage('GameUICanvas',
+                            'OnScalingSliderChanged', value.toString());
+                      },
+                    ),
+                  ],
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: const Text('Close'),
+                  ),
+                ],
+              );
+            },
+          ),
+        );
+      },
+    );
   }
 
   void popUntil() {
@@ -392,6 +476,13 @@ class _UnityScreenState extends State<UnityScreen> {
       }
       if (!unityReady) {
         return;
+      }
+      if (message.startsWith("GameUICanvasReady")) {
+        SharedPreferences.getInstance().then((prefs) {
+          double screenScale = prefs.getDouble('screenScale') ?? 0.5;
+          // postUnityMessage(
+          //     'GameUICanvas', 'OnScalingSliderChanged', screenScale.toString());
+        });
       }
       if (message.startsWith("First touch")) {
         playBackgroundMusic();

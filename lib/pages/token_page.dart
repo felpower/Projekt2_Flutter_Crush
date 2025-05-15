@@ -1,4 +1,3 @@
-import 'package:bachelor_flutter_crush/pages/dark_patterns_page.dart';
 import 'package:bachelor_flutter_crush/persistence/firebase_store.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';

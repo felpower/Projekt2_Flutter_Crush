@@ -57,7 +57,6 @@ class _HomePageState extends State<HomePage>
   late AnimationController _controller;
   late Animation<double> _animation;
 
-  late AnimationController _textAnimationController;
   late Animation<double> _textAnimation;
   int todaysAmount = 0;
   String todaysType = '';
@@ -642,7 +641,7 @@ class _HomePageState extends State<HomePage>
             ),
           ),
           Visibility(
-              visible: true,
+              visible: false,
               child: ListTile(
                 leading: const Icon(Icons.generating_tokens_sharp),
                 title:

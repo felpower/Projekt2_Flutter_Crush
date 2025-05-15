@@ -3,10 +3,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Match3 {
-	public class Hud : MonoBehaviour {
+namespace Match3
+{
+	public class Hud : MonoBehaviour
+	{
 		public Level level;
 		public GameOver gameOver;
+
+		public CanvasScaler canvasScaler; // Reference to the CanvasScaler
 
 		public Text remainingText;
 		public Text remainingSubText;
@@ -18,29 +22,60 @@ namespace Match3 {
 
 		private int _starIndex;
 
-		private void Start() {
+		private void Start()
+		{
 			gameObject.AddComponent<UnityMessageManager>();
-
+			NotifyGameUICanvasReady();
 			for (var i = 0; i < stars.Length; i++) stars[i].enabled = i == _starIndex;
 		}
 
-		public void SetScore(int score) {
+		public void NotifyGameUICanvasReady()
+		{
+			UnityMessageManager.Instance.SendMessageToFlutter("GameUICanvasReady");
+		}
+
+
+		public void OnScalingSliderChanged(string value)
+		{
+			// Try to parse the string value to a float
+			if (float.TryParse(value, out float scaleFactor))
+			{
+				// Adjust the CanvasScaler's scale factor based on the parsed float value
+				if (canvasScaler != null)
+				{
+					canvasScaler.scaleFactor = scaleFactor;
+				}
+			}
+			else
+			{
+				Debug.LogWarning("Invalid float value: " + value);
+			}
+		}
+
+		public void SetScore(int score)
+		{
 			scoreText.text = score.ToString();
 
 			var visibleStar = 0;
 
-			if (score >= level.score1Star && score < level.score2Star) {
+			if (score >= level.score1Star && score < level.score2Star)
+			{
 				visibleStar = 1;
 				_changed = true;
-			} else if (score >= level.score2Star && score < level.score3Star) {
+			}
+			else if (score >= level.score2Star && score < level.score3Star)
+			{
 				visibleStar = 2;
 				_changed = true;
-			} else if (score >= level.score3Star) {
+			}
+			else if (score >= level.score3Star)
+			{
 				visibleStar = 3;
 				_changed = true;
 			}
 
-			if (_changed) {
+			if (_changed)
+			{
 				if (level.isFlutter)
 					UnityMessageManager.Instance.SendMessageToFlutter("Reached Star: " + visibleStar);
 				_changed = false;
@@ -57,8 +92,10 @@ namespace Match3 {
 
 		public void SetRemaining(string remaining) { remainingText.text = remaining; }
 
-		public void SetLevelType(LevelType type, string colorType = "Any") {
-			switch (type) {
+		public void SetLevelType(LevelType type, string colorType = "Any")
+		{
+			switch (type)
+			{
 				case LevelType.Moves:
 					remainingSubText.text = "Verbleibende Züge";
 					targetSubtext.text = "Zielpunktzahl";
@@ -78,7 +115,8 @@ namespace Match3 {
 			}
 		}
 
-		public void OnGameWin(int score) {
+		public void OnGameWin(int score)
+		{
 			gameOver.ShowWin(score, _starIndex, level.isFlutter);
 			if (_starIndex > PlayerPrefs.GetInt(SceneManager.GetActiveScene().name, 0))
 				PlayerPrefs.SetInt(SceneManager.GetActiveScene().name, _starIndex);

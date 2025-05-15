@@ -32,11 +32,13 @@ def decode_push_id(push_id):
 
 
 def load_database(reference):
-	cred = credentials.Certificate('credentials/credentials.json')
-	firebase_admin.initialize_app(cred, {
-		'databaseURL': 'https://darkpatterns-ac762-default-rtdb.europe-west1.firebasedatabase.app'
-	})
-	return db.reference('/' + reference).get()
+    cred = credentials.Certificate('credentials/credentials.json')
+    firebase_admin.initialize_app(cred, {
+        'databaseURL': 'https://darkpatterns-ac762-default-rtdb.europe-west1.firebasedatabase.app'
+    })
+    all_users = db.reference('/' + reference).get()
+    v20_users = {user_id: user_info for user_id, user_info in all_users.items() if user_id.startswith("V20")}
+    return v20_users
 
 
 processed_data = []
@@ -93,7 +95,7 @@ for user_id, user_info in users_data.items():
 	try:
 		if user_id == 'V10-24-03-19–11:02-1JXsC7So1tiNEhp' or user_id == 'V10-24-04-08–19:51-c2dR2Ca7llLRvhe':
 			continue
-		if not use_flutter and not user_id.startswith("V10-"):
+		if not use_flutter and not user_id.startswith("V20-"):
 			continue
 		dark_patterns_type = int(user_info.get('darkPatterns', 0)) if user_info.get('darkPatterns') is not None else ''
 		row = {
@@ -171,14 +173,15 @@ for user_id, user_info in users_data.items():
 				# If the level is not in the dictionary, create a new list with the start time
 				else:
 					start_times[level] = [extracted_start_time]
-		if len(user_start_dates) >= 2:
-			row['dropout'] = 0
-		else:
-			row['dropout'] = 1
-			inactive_users.add(user_id)
-			inactive_user_counter -= 1
-			total_counter += 1
-			continue
+		# if len(user_start_dates) >= 2:
+		# 	row['dropout'] = 0
+		# else:
+		# 	row['dropout'] = 1
+		# 	inactive_users.add(user_id)
+		# 	inactive_user_counter -= 1
+		# 	total_counter += 1
+		# 	continue
+		row['dropout'] = 0 #ToDo: remove if want to go back to normal
 		processed_data.append(row.copy())
 		row['dropout'] = ""
 
@@ -265,6 +268,9 @@ for user_id, user_info in users_data.items():
 
 					row['finishOfLevelTime'] = str(finish_time)
 					finish_date = extract_date_time(level_time)[0]
+					if dark_patterns_type not in play_dates_by_type:
+						play_dates_by_type[dark_patterns_type] = {}
+
 					if user_id not in play_dates_by_type[dark_patterns_type]:
 						play_dates_by_type[dark_patterns_type][user_id] = []
 					play_dates_by_type[dark_patterns_type][user_id].append(finish_date)
@@ -574,12 +580,12 @@ for user_id, user_info in users_data.items():
 						dictionary['sessionCounter'] = session_counter
 						break
 		# If the user has no other activity, add their data to the separate list and continue to the next user
-		if not has_activity:
-			inactive_users.add(user_id)
-			inactive_user_counter -= 1
-		else:
-			userCounter += 1
-			processed_data.append({})
+		# if not has_activity:
+			# inactive_users.add(user_id)
+			# inactive_user_counter -= 1 ToDo: Remove this to work again
+		# else:
+		userCounter += 1
+		processed_data.append({})
 		total_counter += 1
 		print(f"\rNumber of users processed: {total_counter}/{total_users}", end="")
 	except Exception as e:
@@ -845,15 +851,21 @@ try:
 			checked_highscore += 1
 		if 'pushClickDate' in data and data['pushClickDate']:
 			push_click_date = datetime.strptime(data['pushClickDate'], '%Y-%m-%d').date()
-			date_difference = (push_click_date - init_app_start_date).days
-			if date_difference <= 30:
+			if init_app_start_date:
+				date_difference = (push_click_date - init_app_start_date).days
+			else:
+				date_difference = None  # Or handle it appropriately
+			if date_difference and date_difference <= 30:
 				push_clicked += 1
 			else:
 				push_after_30_days += 1
 		if 'notification_sent_date' in data and data['notification_sent_date']:
 			notification_sent_date = datetime.strptime(data['notification_sent_date'], '%Y-%m-%d').date()
-			date_difference = (notification_sent_date - init_app_start_date).days
-			if date_difference <= 30:
+			if init_app_start_date:
+				date_difference = (push_click_date - init_app_start_date).days
+			else:
+				date_difference = None  # Or handle it appropriately
+			if date_difference and date_difference <= 30:
 				notifications_sent += 1
 			else:
 				notifications_sent_after_30_days += 1
@@ -1169,7 +1181,10 @@ try:
 					dark_patterns_off_stats['Notifications sent after 30 days'] += 1
 			if data.get('pushClickDate'):
 				push_click_date = datetime.strptime(data['pushClickDate'], '%Y-%m-%d').date()
-				date_difference = (push_click_date - init_app_start_date).days
+				if init_app_start_date:
+					date_difference = (push_click_date - init_app_start_date).days
+				else:
+					date_difference = None  # Or handle it appropriately
 				if date_difference <= 30:
 					dark_patterns_off_stats['Total Notifications Pushed'] += 1
 				else:
@@ -1206,15 +1221,21 @@ try:
 					dark_patterns_on_stats['Users Max Level'] += 1
 			if data.get('notification_sent_date'):
 				notification_sent_date = datetime.strptime(data['notification_sent_date'], '%Y-%m-%d').date()
-				date_difference = (notification_sent_date - init_app_start_date).days
-				if date_difference <= 30:
+				if init_app_start_date:
+					date_difference = (push_click_date - init_app_start_date).days
+				else:
+					date_difference = None  # Or handle it appropriately
+				if date_difference and date_difference <= 30:
 					dark_patterns_on_stats['Total Notifications Sent'] += 1
 				else:
 					dark_patterns_on_stats['Notifications sent after 30 days'] += 1
 			if data.get('pushClickDate'):
 				push_click_date = datetime.strptime(data['pushClickDate'], '%Y-%m-%d').date()
-				date_difference = (push_click_date - init_app_start_date).days
-				if date_difference <= 30:
+				if init_app_start_date:
+					date_difference = (push_click_date - init_app_start_date).days
+				else:
+					date_difference = None  # Or handle it appropriately
+				if date_difference and date_difference <= 30:
 					dark_patterns_on_stats['Total Notifications Pushed'] += 1
 				else:
 					dark_patterns_on_stats['Notifications clicked after 30 days'] += 1
@@ -1327,7 +1348,10 @@ for dark_pattern_type, play_dates in play_dates_by_type.items():
 				current_streak = 1
 		longest_streak = max(longest_streak, current_streak)
 
-		longest_streaks[dark_pattern_type] = max(longest_streaks[dark_pattern_type], longest_streak)
+		if dark_pattern_type in longest_streaks:
+			longest_streaks[dark_pattern_type] = max(longest_streaks[dark_pattern_type], longest_streak)
+		else:
+			longest_streaks[dark_pattern_type] = longest_streak  # Initialize if key doesn't exist
 try:
 	dark_patterns_off_stats['Total Users'] = dark_patterns_off
 	dark_patterns_on_stats['Total Users'] = dark_patterns_on
@@ -1527,7 +1551,8 @@ statistics_overview = {
 	'endsurveytime': 'Realised DPs',
 	'endsurveydate': 'Last EndSurvey Done',
 }
-
+if user_counter == 0:
+	user_counter = 1
 statistics = {
 	'userNumber': datetime.now(),
 	'dropout': dropout_counter,
